@@ -244,9 +244,10 @@ actualizado: 2026-06-20
 > Preguntas abiertas que hay que responder antes de comprometer ciertos módulos.
 
 ### DealerCenter — Integración (Módulo B)
-- [ ] ¿Tiene DealerCenter API REST documentada o acceso de desarrollador?
-- [ ] Si no hay API: evaluar opciones — backend propio (Node.js/Python en VPS), email parser en n8n, o scraping de exportaciones
-- [ ] Pedir al cliente credenciales o documentación técnica de DealerCenter
+- [x] ¿Tiene DealerCenter API REST documentada o acceso de desarrollador? -> Confirmado que no se dispone de credenciales de API oficial de desarrollador.
+- [x] Si no hay API: evaluar opciones -> Resuelto. Se utilizará un enfoque híbrido con Playwright ejecutando fetch nativo a los endpoints REST de la API interna de DealerCenter usando la sesión persistente.
+- [ ] Registrar el endpoint y payload JSON de creación de cliente (POST) desde las herramientas de red de DealerCenter.
+- [ ] Desarrollar `src/createProspect.js` con la lógica de inyección de leads en segundo plano.
 
 ### WhatsApp en GHL — Estado de integración (Módulo A)
 - [ ] El cliente usa `https://applevel-dashboard.ilumosdigital.com/user/apps` como puente WhatsApp → GHL (servicio de Ilumos Digital)
