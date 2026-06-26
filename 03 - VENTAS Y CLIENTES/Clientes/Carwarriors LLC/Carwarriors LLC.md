@@ -7,7 +7,7 @@ contacto: Jorge (Dueño)
 proximo_paso: Completar pruebas — contrato se firma si salen bien
 estado_comercial: pruebas-en-curso
 creado: 2026-06-18
-actualizado: 2026-06-20
+actualizado: 2026-06-26
 ---
 
 # Cliente — Carwarriors LLC
@@ -171,6 +171,8 @@ actualizado: 2026-06-20
 
 ## Integración DealerCenter
 
+### Panel de Métricas (GHL)
+
 > [!bug] Error activo
 > El panel "Metricas Deeler Center" en GHL muestra: *"Error: No metrics found for date"* (verificado 17/06/2026). Posible desconexión del token de API o fallo en el webhook de sincronización diaria.
 
@@ -179,6 +181,25 @@ actualizado: 2026-06-20
 - Productividad BDC
 - Top Performers BDC
 - Gráfica de distribución de llamadas
+
+### Lead Sync — GHL → DealerCenter (LEGACY)
+
+> [!warning] Reemplazado
+> Este flujo se conectó originalmente vía **Make**, pero se pausó porque consumía demasiadas operaciones y agotaba el saldo rápidamente.
+
+**Alternativa evaluada (n8n):** Técnicamente viable — recibir lead de GHL, convertirlo a formato ADF/XML y subirlo por SFTP para que DealerCenter lo importe. Quedó en diseño, no se implementó.
+
+**Alternativa evaluada (Playwright + fetch interno):** Se intentó usar Playwright con fetch nativo a endpoints REST internos de DealerCenter usando sesión persistente. Se descartó por falta de API directa.
+
+### Lead Sync — GHL → DealerCenter (ARQUITECTURA ACTUAL)
+
+> [!success] Solución adoptada
+> **Cloudflare Worker** — recibe webhook de GHL con el lead, genera archivo ADF/XML, lo sube por SFTP al servidor de DealerCenter. Más limpio, más económico y más estable que Make o n8n para este caso puntual:
+> - No depende de operaciones de Make (sin consumo de saldo)
+> - No necesita tokens de IA ni procesos externos caros
+> - Sin costo variable por ejecución
+>
+> **Estado:** En desarrollo — planificado para implementar el próximo fin de semana.
 
 ---
 
@@ -238,16 +259,20 @@ actualizado: 2026-06-20
 - 2026-06-18 — Registro inicial en bóveda FORJADO.
 - 2026-06-20 — Confirmado: cliente en fase de pruebas activas. Contrato se formaliza si las pruebas salen bien.
 - 2026-06-20 — Integración DC→GHL: Pasos 1-3 completados. Autenticación resuelta, endpoint confirmado, diseño n8n listo. Bloqueado en Paso 4: falta GHL credentials y decisiones de subcuenta/upsert del cliente.
+- 2026-06-26 — Cambio de arquitectura en integración DealerCenter. Se descartan Make (costo de ops), n8n y Playwright. **Solución adoptada:** Cloudflare Worker recibe webhook de GHL → genera ADF/XML → sube por SFTP. Pendiente credenciales SFTP y estructura exacta del XML.
 
 ## Auditoría Técnica Pendiente
 
 > Preguntas abiertas que hay que responder antes de comprometer ciertos módulos.
 
 ### DealerCenter — Integración (Módulo B)
-- [x] ¿Tiene DealerCenter API REST documentada o acceso de desarrollador? -> Confirmado que no se dispone de credenciales de API oficial de desarrollador.
-- [x] Si no hay API: evaluar opciones -> Resuelto. Se utilizará un enfoque híbrido con Playwright ejecutando fetch nativo a los endpoints REST de la API interna de DealerCenter usando la sesión persistente.
-- [ ] Registrar el endpoint y payload JSON de creación de cliente (POST) desde las herramientas de red de DealerCenter.
-- [ ] Desarrollar `src/createProspect.js` con la lógica de inyección de leads en segundo plano.
+- [x] ¿Tiene DealerCenter API REST documentada o acceso de desarrollador? -> Confirmado que **no** se dispone de API oficial de desarrollador.
+- [x] Evaluar opciones -> Intentos previos: (1) Make → descartado por costo de operaciones. (2) Playwright + fetch interno → descartado por inestabilidad. (3) n8n + SFTP + ADF/XML → viable, pero no implementado.
+- [x] Solución adoptada -> **Cloudflare Worker**: recibe webhook de GHL, genera ADF/XML, sube por SFTP. En desarrollo.
+- [ ] Definir estructura exacta del ADF/XML que espera DealerCenter (campo por campo)
+- [ ] Crear Worker con: endpoint webhook → transformación a ADF/XML → subida SFTP
+- [ ] Configurar SFTP: host, puerto, credenciales, ruta de depósito
+- [ ] Probar con un lead de prueba en GHL → verificar que llega a DealerCenter
 
 ### WhatsApp en GHL — Estado de integración (Módulo A)
 - [ ] El cliente usa `https://applevel-dashboard.ilumosdigital.com/user/apps` como puente WhatsApp → GHL (servicio de Ilumos Digital)
@@ -267,20 +292,18 @@ actualizado: 2026-06-20
 > [!important] Estado comercial
 > En fase de **pruebas activas**. El contrato se firma si las pruebas salen bien — es tan prioritario como Varela Law.
 
-### Integración DealerCenter → GHL ← RETOMAR AQUÍ
+### Lead Sync — GHL → DealerCenter (CF Worker)
 
-> [!success] Pasos 1-3 completados
-> Endpoint DC confirmado. Autenticación resuelta vía `validaterefreshtoken`. Diseño del workflow n8n listo.
+> [!success] Arquitectura definida
+> Se reemplaza el enfoque anterior (Make / n8n / Playwright) por un **Cloudflare Worker** que recibe webhooks de GHL, genera archivos ADF/XML y los sube por SFTP a DealerCenter. Más económico, sin costo variable.
 
-> [!warning] Bloqueado en Paso 4 — pendiente del cliente
-> - [ ] Pedir a Jorge/Bianca: **GHL Location ID** (Settings → Business Info)
-> - [ ] Pedir a Jorge/Bianca: **GHL Private API Key** (Settings → Integrations → API Keys)
-> - [ ] Confirmar: ¿a qué subcuenta van los leads? (Carwarriors LLC / Car Express / Rances Car)
-> - [ ] Confirmar: ¿crear contactos nuevos solamente, o también actualizar existentes (upsert)?
-
-Una vez resuelto Paso 4:
-- [ ] Paso 5 — Probar GHL API en Postman con contacto de prueba
-- [ ] Paso 6 — Construir workflow completo en n8n
+**Próximas acciones:**
+- [ ] Obtener credenciales SFTP de DealerCenter (host, puerto, usuario, clave)
+- [ ] Confirmar estructura exacta del ADF/XML que DealerCenter espera
+- [ ] Elegir subcuenta destino de leads (Carwarriors LLC / Car Express / Rances Car)
+- [ ] Desarrollar Worker: endpoint POST → transformar lead a ADF/XML → subir por SFTP
+- [ ] Probar con lead real desde GHL
+- [ ] Monitorear primeras 24h de operación
 
 ### Otros pendientes
 - [ ] Verificar puente WhatsApp → GHL (Ilumos Digital) — ¿activo?
