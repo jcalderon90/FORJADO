@@ -78,12 +78,15 @@ actualizado: 2026-06-20
 
 ### Redirect URIs registrados
 
-| Contexto | Redirect URI |
-|---|---|
-| Postman (pruebas manuales) | `https://oauth.pstmn.io/v1/callback` |
-| n8n (producción) | `https://n8n.srv957125.hstgr.cloud/rest/oauth2-credential/callback` |
+| Contexto | Redirect URI | Estado |
+|---|---|---|
+| Postman | `https://oauth.pstmn.io/v1/callback` | ✅ Único registrado por soporte de MyCase |
+| ~~n8n (producción)~~ | ~~`https://n8n.srv957125.hstgr.cloud/rest/oauth2-credential/callback`~~ | ❌ Corregido 2026-07-01 — nunca se registró. Soporte de MyCase solo dio de alta el de Postman |
 
 > [!important] Cada redirect_uri debe estar registrado con MyCase soporte. Si se usa una URI no registrada, el exchange falla con `invalid_client`.
+
+> [!warning] Implicación técnica
+> Como solo el redirect_uri de Postman está registrado, **no se puede usar la credencial nativa OAuth2 de n8n** (esa maneja su propio redirect_uri interno y requeriría que soporte de MyCase lo registrara). El *authorization_code* inicial siempre debe obtenerse manualmente vía el flujo SSH + browser con el redirect de Postman — ver proceso abajo. Esto confirma que la arquitectura correcta es la ya elegida: **Token estático + [[mycase_token_manager_workflow.json|Token Manager]]** que solo usa `grant_type: refresh_token` (ese grant no requiere redirect_uri). Si el refresh_token se revoca o invalida alguna vez, hay que repetir el proceso manual de abajo para obtener uno nuevo y re-sembrarlo en el Token Manager.
 
 ### Scopes disponibles
 
@@ -149,9 +152,16 @@ curl -s "https://app.mycase.com/api/v1/cases" \
 
 ## Próximos pasos
 
+> [!important] Retomar aquí — pausado 2026-07-01
+> Se estaba obteniendo un **token manual nuevo** (flujo SSH + Postman redirect) para probar/sembrar el Token Manager. Se dejó a mitad de camino: el comando `read + curl` estaba listo para ejecutarse en SSH pero no se completó el intercambio del `code`. Retomar desde el Paso 1 del proceso manual (ver [[Varela Law - MyCase API]] o sección "Proceso para obtener un token" arriba) antes de continuar con el setup del docker-compose.
+
+- [ ] **Retomar:** completar la obtención manual de un token nuevo (flujo SSH + Postman) — en curso, pausado
+- [ ] Sembrar ese refresh_token en el nodo "Seed inicial" de [[mycase_token_manager_workflow.json]]
+- [ ] Configurar `MYCASE_CLIENT_ID`/`MYCASE_CLIENT_SECRET` como env vars en `/root/docker-compose.yml` del VPS y reiniciar `root-n8n-1` — pausado, se retoma después de la parte de arriba
+- [ ] Importar el workflow Token Manager en n8n y probarlo
+- [ ] Migrar `fixed_mycase_workflow.json` al nuevo patrón de auth (Execute Workflow → Bearer token)
 - [ ] Hablar con **Adalberto** sobre el sistema automático de contratos
 - [ ] **Radar Billing Automation** — automatizar llenado de pestaña Billing & Payments en Google Sheet (ver [[Varela Law - Radar Billing Automation]])
-- [ ] Token Manager en n8n — automatizar renovación del access token
 - [ ] Construir workflows funcionales (Cases, Tasks, Time Entries, Events)
 
 ---
@@ -161,6 +171,9 @@ curl -s "https://app.mycase.com/api/v1/cases" \
 - 2026-06-20 — Mario intentó conectar MyCase API con Postman; llegó hasta el login y autorizó el acceso pero no obtuvo el token (timeout). Se resolvió vía script `read` en SSH; OAuth completado exitosamente; proceso documentado.
 - 2026-06-20 — Definidas prioridades de datos MyCase para automatización. Pendiente: hablar con Adalberto sobre sistema de contratos automáticos.
 - 2026-06-20 — Identificado proyecto Radar Billing Automation: Mario gasta 2-3h llenando manualmente Google Sheet "Radar - Civil Cases" con datos de MyCase. Documentado flujo y estructura completa para automatizar con n8n.
+- 2026-07-01 — Construido workflow **Token Manager** para MyCase (sub-workflow callable, static data como almacén, refresh cada 23h). Ver detalle en [[Varela Law - MyCase API]].
+- 2026-07-01 — Corregido dato erróneo: el redirect_uri de n8n **nunca estuvo registrado** con soporte de MyCase — solo el de Postman. Confirma que la arquitectura de token estático + refresh es la única viable (ver advertencia en sección de credenciales).
+- 2026-07-01 — Se inició obtención manual de un token nuevo (SSH + Postman) para sembrar el Token Manager. **Pausado a mitad del flujo** — retomar antes de tocar el docker-compose del VPS.
 
 ## Relacionado
 - [[Pipeline (MOC)]]

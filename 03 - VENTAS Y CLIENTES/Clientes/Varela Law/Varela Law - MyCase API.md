@@ -308,9 +308,28 @@ MyCase no tiene nodo nativo en n8n. El flujo Authorization Code Grant requiere q
 
 ### Estado
 
-- [ ] Token Manager — pendiente de construir
+- [x] Token Manager — workflow construido: [[mycase_token_manager_workflow.json]] (2026-07-01). Ver detalle abajo.
 - [ ] Definir sistema externo a conectar con MyCase
 - [ ] Workflows funcionales — pendiente (bloqueado por sistema externo)
+
+### Token Manager — Implementación (2026-07-01)
+
+Workflow `MyCase - Token Manager` (archivo `mycase_token_manager_workflow.json` en la carpeta del cliente). Arquitectura: **sub-workflow callable**, sin base de datos externa — usa `static data` de n8n como almacén del token.
+
+**Nodos:**
+1. **Trigger doble**: `Execute Workflow Trigger` (para que otros workflows lo llamen) + `Schedule Trigger` cada 23h (pre-calienta el token aunque nadie lo llame)
+2. **Check Stored Token** (Code) — lee `access_token`/`refresh_token`/`expiresAt` de static data, valida si sigue vigente (con 1h de margen)
+3. **IF Token still valid?** — rama true: devuelve el token cacheado. Rama false: refresca
+4. **Refresh Token (MyCase)** (HTTP Request) — `POST https://auth.mycase.com/tokens` con `grant_type: refresh_token`, usando `$env.MYCASE_CLIENT_ID` / `$env.MYCASE_CLIENT_SECRET` (variables de entorno del contenedor n8n, no hardcodeadas en el JSON)
+5. **Save New Token** (Code) — guarda el nuevo `access_token` + `refresh_token` (MyCase puede rotarlo) + `expiresAt` en static data
+6. **Seed inicial (una vez)** — nodo aparte, no conectado al flujo principal, para pegar manualmente el primer `refresh_token` (el que ya se obtuvo el 2026-06-20 vía SSH) y arrancar el ciclo
+
+**Pendiente para dejarlo operativo:**
+- [ ] Importar el JSON en n8n (https://n8n.srv957125.hstgr.cloud)
+- [ ] Configurar `MYCASE_CLIENT_ID` y `MYCASE_CLIENT_SECRET` como variables de entorno del contenedor n8n (no en el workflow)
+- [ ] Ejecutar una vez el nodo "Seed inicial" con el refresh_token vigente, luego desconectarlo/desactivarlo
+- [ ] Probar ejecución manual del Schedule Trigger — verificar que devuelve `accessToken` válido
+- [ ] Migrar `fixed_mycase_workflow.json` (y futuros workflows funcionales) para que llamen a este Token Manager vía nodo **Execute Workflow** al inicio, y usen `Authorization: Bearer {{ $json.accessToken }}` en el HTTP Request en vez de la credencial Header Auth estática (que se rompe cada 24h)
 
 ---
 
