@@ -152,13 +152,15 @@ curl -s "https://app.mycase.com/api/v1/cases" \
 
 ## Próximos pasos
 
-> [!important] Retomar aquí — pausado 2026-07-01
-> Se estaba obteniendo un **token manual nuevo** (flujo SSH + Postman redirect) para probar/sembrar el Token Manager. Se dejó a mitad de camino: el comando `read + curl` estaba listo para ejecutarse en SSH pero no se completó el intercambio del `code`. Retomar desde el Paso 1 del proceso manual (ver [[Varela Law - MyCase API]] o sección "Proceso para obtener un token" arriba) antes de continuar con el setup del docker-compose.
+> [!important] Retomar aquí — pausado 2026-07-02
+> El `refresh_token` ya está sembrado en el nodo "Seed inicial" de [[mycase_token_manager_workflow.json]] (obtenido vía SSH + Postman, reconstruido a partir de una copia en líneas cortas para evitar corrupción del terminal web). Falta: (1) configurar las env vars en el VPS, (2) importar el workflow en n8n, (3) ejecutar el nodo Seed una vez, (4) desactivarlo.
 
-- [ ] **Retomar:** completar la obtención manual de un token nuevo (flujo SSH + Postman) — en curso, pausado
-- [ ] Sembrar ese refresh_token en el nodo "Seed inicial" de [[mycase_token_manager_workflow.json]]
-- [ ] Configurar `MYCASE_CLIENT_ID`/`MYCASE_CLIENT_SECRET` como env vars en `/root/docker-compose.yml` del VPS y reiniciar `root-n8n-1` — pausado, se retoma después de la parte de arriba
-- [ ] Importar el workflow Token Manager en n8n y probarlo
+- [x] Completar la obtención manual de un token nuevo (flujo SSH + Postman) — 2026-07-02
+- [x] Sembrar ese refresh_token en el nodo "Seed inicial" de [[mycase_token_manager_workflow.json]] — 2026-07-02 (sembrado en el archivo local; falta importarlo/ejecutarlo en n8n)
+- [ ] Configurar `MYCASE_CLIENT_ID`/`MYCASE_CLIENT_SECRET` como env vars en `/root/docker-compose.yml` del VPS y reiniciar `root-n8n-1`
+- [ ] Importar el workflow Token Manager (ya con el token sembrado) en n8n
+- [ ] Ejecutar manualmente una vez el nodo "Seed inicial" en n8n, luego desconectarlo/desactivarlo
+- [ ] Probar el Schedule Trigger — verificar que devuelve un `accessToken` válido
 - [ ] Migrar `fixed_mycase_workflow.json` al nuevo patrón de auth (Execute Workflow → Bearer token)
 - [ ] Hablar con **Adalberto** sobre el sistema automático de contratos
 - [ ] **Radar Billing Automation** — automatizar llenado de pestaña Billing & Payments en Google Sheet (ver [[Varela Law - Radar Billing Automation]])
@@ -174,6 +176,7 @@ curl -s "https://app.mycase.com/api/v1/cases" \
 - 2026-07-01 — Construido workflow **Token Manager** para MyCase (sub-workflow callable, static data como almacén, refresh cada 23h). Ver detalle en [[Varela Law - MyCase API]].
 - 2026-07-01 — Corregido dato erróneo: el redirect_uri de n8n **nunca estuvo registrado** con soporte de MyCase — solo el de Postman. Confirma que la arquitectura de token estático + refresh es la única viable (ver advertencia en sección de credenciales).
 - 2026-07-01 — Se inició obtención manual de un token nuevo (SSH + Postman) para sembrar el Token Manager. **Pausado a mitad del flujo** — retomar antes de tocar el docker-compose del VPS.
+- 2026-07-02 — Completado el flujo manual SSH + Postman: `refresh_token` obtenido y sembrado en el nodo "Seed inicial" de `mycase_token_manager_workflow.json`. Nota técnica: la primera copia desde la consola web (Hostinger) salió corrupta por wrap del terminal; se resolvió generando el token en líneas cortas (`fold -w 50`) y reconstruyéndolo. Falta: env vars en el VPS, importar el workflow en n8n y ejecutar el seed ahí.
 
 ## Relacionado
 - [[Pipeline (MOC)]]
