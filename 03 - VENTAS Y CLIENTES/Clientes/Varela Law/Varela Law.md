@@ -152,15 +152,23 @@ curl -s "https://app.mycase.com/api/v1/cases" \
 
 ## Próximos pasos
 
-> [!important] Retomar aquí — pausado 2026-07-02
-> El `refresh_token` ya está sembrado en el nodo "Seed inicial" de [[mycase_token_manager_workflow.json]] (obtenido vía SSH + Postman, reconstruido a partir de una copia en líneas cortas para evitar corrupción del terminal web). Falta: (1) configurar las env vars en el VPS, (2) importar el workflow en n8n, (3) ejecutar el nodo Seed una vez, (4) desactivarlo.
+> [!important] Token Manager operativo — 2026-07-05
+> El workflow **MyCase - Token Manager** (n8n, id `MOpVRrvErCfgs2mn`) quedó funcionando end-to-end con persistencia en MongoDB: lee `VarelaLaw.mycase_tokens`, detecta token vencido, refresca contra MyCase y guarda el nuevo token en Mongo. Ejecución de prueba exitosa: `1915` (2026-07-05). Detalle técnico completo en [[Varela Law - MyCase API]].
+>
+> **Pendiente real:** la instancia de n8n tiene `N8N_BLOCK_ENV_ACCESS_IN_NODE` activo, así que el nodo "Refresh Token (MyCase)" no puede usar `$env.MYCASE_CLIENT_ID`/`$env.MYCASE_CLIENT_SECRET` — se decidió (con el usuario) dejar el `client_id`/`client_secret` hardcodeados directo en el nodo por ahora. Si en algún momento se quiere sacar ese env var block del VPS y volver a `$env`, hay que entrar por SSH y editar `docker-compose.yml`.
 
 - [x] Completar la obtención manual de un token nuevo (flujo SSH + Postman) — 2026-07-02
-- [x] Sembrar ese refresh_token en el nodo "Seed inicial" de [[mycase_token_manager_workflow.json]] — 2026-07-02 (sembrado en el archivo local; falta importarlo/ejecutarlo en n8n)
-- [ ] Configurar `MYCASE_CLIENT_ID`/`MYCASE_CLIENT_SECRET` como env vars en `/root/docker-compose.yml` del VPS y reiniciar `root-n8n-1`
-- [ ] Importar el workflow Token Manager (ya con el token sembrado) en n8n
-- [ ] Ejecutar manualmente una vez el nodo "Seed inicial" en n8n, luego desconectarlo/desactivarlo
-- [ ] Probar el Schedule Trigger — verificar que devuelve un `accessToken` válido
+- [x] Confirmar que el refresh de MyCase funciona end-to-end (probado manualmente en n8n) — 2026-07-02. **Nota:** MyCase rotó el refresh_token en esa prueba; el usado para sembrar quedó invalidado, hay un refresh_token nuevo vigente (solo en el chat/local, no en git)
+- [x] Decidir arquitectura de persistencia: **MongoDB** (cluster compartido Atlas, ver [[MongoDB Database]]) en vez de n8n static data — 2026-07-02
+- [x] Rediseñar `mycase_token_manager_workflow.json`: reemplazar nodos "Check Stored Token"/"Save New Token"/"Seed inicial" (static data) por nodos MongoDB Find/Update sobre `VarelaLaw.mycase_tokens` — 2026-07-05
+- [x] Crear credencial MongoDB en n8n (`Varela Law`, id `UZv1zIWjbmmfIJyv`) y asignarla en los dos nodos Mongo del workflow — 2026-07-05
+- [x] Importar el JSON actualizado en n8n, reemplazando la versión vieja — 2026-07-05
+- [x] Sembrar el refresh_token vigente en el documento Mongo `VarelaLaw.mycase_tokens` — 2026-07-05, vía Compass
+- [x] Corregir bug: el nodo Mongo de n8n castea automáticamente `_id` a `ObjectId`, rompía con nuestro `_id: "token"` (string) — se agregó un campo `key: "token"` como identificador propio para `find`/`update`, evitando `_id` — 2026-07-05
+- [x] Probar el workflow completo (ejecución manual vía MCP) — verificado que lee/escribe Mongo correctamente y refresca contra MyCase — 2026-07-05 (ejecución `1915`, éxito)
+- [x] Publicar la versión corregida como activa en n8n (antes solo estaba en el draft) — 2026-07-05
+- [ ] Confirmar una corrida real del Schedule Trigger (23h) en producción, sin disparo manual
+- [ ] (Opcional, no bloqueante) Sacar `N8N_BLOCK_ENV_ACCESS_IN_NODE` del VPS para volver a usar env vars en vez de credenciales hardcodeadas en el nodo
 - [ ] Migrar `fixed_mycase_workflow.json` al nuevo patrón de auth (Execute Workflow → Bearer token)
 - [ ] Hablar con **Adalberto** sobre el sistema automático de contratos
 - [ ] **Radar Billing Automation** — automatizar llenado de pestaña Billing & Payments en Google Sheet (ver [[Varela Law - Radar Billing Automation]])
@@ -177,6 +185,9 @@ curl -s "https://app.mycase.com/api/v1/cases" \
 - 2026-07-01 — Corregido dato erróneo: el redirect_uri de n8n **nunca estuvo registrado** con soporte de MyCase — solo el de Postman. Confirma que la arquitectura de token estático + refresh es la única viable (ver advertencia en sección de credenciales).
 - 2026-07-01 — Se inició obtención manual de un token nuevo (SSH + Postman) para sembrar el Token Manager. **Pausado a mitad del flujo** — retomar antes de tocar el docker-compose del VPS.
 - 2026-07-02 — Completado el flujo manual SSH + Postman: `refresh_token` obtenido y sembrado en el nodo "Seed inicial" de `mycase_token_manager_workflow.json`. Nota técnica: la primera copia desde la consola web (Hostinger) salió corrupta por wrap del terminal; se resolvió generando el token en líneas cortas (`fold -w 50`) y reconstruyéndolo. Falta: env vars en el VPS, importar el workflow en n8n y ejecutar el seed ahí.
+- 2026-07-02 — Al probar en n8n, el static data no persistía entre ejecuciones manuales (limitación de n8n: solo persiste en corridas de producción reales, no en "Test step" de un nodo aislado). Se hizo una prueba puente con nodos Set/HTTP directos (sin pasar por static data) y **el refresh de MyCase funcionó correctamente** — confirma que la lógica de auth (client_id/secret + grant refresh_token) es correcta. MyCase rotó el refresh_token en esa prueba. Se decidió migrar la persistencia del Token Manager de n8n static data a **MongoDB** (cluster compartido Atlas) para evitar esta ambigüedad. Pendiente reconstruir el workflow con nodos MongoDB.
+- 2026-07-05 — Reconstruido `mycase_token_manager_workflow.json` con nodos MongoDB (`Find Stored Token`, `Save New Token (Mongo)` con upsert) reemplazando los nodos de static data; versión vieja archivada como `mycase_token_manager_workflow.staticdata.bak.json`.
+- 2026-07-05 — Sembrado el refresh_token vigente en `VarelaLaw.mycase_tokens` vía Compass. Conectado el MCP server de n8n de Varela Law a Claude Code (`n8n-varelalaw`), lo que permitió inspeccionar y corregir el workflow importado directamente: (1) el import había dejado los nodos Mongo sin credencial asignada y faltaba el nodo "Called by another workflow" (Execute Workflow Trigger) — corregido; (2) bug del nodo Mongo de n8n: castea `_id` a `ObjectId` automáticamente y rompía con nuestro `_id` string — resuelto agregando un campo `key: "token"` como identificador alternativo para `find`/`update`; (3) la instancia de n8n bloquea acceso a `$env` desde expresiones (`N8N_BLOCK_ENV_ACCESS_IN_NODE`) — se decidió hardcodear `client_id`/`client_secret` de MyCase directo en el nodo "Refresh Token (MyCase)" como solución pragmática. Ejecución de prueba `1915` exitosa: ciclo completo Mongo → refresh MyCase → Mongo funcionando end-to-end. Token Manager queda operativo.
 
 ## Relacionado
 - [[Pipeline (MOC)]]

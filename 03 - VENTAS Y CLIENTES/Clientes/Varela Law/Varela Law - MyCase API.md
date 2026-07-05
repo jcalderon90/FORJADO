@@ -312,24 +312,36 @@ MyCase no tiene nodo nativo en n8n. El flujo Authorization Code Grant requiere q
 - [ ] Definir sistema externo a conectar con MyCase
 - [ ] Workflows funcionales — pendiente (bloqueado por sistema externo)
 
-### Token Manager — Implementación (2026-07-01)
+### Token Manager — Implementación (2026-07-05, v2 MongoDB) — OPERATIVO
 
-Workflow `MyCase - Token Manager` (archivo `mycase_token_manager_workflow.json` en la carpeta del cliente). Arquitectura: **sub-workflow callable**, sin base de datos externa — usa `static data` de n8n como almacén del token.
+Workflow `MyCase - Token Manager` (n8n id `MOpVRrvErCfgs2mn`, archivo `mycase_token_manager_workflow.json` en la carpeta del cliente sincronizado con la versión publicada). Arquitectura: **sub-workflow callable**, persistencia en **MongoDB** (cluster compartido Atlas, ver [[MongoDB Database]]) — reemplaza la v1 con `static data` de n8n (archivada en `mycase_token_manager_workflow.staticdata.bak.json`) porque el static data no persistía de forma confiable entre ejecuciones manuales de prueba.
+
+**Base de datos:** `VarelaLaw`, colección `mycase_tokens`, documento único `{ _id: "token", key: "token", refreshToken, accessToken, expiresAt }`.
+
+> [!warning] Por qué existe el campo `key` además de `_id`
+> El nodo MongoDB clásico de n8n (`n8n-nodes-base.mongoDb`, typeVersion 1) castea automáticamente cualquier valor de `_id` en una query/update a `ObjectId` de Mongo — falla con `BSONError: input must be a 24 character hex string...` si `_id` es un string arbitrario como `"token"`. Workaround: se agregó un campo propio `key: "token"` y los nodos `find`/`update` filtran por `key`, no por `_id`. `_id` queda como está (ya sembrado), simplemente no se usa para el matching.
 
 **Nodos:**
-1. **Trigger doble**: `Execute Workflow Trigger` (para que otros workflows lo llamen) + `Schedule Trigger` cada 23h (pre-calienta el token aunque nadie lo llame)
-2. **Check Stored Token** (Code) — lee `access_token`/`refresh_token`/`expiresAt` de static data, valida si sigue vigente (con 1h de margen)
-3. **IF Token still valid?** — rama true: devuelve el token cacheado. Rama false: refresca
-4. **Refresh Token (MyCase)** (HTTP Request) — `POST https://auth.mycase.com/tokens` con `grant_type: refresh_token`, usando `$env.MYCASE_CLIENT_ID` / `$env.MYCASE_CLIENT_SECRET` (variables de entorno del contenedor n8n, no hardcodeadas en el JSON)
-5. **Save New Token** (Code) — guarda el nuevo `access_token` + `refresh_token` (MyCase puede rotarlo) + `expiresAt` en static data
-6. **Seed inicial (una vez)** — nodo aparte, no conectado al flujo principal, para pegar manualmente el primer `refresh_token` (el que ya se obtuvo el 2026-06-20 vía SSH) y arrancar el ciclo
+1. **Trigger doble**: `Called by another workflow` (Execute Workflow Trigger, para que otros workflows lo llamen) + `Every 23h (pre-warm)` (Schedule Trigger, pre-calienta el token aunque nadie lo llame)
+2. **Find Stored Token** (MongoDB, `find`, query `{ "key": "token" }`) — lee el documento de `mycase_tokens`
+3. **Check Stored Token** (Code) — valida si el `accessToken` sigue vigente (con 1h de margen); lanza error si no hay documento sembrado todavía
+4. **IF Token still valid?** — rama true: devuelve el token cacheado. Rama false: refresca
+5. **Refresh Token (MyCase)** (HTTP Request) — `POST https://auth.mycase.com/tokens` con `grant_type: refresh_token`. **`client_id`/`client_secret` hardcodeados directo en el nodo** (no `$env`, ver nota abajo)
+6. **Map New Token** (Code) — normaliza la respuesta de MyCase (`access_token`/`refresh_token`/`expires_in`) al shape del documento Mongo (incluye `key: "token"`)
+7. **Save New Token (Mongo)** (MongoDB, `update`, `updateKey: "key"`) — persiste el nuevo `accessToken`/`refreshToken`/`expiresAt`
+8. **Return New Token** (Code) — devuelve `{ accessToken }` al workflow que llamó
 
-**Pendiente para dejarlo operativo:**
-- [ ] Importar el JSON en n8n (https://n8n.srv957125.hstgr.cloud)
-- [ ] Configurar `MYCASE_CLIENT_ID` y `MYCASE_CLIENT_SECRET` como variables de entorno del contenedor n8n (no en el workflow)
-- [ ] Ejecutar una vez el nodo "Seed inicial" con el refresh_token vigente, luego desconectarlo/desactivarlo
-- [ ] Probar ejecución manual del Schedule Trigger — verificar que devuelve `accessToken` válido
+> [!warning] `$env` bloqueado en esta instancia de n8n
+> La instancia tiene `N8N_BLOCK_ENV_ACCESS_IN_NODE` activo — cualquier expresión `{{ $env.X }}` dentro de un nodo falla con `access to env vars denied`. Por eso el nodo "Refresh Token (MyCase)" tiene el `client_id` (`mVqwv5ZEgiTJcNsY`) y `client_secret` (`AQP5mkisered9z9Bw9iXv4zXLW9MWNt6`) escritos directo en el JSON body, decisión tomada con el usuario el 2026-07-05. Para volver al patrón con variables de entorno haría falta entrar por SSH al VPS y sacar esa variable del `docker-compose.yml` del contenedor n8n (no bloqueante, queda como mejora futura).
+
+**Credencial MongoDB en n8n:** `Varela Law` (id `UZv1zIWjbmmfIJyv`), tipo connection string, asignada en "Find Stored Token" y "Save New Token (Mongo)".
+
+**Verificado:** ejecución manual `1915` (2026-07-05) exitosa — ciclo completo Mongo → refresh MyCase → Mongo. Versión publicada como activa en n8n el mismo día.
+
+**Pendiente:**
+- [ ] Confirmar una corrida real disparada por el Schedule Trigger (23h), sin ejecución manual
 - [ ] Migrar `fixed_mycase_workflow.json` (y futuros workflows funcionales) para que llamen a este Token Manager vía nodo **Execute Workflow** al inicio, y usen `Authorization: Bearer {{ $json.accessToken }}` en el HTTP Request en vez de la credencial Header Auth estática (que se rompe cada 24h)
+- [ ] (Opcional) Sacar `N8N_BLOCK_ENV_ACCESS_IN_NODE` del VPS y volver a `$env.MYCASE_CLIENT_ID`/`$env.MYCASE_CLIENT_SECRET` en vez de hardcodeado
 
 ---
 

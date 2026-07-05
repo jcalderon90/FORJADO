@@ -1,0 +1,195 @@
+{
+  "name": "MyCase - Token Manager",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [-880, 80],
+      "id": "b1a1b1a1-0001-4a1a-9a1a-000000000001",
+      "name": "Called by another workflow"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 23
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [-880, 260],
+      "id": "b1a1b1a1-0002-4a1a-9a1a-000000000002",
+      "name": "Every 23h (pre-warm)"
+    },
+    {
+      "parameters": {
+        "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst now = Date.now();\nconst bufferMs = 60 * 60 * 1000; // renovar 1h antes de expirar\n\nif (!staticData.refreshToken) {\n  throw new Error('No hay refresh_token guardado. Ejecuta primero el nodo \"Seed inicial (una vez)\" con el refresh_token obtenido por el flujo manual de OAuth.');\n}\n\nconst valid = !!(staticData.accessToken && staticData.expiresAt && (staticData.expiresAt - bufferMs) > now);\n\nreturn [{\n  json: {\n    valid,\n    accessToken: staticData.accessToken || null,\n    refreshToken: staticData.refreshToken\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-640, 170],
+      "id": "b1a1b1a1-0003-4a1a-9a1a-000000000003",
+      "name": "Check Stored Token"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond-1",
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [-400, 170],
+      "id": "b1a1b1a1-0004-4a1a-9a1a-000000000004",
+      "name": "Token still valid?"
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "assign-1",
+              "name": "accessToken",
+              "type": "string",
+              "value": "={{ $json.accessToken }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [-160, 60],
+      "id": "b1a1b1a1-0005-4a1a-9a1a-000000000005",
+      "name": "Return Cached Token"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://auth.mycase.com/tokens",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"client_id\": \"{{ $env.MYCASE_CLIENT_ID }}\",\n  \"client_secret\": \"{{ $env.MYCASE_CLIENT_SECRET }}\",\n  \"refresh_token\": \"{{ $json.refreshToken }}\",\n  \"grant_type\": \"refresh_token\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [-160, 280],
+      "id": "b1a1b1a1-0006-4a1a-9a1a-000000000006",
+      "name": "Refresh Token (MyCase)"
+    },
+    {
+      "parameters": {
+        "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst resp = $input.first().json;\n\nif (!resp.access_token || !resp.refresh_token) {\n  throw new Error('Respuesta inesperada de MyCase al refrescar token: ' + JSON.stringify(resp));\n}\n\nstaticData.accessToken = resp.access_token;\nstaticData.refreshToken = resp.refresh_token; // MyCase puede rotar el refresh_token\nstaticData.expiresAt = Date.now() + (resp.expires_in * 1000);\n\nreturn [{ json: { accessToken: staticData.accessToken } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [140, 280],
+      "id": "b1a1b1a1-0007-4a1a-9a1a-000000000007",
+      "name": "Save New Token"
+    },
+    {
+      "parameters": {
+        "jsCode": "// SOLO PARA EJECUTAR UNA VEZ MANUALMENTE al configurar el workflow.\n// Pega aqui el refresh_token obtenido por el flujo manual OAuth (ver nota Varela Law).\n// Despues de ejecutarlo una vez, desconecta o desactiva este nodo.\nconst staticData = $getWorkflowStaticData('global');\n\nstaticData.refreshToken = 'PEGAR_REFRESH_TOKEN_AQUI';\nstaticData.accessToken = null;\nstaticData.expiresAt = 0;\n\nreturn [{ json: { seeded: true } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-880, 460],
+      "id": "b1a1b1a1-0008-4a1a-9a1a-000000000008",
+      "name": "Seed inicial (una vez)"
+    }
+  ],
+  "connections": {
+    "Called by another workflow": {
+      "main": [
+        [
+          {
+            "node": "Check Stored Token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Every 23h (pre-warm)": {
+      "main": [
+        [
+          {
+            "node": "Check Stored Token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Stored Token": {
+      "main": [
+        [
+          {
+            "node": "Token still valid?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Token still valid?": {
+      "main": [
+        [
+          {
+            "node": "Return Cached Token",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Refresh Token (MyCase)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Refresh Token (MyCase)": {
+      "main": [
+        [
+          {
+            "node": "Save New Token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "1605e0956f411c02ecc29f05b035dcb95746e902cd54a42b69d92da41bbef671"
+  }
+}

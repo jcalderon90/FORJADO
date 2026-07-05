@@ -3,11 +3,11 @@
   "nodes": [
     {
       "parameters": {},
+      "id": "b1f8d382-4767-47b3-809e-fbb2b1d73ab8",
+      "name": "Called by another workflow",
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
-      "position": [-880, 80],
-      "id": "b1a1b1a1-0001-4a1a-9a1a-000000000001",
-      "name": "Called by another workflow"
+      "position": [-928, -176]
     },
     {
       "parameters": {
@@ -22,18 +22,38 @@
       },
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
-      "position": [-880, 260],
-      "id": "b1a1b1a1-0002-4a1a-9a1a-000000000002",
+      "position": [-928, -368],
+      "id": "fc8d754a-2e39-479d-b6f4-bb5af644f733",
       "name": "Every 23h (pre-warm)"
     },
     {
       "parameters": {
-        "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst now = Date.now();\nconst bufferMs = 60 * 60 * 1000; // renovar 1h antes de expirar\n\nif (!staticData.refreshToken) {\n  throw new Error('No hay refresh_token guardado. Ejecuta primero el nodo \"Seed inicial (una vez)\" con el refresh_token obtenido por el flujo manual de OAuth.');\n}\n\nconst valid = !!(staticData.accessToken && staticData.expiresAt && (staticData.expiresAt - bufferMs) > now);\n\nreturn [{\n  json: {\n    valid,\n    accessToken: staticData.accessToken || null,\n    refreshToken: staticData.refreshToken\n  }\n}];"
+        "collection": "mycase_tokens",
+        "options": {
+          "limit": 1
+        },
+        "query": "{ \"key\": \"token\" }"
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1,
+      "position": [-704, -272],
+      "id": "cfce508f-70a1-4394-a4d2-b217169a8281",
+      "name": "Find Stored Token",
+      "credentials": {
+        "mongoDb": {
+          "id": "UZv1zIWjbmmfIJyv",
+          "name": "Varela Law"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\n\nif (!items.length || !items[0].json || !items[0].json.refreshToken) {\n  throw new Error('No hay refresh_token guardado en Mongo (coleccion mycase_tokens, key: \"token\"). Sembralo manualmente antes de usar este workflow.');\n}\n\nconst doc = items[0].json;\nconst now = Date.now();\nconst bufferMs = 60 * 60 * 1000; // renovar 1h antes de expirar\n\nconst valid = !!(doc.accessToken && doc.expiresAt && (doc.expiresAt - bufferMs) > now);\n\nreturn [{\n  json: {\n    valid,\n    accessToken: doc.accessToken || null,\n    refreshToken: doc.refreshToken\n  }\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [-640, 170],
-      "id": "b1a1b1a1-0003-4a1a-9a1a-000000000003",
+      "position": [-480, -272],
+      "id": "0943cbe8-3cb3-473f-a05b-325ef3e3d222",
       "name": "Check Stored Token"
     },
     {
@@ -42,7 +62,8 @@
           "options": {
             "caseSensitive": true,
             "leftValue": "",
-            "typeValidation": "strict"
+            "typeValidation": "strict",
+            "version": 1
           },
           "conditions": [
             {
@@ -62,14 +83,12 @@
       },
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
-      "position": [-400, 170],
-      "id": "b1a1b1a1-0004-4a1a-9a1a-000000000004",
+      "position": [-256, -272],
+      "id": "0018f094-5346-469b-abfe-8ffc09de1e42",
       "name": "Token still valid?"
     },
     {
       "parameters": {
-        "mode": "manual",
-        "duplicateItem": false,
         "assignments": {
           "assignments": [
             {
@@ -79,12 +98,13 @@
               "value": "={{ $json.accessToken }}"
             }
           ]
-        }
+        },
+        "options": {}
       },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [-160, 60],
-      "id": "b1a1b1a1-0005-4a1a-9a1a-000000000005",
+      "position": [-32, -368],
+      "id": "19134bec-70a9-41a4-b472-23eec0deea20",
       "name": "Return Cached Token"
     },
     {
@@ -93,34 +113,54 @@
         "url": "https://auth.mycase.com/tokens",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"client_id\": \"{{ $env.MYCASE_CLIENT_ID }}\",\n  \"client_secret\": \"{{ $env.MYCASE_CLIENT_SECRET }}\",\n  \"refresh_token\": \"{{ $json.refreshToken }}\",\n  \"grant_type\": \"refresh_token\"\n}",
+        "jsonBody": "={\n  \"client_id\": \"mVqwv5ZEgiTJcNsY\",\n  \"client_secret\": \"AQP5mkisered9z9Bw9iXv4zXLW9MWNt6\",\n  \"refresh_token\": \"{{ $json.refreshToken }}\",\n  \"grant_type\": \"refresh_token\"\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
-      "position": [-160, 280],
-      "id": "b1a1b1a1-0006-4a1a-9a1a-000000000006",
+      "position": [-32, -176],
+      "id": "051bc48c-1e9f-496d-bb8e-791e604ad3e4",
       "name": "Refresh Token (MyCase)"
     },
     {
       "parameters": {
-        "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst resp = $input.first().json;\n\nif (!resp.access_token || !resp.refresh_token) {\n  throw new Error('Respuesta inesperada de MyCase al refrescar token: ' + JSON.stringify(resp));\n}\n\nstaticData.accessToken = resp.access_token;\nstaticData.refreshToken = resp.refresh_token; // MyCase puede rotar el refresh_token\nstaticData.expiresAt = Date.now() + (resp.expires_in * 1000);\n\nreturn [{ json: { accessToken: staticData.accessToken } }];"
+        "jsCode": "const resp = $input.first().json;\n\nif (!resp.access_token || !resp.refresh_token) {\n  throw new Error('Respuesta inesperada de MyCase al refrescar token: ' + JSON.stringify(resp));\n}\n\nreturn [{\n  json: {\n    key: 'token',\n    accessToken: resp.access_token,\n    refreshToken: resp.refresh_token, // MyCase puede rotar el refresh_token\n    expiresAt: Date.now() + (resp.expires_in * 1000)\n  }\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [140, 280],
-      "id": "b1a1b1a1-0007-4a1a-9a1a-000000000007",
-      "name": "Save New Token"
+      "position": [192, -176],
+      "id": "95b34cf1-489e-46cb-8b8c-8dd5de5cc9d7",
+      "name": "Map New Token"
     },
     {
       "parameters": {
-        "jsCode": "// SOLO PARA EJECUTAR UNA VEZ MANUALMENTE al configurar el workflow.\n// Pega aqui el refresh_token obtenido por el flujo manual OAuth (ver nota Varela Law).\n// Despues de ejecutarlo una vez, desconecta o desactiva este nodo.\nconst staticData = $getWorkflowStaticData('global');\n\nstaticData.refreshToken = 'PEGAR_REFRESH_TOKEN_AQUI';\nstaticData.accessToken = null;\nstaticData.expiresAt = 0;\n\nreturn [{ json: { seeded: true } }];"
+        "operation": "update",
+        "collection": "mycase_tokens",
+        "updateKey": "key",
+        "fields": "accessToken,refreshToken,expiresAt",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1,
+      "position": [416, -176],
+      "id": "a798225f-3404-4126-9c00-4859164e3ff8",
+      "name": "Save New Token (Mongo)",
+      "credentials": {
+        "mongoDb": {
+          "id": "UZv1zIWjbmmfIJyv",
+          "name": "Varela Law"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const mapped = $('Map New Token').first().json;\nreturn [{ json: { accessToken: mapped.accessToken } }];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [-880, 460],
-      "id": "b1a1b1a1-0008-4a1a-9a1a-000000000008",
-      "name": "Seed inicial (una vez)"
+      "position": [640, -176],
+      "id": "3ae8b3ac-48b8-4a9a-b5b3-115511457055",
+      "name": "Return New Token"
     }
   ],
   "connections": {
@@ -128,7 +168,7 @@
       "main": [
         [
           {
-            "node": "Check Stored Token",
+            "node": "Find Stored Token",
             "type": "main",
             "index": 0
           }
@@ -136,6 +176,17 @@
       ]
     },
     "Every 23h (pre-warm)": {
+      "main": [
+        [
+          {
+            "node": "Find Stored Token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find Stored Token": {
       "main": [
         [
           {
@@ -179,7 +230,29 @@
       "main": [
         [
           {
-            "node": "Save New Token",
+            "node": "Map New Token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Map New Token": {
+      "main": [
+        [
+          {
+            "node": "Save New Token (Mongo)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save New Token (Mongo)": {
+      "main": [
+        [
+          {
+            "node": "Return New Token",
             "type": "main",
             "index": 0
           }
