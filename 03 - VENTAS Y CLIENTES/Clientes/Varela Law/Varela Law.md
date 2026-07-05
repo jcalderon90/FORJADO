@@ -71,7 +71,7 @@ actualizado: 2026-06-20
 | **Client Secret** | AQP5mkisered9z9Bw9iXv4zXLW9MWNt6 |
 | **Firm UUID** | 64ef037e-64d7-4437-b664-98683e3ed374 |
 | **Token endpoint** | `https://auth.mycase.com/tokens` |
-| **API base URL** | `https://app.mycase.com/api/v1/` |
+| **API base URL** | `https://external-integrations.mycase.com/v1/` (corregido 2026-07-05 — `app.mycase.com/api/v1` y `app.mycase.com/api/v3` dan 404, no son el host correcto) |
 | **Docs** | https://mycaseapi.stoplight.io/docs/mycase-api-documentation/k5xpc4jyhkom7-getting-started |
 
 > [!note] El endpoint correcto es `/tokens`, **no** `/access_tokens` (la documentación antigua era incorrecta).
@@ -167,6 +167,7 @@ curl -s "https://app.mycase.com/api/v1/cases" \
 - [x] Corregir bug: el nodo Mongo de n8n castea automáticamente `_id` a `ObjectId`, rompía con nuestro `_id: "token"` (string) — se agregó un campo `key: "token"` como identificador propio para `find`/`update`, evitando `_id` — 2026-07-05
 - [x] Probar el workflow completo (ejecución manual vía MCP) — verificado que lee/escribe Mongo correctamente y refresca contra MyCase — 2026-07-05 (ejecución `1915`, éxito)
 - [x] Publicar la versión corregida como activa en n8n (antes solo estaba en el draft) — 2026-07-05
+- [x] Migrar el workflow "MyCase INTEGRATION" (id `tGas6W5tfuqBPzwA`) al patrón Token Manager (Execute Workflow + Bearer token) — 2026-07-05, verificado con ejecución `1922`. En el camino se corrigió el API base URL real: `https://external-integrations.mycase.com/v1/` (no `app.mycase.com`)
 - [ ] Confirmar una corrida real del Schedule Trigger (23h) en producción, sin disparo manual
 - [ ] (Opcional, no bloqueante) Sacar `N8N_BLOCK_ENV_ACCESS_IN_NODE` del VPS para volver a usar env vars en vez de credenciales hardcodeadas en el nodo
 - [ ] Migrar `fixed_mycase_workflow.json` al nuevo patrón de auth (Execute Workflow → Bearer token)
@@ -188,6 +189,7 @@ curl -s "https://app.mycase.com/api/v1/cases" \
 - 2026-07-02 — Al probar en n8n, el static data no persistía entre ejecuciones manuales (limitación de n8n: solo persiste en corridas de producción reales, no en "Test step" de un nodo aislado). Se hizo una prueba puente con nodos Set/HTTP directos (sin pasar por static data) y **el refresh de MyCase funcionó correctamente** — confirma que la lógica de auth (client_id/secret + grant refresh_token) es correcta. MyCase rotó el refresh_token en esa prueba. Se decidió migrar la persistencia del Token Manager de n8n static data a **MongoDB** (cluster compartido Atlas) para evitar esta ambigüedad. Pendiente reconstruir el workflow con nodos MongoDB.
 - 2026-07-05 — Reconstruido `mycase_token_manager_workflow.json` con nodos MongoDB (`Find Stored Token`, `Save New Token (Mongo)` con upsert) reemplazando los nodos de static data; versión vieja archivada como `mycase_token_manager_workflow.staticdata.bak.json`.
 - 2026-07-05 — Sembrado el refresh_token vigente en `VarelaLaw.mycase_tokens` vía Compass. Conectado el MCP server de n8n de Varela Law a Claude Code (`n8n-varelalaw`), lo que permitió inspeccionar y corregir el workflow importado directamente: (1) el import había dejado los nodos Mongo sin credencial asignada y faltaba el nodo "Called by another workflow" (Execute Workflow Trigger) — corregido; (2) bug del nodo Mongo de n8n: castea `_id` a `ObjectId` automáticamente y rompía con nuestro `_id` string — resuelto agregando un campo `key: "token"` como identificador alternativo para `find`/`update`; (3) la instancia de n8n bloquea acceso a `$env` desde expresiones (`N8N_BLOCK_ENV_ACCESS_IN_NODE`) — se decidió hardcodear `client_id`/`client_secret` de MyCase directo en el nodo "Refresh Token (MyCase)" como solución pragmática. Ejecución de prueba `1915` exitosa: ciclo completo Mongo → refresh MyCase → Mongo funcionando end-to-end. Token Manager queda operativo.
+- 2026-07-05 — Migrado el workflow `MyCase INTEGRATION` (antes referido como "fixed_mycase_workflow.json", nombre desactualizado) para usar el Token Manager: agregado nodo Execute Workflow al inicio y cambiado el HTTP Request de credencial OAuth2 estática a header `Authorization: Bearer {{ $json.accessToken }}`. En el proceso se descubrió que el API base URL documentado (`app.mycase.com/api/v1` y `/v3`) daba 404 — el host correcto es `https://external-integrations.mycase.com/v1/`. Verificado con ejecución `1922` exitosa. Este es el patrón a repetir para los futuros workflows funcionales (Cases, Tasks, Time Entries, Events).
 
 ## Relacionado
 - [[Pipeline (MOC)]]

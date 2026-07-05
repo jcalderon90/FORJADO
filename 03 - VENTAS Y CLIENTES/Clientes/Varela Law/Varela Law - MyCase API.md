@@ -95,7 +95,7 @@ Content-Type: application/json
 
 ## Endpoints disponibles
 
-**Base URL:** `https://external-integrations.mycase.com`
+**Base URL:** `https://external-integrations.mycase.com/v1/` (verificado 2026-07-05 — sin el prefijo `/v1/` da 404 JSON; `https://app.mycase.com/api/v1/` da 404 HTML, no es el host correcto para estos endpoints)
 
 ### Calls (Llamadas)
 - `GET` /calls
@@ -340,8 +340,18 @@ Workflow `MyCase - Token Manager` (n8n id `MOpVRrvErCfgs2mn`, archivo `mycase_to
 
 **Pendiente:**
 - [ ] Confirmar una corrida real disparada por el Schedule Trigger (23h), sin ejecución manual
-- [ ] Migrar `fixed_mycase_workflow.json` (y futuros workflows funcionales) para que llamen a este Token Manager vía nodo **Execute Workflow** al inicio, y usen `Authorization: Bearer {{ $json.accessToken }}` en el HTTP Request en vez de la credencial Header Auth estática (que se rompe cada 24h)
 - [ ] (Opcional) Sacar `N8N_BLOCK_ENV_ACCESS_IN_NODE` del VPS y volver a `$env.MYCASE_CLIENT_ID`/`$env.MYCASE_CLIENT_SECRET` en vez de hardcodeado
+
+### Migración de "MyCase INTEGRATION" al Token Manager (2026-07-05) — COMPLETA
+
+Workflow `MyCase INTEGRATION` (n8n id `tGas6W5tfuqBPzwA`, inactivo, era solo un stub de prueba con un nodo GET a `/cases`). Migrado al patrón correcto:
+
+1. Se agregó el nodo **Get MyCase Token** (Execute Workflow → `MyCase - Token Manager`) entre el Manual Trigger y el HTTP Request.
+2. Se cambió el nodo **Get MyCase Cases** de `authentication: genericCredentialType/oAuth2Api` (credencial OAuth2 estática) a `authentication: none` + header `Authorization: Bearer {{ $json.accessToken }}`.
+3. En el camino se detectó y corrigió la URL: el nodo apuntaba a `https://app.mycase.com/api/v3/cases` (404). Se corrigió a `https://external-integrations.mycase.com/v1/cases` (ver base URL corregida arriba).
+4. Verificado con ejecución manual `1922` — éxito.
+
+Este es el patrón a repetir para cualquier workflow funcional nuevo (Cases, Tasks, Time Entries, Events): Execute Workflow → Token Manager, luego HTTP Request con `Authorization: Bearer {{ $json.accessToken }}` contra `https://external-integrations.mycase.com/v1/...`.
 
 ---
 
