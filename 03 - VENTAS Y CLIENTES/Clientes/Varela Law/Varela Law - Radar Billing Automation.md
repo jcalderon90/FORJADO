@@ -82,6 +82,20 @@ Ruta en MyCase: **Caso → Time & Billing → Info → Case Billing Totals**
 
 ---
 
+## Investigación de API (2026-07-05) — hallazgo importante
+
+> [!warning] No todos los campos están disponibles vía API pública de MyCase
+> Se probó en vivo contra la API real (usando el caso demo `[SAMPLE] John Doe Matter`, id `14752926`, que MyCase incluye por defecto — no es un cliente real):
+>
+> - `GET /cases` y `GET /cases/{id}` — solo traen `outstanding_balance` genérico. Ninguno de los 6 campos de billing.
+> - `GET /invoice_payments`, `GET /time_entries`, `GET /expenses` — el filtro `case_id` **no funciona server-side** (hay que traer todo y filtrar en n8n, o paginar). Sirven como insumo para reconstruir por agregación:
+>   - **Total Amount Collected** ← sumar `amount` de `/invoice_payments` por caso
+>   - **Total Invoiced Amount** ← sumar montos de `/invoices` por caso (no probado directamente, pero es el endpoint lógico)
+>   - **Un-Invoiced Balance** ← `/time_entries` + `/expenses` marcados `billable` sin `invoices` asociado
+> - **Available Trust Balance, Running Trust Balance e Invoices Awaiting Payment (como agregado) NO aparecen en ningún endpoint probado.** Todo indica que MyCase no expone el trust accounting vía su API pública (común en software legal por razones de compliance/IOLTA).
+>
+> **Implicación:** la automatización, tal como está planteada, **no puede reemplazar completamente** el proceso manual de Mario — como mucho puede auto-completar 2-3 de las 6 columnas (D, E parcial, H), dejando el Trust Balance (columnas G, I) manual. Antes de construir el workflow completo hay que decidir si esto vale la pena parcialmente, o si conviene preguntarle a soporte de MyCase si hay un endpoint de trust accounting no documentado.
+
 ## Plan de automatización (n8n)
 
 ### Flujo propuesto
@@ -110,11 +124,13 @@ GET /time_entries?case_id={id}      → entradas de tiempo
 
 ## Estado
 
+- [x] Probar `GET /cases` — no soporta búsqueda por nombre vía `?query=` (se probó y no filtró; devuelve la lista paginada completa) — 2026-07-05
+- [x] Identificar endpoint exacto que devuelve Trust Balance y billing totals — **no existe**; ver hallazgo arriba — 2026-07-05
+- [ ] Decidir con el usuario: ¿automatización parcial (2-3 de 6 campos) o preguntar a soporte de MyCase por un endpoint de trust accounting?
 - [ ] Confirmar acceso a Google Sheet con varelalawremote@gmail.com
-- [ ] Probar `GET /cases` con nombre de cliente para validar búsqueda
-- [ ] Identificar endpoint exacto que devuelve Trust Balance y billing totals
-- [ ] Construir workflow en n8n
-- [ ] Prueba con un cliente real (ej. Wendy Perla)
+- [ ] Definir cómo mapear cliente del Sheet → `case_id` de MyCase (ya que no hay búsqueda por nombre; alternativas: paginar todo `/cases` y matchear por `name`, o mantener un mapeo manual Cliente→case_id en el Sheet)
+- [ ] Construir workflow en n8n (alcance a definir según la decisión de arriba)
+- [ ] Prueba con un cliente real
 - [ ] Despliegue y programación del trigger
 
 ---
