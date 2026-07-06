@@ -4,7 +4,7 @@ tipo: proyecto
 cliente: Varela Law
 estado: pendiente
 creado: 2026-06-20
-actualizado: 2026-06-20
+actualizado: 2026-07-06
 ---
 
 # Varela Law — Automatización: Radar Billing & Payments
@@ -134,6 +134,50 @@ GET /time_entries?case_id={id}      → entradas de tiempo
 - [ ] Revisar la pestaña TEST con Mario/el usuario y decidir cómo vincular esto con "CIVIL CASES" y "Billing & Payments" (opciones: agregar columna con el case_number de MyCase al Sheet, cruzar por cliente/contacto en vez de por caso, u otro identificador)
 - [ ] Una vez resuelto el join: probar con un cliente real y validar los montos contra la UI de MyCase
 - [ ] Despliegue y programación del trigger (recién después de validar el join y los montos)
+
+---
+
+## Procedimiento manual actualizado (versión 2026-07-06)
+
+> [!warning] Reemplaza la definición anterior de la pestaña "Billing & Payments" — layout y fuente de columnas distintos
+> Mario describió este procedimiento el 2026-07-06 como el que está siguiendo manualmente ahora mismo, usando la pestaña **07-05-26** como referencia (la va llenando a mano día a día). Tiene columnas y origen de datos diferentes a lo documentado antes en este archivo — ver conflictos abajo.
+
+**(1) Copiar de la pestaña Civil Cases a las columnas A-E de la pestaña nueva (TEST):**
+
+| Col TEST | Campo | Origen (Civil Cases) |
+|---|---|---|
+| A | Client Name | Col A |
+| B | Case Type | Col B |
+| C | Retained | Col G |
+| D | Age | Col I |
+| E | Resp | Col J |
+
+**(2) Llenar columnas F-K con datos de MyCase (Caso → Time & Billing → Info):**
+
+| Col TEST | Campo | Origen MyCase |
+|---|---|---|
+| F | Total Amount Collected | Case Billing Totals |
+| G | Invoices Awaiting Payment | Case Billing Totals |
+| H | Total Invoiced Amount | Case Billing Totals |
+| I | Available Trust Balance | Running Trust Balance |
+| J | Uninvoiced Balance | Running Trust Balance |
+| K | Running Trust Balance | Running Trust Balance |
+
+**(3) Columnas calculadas:**
+
+| Col TEST | Campo | Fórmula |
+|---|---|---|
+| L | Total Outstanding | `H + J` (Total Invoiced Amount + Uninvoiced Balance) |
+| M | Net Trust Balance | `G - E - H` (ver duda abajo) |
+| N | Type | En blanco por ahora |
+
+> [!bug] Duda sin resolver — fórmula de Net Trust Balance (col M)
+> La fórmula `G - E - H` resta la columna **E**, que en este layout es **"Resp"** (paralegal/abogado asignado — texto, no un número). Restar texto de una fórmula financiera no tiene sentido; en Sheets se trataría como 0 y el resultado real sería `G - H` (Invoices Awaiting Payment − Total Invoiced Amount), lo cual tampoco es claramente "Net Trust Balance" en términos conceptuales. Hipótesis: desfase de letras de columna, posiblemente copiado de una versión anterior del Sheet antes de insertar Case Type/Age/Resp al inicio. **Pendiente:** confirmar contra la pestaña `07-05-26` (que Mario llena a mano) cuál es el cálculo real antes de automatizar o dar esto por definitivo.
+
+> [!bug] Conflicto — nombre de pestaña "TEST" ya está en uso con otro layout
+> La pestaña **TEST** ya fue poblada el 2026-07-06 por el workflow n8n `Radar Billing - Auto Fill (TEST)` (`gQjtpc3B4NinSsW5`) con **993 filas** y columnas `Client, Case No. (MyCase), Status, Practice Area, Billing Type, Outstanding Balance, Opened/Closed Date, Tot Invoiced, Tot Collected, Uninvoiced` (ver sección "Estado" más abajo). Es un layout distinto al de este procedimiento manual (A-N). **Pendiente confirmar con Mario:** si este procedimiento manual va en la misma pestaña TEST (pisando el volcado automático) o en una pestaña separada, y si el volcado automático de 993 filas sigue vigente o se reemplaza por este enfoque.
+>
+> También difiere de la definición anterior de la pestaña **Billing & Payments** (A-L, sin Case Type/Age/Resp, "Para" en vez de esas tres columnas) — ver tabla al inicio de este archivo. No está claro si "Billing & Payments" y este nuevo layout de "TEST" son el mismo destino final o dos cosas paralelas.
 
 ---
 
