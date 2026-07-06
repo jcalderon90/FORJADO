@@ -152,10 +152,12 @@ curl -s "https://app.mycase.com/api/v1/cases" \
 
 ## Próximos pasos
 
-> [!important] Token Manager operativo — 2026-07-05
-> El workflow **MyCase - Token Manager** (n8n, id `MOpVRrvErCfgs2mn`) quedó funcionando end-to-end con persistencia en MongoDB: lee `VarelaLaw.mycase_tokens`, detecta token vencido, refresca contra MyCase y guarda el nuevo token en Mongo. Ejecución de prueba exitosa: `1915` (2026-07-05). Detalle técnico completo en [[Varela Law - MyCase API]].
+> [!important] Retomar aquí — pausado 2026-07-06
+> **MyCase (auth + integración base): operativo.** El Token Manager (n8n id `MOpVRrvErCfgs2mn`) refresca tokens end-to-end vía MongoDB (`VarelaLaw.mycase_tokens`) y está publicado en producción. `MyCase INTEGRATION` (id `tGas6W5tfuqBPzwA`) ya usa ese patrón (Execute Workflow → Bearer token). Detalle en [[Varela Law - MyCase API]].
 >
-> **Pendiente real:** la instancia de n8n tiene `N8N_BLOCK_ENV_ACCESS_IN_NODE` activo, así que el nodo "Refresh Token (MyCase)" no puede usar `$env.MYCASE_CLIENT_ID`/`$env.MYCASE_CLIENT_SECRET` — se decidió (con el usuario) dejar el `client_id`/`client_secret` hardcodeados directo en el nodo por ahora. Si en algún momento se quiere sacar ese env var block del VPS y volver a `$env`, hay que entrar por SSH y editar `docker-compose.yml`.
+> **Radar Billing Automation: en curso, con un bloqueante de diseño sin resolver.** Se construyó `Radar Billing - Auto Fill (TEST)` (n8n id `gQjtpc3B4NinSsW5`) y volcó **993 casos de MyCase** (con billing calculado: Tot Invoiced, Tot Collected, Uninvoiced) a la pestaña **TEST** del Sheet "Radar - Civil Cases" — sin tocar "CIVIL CASES" ni "Billing & Payments". Falta decidir con Mario cómo vincular esos 993 casos con las filas de "CIVIL CASES", porque el "Case No." del Sheet no coincide con el `case_number` de MyCase. Ver detalle y opciones en [[Varela Law - Radar Billing Automation]].
+>
+> **Pendiente menor:** `N8N_BLOCK_ENV_ACCESS_IN_NODE` sigue activo en el VPS, así que el Token Manager tiene `client_id`/`client_secret` de MyCase hardcodeados en el nodo (no `$env`) — decisión pragmática ya tomada con el usuario, no bloqueante.
 
 - [x] Completar la obtención manual de un token nuevo (flujo SSH + Postman) — 2026-07-02
 - [x] Confirmar que el refresh de MyCase funciona end-to-end (probado manualmente en n8n) — 2026-07-02. **Nota:** MyCase rotó el refresh_token en esa prueba; el usado para sembrar quedó invalidado, hay un refresh_token nuevo vigente (solo en el chat/local, no en git)
@@ -170,9 +172,8 @@ curl -s "https://app.mycase.com/api/v1/cases" \
 - [x] Migrar el workflow "MyCase INTEGRATION" (id `tGas6W5tfuqBPzwA`) al patrón Token Manager (Execute Workflow + Bearer token) — 2026-07-05, verificado con ejecución `1922`. En el camino se corrigió el API base URL real: `https://external-integrations.mycase.com/v1/` (no `app.mycase.com`)
 - [ ] Confirmar una corrida real del Schedule Trigger (23h) en producción, sin disparo manual
 - [ ] (Opcional, no bloqueante) Sacar `N8N_BLOCK_ENV_ACCESS_IN_NODE` del VPS para volver a usar env vars en vez de credenciales hardcodeadas en el nodo
-- [ ] Migrar `fixed_mycase_workflow.json` al nuevo patrón de auth (Execute Workflow → Bearer token)
 - [ ] Hablar con **Adalberto** sobre el sistema automático de contratos
-- [ ] **Radar Billing Automation** — automatizar llenado de pestaña Billing & Payments en Google Sheet (ver [[Varela Law - Radar Billing Automation]])
+- [ ] **Radar Billing Automation** — revisar con Mario la pestaña TEST (993 casos volcados) y decidir cómo vincularla con "CIVIL CASES"/"Billing & Payments" (ver [[Varela Law - Radar Billing Automation]])
 - [ ] Construir workflows funcionales (Cases, Tasks, Time Entries, Events)
 
 ---
