@@ -126,12 +126,12 @@ GET /time_entries?case_id={id}      → entradas de tiempo
 
 - [x] Probar `GET /cases` — no soporta búsqueda por nombre vía `?query=` (se probó y no filtró; devuelve la lista paginada completa) — 2026-07-05
 - [x] Identificar endpoint exacto que devuelve Trust Balance y billing totals — **no existe**; ver hallazgo arriba — 2026-07-05
-- [ ] Decidir con el usuario: ¿automatización parcial (2-3 de 6 campos) o preguntar a soporte de MyCase por un endpoint de trust accounting?
-- [ ] Confirmar acceso a Google Sheet con varelalawremote@gmail.com
-- [ ] Definir cómo mapear cliente del Sheet → `case_id` de MyCase (ya que no hay búsqueda por nombre; alternativas: paginar todo `/cases` y matchear por `name`, o mantener un mapeo manual Cliente→case_id en el Sheet)
-- [ ] Construir workflow en n8n (alcance a definir según la decisión de arriba)
-- [ ] Prueba con un cliente real
-- [ ] Despliegue y programación del trigger
+- [x] Decisión: automatización parcial ahora (Total Invoiced, Total Amount Collected, Un-Invoiced Balance) — 2026-07-06
+- [x] Construir workflow "Radar Billing - Auto Fill (TEST)" en n8n (id `gQjtpc3B4NinSsW5`) — 2026-07-06. Pagina `/cases`, `/invoices`, `/invoice_payments`, `/time_entries`, `/expenses` vía cursor (header `Link`, no `page`/`per_page` como decía la doc — ver [[Varela Law - MyCase API]]), agrupa por caso, escribe en la pestaña TEST del Sheet.
+- [ ] **BLOQUEANTE:** la columna "Case No." de la pestaña CIVIL CASES **no usa el mismo formato** que `case_number` de MyCase (sistemas de numeración distintos — probablemente número de causa judicial vs. referencia interna del despacho). De 84 casos activos, solo 2 cruzaron (por nombre de cliente normalizado, no por número). El match por nombre tampoco es confiable (formatos de nombre distintos entre Sheet y MyCase). Sin resolver esto, el workflow no puede completar el join real.
+- [ ] Decidir con el usuario/Mario cómo vincular Sheet ↔ MyCase de forma confiable: (a) agregar una columna nueva en el Sheet con el `case_number` real de MyCase (una vez, manual), (b) cruzar por cliente/contacto en vez de por caso (`/people` o `/contacts`, si el nombre coincide mejor ahí), (c) otro identificador único que ambos sistemas comparten
+- [ ] Una vez resuelto el join: probar con un cliente real y validar contra la UI de MyCase
+- [ ] Despliegue y programación del trigger (recién después de validar el join y los montos)
 
 ---
 

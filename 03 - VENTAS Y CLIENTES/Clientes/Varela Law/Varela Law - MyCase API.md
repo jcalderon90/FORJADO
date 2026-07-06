@@ -245,7 +245,10 @@ Content-Type: application/json
 
 ## Paginación
 
-Parámetros: `page` y `per_page`. Importante al iterar sobre listas grandes en n8n.
+> [!warning] La documentación oficial dice `page`/`per_page`, pero eso no funciona en la práctica (verificado 2026-07-06)
+> Pasar `page=2`, `page=3`, etc. devuelve la **misma primera página** una y otra vez (n8n lo detecta como "The returned response was identical 5x"). `per_page` tampoco cambia el tamaño de página.
+>
+> **Mecanismo real:** paginación por cursor vía el header de respuesta `Link`, formato `<https://.../v1/cases?per_page=200&page_token=XXXX>; rel="next"`. El header `item-count` trae el total de registros (ej. 993 en `/cases`). Para consumirlo en el nodo HTTP Request de n8n (v4.4): activar `options.response.response.fullResponse: true` para poder leer headers, y configurar `options.pagination.pagination` con `paginationMode: "responseContainsNextURL"`, `nextURL` extrayendo la URL del header `Link` vía regex, y `paginationCompleteWhen: "other"` con un `completeExpression` que chequee la ausencia de `rel="next"`. Con `fullResponse:true` cada item de salida tiene shape `{statusCode, headers, body}` — hace falta un Code node para aplanar `body` antes de seguir.
 
 ---
 
