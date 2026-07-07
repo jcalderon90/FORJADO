@@ -1,0 +1,163 @@
+﻿{
+  "name": "Radar Billing - ID Mapper",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "a1b2c3d4-0001-0001-0001-000000000001",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [-1200, 0]
+    },
+    {
+      "parameters": {
+        "workflowId": "MOpVRrvErCfgs2mn"
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000002",
+      "name": "Get MyCase Token",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [-960, 0]
+    },
+    {
+      "parameters": {
+        "url": "https://external-integrations.mycase.com/v1/cases",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Get MyCase Token').item.json.accessToken }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          },
+          "pagination": {
+            "pagination": {
+              "paginationMode": "responseContainsNextURL",
+              "nextURL": "={{ $response.headers['link'] && $response.headers['link'].includes('rel=\"next\"') ? $response.headers['link'].match(/<([^>]+)>;\\s*rel=\"next\"/)[1] : '' }}",
+              "paginationCompleteWhen": "other",
+              "completeExpression": "={{ !$response.headers['link'] || !$response.headers['link'].includes('rel=\"next\"') }}"
+            }
+          }
+        }
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000003",
+      "name": "Fetch All MyCase Cases",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [-720, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const allCases = [];\nfor (const item of $input.all()) {\n  const body = item.json.body;\n  if (Array.isArray(body)) {\n    allCases.push(...body);\n  } else if (body && Array.isArray(body.cases)) {\n    allCases.push(...body.cases);\n  }\n}\nconsole.log('Total cases de MyCase: ' + allCases.length);\nreturn [{ json: { cases: allCases, total: allCases.length } }];"
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000004",
+      "name": "Extract All Cases",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-480, 0]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "1jo3XRFfWRVNJViiPRYjqPt3I-hRw0zl3RPPfQuIaPLw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Civil Cases",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000005",
+      "name": "Read Civil Cases",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [-240, 0],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR_CON_ID_CREDENCIAL_GSHEETS",
+          "name": "Google Sheets — Varela Law"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const mycaseCases = $('Extract All Cases').first().json.cases;\n\nfunction normalize(str) {\n  if (!str && str !== 0) return '';\n  return str.toString()\n    .toLowerCase()\n    .replace(/[\\s\\-\\/\\.]/g, '')\n    .replace(/[^a-z0-9]/g, '');\n}\n\nconst caseNoMap = {};\nconst nameMap = {};\n\nfor (const c of mycaseCases) {\n  if (c.case_number) {\n    const key = normalize(c.case_number);\n    if (key) caseNoMap[key] = c;\n  }\n  if (c.name) {\n    const key = normalize(c.name);\n    if (key) nameMap[key] = c;\n  }\n}\n\nconsole.log('Lookup: ' + Object.keys(caseNoMap).length + ' por case_no, ' + Object.keys(nameMap).length + ' por nombre');\n\nconst results = [];\nlet countCaseNo = 0, countName = 0, countNoMatch = 0, countSkipped = 0;\n\nfor (const item of $input.all()) {\n  const row = item.json;\n  const clientName = (row['Client Name'] || '').toString().trim();\n  const caseNo = (row['Case No.'] || '').toString().trim();\n\n  if (!clientName || clientName.toUpperCase() === 'TOTAL') {\n    countSkipped++;\n    continue;\n  }\n\n  let matchedCase = null;\n  let matchMethod = 'NO MATCH';\n\n  const normCaseNo = normalize(caseNo);\n  if (normCaseNo && caseNoMap[normCaseNo]) {\n    matchedCase = caseNoMap[normCaseNo];\n    matchMethod = 'CASE_NO';\n    countCaseNo++;\n  }\n\n  if (!matchedCase) {\n    const normName = normalize(clientName);\n    if (normName && nameMap[normName]) {\n      matchedCase = nameMap[normName];\n      matchMethod = 'NAME_EXACT';\n      countName++;\n    }\n  }\n\n  if (!matchedCase) {\n    const normName = normalize(clientName);\n    if (normName.length >= 5) {\n      for (const [key, c] of Object.entries(nameMap)) {\n        if (key.includes(normName) || normName.includes(key)) {\n          matchedCase = c;\n          matchMethod = 'NAME_PARTIAL';\n          countName++;\n          break;\n        }\n      }\n    }\n  }\n\n  if (!matchedCase) countNoMatch++;\n\n  results.push({\n    json: {\n      'Client (Sheet)': clientName,\n      'Case No. (Sheet)': caseNo,\n      'MyCase ID': matchedCase ? String(matchedCase.id) : '',\n      'MyCase Case No.': matchedCase ? String(matchedCase.case_number) : '',\n      'MyCase Name': matchedCase ? String(matchedCase.name) : '',\n      'Status': matchedCase ? String(matchedCase.status || '') : '',\n      'Match Method': matchMethod\n    }\n  });\n}\n\nconsole.log('Resumen: CASE_NO=' + countCaseNo + ', NAME=' + countName + ', NO_MATCH=' + countNoMatch + ', SKIPPED=' + countSkipped);\nreturn results;"
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000006",
+      "name": "Match Sheet Rows",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1jo3XRFfWRVNJViiPRYjqPt3I-hRw0zl3RPPfQuIaPLw",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "ID MAP",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000007",
+      "name": "Write to ID MAP",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [240, 0],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR_CON_ID_CREDENCIAL_GSHEETS",
+          "name": "Google Sheets — Varela Law"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [[{ "node": "Get MyCase Token", "type": "main", "index": 0 }]]
+    },
+    "Get MyCase Token": {
+      "main": [[{ "node": "Fetch All MyCase Cases", "type": "main", "index": 0 }]]
+    },
+    "Fetch All MyCase Cases": {
+      "main": [[{ "node": "Extract All Cases", "type": "main", "index": 0 }]]
+    },
+    "Extract All Cases": {
+      "main": [[{ "node": "Read Civil Cases", "type": "main", "index": 0 }]]
+    },
+    "Read Civil Cases": {
+      "main": [[{ "node": "Match Sheet Rows", "type": "main", "index": 0 }]]
+    },
+    "Match Sheet Rows": {
+      "main": [[{ "node": "Write to ID MAP", "type": "main", "index": 0 }]]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "1605e0956f411c02ecc29f05b035dcb95746e902cd54a42b69d92da41bbef671"
+  }
+}

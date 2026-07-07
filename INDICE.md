@@ -2,7 +2,7 @@
 tags: [forjado, indice, navegacion]
 tipo: indice
 aliases: [indice, mapa, index]
-actualizado: 2026-06-20
+actualizado: 2026-07-07
 ---
 
 # FORJADO — Índice de la Bóveda
