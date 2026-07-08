@@ -15,6 +15,17 @@ Mario llena manualmente la pestaña **Billing & Payments** del Google Sheet "Rad
 
 ---
 
+## Estado actual (resumen — 2026-07-08)
+
+- **Join de identidad resuelto:** se abandonó el join por "Case No." (eran dos sistemas de numeración distintos, nunca compatibles) y se construyó la pestaña **ID MAP** vía el workflow `Radar Billing - Build ID MAP (TEST)` (n8n `JoQ4f8txlZTi89O4`). Cobertura: 69% match limpio, 2% ambiguo, 28% sin match — necesita revisión humana.
+- **Bloqueado en 2 frentes, ambos esperando a terceros:**
+  1. Mario está revisando manualmente ID MAP (filas `AMBIGUOUS`/`NO MATCH`) — sin fecha aún.
+  2. Mario va a preguntarle a soporte de MyCase si existe un endpoint no documentado para Trust Balance / Invoices Awaiting Payment (la API pública no los expone, hallazgo del 2026-07-05).
+- **Layout del destino final resuelto a medias:** Mario confirmó usar la pestaña **07-05-26** como referencia y descartó **Billing and Payments**. Todavía falta releer el layout de columnas y la fórmula de Net Trust Balance contra 07-05-26 (la sección "Procedimiento manual actualizado" abajo describe un layout hipotético basado en TEST, no en 07-05-26 — pendiente de reemplazar).
+- **No tocar aún:** "Billing & Payments" ni la pestaña 07-05-26 real — todo el trabajo de automatización sigue aislado en TEST/TEST2/ID MAP hasta validar montos y layout con Mario.
+
+---
+
 ## Proceso manual actual
 
 1. Ir a MyCase → buscar cliente en el Search box
@@ -144,8 +155,9 @@ GET /time_entries?case_id={id}      → entradas de tiempo
   - **Resultado sobre 98 filas de CIVIL CASES:** 68 matches automáticos limpios (69%: 65 apellido+nombre, 2 desambiguados por expediente embebido, 1 por apellido único), 2 `AMBIGUOUS` (mismo cliente con varios matters, sin señal para elegir), 28 `NO MATCH` (probablemente casos cerrados fuera del fetch de `/cases`, clientes no creados aún en MyCase, o discrepancias de nombre — no es un bug, requiere ojo humano).
 - [ ] **Pendiente:** revisar manualmente en la pestaña ID MAP las filas `AMBIGUOUS`/`NO MATCH` (filtrar por columna "Match Method") y completar a mano el MyCase ID/Case No. donde se pueda determinar.
 - [ ] Una vez revisado ID MAP: reconstruir el join real usando ID MAP como llave persistente (no re-derivar el matching por nombre en cada corrida), escribir en TEST2 para validar, y solo después tocar "Billing & Payments" — validando montos de un par de casos reales contra la UI de MyCase.
-- [ ] **Sigue sin resolver (no bloqueante para ID MAP, sí para el objetivo final del cliente):** el hallazgo del 2026-07-05 de que **Available Trust Balance, Running Trust Balance e Invoices Awaiting Payment no están disponibles vía la API pública de MyCase**. Ni el join ni el matching resuelven esto — sigue faltando decidir con Mario si la automatización parcial (Total Invoiced, Total Collected, Un-Invoiced) es suficiente, o si hay que preguntarle a soporte de MyCase por un endpoint de trust accounting no documentado.
-- [ ] Sigue pendiente aclarar con Mario las dos dudas de la sección "Procedimiento manual actualizado" abajo: layout final (TEST vs. Billing & Payments) y fórmula real de Net Trust Balance.
+- [x] **Respuesta de Mario (2026-07-08):** confirmó que la pestaña **07-05-26** es la más actualizada (la que llena a mano día a día) y que la pestaña **Billing and Payments** puede ignorarse — queda descartada como destino/referencia. Falta re-derivar el layout de columnas y la fórmula de Net Trust Balance contra 07-05-26 en vez de contra Billing & Payments.
+- [ ] **En curso — Mario va a checar con soporte de MyCase (2026-07-08)** sobre si hay forma de obtener **Trust Balance** e **Invoices Awaiting Payment** (el hallazgo del 2026-07-05 de que no están disponibles vía la API pública de MyCase). Ni el join ni el matching resuelven esto — bloqueado en espera de su respuesta antes de decidir si la automatización parcial (Total Invoiced, Total Collected, Un-Invoiced) es suficiente.
+- [ ] Con la pestaña 07-05-26 confirmada como referencia: releer su layout de columnas y fórmulas (reemplaza la sección "Procedimiento manual actualizado" abajo, que estaba basada en un layout hipotético de TEST/Billing & Payments) y confirmar la fórmula real de Net Trust Balance.
 - [ ] Despliegue y programación del trigger (recién después de validar el join, los montos, y el layout final con Mario).
 
 ---
@@ -186,6 +198,8 @@ GET /time_entries?case_id={id}      → entradas de tiempo
 
 > [!bug] Duda sin resolver — fórmula de Net Trust Balance (col M)
 > La fórmula `G - E - H` resta la columna **E**, que en este layout es **"Resp"** (paralegal/abogado asignado — texto, no un número). Restar texto de una fórmula financiera no tiene sentido; en Sheets se trataría como 0 y el resultado real sería `G - H` (Invoices Awaiting Payment − Total Invoiced Amount), lo cual tampoco es claramente "Net Trust Balance" en términos conceptuales. Hipótesis: desfase de letras de columna, posiblemente copiado de una versión anterior del Sheet antes de insertar Case Type/Age/Resp al inicio. **Pendiente:** confirmar contra la pestaña `07-05-26` (que Mario llena a mano) cuál es el cálculo real antes de automatizar o dar esto por definitivo.
+
+> [!bug] SUPERADO 2026-07-08 — Mario confirmó ignorar "Billing and Payments" y usar la pestaña 07-05-26 como referencia. Este bloque de conflicto queda obsoleto en cuanto se releve el layout contra 07-05-26.
 
 > [!bug] Conflicto — nombre de pestaña "TEST" ya está en uso con otro layout
 > La pestaña **TEST** ya fue poblada el 2026-07-06 por el workflow n8n `Radar Billing - Auto Fill (TEST)` (`gQjtpc3B4NinSsW5`) con **993 filas** y columnas `Client, Case No. (MyCase), Status, Practice Area, Billing Type, Outstanding Balance, Opened/Closed Date, Tot Invoiced, Tot Collected, Uninvoiced` (ver sección "Estado" más abajo). Es un layout distinto al de este procedimiento manual (A-N). **Pendiente confirmar con Mario:** si este procedimiento manual va en la misma pestaña TEST (pisando el volcado automático) o en una pestaña separada, y si el volcado automático de 993 filas sigue vigente o se reemplaza por este enfoque.
