@@ -41,6 +41,7 @@ actualizado: 2026-07-07
 | [[Carwarriors - Infraestructura (Diseño)]] | Diseño técnico de infraestructura para Carwarriors |
 | [[Carwarriors - Justificación de Infraestructura (Cliente)]] | Doc para el cliente justificando la infraestructura |
 | [[Carwarriors - Propuesta Formal]] | Propuesta formal enviada a Carwarriors |
+| [[Carwarriors - SFTP DealerCenter (Investigación)]] | Investigación técnica de ADF/XML y SFTP para importar leads a DealerCenter |
 | [[Varela Law]] | Cliente activo — bufete legal Miami, n8n + MyCase API, $80/mes |
 | [[Varela Law - MyCase API]] | Documentación técnica completa de la API de MyCase |
 | [[Varela Law - Radar Billing Automation]] | Automatización MyCase → Google Sheet "Radar - Civil Cases", pestaña Billing & Payments (2-3h → 5min) |

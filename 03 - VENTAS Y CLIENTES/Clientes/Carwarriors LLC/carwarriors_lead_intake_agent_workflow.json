@@ -1,0 +1,351 @@
+{
+  "name": "Carwarriors - Agente de Captura de Leads (GHL + Mongo)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "carwarriors-lead-intake",
+        "responseMode": "onReceived",
+        "responseData": "={{ { \"status\": \"received\" } }}",
+        "options": {}
+      },
+      "id": "cw-0001-0001-0001-000000000001",
+      "name": "GHL Lead Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [-2000, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "// NOTA: nombres de campo asumidos — hay que ajustarlos con el payload REAL\n// que envíe la automatización/webhook de GHL en la primera prueba.\nconst body = $json.body || $json;\n\nconst contactId = body.contactId || body.contact_id || body.id || '';\nconst name = body.contactName || body.full_name || body.name || '';\nconst phoneRaw = body.phone || body.contact_phone || '';\nconst channelRaw = (body.channel || body.source || (body.customData && body.customData.channel) || '').toString().toLowerCase();\n\nlet channel = 'unknown';\nif (channelRaw.includes('whatsapp')) channel = 'whatsapp';\nelse if (channelRaw.includes('instagram') || channelRaw.includes(' ig') || channelRaw === 'ig') channel = 'instagram';\nelse if (channelRaw.includes('messenger') || channelRaw.includes('facebook') || channelRaw.includes('fb')) channel = 'messenger';\n\nconst message = body.message || body.lastMessage || body.body || '';\nconst locationId = body.locationId || body.location_id || '';\n\nreturn [{\n  json: {\n    contactId,\n    name,\n    phone: (phoneRaw || '').toString().trim(),\n    channel,\n    message,\n    locationId,\n    receivedAt: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "cw-0001-0001-0001-000000000002",
+      "name": "Normalize Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-1780, 0]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.phone }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "cw-0001-0001-0001-000000000003",
+      "name": "Has Phone?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [-1560, 0]
+    },
+    {
+      "parameters": {
+        "operation": "find",
+        "collection": "leads_pending_phone",
+        "query": "={{ JSON.stringify({ contactId: $json.contactId }) }}",
+        "options": {
+          "limit": 1
+        }
+      },
+      "id": "cw-0001-0001-0001-000000000004",
+      "name": "Check Pending State",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1,
+      "position": [-1340, 150],
+      "credentials": {
+        "mongoDb": {
+          "id": "REEMPLAZAR_CON_ID_CREDENCIAL_MONGODB",
+          "name": "MongoDB Atlas — Carwarriors"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const items = $input.all();\nconst lead = $('Normalize Payload').first().json;\nconst pending = items.length > 0;\n\nreturn [{\n  json: {\n    ...lead,\n    pending\n  }\n}];"
+      },
+      "id": "cw-0001-0001-0001-000000000005",
+      "name": "Has Pending Record?",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-1120, 150]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.pending }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "cw-0001-0001-0001-000000000006",
+      "name": "Already Asked?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [-900, 150]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "collection": "leads_pending_phone",
+        "updateKey": "contactId",
+        "upsert": true,
+        "fields": "={{ { contactId: $json.contactId, channel: $json.channel, name: $json.name, askedAt: new Date().toISOString() } }}",
+        "options": {}
+      },
+      "id": "cw-0001-0001-0001-000000000007",
+      "name": "Mark Pending in Mongo",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1,
+      "position": [-680, 60],
+      "credentials": {
+        "mongoDb": {
+          "id": "REEMPLAZAR_CON_ID_CREDENCIAL_MONGODB",
+          "name": "MongoDB Atlas — Carwarriors"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extracción simple con regex. Si los leads suelen escribir el teléfono mezclado\n// con texto (ej. \"mi numero es cero cuatro...\"), evaluar reemplazar esto por\n// un nodo de IA (OpenRouter) que extraiga el teléfono de lenguaje natural.\nconst lead = $('Normalize Payload').first().json;\nconst text = (lead.message || '').toString();\nconst cleaned = text.replace(/[^\\d+]/g, ' ');\nconst match = cleaned.match(/\\+?\\d[\\d\\s]{7,}/);\nconst phone = match ? match[0].replace(/\\s+/g, '') : '';\n\nreturn [{\n  json: {\n    contactId: lead.contactId,\n    name: lead.name,\n    channel: lead.channel,\n    locationId: lead.locationId,\n    extractedPhone: phone\n  }\n}];"
+      },
+      "id": "cw-0001-0001-0001-000000000008",
+      "name": "Extract Phone From Message",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-680, 240]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.extractedPhone }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "cw-0001-0001-0001-000000000009",
+      "name": "Phone Found?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [-460, 240]
+    },
+    {
+      "parameters": {
+        "jsCode": "const lead = $('Normalize Payload').first().json;\nconst firstName = (lead.name || '').trim().split(' ')[0];\nconst greeting = firstName ? ('¡Hola ' + firstName + '!') : '¡Hola!';\nconst message = greeting + ' Para poder ayudarte más rápido con la búsqueda de tu próximo auto, ¿nos compartes tu número de teléfono? 🚗';\n\nreturn [{\n  json: {\n    contactId: lead.contactId,\n    channel: lead.channel,\n    locationId: lead.locationId,\n    outboundMessage: message\n  }\n}];"
+      },
+      "id": "cw-0001-0001-0001-00000000000a",
+      "name": "Build Ask-Phone Message",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-240, 150]
+    },
+    {
+      "parameters": {
+        "url": "https://services.leadconnectorhq.com/conversations/messages",
+        "method": "POST",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Version", "value": "2021-04-15" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { type: $json.channel === 'instagram' ? 'IG' : ($json.channel === 'messenger' ? 'FB' : 'Custom'), contactId: $json.contactId, message: $json.outboundMessage } }}",
+        "options": {}
+      },
+      "id": "cw-0001-0001-0001-00000000000b",
+      "name": "Send GHL Message",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [-20, 150],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REEMPLAZAR_CON_ID_CREDENCIAL_GHL_API",
+          "name": "GHL API Token — Carwarriors"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://services.leadconnectorhq.com/contacts/{{ $json.contactId }}",
+        "method": "PUT",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Version", "value": "2021-07-28" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { phone: $json.extractedPhone } }}",
+        "options": {}
+      },
+      "id": "cw-0001-0001-0001-00000000000c",
+      "name": "Update GHL Contact Phone",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [-240, 320],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REEMPLAZAR_CON_ID_CREDENCIAL_GHL_API",
+          "name": "GHL API Token — Carwarriors"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "collection": "leads_pending_phone",
+        "query": "={{ JSON.stringify({ contactId: $json.contactId }) }}",
+        "options": {}
+      },
+      "id": "cw-0001-0001-0001-00000000000d",
+      "name": "Remove Pending Flag",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1,
+      "position": [-20, 320],
+      "credentials": {
+        "mongoDb": {
+          "id": "REEMPLAZAR_CON_ID_CREDENCIAL_MONGODB",
+          "name": "MongoDB Atlas — Carwarriors"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const lead = $('Normalize Payload').first().json;\nlet phone = lead.phone;\n\ntry {\n  const extracted = $('Extract Phone From Message').first().json.extractedPhone;\n  if (extracted) phone = extracted;\n} catch (e) {\n  // 'Extract Phone From Message' no corrió en esta rama (lead ya traía teléfono) — está bien.\n}\n\nreturn [{\n  json: {\n    contactId: lead.contactId,\n    name: lead.name,\n    phone,\n    channel: lead.channel,\n    locationId: lead.locationId,\n    status: 'captured',\n    updatedAt: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "cw-0001-0001-0001-00000000000e",
+      "name": "Prepare Final Lead",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [200, 60]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "collection": "leads",
+        "updateKey": "contactId",
+        "upsert": true,
+        "fields": "={{ $json }}",
+        "options": {}
+      },
+      "id": "cw-0001-0001-0001-00000000000f",
+      "name": "Upsert Lead in MongoDB",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1,
+      "position": [420, 60],
+      "credentials": {
+        "mongoDb": {
+          "id": "REEMPLAZAR_CON_ID_CREDENCIAL_MONGODB",
+          "name": "MongoDB Atlas — Carwarriors"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "GHL Lead Webhook": {
+      "main": [[{ "node": "Normalize Payload", "type": "main", "index": 0 }]]
+    },
+    "Normalize Payload": {
+      "main": [[{ "node": "Has Phone?", "type": "main", "index": 0 }]]
+    },
+    "Has Phone?": {
+      "main": [
+        [{ "node": "Prepare Final Lead", "type": "main", "index": 0 }],
+        [{ "node": "Check Pending State", "type": "main", "index": 0 }]
+      ]
+    },
+    "Check Pending State": {
+      "main": [[{ "node": "Has Pending Record?", "type": "main", "index": 0 }]]
+    },
+    "Has Pending Record?": {
+      "main": [[{ "node": "Already Asked?", "type": "main", "index": 0 }]]
+    },
+    "Already Asked?": {
+      "main": [
+        [{ "node": "Extract Phone From Message", "type": "main", "index": 0 }],
+        [{ "node": "Mark Pending in Mongo", "type": "main", "index": 0 }]
+      ]
+    },
+    "Mark Pending in Mongo": {
+      "main": [[{ "node": "Build Ask-Phone Message", "type": "main", "index": 0 }]]
+    },
+    "Extract Phone From Message": {
+      "main": [[{ "node": "Phone Found?", "type": "main", "index": 0 }]]
+    },
+    "Phone Found?": {
+      "main": [
+        [{ "node": "Update GHL Contact Phone", "type": "main", "index": 0 }],
+        [{ "node": "Build Ask-Phone Message", "type": "main", "index": 0 }]
+      ]
+    },
+    "Build Ask-Phone Message": {
+      "main": [[{ "node": "Send GHL Message", "type": "main", "index": 0 }]]
+    },
+    "Update GHL Contact Phone": {
+      "main": [[{ "node": "Remove Pending Flag", "type": "main", "index": 0 }]]
+    },
+    "Remove Pending Flag": {
+      "main": [[{ "node": "Prepare Final Lead", "type": "main", "index": 0 }]]
+    },
+    "Prepare Final Lead": {
+      "main": [[{ "node": "Upsert Lead in MongoDB", "type": "main", "index": 0 }]]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "REEMPLAZAR_AL_IMPORTAR"
+  }
+}

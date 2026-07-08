@@ -7,7 +7,7 @@ contacto: Jorge (Dueño)
 proximo_paso: Completar pruebas — contrato se firma si salen bien
 estado_comercial: pruebas-en-curso
 creado: 2026-06-18
-actualizado: 2026-06-26
+actualizado: 2026-07-08
 ---
 
 # Cliente — Carwarriors LLC
@@ -191,15 +191,12 @@ actualizado: 2026-06-26
 
 **Alternativa evaluada (Playwright + fetch interno):** Se intentó usar Playwright con fetch nativo a endpoints REST internos de DealerCenter usando sesión persistente. Se descartó por falta de API directa.
 
-### Lead Sync — GHL → DealerCenter (ARQUITECTURA ACTUAL)
+### Lead Sync — GHL → DealerCenter (EN RE-EVALUACIÓN)
 
-> [!success] Solución adoptada
-> **Cloudflare Worker** — recibe webhook de GHL con el lead, genera archivo ADF/XML, lo sube por SFTP al servidor de DealerCenter. Más limpio, más económico y más estable que Make o n8n para este caso puntual:
-> - No depende de operaciones de Make (sin consumo de saldo)
-> - No necesita tokens de IA ni procesos externos caros
-> - Sin costo variable por ejecución
+> [!warning] Decisión de arquitectura en revisión (2026-07-08)
+> Se investigó a fondo el mecanismo real de DealerCenter (ver [[Carwarriors - SFTP DealerCenter (Investigación)]]): **sí existe** un método oficial de importación de leads por SFTP con formato ADF/XML (reemplazó al email por cumplimiento GLBA). El hallazgo clave: **SFTP es un protocolo con sesión persistente (sockets TCP), difícil de implementar sobre el runtime de Cloudflare Workers** (no es solo un `fetch`). n8n, en cambio, trae un nodo FTP con soporte SFTP nativo listo para usar, y ya centraliza el resto del pipeline (webhook GHL → agente IA → Mongo).
 >
-> **Estado:** En desarrollo — planificado para implementar el próximo fin de semana.
+> **Estado:** Pendiente decisión final del usuario entre construirlo en n8n (recomendado por los hallazgos técnicos) o insistir con el Cloudflare Worker. No implementado todavía en ninguna de las dos rutas — bloqueado por falta de credenciales SFTP reales de DealerCenter (ver investigación).
 
 ---
 
@@ -260,19 +257,29 @@ actualizado: 2026-06-26
 - 2026-06-20 — Confirmado: cliente en fase de pruebas activas. Contrato se formaliza si las pruebas salen bien.
 - 2026-06-20 — Integración DC→GHL: Pasos 1-3 completados. Autenticación resuelta, endpoint confirmado, diseño n8n listo. Bloqueado en Paso 4: falta GHL credentials y decisiones de subcuenta/upsert del cliente.
 - 2026-06-26 — Cambio de arquitectura en integración DealerCenter. Se descartan Make (costo de ops), n8n y Playwright. **Solución adoptada:** Cloudflare Worker recibe webhook de GHL → genera ADF/XML → sube por SFTP. Pendiente credenciales SFTP y estructura exacta del XML.
+- 2026-07-08 — Investigación técnica de SFTP/ADF-XML de DealerCenter completada (ver [[Carwarriors - SFTP DealerCenter (Investigación)]]): confirmado que DealerCenter soporta importación oficial por SFTP, pero SFTP es difícil de implementar en Cloudflare Workers — reabre la decisión entre n8n y CF Worker para este tramo. En paralelo, se construyó el primer workflow de n8n: **Agente de Captura de Leads** (`carwarriors_lead_intake_agent_workflow.json`), que recibe leads de GHL, pide el teléfono conversacionalmente a los leads de Instagram/Messenger que no lo traen, y guarda todo en MongoDB Atlas (colección `leads`). Aún no probado en el n8n real del cliente — falta importarlo, conectar credenciales y validar el payload real del webhook de GHL.
 
 ## Auditoría Técnica Pendiente
 
 > Preguntas abiertas que hay que responder antes de comprometer ciertos módulos.
 
 ### DealerCenter — Integración (Módulo B)
-- [x] ¿Tiene DealerCenter API REST documentada o acceso de desarrollador? -> Confirmado que **no** se dispone de API oficial de desarrollador.
-- [x] Evaluar opciones -> Intentos previos: (1) Make → descartado por costo de operaciones. (2) Playwright + fetch interno → descartado por inestabilidad. (3) n8n + SFTP + ADF/XML → viable, pero no implementado.
-- [x] Solución adoptada -> **Cloudflare Worker**: recibe webhook de GHL, genera ADF/XML, sube por SFTP. En desarrollo.
-- [ ] Definir estructura exacta del ADF/XML que espera DealerCenter (campo por campo)
-- [ ] Crear Worker con: endpoint webhook → transformación a ADF/XML → subida SFTP
-- [ ] Configurar SFTP: host, puerto, credenciales, ruta de depósito
+- [x] ¿Tiene DealerCenter API REST documentada o acceso de desarrollador? -> Confirmado que **no** se dispone de API oficial de desarrollador (sí existe una API *no oficial* de un tercero, Supergood, documentada como plan B en la investigación).
+- [x] Evaluar opciones -> Intentos previos: (1) Make → descartado por costo de operaciones. (2) Playwright + fetch interno → descartado por inestabilidad. (3) n8n + SFTP + ADF/XML → viable, pendiente de decisión.
+- [x] Investigación SFTP/ADF-XML completada (2026-07-08) -> Ver [[Carwarriors - SFTP DealerCenter (Investigación)]]. DealerCenter sí soporta SFTP oficial. Hallazgo: SFTP es difícil de implementar en el runtime de Cloudflare Workers (sockets TCP con sesión, no HTTP simple) — n8n trae nodo FTP/SFTP nativo. Reabre la decisión Worker vs n8n.
+- [ ] **Decisión pendiente del usuario:** ¿construir el tramo GHL → DealerCenter en n8n (recomendado por los hallazgos técnicos) o insistir con el Cloudflare Worker?
+- [ ] Que Jorge/Karel generen las credenciales SFTP reales desde DealerCenter (Dealer Settings → Customer → Lead Management → Generate SFTP Credentials)
+- [ ] Confirmar el DCID de DealerCenter (Dealer Setting → Dealer Profile Settings) y si las 3 subcuentas GHL comparten un solo DCID o cada una tiene el suyo
+- [ ] Definir estructura exacta del ADF/XML que espera DealerCenter (ya hay un ejemplo base en la nota de investigación, falta confirmar si el bloque `<vehicle>` es obligatorio poblado)
+- [ ] Implementar la transformación a ADF/XML + subida SFTP (en n8n o Worker, según decisión)
 - [ ] Probar con un lead de prueba en GHL → verificar que llega a DealerCenter
+
+### Agente de Captura de Leads en n8n (nuevo, 2026-07-08)
+- [x] Workflow diseñado y exportado: `carwarriors_lead_intake_agent_workflow.json` (webhook GHL → clasifica canal → pide teléfono si falta [IG/Messenger] → guarda en MongoDB Atlas colección `leads`)
+- [ ] Importar el workflow en el n8n real del cliente y conectar credenciales (GHL API token ya documentado arriba, MongoDB Atlas — falta URI de conexión)
+- [ ] Crear la automatización del lado de GHL (usando el snapshot "Carwarrior Base") que dispare el webhook `carwarriors-lead-intake` en n8n ante un contacto nuevo o mensaje entrante
+- [ ] Capturar un payload real de ese webhook y ajustar los nombres de campo en el nodo "Normalize Payload" (los nombres actuales son un supuesto razonable, no están confirmados contra el payload real de GHL)
+- [ ] Probar los 2 caminos: lead de WhatsApp (debe guardarse directo) y lead de Instagram/Messenger sin teléfono (el agente debe preguntar y, al responder con un número, actualizar el contacto en GHL y guardar en Mongo)
 
 ### WhatsApp en GHL — Estado de integración (Módulo A)
 - [ ] El cliente usa `https://applevel-dashboard.ilumosdigital.com/user/apps` como puente WhatsApp → GHL (servicio de Ilumos Digital)
@@ -292,25 +299,40 @@ actualizado: 2026-06-26
 > [!important] Estado comercial
 > En fase de **pruebas activas**. El contrato se firma si las pruebas salen bien — es tan prioritario como Varela Law.
 
-### Lead Sync — GHL → DealerCenter (CF Worker)
+### Lead Sync — GHL → DealerCenter (en re-evaluación: n8n vs CF Worker)
 
-> [!success] Arquitectura definida
-> Se reemplaza el enfoque anterior (Make / n8n / Playwright) por un **Cloudflare Worker** que recibe webhooks de GHL, genera archivos ADF/XML y los sube por SFTP a DealerCenter. Más económico, sin costo variable.
+> [!warning] Arquitectura en revisión
+> La investigación del 2026-07-08 (ver [[Carwarriors - SFTP DealerCenter (Investigación)]]) muestra que SFTP real es difícil de implementar en Cloudflare Workers, mientras que n8n ya trae soporte SFTP nativo. Se deja pendiente la decisión final del usuario antes de construir este tramo.
 
 **Próximas acciones:**
-- [ ] Obtener credenciales SFTP de DealerCenter (host, puerto, usuario, clave)
-- [ ] Confirmar estructura exacta del ADF/XML que DealerCenter espera
+- [ ] Decidir: n8n o Cloudflare Worker para el tramo GHL → DealerCenter
+- [ ] Obtener credenciales SFTP de DealerCenter (host, puerto, usuario, clave) — las genera el propio dealer desde su panel
+- [ ] Confirmar DCID y estructura exacta del ADF/XML que DealerCenter espera
 - [ ] Elegir subcuenta destino de leads (Carwarriors LLC / Car Express / Rances Car)
-- [ ] Desarrollar Worker: endpoint POST → transformar lead a ADF/XML → subir por SFTP
+- [ ] Desarrollar la transformación a ADF/XML + subida SFTP
 - [ ] Probar con lead real desde GHL
 - [ ] Monitorear primeras 24h de operación
 
+### Agente de Captura de Leads en n8n
+
+> [!success] Primer workflow construido (2026-07-08)
+> `carwarriors_lead_intake_agent_workflow.json` — recibe leads de GHL, guarda directo los que ya traen teléfono (WhatsApp) y pide el teléfono conversacionalmente a los que no lo traen (Instagram/Messenger), guardando todo en MongoDB Atlas.
+
+**Próximas acciones:**
+- [ ] Importar el workflow en el n8n del cliente y conectar credenciales (GHL API + MongoDB Atlas)
+- [ ] Crear la automatización en GHL que dispare el webhook hacia n8n
+- [ ] Validar el payload real de GHL y ajustar el nodo de normalización si hace falta
+- [ ] Probar los dos caminos (WhatsApp directo / Instagram-Messenger con pregunta de teléfono)
+
 ### Otros pendientes
 - [ ] Verificar puente WhatsApp → GHL (Ilumos Digital) — ¿activo?
+- [ ] Confirmar con el cliente si hoy en día IG/Messenger corren por GHL o por ManyChat (el usuario no está seguro) — de esto depende si el webhook de entrada debe ser de GHL o de ManyChat
 - [ ] Cliente contrata VPS Hostinger KVM 1
 - [ ] Formalizar contrato una vez validadas las pruebas
 
 ## Relacionado
 
+- [[Carwarriors - Infraestructura (Diseño)]]
+- [[Carwarriors - SFTP DealerCenter (Investigación)]]
 - [[Pipeline (MOC)]]
 - [[Automatización e IA]]
