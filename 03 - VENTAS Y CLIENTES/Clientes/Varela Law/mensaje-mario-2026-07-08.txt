@@ -1,0 +1,11 @@
+Hola Mario! Te cuento cómo va lo del Radar Billing 👇
+
+Buenas noticias: ya resolví el problema que tenía trabado el cruce de datos entre el Sheet y MyCase (el número de caso de un lado y del otro nunca fueron el mismo tipo de dato, por eso no cuadraban). Ya armé una tabla interna que conecta cada cliente con su caso correcto en MyCase, y funcionó automático para el 70% de los casos. El otro 30% lo voy a revisar a mano en los próximos días, tranquilo.
+
+Ahora, dos cositas que necesito que me confirmes para seguir avanzando bien:
+
+1️⃣ MyCase no deja sacar por API el "Trust Balance" (ni el disponible ni el corriente) ni "Invoices Awaiting Payment" — son datos que el sistema protege por temas de cumplimiento con las cuentas de fideicomiso (IOLTA). Esto quiere decir que lo más que puedo automatizar por ahora es: Total Facturado, Total Cobrado, y lo No Facturado. El Trust Balance seguirías llenándolo tú a mano como hasta ahora (o si quieres, le pregunto a soporte de MyCase si hay alguna forma no documentada de sacarlo). ¿Te sirve así, o es un dealbreaker?
+
+2️⃣ Vi que me describiste un formato nuevo de columnas hace unos días (el que estás llenando a mano en la pestaña 07-05-26), pero es distinto al que ya tenía armado antes en "Billing & Payments". ¿Cuál de los dos quieres que sea el definitivo? ¿O van juntos?
+
+Apenas me confirmes esas dos cosas, cierro el automatizado completo. Todo lo que he hecho hasta ahora sigue solo en pestañas de prueba (TEST/TEST2), no toqué nada de tus datos reales.
