@@ -4,10 +4,10 @@ tipo: cliente
 estado: activo
 servicio: automatizacion
 contacto: Jorge (Dueño)
-proximo_paso: Completar pruebas — contrato se firma si salen bien
+proximo_paso: Aplicar en GHL los 4 cambios ya confirmados del Agente IA 24/7 (manual, sin acceso API/browser a Agent Studio) y enviar mensaje pendiente a Jorge González sobre calendarios
 estado_comercial: pruebas-en-curso
 creado: 2026-06-18
-actualizado: 2026-07-08
+actualizado: 2026-07-10
 ---
 
 # Cliente — Carwarriors LLC
@@ -264,6 +264,8 @@ actualizado: 2026-07-08
 - 2026-07-09 — Configuración aplicada en vivo sobre "Asistente Social" (rumbo a `Asistente CarWarriors 24/7`): renombrado, SMS agregado, Bot Goals editado, promo Tesla movida a Knowledge Base, **Appointment Booking** armado (Multi calendars: Showroom — Advisors + BDC‑B Day; BDC‑A quedó fuera por falta de asesor asignado — bug a resolver), **Trigger a Workflow** conectado a `Workflow Contactado` y `Workflow Crear Oportunidad` (conecta el bot al pipeline), **Contact Info** (6 campos) y **Auto Followup** (1 de 3 escenarios) confirmados, **Human Handover** revisado (pre-armado pero apagado, sin usuario asignado — falta elegir entre Carlos Cisneros/Nallely de Leon). Bot sigue en `Off` hasta resolver 14 preguntas pendientes con el equipo (lista completa en [[Carwarriors - Agente IA 24-7 (Diseño)]]).
 - 2026-07-10 — Cliente respondió 8 de las 14 preguntas pendientes del Agente IA 24/7 (detalle en [[Carwarriors - Agente IA 24-7 (Diseño)]]): **Human Handover** → asignar a **Nallely de Leon** en los 3 escenarios (Carlos Cisneros ya no trabaja ahí, sacarlo de GHL); tras agendar cita **no hay transferencia a empleado específico** — la cita cae directo en DealerCenter y la atiende el primer vendedor disponible, quedando la IA como el BDC que originó el lead; **BDC‑A (turno madrugada/noche) lo cubre la IA sola**, sin asesor humano asignado (pendiente técnico: GHL exige `teamMembers` no vacío para usarlo en booking, hay que ver cómo destrabarlo); promo Tesla **sigue vigente**; el cliente no sabía qué es "Knowledge Base" pero confirmó que el **inventario se renueva a diario** — falta explicarle el concepto y definir cómo mantenerlo sincronizado. 2 preguntas no se entendieron y quedaron para reformular en términos más simples: si el bot debe agendar la cita en firme o solo proponer horario, y si los calendarios BDC Callback / Maria Eleonor Zurita quedan fuera del alcance de la IA o no.
 - 2026-07-10 — Se reenvió al cliente un mensaje en lenguaje simple con las 6 preguntas restantes: las 2 reformuladas (agendar en firme vs. proponer horario; alcance de BDC Callback y calendario de Maria Eleonor), comportamiento del bot tras hand-off manual, activar "Contact is Busy"/"Contact Requested" en Auto Followup, permitir cancelar/reagendar citas, y los 3 hallazgos técnicos de GHL (workflows con 74M de inscritos, pestaña "Needs review", workflow "N8N" con 6 inscritos activos). A la espera de respuesta antes de poder encender el bot en Auto Pilot.
+- 2026-07-10 — Cliente respondió 5 de las 6 preguntas reenviadas (detalle en [[Carwarriors - Agente IA 24-7 (Diseño)]]): **booking en Showroom en firme e inmediato** (con requisito nuevo: tarea de confirmación de cita el día anterior, a cargo de un BDC humano o de la IA); tras un hand-off humano el bot **queda en silencio total** hasta el próximo horario sin cobertura humana (obliga a quitar del prompt la línea "stay available for basic questions after handoff" y a ajustar el sleep fijo de 4h); **Auto Followup** "Contact is Busy"/"Contact Requested" se activan; el bot **sí puede cancelar/reagendar** citas. Sigue sin resolver el alcance de `BDC Callback`/calendario de Maria Eleonor Zurita — la persona que respondió no entendió esa pregunta y pidió consultarla directamente con Jorge González. Aún faltan las 3 preguntas técnicas sobre workflows raros de GHL (74M inscritos, "Needs review", workflow "N8N").
+- 2026-07-10 — Se redactó el plan técnico de 6 puntos para aplicar en GHL las respuestas del día (ver [[Carwarriors - Agente IA 24-7 (Diseño)]]: Appointment Booking en firme + cancelar/reagendar, workflow nuevo de tarea de confirmación día -1, Auto Followup, ajuste del prompt/sleep post hand-off) y los 2 mensajes pendientes de envío (a Jorge González sobre calendarios; a soporte GHL sobre las 3 anomalías técnicas). **No se aplicó nada en vivo todavía**: este entorno no tiene herramienta MCP/browser conectada a GoHighLevel (el token de API documentado cubre datos de CRM, no la configuración de Agent Studio, que es solo UI) — los cambios quedan como instrucciones para aplicar manualmente. Los 2 mensajes se dejan pendientes de envío, a decidir cuándo mandarlos.
 
 ## Auditoría Técnica Pendiente
 
@@ -304,6 +306,16 @@ actualizado: 2026-07-08
 
 > [!important] Estado comercial
 > En fase de **pruebas activas**. El contrato se firma si las pruebas salen bien — es tan prioritario como Varela Law.
+
+### Agente IA 24/7 — a aplicar en GHL (manual, ver detalle en [[Carwarriors - Agente IA 24-7 (Diseño)]])
+
+- [ ] Appointment Booking: confirmar modo agenda real + activar "Allow bot to cancel/reschedule the appointment"
+- [ ] Crear workflow nuevo de tarea de confirmación de cita 24h antes (BDC humano o IA — falta definir por defecto)
+- [ ] Auto Followup: activar "Contact is Busy" y "Contact Requested"
+- [ ] Quitar del prompt "Stay available for basic questions after handoff" y ajustar el sleep post hand-off
+- [ ] (Mensaje pendiente de enviar) Preguntar a Jorge González directo sobre `BDC Callback`/calendario de Maria Eleonor
+- [ ] Recién después: activar Human Handover (Nallely de Leon, 3 escenarios) y evaluar pasar el bot a Auto Pilot
+- [ ] (Mensaje pendiente de enviar) 3 preguntas técnicas a soporte GHL: 74M inscritos en 2 workflows, pestaña "Needs review", workflow "N8N" con 6 inscritos
 
 ### Lead Sync — GHL → DealerCenter (en re-evaluación: n8n vs CF Worker)
 

@@ -24,12 +24,18 @@ Se está reactivando y conectando el bot **"Asistente Social CarWarriors"** (se 
 - **Human Handover** revisado: escenario "Human Requested" pre-armado (condición, frases, mensaje final, reactivación 8h, tag) pero **apagado** — falta activarlo y asignarle usuario.
 - **(2026-07-10)** Cliente respondió 8 de las 14 preguntas pendientes: Human Handover (los 3 escenarios) va a **Nallely de Leon** — Carlos Cisneros ya no trabaja en la empresa, sacarlo de GHL; tras agendar cita no hay transferencia a empleado específico (cae en DealerCenter, la atiende el primer vendedor libre); BDC‑A (turno madrugada/noche) lo cubre la IA sola, sin asesor humano; promo Tesla sigue vigente; inventario se renueva a diario (falta explicarle al cliente qué es Knowledge Base y cómo sincronizarlo).
 - **(2026-07-10)** Se reenvió al cliente un mensaje con las 2 preguntas que no entendió (reformuladas en lenguaje simple) más las 5 preguntas restantes (comportamiento post hand-off, Auto Followup, cancelar/reagendar, y los 3 hallazgos técnicos de GHL) — a la espera de respuesta.
+- **(2026-07-10)** Cliente respondió 5 de las 6 preguntas reenviadas: booking en Showroom **en firme e inmediato** (más un requisito nuevo: tarea de confirmación de cita el día anterior, atendida por BDC humano o IA); tras hand-off humano el bot **queda en silencio total** hasta el horario sin cobertura humana (contradice la regla actual del prompt "stay available for basic questions" — hay que quitarla); Auto Followup **"Contact is Busy"/"Contact Requested"** se activan; el bot **sí puede cancelar/reagendar** citas. La pregunta sobre `BDC Callback`/calendario de Maria Eleonor **sigue sin resolver** — quien respondió no entendió y pidió preguntarle directo a Jorge González.
 
 **Todavía no hecho:**
 - Asignar Nallely de Leon como usuario de Human Handover en GHL (ya confirmado por el cliente, falta aplicarlo) y activar sus 3 escenarios.
+- Configurar Appointment Booking como agenda real (booking en firme, no solo sugerencia) + mecanismo de tarea de confirmación 24h antes de cada cita (BDC humano o IA).
+- Activar Auto Followup "Contact is Busy" y "Contact Requested".
+- Activar "Allow bot to cancel/reschedule the appointment".
+- Quitar del prompt (Additional Info) la línea "Stay available for basic questions after handoff" y ajustar el sleep del bot para que dure hasta el próximo horario sin cobertura humana (no un timer fijo de 4h).
+- Preguntarle directamente a Jorge González (no a quien respondió el resto) sobre el alcance de `BDC Callback` y el calendario de Maria Eleonor Zurita.
 - Activar el bot en modo **Auto Pilot** (sigue en `Off`).
 - Apagar "Asistente Nocturno CarWarriors" (recién después de confirmar que el renombrado ya cubre todo).
-- Resolver las 6 preguntas restantes (2 reformuladas + 4 más) enviadas al cliente el 2026-07-10 — respuesta pendiente.
+- Resolver las 3 preguntas técnicas de GHL aún abiertas (74M inscritos, "Needs review", workflow "N8N").
 - Explicarle al cliente qué es Knowledge Base y definir cómo sincronizarlo con el inventario diario.
 - Ver cómo destrabar BDC‑A en Appointment Booking sin asesor humano asignado (GHL exige `teamMembers` no vacío).
 
@@ -421,6 +427,40 @@ Al abrir el selector de usuario aparecieron 3 opciones: **Bianca Marketing**, **
 > [!important] Mismo patrón que Appointment Booking y Auto Followup
 > Otra vez: la lógica ya estaba diseñada con cuidado (condición, frases, mensaje, reactivación, tarea, tag) — solo faltaba **encenderla y asignarle un usuario**. Confirma la conclusión general de todo este documento: el trabajo es activar y conectar, no construir desde cero.
 
+### Mensajes pendientes de enviar (2026-07-10)
+
+**A Jorge González (dueño), directo — sobre BDC Callback / Maria Eleonor:**
+> "Jorge, una última duda sobre el bot: en el sistema hay dos calendarios más aparte del Showroom y BDC‑B — uno se llama 'BDC Callback' y el otro es el personal de Maria Eleonor. ¿La IA puede agendar citas ahí también, o esos dos son solo para que ustedes los usen manualmente y la IA no los debe tocar?"
+
+**Al equipo técnico / soporte GHL — sobre las 3 anomalías de workflows:**
+> "Necesitamos ayuda para revisar 3 cosas en la cuenta de Carwarriors LLC (GHL):
+> 1. Los workflows 'Asignación por Turno (Control Principal)' y 'Reintento de Asignación por Turno' muestran 74 millones de inscritos cada uno — un número imposible para el volumen real de leads. Sospechamos un bucle/bug que puede estar generando consumo de cuota. ¿Pueden confirmar si es un error de visualización o un loop real, y ayudarnos a limpiarlo?
+> 2. En la pestaña de Workflows aparece 'Needs review (1)' — ¿qué workflow es y por qué necesita revisión?
+> 3. Hay un workflow llamado 'N8N' (en estado draft, dentro de la carpeta 'Agente AI') con 6 inscritos activos ahora mismo, a pesar de estar en draft. ¿Qué lo sigue alimentando?"
+
+---
+
+### Plan técnico a aplicar en GHL con las respuestas del 2026-07-10
+
+1. **Appointment Booking → Advanced Options**
+   - Confirmar que el booking quede en modo "agenda real" (no solo sugerencia) para Showroom — Advisors + BDC‑B.
+   - Activar **"Allow bot to cancel/reschedule the appointment"**.
+   - Evaluar el checkbox "Trigger workflow after booking" para disparar la tarea de confirmación día -1 (ver punto 2) o crear un workflow aparte activado por la creación del evento en el calendario.
+2. **Tarea de confirmación día -1 (nuevo, no existía)**
+   - No hay acción nativa de "Bot Goals" para esto — se necesita un **workflow en GHL** (trigger: "Appointment Reminder" / "Before Appointment", condición 24h antes) que cree una tarea asignada a Nallely de Leon (BDC) o dispare al propio bot para que llame/escriba a confirmar.
+   - Definir: ¿la tarea es para un humano (Nallely) que llama, o para que la IA misma envíe un mensaje de confirmación por WhatsApp/SMS? El cliente dijo "un BDC o la IA" — puede convenir preguntarle cuál prefieren por defecto, o implementarlo como IA-primero con fallback a tarea humana si no hay respuesta.
+3. **Auto Followup**
+   - Activar escenario **"Contact is Busy"** con follow-up(s) razonables (mismo criterio de cadencia moderada usado en "Contact Stopped Replying").
+   - Activar escenario **"Contact Requested"** igual.
+4. **Human Handover / comportamiento post hand-off**
+   - En **Additional Info**, quitar la línea `"Stay available for basic questions after handoff."` (contradice la respuesta del cliente).
+   - En **Bot Settings**, revisar el sleep de 4h tras Manual/Workflow Message — idealmente cambiarlo para que el bot permanezca dormido hasta el próximo tramo sin cobertura humana (fuera de horario de atención) en vez de un timer fijo; si GHL no permite eso nativo, evaluar un workflow que reactive el bot solo al llegar el horario de cierre.
+5. **Pendiente de respuesta antes de tocar Appointment Booking multi-calendar:** no agregar `BDC Callback` ni el calendario de Maria Eleonor hasta la respuesta directa de Jorge González (mensaje arriba).
+6. Después de aplicar 1-4: **activar Human Handover** (asignar Nallely de Leon en los 3 escenarios) y recién ahí evaluar pasar el bot de `Off` a **Auto Pilot**.
+
+> [!warning] Ejecución manual — sin acceso API/browser a Agent Studio
+> No hay herramienta MCP ni de navegador conectada a GHL en este entorno para aplicar estos cambios directamente (a diferencia del levantamiento de datos vía API REST, esta configuración de Conversation AI/Agent Studio es solo UI, no está expuesta en la API pública de GHL). Los puntos 1-4 quedan como instrucciones para aplicar manualmente en GHL → AI Agents → Agent Studio → `Asistente CarWarriors 24/7`. El punto 2 (tarea de confirmación día -1) requiere además crear/editar un workflow en GHL Workflows, no solo un toggle dentro de Agent Studio.
+
 ### Plan para la promo (Tesla) — Knowledge Base en vez de prompt
 
 1. Quitar de **Additional Info** el bloque fijo `"Current approved active campaign: Tesla promo..."`.
@@ -588,12 +628,12 @@ Condiciones de salida obligatorias (definir como reglas del agente en Agent Stud
 - [x] Abrir **Contact Info** — mapeo de los 6 campos confirmado y documentado arriba.
 - [x] Abrir **Auto Followup** — 1 de 3 escenarios activo (Contact Stopped Replying, 1h, IA envía sola).
 - [x] Abrir **Appointment Booking** — sin configurar todavía (wizard vacío).
-- [ ] **Decisión con el cliente:** ¿activar "Contact is Busy" y "Contact Requested" en Auto Followup? (no es más agresivo, solo usar capacidad ya existente).
-- [ ] **Decisión con el cliente:** confirmar configurar Appointment Booking en modo "Multi calendars" con Showroom — Advisors + BDC‑A/BDC‑B, para que el bot agende de verdad en vez de solo sugerir.
-- [ ] Confirmar si `BDC Callback` y el calendario personal de Maria Eleonor Zurita deben incluirse o quedar fuera del alcance de la IA.
-- [ ] Decidir si se mantiene "no booking automático, solo sugerencia de ventana + handoff a advisor" (diseño actual) o se pasa a booking directo en calendario — recomendación: **mantenerlo como está**, es más seguro y ya fue diseñado a propósito así.
-- [ ] Aclarar la interacción entre "Send bot to sleep 4h tras mensaje manual/workflow" (Bot Settings) y "Stay available for basic questions after handoff" (Additional Info) — parecen contradecirse.
-- [ ] Confirmar con Jorge/Bianca si la promo Tesla ($1,000 down / $399/mes) sigue activa o ya cambió — es la única data "viva" hardcodeada en el prompt.
+- [x] **Decisión con el cliente:** ¿activar "Contact is Busy" y "Contact Requested" en Auto Followup? → **Sí, respondido 2026-07-10.**
+- [x] **Decisión con el cliente:** ¿agendar en firme o solo proponer horario? → **En firme e inmediato, respondido 2026-07-10.** Requisito nuevo: tarea de confirmación de cita el día anterior (BDC humano o IA).
+- [ ] Confirmar si `BDC Callback` y el calendario personal de Maria Eleonor Zurita deben incluirse o quedar fuera del alcance de la IA — **aún sin resolver, preguntar directo a Jorge González** (quien respondió el resto no entendió esta).
+- [x] ¿El bot puede cancelar/reagendar citas? → **Sí, respondido 2026-07-10.** Activar "Allow bot to cancel/reschedule the appointment".
+- [x] Aclarar comportamiento tras hand-off → **Silencio total hasta horario sin cobertura humana, respondido 2026-07-10.** Quitar "Stay available for basic questions after handoff" del prompt; ajustar el sleep del bot (hoy fijo 4h) para que dure hasta el próximo tramo sin humanos, no un timer fijo.
+- [x] Confirmar con Jorge/Bianca si la promo Tesla ($1,000 down / $399/mes) sigue activa → **Sí, sigue vigente, respondido 2026-07-10.**
 
 **Cambios a aplicar:**
 - [x] Renombrar el bot a `Asistente CarWarriors 24/7`.
@@ -626,17 +666,17 @@ Condiciones de salida obligatorias (definir como reglas del agente en Agent Stud
 
 ### Calendarios / booking
 4. ~~BDC‑A (turno madrugada/tarde-noche) no tiene asesor asignado — ¿se le asigna alguien o ya no se usa?~~ **RESPONDIDO (2026-07-10): "Ese turno lo realiza la IA."** Confirma que no hace falta asesor humano ahí — es el turno que la IA cubre sola fuera de horario de asesores. Pendiente técnico: GHL exige `teamMembers` no vacío para usar un calendario en Appointment Booking, así que probablemente haya que asignar un usuario "placeholder" (¿la propia cuenta del bot, o Nallely como responsable nominal?) solo para destrabar el booking — sin que eso implique que una persona atienda ese turno.
-5. **Pendiente — reformular, el cliente no entendió:** ¿el bot debe **agendar la cita directamente en el calendario** (queda confirmada al momento, como una reservación real), o solo **proponer un horario** y que alguien del equipo la confirme después? Ejemplo concreto a mandar: *"Cuando el bot ofrece una cita para ver un carro en el Showroom, ¿la cita queda agendada ahí mismo apenas el cliente dice que sí, o ustedes prefieren revisarla y confirmarla ustedes antes?"*
-6. **Pendiente — reformular, el cliente no entendió:** ¿el calendario `BDC Callback` y el calendario personal de Maria Eleonor Zurita los debe poder usar la IA para agendar, o esos dos son solo para que el equipo humano los use manualmente (la IA no los toca)? Ejemplo concreto a mandar: *"Aparte del Showroom y BDC‑B, hay dos calendarios más en el sistema: 'BDC Callback' y el personal de Maria Eleonor. ¿La IA también puede agendar ahí, o esos dos quedan solo para uso interno de ustedes?"*
+5. ~~¿El bot agenda en firme o solo propone horario?~~ **RESPONDIDO (2026-07-10): Se agenda en firme, de inmediato** — apenas el cliente confirma, la cita queda reservada ahí mismo (no "solo sugerencia + confirmación humana"). **Requisito adicional del cliente:** crear una **tarea de confirmación de cita el día anterior** a la cita, para que un BDC (humano) o la propia IA llame/confirme antes de que el cliente se presente. → Implica: (a) configurar Appointment Booking como agenda real (no solo sugerencia), (b) agregar un mecanismo (workflow con delay, o "Create a task" del día -1) que dispare esa tarea de confirmación 24h antes de cada cita agendada.
+6. **Aún sin responder con precisión — reformular directo a Jorge González (dueño), no a quien contestó las demás:** ¿el calendario `BDC Callback` y el calendario personal de Maria Eleonor Zurita los debe poder usar la IA para agendar, o esos dos son solo para que el equipo humano los use manualmente? La respuesta recibida fue "pregúntale a Jorge con exactitud, no entiendo" — quien respondió el resto de las preguntas no tiene claridad sobre esto. Pendiente contactar directamente a Jorge González con la pregunta simple: *"Aparte del Showroom y BDC‑B, hay dos calendarios más: 'BDC Callback' y el personal de Maria Eleonor. ¿La IA también puede agendar ahí, o esos dos quedan solo para uso interno de ustedes?"*
 
 ### Contenido / vigencia de datos
 7. ~~¿Sigue vigente la promo Tesla ($1,000 down / $399/mes)?~~ **RESPONDIDO (2026-07-10): Sí, sigue vigente.**
 8. ~~¿Hace falta cargar el inventario real en Knowledge Base?~~ **RESPONDIDO (2026-07-10, parcial):** el cliente no sabía qué era "Knowledge Base"; aclaró que el inventario se renueva día a día al ingresar carros. **Sigue pendiente de nuestro lado:** explicarle qué es Knowledge Base en GHL (repositorio de artículos que el bot consulta) y definir cómo mantenerlo sincronizado con el inventario que cambia a diario — probablemente necesite una automatización que lo actualice solo, no carga manual. Sin resolver todavía.
 
 ### Comportamiento del bot
-9. Hay una posible contradicción: Bot Settings dice que el bot "se duerme" 4h si un humano manda un mensaje manual, pero el prompt (Additional Info) dice "stay available for basic questions after handoff". ¿Cuál es el comportamiento que realmente quieren tras un hand-off — silencio total, o que el bot siga respondiendo cosas básicas mientras un humano atiende lo importante?
-10. ¿Activar los escenarios **"Contact is Busy"** y **"Contact Requested"** de Auto Followup (hoy apagados, solo "Contact Stopped Replying" está activo)? No es más agresivo, solo activa una función ya existente.
-11. ¿Se activa "Allow bot to cancel/reschedule the appointment" desde ya, o se prueba primero sin esas opciones y se agregan más adelante?
+9. ~~¿Silencio total tras hand-off o el bot sigue respondiendo cosas básicas?~~ **RESPONDIDO (2026-07-10): Silencio total.** Una vez que un humano entra a la conversación, el bot no vuelve a contestar hasta el horario en que ya no habrá nadie humano respondiendo (fuera de horario de atención). → Contradice la regla actual del prompt ("Stay available for basic questions after handoff", Additional Info) y probablemente el sleep de 4h fijo de Bot Settings — hay que **quitar esa línea del prompt** y ajustar el "despertar" del bot para que coincida con el fin del horario de atención humana en vez de un timer fijo de 4h (puede no alinear si el hand-off ocurre cerca del cierre o en fin de semana).
+10. ~~¿Activar "Contact is Busy" y "Contact Requested" en Auto Followup?~~ **RESPONDIDO (2026-07-10): Sí.** Activar ambos escenarios (hoy apagados, solo "Contact Stopped Replying" está activo).
+11. ~~¿El bot puede cancelar/reagendar citas?~~ **RESPONDIDO (2026-07-10): Sí, que lo haga el bot.** Activar "Allow bot to cancel/reschedule the appointment" en Appointment Booking.
 
 ### Hallazgos técnicos a auditar (no son preguntas de negocio, pero requieren revisión con soporte GHL o el equipo técnico)
 12. Los workflows **"Asignación por Turno (Control Principal)"** y **"Reintento de Asignación por Turno"** tienen **74 millones de inscritos** cada uno — cifra imposible para el volumen real de leads. Parece un bucle/bug que podría estar generando costo de cuota en GHL. Requiere auditoría antes de construir nada encima.
