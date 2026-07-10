@@ -4,12 +4,12 @@ tipo: spec
 cliente: Carwarriors LLC
 estado: en-implementación
 creado: 2026-07-09
-actualizado: 2026-07-09
+actualizado: 2026-07-10
 ---
 
 # Agente de IA 24/7 — Carwarriors LLC
 
-## Estado actual (resumen ejecutivo — 2026-07-09)
+## Estado actual (resumen ejecutivo — 2026-07-10)
 
 Se está reactivando y conectando el bot **"Asistente Social CarWarriors"** (se renombrará a `Asistente CarWarriors 24/7`) en GHL Conversation AI, en vez de construir uno nuevo desde cero — ya tenía un prompt de producción sólido (Personality + Bot Goals + Additional Info) y varias acciones nativas parcialmente configuradas.
 
@@ -21,19 +21,22 @@ Se está reactivando y conectando el bot **"Asistente Social CarWarriors"** (se 
 - **Trigger a Workflow** configurado con 2 triggers: `Workflow Contactado` (primer contacto real) y `Workflow Crear Oportunidad` (calificación mínima lograda) — esto conecta el bot al pipeline.
 - **Contact Info** (ya traía 6 campos mapeados de antes) confirmado y documentado — coincide con los custom fields ya catalogados.
 - **Auto Followup** revisado: 1 de 3 escenarios activo (Contact Stopped Replying, 1h).
-- **Human Handover** revisado: escenario "Human Requested" pre-armado (condición, frases, mensaje final, reactivación 8h, tag) pero **apagado** y sin usuario asignado — falta decidir quién (Carlos Cisneros o Nallely de Leon, ver preguntas pendientes).
+- **Human Handover** revisado: escenario "Human Requested" pre-armado (condición, frases, mensaje final, reactivación 8h, tag) pero **apagado** — falta activarlo y asignarle usuario.
+- **(2026-07-10)** Cliente respondió 8 de las 14 preguntas pendientes: Human Handover (los 3 escenarios) va a **Nallely de Leon** — Carlos Cisneros ya no trabaja en la empresa, sacarlo de GHL; tras agendar cita no hay transferencia a empleado específico (cae en DealerCenter, la atiende el primer vendedor libre); BDC‑A (turno madrugada/noche) lo cubre la IA sola, sin asesor humano; promo Tesla sigue vigente; inventario se renueva a diario (falta explicarle al cliente qué es Knowledge Base y cómo sincronizarlo).
+- **(2026-07-10)** Se reenvió al cliente un mensaje con las 2 preguntas que no entendió (reformuladas en lenguaje simple) más las 5 preguntas restantes (comportamiento post hand-off, Auto Followup, cancelar/reagendar, y los 3 hallazgos técnicos de GHL) — a la espera de respuesta.
 
 **Todavía no hecho:**
-- Activar Human Handover (falta elegir usuario) y sus otros 2 escenarios (Lack of information, Failed to resolve issue).
+- Asignar Nallely de Leon como usuario de Human Handover en GHL (ya confirmado por el cliente, falta aplicarlo) y activar sus 3 escenarios.
 - Activar el bot en modo **Auto Pilot** (sigue en `Off`).
 - Apagar "Asistente Nocturno CarWarriors" (recién después de confirmar que el renombrado ya cubre todo).
-- Resolver la lista de 14 preguntas pendientes con el equipo de Carwarriors (sección al final de este documento) antes de la activación final.
-- Cargar inventario real en Knowledge Base (pendiente de confirmar si ya existe).
+- Resolver las 6 preguntas restantes (2 reformuladas + 4 más) enviadas al cliente el 2026-07-10 — respuesta pendiente.
+- Explicarle al cliente qué es Knowledge Base y definir cómo sincronizarlo con el inventario diario.
+- Ver cómo destrabar BDC‑A en Appointment Booking sin asesor humano asignado (GHL exige `teamMembers` no vacío).
 
 **Hallazgos importantes sin resolver (requieren al cliente o a soporte GHL):**
-- Los workflows `Asignación por Turno` / `Reintento` tienen 74M de inscritos cada uno — probable bug de loop, pendiente de auditoría.
-- BDC‑A (turno madrugada/noche) no tiene asesor asignado — no se puede usar en booking hasta resolverlo.
-- Workflow "N8N" (draft) tiene 6 inscritos activos — algo lo sigue alimentando, sin explicación aún.
+- Los workflows `Asignación por Turno` / `Reintento` tienen 74M de inscritos cada uno — probable bug de loop, pendiente de auditoría (pregunta reenviada al cliente 2026-07-10).
+- BDC‑A (turno madrugada/noche): confirmado que lo cubre la IA, pero sigue sin poder usarse en booking por falta de `teamMembers`.
+- Workflow "N8N" (draft) tiene 6 inscritos activos — algo lo sigue alimentando, sin explicación aún (pregunta reenviada al cliente 2026-07-10).
 
 ---
 
@@ -617,18 +620,18 @@ Condiciones de salida obligatorias (definir como reglas del agente en Agent Stud
 ## Preguntas pendientes para el equipo de Carwarriors (2026-07-09)
 
 ### Personas / responsables
-1. **¿Quién debe recibir el hand-off cuando un cliente pide hablar con una persona?** Las opciones en GHL son: Bianca Marketing, Carlos Cisneros, Nallely de Leon. Bianca es marketing, no atención en vivo — ¿Carlos o Nallely son del equipo BDC/ventas? ¿Alguno de los dos maneja hoy los calendarios Showroom/BDC?
-2. ¿La misma persona debe asignarse también a los escenarios **"Lack of information"** y **"Failed to resolve issue"** de Human Handover, o alguien distinto?
-3. Si se activa "Transfer Employee post appointment booking" (Advanced Options de Appointment Booking), ¿a quién se transfiere tras agendar una cita?
+1. ~~¿Quién debe recibir el hand-off cuando un cliente pide hablar con una persona?~~ **RESPONDIDO (2026-07-10): Nallely de Leon.** Carlos Cisneros ya no trabaja en la empresa — sacarlo de cualquier lista/selector en GHL.
+2. ~~¿La misma persona para "Lack of information" y "Failed to resolve issue"?~~ **RESPONDIDO (2026-07-10): Sí, Nallely también en esos dos escenarios.**
+3. ~~¿A quién se transfiere tras agendar una cita?~~ **RESPONDIDO (2026-07-10): A nadie específico.** La cita se carga en DealerCenter y llega al dealer; cualquier vendedor disponible la atiende y se le designa ahí mismo. El BDC (la IA) que originó el lead queda registrado como el que lo trajo. → No activar "Transfer Employee post appointment booking"; el flujo real es "cae en DC, lo agarra el primer vendedor libre".
 
 ### Calendarios / booking
-4. **BDC‑A — Morning & Late (Phone/WhatsApp)** no tiene ningún asesor asignado (`teamMembers` vacío) y GHL no deja usarlo en booking. ¿Se le asigna alguien, o ese turno (madrugada/tarde-noche) ya no está en uso?
-5. ¿Aceptan que el bot **agende de verdad** en Showroom/BDC‑B (en vez de solo sugerir una ventana y que un humano confirme, como estaba diseñado originalmente)?
-6. ¿Se incluyen `BDC Callback` y el calendario personal de Maria Eleonor Zurita en el alcance de la IA, o quedan exclusivamente para uso humano (decisión tomada por ahora: dejarlos fuera)?
+4. ~~BDC‑A (turno madrugada/tarde-noche) no tiene asesor asignado — ¿se le asigna alguien o ya no se usa?~~ **RESPONDIDO (2026-07-10): "Ese turno lo realiza la IA."** Confirma que no hace falta asesor humano ahí — es el turno que la IA cubre sola fuera de horario de asesores. Pendiente técnico: GHL exige `teamMembers` no vacío para usar un calendario en Appointment Booking, así que probablemente haya que asignar un usuario "placeholder" (¿la propia cuenta del bot, o Nallely como responsable nominal?) solo para destrabar el booking — sin que eso implique que una persona atienda ese turno.
+5. **Pendiente — reformular, el cliente no entendió:** ¿el bot debe **agendar la cita directamente en el calendario** (queda confirmada al momento, como una reservación real), o solo **proponer un horario** y que alguien del equipo la confirme después? Ejemplo concreto a mandar: *"Cuando el bot ofrece una cita para ver un carro en el Showroom, ¿la cita queda agendada ahí mismo apenas el cliente dice que sí, o ustedes prefieren revisarla y confirmarla ustedes antes?"*
+6. **Pendiente — reformular, el cliente no entendió:** ¿el calendario `BDC Callback` y el calendario personal de Maria Eleonor Zurita los debe poder usar la IA para agendar, o esos dos son solo para que el equipo humano los use manualmente (la IA no los toca)? Ejemplo concreto a mandar: *"Aparte del Showroom y BDC‑B, hay dos calendarios más en el sistema: 'BDC Callback' y el personal de Maria Eleonor. ¿La IA también puede agendar ahí, o esos dos quedan solo para uso interno de ustedes?"*
 
 ### Contenido / vigencia de datos
-7. ¿Sigue vigente la promo **Tesla $1,000 down / $399/mes**? (se está moviendo a Knowledge Base para que se pueda actualizar sin tocar el prompt).
-8. ¿Hace falta cargar/actualizar el inventario real en Knowledge Base, o ya está integrado de alguna forma que no hemos visto?
+7. ~~¿Sigue vigente la promo Tesla ($1,000 down / $399/mes)?~~ **RESPONDIDO (2026-07-10): Sí, sigue vigente.**
+8. ~~¿Hace falta cargar el inventario real en Knowledge Base?~~ **RESPONDIDO (2026-07-10, parcial):** el cliente no sabía qué era "Knowledge Base"; aclaró que el inventario se renueva día a día al ingresar carros. **Sigue pendiente de nuestro lado:** explicarle qué es Knowledge Base en GHL (repositorio de artículos que el bot consulta) y definir cómo mantenerlo sincronizado con el inventario que cambia a diario — probablemente necesite una automatización que lo actualice solo, no carga manual. Sin resolver todavía.
 
 ### Comportamiento del bot
 9. Hay una posible contradicción: Bot Settings dice que el bot "se duerme" 4h si un humano manda un mensaje manual, pero el prompt (Additional Info) dice "stay available for basic questions after handoff". ¿Cuál es el comportamiento que realmente quieren tras un hand-off — silencio total, o que el bot siga respondiendo cosas básicas mientras un humano atiende lo importante?
