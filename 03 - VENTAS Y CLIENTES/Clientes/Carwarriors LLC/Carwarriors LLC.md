@@ -260,6 +260,10 @@ actualizado: 2026-06-26
 - 2026-06-20 — Confirmado: cliente en fase de pruebas activas. Contrato se formaliza si las pruebas salen bien.
 - 2026-06-20 — Integración DC→GHL: Pasos 1-3 completados. Autenticación resuelta, endpoint confirmado, diseño n8n listo. Bloqueado en Paso 4: falta GHL credentials y decisiones de subcuenta/upsert del cliente.
 - 2026-06-26 — Cambio de arquitectura en integración DealerCenter. Se descartan Make (costo de ops), n8n y Playwright. **Solución adoptada:** Cloudflare Worker recibe webhook de GHL → genera ADF/XML → sube por SFTP. Pendiente credenciales SFTP y estructura exacta del XML.
+- 2026-07-09 — Levantamiento vía API de GHL (Location API Key de Carwarriors LLC) de todo lo ya construido: 1 pipeline, 5 calendarios, 32 custom fields, 23 workflows de automatización (enrutamiento BDC por turnos, clasificador de campañas Meta, flujos WhatsApp). Ver detalle en [[Carwarriors - Inventario GHL]]. Pendiente completar el detalle interno de cada workflow (no accesible por API) y repetir para las otras 2 subcuentas.
+- 2026-07-09 — Hallazgo: ya existen 2 agentes de Conversation AI nativos de GHL (Asistente Social IG/FB, Asistente Nocturno SMS/WhatsApp), ambos apagados. Decisión de arquitectura: construir en GHL nativo (no n8n) el nuevo agente 24/7, reservando n8n solo para lo que GHL no puede hacer. Cliente pidió arrancar un agente desde cero para WhatsApp + Instagram + Facebook que reemplace a ambos. Diseño y prompt inicial en [[Carwarriors - Agente IA 24-7 (Diseño)]].
+- 2026-07-09 — El "Asistente Social" ya tiene un prompt de producción sólido (Personality + Bot Goals + Additional Info: control de tono, momentum, jerarquía de escalamiento de 5 niveles, gating por horario Miami, reglas de campaña). Decisión: reutilizar y extender este bot (no reescribir), agregando SMS y conectándolo al CRM. Cliente entregó su filosofía comercial de BDC (urgencia/insistencia) y el doc original "AUTOMATIZACION" — se calibró: urgencia moderada en el bot de IA sin tocar límites de re-contacto/opt-out (la insistencia fuerte queda para el BDC humano), y escasez solo cuando sea verificable. Detalle completo en [[Carwarriors - Agente IA 24-7 (Diseño)]].
+- 2026-07-09 — Configuración aplicada en vivo sobre "Asistente Social" (rumbo a `Asistente CarWarriors 24/7`): renombrado, SMS agregado, Bot Goals editado, promo Tesla movida a Knowledge Base, **Appointment Booking** armado (Multi calendars: Showroom — Advisors + BDC‑B Day; BDC‑A quedó fuera por falta de asesor asignado — bug a resolver), **Trigger a Workflow** conectado a `Workflow Contactado` y `Workflow Crear Oportunidad` (conecta el bot al pipeline), **Contact Info** (6 campos) y **Auto Followup** (1 de 3 escenarios) confirmados, **Human Handover** revisado (pre-armado pero apagado, sin usuario asignado — falta elegir entre Carlos Cisneros/Nallely de Leon). Bot sigue en `Off` hasta resolver 14 preguntas pendientes con el equipo (lista completa en [[Carwarriors - Agente IA 24-7 (Diseño)]]).
 
 ## Auditoría Técnica Pendiente
 
@@ -314,3 +318,5 @@ actualizado: 2026-06-26
 
 - [[Pipeline (MOC)]]
 - [[Automatización e IA]]
+- [[Carwarriors - Inventario GHL]]
+- [[Carwarriors - Agente IA 24-7 (Diseño)]]
