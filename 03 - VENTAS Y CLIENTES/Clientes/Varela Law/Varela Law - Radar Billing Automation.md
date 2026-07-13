@@ -4,7 +4,7 @@ tipo: proyecto
 cliente: Varela Law
 estado: en curso
 creado: 2026-06-20
-actualizado: 2026-07-08
+actualizado: 2026-07-13
 ---
 
 # Varela Law — Automatización: Radar Billing & Payments
@@ -15,12 +15,13 @@ Mario llena manualmente la pestaña **Billing & Payments** del Google Sheet "Rad
 
 ---
 
-## Estado actual (resumen — 2026-07-08)
+## Estado actual (resumen — 2026-07-13)
 
 - **Join de identidad resuelto:** se abandonó el join por "Case No." (eran dos sistemas de numeración distintos, nunca compatibles) y se construyó la pestaña **ID MAP** vía el workflow `Radar Billing - Build ID MAP (TEST)` (n8n `JoQ4f8txlZTi89O4`). Cobertura: 69% match limpio, 2% ambiguo, 28% sin match — necesita revisión humana.
+- **Join real reconstruido usando ID MAP como llave estable (2026-07-13):** `Radar Billing - Join to TEST2` (`UPrV8mk5weAKswuT`) ya no re-deriva el match por nombre en cada corrida — lee ID MAP directamente, limpia TEST2 antes de escribir (re-ejecutable sin duplicar) y deja en blanco las filas `AMBIGUOUS`/`NO MATCH` para revisión manual. Ejecutado con éxito (ejecución `2026`, status `success`). **Pendiente confirmar en el Sheet real** cuántas de las 68 filas limpias trajeron billing — no se pudo verificar el contenido de TEST2 desde esta sesión (sin acceso de lectura directo al Sheet).
 - **Bloqueado en 2 frentes, ambos esperando a terceros:**
-  1. Mario está revisando manualmente ID MAP (filas `AMBIGUOUS`/`NO MATCH`) — sin fecha aún.
-  2. Mario va a preguntarle a soporte de MyCase si existe un endpoint no documentado para Trust Balance / Invoices Awaiting Payment (la API pública no los expone, hallazgo del 2026-07-05).
+  1. Mario está revisando manualmente ID MAP (filas `AMBIGUOUS`/`NO MATCH`, 30 de 98) — sin fecha aún. Se puede avanzar en paralelo (propuesto, no iniciado): ayudar a proponer candidatos de match para esas filas si se comparte un export de ID MAP.
+  2. Mario va a preguntarle a soporte de MyCase si existe un endpoint no documentado para Trust Balance / Invoices Awaiting Payment (la API pública no los expone, hallazgo del 2026-07-05). Alternativa propuesta (no iniciada): revisar la documentación pública de MyCase (Stoplight) en busca de endpoints de trust accounting no probados todavía.
 - **Layout del destino final resuelto a medias:** Mario confirmó usar la pestaña **07-05-26** como referencia y descartó **Billing and Payments**. Todavía falta releer el layout de columnas y la fórmula de Net Trust Balance contra 07-05-26 (la sección "Procedimiento manual actualizado" abajo describe un layout hipotético basado en TEST, no en 07-05-26 — pendiente de reemplazar).
 - **No tocar aún:** "Billing & Payments" ni la pestaña 07-05-26 real — todo el trabajo de automatización sigue aislado en TEST/TEST2/ID MAP hasta validar montos y layout con Mario.
 
@@ -159,6 +160,7 @@ GET /time_entries?case_id={id}      → entradas de tiempo
 - [ ] **En curso — Mario va a checar con soporte de MyCase (2026-07-08)** sobre si hay forma de obtener **Trust Balance** e **Invoices Awaiting Payment** (el hallazgo del 2026-07-05 de que no están disponibles vía la API pública de MyCase). Ni el join ni el matching resuelven esto — bloqueado en espera de su respuesta antes de decidir si la automatización parcial (Total Invoiced, Total Collected, Un-Invoiced) es suficiente.
 - [ ] Con la pestaña 07-05-26 confirmada como referencia: releer su layout de columnas y fórmulas (reemplaza la sección "Procedimiento manual actualizado" abajo, que estaba basada en un layout hipotético de TEST/Billing & Payments) y confirmar la fórmula real de Net Trust Balance.
 - [ ] Despliegue y programación del trigger (recién después de validar el join, los montos, y el layout final con Mario).
+- [x] **Reconstruido el join real usando ID MAP como llave persistente (2026-07-13).** Se modificó `Radar Billing - Join to TEST2` (`UPrV8mk5weAKswuT`) mientras se espera respuesta de Mario: (1) nodo nuevo `Clear TEST2` limpia la pestaña antes de cada corrida (mismo patrón idempotente que ya usaba `Build ID MAP`, evita duplicar filas al re-ejecutar); (2) el nodo antes llamado `Read Civil Cases` ahora lee la pestaña **ID MAP** en vez de CIVIL CASES; (3) el nodo de join (`Join via ID MAP`, antes `Join Civil Cases with MyCase`) ya no re-deriva el match por nombre en cada corrida — usa directamente el `MyCase Case No.` guardado en ID MAP como llave estable, eliminando el riesgo del bug de matching por primer nombre (Correa Jose/Vladimir) que sí existía en esta versión vieja. Las filas `AMBIGUOUS`/`NO MATCH` de ID MAP pasan a TEST2 con billing en blanco (visibles, no bloquean el resto). Ejecutado en modo manual (ejecución `2026`, 2026-07-13, ~3.5 min, status `success`). **Pendiente confirmar en el Sheet:** cuántas de las 68 filas limpias de ID MAP trajeron billing real en TEST2 — no hay acceso directo de lectura al Sheet desde esta sesión para verificarlo automáticamente.
 
 ---
 

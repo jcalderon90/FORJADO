@@ -5,7 +5,7 @@ estado: activo
 servicio: automatizacion
 contacto: Mario Varela
 creado: 2026-06-17
-actualizado: 2026-07-08
+actualizado: 2026-07-13
 ---
 
 # Cliente — Varela Law
@@ -174,7 +174,7 @@ curl -s "https://app.mycase.com/api/v1/cases" \
 - [ ] (Opcional, no bloqueante) Sacar `N8N_BLOCK_ENV_ACCESS_IN_NODE` del VPS para volver a usar env vars en vez de credenciales hardcodeadas en el nodo
 - [ ] Hablar con **Adalberto** sobre el sistema automático de contratos
 - [ ] **Radar Billing Automation** — revisar manualmente las filas `AMBIGUOUS`/`NO MATCH` de la nueva pestaña ID MAP (31 de 98 clientes) y completar a mano donde se pueda (ver [[Varela Law - Radar Billing Automation]])
-- [ ] **Radar Billing Automation** — con ID MAP como llave estable, reconstruir el join real hacia TEST2 y luego decidir con Mario cómo vincularlo a "CIVIL CASES"/"Billing & Payments"
+- [x] **Radar Billing Automation** — con ID MAP como llave estable, reconstruir el join real hacia TEST2 — 2026-07-13, workflow `Radar Billing - Join to TEST2` modificado y ejecutado con éxito (ejecución `2026`). Pendiente decidir con Mario cómo vincularlo a "CIVIL CASES"/"Billing & Payments"
 - [ ] **Radar Billing Automation** — Mario describió un procedimiento manual actualizado (2026-07-06) con layout de columnas distinto al ya automatizado en la pestaña TEST; confirmar con él si reemplaza o convive con el volcado de 993 filas, y aclarar la fórmula de Net Trust Balance (ver duda en [[Varela Law - Radar Billing Automation]])
 - [ ] **Radar Billing Automation** — decidir con Mario el alcance final dado que Trust Balance no está disponible vía API de MyCase (hallazgo 2026-07-05): ¿automatización parcial es suficiente, o se pregunta a soporte de MyCase por un endpoint no documentado?
   - **2026-07-08 — mensaje enviado a Mario por WhatsApp** con estas dos preguntas (guardado en [[mensaje-mario-2026-07-08.txt]]). **Esperando su respuesta antes de seguir** con el layout final y con el alcance del Trust Balance.
