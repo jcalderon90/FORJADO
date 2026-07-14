@@ -4,10 +4,38 @@ tipo: spec
 cliente: Carwarriors LLC
 estado: en-implementación
 creado: 2026-07-09
-actualizado: 2026-07-10
+actualizado: 2026-07-13
 ---
 
 # Agente de IA 24/7 — Carwarriors LLC
+
+## Estado actual (resumen ejecutivo — 2026-07-13)
+
+**Decisión (2026-07-13):** dejar de esperar la respuesta de Jorge González sobre `BDC Callback` / calendario de Maria Eleonor Zurita — se **excluyen esos 2 calendarios del alcance de la IA por ahora** (es el estado actual, no requiere cambio) y se activa el bot hoy. El mensaje a Jorge se manda en paralelo, sin bloquear; si confirma que sí deben incluirse, se agregan después en 2 minutos vía Appointment Booking. Ver "Plan de ejecución — HOY" más abajo para el orden exacto de pasos en GHL.
+
+**Ejecución en vivo (2026-07-14):**
+- Pasos 1-4 del plan aplicados: línea de Additional Info eliminada; Appointment Booking con cancel/reschedule activados (booking en firme ya era el default); Auto Followup con los 3 escenarios en `On` (Contact Stopped Replying, Contact is Busy, Contact Requested); Human Handover con los 3 escenarios en `On`, Nallely de Leon asignada en todos.
+- **Corrección al hallazgo del 2026-07-09:** el bot **NO se había renombrado** — el campo "Bot Name" seguía en `Asistente Social CarWarriors`. **Decisión (2026-07-14): se mantiene ese nombre**, no se renombra a `Asistente CarWarriors 24/7`.
+- **Hallazgo nuevo, no documentado antes:** cambiar el Bot Status a Auto Pilot no alcanza — hace falta además el botón **"Set as Primary Bot"** (visible en Bot Settings) para que el bot reciba de verdad el tráfico de IG/FB/WhatsApp/SMS. **Ya se hizo clic en "Set as Primary Bot" y el status está confirmado en `Auto Pilot`.**
+- **El bot está en vivo desde este momento.** Confirmado en la lista de AI Agents: `Asistente Nocturno CarWarriors` → `Off`; `Asistente Social CarWarriors` → `Primary` + `Auto-Pilot`, canales Instagram/Facebook/WhatsApp/SMS. Solo quedan estos 2 bots en la cuenta, sin solapamiento.
+- **Prueba en "Test Your Bot" (sandbox, pestaña Bot Training) — resultado muy positivo:** conversación completa vehículo (SUV) → zona (Brickell) → uso (diario) → timing (esta semana) → oferta de visita, todo en tono correcto y una pregunta por turno. Al escribir la frase de intención fuerte ("tengo el dinero listo, quiero cerrar hoy") el bot **no solo escaló genéricamente — ofreció horarios reales de hoy leídos del calendario Showroom — Advisors** (10:00, 11:10, 12:20, 1:30 PM), confirmó la reserva de las 12:20 PM, y preguntó preferencia de confirmación (WhatsApp/llamada). Esto confirma que Appointment Booking está conectado de verdad al calendario real.
+- **⚠️ BLOQUEADO (2026-07-14): se perdió el acceso a la cuenta de GHL a mitad de la verificación.** Justo antes de perder acceso se iba a revisar si esa reserva de prueba (14 jul 2026, 12:20 PM) creó de verdad un evento en el calendario Showroom — Advisors y un contacto nuevo en Contacts — **esto sigue sin confirmarse.** Hace falta que el equipo de Carwarriors le devuelva el acceso a la cuenta antes de continuar.
+
+### Cómo retomar (siguiente sesión / otra PC)
+
+1. **Conseguir acceso a GHL de nuevo** — pedirle al equipo de Carwarriors que reactive el usuario expulsado.
+2. **Verificar si la reserva de prueba de las 12:20 PM (14 jul 2026) es real:**
+   - Calendars → Showroom — Advisors → buscar evento hoy 12:20 PM.
+   - Contacts → buscar un contacto nuevo de esa conversación de prueba.
+   - Si es real: **borrar ese contacto/evento de prueba** (es basura de testing, no un lead real) antes de que llegue a un asesor.
+   - Si NO es real (sandbox solo simula): falta una prueba end-to-end por canal real (IG/FB DM, o WhatsApp desde un número no sancionado — Cuba/Irán/Siria/Corea del Norte están bloqueados por Meta) para confirmar que custom fields, calendario y Human Handover a Nallely funcionan de punta a punta.
+3. **Pendientes que quedaron sin resolver, no bloquean pero hay que cerrarlos:**
+   - Confirmar si se envió ya el mensaje a **Jorge González** sobre BDC Callback / calendario de Maria Eleonor (estaba redactado, no se confirmó envío).
+   - Confirmar si se envió ya el mensaje a **soporte GHL** sobre las 3 anomalías técnicas (74M inscritos, "Needs review", workflow "N8N").
+   - Revisar con el cliente: "Pause bot responses after booking" (6h, en Appointment Booking Advanced Options) — no estaba documentado antes, confirmar si es intencional.
+   - Revisar: "Trigger workflow after booking" dispara `Workflow Crear Oportunidad` — mismo workflow que ya dispara la acción separada "Trigger a Workflow" al capturar vehículo+pago — posible duplicado, no se tocó, solo queda anotado.
+   - Bot Settings → sleep de 4h tras Manual/Workflow Message — se dejó igual (no bloqueaba), sigue como ajuste fino pendiente.
+   - Fase 2 (no bloquean nada de lo ya activado): tarea de confirmación de cita día‑1 (requiere workflow nuevo), explicarle Knowledge Base al cliente + sync de inventario diario, destrabar BDC‑A (`teamMembers` vacío).
 
 ## Estado actual (resumen ejecutivo — 2026-07-10)
 
@@ -437,6 +465,32 @@ Al abrir el selector de usuario aparecieron 3 opciones: **Bianca Marketing**, **
 > 1. Los workflows 'Asignación por Turno (Control Principal)' y 'Reintento de Asignación por Turno' muestran 74 millones de inscritos cada uno — un número imposible para el volumen real de leads. Sospechamos un bucle/bug que puede estar generando consumo de cuota. ¿Pueden confirmar si es un error de visualización o un loop real, y ayudarnos a limpiarlo?
 > 2. En la pestaña de Workflows aparece 'Needs review (1)' — ¿qué workflow es y por qué necesita revisión?
 > 3. Hay un workflow llamado 'N8N' (en estado draft, dentro de la carpeta 'Agente AI') con 6 inscritos activos ahora mismo, a pesar de estar en draft. ¿Qué lo sigue alimentando?"
+
+---
+
+### Plan de ejecución — HOY (2026-07-13)
+
+Orden exacto para aplicar todo en una sola sesión en GHL → AI Agents → Agent Studio → `Asistente CarWarriors 24/7`. Este entorno no tiene acceso API/browser a GHL — cada paso lo aplica el usuario manualmente.
+
+1. **Bot Training → Additional Info (Escalation Rules):** borrar la línea `"Stay available for basic questions after handoff."`. No reemplazarla — la ausencia de la regla ya implica silencio total, que es el comportamiento confirmado por el cliente.
+2. **Bot Goals → Setup your Actions → Appointment Booking → Advanced Options:**
+   - Confirmar Multi calendars = **Showroom — Advisors + Calendario BDC‑B — Day** únicamente (no agregar BDC Callback, Maria Eleonor, ni BDC‑A — BDC‑A sigue bloqueado por `teamMembers` vacío).
+   - Activar el toggle de booking en firme (agenda real, no solo sugerencia) si aparece como opción separada en Advanced Options.
+   - Activar **"Allow bot to cancel/reschedule the appointment"**.
+3. **Bot Goals → Setup your Actions → Auto Followup:**
+   - Activar **"Contact is Busy"** con 1 follow-up, cadencia similar a la ya activa (Contact Stopped Replying, 1h, IA envía sola).
+   - Activar **"Contact Requested"** con el mismo criterio.
+4. **Bot Goals → Setup your Actions → Human Handover:** en los 3 escenarios (Human Requested, Lack of information, Failed to resolve issue) — asignar **Nallely de Leon** como usuario y pasar cada uno de `Off` a `On`. Si Carlos Cisneros sigue apareciendo en el selector de usuarios, quitarlo del equipo en GHL (Settings → Team) de paso.
+5. **Bot Settings → Advanced Settings:** revisar el sleep de 4h tras Manual/Workflow Message. Si GHL no permite atarlo al horario de negocio, dejarlo en 4h por ahora (no bloquea el lanzamiento de hoy) y anotarlo como ajuste fino pendiente.
+6. **Set Bot Status:** cambiar de `Off` a **`Auto Pilot`** — último paso, solo después de 1-5.
+7. **Apagar "Asistente Nocturno CarWarriors"** (Off) una vez confirmado que el bot renombrado ya cubre WhatsApp+SMS+IG+FB.
+8. **Probar con 2-3 mensajes reales** (WhatsApp e IG) simulando un lead nuevo, antes de avisarle al equipo BDC que ya está en vivo.
+
+**Explícitamente fuera del alcance de hoy (no bloquean la activación):**
+- Tarea de confirmación de cita día -1: requiere construir un workflow nuevo (trigger + delay 24h + tarea/mensaje) — no existe hoy, no es un toggle. Fase 2; mientras tanto Nallely puede revisar manualmente las citas agendadas cada mañana.
+- Explicarle al cliente qué es Knowledge Base y automatizar su sync con el inventario diario — Fase 2, no afecta que el bot funcione hoy (ya tiene reglas para no inventar disponibilidad).
+- Las 3 anomalías técnicas (74M inscritos, "Needs review", workflow "N8N") — se reportan a soporte GHL en paralelo, no bloquean el encendido del bot.
+- Confirmación de Jorge sobre BDC Callback / Maria Eleonor — se pregunta en paralelo (ver mensaje abajo), se ajusta después si responde que sí.
 
 ---
 
