@@ -4,10 +4,10 @@ tipo: cliente
 estado: activo
 servicio: automatizacion
 contacto: Jorge (Dueño)
-proximo_paso: Aplicar en GHL los 4 cambios ya confirmados del Agente IA 24/7 (manual, sin acceso API/browser a Agent Studio) y enviar mensaje pendiente a Jorge González sobre calendarios
+proximo_paso: Retomar la construcción del Agente Social RancesCar (interrumpida por corte de luz) y confirmar si el acceso a GHL de Carwarriors LLC (subcuenta principal, perdido el 14-jul) ya se recuperó
 estado_comercial: pruebas-en-curso
 creado: 2026-06-18
-actualizado: 2026-07-10
+actualizado: 2026-07-17
 ---
 
 # Cliente — Carwarriors LLC
@@ -95,6 +95,10 @@ actualizado: 2026-07-10
 |---|---|
 | **Dirección** | 3620 NW 27 Ave, Miami, FL 33142 |
 | **Teléfono** | +1 (786) 339-1714 |
+| **Location ID** | 1j1dHo8HEbZdElQUGFoC |
+| **Company ID (agencia)** | PeypDgSbyaeyqkVNGsXs |
+| **API Access Token** | pit-c30b22ca-d09c-45a4-967e-8b75e574a783 |
+| **Snapshot aplicado** | SAmtzYoYrD3VOV5kOPXT |
 | **Creada** | 17 Jul 2025 |
 | **Último login** | 3 Mar 2026 *(más activa del ecosistema)* |
 | **WordPress** | ❌ Desconectado |
@@ -266,6 +270,8 @@ actualizado: 2026-07-10
 - 2026-07-10 — Se reenvió al cliente un mensaje en lenguaje simple con las 6 preguntas restantes: las 2 reformuladas (agendar en firme vs. proponer horario; alcance de BDC Callback y calendario de Maria Eleonor), comportamiento del bot tras hand-off manual, activar "Contact is Busy"/"Contact Requested" en Auto Followup, permitir cancelar/reagendar citas, y los 3 hallazgos técnicos de GHL (workflows con 74M de inscritos, pestaña "Needs review", workflow "N8N" con 6 inscritos activos). A la espera de respuesta antes de poder encender el bot en Auto Pilot.
 - 2026-07-10 — Cliente respondió 5 de las 6 preguntas reenviadas (detalle en [[Carwarriors - Agente IA 24-7 (Diseño)]]): **booking en Showroom en firme e inmediato** (con requisito nuevo: tarea de confirmación de cita el día anterior, a cargo de un BDC humano o de la IA); tras un hand-off humano el bot **queda en silencio total** hasta el próximo horario sin cobertura humana (obliga a quitar del prompt la línea "stay available for basic questions after handoff" y a ajustar el sleep fijo de 4h); **Auto Followup** "Contact is Busy"/"Contact Requested" se activan; el bot **sí puede cancelar/reagendar** citas. Sigue sin resolver el alcance de `BDC Callback`/calendario de Maria Eleonor Zurita — la persona que respondió no entendió esa pregunta y pidió consultarla directamente con Jorge González. Aún faltan las 3 preguntas técnicas sobre workflows raros de GHL (74M inscritos, "Needs review", workflow "N8N").
 - 2026-07-10 — Se redactó el plan técnico de 6 puntos para aplicar en GHL las respuestas del día (ver [[Carwarriors - Agente IA 24-7 (Diseño)]]: Appointment Booking en firme + cancelar/reagendar, workflow nuevo de tarea de confirmación día -1, Auto Followup, ajuste del prompt/sleep post hand-off) y los 2 mensajes pendientes de envío (a Jorge González sobre calendarios; a soporte GHL sobre las 3 anomalías técnicas). **No se aplicó nada en vivo todavía**: este entorno no tiene herramienta MCP/browser conectada a GoHighLevel (el token de API documentado cubre datos de CRM, no la configuración de Agent Studio, que es solo UI) — los cambios quedan como instrucciones para aplicar manualmente. Los 2 mensajes se dejan pendientes de envío, a decidir cuándo mandarlos.
+- 2026-07-14 — Bot "Asistente Social CarWarriors" (subcuenta principal) activado en vivo: `Primary` + `Auto-Pilot` en WhatsApp/IG/FB/SMS, con Appointment Booking, Trigger a Workflow, Auto Followup y Human Handover (Nallely de Leon) configurados. Prueba en sandbox salió muy bien (agendó una cita real leyendo el calendario). **Bloqueo activo:** se perdió el acceso a la cuenta de GHL justo antes de confirmar si esa cita de prueba (12:20 PM) creó un evento/contacto real — sigue sin confirmarse. Detalle completo en [[Carwarriors - Agente IA 24-7 (Diseño)]] y [[Carwarriors - Comportamiento del Bot (Resumen)]].
+- 2026-07-17 — Cliente entregó un token API nuevo (`pit-c30b22ca-d09c-45a4-967e-8b75e574a783`), confirmado por prueba directa contra la API como perteneciente a la subcuenta **Rances Car** (antes sin Location ID documentado). Se instaló Playwright en este entorno y, con credenciales propias del usuario (2FA por correo, no por SMS), se logró entrar por primera vez a la interfaz de GHL vía navegador — esto resuelve la limitación de "solo API, sin acceso a Agent Studio/Conversation AI" que bloqueaba avances desde el 2026-07-10. Al entrar a Rances Car se descubrió que el cliente **ya estaba construyendo ahí el equivalente del Agente Social**, replicando el prompt de Carwarriors LLC, pero la sesión (en otra PC) se cortó por un apagón a medio trabajo. Se documentó el estado exacto en el que quedó — ver [[Carwarriors - Agente IA Rances Car (Diseño)]]. Pendiente: seguir aplicando ahí las mismas calibraciones ya validadas en Carwarriors LLC, y por separado seguir el bloqueo de acceso de la subcuenta principal (sin novedades desde el 14 de julio).
 
 ## Auditoría Técnica Pendiente
 
@@ -307,15 +313,24 @@ actualizado: 2026-07-10
 > [!important] Estado comercial
 > En fase de **pruebas activas**. El contrato se firma si las pruebas salen bien — es tan prioritario como Varela Law.
 
-### Agente IA 24/7 — a aplicar en GHL (manual, ver detalle en [[Carwarriors - Agente IA 24-7 (Diseño)]])
+### Agente IA 24/7 — subcuenta principal Carwarriors LLC (ver detalle en [[Carwarriors - Agente IA 24-7 (Diseño)]] y [[Carwarriors - Comportamiento del Bot (Resumen)]])
 
-- [ ] Appointment Booking: confirmar modo agenda real + activar "Allow bot to cancel/reschedule the appointment"
-- [ ] Crear workflow nuevo de tarea de confirmación de cita 24h antes (BDC humano o IA — falta definir por defecto)
-- [ ] Auto Followup: activar "Contact is Busy" y "Contact Requested"
-- [ ] Quitar del prompt "Stay available for basic questions after handoff" y ajustar el sleep post hand-off
+- [x] Bot en vivo desde 2026-07-14: `Primary` + `Auto-Pilot`, Appointment Booking, Trigger a Workflow, Auto Followup y Human Handover (Nallely de Leon) configurados.
+- [ ] **Bloqueado desde 2026-07-14:** confirmar si la cita de prueba (14 jul, 12:20 PM) creó un evento/contacto real en GHL — se perdió el acceso a la cuenta a mitad de la verificación, sigue sin confirmarse. Requiere que el equipo de Carwarriors reactive el acceso.
 - [ ] (Mensaje pendiente de enviar) Preguntar a Jorge González directo sobre `BDC Callback`/calendario de Maria Eleonor
-- [ ] Recién después: activar Human Handover (Nallely de Leon, 3 escenarios) y evaluar pasar el bot a Auto Pilot
 - [ ] (Mensaje pendiente de enviar) 3 preguntas técnicas a soporte GHL: 74M inscritos en 2 workflows, pestaña "Needs review", workflow "N8N" con 6 inscritos
+- [ ] Fase 2: tarea de confirmación de cita día -1, explicar Knowledge Base al cliente + sync de inventario diario, destrabar calendario BDC-A
+
+### Agente IA — subcuenta Rances Car (nuevo, ver detalle en [[Carwarriors - Agente IA Rances Car (Diseño)]])
+
+- [x] Acceso resuelto 2026-07-17: token API propio + acceso de navegador vía Playwright (2FA por correo, más rápido que el de la cuenta de agencia).
+- [x] Confirmado: "Agente Social RancesCar" ya tenía el prompt portado de Carwarriors LLC y los 4 canales configurados (Facebook, Instagram, WhatsApp, SMS) antes del corte de luz.
+- [ ] Corregir typo "Rancer Car" → "Rances Car" en el prompt
+- [ ] Aplicar las calibraciones ya validadas en Carwarriors LLC (multi-canal en Goal, Visit Rules acortada, silencio post hand-off, promo en Knowledge Base en vez de hardcodeada)
+- [ ] Abrir y configurar "Setup your Actions" (Appointment Booking, Contact Info, Auto Followup, Human Handover) — no se alcanzó a revisar
+- [ ] Abrir y documentar "Agente Nocturno RancesCar" (sin auditar)
+- [ ] Aclarar por qué el dashboard de Conversation AI ya muestra 193 contactos/2.21h ahorradas con ambos bots en `Off`
+- [ ] Recién después: Set as Primary Bot + Auto Pilot
 
 ### Lead Sync — GHL → DealerCenter (en re-evaluación: n8n vs CF Worker)
 
@@ -356,3 +371,5 @@ actualizado: 2026-07-10
 - [[Automatización e IA]]
 - [[Carwarriors - Inventario GHL]]
 - [[Carwarriors - Agente IA 24-7 (Diseño)]]
+- [[Carwarriors - Comportamiento del Bot (Resumen)]]
+- [[Carwarriors - Agente IA Rances Car (Diseño)]]
