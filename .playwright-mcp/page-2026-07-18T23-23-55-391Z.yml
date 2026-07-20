@@ -1,0 +1,523 @@
+- generic [ref=f11e1]:
+  - generic [ref=f11e467]:
+    - complementary [ref=f11e468]:
+      - button "Collapse sidebar" [ref=f11e702] [cursor=pointer]:
+        - generic [ref=f11e703]: 
+      - generic [ref=f11e473]:
+        - generic [ref=f11e477] [cursor=pointer]:
+          - generic [ref=f11e704]:
+            - generic [ref=f11e705]: Rances Car
+            - generic [ref=f11e706]: Miami, Florida
+          - generic [ref=f11e707]:
+            - generic [ref=f11e708]: 
+            - generic [ref=f11e709]: 
+        - generic [ref=f11e485]:
+          - generic [ref=f11e487] [cursor=pointer]:
+            - generic [ref=f11e488]: Search
+            - generic "Press Ctrl + K to open" [ref=f11e711]: ctrlK
+          - img "Quick actions icon" [ref=f11e492] [cursor=pointer]
+        - navigation "header" [ref=f11e494]:
+          - link "Ask AI Ask AI" [ref=f11e713] [cursor=pointer]:
+            - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ask-ai
+            - img "Ask AI" [ref=f11e496]
+            - generic [ref=f11e714]: Ask AI
+          - link "Launchpad icon Launchpad" [ref=f11e715] [cursor=pointer]:
+            - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/launchpad
+            - img "Launchpad icon" [ref=f11e498]
+            - generic [ref=f11e716]: Launchpad
+          - link "Dashboard icon Dashboard" [ref=f11e717] [cursor=pointer]:
+            - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/dashboard
+            - img "Dashboard icon" [ref=f11e500]
+            - generic [ref=f11e718]: Dashboard
+          - link "Conversations icon Conversations" [ref=f11e719] [cursor=pointer]:
+            - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/conversations/conversations
+            - img "Conversations icon" [ref=f11e502]
+            - generic [ref=f11e720]: Conversations
+          - link "Calendars icon Calendars" [ref=f11e721] [cursor=pointer]:
+            - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/calendars/view
+            - img "Calendars icon" [ref=f11e504]
+            - generic [ref=f11e722]: Calendars
+          - link "Contacts icon Contacts" [ref=f11e723] [cursor=pointer]:
+            - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/contacts/smart_list/All
+            - img "Contacts icon" [ref=f11e506]
+            - generic [ref=f11e724]: Contacts
+          - link "Opportunities icon Opportunities" [ref=f11e725] [cursor=pointer]:
+            - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/opportunities/list
+            - img "Opportunities icon" [ref=f11e508]
+            - generic [ref=f11e726]: Opportunities
+          - link "Payments icon Payments" [ref=f11e727] [cursor=pointer]:
+            - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/payments/invoices
+            - img "Payments icon" [ref=f11e510]
+            - generic [ref=f11e728]: Payments
+          - paragraph [ref=f11e512]
+          - link "AI Agents icon AI Agents" [ref=f11e729] [cursor=pointer]:
+            - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/conversation-ai
+            - img "AI Agents icon" [ref=f11e514]
+            - generic [ref=f11e730]: AI Agents
+          - link "Marketing icon Marketing" [ref=f11e731] [cursor=pointer]:
+            - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/marketing/social-planner
+            - img "Marketing icon" [ref=f11e516]
+            - generic [ref=f11e732]: Marketing
+          - link "Automation icon Automation" [ref=f11e733] [cursor=pointer]:
+            - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/automation/workflows
+            - img "Automation icon" [ref=f11e518]
+            - generic [ref=f11e734]: Automation
+          - link "Sites icon Sites" [ref=f11e735] [cursor=pointer]:
+            - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/funnels-websites/funnels
+            - img "Sites icon" [ref=f11e520]
+            - generic [ref=f11e736]: Sites
+          - link "Memberships icon Memberships" [ref=f11e737] [cursor=pointer]:
+            - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/memberships/client-portal/dashboard
+            - img "Memberships icon" [ref=f11e522]
+            - generic [ref=f11e738]: Memberships
+          - link "Media Storage icon Media Storage" [ref=f11e739] [cursor=pointer]:
+            - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/media-storage
+            - img "Media Storage icon" [ref=f11e524]
+            - generic [ref=f11e740]: Media Storage
+          - link "Reputation icon Reputation" [ref=f11e741] [cursor=pointer]:
+            - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/reputation/overview
+            - img "Reputation icon" [ref=f11e526]
+            - generic [ref=f11e742]: Reputation
+          - link "Reporting icon Reporting" [ref=f11e743] [cursor=pointer]:
+            - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/reporting/reports
+            - img "Reporting icon" [ref=f11e528]
+            - generic [ref=f11e744]: Reporting
+          - link "App Marketplace icon App Marketplace" [ref=f11e745] [cursor=pointer]:
+            - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/integration
+            - img "App Marketplace icon" [ref=f11e530]
+            - generic [ref=f11e746]: App Marketplace
+          - link "Metricas Zonitel icon Metricas Zonitel" [ref=f11e747] [cursor=pointer]:
+            - /url: javascript:void(0)
+            - generic "Metricas Zonitel icon" [ref=f11e533]: 
+            - generic [ref=f11e748]: Metricas Zonitel
+          - link "Metricas Deeler Center icon Metricas Deeler Center" [ref=f11e749] [cursor=pointer]:
+            - /url: javascript:void(0)
+            - generic "Metricas Deeler Center icon" [ref=f11e536]: 
+            - generic [ref=f11e750]: Metricas Deeler Center
+        - navigation "footer" [ref=f11e538]:
+          - link "Settings icon Settings" [ref=f11e751] [cursor=pointer]:
+            - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/settings/company
+            - img "Settings icon" [ref=f11e540]
+            - generic [ref=f11e752]: Settings
+    - banner [ref=f11e541]:
+      - generic [ref=f11e543]:
+        - generic "Report Translation Issue"
+        - button "Voice Calling" [ref=f11e566] [cursor=pointer]
+        - button "Ask AI Assistant" [ref=f11e753] [cursor=pointer]:
+          - generic [ref=f11e758]: Ask AI
+        - button "View Changelog" [ref=f11e545] [cursor=pointer]:
+          - generic [ref=f11e546]: 
+        - button "View Notifications" [ref=f11e549] [cursor=pointer]:
+          - generic [ref=f11e550]: 
+          - generic [ref=f11e551]: Notifications
+        - button "Access Help & Support" [ref=f11e552] [cursor=pointer]:
+          - generic [ref=f11e553]: "?"
+          - generic [ref=f11e554]: Support
+        - generic [ref=f11e555]:
+          - button "Open Profile Menu" [ref=f11e556] [cursor=pointer]:
+            - generic [ref=f11e557]: JC
+          - text: 
+      - generic [ref=f11e759]:
+        - heading "AI Agents" [level=1] [ref=f11e760]
+        - link "Getting Started" [ref=f11e761] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/getting-started
+        - link "Agent Studio" [ref=f11e763] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/agent-studio
+        - link "Voice AI" [ref=f11e765] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/voice-ai
+        - link "Conversation AI" [ref=f11e767] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/conversation-ai
+        - link "Knowledge Base" [ref=f11e769] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/knowledge-base
+        - link "Agent Templates" [ref=f11e771] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/agent-templates
+        - link "Content AI" [ref=f11e773] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/content-ai
+        - link "Agent Logs" [ref=f11e775] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/agent-logs
+    - generic [ref=f11e1346]:
+      - generic [ref=f11e1349]:
+        - generic [ref=f11e1350]:
+          - paragraph [ref=f11e1351]: Conversation AI Agents
+          - paragraph [ref=f11e1352]: Create And Manage Multiple Agents For Your Business
+        - generic [ref=f11e1354]:
+          - button [ref=f11e1355] [cursor=pointer]
+          - button "Create Bot" [ref=f11e1361] [cursor=pointer]
+      - generic [ref=f11e1368]:
+        - generic [ref=f11e1373]:
+          - generic [ref=f11e1374]: Dashboard
+          - generic [ref=f11e1377]: Agents List
+        - generic [ref=f11e1383]:
+          - generic [ref=f11e1384]:
+            - generic [ref=f11e1388] [cursor=pointer]:
+              - generic: All Channels
+              - img "loading" [ref=f11e1389]
+            - generic [ref=f11e1397]:
+              - textbox "Start Date" [ref=f11e1400]: 2026-07-01
+              - textbox "End Date" [ref=f11e1409]: 2026-07-18
+            - generic "All Agents" [ref=f11e1419] [cursor=pointer]:
+              - textbox [ref=f11e1420]
+              - img "loading" [ref=f11e1421]
+          - generic [ref=f11e1429]:
+            - generic [ref=f11e1432] [cursor=pointer]:
+              - paragraph [ref=f11e1436]: Total Unique Contacts
+              - generic [ref=f11e1438]:
+                - paragraph [ref=f11e1439]:
+                  - generic [ref=f11e1440]: "202"
+                - generic [ref=f11e1444]:
+                  - generic [ref=f11e1445]: ▼ -23.19%
+                  - generic [ref=f11e1446]: vs last month
+            - generic [ref=f11e1449] [cursor=pointer]:
+              - paragraph [ref=f11e1453]: Total Actions Triggered
+              - paragraph [ref=f11e1456]:
+                - generic [ref=f11e1457]: "0"
+            - generic [ref=f11e1461] [cursor=pointer]:
+              - paragraph [ref=f11e1465]: Total Appointment Booked
+              - paragraph [ref=f11e1468]:
+                - generic [ref=f11e1469]: "0"
+            - generic [ref=f11e1473]:
+              - paragraph [ref=f11e1477]: Time Saved
+              - generic [ref=f11e1481]:
+                - paragraph [ref=f11e1482]:
+                  - generic [ref=f11e1483]: 2.31 hours
+                - generic [ref=f11e1487]:
+                  - generic [ref=f11e1488]: ▼ -22.29%
+                  - generic [ref=f11e1489]: vs last month
+          - paragraph [ref=f11e1494]: Total Unique Contacts
+          - generic [ref=f11e1501]:
+            - generic [ref=f11e1504]:
+              - paragraph [ref=f11e1508]: Total Message
+              - generic [ref=f11e1509]:
+                - paragraph [ref=f11e1511]:
+                  - generic [ref=f11e1512]: "833"
+                - generic [ref=f11e1517]:
+                  - generic [ref=f11e1518]: ▼ -22.29%
+                  - generic [ref=f11e1519]: vs last month
+            - generic [ref=f11e1522]:
+              - paragraph [ref=f11e1526]: Average Messages per Contact
+              - generic [ref=f11e1527]:
+                - paragraph [ref=f11e1529]:
+                  - generic [ref=f11e1530]: "4.12"
+                - generic [ref=f11e1539]:
+                  - generic [ref=f11e1540]: ▲ 0.98%
+                  - generic [ref=f11e1541]: vs last month
+          - generic [ref=f11e1542]:
+            - generic [ref=f11e1544]:
+              - paragraph [ref=f11e1546]: Total Conversations (202)
+              - generic [ref=f11e1550] [cursor=pointer]:
+                - textbox [ref=f11e1551]
+                - generic: Select Contact
+                - img "loading" [ref=f11e1552]
+            - generic [ref=f11e1559]:
+              - table [ref=f11e1563]:
+                - rowgroup [ref=f11e1570]:
+                  - row [ref=f11e1571]:
+                    - columnheader "Contact Name" [ref=f11e1572]
+                    - columnheader "Channel Name" [ref=f11e1575]
+                    - columnheader "Agent Name" [ref=f11e1578]
+                    - columnheader "Last Message Date & Time" [ref=f11e1581] [cursor=pointer]
+                    - columnheader "Actions" [ref=f11e1590]
+                - rowgroup [ref=f11e1593]:
+                  - row [ref=f11e1594]:
+                    - cell "ML Mariah Leticia" [ref=f11e1595]:
+                      - generic [ref=f11e1596] [cursor=pointer]:
+                        - generic [ref=f11e1597]: ML
+                        - paragraph [ref=f11e1599]: Mariah Leticia
+                    - cell [ref=f11e1600]:
+                      - paragraph [ref=f11e1602]: Facebook
+                    - cell [ref=f11e1603]:
+                      - paragraph [ref=f11e1605] [cursor=pointer]: Agente Social RancesCar
+                    - cell [ref=f11e1606]:
+                      - paragraph [ref=f11e1608]: 18-07-2026 09:44:04
+                    - cell [ref=f11e1609]:
+                      - button [active] [ref=f11e1611] [cursor=pointer]:
+                        - paragraph [ref=f11e1615]: Summary
+                  - row [ref=f11e1619]:
+                    - cell "1 17869070562" [ref=f11e1620]:
+                      - generic [ref=f11e1621] [cursor=pointer]:
+                        - generic [ref=f11e1622]: "1"
+                        - paragraph [ref=f11e1624]: "17869070562"
+                    - cell [ref=f11e1625]:
+                      - paragraph [ref=f11e1627]: SMS
+                    - cell [ref=f11e1628]:
+                      - paragraph [ref=f11e1630] [cursor=pointer]: Agente Nocturno RancesCar
+                    - cell [ref=f11e1631]:
+                      - paragraph [ref=f11e1633]: 18-07-2026 09:40:01
+                    - cell [ref=f11e1634]:
+                      - button [ref=f11e1636] [cursor=pointer]:
+                        - paragraph [ref=f11e1640]: Summary
+                  - row [ref=f11e1644]:
+                    - cell "1 17867786963" [ref=f11e1645]:
+                      - generic [ref=f11e1646] [cursor=pointer]:
+                        - generic [ref=f11e1647]: "1"
+                        - paragraph [ref=f11e1649]: "17867786963"
+                    - cell [ref=f11e1650]:
+                      - paragraph [ref=f11e1652]: SMS
+                    - cell [ref=f11e1653]:
+                      - paragraph [ref=f11e1655] [cursor=pointer]: Agente Nocturno RancesCar
+                    - cell [ref=f11e1656]:
+                      - paragraph [ref=f11e1658]: 18-07-2026 09:30:19
+                    - cell [ref=f11e1659]:
+                      - button [ref=f11e1661] [cursor=pointer]:
+                        - paragraph [ref=f11e1665]: Summary
+                  - row [ref=f11e1669]:
+                    - cell "N Nicolas" [ref=f11e1670]:
+                      - generic [ref=f11e1671] [cursor=pointer]:
+                        - generic [ref=f11e1672]: "N"
+                        - paragraph [ref=f11e1674]: Nicolas
+                    - cell [ref=f11e1675]:
+                      - paragraph [ref=f11e1677]: SMS
+                    - cell [ref=f11e1678]:
+                      - paragraph [ref=f11e1680] [cursor=pointer]: Agente Nocturno RancesCar
+                    - cell [ref=f11e1681]:
+                      - paragraph [ref=f11e1683]: 18-07-2026 08:53:23
+                    - cell [ref=f11e1684]:
+                      - button [ref=f11e1686] [cursor=pointer]:
+                        - paragraph [ref=f11e1690]: Summary
+                  - row [ref=f11e1694]:
+                    - cell "IP Isaac Perez" [ref=f11e1695]:
+                      - generic [ref=f11e1696] [cursor=pointer]:
+                        - generic [ref=f11e1697]: IP
+                        - paragraph [ref=f11e1699]: Isaac Perez
+                    - cell [ref=f11e1700]:
+                      - paragraph [ref=f11e1702]: SMS
+                    - cell [ref=f11e1703]:
+                      - paragraph [ref=f11e1705] [cursor=pointer]: Agente Nocturno RancesCar
+                    - cell [ref=f11e1706]:
+                      - paragraph [ref=f11e1708]: 18-07-2026 06:41:34
+                    - cell [ref=f11e1709]:
+                      - button [ref=f11e1711] [cursor=pointer]:
+                        - paragraph [ref=f11e1715]: Summary
+                  - row [ref=f11e1719]:
+                    - cell "RP Rolando Perez" [ref=f11e1720]:
+                      - generic [ref=f11e1721] [cursor=pointer]:
+                        - generic [ref=f11e1722]: RP
+                        - paragraph [ref=f11e1724]: Rolando Perez
+                    - cell [ref=f11e1725]:
+                      - paragraph [ref=f11e1727]: SMS
+                    - cell [ref=f11e1728]:
+                      - paragraph [ref=f11e1730] [cursor=pointer]: Agente Nocturno RancesCar
+                    - cell [ref=f11e1731]:
+                      - paragraph [ref=f11e1733]: 18-07-2026 06:22:27
+                    - cell [ref=f11e1734]:
+                      - button [ref=f11e1736] [cursor=pointer]:
+                        - paragraph [ref=f11e1740]: Summary
+                  - row [ref=f11e1744]:
+                    - cell "Y Yaniel" [ref=f11e1745]:
+                      - generic [ref=f11e1746] [cursor=pointer]:
+                        - generic [ref=f11e1747]: "Y"
+                        - paragraph [ref=f11e1749]: Yaniel
+                    - cell [ref=f11e1750]:
+                      - paragraph [ref=f11e1752]: SMS
+                    - cell [ref=f11e1753]:
+                      - paragraph [ref=f11e1755] [cursor=pointer]: Agente Nocturno RancesCar
+                    - cell [ref=f11e1756]:
+                      - paragraph [ref=f11e1758]: 18-07-2026 00:27:45
+                    - cell [ref=f11e1759]:
+                      - button [ref=f11e1761] [cursor=pointer]:
+                        - paragraph [ref=f11e1765]: Summary
+                  - row [ref=f11e1769]:
+                    - cell "TL Teresa Perez Llopiz" [ref=f11e1770]:
+                      - generic [ref=f11e1771] [cursor=pointer]:
+                        - generic [ref=f11e1772]: TL
+                        - paragraph [ref=f11e1774]: Teresa Perez Llopiz
+                    - cell [ref=f11e1775]:
+                      - paragraph [ref=f11e1777]: SMS
+                    - cell [ref=f11e1778]:
+                      - paragraph [ref=f11e1780] [cursor=pointer]: Agente Nocturno RancesCar
+                    - cell [ref=f11e1781]:
+                      - paragraph [ref=f11e1783]: 17-07-2026 21:51:56
+                    - cell [ref=f11e1784]:
+                      - button [ref=f11e1786] [cursor=pointer]:
+                        - paragraph [ref=f11e1790]: Summary
+                  - row [ref=f11e1794]:
+                    - cell "K Karlee" [ref=f11e1795]:
+                      - generic [ref=f11e1796] [cursor=pointer]:
+                        - generic [ref=f11e1797]: K
+                        - paragraph [ref=f11e1799]: Karlee
+                    - cell [ref=f11e1800]:
+                      - paragraph [ref=f11e1802]: SMS
+                    - cell [ref=f11e1803]:
+                      - paragraph [ref=f11e1805] [cursor=pointer]: Agente Nocturno RancesCar
+                    - cell [ref=f11e1806]:
+                      - paragraph [ref=f11e1808]: 17-07-2026 21:48:31
+                    - cell [ref=f11e1809]:
+                      - button [ref=f11e1811] [cursor=pointer]:
+                        - paragraph [ref=f11e1815]: Summary
+                  - row [ref=f11e1819]:
+                    - cell "B Barbaro" [ref=f11e1820]:
+                      - generic [ref=f11e1821] [cursor=pointer]:
+                        - generic [ref=f11e1822]: B
+                        - paragraph [ref=f11e1824]: Barbaro
+                    - cell [ref=f11e1825]:
+                      - paragraph [ref=f11e1827]: SMS
+                    - cell [ref=f11e1828]:
+                      - paragraph [ref=f11e1830] [cursor=pointer]: Agente Nocturno RancesCar
+                    - cell [ref=f11e1831]:
+                      - paragraph [ref=f11e1833]: 17-07-2026 21:27:20
+                    - cell [ref=f11e1834]:
+                      - button [ref=f11e1836] [cursor=pointer]:
+                        - paragraph [ref=f11e1840]: Summary
+                  - row [ref=f11e1844]:
+                    - cell "1 19545432163" [ref=f11e1845]:
+                      - generic [ref=f11e1846] [cursor=pointer]:
+                        - generic [ref=f11e1847]: "1"
+                        - paragraph [ref=f11e1849]: "19545432163"
+                    - cell [ref=f11e1850]:
+                      - paragraph [ref=f11e1852]: SMS
+                    - cell [ref=f11e1853]:
+                      - paragraph [ref=f11e1855] [cursor=pointer]: Agente Nocturno RancesCar
+                    - cell [ref=f11e1856]:
+                      - paragraph [ref=f11e1858]: 17-07-2026 21:25:38
+                    - cell [ref=f11e1859]:
+                      - button [ref=f11e1861] [cursor=pointer]:
+                        - paragraph [ref=f11e1865]: Summary
+                  - row [ref=f11e1869]:
+                    - cell "1 17863425629" [ref=f11e1870]:
+                      - generic [ref=f11e1871] [cursor=pointer]:
+                        - generic [ref=f11e1872]: "1"
+                        - paragraph [ref=f11e1874]: "17863425629"
+                    - cell [ref=f11e1875]:
+                      - paragraph [ref=f11e1877]: SMS
+                    - cell [ref=f11e1878]:
+                      - paragraph [ref=f11e1880] [cursor=pointer]: Agente Nocturno RancesCar
+                    - cell [ref=f11e1881]:
+                      - paragraph [ref=f11e1883]: 17-07-2026 09:05:03
+                    - cell [ref=f11e1884]:
+                      - button [ref=f11e1886] [cursor=pointer]:
+                        - paragraph [ref=f11e1890]: Summary
+                  - row [ref=f11e1894]:
+                    - cell "MO Mv | Trading & Event Operations" [ref=f11e1895]:
+                      - generic [ref=f11e1896] [cursor=pointer]:
+                        - generic [ref=f11e1897]: MO
+                        - paragraph [ref=f11e1899]: Mv | Trading & Event Operations
+                    - cell [ref=f11e1900]:
+                      - paragraph [ref=f11e1902]: SMS
+                    - cell [ref=f11e1903]:
+                      - paragraph [ref=f11e1905] [cursor=pointer]: Agente Nocturno RancesCar
+                    - cell [ref=f11e1906]:
+                      - paragraph [ref=f11e1908]: 17-07-2026 08:21:05
+                    - cell [ref=f11e1909]:
+                      - button [ref=f11e1911] [cursor=pointer]:
+                        - paragraph [ref=f11e1915]: Summary
+                  - row [ref=f11e1919]:
+                    - cell "✨ ✨" [ref=f11e1920]:
+                      - generic [ref=f11e1921] [cursor=pointer]:
+                        - generic [ref=f11e1922]: ✨
+                        - paragraph [ref=f11e1924]: ✨
+                    - cell [ref=f11e1925]:
+                      - paragraph [ref=f11e1927]: SMS
+                    - cell [ref=f11e1928]:
+                      - paragraph [ref=f11e1930] [cursor=pointer]: Agente Nocturno RancesCar
+                    - cell [ref=f11e1931]:
+                      - paragraph [ref=f11e1933]: 17-07-2026 06:27:46
+                    - cell [ref=f11e1934]:
+                      - button [ref=f11e1936] [cursor=pointer]:
+                        - paragraph [ref=f11e1940]: Summary
+                  - row [ref=f11e1944]:
+                    - cell "D Dean" [ref=f11e1945]:
+                      - generic [ref=f11e1946] [cursor=pointer]:
+                        - generic [ref=f11e1947]: D
+                        - paragraph [ref=f11e1949]: Dean
+                    - cell [ref=f11e1950]:
+                      - paragraph [ref=f11e1952]: SMS
+                    - cell [ref=f11e1953]:
+                      - paragraph [ref=f11e1955] [cursor=pointer]: Agente Nocturno RancesCar
+                    - cell [ref=f11e1956]:
+                      - paragraph [ref=f11e1958]: 17-07-2026 02:08:43
+                    - cell [ref=f11e1959]:
+                      - button [ref=f11e1961] [cursor=pointer]:
+                        - paragraph [ref=f11e1965]: Summary
+                  - row [ref=f11e1969]:
+                    - cell "\ud83d 😉👀😇" [ref=f11e1970]:
+                      - generic [ref=f11e1971] [cursor=pointer]:
+                        - generic [ref=f11e1972]: �
+                        - paragraph [ref=f11e1974]: 😉👀😇
+                    - cell [ref=f11e1975]:
+                      - paragraph [ref=f11e1977]: SMS
+                    - cell [ref=f11e1978]:
+                      - paragraph [ref=f11e1980] [cursor=pointer]: Agente Nocturno RancesCar
+                    - cell [ref=f11e1981]:
+                      - paragraph [ref=f11e1983]: 17-07-2026 00:59:23
+                    - cell [ref=f11e1984]:
+                      - button [ref=f11e1986] [cursor=pointer]:
+                        - paragraph [ref=f11e1990]: Summary
+                  - row [ref=f11e1994]:
+                    - cell "L* Llamada Saliente Rc ***3698" [ref=f11e1995]:
+                      - generic [ref=f11e1996] [cursor=pointer]:
+                        - generic [ref=f11e1997]: L*
+                        - paragraph [ref=f11e1999]: Llamada Saliente Rc ***3698
+                    - cell [ref=f11e2000]:
+                      - paragraph [ref=f11e2002]: SMS
+                    - cell [ref=f11e2003]:
+                      - paragraph [ref=f11e2005] [cursor=pointer]: Agente Nocturno RancesCar
+                    - cell [ref=f11e2006]:
+                      - paragraph [ref=f11e2008]: 16-07-2026 21:41:24
+                    - cell [ref=f11e2009]:
+                      - button [ref=f11e2011] [cursor=pointer]:
+                        - paragraph [ref=f11e2015]: Summary
+                  - row [ref=f11e2019]:
+                    - cell "A Al" [ref=f11e2020]:
+                      - generic [ref=f11e2021] [cursor=pointer]:
+                        - generic [ref=f11e2022]: A
+                        - paragraph [ref=f11e2024]: Al
+                    - cell [ref=f11e2025]:
+                      - paragraph [ref=f11e2027]: SMS
+                    - cell [ref=f11e2028]:
+                      - paragraph [ref=f11e2030] [cursor=pointer]: Agente Nocturno RancesCar
+                    - cell [ref=f11e2031]:
+                      - paragraph [ref=f11e2033]: 16-07-2026 21:19:16
+                    - cell [ref=f11e2034]:
+                      - button [ref=f11e2036] [cursor=pointer]:
+                        - paragraph [ref=f11e2040]: Summary
+                  - row [ref=f11e2044]:
+                    - cell "W William" [ref=f11e2045]:
+                      - generic [ref=f11e2046] [cursor=pointer]:
+                        - generic [ref=f11e2047]: W
+                        - paragraph [ref=f11e2049]: William
+                    - cell [ref=f11e2050]:
+                      - paragraph [ref=f11e2052]: SMS
+                    - cell [ref=f11e2053]:
+                      - paragraph [ref=f11e2055] [cursor=pointer]: Agente Nocturno RancesCar
+                    - cell [ref=f11e2056]:
+                      - paragraph [ref=f11e2058]: 16-07-2026 09:54:49
+                    - cell [ref=f11e2059]:
+                      - button [ref=f11e2061] [cursor=pointer]:
+                        - paragraph [ref=f11e2065]: Summary
+                  - row [ref=f11e2069]:
+                    - cell "Y Yesi" [ref=f11e2070]:
+                      - generic [ref=f11e2071] [cursor=pointer]:
+                        - generic [ref=f11e2072]: "Y"
+                        - paragraph [ref=f11e2074]: Yesi
+                    - cell [ref=f11e2075]:
+                      - paragraph [ref=f11e2077]: SMS
+                    - cell [ref=f11e2078]:
+                      - paragraph [ref=f11e2080] [cursor=pointer]: Agente Nocturno RancesCar
+                    - cell [ref=f11e2081]:
+                      - paragraph [ref=f11e2083]: 15-07-2026 22:17:56
+                    - cell [ref=f11e2084]:
+                      - button [ref=f11e2086] [cursor=pointer]:
+                        - paragraph [ref=f11e2090]: Summary
+              - generic [ref=f11e2098]:
+                - button "Previous" [ref=f11e2100]
+                - generic [ref=f11e2102] [cursor=pointer]: "1"
+                - generic [ref=f11e2103] [cursor=pointer]: "2"
+                - generic [ref=f11e2104] [cursor=pointer]: "3"
+                - generic [ref=f11e2105] [cursor=pointer]: "4"
+                - generic [ref=f11e2106] [cursor=pointer]: "5"
+                - generic [ref=f11e2107] [cursor=pointer]: "6"
+                - generic [ref=f11e2108] [cursor=pointer]: "7"
+                - generic [ref=f11e2115] [cursor=pointer]: "11"
+                - button "Next" [ref=f11e2117] [cursor=pointer]
+                - generic [ref=f11e2121] [cursor=pointer]:
+                  - generic "20 / page" [ref=f11e2122]
+                  - img "loading" [ref=f11e2124]
+  - dialog "UI Modal" [ref=f11e2132]:
+    - heading [level=1] [ref=f11e2133]:
+      - heading [level=1] [ref=f11e2134]:
+        - generic [ref=f11e2137]:
+          - generic [ref=f11e2138]:
+            - paragraph [ref=f11e2139]: Conversation Summary
+            - paragraph [ref=f11e2140]: All summaries for this conversation between contact and AI agent
+          - button [ref=f11e2142] [cursor=pointer]
+    - paragraph [ref=f11e2147]: No summaries found

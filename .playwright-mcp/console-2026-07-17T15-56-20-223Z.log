@@ -1,0 +1,14 @@
+[     664ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://app.gohighlevel.com/v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/getting-started:0
+[     885ms] [WARNING] The PerformanceObserver does not support buffered flag with the entryTypes argument. @ https://static.leadconnectorhq.com/1654/js/chunk.DJwGvs1j.js:17
+[     942ms] [LOG] This is test file @ https://static.leadconnectorhq.com/1654/js/chunk.C4ZQ5PKD.js:16
+[    9793ms] [INFO] Slow network is detected. See https://www.chromestatus.com/feature/5636954674692096 for more details. Fallback font will be used while loading: https://fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBA.woff2 @ https://app.gohighlevel.com/v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/getting-started:0
+[   12071ms] [WARNING] [ Federation Runtime ] Version 1.7.2 from spm-ts-runtime-remote-apps of shared singleton module axios does not satisfy the requirement of launchpadApp which needs ^1.13.2) @ https://static.leadconnectorhq.com/1654/js/chunk.C4ZQ5PKD.js:16
+[   12394ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://backend.leadconnectorhq.com/integrations/gmb/oauth/scope/check?locationId=1j1dHo8HEbZdElQUGFoC:0
+[   12394ms] [ERROR] Ae @ https://static.leadconnectorhq.com/1654/js/chunk.C4ZQ5PKD.js:16
+[   13098ms] [WARNING] [ Federation Runtime ] Version 11.1.1 from spm-ts-runtime-remote-apps of shared singleton module vue-i18n does not satisfy the requirement of contentAIApp which needs ^9.0.0) @ https://static.leadconnectorhq.com/1654/js/chunk.C4ZQ5PKD.js:16
+[   15487ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://backend.leadconnectorhq.com/phone-system/whatsapp/location/1j1dHo8HEbZdElQUGFoC/phone-numbers-meta?fields[]=config&fields[]=settings:0
+[   15489ms] [ERROR] [whatsapp] init catch AxiosError: Request failed with status code 400
+    at xe (https://appcdn.leadconnectorhq.com/revex/power-dialer/1685/power-dialer.ad55fd20cf52ef81a68b.js:2:3916335)
+    at XMLHttpRequest.A (https://appcdn.leadconnectorhq.com/revex/power-dialer/1685/power-dialer.ad55fd20cf52ef81a68b.js:2:3920840)
+    at lt.request (https://appcdn.leadconnectorhq.com/revex/power-dialer/1685/power-dialer.ad55fd20cf52ef81a68b.js:2:3929477) @ https://static.leadconnectorhq.com/1654/js/chunk.C4ZQ5PKD.js:16
+[   19148ms] [ERROR] Failed to load resource: the server responded with a status of 429 () @ https://o176457.ingest.sentry.io/api/1723141/envelope/?sentry_version=7&sentry_key=c67431ff70d6440fb529c2705792425f&sentry_client=sentry.javascript.vue%2F10.19.0:0

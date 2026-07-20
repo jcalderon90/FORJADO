@@ -1,0 +1,24 @@
+[    2578ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://app.gohighlevel.com/v2/location/1j1dHo8HEbZdElQUGFoC/automation/workflows:0
+[    4889ms] [WARNING] The PerformanceObserver does not support buffered flag with the entryTypes argument. @ https://static.leadconnectorhq.com/1654/js/chunk.DJwGvs1j.js:17
+[    4955ms] [LOG] This is test file @ https://static.leadconnectorhq.com/1654/js/chunk.C4ZQ5PKD.js:16
+[   10327ms] [ERROR] Failed to load resource: the server responded with a status of 429 () @ https://o176457.ingest.sentry.io/api/1723141/envelope/?sentry_version=7&sentry_key=c67431ff70d6440fb529c2705792425f&sentry_client=sentry.javascript.vue%2F10.19.0:0
+[   16029ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://backend.leadconnectorhq.com/integrations/gmb/oauth/scope/check?locationId=1j1dHo8HEbZdElQUGFoC:0
+[   16030ms] [ERROR] Ae @ https://static.leadconnectorhq.com/1654/js/chunk.C4ZQ5PKD.js:16
+[   20550ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://client-app-automation-workflows.leadconnectorhq.com/v2/location/1j1dHo8HEbZdElQUGFoC/automation/workflows:0
+[   20954ms] [WARNING] [ Federation Runtime ] Version 1.7.2 from spm-ts-runtime-remote-apps of shared singleton module axios does not satisfy the requirement of launchpadApp which needs ^1.13.2) @ https://static.leadconnectorhq.com/1654/js/chunk.C4ZQ5PKD.js:16
+[   21635ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://backend.leadconnectorhq.com/phone-system/whatsapp/location/1j1dHo8HEbZdElQUGFoC/phone-numbers-meta?fields[]=config&fields[]=settings:0
+[   21637ms] [ERROR] [whatsapp] init catch AxiosError: Request failed with status code 400
+    at xe (https://appcdn.leadconnectorhq.com/revex/power-dialer/1685/power-dialer.ad55fd20cf52ef81a68b.js:2:3916335)
+    at XMLHttpRequest.A (https://appcdn.leadconnectorhq.com/revex/power-dialer/1685/power-dialer.ad55fd20cf52ef81a68b.js:2:3920840)
+    at lt.request (https://appcdn.leadconnectorhq.com/revex/power-dialer/1685/power-dialer.ad55fd20cf52ef81a68b.js:2:3929477) @ https://static.leadconnectorhq.com/1654/js/chunk.C4ZQ5PKD.js:16
+[   21986ms] [WARNING] [ Federation Runtime ] Version 11.1.1 from spm-ts-runtime-remote-apps of shared singleton module vue-i18n does not satisfy the requirement of contentAIApp which needs ^9.0.0) @ https://static.leadconnectorhq.com/1654/js/chunk.C4ZQ5PKD.js:16
+[   22979ms] [ERROR] Failed to load resource: the server responded with a status of 429 () @ https://o176457.ingest.sentry.io/api/1723141/envelope/?sentry_version=7&sentry_key=c67431ff70d6440fb529c2705792425f&sentry_client=sentry.javascript.vue%2F10.19.0:0
+[   29009ms] [WARNING] WebSocket connection to 'wss://voice-js.roaming.twilio.com/signal' failed: WebSocket is closed before the connection is established. @ https://appcdn.leadconnectorhq.com/revex/power-dialer/1685/power-dialer.ad55fd20cf52ef81a68b.js:1
+[   29322ms] [WARNING] [ Federation Runtime ] Version 1.7.2 from spm-ts-runtime-remote-apps of shared singleton module axios does not satisfy the requirement of copilotApp which needs ^1.13.2) @ https://static.leadconnectorhq.com/1654/js/chunk.C4ZQ5PKD.js:16
+[   49216ms] [WARNING] Error in useId:  TypeError: Cannot read properties of null (reading 'uid')
+    at ey (https://client-app-automation-workflows.leadconnectorhq.com/assets/highrise-jiJ17Ktu.js:66:1189)
+    at https://client-app-automation-workflows.leadconnectorhq.com/assets/highrise-jiJ17Ktu.js:2494:903  Upgrade Vue to 3.5.0 or higher to fix this issue; using fallback method @ https://client-app-automation-workflows.leadconnectorhq.com/assets/highrise-jiJ17Ktu.js:65
+[   50738ms] [LOG] Handshake with parent complete. @ https://client-app-automation-workflows.leadconnectorhq.com/assets/sentry-Cvbs1DrG.js:3
+[   52716ms] [LOG] setIsBuildWithAIEnabled true true true @ https://client-app-automation-workflows.leadconnectorhq.com/assets/sentry-Cvbs1DrG.js:3
+[   57053ms] [ERROR] Failed to load resource: the server responded with a status of 429 () @ https://o176457.ingest.sentry.io/api/1723141/envelope/?sentry_version=7&sentry_key=c67431ff70d6440fb529c2705792425f&sentry_client=sentry.javascript.vue%2F10.19.0:0
+[  143841ms] [ERROR] Failed to load resource: the server responded with a status of 429 () @ https://o176457.ingest.sentry.io/api/1723141/envelope/?sentry_version=7&sentry_key=c67431ff70d6440fb529c2705792425f&sentry_client=sentry.javascript.vue%2F10.19.0:0

@@ -1,0 +1,276 @@
+- generic [ref=f11e467]:
+  - complementary [ref=f11e468]:
+    - button "Collapse sidebar" [ref=f11e702] [cursor=pointer]:
+      - generic [ref=f11e703]: 
+    - generic [ref=f11e473]:
+      - generic [ref=f11e477] [cursor=pointer]:
+        - generic [ref=f11e704]:
+          - generic [ref=f11e705]: Rances Car
+          - generic [ref=f11e706]: Miami, Florida
+        - generic [ref=f11e707]:
+          - generic [ref=f11e708]: 
+          - generic [ref=f11e709]: 
+      - generic [ref=f11e485]:
+        - generic [ref=f11e487] [cursor=pointer]:
+          - generic [ref=f11e488]: Search
+          - generic "Press Ctrl + K to open" [ref=f11e711]: ctrlK
+        - img "Quick actions icon" [ref=f11e492] [cursor=pointer]
+      - navigation "header" [ref=f11e494]:
+        - link "Ask AI Ask AI" [ref=f11e713] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ask-ai
+          - img "Ask AI" [ref=f11e496]
+          - generic [ref=f11e714]: Ask AI
+        - link "Launchpad icon Launchpad" [ref=f11e715] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/launchpad
+          - img "Launchpad icon" [ref=f11e498]
+          - generic [ref=f11e716]: Launchpad
+        - link "Dashboard icon Dashboard" [ref=f11e717] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/dashboard
+          - img "Dashboard icon" [ref=f11e500]
+          - generic [ref=f11e718]: Dashboard
+        - link "Conversations icon Conversations" [ref=f11e719] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/conversations/conversations
+          - img "Conversations icon" [ref=f11e502]
+          - generic [ref=f11e720]: Conversations
+        - link "Calendars icon Calendars" [ref=f11e721] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/calendars/view
+          - img "Calendars icon" [ref=f11e504]
+          - generic [ref=f11e722]: Calendars
+        - link "Contacts icon Contacts" [ref=f11e723] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/contacts/smart_list/All
+          - img "Contacts icon" [ref=f11e506]
+          - generic [ref=f11e724]: Contacts
+        - link "Opportunities icon Opportunities" [ref=f11e725] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/opportunities/list
+          - img "Opportunities icon" [ref=f11e508]
+          - generic [ref=f11e726]: Opportunities
+        - link "Payments icon Payments" [ref=f11e727] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/payments/invoices
+          - img "Payments icon" [ref=f11e510]
+          - generic [ref=f11e728]: Payments
+        - paragraph [ref=f11e512]
+        - link "AI Agents icon AI Agents" [ref=f11e729] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/conversation-ai/agent/7d2DMiUdHfLb1uXPFO7F
+          - img "AI Agents icon" [ref=f11e514]
+          - generic [ref=f11e730]: AI Agents
+        - link "Marketing icon Marketing" [ref=f11e731] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/marketing/social-planner
+          - img "Marketing icon" [ref=f11e516]
+          - generic [ref=f11e732]: Marketing
+        - link "Automation icon Automation" [ref=f11e733] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/automation/workflows
+          - img "Automation icon" [ref=f11e518]
+          - generic [ref=f11e734]: Automation
+        - link "Sites icon Sites" [ref=f11e735] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/funnels-websites/funnels
+          - img "Sites icon" [ref=f11e520]
+          - generic [ref=f11e736]: Sites
+        - link "Memberships icon Memberships" [ref=f11e737] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/memberships/client-portal/dashboard
+          - img "Memberships icon" [ref=f11e522]
+          - generic [ref=f11e738]: Memberships
+        - link "Media Storage icon Media Storage" [ref=f11e739] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/media-storage
+          - img "Media Storage icon" [ref=f11e524]
+          - generic [ref=f11e740]: Media Storage
+        - link "Reputation icon Reputation" [ref=f11e741] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/reputation/overview
+          - img "Reputation icon" [ref=f11e526]
+          - generic [ref=f11e742]: Reputation
+        - link "Reporting icon Reporting" [ref=f11e743] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/reporting/reports
+          - img "Reporting icon" [ref=f11e528]
+          - generic [ref=f11e744]: Reporting
+        - link "App Marketplace icon App Marketplace" [ref=f11e745] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/integration
+          - img "App Marketplace icon" [ref=f11e530]
+          - generic [ref=f11e746]: App Marketplace
+        - link "Metricas Zonitel icon Metricas Zonitel" [ref=f11e747] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic "Metricas Zonitel icon" [ref=f11e533]: 
+          - generic [ref=f11e748]: Metricas Zonitel
+        - link "Metricas Deeler Center icon Metricas Deeler Center" [ref=f11e749] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic "Metricas Deeler Center icon" [ref=f11e536]: 
+          - generic [ref=f11e750]: Metricas Deeler Center
+      - navigation "footer" [ref=f11e538]:
+        - link "Settings icon Settings" [ref=f11e751] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/settings/company
+          - img "Settings icon" [ref=f11e540]
+          - generic [ref=f11e752]: Settings
+  - banner [ref=f11e541]:
+    - generic [ref=f11e543]:
+      - generic "Report Translation Issue"
+      - button "Voice Calling" [ref=f11e566] [cursor=pointer]
+      - button "Ask AI Assistant" [ref=f11e753] [cursor=pointer]:
+        - generic [ref=f11e758]: Ask AI
+      - button "View Changelog" [ref=f11e545] [cursor=pointer]:
+        - generic [ref=f11e546]: 
+      - button "View Notifications" [ref=f11e549] [cursor=pointer]:
+        - generic [ref=f11e550]: 
+        - generic [ref=f11e551]: Notifications
+      - button "Access Help & Support" [ref=f11e552] [cursor=pointer]:
+        - generic [ref=f11e553]: "?"
+        - generic [ref=f11e554]: Support
+      - generic [ref=f11e555]:
+        - button "Open Profile Menu" [ref=f11e556] [cursor=pointer]:
+          - generic [ref=f11e557]: JC
+        - text: 
+    - generic [ref=f11e759]:
+      - heading "AI Agents" [level=1] [ref=f11e760]
+      - link "Getting Started" [ref=f11e761] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/getting-started
+      - link "Agent Studio" [ref=f11e763] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/agent-studio
+      - link "Voice AI" [ref=f11e765] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/voice-ai
+      - link "Conversation AI" [ref=f11e767] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/conversation-ai
+      - link "Knowledge Base" [ref=f11e769] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/knowledge-base
+      - link "Agent Templates" [ref=f11e771] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/agent-templates
+      - link "Content AI" [ref=f11e773] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/content-ai
+      - link "Agent Logs" [ref=f11e775] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/agent-logs
+  - generic [ref=f11e2299]:
+    - generic [ref=f11e2302]:
+      - paragraph [ref=f11e2303]: Agente Social RancesCar
+      - paragraph [ref=f11e2304]: Unlock the power of automated conversations
+    - generic [ref=f11e2305]:
+      - generic [ref=f11e2310]:
+        - generic [ref=f11e2311]: Bot Settings
+        - generic [ref=f11e2314]: Bot Training
+        - generic [ref=f11e2318]: Bot Goals
+        - generic [ref=f11e2324]: Dashboard
+      - generic [ref=f11e2330]:
+        - generic [ref=f11e2331]:
+          - generic [ref=f11e2333]:
+            - generic [ref=f11e2334]:
+              - paragraph [ref=f11e2336]: Bot Details
+              - paragraph [ref=f11e2337]: Configure your bot's communication preferences and settings
+              - button "Set as Primary Bot" [ref=f11e2338] [cursor=pointer]
+            - separator [ref=f11e2340]
+            - generic [ref=f11e2342]:
+              - generic [ref=f11e2343]:
+                - generic [ref=f11e2344]:
+                  - generic [ref=f11e2345]: Bot Name
+                  - generic [ref=f11e2346]: "*"
+                - textbox "Enter bot name" [ref=f11e2351]: Agente Social RancesCar
+              - paragraph [ref=f11e2353]: Set Bot Status
+              - paragraph [ref=f11e2354]: Choose the bot's operating mode (choose one)
+              - generic [ref=f11e2355]:
+                - generic [ref=f11e2356] [cursor=pointer]:
+                  - radio "Off Turn off Conversations AI radio-input"
+                  - generic [ref=f11e2358]:
+                    - generic [ref=f11e2365]:
+                      - text: "Off"
+                      - paragraph [ref=f11e2367]: Turn off Conversations AI
+                    - generic "radio-input" [ref=f11e2369]:
+                      - radio "radio-input" [checked]
+                - generic [ref=f11e2372] [cursor=pointer]:
+                  - radio "Suggestive Suggests prompts within chat window radio-input"
+                  - generic [ref=f11e2374]:
+                    - generic [ref=f11e2381]:
+                      - text: Suggestive
+                      - paragraph [ref=f11e2383]: Suggests prompts within chat window
+                    - generic "radio-input" [ref=f11e2385]:
+                      - radio "radio-input"
+                - generic [ref=f11e2388] [cursor=pointer]:
+                  - radio "Auto Pilot Bot replies automatically based on trained data radio-input"
+                  - generic [ref=f11e2390]:
+                    - generic [ref=f11e2397]:
+                      - text: Auto Pilot
+                      - paragraph [ref=f11e2399]: Bot replies automatically based on trained data
+                    - generic "radio-input" [ref=f11e2401]:
+                      - radio "radio-input"
+              - generic [ref=f11e2404]:
+                - paragraph [ref=f11e2405]: Supported Communication Channels/Providers
+                - paragraph [ref=f11e2406]: Select the Channels where you want the Bot to be Active On
+                - generic [ref=f11e2411] [cursor=pointer]:
+                  - generic [ref=f11e2413]:
+                    - generic [ref=f11e2414]: Facebook
+                    - button "close" [ref=f11e2415]
+                  - generic [ref=f11e2422]:
+                    - generic [ref=f11e2423]: Instagram
+                    - button "close" [ref=f11e2424]
+                  - generic [ref=f11e2431]:
+                    - generic [ref=f11e2432]: WhatsApp
+                    - button "close" [ref=f11e2433]
+                  - generic [ref=f11e2440]:
+                    - generic [ref=f11e2441]: SMS
+                    - button "close" [ref=f11e2442]
+                  - img "loading" [ref=f11e2448]
+              - generic [ref=f11e2456]:
+                - paragraph [ref=f11e2460]: AI bot trial
+                - paragraph [ref=f11e2461]: Your AI bot is ready for trial. Ask it question based on your training data
+                - button "Go to bot trial" [ref=f11e2462] [cursor=pointer]
+          - generic [ref=f11e2466]:
+            - paragraph [ref=f11e2467]: Advanced Settings
+            - paragraph [ref=f11e2468]: Fine-Tune your Bot's Behavior
+            - generic [ref=f11e2469]:
+              - generic [ref=f11e2470]: Business Name (default is the location name)
+              - generic [ref=f11e2475]:
+                - textbox "Enter business name" [ref=f11e2476]
+                - generic: Enter business name
+            - separator [ref=f11e2478]
+            - generic [ref=f11e2480]:
+              - paragraph [ref=f11e2481]: Auto-pilot mode
+              - paragraph [ref=f11e2482]: Configure settings for the auto-pilot mode based on your business needs
+            - generic [ref=f11e2483]:
+              - generic [ref=f11e2484]: Wait time before responding *
+              - generic [ref=f11e2491]:
+                - textbox "Enter Number" [ref=f11e2496]: "15"
+                - generic [ref=f11e2499] [cursor=pointer]:
+                  - generic "Seconds" [ref=f11e2500]
+                  - img "loading" [ref=f11e2502]
+            - generic [ref=f11e2510]:
+              - generic [ref=f11e2511]: Maximum messages a Bot can send in a Conversation
+              - generic [ref=f11e2520]:
+                - textbox "Enter Number" [ref=f11e2522]: "20"
+                - generic [ref=f11e2523]:
+                  - button [ref=f11e2524] [cursor=pointer]
+                  - button [ref=f11e2528] [cursor=pointer]
+            - generic [ref=f11e2534]:
+              - generic [ref=f11e2535]:
+                - paragraph [ref=f11e2536]: "Also allow this bot to respond to:"
+                - switch "toggle" [ref=f11e2537]
+                - paragraph [ref=f11e2540]: Images
+                - switch "toggle" [ref=f11e2541]
+                - paragraph [ref=f11e2544]: Voice Notes
+              - paragraph [ref=f11e2545]:
+                - paragraph [ref=f11e2546]: "Note: Responses to images and voice notes may take slightly longer than normal replies. This feature is currently supported only in Auto-Pilot mode."
+            - generic [ref=f11e2547]:
+              - generic [ref=f11e2548]:
+                - paragraph [ref=f11e2549]: "Send bot to sleep when I send a:"
+                - switch "toggle" [checked] [ref=f11e2550]
+                - paragraph [ref=f11e2553]: Manual Message
+                - switch "toggle" [checked] [ref=f11e2554]
+                - paragraph [ref=f11e2557]: Workflow Message
+              - paragraph [ref=f11e2558]:
+                - paragraph [ref=f11e2559]: The bot will pause responses when the selected message type is sent. Enable both to pause on any outbound message.
+              - generic [ref=f11e2562]:
+                - checkbox "Reactivate bot after" [checked] [ref=f11e2564] [cursor=pointer]
+                - generic [ref=f11e2574]:
+                  - textbox "Enter Number" [ref=f11e2579]: "2"
+                  - generic [ref=f11e2582] [cursor=pointer]:
+                    - generic "Hours" [ref=f11e2583]
+                    - img "loading" [ref=f11e2585]
+          - generic [ref=f11e2594]:
+            - paragraph [ref=f11e2595]: Response Settings
+            - paragraph [ref=f11e2596]: Other options to customize bot response
+            - generic [ref=f11e2598]:
+              - paragraph [ref=f11e2599]: Enable Response Style Settings
+              - switch "toggle" [ref=f11e2602]
+          - generic [ref=f11e2607]:
+            - paragraph [ref=f11e2608]: Pricing
+            - generic [ref=f11e2611]:
+              - generic [ref=f11e2612]:
+                - paragraph [ref=f11e2613]: Current plan
+                - paragraph [ref=f11e2615]:
+                  - paragraph [ref=f11e2616]: Token Usage Cost
+              - button "Upgrade to AI Employee" [ref=f11e2618] [cursor=pointer]
+        - generic [ref=f11e2626]:
+          - button "Cancel" [ref=f11e2627] [cursor=pointer]
+          - button "Save" [disabled] [ref=f11e2629]

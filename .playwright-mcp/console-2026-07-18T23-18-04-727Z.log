@@ -1,0 +1,1 @@
+[     264ms] [WARNING] [ Federation Runtime ] Version 1.7.2 from spm-ts-runtime-remote-apps of shared singleton module axios does not satisfy the requirement of copilotApp which needs ^1.13.2) @ https://static.leadconnectorhq.com/1654/js/chunk.C4ZQ5PKD.js:16

@@ -1,0 +1,307 @@
+- generic [ref=f14e20]:
+  - complementary [ref=f14e21]:
+    - button "Collapse sidebar" [ref=f14e23] [cursor=pointer]:
+      - generic [ref=f14e24]: 
+    - generic [ref=f14e26]:
+      - generic [ref=f14e30] [cursor=pointer]:
+        - generic [ref=f14e38]:
+          - generic [ref=f14e39]: Rances Car
+          - generic [ref=f14e40]: Miami, Florida
+        - generic [ref=f14e41]:
+          - generic [ref=f14e42]: 
+          - generic [ref=f14e43]: 
+      - generic [ref=f14e44]:
+        - generic [ref=f14e46] [cursor=pointer]:
+          - generic [ref=f14e47]: Search
+          - generic "Press Ctrl + K to open" [ref=f14e51]: ctrlK
+        - img "Quick actions icon" [ref=f14e54] [cursor=pointer]
+      - navigation "header" [ref=f14e56]:
+        - link "Ask AI Ask AI" [ref=f14e57] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ask-ai
+          - img "Ask AI" [ref=f14e58]
+          - generic [ref=f14e59]: Ask AI
+        - link "Launchpad icon Launchpad" [ref=f14e60] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/launchpad
+          - img "Launchpad icon" [ref=f14e61]
+          - generic [ref=f14e62]: Launchpad
+        - link "Dashboard icon Dashboard" [ref=f14e63] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/dashboard
+          - img "Dashboard icon" [ref=f14e64]
+          - generic [ref=f14e65]: Dashboard
+        - link "Conversations icon Conversations" [ref=f14e66] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/conversations/conversations
+          - img "Conversations icon" [ref=f14e67]
+          - generic [ref=f14e68]: Conversations
+        - link "Calendars icon Calendars" [ref=f14e69] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/calendars/view
+          - img "Calendars icon" [ref=f14e70]
+          - generic [ref=f14e71]: Calendars
+        - link "Contacts icon Contacts" [ref=f14e72] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/contacts/smart_list/All
+          - img "Contacts icon" [ref=f14e73]
+          - generic [ref=f14e74]: Contacts
+        - link "Opportunities icon Opportunities" [ref=f14e75] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/opportunities/list
+          - img "Opportunities icon" [ref=f14e76]
+          - generic [ref=f14e77]: Opportunities
+        - link "Payments icon Payments" [ref=f14e78] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/payments/invoices
+          - img "Payments icon" [ref=f14e79]
+          - generic [ref=f14e80]: Payments
+        - paragraph [ref=f14e82]
+        - link "AI Agents icon AI Agents" [ref=f14e83] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/getting-started
+          - img "AI Agents icon" [ref=f14e84]
+          - generic [ref=f14e85]: AI Agents
+        - link "Marketing icon Marketing" [ref=f14e86] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/marketing/social-planner
+          - img "Marketing icon" [ref=f14e87]
+          - generic [ref=f14e88]: Marketing
+        - link "Automation icon Automation" [ref=f14e89] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/automation/workflows
+          - img "Automation icon" [ref=f14e90]
+          - generic [ref=f14e91]: Automation
+        - link "Sites icon Sites" [ref=f14e92] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/funnels-websites/funnels
+          - img "Sites icon" [ref=f14e93]
+          - generic [ref=f14e94]: Sites
+        - link "Memberships icon Memberships" [ref=f14e95] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/memberships/client-portal/dashboard
+          - img "Memberships icon" [ref=f14e96]
+          - generic [ref=f14e97]: Memberships
+        - link "Media Storage icon Media Storage" [ref=f14e98] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/media-storage
+          - img "Media Storage icon" [ref=f14e99]
+          - generic [ref=f14e100]: Media Storage
+        - link "Reputation icon Reputation" [ref=f14e101] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/reputation/overview
+          - img "Reputation icon" [ref=f14e102]
+          - generic [ref=f14e103]: Reputation
+        - link "Reporting icon Reporting" [ref=f14e104] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/reporting/reports
+          - img "Reporting icon" [ref=f14e105]
+          - generic [ref=f14e106]: Reporting
+        - link "App Marketplace icon App Marketplace" [ref=f14e107] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/integration
+          - img "App Marketplace icon" [ref=f14e108]
+          - generic [ref=f14e109]: App Marketplace
+        - link "Metricas Zonitel icon Metricas Zonitel" [ref=f14e110] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic "Metricas Zonitel icon" [ref=f14e112]: 
+          - generic [ref=f14e113]: Metricas Zonitel
+        - link "Metricas Deeler Center icon Metricas Deeler Center" [ref=f14e114] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic "Metricas Deeler Center icon" [ref=f14e116]: 
+          - generic [ref=f14e117]: Metricas Deeler Center
+      - navigation "footer" [ref=f14e119]:
+        - link "Settings icon Settings" [ref=f14e120] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/settings/company
+          - img "Settings icon" [ref=f14e121]
+          - generic [ref=f14e122]: Settings
+  - banner [ref=f14e123]:
+    - generic [ref=f14e125]:
+      - generic [ref=f14e131]:
+        - button "automation What's new Automation updates" [ref=f14e132] [cursor=pointer]:
+          - img "automation" [ref=f14e133]
+          - generic [ref=f14e134]: What's new
+          - generic [ref=f14e135]: Automation updates
+        - superscript [ref=f14e136]
+      - generic "Report Translation Issue"
+      - button "Voice Calling" [ref=f14e142] [cursor=pointer]
+      - button "Ask AI Assistant" [ref=f14e145] [cursor=pointer]:
+        - generic [ref=f14e150]: Ask AI
+      - button "View Changelog" [ref=f14e152] [cursor=pointer]:
+        - generic [ref=f14e153]: 
+      - button "View Notifications" [ref=f14e156] [cursor=pointer]:
+        - generic [ref=f14e157]: 
+        - generic [ref=f14e158]: Notifications
+      - button "Access Help & Support" [ref=f14e159] [cursor=pointer]:
+        - generic [ref=f14e160]: "?"
+        - generic [ref=f14e161]: Support
+      - generic [ref=f14e162]:
+        - button "Open Profile Menu" [ref=f14e163] [cursor=pointer]:
+          - generic [ref=f14e164]: JC
+        - text: 
+    - generic [ref=f14e166]:
+      - heading "Automation" [level=1] [ref=f14e167]
+      - link "Workflows" [ref=f14e168] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/automation/workflows
+      - link "Overview" [ref=f14e170] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/automation/overview
+        - generic [ref=f14e171]:
+          - text: Overview
+          - generic [ref=f14e172]: Beta
+      - link "Global Workflow Settings" [ref=f14e174] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/automation/workflows/settings
+        - generic [ref=f14e175]:
+          - img "Global Workflow Settings" [ref=f14e176]
+          - text: Global Workflow Settings
+  - iframe [active] [ref=f14e181]:
+    - generic [active] [ref=f17e1]:
+      - generic [ref=f17e3]:
+        - list:
+          - listitem:
+            - link "Skip to main content" [ref=f17e4] [cursor=pointer]:
+              - /url: "#main"
+        - generic [ref=f17e10]:
+          - generic [ref=f17e11]:
+            - heading "Workflows list" [level=2] [ref=f17e13]
+            - generic [ref=f17e14]:
+              - button [ref=f17e15] [cursor=pointer]
+              - button [ref=f17e19] [cursor=pointer]
+              - button [ref=f17e23] [cursor=pointer]
+          - paragraph [ref=f17e27] [cursor=pointer]: All workflows
+          - paragraph [ref=f17e28] [cursor=pointer]: Needs review (1)
+          - paragraph [ref=f17e29] [cursor=pointer]: Deleted
+          - button "Add smart list" [ref=f17e30] [cursor=pointer]:
+            - paragraph [ref=f17e34]: New smart list
+          - button "Customize smart list" [disabled] [ref=f17e35]:
+            - paragraph [ref=f17e39]: Customize list
+          - generic [ref=f17e44]:
+            - generic [ref=f17e45]:
+              - generic [ref=f17e46]:
+                - paragraph [ref=f17e55]: Advanced filters
+                - generic [ref=f17e56]:
+                  - generic [ref=f17e57]:
+                    - group [ref=f17e58]:
+                      - button "Copy workflow history" [ref=f17e59] [cursor=pointer]
+                    - group [ref=f17e63]:
+                      - button "Recent" [ref=f17e64] [cursor=pointer]
+                      - button "List" [ref=f17e68] [cursor=pointer]
+                  - generic [ref=f17e77]:
+                    - textbox "Search" [ref=f17e78]
+                    - generic: Search
+              - navigation "Breadcrumb" [ref=f17e82]:
+                - list [ref=f17e83]:
+                  - listitem [ref=f17e84]:
+                    - button "Back" [ref=f17e468] [cursor=pointer]
+                    - generic [ref=f17e469]: /
+                  - listitem [ref=f17e470]:
+                    - generic [ref=f17e471]: Asignacion
+            - generic [ref=f17e87]:
+              - generic [ref=f17e88]:
+                - generic [ref=f17e90]:
+                  - table [ref=f17e92]:
+                    - rowgroup [ref=f17e103]:
+                      - row [ref=f17e104]:
+                        - columnheader [ref=f17e105]:
+                          - checkbox [ref=f17e106] [cursor=pointer]
+                        - columnheader "Name" [ref=f17e116]
+                        - columnheader "Status" [ref=f17e119]
+                        - columnheader "Total enrolled" [ref=f17e122]
+                        - columnheader "Active enrolled" [ref=f17e125]
+                        - columnheader "Last updated" [ref=f17e128]
+                        - columnheader "Created on" [ref=f17e131]
+                        - columnheader [ref=f17e134]
+                        - columnheader [ref=f17e140]
+                  - table [ref=f17e141]:
+                    - rowgroup [ref=f17e152]:
+                      - row [ref=f17e475]:
+                        - cell [ref=f17e476]:
+                          - checkbox [ref=f17e477] [cursor=pointer]
+                        - cell [ref=f17e484]:
+                          - link [ref=f17e485]:
+                            - generic [ref=f17e488] [cursor=pointer]:
+                              - text: Asignación por Turno (Control Principal)
+                              - link [ref=f17e489]
+                        - cell "Published" [ref=f17e492]
+                        - cell [ref=f17e497]:
+                          - paragraph [ref=f17e498] [cursor=pointer]: "0"
+                        - cell [ref=f17e499]:
+                          - paragraph [ref=f17e500] [cursor=pointer]: "0"
+                        - cell [ref=f17e501]:
+                          - paragraph [ref=f17e502]: Jan 04 2026, 4:16 PM
+                        - cell [ref=f17e503]:
+                          - paragraph [ref=f17e504]: Sep 05 2025, 10:45 AM
+                        - cell [ref=f17e505]
+                        - cell [ref=f17e510]:
+                          - button "Workflow list actions" [ref=f17e511] [cursor=pointer]
+                      - row [ref=f17e515]:
+                        - cell [ref=f17e516]:
+                          - checkbox [ref=f17e517] [cursor=pointer]
+                        - cell [ref=f17e524]:
+                          - link [ref=f17e525]:
+                            - generic [ref=f17e528] [cursor=pointer]:
+                              - text: Rances Car - Ruteo Human Handover por Turno
+                              - link [ref=f17e529]
+                        - cell "Draft" [ref=f17e532]
+                        - cell [ref=f17e537]:
+                          - paragraph [ref=f17e538] [cursor=pointer]: "0"
+                        - cell [ref=f17e539]:
+                          - paragraph [ref=f17e540] [cursor=pointer]: "0"
+                        - cell [ref=f17e541]:
+                          - paragraph [ref=f17e542]: Jul 16 2026, 9:53 PM
+                        - cell [ref=f17e543]:
+                          - paragraph [ref=f17e544]: Jul 16 2026, 9:31 PM
+                        - cell [ref=f17e545]
+                        - cell [ref=f17e550]:
+                          - button "Workflow list actions" [ref=f17e551] [cursor=pointer]
+                      - row [ref=f17e555]:
+                        - cell [ref=f17e556]:
+                          - checkbox [ref=f17e557] [cursor=pointer]
+                        - cell [ref=f17e564]:
+                          - link [ref=f17e565]:
+                            - generic [ref=f17e568] [cursor=pointer]:
+                              - text: Reintento de Asignación por Turno
+                              - link [ref=f17e569]
+                        - cell "Published" [ref=f17e572]
+                        - cell [ref=f17e577]:
+                          - paragraph [ref=f17e578] [cursor=pointer]: "0"
+                        - cell [ref=f17e579]:
+                          - paragraph [ref=f17e580] [cursor=pointer]: "0"
+                        - cell [ref=f17e581]:
+                          - paragraph [ref=f17e582]: Sep 06 2025, 3:29 PM
+                        - cell [ref=f17e583]:
+                          - paragraph [ref=f17e584]: Sep 05 2025, 10:45 AM
+                        - cell [ref=f17e585]
+                        - cell [ref=f17e590]:
+                          - button "Workflow list actions" [ref=f17e591] [cursor=pointer]
+                      - row [ref=f17e595]:
+                        - cell [ref=f17e596]:
+                          - checkbox [ref=f17e597] [cursor=pointer]
+                        - cell [ref=f17e604]:
+                          - link [ref=f17e605]:
+                            - generic [ref=f17e608] [cursor=pointer]:
+                              - text: Workflow Asig Agente (Entrada))
+                              - link [ref=f17e609]
+                        - cell "Published" [ref=f17e612]
+                        - cell [ref=f17e617]:
+                          - paragraph [ref=f17e618] [cursor=pointer]: "0"
+                        - cell [ref=f17e619]:
+                          - paragraph [ref=f17e620] [cursor=pointer]: "0"
+                        - cell [ref=f17e621]:
+                          - paragraph [ref=f17e622]: Jan 04 2026, 4:16 PM
+                        - cell [ref=f17e623]:
+                          - paragraph [ref=f17e624]: Sep 05 2025, 10:45 AM
+                        - cell [ref=f17e625]
+                        - cell [ref=f17e630]:
+                          - button "Workflow list actions" [ref=f17e631] [cursor=pointer]
+                      - row [ref=f17e635]:
+                        - cell [ref=f17e636]:
+                          - checkbox [ref=f17e637] [cursor=pointer]
+                        - cell [ref=f17e644]:
+                          - link [ref=f17e645]:
+                            - generic [ref=f17e648] [cursor=pointer]:
+                              - text: Workflow Contactado
+                              - link [ref=f17e649]
+                        - cell "Published" [ref=f17e652]
+                        - cell [ref=f17e657]:
+                          - paragraph [ref=f17e658] [cursor=pointer]: "0"
+                        - cell [ref=f17e659]:
+                          - paragraph [ref=f17e660] [cursor=pointer]: "0"
+                        - cell [ref=f17e661]:
+                          - paragraph [ref=f17e662]: Sep 06 2025, 10:52 PM
+                        - cell [ref=f17e663]:
+                          - paragraph [ref=f17e664]: Sep 05 2025, 10:45 AM
+                        - cell [ref=f17e665]
+                        - cell [ref=f17e670]:
+                          - button "Workflow list actions" [ref=f17e671] [cursor=pointer]
+                - img "loading" [ref=f17e677]
+              - generic [ref=f17e447]:
+                - button "Previous" [ref=f17e449]
+                - generic [ref=f17e451] [cursor=pointer]: "1"
+                - button "Next" [ref=f17e453]
+                - generic [ref=f17e457] [cursor=pointer]:
+                  - generic [ref=f17e458]: 10 / page
+                  - img "loading" [ref=f17e460]
+      - log [ref=f17e467]

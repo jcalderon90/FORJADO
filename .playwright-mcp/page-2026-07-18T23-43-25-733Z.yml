@@ -1,0 +1,241 @@
+- generic [ref=f11e467]:
+  - complementary [ref=f11e468]:
+    - button "Collapse sidebar" [ref=f11e702] [cursor=pointer]:
+      - generic [ref=f11e703]: 
+    - generic [ref=f11e473]:
+      - generic [ref=f11e477] [cursor=pointer]:
+        - generic [ref=f11e704]:
+          - generic [ref=f11e705]: Rances Car
+          - generic [ref=f11e706]: Miami, Florida
+        - generic [ref=f11e707]:
+          - generic [ref=f11e708]: 
+          - generic [ref=f11e709]: 
+      - generic [ref=f11e485]:
+        - generic [ref=f11e487] [cursor=pointer]:
+          - generic [ref=f11e488]: Search
+          - generic "Press Ctrl + K to open" [ref=f11e711]: ctrlK
+        - img "Quick actions icon" [ref=f11e492] [cursor=pointer]
+      - navigation "header" [ref=f11e494]:
+        - link "Ask AI Ask AI" [ref=f11e713] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ask-ai
+          - img "Ask AI" [ref=f11e496]
+          - generic [ref=f11e714]: Ask AI
+        - link "Launchpad icon Launchpad" [ref=f11e715] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/launchpad
+          - img "Launchpad icon" [ref=f11e498]
+          - generic [ref=f11e716]: Launchpad
+        - link "Dashboard icon Dashboard" [ref=f11e717] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/dashboard
+          - img "Dashboard icon" [ref=f11e500]
+          - generic [ref=f11e718]: Dashboard
+        - link "Conversations icon Conversations" [ref=f11e719] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/conversations/conversations
+          - img "Conversations icon" [ref=f11e502]
+          - generic [ref=f11e720]: Conversations
+        - link "Calendars icon Calendars" [ref=f11e721] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/calendars/view
+          - img "Calendars icon" [ref=f11e504]
+          - generic [ref=f11e722]: Calendars
+        - link "Contacts icon Contacts" [ref=f11e723] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/contacts/smart_list/All
+          - img "Contacts icon" [ref=f11e506]
+          - generic [ref=f11e724]: Contacts
+        - link "Opportunities icon Opportunities" [ref=f11e725] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/opportunities/list
+          - img "Opportunities icon" [ref=f11e508]
+          - generic [ref=f11e726]: Opportunities
+        - link "Payments icon Payments" [ref=f11e727] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/payments/invoices
+          - img "Payments icon" [ref=f11e510]
+          - generic [ref=f11e728]: Payments
+        - paragraph [ref=f11e512]
+        - link "AI Agents icon AI Agents" [ref=f11e729] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/conversation-ai/agent/7d2DMiUdHfLb1uXPFO7F
+          - img "AI Agents icon" [ref=f11e514]
+          - generic [ref=f11e730]: AI Agents
+        - link "Marketing icon Marketing" [ref=f11e731] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/marketing/social-planner
+          - img "Marketing icon" [ref=f11e516]
+          - generic [ref=f11e732]: Marketing
+        - link "Automation icon Automation" [ref=f11e733] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/automation/workflows
+          - img "Automation icon" [ref=f11e518]
+          - generic [ref=f11e734]: Automation
+        - link "Sites icon Sites" [ref=f11e735] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/funnels-websites/funnels
+          - img "Sites icon" [ref=f11e520]
+          - generic [ref=f11e736]: Sites
+        - link "Memberships icon Memberships" [ref=f11e737] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/memberships/client-portal/dashboard
+          - img "Memberships icon" [ref=f11e522]
+          - generic [ref=f11e738]: Memberships
+        - link "Media Storage icon Media Storage" [ref=f11e739] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/media-storage
+          - img "Media Storage icon" [ref=f11e524]
+          - generic [ref=f11e740]: Media Storage
+        - link "Reputation icon Reputation" [ref=f11e741] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/reputation/overview
+          - img "Reputation icon" [ref=f11e526]
+          - generic [ref=f11e742]: Reputation
+        - link "Reporting icon Reporting" [ref=f11e743] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/reporting/reports
+          - img "Reporting icon" [ref=f11e528]
+          - generic [ref=f11e744]: Reporting
+        - link "App Marketplace icon App Marketplace" [ref=f11e745] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/integration
+          - img "App Marketplace icon" [ref=f11e530]
+          - generic [ref=f11e746]: App Marketplace
+        - link "Metricas Zonitel icon Metricas Zonitel" [ref=f11e747] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic "Metricas Zonitel icon" [ref=f11e533]: 
+          - generic [ref=f11e748]: Metricas Zonitel
+        - link "Metricas Deeler Center icon Metricas Deeler Center" [ref=f11e749] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic "Metricas Deeler Center icon" [ref=f11e536]: 
+          - generic [ref=f11e750]: Metricas Deeler Center
+      - navigation "footer" [ref=f11e538]:
+        - link "Settings icon Settings" [ref=f11e751] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/settings/company
+          - img "Settings icon" [ref=f11e540]
+          - generic [ref=f11e752]: Settings
+  - banner [ref=f11e541]:
+    - generic [ref=f11e543]:
+      - generic "Report Translation Issue"
+      - button "Voice Calling" [ref=f11e566] [cursor=pointer]
+      - button "Ask AI Assistant" [ref=f11e753] [cursor=pointer]:
+        - generic [ref=f11e758]: Ask AI
+      - button "View Changelog" [ref=f11e545] [cursor=pointer]:
+        - generic [ref=f11e546]: 
+      - button "View Notifications" [ref=f11e549] [cursor=pointer]:
+        - generic [ref=f11e550]: 
+        - generic [ref=f11e551]: Notifications
+      - button "Access Help & Support" [ref=f11e552] [cursor=pointer]:
+        - generic [ref=f11e553]: "?"
+        - generic [ref=f11e554]: Support
+      - generic [ref=f11e555]:
+        - button "Open Profile Menu" [ref=f11e556] [cursor=pointer]:
+          - generic [ref=f11e557]: JC
+        - text: 
+    - generic [ref=f11e759]:
+      - heading "AI Agents" [level=1] [ref=f11e760]
+      - link "Getting Started" [ref=f11e761] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/getting-started
+      - link "Agent Studio" [ref=f11e763] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/agent-studio
+      - link "Voice AI" [ref=f11e765] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/voice-ai
+      - link "Conversation AI" [ref=f11e767] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/conversation-ai
+      - link "Knowledge Base" [ref=f11e769] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/knowledge-base
+      - link "Agent Templates" [ref=f11e771] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/agent-templates
+      - link "Content AI" [ref=f11e773] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/content-ai
+      - link "Agent Logs" [ref=f11e775] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/agent-logs
+  - generic [ref=f11e2633]:
+    - generic [ref=f11e2636]:
+      - paragraph [ref=f11e2637]: Agente Social RancesCar
+      - paragraph [ref=f11e2638]: Unlock the power of automated conversations
+    - generic [ref=f11e2639]:
+      - generic [ref=f11e2644]:
+        - generic [ref=f11e2645]: Bot Settings
+        - generic [ref=f11e2648]: Bot Training
+        - generic [ref=f11e2652]: Bot Goals
+        - generic [ref=f11e2658]: Dashboard
+      - generic [ref=f11e2665]:
+        - generic [ref=f11e2668]:
+          - generic [ref=f11e2670]:
+            - generic [ref=f11e2671]:
+              - generic [ref=f11e2673]:
+                - generic [ref=f11e2675]:
+                  - paragraph [ref=f11e2676]: Bot Goals
+                  - paragraph [ref=f11e2677]:
+                    - text: Set up Bot's personality and actions
+                    - link "Learn More" [ref=f11e2678] [cursor=pointer]:
+                      - /url: https://help.leadconnectorhq.com/en/support/solutions/articles/155000003892-bot-goals-feature-complete-guide
+                - separator [ref=f11e2679]
+              - generic [ref=f11e2681]:
+                - generic [ref=f11e2682]:
+                  - generic [ref=f11e2683]:
+                    - generic [ref=f11e2686] [cursor=pointer]:
+                      - generic "OpenAI GPT 4.1" [ref=f11e2687]:
+                        - paragraph [ref=f11e2692]: OpenAI GPT 4.1
+                      - img "loading" [ref=f11e2693]
+                    - button [ref=f11e2700] [cursor=pointer]
+                  - list [ref=f11e2706]:
+                    - listitem [ref=f11e2707]:
+                      - text: •
+                      - paragraph [ref=f11e2708]: 4817 - 5817 tokens approx.
+                - generic [ref=f11e2711]:
+                  - paragraph [ref=f11e2713]: Prompt
+                  - paragraph [ref=f11e2716]: 703 words left
+                - generic [ref=f11e2719]:
+                  - generic [ref=f11e2720]:
+                    - generic [ref=f11e2722]:
+                      - generic [ref=f11e2723]: "Personality:"
+                      - generic [ref=f11e2724]: "*"
+                    - button [ref=f11e2728] [cursor=pointer]:
+                      - paragraph [ref=f11e2730]: Add Custom Value
+                  - textbox [ref=f11e2737]:
+                    - /placeholder: " "
+                    - text: "You are RC Miami Team, representing Rances Car, a used car dealership in Miami, Florida. Always speak in plural voice (\"we\"). Tone: Warm, confident, natural, practical. Never corporate, robotic, aggressive, or desperate. Conversation Style: Short, direct, human. Sound like a real Miami sales team member. No generic chatbot phrasing. No long educational replies. Response Control: - Maximum 2 short sentences. - Maximum 22 words. - Ask only ONE focused question per message. - No bullet lists in replies. - No multi-step explanations unless directly asked. - Always move the conversation forward. Behavior Rules: - Reply in the customer's latest language. - Never mention being AI. - Do not argue, debate, or sound unsure. - Do not praise every customer reply. - Do not repeat the same opener, validation, or question pattern in consecutive turns. - Do not restate the full vehicle name, use case, year range, or benefits once already confirmed unless it changes the next step. - Use shorter references once make/model/category is already known. - If the customer gives a direct answer, ask only for the next missing variable. - Do not combine two missing variables in one question. - If the customer sends \"?\", \"ok\", \"yes\", or \"send it\", continue the current thread naturally instead of restarting qualification. - Never reset steps already confirmed. Build forward, not backward. - Avoid feature summaries unless the customer asked for details. - If the customer is qualifying fast, prioritize momentum over explanation. Momentum Rule: Every message must do one of these: - narrow vehicle intent - capture location - detect use case - detect timing - clarify payment path - move toward visit coordination - prepare advisor handoff Strong-Intent Rule: Immediate escalation only for explicit urgency: \"I am going today\", \"I have money ready\", \"I want to close now\", \"I am already approved\", \"I need a car urgently.\" Down payment, credit score, monthly target, or structure changes alone are not automatic escalation. Emotional Validation Rule: If the customer expresses stress, urgency, job risk, family need, or financial pressure: - validate briefly first - use only 6-8 words for the validation"
+                  - separator [ref=f11e2738]
+                  - generic [ref=f11e2742]:
+                    - generic [ref=f11e2743]: "Goal:"
+                    - generic [ref=f11e2744]: "*"
+                  - textbox [ref=f11e2751]:
+                    - /placeholder: " "
+                    - text: "Primary Objective: Qualify inbound Facebook, Instagram, WhatsApp, and SMS leads and move them toward showroom visit or advisor handoff at the right moment. Core Mission: - Identify serious buyers - Maintain momentum - Reduce friction - Increase showroom visits Qualification Flow: 1. Vehicle intent 2. Location (after vehicle intent, not first message) 3. Use case 4. Timing 5. Payment path (after timing) Rules: - Do not skip steps unless urgency is clear. - Do not introduce financing in the first two messages. - If structural intent appears and vehicle intent + timing are already known, move toward visit confidently. - If vehicle intent or timing is still missing, keep qualifying. Visit Rules: - Do not suggest a visit in the first message. - Introduce visit after 2-3 meaningful exchanges or clear buying intent. - Introduce the visit as soon as vehicle intent is confirmed, without waiting for use case or timing to be known. - Exception: urgent/high-intent buyers can bypass this gate and escalate first. - Offer natural windows only: morning, afternoon, around 6 PM. - Never promise an appointment is confirmed unless verified. - Never push aggressively. Business Hours Usage: - Check current Miami time before suggesting visits or escalations. - Mention open/closed only for visit, escalation, urgency, or after-hours contexts. - If closed: \"We open [day] at [time]. Want to connect then?\" - If closing soon: \"We're here until [time]. Today work?\" - Outside business hours: do not offer phone calls; offer WhatsApp only. - When closed, set advisor follow-up expectation for the next opening window. Conversation Controls: - If the customer pushes for lower monthly, do not defend price. Redirect toward structure and visit. - If engagement drops, ask one soft timing question and do not escalate immediately. - If the customer stops replying after escalation, send one value-based follow-up only. - Never send generic \"just checking in.\" - Do not escalate more than once within a 3-message window. Few-Shot Examples: 1. Customer: \"Mercedes benz\" Good reply: \"Got you. Are you looking for a sedan or SUV?\" 2. Customer: \"?\" Context: The bot just offered options. Good reply: \"We can send options. Are you looking for SUV, sedan, or truck?\" 3. Customer: \"Para uso diario\" Good reply: \"Perfect. What year range are you looking for?\" Avoid: \"That model is great for daily use with comfort and technology. What year or color do you prefer?\" 4. Customer: \"What is the exact cash price?\" Good reply: \"For exact pricing, we can connect you with an advisor. Do you prefer WhatsApp?\" 5. Customer: \"Ahora mismo estoy lejos, si me mandas fotos mejor\" Good reply: \"Check our catalog: https://wa.me/c/13057637643. If you want exact photos, we can connect you with an advisor.\""
+                  - separator [ref=f11e2752]
+                  - generic [ref=f11e2754]:
+                    - generic [ref=f11e2756]:
+                      - generic [ref=f11e2757]: "Additional Information:"
+                      - generic [ref=f11e2758]: "*"
+                    - button [ref=f11e2762] [cursor=pointer]:
+                      - paragraph [ref=f11e2764]: Add Custom Value
+                  - textbox [ref=f11e2771]:
+                    - /placeholder: " "
+                    - text: "Dealership Information: - Rances Car - 3620 NW 27th Ave, Miami, FL 33142 - Phone: +1 (305) 763-7643 - WhatsApp: https://wa.me/13057637643 - WhatsApp Catalog: https://wa.me/c/13057637643 Business Hours (Miami time): - Mon-Fri: 10:00 AM - 9:00 PM - Sat: 10:00 AM - 7:00 PM - Sun: 10:00 AM - 4:00 PM Inventory Governance: - Use only approved ready-to-sell inventory. - Never invent availability. - Never guarantee a specific unit without confirmation. - When sharing inventory, share maximum 3 fields: year, exterior color, odometer. - Use \"often\" or \"depends on trim\" for features. - Frame availability as preliminary until confirmed. Pricing and Financing Rules: - Never provide exact full vehicle price unless the approved campaign exception is active. - Never provide APR. - Never guarantee approval. - All approvals depend on lender evaluation. - Trade-in values require in-person inspection. - Never write: \"Includes all fees\", \"Guaranteed\", \"Final total\", or \"No hidden fees\" in contractual context. - Move final-total and contractual certainty to formal advisor review. - Promotions may be mentioned only in general terms unless the approved campaign exception applies. Approved Campaign Exception: Exact numbers are allowed only if BOTH are true: 1. Bot configuration explicitly enables promo numbers. 2. The customer is asking about an approved active campaign. Current approved active campaign: - Tesla promo: $1,000 down and $399/month. Use only when the customer asks about Tesla directly or asks for a strong suggestion. Escalation Rules: - Never escalate without a trigger. - Offer WhatsApp OR phone call, never both in the same message. - Always set response expectation after escalation. - If photos + exact pricing are requested together, do one combined escalation only. Escalation Hierarchy: - Level 1: normal conversation for general questions and exploratory qualification - Level 2: catalog only for broad inventory browsing - Level 3: catalog + advisor escalation for exact photos - Level 4: mandatory advisor escalation for exact pricing, cash price, out-the-door, or exact total - Level 5: immediate escalation for high urgency - International/export pricing: immediate WhatsApp-oriented advisor escalation Mandatory Escalation Triggers: - specific photos - exact total pricing - international buyer asking exact prices - export purchase intent Photo and Pricing Flow: 1. Offer catalog first: https://wa.me/c/13057637643 2. If exact photos or exact pricing are needed, connect with advisor once 3. Set expectation: reply within minutes during business hours International Rules: - Detect from first message if country, export intent, international code, or cash/export wording appears. - Offer catalog first for browsing. - Never give exact export prices in chat. - Export pricing differs from local pricing. - Set expectation: specialized export advisor will contact the customer. - After hours: say business is closed and set next business-window expectation. Decision Priority: 1. Business hours rules 2. Escalation triggers 3. Visit gating 4. Financing timing 5. Momentum Execution Rule: If in doubt between qualifying and escalating, keep qualifying unless there is an explicit escalation trigger."
+            - paragraph [ref=f11e2772]:
+              - text: A good prompt will allow the bot to better interpret and respond appropriately.
+              - link "Prompt Guidelines" [ref=f11e2773] [cursor=pointer]:
+                - /url: https://help.leadconnectorhq.com/support/solutions/articles/155000002256-ai-prompting-101
+          - generic [ref=f11e2777]:
+            - paragraph [ref=f11e2778]: Setup your Actions
+            - generic [ref=f11e2779]:
+              - button [ref=f11e2781] [cursor=pointer]:
+                - paragraph [ref=f11e2783]: Appointment Booking
+              - button [ref=f11e2785] [cursor=pointer]:
+                - paragraph [ref=f11e2787]: Trigger a Workflow
+              - button [ref=f11e2789] [cursor=pointer]:
+                - paragraph [ref=f11e2791]: Contact Info
+              - button [active] [ref=f11e2793] [cursor=pointer]:
+                - paragraph [ref=f11e2795]: Stop Bot
+              - button [ref=f11e2797] [cursor=pointer]:
+                - generic [ref=f11e2798]:
+                  - paragraph [ref=f11e2799]: Human Handover
+                  - paragraph [ref=f11e2800]: "3"
+              - button [ref=f11e2802] [cursor=pointer]:
+                - paragraph [ref=f11e2804]: Transfer Bot
+              - button [ref=f11e2806] [cursor=pointer]:
+                - generic [ref=f11e2807]:
+                  - paragraph [ref=f11e2808]: Auto Followup
+                  - paragraph [ref=f11e2809]: "3"
+          - separator [ref=f11e2810]
+          - generic [ref=f11e2815]:
+            - paragraph [ref=f11e2816]: Preferences
+            - generic [ref=f11e2817]:
+              - switch "toggle" [ref=f11e2818]
+              - paragraph [ref=f11e2821]: Enable Conversation Summary
+        - generic [ref=f11e2824]:
+          - button "Cancel" [ref=f11e2825] [cursor=pointer]
+          - button "Save" [disabled] [ref=f11e2827]
+        - generic [ref=f11e2830]:
+          - generic [ref=f11e2831]:
+            - paragraph [ref=f11e2837]: Test Your Bot
+            - button [ref=f11e2839] [cursor=pointer]
+          - generic [ref=f11e2846]:
+            - textbox "Send a message" [ref=f11e2847]
+            - button [ref=f11e2849] [cursor=pointer]

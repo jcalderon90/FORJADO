@@ -1,0 +1,44 @@
+- generic [ref=e14]:
+  - generic [ref=e16]:
+    - link "Ir a la página de inicio" [ref=e17] [cursor=pointer]:
+      - /url: ./
+    - generic [ref=e20]:
+      - generic [ref=e21]: "Idioma de la plataforma:"
+      - combobox [ref=e22]:
+        - option "English"
+        - option "Dansk"
+        - option "Deutsch"
+        - option "Español" [selected]
+        - option "Suomi"
+        - option "Français (Canada)"
+        - option "Français (France)"
+        - option "Italiano"
+        - option "Nederlands"
+        - option "Norsk"
+        - option "Português (Brasil)"
+        - option "Português (Portugal)"
+        - option "Svenska"
+  - generic [ref=e26]:
+    - heading "Inicie sesión en su cuenta" [level=2] [ref=e28]
+    - generic [ref=e29]:
+      - generic [ref=e31]:
+        - generic [ref=e32]: Correo electrónico
+        - textbox "Su dirección de correo electrónico" [ref=e35]
+      - generic [ref=e36]:
+        - generic [ref=e37]:
+          - generic [ref=e38]: Contraseña
+          - generic [ref=e40]:
+            - textbox "La contraseña que ha elegido" [ref=e41]
+            - button "Mostrar contraseña" [ref=e42] [cursor=pointer]
+        - link "¿Ha olvidado la contraseña?" [ref=e43] [cursor=pointer]:
+          - /url: /forgot_password?email=
+      - button "Inicie sesión" [ref=e46] [cursor=pointer]
+    - generic [ref=e47]: O Continuar con
+    - generic [ref=e55]:
+      - button "Acceder con Google. Se abre en una pestaña nueva" [ref=e57] [cursor=pointer]:
+        - generic [ref=e59]: Acceder con Google
+      - iframe
+    - paragraph [ref=e69]:
+      - text: Al iniciar sesión, usted acepta nuestros
+      - link "Términos y condiciones" [ref=e70] [cursor=pointer]:
+        - /url: https://www.gohighlevel.com/terms-of-service

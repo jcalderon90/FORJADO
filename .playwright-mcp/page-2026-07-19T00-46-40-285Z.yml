@@ -1,0 +1,136 @@
+- iframe [active] [ref=e25]:
+  - generic [ref=f3e1]:
+    - generic [ref=f3e3]:
+      - list:
+        - listitem:
+          - link "Skip to main content" [ref=f3e4] [cursor=pointer]:
+            - /url: "#main"
+      - generic [ref=f3e7]:
+        - generic [ref=f3e8]:
+          - generic [ref=f3e9]:
+            - generic [ref=f3e10]:
+              - button "Workflows list" [ref=f3e11] [cursor=pointer]
+              - button [ref=f3e16] [cursor=pointer]
+            - paragraph [ref=f3e21]:
+              - button [ref=f3e22] [cursor=pointer]:
+                - heading "Workflow name" [level=1] [ref=f3e24]: Rances Car - Ruteo Human Handover por Turno
+            - generic [ref=f3e28]:
+              - group [ref=f3e30]:
+                - generic [ref=f3e31]: JC
+              - generic [ref=f3e33]:
+                - button "Recent changes" [ref=f3e35] [cursor=pointer]:
+                  - img "changelog icon" [ref=f3e37]
+                - button "Undo" [disabled] [ref=f3e39]
+                - button "Redo" [disabled] [ref=f3e43]
+              - button "Save workflow button" [disabled] [ref=f3e49]:
+                - generic [ref=f3e50]: Saved
+          - generic [ref=f3e55]:
+            - generic [ref=f3e60] [cursor=pointer]:
+              - generic [ref=f3e61]: Standard builder
+              - img "loading" [ref=f3e63]
+            - tablist [ref=f3e76]:
+              - tab "Builder" [selected] [ref=f3e78] [cursor=pointer]:
+                - paragraph [ref=f3e80]: Builder
+              - tab "Settings" [ref=f3e83] [cursor=pointer]:
+                - paragraph [ref=f3e85]: Settings
+              - tab "Enrollment history" [ref=f3e88] [cursor=pointer]:
+                - paragraph [ref=f3e90]: Enrollment history
+              - tab "Execution logs" [ref=f3e93] [cursor=pointer]:
+                - paragraph [ref=f3e95]: Execution logs
+            - generic [ref=f3e97]:
+              - button "Test workflow" [ref=f3e98] [cursor=pointer]
+              - generic [ref=f3e100]:
+                - paragraph [ref=f3e101]: Draft
+                - switch "Toggle draft publish workflow" [ref=f3e102]
+                - paragraph [ref=f3e105]: Publish
+        - generic [ref=f3e108]:
+          - generic [ref=f3e111]:
+            - button [ref=f3e112] [cursor=pointer]
+            - button [ref=f3e116] [cursor=pointer]
+            - button [ref=f3e120] [cursor=pointer]
+            - button [ref=f3e124] [cursor=pointer]
+            - button [ref=f3e128] [cursor=pointer]
+            - button [ref=f3e132] [cursor=pointer]
+            - button [ref=f3e136] [cursor=pointer]
+            - button [ref=f3e140] [cursor=pointer]
+          - generic "Workflow tree" [ref=f3e150]:
+            - generic [ref=f3e152]:
+              - generic:
+                - img:
+                  - button "Edge from 31beff1b-a388-4f46-a0e8-edf3d3e48af5 to 614e26be-9667-44cf-a828-4a1f93587c70" [ref=f3e153] [cursor=pointer]
+                - img:
+                  - button "Edge from 31beff1b-a388-4f46-a0e8-edf3d3e48af5 to 3f9bbf45-9b90-42e0-937d-758c3d970f02" [ref=f3e156] [cursor=pointer]
+                - img:
+                  - button "Edge from 31beff1b-a388-4f46-a0e8-edf3d3e48af5 to d1927852-b47d-4783-a1ec-7206860be4b8" [ref=f3e159] [cursor=pointer]
+                - img:
+                  - button "Edge from 614e26be-9667-44cf-a828-4a1f93587c70 to d5fa8c57-9d44-443f-b270-c2b5559aa401" [ref=f3e162] [cursor=pointer]
+                - img:
+                  - button "Edge from 3f9bbf45-9b90-42e0-937d-758c3d970f02 to 1dd39e2c-50ba-410b-9f6b-c04930fe48ff" [ref=f3e165] [cursor=pointer]
+                - img:
+                  - button "Edge from d1927852-b47d-4783-a1ec-7206860be4b8 to d1927852-b47d-4783-a1ec-7206860be4b8-end" [ref=f3e168] [cursor=pointer]
+                - img:
+                  - button "Edge from d5fa8c57-9d44-443f-b270-c2b5559aa401 to d5fa8c57-9d44-443f-b270-c2b5559aa401-end"
+                - img:
+                  - button "Edge from 1dd39e2c-50ba-410b-9f6b-c04930fe48ff to 1dd39e2c-50ba-410b-9f6b-c04930fe48ff-end"
+                - img:
+                  - button "Edge from SKCyR5TAr7oAfDVrWFse to 31beff1b-a388-4f46-a0e8-edf3d3e48af5" [ref=f3e171] [cursor=pointer]
+                - img:
+                  - button "Edge from add-new-trigger to 31beff1b-a388-4f46-a0e8-edf3d3e48af5" [ref=f3e174] [cursor=pointer]
+                - generic:
+                  - generic "Add action" [ref=f3e180]:
+                    - button "Add action" [ref=f3e182] [cursor=pointer]
+                  - generic "Add action" [ref=f3e190]:
+                    - button "Add action" [ref=f3e192] [cursor=pointer]
+                  - generic "Add action" [ref=f3e200]:
+                    - button "Add action" [ref=f3e202] [cursor=pointer]
+                  - generic "Add action" [ref=f3e210]:
+                    - button "Add action" [ref=f3e212] [cursor=pointer]
+                  - generic "Add action" [ref=f3e220]:
+                    - button "Add action" [ref=f3e222] [cursor=pointer]
+                - generic:
+                  - button [ref=f3e227] [cursor=pointer]:
+                    - button "Ruteo por turno - Scarleth vs Samuel Action" [ref=f3e228]:
+                      - button "Add action" [ref=f3e232]
+                      - button "Ruteo por turno - Scarleth vs Samuel" [ref=f3e237]:
+                        - button [ref=f3e249]
+                  - button [ref=f3e252] [cursor=pointer]:
+                    - generic [ref=f3e254]:
+                      - generic [ref=f3e255]:
+                        - button "Turno Scarleth (Lun-Sab 8am..." [ref=f3e256]
+                        - button [ref=f3e262]:
+                          - paragraph [ref=f3e265]: If "Current Day of week" is not "Sunday"
+                      - button [ref=f3e266]:
+                        - button "+1 other segments" [ref=f3e267]
+                  - button [ref=f3e270] [cursor=pointer]:
+                    - generic [ref=f3e272]:
+                      - generic [ref=f3e273]:
+                        - button "Turno Samuel (Mar-Dom 5pm-9pm)" [ref=f3e274]
+                        - button [ref=f3e280]:
+                          - paragraph [ref=f3e283]: If "Current Day of week" is not "Monday"
+                      - button [ref=f3e284]:
+                        - button "+1 other segments" [ref=f3e285]
+                  - button [ref=f3e288] [cursor=pointer]:
+                    - generic [ref=f3e292]:
+                      - button "None" [ref=f3e293]
+                      - button "When none of the conditions are met" [ref=f3e299]
+                  - button [ref=f3e301] [cursor=pointer]:
+                    - button "Assign to user Action" [ref=f3e302]:
+                      - button "Assign to user" [ref=f3e304]:
+                        - button [ref=f3e319]
+                  - button [ref=f3e322] [cursor=pointer]:
+                    - button "Assign to user Action" [ref=f3e323]:
+                      - button "Assign to user" [ref=f3e325]:
+                        - button [ref=f3e340]
+                  - button [ref=f3e343] [cursor=pointer]
+            - img "Vue Flow mini map" [ref=f3e351]
+            - button [ref=f3e363] [cursor=pointer]
+            - generic [ref=f3e368]:
+              - button [ref=f3e370] [cursor=pointer]
+              - group [ref=f3e375]:
+                - button "Zoom in" [ref=f3e376] [cursor=pointer]
+                - button "100%" [ref=f3e380] [cursor=pointer]
+                - button "Zoom out" [ref=f3e382] [cursor=pointer]
+              - group [ref=f3e385]:
+                - button "Fit to Screen" [ref=f3e386] [cursor=pointer]
+            - button [ref=f3e391] [cursor=pointer]
+    - log [ref=f3e396]

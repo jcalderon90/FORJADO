@@ -1,0 +1,91 @@
+- iframe [active] [ref=f18e181]:
+  - generic [ref=f21e1]:
+    - generic [ref=f21e3]:
+      - list:
+        - listitem:
+          - link "Skip to main content" [ref=f21e4] [cursor=pointer]:
+            - /url: "#main"
+      - generic [ref=f21e678]:
+        - generic [ref=f21e679]:
+          - generic [ref=f21e680]:
+            - generic [ref=f21e681]:
+              - button "Workflows list" [ref=f21e682] [cursor=pointer]
+              - button [ref=f21e687] [cursor=pointer]
+            - paragraph [ref=f21e692]:
+              - button [ref=f21e804] [cursor=pointer]:
+                - heading "Workflow name" [level=1] [ref=f21e806]: Rances Car - Ruteo Human Handover por Turno
+            - generic [ref=f21e695]:
+              - group [ref=f21e811]:
+                - generic [ref=f21e812]: JC
+              - generic [ref=f21e696]:
+                - button "Recent changes" [ref=f21e698] [cursor=pointer]:
+                  - img "changelog icon" [ref=f21e700]
+                - button "Undo" [ref=f21e702] [cursor=pointer]
+                - button "Redo" [disabled] [ref=f21e706]
+              - button "Save workflow button" [ref=f21e712] [cursor=pointer]:
+                - generic [ref=f21e713]: Save
+          - generic [ref=f21e718]:
+            - generic [ref=f21e817] [cursor=pointer]:
+              - generic [ref=f21e818]: Standard builder
+              - img "loading" [ref=f21e820]
+            - tablist [ref=f21e726]:
+              - tab "Builder" [selected] [ref=f21e728] [cursor=pointer]:
+                - paragraph [ref=f21e730]: Builder
+              - tab "Settings" [ref=f21e733] [cursor=pointer]:
+                - paragraph [ref=f21e735]: Settings
+              - tab "Enrollment history" [ref=f21e738] [cursor=pointer]:
+                - paragraph [ref=f21e740]: Enrollment history
+              - tab "Execution logs" [ref=f21e743] [cursor=pointer]:
+                - paragraph [ref=f21e745]: Execution logs
+            - generic [ref=f21e747]:
+              - button "Test workflow" [ref=f21e748] [cursor=pointer]
+              - generic [ref=f21e750]:
+                - paragraph [ref=f21e751]: Draft
+                - switch "Toggle draft publish workflow" [ref=f21e752]
+                - paragraph [ref=f21e755]: Publish
+        - generic [ref=f21e758]:
+          - generic [ref=f21e761]:
+            - button [ref=f21e762] [cursor=pointer]
+            - button [ref=f21e766] [cursor=pointer]
+            - button [ref=f21e770] [cursor=pointer]
+            - button [ref=f21e774] [cursor=pointer]
+            - button [ref=f21e778] [cursor=pointer]
+            - button [ref=f21e782] [cursor=pointer]
+            - button [ref=f21e786] [cursor=pointer]
+            - button [ref=f21e790] [cursor=pointer]
+          - generic "Workflow tree" [ref=f21e831]:
+            - generic [ref=f21e833]:
+              - generic:
+                - img:
+                  - button "Edge from bc2c85fe-a96e-49da-9048-70e9a8d078f6 to newWorkflow-endNode" [ref=f21e2820] [cursor=pointer]
+                - img:
+                  - button "Edge from add-new-trigger to newWorkflow-endNode" [ref=f21e2823] [cursor=pointer]
+                - generic:
+                  - button "END":
+                    - generic "END":
+                      - button "Add action" [ref=f21e2830] [cursor=pointer]
+                  - 'button "Tag: human handover agregado Trigger Tag added includes \"human handover\" Stats" [ref=f21e2834] [cursor=pointer]':
+                    - generic [ref=f21e2836]:
+                      - 'button "Tag: human handover agregado Trigger" [ref=f21e2837]':
+                        - generic [ref=f21e2844]:
+                          - generic [ref=f21e2845]: Contact tag
+                          - generic [ref=f21e2847]: "Tag: human handover agregado"
+                      - generic [ref=f21e2849]:
+                        - list [ref=f21e2851]:
+                          - listitem [ref=f21e2852]:
+                            - generic [ref=f21e2853]: Tag added includes "human handover"
+                        - button [ref=f21e2860]
+                  - button [ref=f21e2864] [cursor=pointer]:
+                    - generic "Add trigger" [ref=f21e2866]: Add new trigger
+            - img "Vue Flow mini map" [ref=f21e898]
+            - button [ref=f21e906] [cursor=pointer]
+            - generic [ref=f21e911]:
+              - button [ref=f21e913] [cursor=pointer]
+              - group [ref=f21e918]:
+                - button "Zoom in" [ref=f21e919] [cursor=pointer]
+                - button "76%" [ref=f21e923] [cursor=pointer]
+                - button "Zoom out" [ref=f21e925] [cursor=pointer]
+              - group [ref=f21e928]:
+                - button "Fit to Screen" [ref=f21e929] [cursor=pointer]
+            - button [ref=f21e934] [cursor=pointer]
+    - log [ref=f21e467]

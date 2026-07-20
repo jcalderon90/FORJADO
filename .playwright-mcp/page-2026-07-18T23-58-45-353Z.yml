@@ -1,0 +1,380 @@
+- iframe [active] [ref=f1e10]:
+  - generic [ref=f4e1]:
+    - generic [ref=f4e3]:
+      - list:
+        - listitem:
+          - link "Skip to main content" [ref=f4e4] [cursor=pointer]:
+            - /url: "#main"
+      - generic [ref=f4e7]:
+        - generic [ref=f4e8]:
+          - generic [ref=f4e9]:
+            - generic [ref=f4e10]:
+              - button "Workflows list" [ref=f4e11] [cursor=pointer]
+              - button [ref=f4e16] [cursor=pointer]
+            - paragraph [ref=f4e21]:
+              - button [ref=f4e22] [cursor=pointer]:
+                - heading "Workflow name" [level=1] [ref=f4e24]: Rances Car - Ruteo Human Handover por Turno
+            - generic [ref=f4e28]:
+              - group [ref=f4e256]:
+                - generic [ref=f4e257]: JC
+              - generic [ref=f4e29]:
+                - button "Recent changes" [ref=f4e31] [cursor=pointer]:
+                  - img "changelog icon" [ref=f4e33]
+                - button "Undo" [disabled] [ref=f4e35]
+                - button "Redo" [disabled] [ref=f4e39]
+              - button "Save workflow button" [disabled] [ref=f4e45]:
+                - generic [ref=f4e46]: Saved
+          - generic [ref=f4e51]:
+            - generic [ref=f4e56] [cursor=pointer]:
+              - generic [ref=f4e57]: Standard builder
+              - img "loading" [ref=f4e59]
+            - tablist [ref=f4e72]:
+              - tab "Builder" [selected] [ref=f4e74] [cursor=pointer]:
+                - paragraph [ref=f4e76]: Builder
+              - tab "Settings" [ref=f4e79] [cursor=pointer]:
+                - paragraph [ref=f4e81]: Settings
+              - tab "Enrollment history" [ref=f4e84] [cursor=pointer]:
+                - paragraph [ref=f4e86]: Enrollment history
+              - tab "Execution logs" [ref=f4e89] [cursor=pointer]:
+                - paragraph [ref=f4e91]: Execution logs
+            - generic [ref=f4e93]:
+              - button "Test workflow" [ref=f4e94] [cursor=pointer]
+              - generic [ref=f4e96]:
+                - paragraph [ref=f4e97]: Draft
+                - switch "Toggle draft publish workflow" [ref=f4e98]
+                - paragraph [ref=f4e101]: Publish
+        - generic [ref=f4e104]:
+          - generic [ref=f4e107]:
+            - button [ref=f4e108] [cursor=pointer]
+            - button [ref=f4e112] [cursor=pointer]
+            - button [ref=f4e116] [cursor=pointer]
+            - button [ref=f4e120] [cursor=pointer]
+            - button [ref=f4e124] [cursor=pointer]
+            - button [ref=f4e128] [cursor=pointer]
+            - button [ref=f4e132] [cursor=pointer]
+            - button [ref=f4e136] [cursor=pointer]
+          - generic "Workflow tree" [ref=f4e146]:
+            - generic [ref=f4e148]:
+              - generic:
+                - img:
+                  - button "Edge from add-new-trigger to newWorkflow-endNode"
+                - generic "Add action" [ref=f4e152]:
+                  - button "Add action" [ref=f4e154] [cursor=pointer]
+                - generic:
+                  - button "END"
+                  - button [ref=f4e159] [cursor=pointer]:
+                    - generic "Add trigger" [ref=f4e162]: Add new trigger
+                  - button "What do you want to automate? BETA Build workflows for free by chatting with AI After sending a proposal, wait 24 hours then sen loading Dictate Submitting... Lead nurturing Form automation Email campaigns more Or" [ref=f4e268] [cursor=pointer]:
+                    - generic [ref=f4e172]:
+                      - generic [ref=f4e175]:
+                        - generic [ref=f4e176]:
+                          - generic [ref=f4e177]:
+                            - text: What do you want to automate?
+                            - generic [ref=f4e181]: BETA
+                          - generic [ref=f4e182]: Build workflows for free by chatting with AI
+                        - generic [ref=f4e183]:
+                          - generic [ref=f4e185]:
+                            - textbox "After sending a proposal, wait 24 hours then sen" [ref=f4e269]
+                            - generic: After sending a proposal, wait 24 hours then sen
+                            - generic [ref=f4e187]:
+                              - img "loading" [ref=f4e188]
+                              - button "Dictate" [ref=f4e189]
+                              - button "Submitting..." [disabled] [ref=f4e192]
+                          - generic [ref=f4e195]:
+                            - generic "Lead nurturing" [ref=f4e196]
+                            - generic "Form automation" [ref=f4e199]
+                            - generic "Email campaigns" [ref=f4e202]
+                            - generic "more" [ref=f4e205]
+                      - generic [ref=f4e206]: Or
+            - img "Vue Flow mini map" [ref=f4e213]
+            - button [ref=f4e221] [cursor=pointer]
+            - generic [ref=f4e226]:
+              - button [ref=f4e228] [cursor=pointer]
+              - group [ref=f4e233]:
+                - button "Zoom in" [ref=f4e234] [cursor=pointer]
+                - button "76%" [ref=f4e265] [cursor=pointer]
+                - button "Zoom out" [ref=f4e240] [cursor=pointer]
+              - group [ref=f4e243]:
+                - button "Fit to Screen" [ref=f4e244] [cursor=pointer]
+            - button [ref=f4e249] [cursor=pointer]
+          - generic [ref=f4e275]:
+            - generic [ref=f4e277]:
+              - generic [ref=f4e278]: Add trigger
+              - generic [ref=f4e280]:
+                - button [ref=f4e281] [cursor=pointer]
+                - button "Close panel" [ref=f4e285] [cursor=pointer]
+            - group [ref=f4e291]:
+              - generic [ref=f4e292]:
+                - generic [ref=f4e293]:
+                  - generic [ref=f4e294]:
+                    - button [ref=f4e296] [cursor=pointer]:
+                      - img "Category Icon" [ref=f4e298]
+                    - generic [ref=f4e300]:
+                      - generic [ref=f4e301]: Search triggers
+                      - textbox "Search triggers" [active] [ref=f4e302]
+                  - generic [ref=f4e304]:
+                    - button "Triggers" [ref=f4e305] [cursor=pointer]
+                    - button "Apps" [ref=f4e310] [cursor=pointer]
+                - generic [ref=f4e317]:
+                  - generic [ref=f4e318]:
+                    - button [ref=f4e319] [cursor=pointer]:
+                      - heading "Recent triggers" [level=3] [ref=f4e322]
+                    - button "Contact tag" [ref=f4e328] [cursor=pointer]:
+                      - button "Pin" [ref=f4e337]
+                  - generic [ref=f4e342]:
+                    - button [ref=f4e343] [cursor=pointer]:
+                      - heading "Contact" [level=3] [ref=f4e346]
+                    - generic [ref=f4e351]:
+                      - button "Birthday reminder" [ref=f4e352] [cursor=pointer]:
+                        - button "Pin" [ref=f4e361]
+                      - button "Contact changed" [ref=f4e366] [cursor=pointer]:
+                        - button "Pin" [ref=f4e375]
+                      - button "Contact created" [ref=f4e380] [cursor=pointer]:
+                        - button "Pin" [ref=f4e389]
+                      - button "Contact DND" [ref=f4e394] [cursor=pointer]:
+                        - button "Pin" [ref=f4e403]
+                      - button "Contact tag" [ref=f4e408] [cursor=pointer]:
+                        - button "Pin" [ref=f4e417]
+                      - button "Custom date reminder" [ref=f4e422] [cursor=pointer]:
+                        - button "Pin" [ref=f4e431]
+                      - button "Note added" [ref=f4e436] [cursor=pointer]:
+                        - button "Pin" [ref=f4e445]
+                      - button "Note changed" [ref=f4e450] [cursor=pointer]:
+                        - button "Pin" [ref=f4e459]
+                      - button "Task added" [ref=f4e464] [cursor=pointer]:
+                        - button "Pin" [ref=f4e473]
+                      - button "Task reminder" [ref=f4e478] [cursor=pointer]:
+                        - button "Pin" [ref=f4e487]
+                      - button "Task completed" [ref=f4e492] [cursor=pointer]:
+                        - button "Pin" [ref=f4e500]
+                      - button "Contact engagement score" [ref=f4e505] [cursor=pointer]:
+                        - button "Pin" [ref=f4e513]
+                  - generic [ref=f4e518]:
+                    - button [ref=f4e519] [cursor=pointer]:
+                      - heading "Events" [level=3] [ref=f4e522]
+                    - generic [ref=f4e527]:
+                      - button "Inbound webhook" [ref=f4e528] [cursor=pointer]:
+                        - button "Pin" [ref=f4e546]
+                      - button "Scheduler" [ref=f4e551] [cursor=pointer]:
+                        - button "Pin" [ref=f4e560]
+                      - button "Call details" [ref=f4e565] [cursor=pointer]:
+                        - button "Pin" [ref=f4e574]
+                      - button "Email events" [ref=f4e579] [cursor=pointer]:
+                        - button "Pin" [ref=f4e588]
+                      - button "Customer replied" [ref=f4e593] [cursor=pointer]:
+                        - button "Pin" [ref=f4e602]
+                      - button "Inbound email" [ref=f4e607] [cursor=pointer]:
+                        - button "Pin" [ref=f4e616]
+                      - button "Conversation AI trigger" [ref=f4e621]:
+                        - button "Pin" [ref=f4e629] [cursor=pointer]
+                      - button "Custom trigger" [ref=f4e634]:
+                        - button "Pin" [ref=f4e642] [cursor=pointer]
+                      - button "Form submitted" [ref=f4e647] [cursor=pointer]:
+                        - button "Pin" [ref=f4e656]
+                      - button "Survey submitted" [ref=f4e661] [cursor=pointer]:
+                        - button "Pin" [ref=f4e670]
+                      - button "Trigger link clicked" [ref=f4e675] [cursor=pointer]:
+                        - button "Pin" [ref=f4e684]
+                      - button "Facebook lead form submitted" [ref=f4e689] [cursor=pointer]:
+                        - button "Pin" [ref=f4e698]
+                      - button "TikTok form submitted" [ref=f4e703] [cursor=pointer]:
+                        - button "Pin" [ref=f4e711]
+                      - button "Video tracking" [ref=f4e716] [cursor=pointer]:
+                        - button "Pin" [ref=f4e727]
+                      - button "Number validation" [ref=f4e732] [cursor=pointer]:
+                        - button "Pin" [ref=f4e741]
+                      - button "Messaging error - SMS" [ref=f4e746] [cursor=pointer]:
+                        - button "Pin" [ref=f4e755]
+                      - button "LinkedIn lead form submitted" [ref=f4e760] [cursor=pointer]:
+                        - button "Pin" [ref=f4e768]
+                      - button "Funnel/website pageview" [ref=f4e773] [cursor=pointer]:
+                        - button "Pin" [ref=f4e781]
+                      - button "Quiz submitted" [ref=f4e786] [cursor=pointer]:
+                        - button "Pin" [ref=f4e795]
+                      - button "New review received" [ref=f4e800] [cursor=pointer]:
+                        - button "Pin" [ref=f4e808]
+                      - button "Prospect generated" [ref=f4e813] [cursor=pointer]:
+                        - button "Pin" [ref=f4e821]
+                      - button "Click to WhatsApp ads" [ref=f4e826] [cursor=pointer]:
+                        - button "Pin" [ref=f4e834]
+                      - button "External tracking event" [ref=f4e839] [cursor=pointer]:
+                        - button "Pin" [ref=f4e847]
+                      - button "User replied" [ref=f4e852] [cursor=pointer]:
+                        - button "Pin" [ref=f4e862]
+                  - generic [ref=f4e867]:
+                    - button [ref=f4e868] [cursor=pointer]:
+                      - heading "Appointments" [level=3] [ref=f4e871]
+                    - generic [ref=f4e876]:
+                      - button "Appointment status" [ref=f4e877] [cursor=pointer]:
+                        - button "Pin" [ref=f4e886]
+                      - button "Customer booked appointment" [ref=f4e891] [cursor=pointer]:
+                        - button "Pin" [ref=f4e900]
+                      - button "Service booking Service booking" [ref=f4e905] [cursor=pointer]:
+                        - img "Service booking" [ref=f4e908]
+                        - generic [ref=f4e909]: Service booking
+                        - button "Pin" [ref=f4e912]
+                      - button "Rental booking Rental booking" [ref=f4e917] [cursor=pointer]:
+                        - img "Rental booking" [ref=f4e920]
+                        - generic [ref=f4e921]: Rental booking
+                        - button "Pin" [ref=f4e924]
+                  - generic [ref=f4e929]:
+                    - button [ref=f4e930] [cursor=pointer]:
+                      - heading "Opportunities" [level=3] [ref=f4e933]
+                    - generic [ref=f4e938]:
+                      - button "Opportunity status changed" [ref=f4e939] [cursor=pointer]:
+                        - button "Pin" [ref=f4e948]
+                      - button "Opportunity created" [ref=f4e953] [cursor=pointer]:
+                        - button "Pin" [ref=f4e962]
+                      - button "Opportunity changed" [ref=f4e967] [cursor=pointer]:
+                        - button "Pin" [ref=f4e976]
+                      - button "Pipeline stage changed" [ref=f4e981] [cursor=pointer]:
+                        - button "Pin" [ref=f4e990]
+                      - button "Stale opportunities" [ref=f4e995] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1003]
+                  - generic [ref=f4e1008]:
+                    - button [ref=f4e1009] [cursor=pointer]:
+                      - heading "Affiliate" [level=3] [ref=f4e1012]
+                    - generic [ref=f4e1017]:
+                      - button "Affiliate created" [ref=f4e1018] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1026]
+                      - button "New affiliate sales" [ref=f4e1031] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1039]
+                      - button "Affiliate enrolled in campaign" [ref=f4e1044] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1052]
+                      - button "Lead created" [ref=f4e1057] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1065]
+                  - generic [ref=f4e1070]:
+                    - button [ref=f4e1071] [cursor=pointer]:
+                      - heading "Courses" [level=3] [ref=f4e1074]
+                    - generic [ref=f4e1079]:
+                      - button "Category started" [ref=f4e1080] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1092]
+                      - button "Category completed" [ref=f4e1097] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1109]
+                      - button "Lesson started" [ref=f4e1114] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1123]
+                      - button "Lesson completed" [ref=f4e1128] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1137]
+                      - button "New signup" [ref=f4e1142] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1150]
+                      - button "Offer access granted" [ref=f4e1155] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1163]
+                      - button "Offer access removed" [ref=f4e1168] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1176]
+                      - button "Product access granted" [ref=f4e1181] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1190]
+                      - button "Product access removed" [ref=f4e1195] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1204]
+                      - button "Product started" [ref=f4e1209] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1218]
+                      - button "Product completed" [ref=f4e1223] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1232]
+                      - button "User login" [ref=f4e1237] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1247]
+                  - generic [ref=f4e1252]:
+                    - button [ref=f4e1253] [cursor=pointer]:
+                      - heading "Payments" [level=3] [ref=f4e1256]
+                    - generic [ref=f4e1261]:
+                      - button "Invoice" [ref=f4e1262] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1270]
+                      - button "Payment received" [ref=f4e1275] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1284]
+                      - button "Order form submission" [ref=f4e1289] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1298]
+                      - button "Order submitted" [ref=f4e1303] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1312]
+                      - button "Documents & contracts" [ref=f4e1317] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1325]
+                      - button "Estimates" [ref=f4e1330] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1338]
+                      - button "Subscription" [ref=f4e1343] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1351]
+                      - button "Refund" [ref=f4e1356] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1364]
+                      - button "Coupon code applied" [ref=f4e1369] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1377]
+                      - button "Coupon redemption limit reached" [ref=f4e1382] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1390]
+                      - button "Coupon code expired" [ref=f4e1395] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1403]
+                      - button "Coupon code redeemed" [ref=f4e1408] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1416]
+                  - generic [ref=f4e1421]:
+                    - button [ref=f4e1422] [cursor=pointer]:
+                      - heading "Ecommerce stores" [level=3] [ref=f4e1425]
+                    - generic [ref=f4e1430]:
+                      - button "Shopify abandoned cart (deprecating soon)" [ref=f4e1431] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1439]
+                      - button "Shopify order placed" [ref=f4e1444] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1453]
+                      - button "Shopify order fulfilled (deprecating soon)" [ref=f4e1458] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1466]
+                      - button "Order fulfilled" [ref=f4e1471] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1479]
+                      - button "Product review submitted" [ref=f4e1484] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1492]
+                      - button "Abandoned checkout" [ref=f4e1497] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1505]
+                  - generic [ref=f4e1510]:
+                    - button [ref=f4e1511] [cursor=pointer]:
+                      - heading "IVR" [level=3] [ref=f4e1514]
+                    - button "Start IVR trigger" [ref=f4e1520] [cursor=pointer]:
+                      - button "Pin" [ref=f4e1528]
+                  - generic [ref=f4e1533]:
+                    - button [ref=f4e1534] [cursor=pointer]:
+                      - heading "Facebook/Instagram events" [level=3] [ref=f4e1537]
+                    - generic [ref=f4e1542]:
+                      - button "Facebook - Comment(s) on a post" [ref=f4e1543] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1551]
+                      - button "Instagram - Comment(s) on a post" [ref=f4e1556]:
+                        - button "Pin" [ref=f4e1564] [cursor=pointer]
+                  - generic [ref=f4e1569]:
+                    - button [ref=f4e1570] [cursor=pointer]:
+                      - heading "Membership" [level=3] [ref=f4e1573]
+                    - button "Client portal file uploaded" [ref=f4e1579] [cursor=pointer]:
+                      - button "Pin" [ref=f4e1587]
+                  - generic [ref=f4e1592]:
+                    - button [ref=f4e1593] [cursor=pointer]:
+                      - heading "Communities" [level=3] [ref=f4e1596]
+                    - generic [ref=f4e1601]:
+                      - button "Private channel access revoked" [ref=f4e1602] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1610]
+                      - button "Group access revoked" [ref=f4e1615] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1623]
+                      - button "Private channel access granted" [ref=f4e1628] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1636]
+                      - button "Group access granted" [ref=f4e1641] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1649]
+                      - button "Community group member leaderboard level changed" [ref=f4e1654] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1662]
+                      - button "Group joining request rejected" [ref=f4e1667] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1675]
+                      - button "Member registered for group event" [ref=f4e1680] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1688]
+                      - button "Group comment created" [ref=f4e1693] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1701]
+                      - button "Group post created" [ref=f4e1706] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1714]
+                  - generic [ref=f4e1719]:
+                    - button [ref=f4e1720] [cursor=pointer]:
+                      - heading "Certificates" [level=3] [ref=f4e1723]
+                    - button "Certificates issued" [ref=f4e1729] [cursor=pointer]:
+                      - button "Pin" [ref=f4e1737]
+                  - generic [ref=f4e1742]:
+                    - button [ref=f4e1743] [cursor=pointer]:
+                      - heading "Google ads" [level=3] [ref=f4e1746]
+                    - button "Google lead form submitted Google lead form submitted" [ref=f4e1752] [cursor=pointer]:
+                      - img "Google lead form submitted" [ref=f4e1755]
+                      - generic [ref=f4e1756]: Google lead form submitted
+                      - button "Pin" [ref=f4e1759]
+                  - generic [ref=f4e1764]:
+                    - button [ref=f4e1765] [cursor=pointer]:
+                      - heading "Communication" [level=3] [ref=f4e1768]
+                    - generic [ref=f4e1773]:
+                      - button "TikTok - comment(s) on a video" [ref=f4e1774] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1787]
+                      - button "Transcript generated" [ref=f4e1792] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1801]
+                      - button "Conversations SLA" [ref=f4e1806] [cursor=pointer]:
+                        - button "Pin" [ref=f4e1815]
+    - log [ref=f4e254]
