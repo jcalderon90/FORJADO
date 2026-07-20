@@ -1,4 +1,0 @@
-[     547ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://app.gohighlevel.com/accounts:0
-[     801ms] [WARNING] The PerformanceObserver does not support buffered flag with the entryTypes argument. @ https://static.leadconnectorhq.com/1654/js/chunk.DJwGvs1j.js:17
-[     862ms] [LOG] This is test file @ https://static.leadconnectorhq.com/1654/js/chunk.C4ZQ5PKD.js:16
-[    6187ms] [ERROR] Failed to load resource: the server responded with a status of 429 () @ https://o176457.ingest.sentry.io/api/1723141/envelope/?sentry_version=7&sentry_key=c67431ff70d6440fb529c2705792425f&sentry_client=sentry.javascript.vue%2F10.19.0:0

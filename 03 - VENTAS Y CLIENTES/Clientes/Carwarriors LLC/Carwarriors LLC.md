@@ -4,10 +4,10 @@ tipo: cliente
 estado: activo
 servicio: automatizacion
 contacto: Jorge (Dueño)
-proximo_paso: Retomar Rances Car tras corte de luz — configurar Contact Info (6 campos, contenido ya decidido) y Trigger a Workflow en Agente Social RancesCar; limpiar contacto de prueba Jorge Calderón; confirmar si el acceso a GHL de Carwarriors LLC (subcuenta principal, perdido el 14-jul) ya se recuperó
+proximo_paso: Agente Social RancesCar ya está en producción (Primary + Auto Pilot desde 2026-07-20). Queda borrar "Agente Nocturno RancesCar", alinear horario Scarleth entre los 2 workflows de asignación, y reportar a soporte GHL el bug de loop (56.4M inscritos). Prioridad ahora vuelve a la subcuenta principal Carwarriors LLC: confirmar si el acceso a GHL (perdido el 14-jul) ya se recuperó.
 estado_comercial: pruebas-en-curso
 creado: 2026-06-18
-actualizado: 2026-07-18
+actualizado: 2026-07-20
 ---
 
 # Cliente — Carwarriors LLC
@@ -273,6 +273,7 @@ actualizado: 2026-07-18
 - 2026-07-14 — Bot "Asistente Social CarWarriors" (subcuenta principal) activado en vivo: `Primary` + `Auto-Pilot` en WhatsApp/IG/FB/SMS, con Appointment Booking, Trigger a Workflow, Auto Followup y Human Handover (Nallely de Leon) configurados. Prueba en sandbox salió muy bien (agendó una cita real leyendo el calendario). **Bloqueo activo:** se perdió el acceso a la cuenta de GHL justo antes de confirmar si esa cita de prueba (12:20 PM) creó un evento/contacto real — sigue sin confirmarse. Detalle completo en [[Carwarriors - Agente IA 24-7 (Diseño)]] y [[Carwarriors - Comportamiento del Bot (Resumen)]].
 - 2026-07-17 — Cliente entregó un token API nuevo (`pit-c30b22ca-d09c-45a4-967e-8b75e574a783`), confirmado por prueba directa contra la API como perteneciente a la subcuenta **Rances Car** (antes sin Location ID documentado). Se instaló Playwright en este entorno y, con credenciales propias del usuario (2FA por correo, no por SMS), se logró entrar por primera vez a la interfaz de GHL vía navegador — esto resuelve la limitación de "solo API, sin acceso a Agent Studio/Conversation AI" que bloqueaba avances desde el 2026-07-10. Al entrar a Rances Car se descubrió que el cliente **ya estaba construyendo ahí el equivalente del Agente Social**, replicando el prompt de Carwarriors LLC, pero la sesión (en otra PC) se cortó por un apagón a medio trabajo. Se documentó el estado exacto en el que quedó — ver [[Carwarriors - Agente IA Rances Car (Diseño)]]. Pendiente: seguir aplicando ahí las mismas calibraciones ya validadas en Carwarriors LLC, y por separado seguir el bloqueo de acceso de la subcuenta principal (sin novedades desde el 14 de julio).
 - 2026-07-18 — Se retomó Rances Car (mismo acceso Playwright). Hallazgo: el cliente siguió avanzando por su cuenta entre el 17 y el 18 — "Setup your Actions" del "Agente Social RancesCar" ya no estaba vacío: **Appointment Booking** (multi calendars Samuel Aguilar + Scarleth Hassiel Rubi, cancelar/reagendar habilitado), **Human Handover** (3 escenarios On, asignado a Scarleth Hassiel Rubi, reactiva en 8h) y **Auto Followup** (3 escenarios On, 15 min) quedaron configurados igual que en Carwarriors LLC. Faltan **Contact Info** y **Trigger a Workflow** (plantillas vacías). Se aplicaron en vivo 3 de las calibraciones ya validadas en Carwarriors LLC (bot sigue en `Off`, sin riesgo): typo "Rancer Car"→"Rances Car", Goal actualizado a los 4 canales, Visit Rules acortada, y silencio total post hand-off. Se dejó sin tocar la promo Tesla (pendiente confirmar con el cliente si aplica a este dealer). Se resolvió también la duda de los "193 contactos con bot en Off": es solo reporte de tráfico agregado por canal, no evidencia de que la IA esté respondiendo. Además se encontró que el workflow **"Rances Car - Ruteo Human Handover por Turno"** (Automation → Asignacion), construido en una sesión anterior el 17-jul, **nunca se había guardado** (quedó vacío) — se reconstruyó de cero: If/Else por día/hora (Scarleth Lun-Sáb 8am-5pm / Samuel Mar-Dom 5pm-9pm / None sin acción en los huecos), se guardó, **se publicó y se probó en vivo** con un contacto de prueba (Jorge Calderón) — el Execution log confirmó que tomó la rama "None" correctamente (domingo noche, fuera de ambos turnos). **Sesión interrumpida por corte de electricidad** justo antes de empezar a configurar Contact Info (contenido de los 6 campos ya decidido, sin escribir aún) — detalle completo y próximo paso exacto en [[Carwarriors - Agente IA Rances Car (Diseño)]].
+- 2026-07-20 — **"Agente Social RancesCar" activado en producción** (modo guiado por captura de pantalla, cliente operando su propio navegador). Se completó todo lo que quedó pendiente el 18-jul: **Contact Info** (6 campos, con 2 "Output Example" cada custom field — requisito no documentado antes); **Trigger a Workflow** (se descartó construir un "Workflow Crear Oportunidad" nuevo al confirmar que "Workflow Contactado" ya hace find-or-create de oportunidad internamente — se reusa ese mismo workflow para los 2 triggers del bot); **promo Tesla movida a Knowledge Base** (artículo "Campañas activas", prompt actualizado con regla genérica de check a KB); contacto de prueba Jorge Calderón eliminado; **"Goodbye Detection" (Stop Bot) decidido dejar en `Off`** (las frases pre-cargadas eran despedidas casuales sin ventana de reactivación — activarlo habría abandonado leads tibios para siempre, contra la filosofía de no dejar enfriar al cliente); investigado el sistema de asignación general `Workflow Asig Agente (Entrada)` — confirmado complementario al Human Handover (no conflictivo), con un desalineamiento menor de horario de Scarleth (6:45pm vs 5pm) que queda como mejora futura; y confirmado que "Asignación por Turno"/"Reintento" en Rances Car también tiene el bug de loop ya visto en la subcuenta principal (56.4M inscritos vs 74M en Carwarriors LLC). **Cierre: "Set as Primary Bot" + Auto Pilot aplicado — bot en vivo** en Facebook/Instagram/WhatsApp/SMS. Decisión del cliente: "Agente Nocturno RancesCar" se va a borrar directamente, no se audita.
 
 ## Auditoría Técnica Pendiente
 
@@ -322,21 +323,27 @@ actualizado: 2026-07-18
 - [ ] (Mensaje pendiente de enviar) 3 preguntas técnicas a soporte GHL: 74M inscritos en 2 workflows, pestaña "Needs review", workflow "N8N" con 6 inscritos
 - [ ] Fase 2: tarea de confirmación de cita día -1, explicar Knowledge Base al cliente + sync de inventario diario, destrabar calendario BDC-A
 
-### Agente IA — subcuenta Rances Car (nuevo, ver detalle en [[Carwarriors - Agente IA Rances Car (Diseño)]])
+### Agente IA — subcuenta Rances Car — ✅ EN PRODUCCIÓN desde 2026-07-20 (ver detalle en [[Carwarriors - Agente IA Rances Car (Diseño)]])
 
 - [x] Acceso resuelto 2026-07-17: token API propio + acceso de navegador vía Playwright (2FA por correo, más rápido que el de la cuenta de agencia).
 - [x] Confirmado: "Agente Social RancesCar" ya tenía el prompt portado de Carwarriors LLC y los 4 canales configurados (Facebook, Instagram, WhatsApp, SMS) antes del corte de luz.
 - [x] Corregir typo "Rancer Car" → "Rances Car" en el prompt — hecho 2026-07-18.
-- [x] Aplicar calibraciones de Carwarriors LLC que no dependen de decisión del cliente (multi-canal en Goal, Visit Rules acortada, silencio post hand-off) — hecho 2026-07-18. Pendiente: promo Tesla → Knowledge Base, sujeto a confirmar con el cliente si aplica a Rances Car.
+- [x] Aplicar calibraciones de Carwarriors LLC (multi-canal en Goal, Visit Rules acortada, silencio post hand-off) — hecho 2026-07-18.
+- [x] Promo Tesla → Knowledge Base — hecho 2026-07-20: reemplazada en el prompt por regla genérica de check a Knowledge Base; artículo "Campañas activas" creado con el detalle ($1,000 down / $399/mes).
 - [x] Appointment Booking, Human Handover y Auto Followup — confirmado 2026-07-18 que el cliente ya los configuró en la otra PC (multi calendars, 3 escenarios cada uno, asignado a Scarleth Hassiel Rubi).
-- [x] Workflow "Rances Car - Ruteo Human Handover por Turno" — reconstruido (se había perdido sin guardar), guardado, publicado y probado en vivo 2026-07-18 (rama "None" confirmada correcta).
-- [ ] **PENDIENTE INMEDIATO (interrumpido por corte de luz 2026-07-18):** Configurar Contact Info (6 campos: City, Interés de Vehículo, Método de Pago, Tiempo estimado de compra, Lenguaje Preferido, Resumen AI — contenido de cada uno ya redactado, ver [[Carwarriors - Agente IA Rances Car (Diseño)]])
-- [ ] Configurar Trigger a Workflow (conectar al pipeline) — plantilla vacía todavía
-- [ ] Limpiar contacto de prueba Jorge Calderón (tags loop-temp/human handover + opportunity de prueba)
-- [ ] Decidir si activar "Goodbye Detection" en Stop Bot (viene pre-armado, solo falta el toggle)
-- [ ] Abrir y documentar "Agente Nocturno RancesCar" (sin auditar)
-- [x] Aclarado 2026-07-18: los 193 contactos/2.21h ahorradas con ambos bots en `Off` son solo reporte de tráfico agregado por canal, no evidencia de que la IA esté respondiendo.
-- [ ] Recién después: Set as Primary Bot + Auto Pilot
+- [x] Workflow "Rances Car - Ruteo Human Handover por Turno" — reconstruido, guardado, publicado y probado en vivo 2026-07-18 (rama "None" confirmada correcta).
+- [x] Contact Info configurado (6 campos, con ejemplos de output) — hecho 2026-07-20.
+- [x] Trigger a Workflow configurado — hecho 2026-07-20: no existe "Workflow Crear Oportunidad" separado en Rances Car, se reusa "Workflow Contactado" (ya hace find-or-create de oportunidad) para los 2 triggers del bot.
+- [x] Limpiar contacto de prueba Jorge Calderón — hecho 2026-07-20 (contacto eliminado).
+- [x] Decidido: "Goodbye Detection" en Stop Bot queda en `Off` — hecho 2026-07-20 (frases pre-cargadas eran despedidas casuales, no opt-out real; activar hubiera contradicho la filosofía de no dejar enfriar leads).
+- [x] Investigado el sistema de asignación general (`Workflow Asig Agente (Entrada)`) — hecho 2026-07-20: complementario al Human Handover, no conflictivo; desalineamiento menor de horario (6:45pm vs 5pm) queda como mejora futura.
+- [x] Aclarado 2026-07-18: los 193 contactos/2.21h ahorradas con ambos bots en `Off` son solo reporte de tráfico agregado por canal.
+- [x] **Set as Primary Bot + Auto Pilot — hecho 2026-07-20. Bot en vivo: `Primary` + `Auto-Pilot`, Facebook/Instagram/WhatsApp/SMS.**
+
+**Pendientes que NO bloquean, quedan para después:**
+- [ ] Borrar "Agente Nocturno RancesCar" (decisión del cliente 2026-07-20, sin auditar, falta ejecutar).
+- [ ] Alinear el corte de horario de Scarleth entre "Workflow Asig Agente (Entrada)" (6:45pm) y "Ruteo Human Handover por Turno" (5pm).
+- [ ] Bug de loop en "Asignación por Turno (Control Principal)" / "Reintento de Asignación por Turno" (56.4M inscritos cada uno) — mismo bug que en la subcuenta principal (ahí 74M), reportar a soporte GHL.
 
 ### Lead Sync — GHL → DealerCenter (en re-evaluación: n8n vs CF Worker)
 

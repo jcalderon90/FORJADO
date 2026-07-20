@@ -2,9 +2,9 @@
 tags: [forjado, carwarriors, rancescar, gohighlevel, ia, agente-conversacional]
 tipo: spec
 cliente: Carwarriors LLC (subcuenta Rances Car)
-estado: en-implementación
+estado: en-producción
 creado: 2026-07-17
-actualizado: 2026-07-18
+actualizado: 2026-07-20
 ---
 
 # Agente IA — Rances Car (subcuenta hermana de Carwarriors LLC)
@@ -125,15 +125,22 @@ Al revisar la carpeta Automation → Asignacion se encontró el workflow **"Ranc
 ## Próximos pasos
 
 1. ~~Corregir el typo "Rancer Car" → "Rances Car" en Additional Information.~~ ✅ Hecho 2026-07-18.
-2. ~~Aplicar calibraciones de Carwarriors LLC que no dependen de decisión del cliente (multi-canal en Goal, Visit Rules acortada, silencio post hand-off).~~ ✅ Hecho 2026-07-18. Pendiente: decidir con el cliente si la promo Tesla aplica a Rances Car y, si aplica, moverla a Knowledge Base.
+2. ~~Aplicar calibraciones de Carwarriors LLC que no dependen de decisión del cliente (multi-canal en Goal, Visit Rules acortada, silencio post hand-off).~~ ✅ Hecho 2026-07-18. ~~Promo Tesla → Knowledge Base.~~ ✅ Hecho 2026-07-20: en Additional Information se reemplazó la línea fija "Current approved active campaign: Tesla promo..." por la regla genérica "Check Knowledge Base for the current approved active campaign before offering exact promo numbers. If none is listed there, no exact numbers are approved."; se creó el artículo "Campañas activas" en la Knowledge Base del bot con el detalle ($1,000 down / $399/mes) y la condición de uso.
 3. ~~Terminar el workflow "Rances Car - Ruteo Human Handover por Turno".~~ ✅ Reconstruido, guardado, **publicado y probado** 2026-07-18 (ver arriba) — rama "None" confirmada correcta en vivo.
-4. **PRÓXIMO PASO INMEDIATO al retomar:** Configurar **Contact Info** en "Agente Social RancesCar" con los 6 campos de la tabla de arriba (contenido ya decidido, solo falta escribirlo en GHL).
-5. Configurar **Trigger a Workflow** — verificar si `Workflow Contactado` y `Workflow Crear Oportunidad` (o sus equivalentes) ya existen en el pipeline de Rances Car antes de conectarlos.
-6. Limpiar el contacto de prueba Jorge Calderón (quitar tags, borrar opportunity de prueba).
-7. Investigar (sin urgencia) el sistema de asignación de leads generales (`Workflow Asig Agente (Entrada)` etc.) para entender si se superpone con Human Handover.
-8. Abrir "Agente Nocturno RancesCar" y documentar su estado (Bot Settings, Goal, Setup your Actions) — aún sin auditar.
-9. Decidir si activar "Goodbye Detection" en Stop Bot (viene pre-armado, solo falta el toggle).
-10. Solo al final: "Set as Primary Bot" + pasar a Auto Pilot, siguiendo el mismo checklist de activación ya usado en Carwarriors LLC.
+4. ~~Configurar Contact Info en "Agente Social RancesCar" con los 6 campos.~~ ✅ Hecho 2026-07-20 (modo guiado, cliente aplicó los cambios en su navegador). Los 4 custom fields (Interés de Vehículo, Método de Pago, Tiempo estimado de compra, Lenguaje Preferido, Resumen AI) pidieron 2 "Output Example" cada uno (requisito no documentado antes, City como campo estándar no lo pidió) — ejemplos usados: Interés (`Toyota Camry` / `SUV`), Método de Pago (`Cash` / `Financing`), Tiempo (`This week` / `Just browsing`), Lenguaje (`Spanish` / `English`), Resumen AI (2 resúmenes de ejemplo de conversación).
+5. ~~Configurar Trigger a Workflow.~~ ✅ Hecho 2026-07-20. Auditoría de carpeta Automation → Asignacion en Rances Car: **no existe** un "Workflow Crear Oportunidad" separado como en Carwarriors LLC — pero **"Workflow Contactado" ya hace find-or-create de la oportunidad internamente** (2 triggers por tag `contactado`/`contacts_nuevo` → Find Opportunity → Create Or Update Opportunity según pipeline stage `RancesCar - ...`). Decisión: reusar el mismo workflow para los 2 triggers del bot en vez de construir uno nuevo — Trigger Workflow 1 (`Workflow Contactado`, condición "primer contacto real") y Trigger Workflow 2 (mismo workflow, condición "vehículo + método de pago capturados"). **Hallazgo colateral:** "Asignación por Turno (Control Principal)" y "Reintento de Asignación por Turno" en esa misma carpeta tienen **56.4M inscritos cada uno** — mismo bug de loop ya documentado en Carwarriors LLC (ahí eran 74M), confirma que también afecta Rances Car (ver tarea de investigación abajo, sin urgencia).
+6. ~~Limpiar el contacto de prueba Jorge Calderón.~~ ✅ Hecho 2026-07-20 — contacto eliminado directamente (borra tags y opportunity de prueba de una vez).
+7. ~~Investigar el sistema de asignación de leads generales.~~ ✅ Investigado 2026-07-20: `Workflow Asig Agente (Entrada)` se dispara con "Contact Created" (todo contacto nuevo, sin filtro) y asigna Lun-Sáb 10am-6:45pm → Scarleth Hassiel Rubi, resto (incl. domingo) → Samuel Aguilar; ambas ramas con "Only apply to unassigned contacts" apagado, igual que nuestro workflow. **Conclusión: complementario, no conflictivo** — este asigna al crear el lead, el de Human Handover reasigna al escalar, y como dejamos ese toggle apagado puede sobreescribir la asignación inicial cuando corresponde (diseño intencional). Único hallazgo menor: el corte de horario de Scarleth difiere entre los 2 workflows (6:45pm acá vs 5pm en Human Handover) — desalineamiento de límites, no pérdida de leads. Queda como mejora futura (alinear ambos a 5pm), no bloquea producción.
+8. ~~Abrir "Agente Nocturno RancesCar" y documentar su estado.~~ Decisión del cliente 2026-07-20: **este bot será borrado**, no se audita — no bloquea la activación del Agente Social.
+9. ~~Decidir si activar "Goodbye Detection" en Stop Bot.~~ ✅ Decidido 2026-07-20: se deja en `Off`. Las frases pre-cargadas ("Bye", "Goodbye", "Thank you! have a nice day") son despedidas conversacionales normales, no opt-out real, y sin "Reactivate bot after" configurado el bot abandonaría al contacto para siempre — contradice la filosofía comercial del cliente de no dejar enfriar un lead. Si en el futuro se quiere un mecanismo de opt-out real, reescribir el trigger con frases explícitas ("STOP", "no me contacten más", "déjenme en paz") antes de activarlo.
+10. ~~Set as Primary Bot + pasar a Auto Pilot.~~ ✅ **Hecho 2026-07-20 — "Agente Social RancesCar" está EN VIVO**: badge `Primary` confirmado, `Bot Status: Auto Pilot`, canales Facebook/Instagram/WhatsApp/SMS activos.
+
+## Estado final — 2026-07-20: bot en producción
+
+Con esto queda cerrado el checklist completo de activación de "Agente Social RancesCar": prompt calibrado igual que Carwarriors LLC, promo Tesla en Knowledge Base, Contact Info (6 campos), Trigger a Workflow (Workflow Contactado, x2), Human Handover (Scarleth Hassiel Rubi, 3 escenarios), Auto Followup (3 escenarios), Appointment Booking (Scarleth + Samuel), workflow de ruteo por turno publicado y probado, contacto de prueba limpiado, Stop Bot dejado en Off (razón documentada), y sistema de asignación general (`Workflow Asig Agente (Entrada)`) auditado y confirmado como complementario. **Pendientes que NO bloquean producción, quedan para después:**
+- Borrar "Agente Nocturno RancesCar" (decisión ya tomada, falta ejecutarla).
+- Alinear el corte de horario de Scarleth entre los 2 workflows de asignación (6:45pm vs 5pm).
+- Bug de loop en "Asignación por Turno (Control Principal)" / "Reintento" (56.4M inscritos) — mismo bug ya reportado para Carwarriors LLC, pendiente de auditoría con soporte GHL.
 
 ## Relacionado
 - [[Carwarriors LLC]]

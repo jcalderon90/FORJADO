@@ -1,2 +1,0 @@
-[     765ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://firestore.googleapis.com/:0
-[    5905ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://firestore.googleapis.com/favicon.ico:0
