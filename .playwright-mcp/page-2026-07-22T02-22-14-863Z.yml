@@ -1,0 +1,176 @@
+- generic [ref=e219]:
+  - complementary [ref=e220]:
+    - button "Collapse sidebar" [active] [ref=e264] [cursor=pointer]:
+      - generic [ref=e265]: 
+    - generic [ref=e225]:
+      - generic [ref=e229] [cursor=pointer]:
+        - generic [ref=e266]:
+          - generic [ref=e267]: Rances Car
+          - generic [ref=e268]: Miami, Florida
+        - generic [ref=e269]:
+          - generic [ref=e270]: 
+          - generic [ref=e271]: 
+      - generic [ref=e237]:
+        - generic [ref=e239] [cursor=pointer]:
+          - generic [ref=e240]: Search
+          - generic "Press Ctrl + K to open" [ref=e273]: ctrlK
+        - img "Quick actions icon" [ref=e244] [cursor=pointer]
+      - navigation "header" [ref=e276]:
+        - link "Ask AI Ask AI" [ref=e277] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ask-ai
+          - img "Ask AI" [ref=e278]
+          - generic [ref=e279]: Ask AI
+        - link "Launchpad icon Launchpad" [ref=e280] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/launchpad
+          - img "Launchpad icon" [ref=e281]
+          - generic [ref=e282]: Launchpad
+        - link "Dashboard icon Dashboard" [ref=e283] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/dashboard
+          - img "Dashboard icon" [ref=e284]
+          - generic [ref=e285]: Dashboard
+        - link "Conversations icon Conversations" [ref=e286] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/conversations/conversations
+          - img "Conversations icon" [ref=e287]
+          - generic [ref=e288]: Conversations
+        - link "Calendars icon Calendars" [ref=e289] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/calendars/view
+          - img "Calendars icon" [ref=e290]
+          - generic [ref=e291]: Calendars
+        - link "Contacts icon Contacts" [ref=e292] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/contacts/smart_list/All
+          - img "Contacts icon" [ref=e293]
+          - generic [ref=e294]: Contacts
+        - link "Opportunities icon Opportunities" [ref=e295] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/opportunities/list
+          - img "Opportunities icon" [ref=e296]
+          - generic [ref=e297]: Opportunities
+        - link "Payments icon Payments" [ref=e298] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/payments/invoices
+          - img "Payments icon" [ref=e299]
+          - generic [ref=e300]: Payments
+        - paragraph [ref=e302]
+        - link "AI Agents icon AI Agents" [ref=e303] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/getting-started
+          - img "AI Agents icon" [ref=e304]
+          - generic [ref=e305]: AI Agents
+        - link "Marketing icon Marketing" [ref=e306] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/marketing/social-planner
+          - img "Marketing icon" [ref=e307]
+          - generic [ref=e308]: Marketing
+        - link "Automation icon Automation" [ref=e309] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/automation/workflows
+          - img "Automation icon" [ref=e310]
+          - generic [ref=e311]: Automation
+        - link "Sites icon Sites" [ref=e312] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/funnels-websites/funnels
+          - img "Sites icon" [ref=e313]
+          - generic [ref=e314]: Sites
+        - link "Memberships icon Memberships" [ref=e315] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/memberships/client-portal/dashboard
+          - img "Memberships icon" [ref=e316]
+          - generic [ref=e317]: Memberships
+        - link "Media Storage icon Media Storage" [ref=e318] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/media-storage
+          - img "Media Storage icon" [ref=e319]
+          - generic [ref=e320]: Media Storage
+        - link "Reputation icon Reputation" [ref=e321] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/reputation/overview
+          - img "Reputation icon" [ref=e322]
+          - generic [ref=e323]: Reputation
+        - link "Reporting icon Reporting" [ref=e324] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/reporting/reports
+          - img "Reporting icon" [ref=e325]
+          - generic [ref=e326]: Reporting
+        - link "App Marketplace icon App Marketplace" [ref=e327] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/integration
+          - img "App Marketplace icon" [ref=e328]
+          - generic [ref=e329]: App Marketplace
+        - link "Metricas Zonitel icon Metricas Zonitel" [ref=e330] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic "Metricas Zonitel icon" [ref=e332]: 
+          - generic [ref=e333]: Metricas Zonitel
+        - link "Metricas Deeler Center icon Metricas Deeler Center" [ref=e334] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic "Metricas Deeler Center icon" [ref=e336]: 
+          - generic [ref=e337]: Metricas Deeler Center
+      - navigation "footer" [ref=e339]:
+        - link "Settings icon Settings" [ref=e340] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/settings/company
+          - img "Settings icon" [ref=e341]
+          - generic [ref=e342]: Settings
+  - banner [ref=e245]:
+    - region "Notification Banner" [ref=e343]:
+      - generic [ref=e344]:
+        - generic [ref=e345]:
+          - button "Previous notification" [disabled] [ref=e346]
+          - generic [ref=e349]: 1/1
+          - button "Next notification" [disabled] [ref=e350]
+        - generic [ref=e353]:
+          - region [ref=e355]: You're competing for a piece of the $100K prize pool. Every sub-account you activate earns points.
+          - button "Activate AI for MORE Subaccounts" [ref=e357] [cursor=pointer]
+      - button "Close notification" [ref=e358] [cursor=pointer]
+    - generic [ref=e247]:
+      - generic "Report Translation Issue"
+      - button "Voice Calling" [ref=e366] [cursor=pointer]
+      - button "View Changelog" [ref=e249] [cursor=pointer]:
+        - generic [ref=e250]: 
+      - button "View Notifications" [ref=e252] [cursor=pointer]:
+        - generic [ref=e253]: 
+        - generic [ref=e254]: Notifications
+      - button "Access Help & Support" [ref=e255] [cursor=pointer]:
+        - generic [ref=e256]: "?"
+        - generic [ref=e257]: Support
+      - generic [ref=e258]:
+        - button "Open Profile Menu" [ref=e259] [cursor=pointer]:
+          - generic [ref=e260]: JC
+        - text: 
+  - generic [ref=e378]:
+    - generic [ref=e380]:
+      - generic [ref=e381]:
+        - img "Stars icon" [ref=e383]
+        - button "Close sidebar" [ref=e384] [cursor=pointer]:
+          - img "Alternative text for image not provided" [ref=e386]
+      - generic [ref=e389]:
+        - button "Create new chat icon New chat" [ref=e390] [cursor=pointer]:
+          - paragraph [ref=e392]:
+            - img "Create new chat icon" [ref=e394]
+            - generic [ref=e395]: New chat
+        - button "Search icon Search" [ref=e396] [cursor=pointer]:
+          - paragraph [ref=e398]:
+            - img "Search icon" [ref=e400]
+            - generic [ref=e401]: Search
+        - button "Templates" [ref=e402] [cursor=pointer]:
+          - paragraph [ref=e404]:
+            - generic [ref=e408]: Templates
+        - button "Scheduled" [ref=e409] [cursor=pointer]:
+          - paragraph [ref=e411]:
+            - generic [ref=e415]: Scheduled
+      - generic [ref=e417]:
+        - generic [ref=e418]:
+          - paragraph [ref=e419]: Start your first AI chat
+          - paragraph [ref=e420]: Ask for insights, create content, or solve problems faster with AI.
+        - button [ref=e422] [cursor=pointer]:
+          - generic [ref=e423]:
+            - img "Alternative text for image not provided" [ref=e424]
+            - paragraph [ref=e427]: Start a new chat
+      - button "JC Account" [ref=e428] [cursor=pointer]:
+        - paragraph [ref=e430]:
+          - generic [ref=e431]: JC
+          - generic [ref=e433]: Account
+    - generic [ref=e438]:
+      - status "Loading…" [ref=e444]:
+        - group
+      - generic [ref=e451]:
+        - paragraph [ref=e455]:
+          - generic [ref=e456]: What's on your mind, Jorge?
+        - generic [ref=e461]:
+          - button "More options" [ref=e463] [cursor=pointer]:
+            - img "Alternative text for image not provided" [ref=e465]
+          - generic [ref=e471]:
+            - textbox "Ask anything..." [ref=e472]
+            - generic: Ask anything...
+          - generic [ref=e474]:
+            - button [ref=e475] [cursor=pointer]:
+              - paragraph [ref=e477]
+            - button [ref=e481] [cursor=pointer]:
+              - paragraph [ref=e483]

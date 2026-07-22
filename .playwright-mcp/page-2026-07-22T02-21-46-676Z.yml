@@ -1,0 +1,20 @@
+- generic [ref=e219]:
+  - complementary [ref=e220]:
+    - button "Expand sidebar" [ref=e222] [cursor=pointer]:
+      - generic [ref=e223]: 
+    - img "Quick actions icon" [ref=e244] [cursor=pointer]
+  - banner [ref=e245]:
+    - generic [ref=e247]:
+      - generic "Report Translation Issue"
+      - button "View Changelog" [ref=e249] [cursor=pointer]:
+        - generic [ref=e250]: 
+      - button "View Notifications" [ref=e252] [cursor=pointer]:
+        - generic [ref=e253]: 
+        - generic [ref=e254]: Notifications
+      - button "Access Help & Support" [ref=e255] [cursor=pointer]:
+        - generic [ref=e256]: "?"
+        - generic [ref=e257]: Support
+      - generic [ref=e258]:
+        - button "Open Profile Menu" [ref=e259] [cursor=pointer]:
+          - generic [ref=e260]: JC
+        - text: 

@@ -1,0 +1,159 @@
+- generic [ref=e20]:
+  - complementary [ref=e21]:
+    - button "Collapse sidebar" [ref=e23] [cursor=pointer]:
+      - generic [ref=e24]: 
+    - generic [ref=e26]:
+      - generic [ref=e30] [cursor=pointer]:
+        - generic [ref=e31]: Click here to switch
+        - generic [ref=e40]:
+          - generic [ref=e41]: 
+          - generic [ref=e42]: 
+        - generic [ref=e178]:
+          - searchbox "Search for a sub-account" [ref=e182]
+          - generic [ref=e186]:
+            - generic [ref=e187]: ALL ACCOUNTS
+            - generic [ref=e190]:
+              - generic [ref=e191]: C
+              - generic [ref=e192]:
+                - generic [ref=e193]: Car Express Servicess
+                - generic [ref=e194]: Miami, Miami, Florida
+            - generic [ref=e199]:
+              - generic [ref=e200]: C
+              - generic [ref=e201]:
+                - generic [ref=e202]: Carwarriors LLC
+                - generic [ref=e203]: 3620 nw 27 ave, Miami, Florida
+            - generic [ref=e208]:
+              - generic [ref=e209]: R
+              - generic [ref=e210]:
+                - generic [ref=e211]: Rances Car
+                - generic [ref=e212]: 3620 Northwest 27th Avenue, Miami, Florida
+      - navigation "header" [ref=e44]:
+        - link " Get Free AI" [ref=e45] [cursor=pointer]:
+          - /url: /ai-employee-promo
+          - generic [ref=e46]: 
+          - generic [ref=e48]: Get Free AI
+        - link "AI Suite icon AI Suite New" [ref=e49] [cursor=pointer]:
+          - /url: /ai-suite
+          - img "AI Suite icon" [ref=e50]
+          - generic [ref=e51]: AI Suite
+          - generic [ref=e52]: New
+        - link "Ask AI Ask AI" [ref=e53] [cursor=pointer]:
+          - /url: /ask-ai-agency
+          - img "Ask AI" [ref=e54]
+          - generic [ref=e55]: Ask AI
+        - link "Agency Dashboard icon Agency Dashboard" [ref=e56] [cursor=pointer]:
+          - /url: /agency_dashboard
+          - img "Agency Dashboard icon" [ref=e57]
+          - generic [ref=e58]: Agency Dashboard
+        - link "Prospecting icon Prospecting" [ref=e59] [cursor=pointer]:
+          - /url: /prospecting
+          - img "Prospecting icon" [ref=e60]
+          - generic [ref=e61]: Prospecting
+        - link "Sub-Accounts icon Sub-Accounts" [ref=e62] [cursor=pointer]:
+          - /url: /accounts
+          - img "Sub-Accounts icon" [ref=e63]
+          - generic [ref=e64]: Sub-Accounts
+        - link "Account Snapshots icon Account Snapshots" [ref=e65] [cursor=pointer]:
+          - /url: /snapshots
+          - img "Account Snapshots icon" [ref=e66]
+          - generic [ref=e67]: Account Snapshots
+        - link "Reselling icon Reselling" [ref=e68] [cursor=pointer]:
+          - /url: /reselling
+          - img "Reselling icon" [ref=e69]
+          - generic [ref=e70]: Reselling
+        - link "Add-Ons icon Add-Ons" [ref=e71] [cursor=pointer]:
+          - /url: /marketplace
+          - img "Add-Ons icon" [ref=e72]
+          - generic [ref=e73]: Add-Ons
+        - link " Affiliate Portal" [ref=e74] [cursor=pointer]:
+          - /url: /affiliate_portal/terms-and-conditions
+          - generic [ref=e75]: 
+          - generic [ref=e77]: Affiliate Portal
+        - link " Template Library" [ref=e78] [cursor=pointer]:
+          - /url: /template-library-admin
+          - generic [ref=e79]: 
+          - generic [ref=e81]: Template Library
+        - link "Partners icon Partners" [ref=e82] [cursor=pointer]:
+          - /url: /partners
+          - img "Partners icon" [ref=e83]
+          - generic [ref=e84]: Partners
+        - link " University" [ref=e85] [cursor=pointer]:
+          - /url: /university
+          - generic [ref=e86]: 
+          - generic [ref=e88]: University
+        - link "SaaS Education icon SaaS Education" [ref=e89] [cursor=pointer]:
+          - /url: /saas_education
+          - img "SaaS Education icon" [ref=e90]
+          - generic [ref=e91]: SaaS Education
+        - link "GHL Swag icon GHL Swag" [ref=e92] [cursor=pointer]:
+          - /url: /ghl-swag
+          - img "GHL Swag icon" [ref=e93]
+          - generic [ref=e94]: GHL Swag
+        - link "Ideas icon Ideas" [ref=e95] [cursor=pointer]:
+          - /url: /ideas
+          - img "Ideas icon" [ref=e96]
+          - generic [ref=e97]: Ideas
+        - link "Mobile App icon Mobile App New" [ref=e98] [cursor=pointer]:
+          - /url: /mobile-app-customiser
+          - img "Mobile App icon" [ref=e99]
+          - generic [ref=e100]: Mobile App
+          - generic [ref=e101]: New
+        - link " Desktop App New" [ref=e102] [cursor=pointer]:
+          - /url: /desktop-whitelabel-app
+          - generic [ref=e103]: 
+          - generic [ref=e105]: Desktop App
+          - generic [ref=e106]: New
+        - link "App Marketplace icon App Marketplace" [ref=e107] [cursor=pointer]:
+          - /url: /integration
+          - img "App Marketplace icon" [ref=e108]
+          - generic [ref=e109]: App Marketplace
+        - link "Metricas Zonitel icon Metricas Zonitel" [ref=e110] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic "Metricas Zonitel icon" [ref=e112]: 
+          - generic [ref=e113]: Metricas Zonitel
+        - link "Metricas Deeler Center icon Metricas Deeler Center" [ref=e114] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic "Metricas Deeler Center icon" [ref=e116]: 
+          - generic [ref=e117]: Metricas Deeler Center
+      - navigation "footer" [ref=e119]:
+        - link "Settings icon Settings" [ref=e120] [cursor=pointer]:
+          - /url: /settings/profile
+          - img "Settings icon" [ref=e121]
+          - generic [ref=e122]: Settings
+  - banner [ref=e123]:
+    - region "Notification Banner" [ref=e124]:
+      - generic [ref=e125]:
+        - generic [ref=e126]:
+          - button "Previous notification" [disabled] [ref=e127]
+          - generic [ref=e130]: 1/1
+          - button "Next notification" [disabled] [ref=e131]
+        - generic [ref=e134]:
+          - region [ref=e136]: You're competing for a piece of the $100K prize pool. Every sub-account you activate earns points.
+          - button "Activate AI for MORE Subaccounts" [ref=e138] [cursor=pointer]
+      - button "Close notification" [ref=e139] [cursor=pointer]
+    - generic [ref=e143]:
+      - generic "Report Translation Issue"
+      - button "Ask AI Assistant" [ref=e144] [cursor=pointer]:
+        - generic [ref=e149]: Ask AI
+      - button "View Changelog" [ref=e151] [cursor=pointer]:
+        - generic [ref=e152]: 
+      - button "View Notifications" [ref=e155] [cursor=pointer]:
+        - generic [ref=e156]: 
+        - generic [ref=e157]: Notifications
+      - button "Access Help & Support" [ref=e158] [cursor=pointer]:
+        - generic [ref=e159]: "?"
+        - generic [ref=e160]: Support
+      - generic [ref=e161]:
+        - button "Open Profile Menu" [ref=e162] [cursor=pointer]:
+          - generic [ref=e163]: JC
+        - text: 
+  - generic [ref=e170]:
+    - text: Agency Dashboard
+    - generic [ref=e171]:
+      - img "Stripe warning illustration" [ref=e216]
+      - paragraph [ref=e172]: Connect Stripe to get started
+      - paragraph [ref=e173]: Please connect your Stripe account to view business KPIs.
+      - button [ref=e174] [cursor=pointer]:
+        - paragraph [ref=e176]:
+          - img "Stripe" [ref=e217]
+          - text: Connect Stripe

@@ -1,0 +1,511 @@
+- generic [ref=f19e20]:
+  - complementary [ref=f19e21]:
+    - button "Collapse sidebar" [ref=f19e23] [cursor=pointer]:
+      - generic [ref=f19e24]: 
+    - generic [ref=f19e26]:
+      - generic [ref=f19e30] [cursor=pointer]:
+        - generic [ref=f19e38]:
+          - generic [ref=f19e39]: Rances Car
+          - generic [ref=f19e40]: Miami, Florida
+        - generic [ref=f19e41]:
+          - generic [ref=f19e42]: 
+          - generic [ref=f19e43]: 
+      - generic [ref=f19e44]:
+        - generic [ref=f19e46] [cursor=pointer]:
+          - generic [ref=f19e47]: Search
+          - generic "Press Ctrl + K to open" [ref=f19e51]: ctrlK
+        - img "Quick actions icon" [ref=f19e54] [cursor=pointer]
+      - navigation "header" [ref=f19e56]:
+        - link "Ask AI Ask AI" [ref=f19e57] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ask-ai
+          - img "Ask AI" [ref=f19e58]
+          - generic [ref=f19e59]: Ask AI
+        - link "Launchpad icon Launchpad" [ref=f19e60] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/launchpad
+          - img "Launchpad icon" [ref=f19e61]
+          - generic [ref=f19e62]: Launchpad
+        - link "Dashboard icon Dashboard" [ref=f19e63] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/dashboard
+          - img "Dashboard icon" [ref=f19e64]
+          - generic [ref=f19e65]: Dashboard
+        - link "Conversations icon Conversations" [ref=f19e66] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/conversations/conversations
+          - img "Conversations icon" [ref=f19e67]
+          - generic [ref=f19e68]: Conversations
+        - link "Calendars icon Calendars" [ref=f19e69] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/calendars/view
+          - img "Calendars icon" [ref=f19e70]
+          - generic [ref=f19e71]: Calendars
+        - link "Contacts icon Contacts" [ref=f19e72] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/contacts/smart_list/All
+          - img "Contacts icon" [ref=f19e73]
+          - generic [ref=f19e74]: Contacts
+        - link "Opportunities icon Opportunities" [ref=f19e75] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/opportunities/list
+          - img "Opportunities icon" [ref=f19e76]
+          - generic [ref=f19e77]: Opportunities
+        - link "Payments icon Payments" [ref=f19e78] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/payments/invoices
+          - img "Payments icon" [ref=f19e79]
+          - generic [ref=f19e80]: Payments
+        - paragraph [ref=f19e82]
+        - link "AI Agents icon AI Agents" [ref=f19e83] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/getting-started
+          - img "AI Agents icon" [ref=f19e84]
+          - generic [ref=f19e85]: AI Agents
+        - link "Marketing icon Marketing" [ref=f19e86] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/marketing/social-planner
+          - img "Marketing icon" [ref=f19e87]
+          - generic [ref=f19e88]: Marketing
+        - link "Automation icon Automation" [ref=f19e89] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/automation/workflows
+          - img "Automation icon" [ref=f19e90]
+          - generic [ref=f19e91]: Automation
+        - link "Sites icon Sites" [ref=f19e92] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/funnels-websites/funnels
+          - img "Sites icon" [ref=f19e93]
+          - generic [ref=f19e94]: Sites
+        - link "Memberships icon Memberships" [ref=f19e95] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/memberships/client-portal/dashboard
+          - img "Memberships icon" [ref=f19e96]
+          - generic [ref=f19e97]: Memberships
+        - link "Media Storage icon Media Storage" [ref=f19e98] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/media-storage
+          - img "Media Storage icon" [ref=f19e99]
+          - generic [ref=f19e100]: Media Storage
+        - link "Reputation icon Reputation" [ref=f19e101] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/reputation/overview
+          - img "Reputation icon" [ref=f19e102]
+          - generic [ref=f19e103]: Reputation
+        - link "Reporting icon Reporting" [ref=f19e104] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/reporting/reports
+          - img "Reporting icon" [ref=f19e105]
+          - generic [ref=f19e106]: Reporting
+        - link "App Marketplace icon App Marketplace" [ref=f19e107] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/integration
+          - img "App Marketplace icon" [ref=f19e108]
+          - generic [ref=f19e109]: App Marketplace
+        - link "Metricas Zonitel icon Metricas Zonitel" [ref=f19e110] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic "Metricas Zonitel icon" [ref=f19e112]: 
+          - generic [ref=f19e113]: Metricas Zonitel
+        - link "Metricas Deeler Center icon Metricas Deeler Center" [ref=f19e114] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic "Metricas Deeler Center icon" [ref=f19e116]: 
+          - generic [ref=f19e117]: Metricas Deeler Center
+      - navigation "footer" [ref=f19e119]:
+        - link "Settings icon Settings" [ref=f19e120] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/settings/company
+          - img "Settings icon" [ref=f19e121]
+          - generic [ref=f19e122]: Settings
+  - banner [ref=f19e123]:
+    - region "Notification Banner" [ref=f19e124]:
+      - generic [ref=f19e125]:
+        - generic [ref=f19e126]:
+          - button "Previous notification" [disabled] [ref=f19e127]
+          - generic [ref=f19e130]: 1/1
+          - button "Next notification" [disabled] [ref=f19e131]
+        - generic [ref=f19e134]:
+          - region [ref=f19e136]: You're competing for a piece of the $100K prize pool. Every sub-account you activate earns points.
+          - button "Activate AI for MORE Subaccounts" [ref=f19e138] [cursor=pointer]
+      - button "Close notification" [ref=f19e139] [cursor=pointer]
+    - generic [ref=f19e143]:
+      - generic "Report Translation Issue"
+      - button "Voice Calling" [ref=f19e149] [cursor=pointer]
+      - button "Ask AI Assistant" [ref=f19e152] [cursor=pointer]:
+        - generic [ref=f19e157]: Ask AI
+      - button "View Changelog" [ref=f19e159] [cursor=pointer]:
+        - generic [ref=f19e160]: 
+      - button "View Notifications" [ref=f19e163] [cursor=pointer]:
+        - generic [ref=f19e164]: 
+        - generic [ref=f19e165]: Notifications
+      - button "Access Help & Support" [ref=f19e166] [cursor=pointer]:
+        - generic [ref=f19e167]: "?"
+        - generic [ref=f19e168]: Support
+      - generic [ref=f19e169]:
+        - button "Open Profile Menu" [ref=f19e170] [cursor=pointer]:
+          - generic [ref=f19e171]: JC
+        - text: 
+  - main "Dashboard" [ref=f19e179]:
+    - region "Dashboard header" [ref=f19e180]:
+      - generic [ref=f19e182]:
+        - generic [ref=f19e183]:
+          - button "Open dashboard selector" [ref=f19e185] [cursor=pointer]
+          - generic [ref=f19e192]: Dashboard
+        - generic [ref=f19e199]:
+          - generic "Date picker" [ref=f19e201]:
+            - button "Last 30 days" [ref=f19e202] [cursor=pointer]
+          - separator [ref=f19e210]
+          - button "Summarize dashboard with AI" [ref=f19e211] [cursor=pointer]
+          - button "Edit dashboard" [ref=f19e216] [cursor=pointer]
+    - generic [ref=f19e225]:
+      - generic [ref=f19e226]:
+        - generic [ref=f19e229]:
+          - button "Quick filters" [ref=f19e230] [cursor=pointer]
+          - separator [ref=f19e236]
+        - separator [ref=f19e238]
+      - region "Dashboard widgets" [ref=f19e240]:
+        - generic [ref=f19e241]:
+          - group "titleOpportunitySalesEfficiency" [ref=f19e242]:
+            - generic [ref=f19e246]:
+              - generic [ref=f19e248]:
+                - heading "Sales efficiency" [level=3] [ref=f19e259]
+                - generic [ref=f19e261]:
+                  - generic "All pipelines" [ref=f19e264] [cursor=pointer]:
+                    - textbox [ref=f19e265]
+                    - img "loading" [ref=f19e266]
+                  - generic "All users" [ref=f19e275] [cursor=pointer]:
+                    - textbox [ref=f19e276]
+                    - img "loading" [ref=f19e277]
+              - generic [ref=f19e291]:
+                - generic [ref=f19e293]:
+                  - generic [ref=f19e294]: Average sales duration
+                  - generic [ref=f19e295] [cursor=pointer]: 0s
+                - generic [ref=f19e297]:
+                  - generic [ref=f19e298]: Total sale value
+                  - generic [ref=f19e299] [cursor=pointer]: $0
+                - generic [ref=f19e301]:
+                  - generic [ref=f19e302]: Sales velocity
+                  - generic [ref=f19e303] [cursor=pointer]: $0/M
+          - group "titleGoogleAnalyticsChart" [ref=f19e304]:
+            - generic [ref=f19e308]:
+              - generic [ref=f19e320]:
+                - heading "Google Analytics report" [level=3] [ref=f19e321]
+                - generic [ref=f19e322]: (Last 12 months)
+              - generic [ref=f19e324]:
+                - img [ref=f19e328]:
+                  - generic [ref=f19e330]:
+                    - generic [ref=f19e331]: "0"
+                    - generic [ref=f19e332]: "300"
+                    - generic [ref=f19e333]: "600"
+                    - generic [ref=f19e334]: "900"
+                    - generic [ref=f19e335]: 1,200
+                    - generic [ref=f19e336]: 1,500
+                    - generic [ref=f19e337]: "1"
+                    - generic [ref=f19e338]: "2"
+                    - generic [ref=f19e339]: "3"
+                    - generic [ref=f19e340]: "4"
+                    - generic [ref=f19e341]: "5"
+                    - generic [ref=f19e342]: "6"
+                    - generic [ref=f19e343]: "7"
+                    - generic [ref=f19e344]: "8"
+                    - generic [ref=f19e345]: "9"
+                    - generic [ref=f19e346]: "10"
+                    - generic [ref=f19e347]: "11"
+                - generic [ref=f19e362]: No data found
+          - group "titleManualActions" [ref=f19e363]:
+            - generic [ref=f19e367]:
+              - generic [ref=f19e369]:
+                - heading "Manual actions" [level=3] [ref=f19e380]
+                - generic [ref=f19e382]:
+                  - generic [ref=f19e383]:
+                    - generic [ref=f19e384]: Workflow selection
+                    - generic "Workflow selection" [ref=f19e385]:
+                      - generic "All" [ref=f19e387] [cursor=pointer]:
+                        - textbox [ref=f19e388]
+                        - img "loading" [ref=f19e389]
+                  - generic: Campaign selection
+                  - generic [ref=f19e397]:
+                    - generic [ref=f19e398]: User selection
+                    - generic "User selection" [ref=f19e399]:
+                      - generic "All users" [ref=f19e401] [cursor=pointer]:
+                        - textbox [ref=f19e402]
+                        - img "loading" [ref=f19e403]
+              - generic [ref=f19e413]:
+                - generic [ref=f19e414]:
+                  - region "Pending phone actions" [ref=f19e415]:
+                    - generic [ref=f19e416]: Phone
+                    - paragraph [ref=f19e417]: "0"
+                  - region "Pending SMS actions" [ref=f19e418]:
+                    - generic [ref=f19e419]: SMS
+                    - paragraph [ref=f19e420]: "0"
+                  - region "Total pending actions" [ref=f19e421]:
+                    - generic [ref=f19e422]: Total pending
+                    - paragraph [ref=f19e423]: "0"
+                - generic [ref=f19e424]: Go to manual actions
+          - group "titleOpportunityValue" [ref=f19e428]:
+            - generic [ref=f19e432]:
+              - generic [ref=f19e434]:
+                - heading "Opportunity value" [level=3] [ref=f19e445]
+                - generic "All pipelines" [ref=f19e450] [cursor=pointer]:
+                  - textbox [ref=f19e451]
+                  - img "loading" [ref=f19e452]
+              - generic [ref=f19e466]:
+                - img [ref=f19e470]:
+                  - generic [ref=f19e472]:
+                    - generic [ref=f19e474]: Open
+                    - generic [ref=f19e476]: $0
+                    - generic [ref=f19e478]: $0.2
+                    - generic [ref=f19e480]: $0.4
+                    - generic [ref=f19e482]: $0.6
+                    - generic [ref=f19e484]: $0.8
+                    - generic [ref=f19e486]: $1
+                - generic [ref=f19e487]:
+                  - generic [ref=f19e488]: Total revenue
+                  - generic [ref=f19e489] [cursor=pointer]: $0
+          - group "titleConversionRate" [ref=f19e490]:
+            - generic [ref=f19e494]:
+              - generic [ref=f19e496]:
+                - heading "Conversion rate" [level=3] [ref=f19e507]
+                - generic "All pipelines" [ref=f19e512] [cursor=pointer]:
+                  - textbox [ref=f19e513]
+                  - img "loading" [ref=f19e514]
+              - generic [ref=f19e528]:
+                - img [ref=f19e532]:
+                  - generic [ref=f19e534]: 0%
+                - generic [ref=f19e539]:
+                  - generic [ref=f19e540]: Won revenue
+                  - generic [ref=f19e541] [cursor=pointer]: $0
+          - group "titleLeadSources" [ref=f19e542]:
+            - generic [ref=f19e546]:
+              - generic [ref=f19e548]:
+                - heading "Lead source report" [level=3] [ref=f19e559]
+                - generic "All pipelines" [ref=f19e564] [cursor=pointer]:
+                  - textbox [ref=f19e565]
+                  - img "loading" [ref=f19e566]
+              - generic [ref=f19e579]:
+                - generic [ref=f19e580]:
+                  - generic [ref=f19e581]: "908"
+                  - generic [ref=f19e582] [cursor=pointer]:
+                    - generic [ref=f19e583]: 102.68%
+                    - generic [ref=f19e587]: vs No comparison
+                - generic [ref=f19e590]:
+                  - table [ref=f19e592]:
+                    - rowgroup [ref=f19e602]:
+                      - row [ref=f19e603]:
+                        - columnheader "Source" [ref=f19e604]
+                        - columnheader "Total leads" [ref=f19e607]
+                        - columnheader "Total values" [ref=f19e610]
+                        - columnheader "Open" [ref=f19e613]
+                        - columnheader "Won" [ref=f19e616]
+                        - columnheader "Lost" [ref=f19e619]
+                        - columnheader "Abandoned" [ref=f19e622]
+                        - columnheader "Win%" [ref=f19e625]
+                  - table [ref=f19e628]:
+                    - rowgroup [ref=f19e638]:
+                      - row [ref=f19e639]:
+                        - cell "-" [ref=f19e640]
+                        - cell "21" [ref=f19e641]
+                        - cell "$0" [ref=f19e642]
+                        - cell "21" [ref=f19e643]
+                        - cell "0" [ref=f19e644]
+                        - cell "0" [ref=f19e645]
+                        - cell "0" [ref=f19e646]
+                        - cell "0.00%" [ref=f19e647]
+                      - row [ref=f19e648]:
+                        - cell "camionetas" [ref=f19e649]
+                        - cell "2" [ref=f19e650]
+                        - cell "$0" [ref=f19e651]
+                        - cell "2" [ref=f19e652]
+                        - cell "0" [ref=f19e653]
+                        - cell "0" [ref=f19e654]
+                        - cell "0" [ref=f19e655]
+                        - cell "0.00%" [ref=f19e656]
+                      - row [ref=f19e657]:
+                        - cell "general" [ref=f19e658]
+                        - cell "281" [ref=f19e659]
+                        - cell "$0" [ref=f19e660]
+                        - cell "281" [ref=f19e661]
+                        - cell "0" [ref=f19e662]
+                        - cell "0" [ref=f19e663]
+                        - cell "0" [ref=f19e664]
+                        - cell "0.00%" [ref=f19e665]
+                      - row [ref=f19e666]:
+                        - cell "trade_in" [ref=f19e667]
+                        - cell "6" [ref=f19e668]
+                        - cell "$0" [ref=f19e669]
+                        - cell "6" [ref=f19e670]
+                        - cell "0" [ref=f19e671]
+                        - cell "0" [ref=f19e672]
+                        - cell "0" [ref=f19e673]
+                        - cell "0.00%" [ref=f19e674]
+                      - row [ref=f19e675]:
+                        - cell "whatsapp" [ref=f19e676]
+                        - cell "594" [ref=f19e677]
+                        - cell "$0" [ref=f19e678]
+                        - cell "594" [ref=f19e679]
+                        - cell "0" [ref=f19e680]
+                        - cell "0" [ref=f19e681]
+                        - cell "0" [ref=f19e682]
+                        - cell "0.00%" [ref=f19e683]
+                      - row [ref=f19e684]:
+                        - cell "zonitel auto-created" [ref=f19e685]
+                        - cell "4" [ref=f19e686]
+                        - cell "$0" [ref=f19e687]
+                        - cell "4" [ref=f19e688]
+                        - cell "0" [ref=f19e689]
+                        - cell "0" [ref=f19e690]
+                        - cell "0" [ref=f19e691]
+                        - cell "0.00%" [ref=f19e692]
+              - generic [ref=f19e694]:
+                - button "Previous" [ref=f19e696]
+                - generic [ref=f19e698] [cursor=pointer]: "1"
+                - button "Next" [ref=f19e700]
+          - group "titleOpportunityStatus" [ref=f19e702]:
+            - generic [ref=f19e706]:
+              - generic [ref=f19e708]:
+                - heading "Opportunity status" [level=3] [ref=f19e719]
+                - generic "All pipelines" [ref=f19e724] [cursor=pointer]:
+                  - textbox [ref=f19e725]
+                  - img "loading" [ref=f19e726]
+              - img [ref=f19e744]:
+                - generic [ref=f19e746]:
+                  - generic [ref=f19e749]: "908"
+                  - generic [ref=f19e753]: Open - 908
+          - group "titleTasks" [ref=f19e755]:
+            - generic [ref=f19e759]:
+              - generic [ref=f19e761]:
+                - heading "Tasks" [level=3] [ref=f19e772]
+                - generic [ref=f19e774]:
+                  - generic [ref=f19e777] [cursor=pointer]:
+                    - generic "Pending" [ref=f19e778]
+                    - img "loading" [ref=f19e780]
+                  - generic [ref=f19e789] [cursor=pointer]:
+                    - generic "Due date (ASC)" [ref=f19e790]
+                    - img "loading" [ref=f19e792]
+                  - generic [ref=f19e801] [cursor=pointer]:
+                    - generic "All users" [ref=f19e802]
+                    - img "loading" [ref=f19e804]
+              - generic [ref=f19e816]:
+                - generic [ref=f19e817]:
+                  - checkbox "SMS ZONITEL" [ref=f19e819] [cursor=pointer]
+                  - generic [ref=f19e827]:
+                    - generic [ref=f19e828]:
+                      - generic [ref=f19e829] [cursor=pointer]: SMS ZONITEL
+                      - generic [ref=f19e831]: Overdue - 9/17/2025
+                    - generic [ref=f19e835]: hola me interesa un mustang tienen tengo 1000k de inicial
+                    - generic [ref=f19e836]:
+                      - generic [ref=f19e837]: ": new contacto zonitel"
+                      - generic [ref=f19e838]: "Assigned to: Unassigned"
+                - separator [ref=f19e843]
+          - group "titleOpportunityStageDistribution" [ref=f19e845]:
+            - generic [ref=f19e849]:
+              - generic [ref=f19e851]:
+                - heading "Stage distribution" [level=3] [ref=f19e862]
+                - generic "RancesCar – Venta & Financing" [ref=f19e867] [cursor=pointer]:
+                  - textbox [ref=f19e868]
+                  - img "loading" [ref=f19e869]
+              - img [ref=f19e888]:
+                - generic [ref=f19e890]:
+                  - generic [ref=f19e893]: "908"
+                  - generic [ref=f19e897]: Nuevo Lead
+                  - generic [ref=f19e898]: $0 (100.00%) - 908
+                  - generic [ref=f19e902]: Contactado
+                  - generic [ref=f19e903]: $0 (0.00%) - 0
+                  - generic [ref=f19e907]: Seguimiento...
+                  - generic [ref=f19e908]: $0 (0.00%) - 0
+                  - generic [ref=f19e912]: Pre Cita
+                  - generic [ref=f19e913]: $0 (0.00%) - 0
+                  - generic [ref=f19e917]: Agendado Ci...
+                  - generic [ref=f19e918]: $0 (0.00%) - 0
+                  - generic [ref=f19e922]: Post Cita
+                  - generic [ref=f19e923]: $0 (0.00%) - 0
+                  - generic [ref=f19e927]: Vendido
+                  - generic [ref=f19e928]: $0 (0.00%) - 0
+                  - generic [ref=f19e932]: Perdido
+                  - generic [ref=f19e933]: $0 (0.00%) - 0
+                  - generic [ref=f19e937]: Lista Negra...
+                  - generic [ref=f19e938]: $0 (0.00%) - 0
+                  - generic [ref=f19e942]: Won
+                  - generic [ref=f19e943]: $0 (0.00%) - 0
+                  - generic [ref=f19e947]: Lost/abando...
+                  - generic [ref=f19e948]: $0 (0.00%) - 0
+          - group "titleFacebookAdsReport" [ref=f19e950]:
+            - generic [ref=f19e954]:
+              - heading "Facebook Ads report" [level=3] [ref=f19e967]
+              - alert [ref=f19e970]:
+                - generic [ref=f19e971]: Error while loading data
+          - group "titleOpportunityFunnel" [ref=f19e978]:
+            - generic [ref=f19e982]:
+              - generic [ref=f19e984]:
+                - heading "Funnel" [level=3] [ref=f19e995]
+                - generic "RancesCar – Venta & Financing" [ref=f19e1000] [cursor=pointer]:
+                  - textbox [ref=f19e1001]
+                  - img "loading" [ref=f19e1002]
+              - img [ref=f19e1021]:
+                - generic [ref=f19e1023]:
+                  - generic [ref=f19e1025]: "0"
+                  - generic [ref=f19e1027]: "200"
+                  - generic [ref=f19e1029]: "400"
+                  - generic [ref=f19e1031]: "600"
+                  - generic [ref=f19e1033]: "800"
+                  - generic [ref=f19e1035]: 1,000
+                  - generic [ref=f19e1048]: Nuevo Lead $0
+                  - generic [ref=f19e1050]: Contactado $0
+                  - generic [ref=f19e1052]: Seguimiento $0
+                  - generic [ref=f19e1054]: Pre Cita $0
+                  - generic [ref=f19e1056]: Agendado Cita $0
+                  - generic [ref=f19e1058]: Post Cita $0
+                  - generic [ref=f19e1060]: Vendido $0
+                  - generic [ref=f19e1062]: Perdido $0
+                  - generic [ref=f19e1064]: Lista Negra $0
+                  - generic [ref=f19e1066]: Won $0
+                  - generic [ref=f19e1067]: Next step
+                  - generic [ref=f19e1068]: conversion
+                  - generic [ref=f19e1079]: Cumulative
+                  - generic [ref=f19e1090]: 100.00%
+                  - generic [ref=f19e1091]: 0.00%
+                  - generic [ref=f19e1092]: 0.00%
+                  - generic [ref=f19e1093]: 0.00%
+                  - generic [ref=f19e1094]: 0.00%
+                  - generic [ref=f19e1095]: 0.00%
+                  - generic [ref=f19e1096]: 0.00%
+                  - generic [ref=f19e1097]: 0.00%
+                  - generic [ref=f19e1098]: 0.00%
+                  - generic [ref=f19e1099]: 0.00%
+                  - generic [ref=f19e1100]: 100.00%
+                  - generic [ref=f19e1101]: 0.00%
+                  - generic [ref=f19e1102]: 0.00%
+                  - generic [ref=f19e1103]: 0.00%
+                  - generic [ref=f19e1104]: 0.00%
+                  - generic [ref=f19e1105]: 0.00%
+                  - generic [ref=f19e1106]: 0.00%
+                  - generic [ref=f19e1107]: 0.00%
+                  - generic [ref=f19e1108]: 0.00%
+                  - generic [ref=f19e1109]: 0.00%
+          - group "titleGoogleAnalyticsCount" [ref=f19e1110]:
+            - generic [ref=f19e1114]:
+              - generic [ref=f19e1126]:
+                - heading "Google Analytics report" [level=3] [ref=f19e1127]
+                - generic [ref=f19e1128]: (Last 12 months)
+              - status [ref=f19e1131]:
+                - generic [ref=f19e1132]: No data found
+          - group "titleGoogleAdsReport" [ref=f19e1139]:
+            - generic [ref=f19e1143]:
+              - heading "Google Ads report" [level=3] [ref=f19e1156]
+              - alert [ref=f19e1159]:
+                - generic [ref=f19e1160]: Error while loading data
+          - group "titleGmbReports" [ref=f19e1167]:
+            - generic [ref=f19e1171]:
+              - generic [ref=f19e1173]:
+                - generic [ref=f19e1183]:
+                  - heading "Google Business Profile" [level=3] [ref=f19e1184]
+                  - generic [ref=f19e1185]: (Last 30 days)
+                - generic [ref=f19e1190] [cursor=pointer]:
+                  - generic: Please Select
+                  - img "loading" [ref=f19e1191]
+              - generic [ref=f19e1201]:
+                - generic [ref=f19e1202]:
+                  - generic [ref=f19e1203]: Total views
+                  - generic [ref=f19e1204] [cursor=pointer]: "0"
+                - generic [ref=f19e1205]:
+                  - generic [ref=f19e1206]:
+                    - generic [ref=f19e1207]: Search (desktop & mobile)
+                    - generic [ref=f19e1208] [cursor=pointer]: "0"
+                  - generic [ref=f19e1209]:
+                    - generic [ref=f19e1210]: Maps (desktop & mobile)
+                    - generic [ref=f19e1211] [cursor=pointer]: "0"
+                - generic [ref=f19e1212]:
+                  - generic [ref=f19e1213]:
+                    - generic [ref=f19e1214]: Conversations
+                    - generic [ref=f19e1215] [cursor=pointer]: "0"
+                  - generic [ref=f19e1216]:
+                    - generic [ref=f19e1217]: Bookings
+                    - generic [ref=f19e1218] [cursor=pointer]: "0"
+                - generic [ref=f19e1219]:
+                  - generic [ref=f19e1220]:
+                    - generic [ref=f19e1221]: Website visits
+                    - generic [ref=f19e1222] [cursor=pointer]: "0"
+                  - generic [ref=f19e1223]:
+                    - generic [ref=f19e1224]: Calls
+                    - generic [ref=f19e1225] [cursor=pointer]: "0"

@@ -1,0 +1,132 @@
+- generic [ref=f9e13]:
+  - complementary [ref=f9e14]:
+    - button "Collapse sidebar" [ref=f9e16] [cursor=pointer]:
+      - generic [ref=f9e17]: 
+    - generic [ref=f9e19]:
+      - generic [ref=f9e23] [cursor=pointer]:
+        - generic [ref=f9e31]:
+          - generic [ref=f9e32]: Rances Car
+          - generic [ref=f9e33]: Miami, Florida
+        - generic [ref=f9e34]:
+          - generic [ref=f9e35]: 
+          - generic [ref=f9e36]: 
+      - generic [ref=f9e37]:
+        - generic [ref=f9e39] [cursor=pointer]:
+          - generic [ref=f9e40]: Search
+          - generic "Press Ctrl + K to open" [ref=f9e44]: ctrlK
+        - img "Quick actions icon" [ref=f9e47] [cursor=pointer]
+      - navigation "header" [ref=f9e49]:
+        - link "Ask AI Ask AI" [ref=f9e50] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ask-ai
+          - img "Ask AI" [ref=f9e51]
+          - generic [ref=f9e52]: Ask AI
+        - link "Launchpad icon Launchpad" [ref=f9e53] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/launchpad
+          - img "Launchpad icon" [ref=f9e54]
+          - generic [ref=f9e55]: Launchpad
+        - link "Dashboard icon Dashboard" [ref=f9e56] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/dashboard
+          - img "Dashboard icon" [ref=f9e57]
+          - generic [ref=f9e58]: Dashboard
+        - link "Conversations icon Conversations" [ref=f9e59] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/conversations/conversations
+          - img "Conversations icon" [ref=f9e60]
+          - generic [ref=f9e61]: Conversations
+        - link "Calendars icon Calendars" [ref=f9e62] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/calendars/view
+          - img "Calendars icon" [ref=f9e63]
+          - generic [ref=f9e64]: Calendars
+        - link "Contacts icon Contacts" [ref=f9e65] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/contacts/smart_list/All
+          - img "Contacts icon" [ref=f9e66]
+          - generic [ref=f9e67]: Contacts
+        - link "Opportunities icon Opportunities" [ref=f9e68] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/opportunities/list
+          - img "Opportunities icon" [ref=f9e69]
+          - generic [ref=f9e70]: Opportunities
+        - link "Payments icon Payments" [ref=f9e71] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/payments/invoices
+          - img "Payments icon" [ref=f9e72]
+          - generic [ref=f9e73]: Payments
+        - paragraph [ref=f9e75]
+        - link "AI Agents icon AI Agents" [ref=f9e76] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/getting-started
+          - img "AI Agents icon" [ref=f9e77]
+          - generic [ref=f9e78]: AI Agents
+        - link "Marketing icon Marketing" [ref=f9e79] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/marketing/social-planner
+          - img "Marketing icon" [ref=f9e80]
+          - generic [ref=f9e81]: Marketing
+        - link "Automation icon Automation" [ref=f9e82] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/automation/workflows
+          - img "Automation icon" [ref=f9e83]
+          - generic [ref=f9e84]: Automation
+        - link "Sites icon Sites" [ref=f9e85] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/funnels-websites/funnels
+          - img "Sites icon" [ref=f9e86]
+          - generic [ref=f9e87]: Sites
+        - link "Memberships icon Memberships" [ref=f9e88] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/memberships/client-portal/dashboard
+          - img "Memberships icon" [ref=f9e89]
+          - generic [ref=f9e90]: Memberships
+        - link "Media Storage icon Media Storage" [ref=f9e91] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/media-storage
+          - img "Media Storage icon" [ref=f9e92]
+          - generic [ref=f9e93]: Media Storage
+        - link "Reputation icon Reputation" [ref=f9e94] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/reputation/overview
+          - img "Reputation icon" [ref=f9e95]
+          - generic [ref=f9e96]: Reputation
+        - link "Reporting icon Reporting" [ref=f9e97] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/reporting/reports
+          - img "Reporting icon" [ref=f9e98]
+          - generic [ref=f9e99]: Reporting
+        - link "App Marketplace icon App Marketplace" [ref=f9e100] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/integration
+          - img "App Marketplace icon" [ref=f9e101]
+          - generic [ref=f9e102]: App Marketplace
+        - link "Metricas Zonitel icon Metricas Zonitel" [ref=f9e103] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic "Metricas Zonitel icon" [ref=f9e105]: 
+          - generic [ref=f9e106]: Metricas Zonitel
+        - link "Metricas Deeler Center icon Metricas Deeler Center" [ref=f9e107] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic "Metricas Deeler Center icon" [ref=f9e109]: 
+          - generic [ref=f9e110]: Metricas Deeler Center
+      - navigation "footer" [ref=f9e112]:
+        - link "Settings icon Settings" [ref=f9e113] [cursor=pointer]:
+          - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/settings/company
+          - img "Settings icon" [ref=f9e114]
+          - generic [ref=f9e115]: Settings
+  - banner [ref=f9e116]:
+    - generic [ref=f9e118]:
+      - generic "Report Translation Issue"
+      - button "Ask AI Assistant" [ref=f9e119] [cursor=pointer]:
+        - generic [ref=f9e124]: Ask AI
+      - button "View Changelog" [ref=f9e126] [cursor=pointer]:
+        - generic [ref=f9e127]: 
+      - button "View Notifications" [ref=f9e130] [cursor=pointer]:
+        - generic [ref=f9e131]: 
+        - generic [ref=f9e132]: Notifications
+      - button "Access Help & Support" [ref=f9e133] [cursor=pointer]:
+        - generic [ref=f9e134]: "?"
+        - generic [ref=f9e135]: Support
+      - generic [ref=f9e136]:
+        - button "Open Profile Menu" [ref=f9e137] [cursor=pointer]:
+          - generic [ref=f9e138]: JC
+        - text: 
+    - generic [ref=f9e140]:
+      - heading "Automation" [level=1] [ref=f9e141]
+      - link "Workflows" [ref=f9e142] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/automation/workflows
+      - link "Overview" [ref=f9e144] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/automation/overview
+        - generic [ref=f9e145]:
+          - text: Overview
+          - generic [ref=f9e146]: Beta
+      - link "Global Workflow Settings" [ref=f9e148] [cursor=pointer]:
+        - /url: /v2/location/1j1dHo8HEbZdElQUGFoC/automation/workflows/settings
+        - generic [ref=f9e149]:
+          - img "Global Workflow Settings" [ref=f9e150]
+          - text: Global Workflow Settings
+  - iframe [ref=f9e155]

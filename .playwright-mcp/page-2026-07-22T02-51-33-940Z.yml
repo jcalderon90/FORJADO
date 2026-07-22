@@ -1,0 +1,117 @@
+- iframe [active] [ref=f9e155]:
+  - generic [active] [ref=f12e1]:
+    - generic [ref=f12e3]:
+      - list:
+        - listitem:
+          - link "Skip to main content" [ref=f12e4] [cursor=pointer]:
+            - /url: "#main"
+      - generic [ref=f12e685]:
+        - generic [ref=f12e686]:
+          - generic [ref=f12e687]:
+            - generic [ref=f12e688]:
+              - button "Workflows list" [ref=f12e689] [cursor=pointer]
+              - button [ref=f12e694] [cursor=pointer]
+            - paragraph [ref=f12e699]:
+              - button [ref=f12e811] [cursor=pointer]:
+                - heading "Workflow name" [level=1] [ref=f12e813]: Workflow Asig Agente (Entrada))
+            - generic [ref=f12e702]:
+              - group [ref=f12e818]:
+                - generic [ref=f12e819]: JC
+              - generic [ref=f12e703]:
+                - button "Recent changes" [ref=f12e705] [cursor=pointer]:
+                  - img "changelog icon" [ref=f12e707]
+                - button "Undo" [ref=f12e709] [cursor=pointer]
+                - button "Redo" [disabled] [ref=f12e713]
+              - button "Save workflow button" [disabled] [ref=f12e719]:
+                - generic [ref=f12e720]: Saved
+          - generic [ref=f12e725]:
+            - generic [ref=f12e824] [cursor=pointer]:
+              - generic [ref=f12e825]: Standard builder
+              - img "loading" [ref=f12e827]
+            - tablist [ref=f12e733]:
+              - tab "Builder" [selected] [ref=f12e735] [cursor=pointer]:
+                - paragraph [ref=f12e737]: Builder
+              - tab "Settings" [ref=f12e740] [cursor=pointer]:
+                - paragraph [ref=f12e742]: Settings
+              - tab "Enrollment history" [ref=f12e745] [cursor=pointer]:
+                - paragraph [ref=f12e747]: Enrollment history
+              - tab "Execution logs" [ref=f12e750] [cursor=pointer]:
+                - paragraph [ref=f12e752]: Execution logs
+            - generic [ref=f12e754]:
+              - button "Test workflow" [ref=f12e755] [cursor=pointer]
+              - generic [ref=f12e757]:
+                - paragraph [ref=f12e758]: Draft
+                - switch "Toggle draft publish workflow" [checked] [ref=f12e759]
+                - paragraph [ref=f12e762]: Publish
+        - generic [ref=f12e765]:
+          - generic [ref=f12e768]:
+            - button [ref=f12e769] [cursor=pointer]
+            - button [ref=f12e773] [cursor=pointer]
+            - button [ref=f12e777] [cursor=pointer]
+            - button [ref=f12e781] [cursor=pointer]
+            - button [ref=f12e785] [cursor=pointer]
+            - button [ref=f12e789] [cursor=pointer]
+            - button [ref=f12e793] [cursor=pointer]
+            - button [ref=f12e797] [cursor=pointer]
+          - generic "Workflow tree" [ref=f12e838]:
+            - generic [ref=f12e840]:
+              - generic:
+                - img:
+                  - button "Edge from 3df116da-fb73-4dfa-9559-0b3f5753b9fa to 63b0d908-80f0-4a8a-9cf3-cf64ea07c0ba" [ref=f12e841] [cursor=pointer]
+                - img:
+                  - button "Edge from 3df116da-fb73-4dfa-9559-0b3f5753b9fa to fcc6cf1f-fae0-455a-bd8b-dc1a3df267c9" [ref=f12e844] [cursor=pointer]
+                - img:
+                  - button "Edge from 63b0d908-80f0-4a8a-9cf3-cf64ea07c0ba to c6e390bb-3637-40a9-9bd8-ef0203e013d0" [ref=f12e847] [cursor=pointer]
+                - img:
+                  - button "Edge from fcc6cf1f-fae0-455a-bd8b-dc1a3df267c9 to f8df8712-e5b1-4670-bc9d-31ba125cce4a" [ref=f12e850] [cursor=pointer]
+                - img:
+                  - button "Edge from c6e390bb-3637-40a9-9bd8-ef0203e013d0 to c02f65d7-765c-4939-b006-eb0b79499700"
+                - img:
+                  - button "Edge from f8df8712-e5b1-4670-bc9d-31ba125cce4a to 219dfc33-0c95-49e1-a8aa-2625cb3c2183"
+                - img:
+                  - button "Edge from r59O2JKxinAgAJKuKWAx to 3df116da-fb73-4dfa-9559-0b3f5753b9fa" [ref=f12e853] [cursor=pointer]
+                - img:
+                  - button "Edge from add-new-trigger to 3df116da-fb73-4dfa-9559-0b3f5753b9fa" [ref=f12e856] [cursor=pointer]
+                - generic:
+                  - generic "Add action" [ref=f12e862]:
+                    - button "Add action" [ref=f12e864] [cursor=pointer]
+                  - generic "Add action" [ref=f12e872]:
+                    - button "Add action" [ref=f12e874] [cursor=pointer]
+                  - generic "Add action" [ref=f12e882]:
+                    - button "Add action" [ref=f12e884] [cursor=pointer]
+                  - generic "Add action" [ref=f12e892]:
+                    - button "Add action" [ref=f12e894] [cursor=pointer]
+                - generic:
+                  - button [ref=f12e899] [cursor=pointer]:
+                    - button "Condition Action" [ref=f12e900]:
+                      - button "Add action" [ref=f12e904]
+                      - button "Condition" [ref=f12e909]:
+                        - button [ref=f12e921]
+                  - button [ref=f12e924] [cursor=pointer]:
+                    - generic [ref=f12e927]:
+                      - button "Branch" [ref=f12e928]
+                      - button "If \"Current Day of week\" is on or aft..." [ref=f12e1746]
+                  - button [ref=f12e938] [cursor=pointer]:
+                    - generic [ref=f12e942]:
+                      - button "None" [ref=f12e943]
+                      - button "When none of the conditions are met" [ref=f12e949]
+                  - button [ref=f12e951] [cursor=pointer]:
+                    - button "Assign to user Action" [ref=f12e952]:
+                      - button "Assign to user" [ref=f12e954]:
+                        - button [ref=f12e969]
+                  - button [ref=f12e972] [cursor=pointer]:
+                    - button "Assign to user Action" [ref=f12e973]:
+                      - button "Assign to user" [ref=f12e975]:
+                        - button [ref=f12e990]
+            - img "Vue Flow mini map" [ref=f12e996]
+            - button [ref=f12e1006] [cursor=pointer]
+            - generic [ref=f12e1011]:
+              - button [ref=f12e1013] [cursor=pointer]
+              - group [ref=f12e1018]:
+                - button "Zoom in" [ref=f12e1019] [cursor=pointer]
+                - button "100%" [ref=f12e1023] [cursor=pointer]
+                - button "Zoom out" [ref=f12e1025] [cursor=pointer]
+              - group [ref=f12e1028]:
+                - button "Fit to Screen" [ref=f12e1029] [cursor=pointer]
+            - button [ref=f12e1034] [cursor=pointer]
+    - log [ref=f12e467]

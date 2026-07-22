@@ -1,0 +1,242 @@
+- generic [ref=f7e4]:
+  - generic [ref=f7e18]:
+    - generic [ref=f7e19]:
+      - link "" [ref=f7e20] [cursor=pointer]:
+        - /url: reports/home
+      - generic [ref=f7e24]:
+        - textbox "Search Inventory, Customer, Deal ..." [ref=f7e25]
+        - button "" [ref=f7e27] [cursor=pointer]
+    - generic [ref=f7e29]:
+      - button "CARWARRIORS LLC Miami, FL " [ref=f7e31] [cursor=pointer]:
+        - generic [ref=f7e32]:
+          - generic [ref=f7e33]:
+            - generic [ref=f7e34]: CARWARRIORS LLC
+            - generic [ref=f7e35]: Miami, FL
+          - generic [ref=f7e36]: 
+      - generic [ref=f7e37]:
+        - button "" [ref=f7e39] [cursor=pointer]
+        - generic [ref=f7e41]:
+          - button "" [ref=f7e42] [cursor=pointer]
+          - generic: "1"
+        - generic [ref=f7e45]:
+          - button "" [ref=f7e46] [cursor=pointer]
+          - generic: "1"
+        - button "" [ref=f7e50] [cursor=pointer]
+        - button "" [ref=f7e53] [cursor=pointer]
+      - button "" [ref=f7e56] [cursor=pointer]
+      - button "JC" [ref=f7e59] [cursor=pointer]
+  - generic [ref=f7e8]:
+    - menubar [ref=f7e62]:
+      - menuitem "Home" [ref=f7e63] [cursor=pointer]:
+        - generic [ref=f7e64]:
+          - generic [ref=f7e65]: 
+          - generic [ref=f7e66]: Home
+      - menuitem "Reports" [ref=f7e67] [cursor=pointer]:
+        - generic [ref=f7e68]:
+          - generic [ref=f7e69]: 
+          - generic [ref=f7e70]: Reports
+      - menuitem "Inventory" [ref=f7e71] [cursor=pointer]:
+        - generic [ref=f7e72]:
+          - generic [ref=f7e73]: 
+          - generic [ref=f7e74]: Inventory
+      - menuitem "Auctions" [ref=f7e75] [cursor=pointer]:
+        - generic [ref=f7e76]:
+          - generic [ref=f7e77]: 
+          - generic [ref=f7e78]: Auctions
+      - menuitem "Customer" [ref=f7e79] [cursor=pointer]:
+        - generic [ref=f7e80]:
+          - generic [ref=f7e81]: 
+          - generic [ref=f7e82]: Customer
+      - menuitem "Deal" [ref=f7e83] [cursor=pointer]:
+        - generic [ref=f7e84]:
+          - generic [ref=f7e85]: 
+          - generic [ref=f7e86]: Deal
+      - menuitem "BHPH" [ref=f7e87] [cursor=pointer]:
+        - generic [ref=f7e88]:
+          - generic [ref=f7e89]: 
+          - generic [ref=f7e90]: BHPH
+      - menuitem "Marketing" [ref=f7e91] [cursor=pointer]:
+        - generic [ref=f7e92]:
+          - generic [ref=f7e93]: 
+          - generic [ref=f7e94]: Marketing
+      - menuitem "Accounting" [ref=f7e95] [cursor=pointer]:
+        - generic [ref=f7e96]:
+          - generic [ref=f7e97]: 
+          - generic [ref=f7e98]: Accounting
+      - menuitem "QuickBooks" [ref=f7e99] [cursor=pointer]:
+        - generic [ref=f7e100]:
+          - generic [ref=f7e101]: 
+          - generic [ref=f7e102]: QuickBooks
+      - menuitem "Force" [ref=f7e103] [cursor=pointer]:
+        - generic [ref=f7e104]:
+          - generic [ref=f7e105]: 
+          - generic [ref=f7e106]: Support
+      - menuitem "Admin" [ref=f7e107] [cursor=pointer]:
+        - generic [ref=f7e108]:
+          - generic [ref=f7e109]: 
+          - generic [ref=f7e110]: Admin
+      - menuitem "Dealer Settings" [ref=f7e111] [cursor=pointer]:
+        - generic [ref=f7e112]:
+          - generic [ref=f7e113]: 
+          - generic [ref=f7e114]: Settings
+    - generic [ref=f7e852]:
+      - generic [ref=f7e854]:
+        - button "My New Prospects " [ref=f7e856] [cursor=pointer]:
+          - generic [ref=f7e857]:
+            - generic [ref=f7e858]: My New Prospects
+            - generic [ref=f7e859]: 
+        - generic [ref=f7e862]:
+          - generic [ref=f7e865]:
+            - button " Save as" [ref=f7e867] [cursor=pointer]:
+              - generic [ref=f7e868]: 
+              - generic [ref=f7e869]: Save as
+            - generic "Revert Changes" [ref=f7e1037]:
+              - button " Revert Changes" [ref=f7e1038] [cursor=pointer]:
+                - generic [ref=f7e1039]: 
+                - generic [ref=f7e1040]: Revert Changes
+            - generic "Schedule this report" [ref=f7e870]:
+              - button " Schedule" [ref=f7e871] [cursor=pointer]:
+                - generic [ref=f7e872]: 
+                - generic [ref=f7e873]: Schedule
+            - generic "Print / Export Report" [ref=f7e874]:
+              - button " Print / Export" [ref=f7e875] [cursor=pointer]:
+                - generic [ref=f7e876]: 
+                - generic [ref=f7e877]: Print / Export
+            - button " More" [ref=f7e881] [cursor=pointer]:
+              - generic [ref=f7e882]: 
+              - generic [ref=f7e883]: More
+          - generic [ref=f7e884]:
+            - button " Add New Report" [ref=f7e886] [cursor=pointer]:
+              - generic [ref=f7e887]: 
+              - generic [ref=f7e888]: Add New Report
+            - generic [ref=f7e890]:
+              - generic [ref=f7e892]:
+                - button "" [pressed] [ref=f7e894] [cursor=pointer]
+                - button "" [ref=f7e897] [cursor=pointer]
+                - button "" [ref=f7e900] [cursor=pointer]
+              - button "" [ref=f7e904] [cursor=pointer]
+      - generic [ref=f7e909]:
+        - generic [ref=f7e910]:
+          - generic [ref=f7e914]:
+            - generic [ref=f7e915]:
+              - generic [ref=f7e916]:
+                - generic [ref=f7e917]: Created Date
+                - generic [ref=f7e921]:
+                  - combobox [ref=f7e923]
+                  - button "Select" [ref=f7e924] [cursor=pointer]:
+                    - generic [ref=f7e925]: 
+              - generic [ref=f7e927]:
+                - generic [ref=f7e928]: Lead Source
+                - combobox [ref=f7e933]
+              - generic [ref=f7e934]:
+                - generic [ref=f7e935]: Lead Type
+                - generic [ref=f7e937]:
+                  - combobox [ref=f7e939]
+                  - button "Select" [ref=f7e940] [cursor=pointer]:
+                    - generic [ref=f7e941]: 
+              - generic [ref=f7e943]:
+                - generic [ref=f7e944]: Customer Name
+                - textbox "Search Customer Name..." [ref=f7e946]: FORJADO
+              - generic [ref=f7e947]:
+                - generic [ref=f7e948]: Inquiry Type
+                - combobox [ref=f7e953]
+              - generic [ref=f7e954]:
+                - generic [ref=f7e955]: Sales Rep
+                - combobox [ref=f7e969]
+              - generic [ref=f7e970]:
+                - generic [ref=f7e971]: BDC Rep
+                - combobox [ref=f7e976]
+            - generic [ref=f7e978]:
+              - button "Run" [active] [ref=f7e979] [cursor=pointer]
+              - button "Reset" [ref=f7e981] [cursor=pointer]
+            - generic [ref=f7e983]:
+              - button " FILTER+" [ref=f7e985] [cursor=pointer]:
+                - generic [ref=f7e986]: 
+                - generic [ref=f7e987]: FILTER+
+              - generic [ref=f7e988]:
+                - generic [ref=f7e989]: "1"
+                - button " SORT" [ref=f7e990] [cursor=pointer]:
+                  - generic [ref=f7e991]: 
+                  - generic [ref=f7e992]: SORT
+          - generic [ref=f7e994]:
+            - generic [ref=f7e995]: This report is scheduled daily at 10:00 AM View schedule | Turn off schedule
+            - generic [ref=f7e1000]:
+              - generic [ref=f7e1041]: 1 Result Found
+              - combobox [ref=f7e1002] [cursor=pointer]:
+                - generic [ref=f7e1003]: "50"
+                - button "Select" [ref=f7e1005]:
+                  - generic [ref=f7e1006]: 
+              - button "" [disabled]
+              - spinbutton [ref=f7e1043]: "1"
+              - generic [ref=f7e1044]: of 1
+              - button "" [disabled]
+        - group [ref=f7e1011]:
+          - group "Data grid with 1 rows and 7 columns" [ref=f7e1045]:
+            - table [ref=f7e1046]:
+              - row [ref=f7e1053]:
+                - columnheader "Column Customer" [ref=f7e1054] [cursor=pointer]: Customer
+                - columnheader "Column Interested Vehicle" [ref=f7e1055] [cursor=pointer]: Interested Vehicle
+                - columnheader "Column Lead Info" [ref=f7e1056] [cursor=pointer]: Lead Info
+                - columnheader "Column Date" [ref=f7e1057] [cursor=pointer]: Date
+                - columnheader "Column Employment" [ref=f7e1058] [cursor=pointer]: Employment
+                - columnheader "Column"
+            - table [ref=f7e1059]:
+              - row [ref=f7e1066]:
+                - 'gridcell "FORJADO TEST LEAD BORRAR FORJADO-TEST@EXAMPLE.COM H: (786) 000-0001 C: (786) 000-0001 DOB:" [ref=f7e1067]':
+                  - generic [ref=f7e1068]:
+                    - generic "FORJADO TEST LEAD BORRAR" [ref=f7e1070]
+                    - link "FORJADO-TEST@EXAMPLE.COM" [ref=f7e1072] [cursor=pointer]:
+                      - /url: "#"
+                    - generic [ref=f7e1073]:
+                      - generic [ref=f7e1074]:
+                        - text: "H:"
+                        - link "(786) 000-0001" [ref=f7e1075] [cursor=pointer]:
+                          - /url: "#"
+                      - generic [ref=f7e1076]:
+                        - text: "C:"
+                        - link "(786) 000-0001" [ref=f7e1077] [cursor=pointer]:
+                          - /url: "#"
+                    - generic [ref=f7e1078]: "DOB:"
+                - gridcell [ref=f7e1080]
+                - gridcell [ref=f7e1081]:
+                  - generic [ref=f7e1082]:
+                    - generic [ref=f7e1083]:
+                      - generic "null" [ref=f7e1084]: "Sales Rep:"
+                      - generic "null" [ref=f7e1085]: "Inquiry Type:"
+                    - generic [ref=f7e1086]:
+                      - generic "null" [ref=f7e1087]: "BDC Rep:"
+                      - generic "NEW" [ref=f7e1088]: Status:NEW
+                    - generic "CARWARRIORS LLC - GHL - FORJADO TEST - WHATSAPP / INSTAGRAM / MESSENGER" [ref=f7e1090]: Source:CARWARRIORS LLC - GHL - FORJADO TEST - WHATSAPP / INSTAGRAM / MESSENGER
+                    - generic "INTERNET" [ref=f7e1092]: Type:INTERNET
+                    - generic [ref=f7e1093]: Cash Down:$0.00
+                - gridcell [ref=f7e1095]:
+                  - generic [ref=f7e1096]:
+                    - generic "07/22/2026" [ref=f7e1098]: Created:07/22/2026
+                    - generic "12/31/0001" [ref=f7e1100]: Sales Rep Assigned:12/31/0001
+                    - generic "null" [ref=f7e1102]: "BDC Rep Assigned:"
+                    - generic "0" [ref=f7e1104]: Days Old:0
+                    - generic "0" [ref=f7e1106]: Last Contacted Day:0
+                - gridcell [ref=f7e1107]:
+                  - generic [ref=f7e1108]:
+                    - generic "null" [ref=f7e1110]: "Employer Name:"
+                    - generic "null" [ref=f7e1112]: "Occupation:"
+                    - generic [ref=f7e1113]: "Length at Job:"
+                    - generic "$0" [ref=f7e1116]: Income:$0
+                    - generic "null" [ref=f7e1118]: "Work Phone:"
+                - gridcell
+  - iframe [ref=f7e848]:
+    - main [ref=f8e4]:
+      - generic [ref=f8e5]:
+        - generic [ref=f8e8]:
+          - generic "AI-powered assistant" [ref=f8e9]:
+            - generic [ref=f8e10]:
+              - generic [ref=f8e11]: 
+              - generic [ref=f8e12]: AI-powered assistant
+            - generic [ref=f8e13]:
+              - button "Expand chat" [ref=f8e15] [cursor=pointer]:
+                - generic [ref=f8e16]: 
+              - button "Close chat" [ref=f8e18] [cursor=pointer]:
+                - generic [ref=f8e19]: 
+          - text:     
+        - generic:
+          - alertdialog

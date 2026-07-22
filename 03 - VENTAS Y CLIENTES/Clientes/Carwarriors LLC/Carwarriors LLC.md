@@ -4,10 +4,10 @@ tipo: cliente
 estado: activo
 servicio: automatizacion
 contacto: Jorge (Dueño)
-proximo_paso: Agente Social RancesCar ya está en producción (Primary + Auto Pilot desde 2026-07-20). Queda borrar "Agente Nocturno RancesCar", alinear horario Scarleth entre los 2 workflows de asignación, y reportar a soporte GHL el bug de loop (56.4M inscritos). Prioridad ahora vuelve a la subcuenta principal Carwarriors LLC: confirmar si el acceso a GHL (perdido el 14-jul) ya se recuperó.
+proximo_paso: Rances Car en producción, sin pendientes conocidos (ver historial 2026-07-21). Foco actual: Lead Sync GHL→DealerCenter — mecanismo SFTP+ADF/XML validado end-to-end 2026-07-22, arquitectura decidida (n8n). A la espera de que Jorge González responda si Rances Car/Car Express comparten el DCID de Carwarriors LLC o necesitan cuenta propia (mensaje enviado 2026-07-22); mientras tanto se puede avanzar construyendo el workflow n8n para Carwarriors LLC.
 estado_comercial: pruebas-en-curso
 creado: 2026-06-18
-actualizado: 2026-07-20
+actualizado: 2026-07-22
 ---
 
 # Cliente — Carwarriors LLC
@@ -51,6 +51,44 @@ actualizado: 2026-07-20
 | **2FA** | Código SMS al +1 786-502-5614 (Jorge) |
 | **Teléfono de verificación EE.UU.** | 786-739-9691 |
 | **GHL MCP Endpoint** | https://services.leadconnectorhq.com/mcp/ |
+| **DealerCenter (usuario)** | jcalderon90 |
+| **DealerCenter (contraseña)** | Dealermiami100@ |
+| **DealerCenter 2FA** | Código por email a jcalderon900610@gmail.com (no SMS) |
+| **DealerCenter — dealer vinculado a este login** | Solo **CARWARRIORS LLC** (no hay selector multi-rooftop en esta cuenta — sin evidencia de que Rances Car / Car Express tengan cuenta propia, confirmar con Jorge) |
+
+---
+
+## DealerCenter — Credenciales SFTP para envío de leads (generadas 2026-07-22)
+
+> [!warning] Información sensible — no compartir
+
+Generadas desde Dealer Settings → Customer → Lead Management → SFTP to Lead (Secure File Transfer) → "Generate SFTP Credentials to Provide Lead Sources". Confirmado con Jorge antes de generarlas (no había credenciales previas).
+
+| Campo | Valor |
+|---|---|
+| **DC Company ID (DCID)** | 14031841 *(confirmado en Dealership → General → "DC Company ID", coincide con el prefijo del username/email de abajo)* |
+| **Host** | dccrmleadsprod.blob.core.windows.net |
+| **Port** | 22 |
+| **Username** | dccrmleadsprod.14031841 |
+| **Password** | KZ5gBkFeXt3l/0U/RNmitUiymhEn+bs2 |
+| **Directory** | /Leads/ |
+
+> [!info] Hallazgo técnico
+> El host es un endpoint de **Azure Blob Storage con soporte SFTP** (`*.blob.core.windows.net`), no un servidor SFTP tradicional — Azure Blob Storage tiene una feature nativa de SFTP que DealerCenter usa como backend. Relevante para la decisión n8n vs Cloudflare Worker: cualquier cliente SFTP estándar debería funcionar contra Azure Blob SFTP sin configuración especial.
+
+> [!info] Posible vía alternativa a explorar: email
+> En la misma pantalla de Lead Management aparece **"Email to provide Lead Sources": `14031841@leadsprod.dealercenter.net`**. No confirmado todavía si esto acepta un ADF/XML adjunto por email como vía de ingesta alternativa al SFTP (sería mucho más simple de implementar en un Cloudflare Worker que SFTP) o si es solo para registrar nombres de lead source. No se probó — se priorizó SFTP por ser la vía oficial y documentada (el email fue deprecado por GLBA según la investigación original).
+
+> [!success] VALIDADO END-TO-END 2026-07-22 — el mecanismo SFTP + ADF/XML funciona de verdad
+> Se armó un XML de prueba mínimo (basado en el ejemplo de la investigación, DCID 14031841, cliente "FORJADO TEST LEAD BORRAR") y se subió por SFTP con `curl` (soporta SFTP vía libssh2) a `/Leads/` usando las credenciales de arriba. El archivo desapareció del directorio poco después de subirlo (confirma que DealerCenter lo consume activamente, no es una carpeta pasiva). El contador "My New Prospects" en el Home de DealerCenter subió de 3 a 4, y buscando "FORJADO" en Customer → Reports → My New Prospects apareció el lead completo: nombre, email, teléfono, **Source = "CARWARRIORS LLC - GHL - FORJADO TEST - WHAT..."** (coincide exactamente con el campo `<provider><name>` del XML), Status NEW, Type INTERNET.
+>
+> **Detalle técnico:** el host SFTP es un endpoint de Azure Blob Storage con soporte SFTP nativo (confirmado por el banner `AzureSSH_1.0.0` al hacer `ssh-keyscan`) — cualquier cliente SFTP estándar conecta sin configuración especial (se verificó con `curl` vía libssh2, pinneando el host key con `--hostpubsha256` en vez de usar known_hosts).
+>
+> **Hallazgo curioso sin explicar:** antes de subir el XML de prueba, el directorio `/Leads/` ya contenía 2 archivos con nombres aleatorios (`3muMegFrf2x2z22XaOrh.xml`, `xQNvxsxTD5BIy8n0HE8s.xml`) que no se pudieron leer (permiso denegado — es una cuenta de solo escritura/drop-box). Podrían ser residuos de un intento previo (¿el mismo origen del Cloudflare Worker "gyoan"?) o archivos en cola sin procesar. Preguntar a Jorge/Karel si tienen contexto.
+>
+> **✅ Limpieza hecha 2026-07-22:** el lead de prueba "FORJADO TEST LEAD BORRAR" se marcó como `Deleted` (Customer detail → botón "⋮" → "Mark as Deleted", confirmado por Jorge). Status queda en "Deleted by Jorge Calderon - jcalderon90 on 07/22/2026".
+>
+> **Con esto, la arquitectura n8n vs Cloudflare Worker deja de ser una duda teórica**: SFTP real contra este host ya se probó y funciona; n8n sigue siendo la opción más simple de construir (nodo FTP/SFTP nativo) pero un Cloudflare Worker con una librería SFTP para JS también sería viable ahora que se confirmó el mecanismo end-to-end.
 
 ---
 
@@ -178,7 +216,14 @@ actualizado: 2026-07-20
 ### Panel de Métricas (GHL)
 
 > [!bug] Error activo
-> El panel "Metricas Deeler Center" en GHL muestra: *"Error: No metrics found for date"* (verificado 17/06/2026). Posible desconexión del token de API o fallo en el webhook de sincronización diaria.
+> El panel "Metricas Deeler Center" en GHL muestra: *"Error: No metrics found for date"* (verificado 17/06/2026 y de nuevo 2026-07-21). Posible desconexión del token de API o fallo en el webhook de sincronización diaria.
+
+> [!info] Hallazgo 2026-07-21: identificado el backend real de este panel
+> El custom menu link "Metricas Deeler Center" en GHL (`custom-menu-link/71282143-641c-4a9d-a2be-f7fc5d1907fe`) embebe un **Cloudflare Worker ya existente**: `https://dc-metrics-dashboard.gyoan.workers.dev/` (título "📊 BDC Metrics Dashboard PRO"). No estaba documentado antes en el vault — es infraestructura de un desarrollador/agencia previa (subdominio de cuenta Cloudflare "gyoan"), no algo que FORJADO haya construido.
+> - El frontend llama a `GET /api/metrics/daily?date=YYYY-MM-DD`, que responde `{"ok": false, "error": "No metrics found for date", "key": "dc:metrics_daily:YYYY-MM-DD"}` — confirma que lee de un **Cloudflare KV namespace** con keys tipo `dc:metrics_daily:<fecha>`, y que ese KV está vacío (probado con la fecha actual y con 2025-09-06, ambas 404).
+> - El tooltip del dashboard dice "los datos se actualizan automáticamente cada 5 minutos" — implica que debería existir un cron/webhook separado escribiendo a ese KV, pero no se encontró evidencia de que esté corriendo.
+> - Es un dashboard de **solo lectura de métricas BDC/Sales** (productividad, top performers, distribución de llamadas) — **no** es la vía de sincronización de leads GHL→DealerCenter que se investiga por separado (ver [[Carwarriors - SFTP DealerCenter (Investigación)]]). Son dos integraciones distintas con DealerCenter: esta reporta *desde* DealerCenter (rota), la otra inyectaría leads *hacia* DealerCenter (no construida).
+> - Pendiente: preguntarle a Jorge/Karel si conocen el origen de este Worker (¿un desarrollador anterior? ¿tienen acceso a la cuenta de Cloudflare "gyoan"?) — podría ser reutilizable o dar pistas de una integración a medio construir.
 
 **Módulos que debería mostrar (cuando funcione):**
 - Resumen ejecutivo del día
@@ -274,6 +319,8 @@ actualizado: 2026-07-20
 - 2026-07-17 — Cliente entregó un token API nuevo (`pit-c30b22ca-d09c-45a4-967e-8b75e574a783`), confirmado por prueba directa contra la API como perteneciente a la subcuenta **Rances Car** (antes sin Location ID documentado). Se instaló Playwright en este entorno y, con credenciales propias del usuario (2FA por correo, no por SMS), se logró entrar por primera vez a la interfaz de GHL vía navegador — esto resuelve la limitación de "solo API, sin acceso a Agent Studio/Conversation AI" que bloqueaba avances desde el 2026-07-10. Al entrar a Rances Car se descubrió que el cliente **ya estaba construyendo ahí el equivalente del Agente Social**, replicando el prompt de Carwarriors LLC, pero la sesión (en otra PC) se cortó por un apagón a medio trabajo. Se documentó el estado exacto en el que quedó — ver [[Carwarriors - Agente IA Rances Car (Diseño)]]. Pendiente: seguir aplicando ahí las mismas calibraciones ya validadas en Carwarriors LLC, y por separado seguir el bloqueo de acceso de la subcuenta principal (sin novedades desde el 14 de julio).
 - 2026-07-18 — Se retomó Rances Car (mismo acceso Playwright). Hallazgo: el cliente siguió avanzando por su cuenta entre el 17 y el 18 — "Setup your Actions" del "Agente Social RancesCar" ya no estaba vacío: **Appointment Booking** (multi calendars Samuel Aguilar + Scarleth Hassiel Rubi, cancelar/reagendar habilitado), **Human Handover** (3 escenarios On, asignado a Scarleth Hassiel Rubi, reactiva en 8h) y **Auto Followup** (3 escenarios On, 15 min) quedaron configurados igual que en Carwarriors LLC. Faltan **Contact Info** y **Trigger a Workflow** (plantillas vacías). Se aplicaron en vivo 3 de las calibraciones ya validadas en Carwarriors LLC (bot sigue en `Off`, sin riesgo): typo "Rancer Car"→"Rances Car", Goal actualizado a los 4 canales, Visit Rules acortada, y silencio total post hand-off. Se dejó sin tocar la promo Tesla (pendiente confirmar con el cliente si aplica a este dealer). Se resolvió también la duda de los "193 contactos con bot en Off": es solo reporte de tráfico agregado por canal, no evidencia de que la IA esté respondiendo. Además se encontró que el workflow **"Rances Car - Ruteo Human Handover por Turno"** (Automation → Asignacion), construido en una sesión anterior el 17-jul, **nunca se había guardado** (quedó vacío) — se reconstruyó de cero: If/Else por día/hora (Scarleth Lun-Sáb 8am-5pm / Samuel Mar-Dom 5pm-9pm / None sin acción en los huecos), se guardó, **se publicó y se probó en vivo** con un contacto de prueba (Jorge Calderón) — el Execution log confirmó que tomó la rama "None" correctamente (domingo noche, fuera de ambos turnos). **Sesión interrumpida por corte de electricidad** justo antes de empezar a configurar Contact Info (contenido de los 6 campos ya decidido, sin escribir aún) — detalle completo y próximo paso exacto en [[Carwarriors - Agente IA Rances Car (Diseño)]].
 - 2026-07-20 — **"Agente Social RancesCar" activado en producción** (modo guiado por captura de pantalla, cliente operando su propio navegador). Se completó todo lo que quedó pendiente el 18-jul: **Contact Info** (6 campos, con 2 "Output Example" cada custom field — requisito no documentado antes); **Trigger a Workflow** (se descartó construir un "Workflow Crear Oportunidad" nuevo al confirmar que "Workflow Contactado" ya hace find-or-create de oportunidad internamente — se reusa ese mismo workflow para los 2 triggers del bot); **promo Tesla movida a Knowledge Base** (artículo "Campañas activas", prompt actualizado con regla genérica de check a KB); contacto de prueba Jorge Calderón eliminado; **"Goodbye Detection" (Stop Bot) decidido dejar en `Off`** (las frases pre-cargadas eran despedidas casuales sin ventana de reactivación — activarlo habría abandonado leads tibios para siempre, contra la filosofía de no dejar enfriar al cliente); investigado el sistema de asignación general `Workflow Asig Agente (Entrada)` — confirmado complementario al Human Handover (no conflictivo), con un desalineamiento menor de horario de Scarleth (6:45pm vs 5pm) que queda como mejora futura; y confirmado que "Asignación por Turno"/"Reintento" en Rances Car también tiene el bug de loop ya visto en la subcuenta principal (56.4M inscritos vs 74M en Carwarriors LLC). **Cierre: "Set as Primary Bot" + Auto Pilot aplicado — bot en vivo** en Facebook/Instagram/WhatsApp/SMS. Decisión del cliente: "Agente Nocturno RancesCar" se va a borrar directamente, no se audita.
+- 2026-07-21 — Cerrados los 3 pendientes que quedaban de Rances Car: bot "Agente Nocturno RancesCar" borrado en GHL (confirmado por Jorge antes de ejecutar, acción irreversible); horario de Scarleth alineado a las 5pm en `Workflow Asig Agente (Entrada)` (antes 6:45pm, desalineado contra el workflow de ruteo por turno); promo Tesla/horario de negocio/jerarquía de escalamiento de 5 niveles confirmados por Jorge como iguales a Carwarriors LLC (no necesitan versión propia). Se descartó (decisión de Jorge) reportar a soporte GHL el bug de loop de 56.4M inscritos — mismo patrón no reportado tampoco en Carwarriors LLC. Rances Car queda sin pendientes conocidos.
+- 2026-07-22 — **Lead Sync GHL→DealerCenter: mecanismo validado end-to-end por primera vez.** Jorge confirmó tener acceso a DealerCenter (usuario jcalderon90) y se logueó en vivo (2FA por email) en la misma sesión de Playwright ya usada para GHL. Se generaron las credenciales SFTP reales (Dealer Settings → Customer → Lead Management → SFTP to Lead) y se confirmó el DCID de Carwarriors LLC (**14031841**, en Dealership → General → "DC Company ID"). Se armó un XML de prueba en formato ADF, se subió por SFTP con `curl` (soporta SFTP vía libssh2, pinneando el host key con `--hostpubsha256`) a `/Leads/`, y apareció como lead real en DealerCenter (Customer → Reports → My New Prospects) con todos los datos coincidiendo — confirmando que el mecanismo oficial de DealerCenter funciona de verdad, no solo en documentación. El lead de prueba se marcó como `Deleted` para no confundir al equipo de ventas. Hallazgo técnico: el host SFTP es Azure Blob Storage con soporte SFTP nativo (banner `AzureSSH_1.0.0`). Hallazgo sin explicar: el directorio `/Leads/` ya tenía 2 archivos con nombres aleatorios no legibles (permiso denegado, cuenta de solo escritura) antes de la prueba — posible residuo de un intento anterior, sin confirmar con Jorge/Karel. **Arquitectura decidida: n8n** (no Cloudflare Worker) para construir el workflow de producción que arme el XML y lo suba por SFTP automáticamente ante cada lead nuevo de GHL. Se le explicó todo esto a Jorge Calderón en lenguaje simple (analogía de "buzón" y "carta") para que se lo reenviara a Jorge González, incluyendo la pregunta pendiente de si Rances Car/Car Express comparten el DCID 14031841 o necesitan cuenta propia en DealerCenter — mensaje ya enviado, a la espera de respuesta. Detalle técnico completo (credenciales, ejemplo de XML, hallazgos) en la sección "DealerCenter" más abajo en esta misma nota.
 
 ## Auditoría Técnica Pendiente
 
@@ -283,12 +330,12 @@ actualizado: 2026-07-20
 - [x] ¿Tiene DealerCenter API REST documentada o acceso de desarrollador? -> Confirmado que **no** se dispone de API oficial de desarrollador (sí existe una API *no oficial* de un tercero, Supergood, documentada como plan B en la investigación).
 - [x] Evaluar opciones -> Intentos previos: (1) Make → descartado por costo de operaciones. (2) Playwright + fetch interno → descartado por inestabilidad. (3) n8n + SFTP + ADF/XML → viable, pendiente de decisión.
 - [x] Investigación SFTP/ADF-XML completada (2026-07-08) -> Ver [[Carwarriors - SFTP DealerCenter (Investigación)]]. DealerCenter sí soporta SFTP oficial. Hallazgo: SFTP es difícil de implementar en el runtime de Cloudflare Workers (sockets TCP con sesión, no HTTP simple) — n8n trae nodo FTP/SFTP nativo. Reabre la decisión Worker vs n8n.
-- [ ] **Decisión pendiente del usuario:** ¿construir el tramo GHL → DealerCenter en n8n (recomendado por los hallazgos técnicos) o insistir con el Cloudflare Worker?
-- [ ] Que Jorge/Karel generen las credenciales SFTP reales desde DealerCenter (Dealer Settings → Customer → Lead Management → Generate SFTP Credentials)
-- [ ] Confirmar el DCID de DealerCenter (Dealer Setting → Dealer Profile Settings) y si las 3 subcuentas GHL comparten un solo DCID o cada una tiene el suyo
-- [ ] Definir estructura exacta del ADF/XML que espera DealerCenter (ya hay un ejemplo base en la nota de investigación, falta confirmar si el bloque `<vehicle>` es obligatorio poblado)
-- [ ] Implementar la transformación a ADF/XML + subida SFTP (en n8n o Worker, según decisión)
-- [ ] Probar con un lead de prueba en GHL → verificar que llega a DealerCenter
+- [x] **Decisión de arquitectura tomada 2026-07-22: n8n** (no Cloudflare Worker) para construir el tramo GHL → DealerCenter.
+- [x] Credenciales SFTP generadas 2026-07-22 desde DealerCenter (Dealer Settings → Customer → Lead Management → SFTP to Lead) — ver sección "DealerCenter" más abajo para host/usuario/password/directorio.
+- [x] DCID de Carwarriors LLC confirmado: **14031841** (Dealership → General → "DC Company ID"). -> Pendiente: confirmar si Rances Car/Car Express comparten este DCID o necesitan cuenta propia — mensaje enviado a Jorge González 2026-07-22, a la espera de respuesta.
+- [x] Probado con un lead de prueba real 2026-07-22 → **llegó a DealerCenter correctamente** (ver historial). El bloque `<vehicle>` se probó poblado (año/marca/modelo) y funcionó; no se probó sin poblar, no es bloqueante.
+- [ ] Implementar el workflow real en n8n: recibir lead nuevo desde GHL (webhook o trigger), armar el XML ADF con los datos reales, subir por SFTP a DealerCenter automáticamente.
+- [ ] Definir convención de nombre de archivo (no confirmado si DealerCenter la exige; se usó un nombre descriptivo en la prueba sin problema).
 
 ### Agente de Captura de Leads en n8n (nuevo, 2026-07-08)
 - [x] Workflow diseñado y exportado: `carwarriors_lead_intake_agent_workflow.json` (webhook GHL → clasifica canal → pide teléfono si falta [IG/Messenger] → guarda en MongoDB Atlas colección `leads`)
@@ -318,7 +365,8 @@ actualizado: 2026-07-20
 ### Agente IA 24/7 — subcuenta principal Carwarriors LLC (ver detalle en [[Carwarriors - Agente IA 24-7 (Diseño)]] y [[Carwarriors - Comportamiento del Bot (Resumen)]])
 
 - [x] Bot en vivo desde 2026-07-14: `Primary` + `Auto-Pilot`, Appointment Booking, Trigger a Workflow, Auto Followup y Human Handover (Nallely de Leon) configurados.
-- [ ] **Bloqueado desde 2026-07-14:** confirmar si la cita de prueba (14 jul, 12:20 PM) creó un evento/contacto real en GHL — se perdió el acceso a la cuenta a mitad de la verificación, sigue sin confirmarse. Requiere que el equipo de Carwarriors reactive el acceso.
+- [x] Acceso a GHL recuperado 2026-07-15 (el bloqueo de "me expulsaron" del 14-jul no volvió a mencionarse desde entonces; el trabajo en Rances Car y DealerCenter continuó con normalidad en la misma cuenta de agencia).
+- [ ] Sigue sin confirmarse si la cita de prueba (14 jul, 12:20 PM) creó un evento/contacto real en GHL — no se retomó esta verificación específica, no bloquea nada más.
 - [ ] (Mensaje pendiente de enviar) Preguntar a Jorge González directo sobre `BDC Callback`/calendario de Maria Eleonor
 - [ ] (Mensaje pendiente de enviar) 3 preguntas técnicas a soporte GHL: 74M inscritos en 2 workflows, pestaña "Needs review", workflow "N8N" con 6 inscritos
 - [ ] Fase 2: tarea de confirmación de cita día -1, explicar Knowledge Base al cliente + sync de inventario diario, destrabar calendario BDC-A
@@ -340,24 +388,25 @@ actualizado: 2026-07-20
 - [x] Aclarado 2026-07-18: los 193 contactos/2.21h ahorradas con ambos bots en `Off` son solo reporte de tráfico agregado por canal.
 - [x] **Set as Primary Bot + Auto Pilot — hecho 2026-07-20. Bot en vivo: `Primary` + `Auto-Pilot`, Facebook/Instagram/WhatsApp/SMS.**
 
-**Pendientes que NO bloquean, quedan para después:**
-- [ ] Borrar "Agente Nocturno RancesCar" (decisión del cliente 2026-07-20, sin auditar, falta ejecutar).
-- [ ] Alinear el corte de horario de Scarleth entre "Workflow Asig Agente (Entrada)" (6:45pm) y "Ruteo Human Handover por Turno" (5pm).
-- [ ] Bug de loop en "Asignación por Turno (Control Principal)" / "Reintento de Asignación por Turno" (56.4M inscritos cada uno) — mismo bug que en la subcuenta principal (ahí 74M), reportar a soporte GHL.
+**Pendientes de Rances Car — todos cerrados 2026-07-21:**
+- [x] Borrado "Agente Nocturno RancesCar" (confirmado por Jorge antes de ejecutar, irreversible).
+- [x] Horario de Scarleth alineado a las 5pm en "Workflow Asig Agente (Entrada)" (antes 6:45pm).
+- [x] Promo Tesla / horario de negocio / jerarquía de escalamiento confirmados por Jorge como iguales a Carwarriors LLC.
+- Descartado por decisión de Jorge: reportar a soporte GHL el bug de loop (56.4M inscritos) — mismo patrón tampoco reportado en Carwarriors LLC. Rances Car sin pendientes conocidos.
 
-### Lead Sync — GHL → DealerCenter (en re-evaluación: n8n vs CF Worker)
+### Lead Sync — GHL → DealerCenter — arquitectura decidida: n8n (2026-07-22)
 
-> [!warning] Arquitectura en revisión
-> La investigación del 2026-07-08 (ver [[Carwarriors - SFTP DealerCenter (Investigación)]]) muestra que SFTP real es difícil de implementar en Cloudflare Workers, mientras que n8n ya trae soporte SFTP nativo. Se deja pendiente la decisión final del usuario antes de construir este tramo.
+> [!success] Mecanismo validado end-to-end 2026-07-22
+> Se generaron credenciales SFTP reales, se confirmó el DCID de Carwarriors LLC (14031841), y se subió un XML de prueba que se convirtió en un lead real dentro de DealerCenter — confirmando que el camino SFTP + ADF/XML funciona de verdad. Detalle técnico completo (credenciales, hallazgos) en la sección "DealerCenter" y en el historial del 2026-07-22, más arriba en esta misma nota.
 
 **Próximas acciones:**
-- [ ] Decidir: n8n o Cloudflare Worker para el tramo GHL → DealerCenter
-- [ ] Obtener credenciales SFTP de DealerCenter (host, puerto, usuario, clave) — las genera el propio dealer desde su panel
-- [ ] Confirmar DCID y estructura exacta del ADF/XML que DealerCenter espera
-- [ ] Elegir subcuenta destino de leads (Carwarriors LLC / Car Express / Rances Car)
-- [ ] Desarrollar la transformación a ADF/XML + subida SFTP
-- [ ] Probar con lead real desde GHL
-- [ ] Monitorear primeras 24h de operación
+- [x] ~~Decidir: n8n o Cloudflare Worker~~ → **n8n**.
+- [x] ~~Obtener credenciales SFTP de DealerCenter~~ → hecho 2026-07-22.
+- [x] ~~Confirmar DCID~~ → 14031841 (Carwarriors LLC).
+- [x] ~~Probar con lead real~~ → hecho 2026-07-22, confirmado que llega y se crea correctamente.
+- [ ] Confirmar con Jorge González si Rances Car/Car Express comparten este DCID o necesitan cuenta propia en DealerCenter — mensaje enviado 2026-07-22, a la espera de respuesta.
+- [ ] Construir el workflow real en n8n: trigger de lead nuevo en GHL → armar XML ADF con datos reales → subir por SFTP a DealerCenter.
+- [ ] Monitorear primeras 24h de operación una vez esté en producción.
 
 ### Agente de Captura de Leads en n8n
 

@@ -1,0 +1,561 @@
+- generic [ref=f6e4]:
+  - generic [ref=f6e7]:
+    - generic [ref=f6e8]:
+      - generic [ref=f6e9]:
+        - link "" [ref=f6e10] [cursor=pointer]:
+          - /url: reports/home
+        - generic [ref=f6e14]:
+          - textbox "Search Inventory, Customer, Deal ..." [ref=f6e15]
+          - button "" [ref=f6e17] [cursor=pointer]
+      - generic [ref=f6e19]:
+        - button "CARWARRIORS LLC" [active] [ref=f6e1714] [cursor=pointer]:
+          - generic [ref=f6e22]:
+            - generic [ref=f6e23]: CARWARRIORS LLC
+            - generic [ref=f6e25]: 
+        - generic [ref=f6e26]:
+          - button "" [ref=f6e28] [cursor=pointer]
+          - generic [ref=f6e30]:
+            - button "" [ref=f6e31] [cursor=pointer]
+            - generic: "1"
+          - generic [ref=f6e34]:
+            - button "" [ref=f6e35] [cursor=pointer]
+            - generic: "1"
+          - button "" [ref=f6e39] [cursor=pointer]
+        - button "" [ref=f6e42] [cursor=pointer]
+        - button "JC" [ref=f6e45] [cursor=pointer]
+    - generic [ref=f6e1716]:
+      - generic [ref=f6e1717]:
+        - generic "CARWARRIORS LLC" [ref=f6e1718]
+        - generic [ref=f6e1719]: Company Name
+      - generic [ref=f6e1721]:
+        - button " Pay My Bill" [ref=f6e1722] [cursor=pointer]:
+          - generic [ref=f6e1723]: 
+          - generic [ref=f6e1724]: Pay My Bill
+        - button " Products" [ref=f6e1726] [cursor=pointer]:
+          - generic [ref=f6e1727]: 
+          - generic [ref=f6e1728]: Products
+        - button " Settings" [ref=f6e1729] [cursor=pointer]:
+          - generic [ref=f6e1730]: 
+          - generic [ref=f6e1731]: Settings
+  - generic [ref=f6e48]:
+    - generic [ref=f6e49]:
+      - menubar [ref=f6e52]:
+        - menuitem "Home" [ref=f6e53] [cursor=pointer]:
+          - generic [ref=f6e54]:
+            - generic [ref=f6e55]: 
+            - generic [ref=f6e56]: Home
+        - menuitem "Reports" [ref=f6e57] [cursor=pointer]:
+          - generic [ref=f6e58]:
+            - generic [ref=f6e59]: 
+            - generic [ref=f6e60]: Reports
+        - menuitem "Inventory" [ref=f6e61] [cursor=pointer]:
+          - generic [ref=f6e62]:
+            - generic [ref=f6e63]: 
+            - generic [ref=f6e64]: Inventory
+        - menuitem "Customer" [ref=f6e65] [cursor=pointer]:
+          - generic [ref=f6e66]:
+            - generic [ref=f6e67]: 
+            - generic [ref=f6e68]: Customer
+        - menuitem "Deal" [ref=f6e69] [cursor=pointer]:
+          - generic [ref=f6e70]:
+            - generic [ref=f6e71]: 
+            - generic [ref=f6e72]: Deal
+        - menuitem "BHPH" [ref=f6e73] [cursor=pointer]:
+          - generic [ref=f6e74]:
+            - generic [ref=f6e75]: 
+            - generic [ref=f6e76]: BHPH
+        - menuitem "Marketing" [ref=f6e77] [cursor=pointer]:
+          - generic [ref=f6e78]:
+            - generic [ref=f6e79]: 
+            - generic [ref=f6e80]: Marketing
+        - menuitem "Accounting" [ref=f6e81] [cursor=pointer]:
+          - generic [ref=f6e82]:
+            - generic [ref=f6e83]: 
+            - generic [ref=f6e84]: Accounting
+        - menuitem "CarZing" [ref=f6e85] [cursor=pointer]:
+          - generic [ref=f6e86]:
+            - generic [ref=f6e87]: 
+            - generic [ref=f6e88]: CarZing
+        - menuitem "My Account" [ref=f6e89] [cursor=pointer]:
+          - generic [ref=f6e90]:
+            - generic [ref=f6e91]: 
+            - generic [ref=f6e92]: My Account
+        - menuitem "Admin" [ref=f6e93] [cursor=pointer]:
+          - generic [ref=f6e94]:
+            - generic [ref=f6e95]: 
+            - generic [ref=f6e96]: Admin
+        - menuitem "Dealer Settings" [ref=f6e97] [cursor=pointer]:
+          - generic [ref=f6e98]:
+            - generic [ref=f6e99]: 
+            - generic [ref=f6e100]: Settings
+      - generic [ref=f6e837]:
+        - generic [ref=f6e845]:
+          - generic [ref=f6e846]:
+            - generic [ref=f6e847]: Settings
+            - generic "CARWARRIORS LLC" [ref=f6e848]
+          - generic [ref=f6e849]:
+            - generic [ref=f6e850]:
+              - button "Dealership" [ref=f6e851] [cursor=pointer]
+              - generic [ref=f6e853]:
+                - button "General" [ref=f6e855] [cursor=pointer]
+                - button "Website" [ref=f6e859] [cursor=pointer]
+            - button "Inventory" [ref=f6e865] [cursor=pointer]
+            - button "Reconditioning" [ref=f6e868] [cursor=pointer]
+            - button "Customer" [ref=f6e871] [cursor=pointer]
+            - button "Deal" [ref=f6e874] [cursor=pointer]
+            - button "BHPH" [ref=f6e877] [cursor=pointer]
+            - button "Service" [ref=f6e880] [cursor=pointer]
+            - button "Auction" [ref=f6e883] [cursor=pointer]
+            - button "Carzing" [ref=f6e886] [cursor=pointer]
+            - button "Websites" [ref=f6e889] [cursor=pointer]
+            - button "Accounting" [ref=f6e892] [cursor=pointer]
+            - button "Payments" [ref=f6e895] [cursor=pointer]
+            - button "All Notifications" [ref=f6e898] [cursor=pointer]
+        - button "" [ref=f6e842] [cursor=pointer]
+    - generic [ref=f6e103]:
+      - generic [ref=f6e902]:
+        - generic [ref=f6e904]:
+          - button [ref=f6e906] [cursor=pointer]:
+            - generic [ref=f6e907]: 
+          - textbox "Search settings" [ref=f6e909]
+        - generic [ref=f6e1142]:
+          - generic [ref=f6e1143]:
+            - generic [ref=f6e1144]: Dealership
+            - generic [ref=f6e1145]: 
+            - generic [ref=f6e1146]: General
+          - generic [ref=f6e1149]:
+            - generic [ref=f6e1152]:
+              - generic [ref=f6e1153]:
+                - generic [ref=f6e1154]: Dealer Setting
+                - paragraph [ref=f6e1156]: Setting for basic dealership information like tax/EIN numbers, contact info, and the dealership's address.
+              - generic [ref=f6e1160]:
+                - generic [ref=f6e1161]:
+                  - generic [ref=f6e1163]:
+                    - generic [ref=f6e1165]:
+                      - generic [ref=f6e1166]:
+                        - generic [ref=f6e1167]: Name
+                        - generic "CARWARRIORS LLC" [ref=f6e1168]:
+                          - generic:
+                            - textbox [disabled]: CARWARRIORS LLC
+                      - generic [ref=f6e1169]:
+                        - generic [ref=f6e1170]: Company Name Alias
+                        - textbox [ref=f6e1172]
+                    - generic [ref=f6e1176]:
+                      - application [ref=f6e1177]
+                      - button [ref=f6e1180] [cursor=pointer]:
+                        - generic [ref=f6e1184]:
+                          - img "Icon Upload" [ref=f6e1445]
+                          - button "Upload Company Logo" [ref=f6e1186]
+                  - generic [ref=f6e1187]:
+                    - generic [ref=f6e1188]:
+                      - generic [ref=f6e1189]:
+                        - generic [ref=f6e1190]: Dealer License No.
+                        - generic:
+                          - textbox [disabled]: vI11324371
+                      - generic [ref=f6e1191]:
+                        - generic [ref=f6e1192]: Dealer No.
+                        - textbox [ref=f6e1194]: VI11324371
+                      - generic [ref=f6e1195]:
+                        - generic [ref=f6e1196]: DC Company ID
+                        - generic:
+                          - textbox [disabled]: "14031841"
+                    - generic [ref=f6e1197]:
+                      - generic [ref=f6e1198]:
+                        - generic [ref=f6e1199]: Westlake Dealer Code
+                        - generic:
+                          - textbox [disabled]: "100425881"
+                      - generic [ref=f6e1200]:
+                        - generic [ref=f6e1201]: Sales Tax License
+                        - textbox [ref=f6e1203]: 23-8018004641-3
+                      - generic [ref=f6e1204]:
+                        - generic [ref=f6e1205]: EIN No.
+                        - textbox [ref=f6e1207]
+                - generic [ref=f6e1208]:
+                  - heading "Contact Info" [level=5] [ref=f6e1210]
+                  - generic [ref=f6e1212]:
+                    - generic [ref=f6e1213]:
+                      - generic [ref=f6e1214]: Phone No.
+                      - textbox [ref=f6e1217]: (786) 717-4787
+                    - generic [ref=f6e1218]:
+                      - generic [ref=f6e1219]: Fax No.
+                      - textbox [ref=f6e1222]: (305) 675-3806
+                    - generic [ref=f6e1223]:
+                      - generic [ref=f6e1224]: Email
+                      - generic [ref=f6e1225]:
+                        - text: 
+                        - textbox [ref=f6e1226]
+                - generic [ref=f6e1227]:
+                  - heading "Address" [level=5] [ref=f6e1229]
+                  - generic [ref=f6e1230]:
+                    - generic [ref=f6e1231]:
+                      - generic [ref=f6e1232]:
+                        - generic [ref=f6e1233]: Physical Address
+                        - generic [ref=f6e1235]:
+                          - generic:
+                            - text: 
+                            - textbox [disabled]: 3620 NW 27th Ave, Miami, FL 33142
+                          - generic [ref=f6e1236]: 
+                      - generic [ref=f6e1239]:
+                        - generic [ref=f6e1240]: County
+                        - generic [ref=f6e1241]:
+                          - combobox [ref=f6e1243]: Miami-Dade
+                          - button "Select" [ref=f6e1244] [cursor=pointer]:
+                            - generic [ref=f6e1245]: 
+                      - generic [ref=f6e1247]:
+                        - generic [ref=f6e1248]: County Code
+                        - textbox [ref=f6e1250]: "33142"
+                    - generic [ref=f6e1251]:
+                      - generic [ref=f6e1253]:
+                        - checkbox [ref=f6e1254] [cursor=pointer]
+                        - generic [ref=f6e1255]: Same mailing address
+                      - button "Request Address Change" [ref=f6e1259] [cursor=pointer]
+                    - generic [ref=f6e1262]:
+                      - generic [ref=f6e1263]: Mailing Address
+                      - generic [ref=f6e1265]:
+                        - generic [ref=f6e1266]:
+                          - text: 
+                          - textbox [ref=f6e1267]
+                        - generic [ref=f6e1268]: 
+                - generic [ref=f6e1271]:
+                  - heading "Default Reminders Settings" [level=5] [ref=f6e1273]
+                  - generic [ref=f6e1274]:
+                    - generic [ref=f6e1275]:
+                      - generic [ref=f6e1276]: Default Appointment Reminder
+                      - combobox [ref=f6e1277] [cursor=pointer]:
+                        - generic [ref=f6e1278]: None
+                        - button "Select" [ref=f6e1280]:
+                          - generic [ref=f6e1281]: 
+                    - generic [ref=f6e1283]:
+                      - generic [ref=f6e1284]: Default Task Reminder
+                      - combobox [ref=f6e1285] [cursor=pointer]:
+                        - generic [ref=f6e1286]: None
+                        - button "Select" [ref=f6e1288]:
+                          - generic [ref=f6e1289]: 
+                - generic [ref=f6e1291]:
+                  - heading "Consent" [level=5] [ref=f6e1293]
+                  - generic [ref=f6e1295]:
+                    - checkbox "Consent for Sharing and Use of Information" [disabled]
+                    - generic [ref=f6e1296]: Consent for Sharing and Use of Information
+                    - button "Read more about consent sharing" [ref=f6e1297] [cursor=pointer]: Read More...
+            - generic [ref=f6e1300]:
+              - generic [ref=f6e1301]:
+                - generic [ref=f6e1302]: Store Hours
+                - paragraph [ref=f6e1304]: Controls to set the dealership's hours of operation.
+              - generic [ref=f6e1309]:
+                - generic [ref=f6e1310]:
+                  - button "Sun" [pressed] [ref=f6e1312] [cursor=pointer]
+                  - generic [ref=f6e1314]:
+                    - generic [ref=f6e1315]:
+                      - text: 
+                      - combobox "null" [ref=f6e1317]: 10:00 AM
+                      - button "Toggle time list" [ref=f6e1318] [cursor=pointer]:
+                        - generic [ref=f6e1319]: 
+                    - generic [ref=f6e1321]: "-"
+                    - generic [ref=f6e1322]:
+                      - text: 
+                      - combobox "null" [ref=f6e1324]: 4:00 PM
+                      - button "Toggle time list" [ref=f6e1325] [cursor=pointer]:
+                        - generic [ref=f6e1326]: 
+                - generic [ref=f6e1328]:
+                  - button "Mon" [pressed] [ref=f6e1330] [cursor=pointer]
+                  - generic [ref=f6e1332]:
+                    - generic [ref=f6e1333]:
+                      - text: 
+                      - combobox "null" [ref=f6e1335]: 10:00 AM
+                      - button "Toggle time list" [ref=f6e1336] [cursor=pointer]:
+                        - generic [ref=f6e1337]: 
+                    - generic [ref=f6e1339]: "-"
+                    - generic [ref=f6e1340]:
+                      - text: 
+                      - combobox "null" [ref=f6e1342]: 9:00 PM
+                      - button "Toggle time list" [ref=f6e1343] [cursor=pointer]:
+                        - generic [ref=f6e1344]: 
+                - generic [ref=f6e1346]:
+                  - button "Tue" [pressed] [ref=f6e1348] [cursor=pointer]
+                  - generic [ref=f6e1350]:
+                    - generic [ref=f6e1351]:
+                      - text: 
+                      - combobox "null" [ref=f6e1353]: 10:00 AM
+                      - button "Toggle time list" [ref=f6e1354] [cursor=pointer]:
+                        - generic [ref=f6e1355]: 
+                    - generic [ref=f6e1357]: "-"
+                    - generic [ref=f6e1358]:
+                      - text: 
+                      - combobox "null" [ref=f6e1360]: 9:00 PM
+                      - button "Toggle time list" [ref=f6e1361] [cursor=pointer]:
+                        - generic [ref=f6e1362]: 
+                - generic [ref=f6e1364]:
+                  - button "Wed" [pressed] [ref=f6e1366] [cursor=pointer]
+                  - generic [ref=f6e1368]:
+                    - generic [ref=f6e1369]:
+                      - text: 
+                      - combobox "null" [ref=f6e1371]: 10:00 AM
+                      - button "Toggle time list" [ref=f6e1372] [cursor=pointer]:
+                        - generic [ref=f6e1373]: 
+                    - generic [ref=f6e1375]: "-"
+                    - generic [ref=f6e1376]:
+                      - text: 
+                      - combobox "null" [ref=f6e1378]: 9:00 PM
+                      - button "Toggle time list" [ref=f6e1379] [cursor=pointer]:
+                        - generic [ref=f6e1380]: 
+                - generic [ref=f6e1382]:
+                  - button "Thu" [pressed] [ref=f6e1384] [cursor=pointer]
+                  - generic [ref=f6e1386]:
+                    - generic [ref=f6e1387]:
+                      - text: 
+                      - combobox "null" [ref=f6e1389]: 10:00 AM
+                      - button "Toggle time list" [ref=f6e1390] [cursor=pointer]:
+                        - generic [ref=f6e1391]: 
+                    - generic [ref=f6e1393]: "-"
+                    - generic [ref=f6e1394]:
+                      - text: 
+                      - combobox "null" [ref=f6e1396]: 9:00 PM
+                      - button "Toggle time list" [ref=f6e1397] [cursor=pointer]:
+                        - generic [ref=f6e1398]: 
+                - generic [ref=f6e1400]:
+                  - button "Fri" [pressed] [ref=f6e1402] [cursor=pointer]
+                  - generic [ref=f6e1404]:
+                    - generic [ref=f6e1405]:
+                      - text: 
+                      - combobox "null" [ref=f6e1407]: 10:00 AM
+                      - button "Toggle time list" [ref=f6e1408] [cursor=pointer]:
+                        - generic [ref=f6e1409]: 
+                    - generic [ref=f6e1411]: "-"
+                    - generic [ref=f6e1412]:
+                      - text: 
+                      - combobox "null" [ref=f6e1414]: 9:00 PM
+                      - button "Toggle time list" [ref=f6e1415] [cursor=pointer]:
+                        - generic [ref=f6e1416]: 
+                - generic [ref=f6e1418]:
+                  - button "Sat" [pressed] [ref=f6e1420] [cursor=pointer]
+                  - generic [ref=f6e1422]:
+                    - generic [ref=f6e1423]:
+                      - text: 
+                      - combobox "null" [ref=f6e1425]: 10:00 AM
+                      - button "Toggle time list" [ref=f6e1426] [cursor=pointer]:
+                        - generic [ref=f6e1427]: 
+                    - generic [ref=f6e1429]: "-"
+                    - generic [ref=f6e1430]:
+                      - text: 
+                      - combobox "null" [ref=f6e1432]: 9:00 PM
+                      - button "Toggle time list" [ref=f6e1433] [cursor=pointer]:
+                        - generic [ref=f6e1434]: 
+            - generic [ref=f6e1438]:
+              - generic [ref=f6e1439]:
+                - generic [ref=f6e1440]: Special Store Hours
+                - paragraph [ref=f6e1442]: Override store hours for holidays and special days.
+              - generic [ref=f6e1449]:
+                - table [ref=f6e1451]:
+                  - rowgroup [ref=f6e1452]:
+                    - row [ref=f6e1453]:
+                      - columnheader "Date" [ref=f6e1454]
+                      - columnheader "Holiday" [ref=f6e1455]
+                      - columnheader "Status" [ref=f6e1456]
+                      - columnheader "Hours of Operation" [ref=f6e1457]
+                  - rowgroup [ref=f6e1458]:
+                    - row [ref=f6e1459]:
+                      - cell "Thu, Jan 1, 2026" [ref=f6e1460]
+                      - cell "New Year Federal Fixed date every year" [ref=f6e1462]:
+                        - generic [ref=f6e1463]:
+                          - generic [ref=f6e1464]:
+                            - generic [ref=f6e1465]: New Year
+                            - generic [ref=f6e1466]: Federal
+                          - generic [ref=f6e1467]: Fixed date every year
+                      - cell [ref=f6e1468]:
+                        - combobox [ref=f6e1469] [cursor=pointer]:
+                          - generic [ref=f6e1470]: Open
+                          - button "Select" [ref=f6e1472]:
+                            - generic [ref=f6e1473]: 
+                      - cell [ref=f6e1475]
+                    - row [ref=f6e1476]:
+                      - cell "Mon, Jan 19, 2026" [ref=f6e1477]
+                      - cell "MLK Day Federal 3rd Mon in Jan every year" [ref=f6e1479]:
+                        - generic [ref=f6e1480]:
+                          - generic [ref=f6e1481]:
+                            - generic [ref=f6e1482]: MLK Day
+                            - generic [ref=f6e1483]: Federal
+                          - generic [ref=f6e1484]: 3rd Mon in Jan every year
+                      - cell [ref=f6e1485]:
+                        - combobox [ref=f6e1486] [cursor=pointer]:
+                          - generic [ref=f6e1487]: Open
+                          - button "Select" [ref=f6e1489]:
+                            - generic [ref=f6e1490]: 
+                      - cell [ref=f6e1492]
+                    - row [ref=f6e1493]:
+                      - cell "Mon, Feb 16, 2026" [ref=f6e1494]
+                      - cell "Presidents Day Federal 3rd Mon in Feb every year" [ref=f6e1496]:
+                        - generic [ref=f6e1497]:
+                          - generic [ref=f6e1498]:
+                            - generic [ref=f6e1499]: Presidents Day
+                            - generic [ref=f6e1500]: Federal
+                          - generic [ref=f6e1501]: 3rd Mon in Feb every year
+                      - cell [ref=f6e1502]:
+                        - combobox [ref=f6e1503] [cursor=pointer]:
+                          - generic [ref=f6e1504]: Open
+                          - button "Select" [ref=f6e1506]:
+                            - generic [ref=f6e1507]: 
+                      - cell [ref=f6e1509]
+                    - row [ref=f6e1510]:
+                      - cell "Mon, May 25, 2026" [ref=f6e1511]
+                      - cell "Memorial Day Federal Last Mon in May every year" [ref=f6e1513]:
+                        - generic [ref=f6e1514]:
+                          - generic [ref=f6e1515]:
+                            - generic [ref=f6e1516]: Memorial Day
+                            - generic [ref=f6e1517]: Federal
+                          - generic [ref=f6e1518]: Last Mon in May every year
+                      - cell [ref=f6e1519]:
+                        - combobox [ref=f6e1520] [cursor=pointer]:
+                          - generic [ref=f6e1521]: Open
+                          - button "Select" [ref=f6e1523]:
+                            - generic [ref=f6e1524]: 
+                      - cell [ref=f6e1526]
+                    - row [ref=f6e1527]:
+                      - cell "Fri, Jun 19, 2026" [ref=f6e1528]
+                      - cell "Juneteenth Federal Fixed date every year" [ref=f6e1530]:
+                        - generic [ref=f6e1531]:
+                          - generic [ref=f6e1532]:
+                            - generic [ref=f6e1533]: Juneteenth
+                            - generic [ref=f6e1534]: Federal
+                          - generic [ref=f6e1535]: Fixed date every year
+                      - cell [ref=f6e1536]:
+                        - combobox [ref=f6e1537] [cursor=pointer]:
+                          - generic [ref=f6e1538]: Open
+                          - button "Select" [ref=f6e1540]:
+                            - generic [ref=f6e1541]: 
+                      - cell [ref=f6e1543]
+                    - row [ref=f6e1544]:
+                      - cell "Sat, Jul 4, 2026" [ref=f6e1545]
+                      - cell "Independence Day Federal Fixed date every year" [ref=f6e1547]:
+                        - generic [ref=f6e1548]:
+                          - generic [ref=f6e1549]:
+                            - generic [ref=f6e1550]: Independence Day
+                            - generic [ref=f6e1551]: Federal
+                          - generic [ref=f6e1552]: Fixed date every year
+                      - cell [ref=f6e1553]:
+                        - combobox [ref=f6e1554] [cursor=pointer]:
+                          - generic [ref=f6e1555]: Open
+                          - button "Select" [ref=f6e1557]:
+                            - generic [ref=f6e1558]: 
+                      - cell [ref=f6e1560]
+                    - row [ref=f6e1561]:
+                      - cell "Mon, Sep 7, 2026" [ref=f6e1562]
+                      - cell "Labor Day Federal 1st Mon in Sep every year" [ref=f6e1564]:
+                        - generic [ref=f6e1565]:
+                          - generic [ref=f6e1566]:
+                            - generic [ref=f6e1567]: Labor Day
+                            - generic [ref=f6e1568]: Federal
+                          - generic [ref=f6e1569]: 1st Mon in Sep every year
+                      - cell [ref=f6e1570]:
+                        - combobox [ref=f6e1571] [cursor=pointer]:
+                          - generic [ref=f6e1572]: Open
+                          - button "Select" [ref=f6e1574]:
+                            - generic [ref=f6e1575]: 
+                      - cell [ref=f6e1577]
+                    - row [ref=f6e1578]:
+                      - cell "Mon, Oct 12, 2026" [ref=f6e1579]
+                      - cell "Columbus Day Federal 2nd Mon in Oct every year" [ref=f6e1581]:
+                        - generic [ref=f6e1582]:
+                          - generic [ref=f6e1583]:
+                            - generic [ref=f6e1584]: Columbus Day
+                            - generic [ref=f6e1585]: Federal
+                          - generic [ref=f6e1586]: 2nd Mon in Oct every year
+                      - cell [ref=f6e1587]:
+                        - combobox [ref=f6e1588] [cursor=pointer]:
+                          - generic [ref=f6e1589]: Open
+                          - button "Select" [ref=f6e1591]:
+                            - generic [ref=f6e1592]: 
+                      - cell [ref=f6e1594]
+                    - row [ref=f6e1595]:
+                      - cell "Wed, Nov 11, 2026" [ref=f6e1596]
+                      - cell "Veterans Day Federal Fixed date every year" [ref=f6e1598]:
+                        - generic [ref=f6e1599]:
+                          - generic [ref=f6e1600]:
+                            - generic [ref=f6e1601]: Veterans Day
+                            - generic [ref=f6e1602]: Federal
+                          - generic [ref=f6e1603]: Fixed date every year
+                      - cell [ref=f6e1604]:
+                        - combobox [ref=f6e1605] [cursor=pointer]:
+                          - generic [ref=f6e1606]: Open
+                          - button "Select" [ref=f6e1608]:
+                            - generic [ref=f6e1609]: 
+                      - cell [ref=f6e1611]
+                    - row [ref=f6e1612]:
+                      - cell "Thu, Nov 26, 2026" [ref=f6e1613]
+                      - cell "Thanksgiving Federal 4th Thu in Nov every year" [ref=f6e1615]:
+                        - generic [ref=f6e1616]:
+                          - generic [ref=f6e1617]:
+                            - generic [ref=f6e1618]: Thanksgiving
+                            - generic [ref=f6e1619]: Federal
+                          - generic [ref=f6e1620]: 4th Thu in Nov every year
+                      - cell [ref=f6e1621]:
+                        - combobox [ref=f6e1622] [cursor=pointer]:
+                          - generic [ref=f6e1623]: Open
+                          - button "Select" [ref=f6e1625]:
+                            - generic [ref=f6e1626]: 
+                      - cell [ref=f6e1628]
+                    - row [ref=f6e1629]:
+                      - cell "Fri, Nov 27, 2026" [ref=f6e1630]
+                      - cell "Black Friday Day after Thanksgiving every year" [ref=f6e1632]:
+                        - generic [ref=f6e1633]:
+                          - generic [ref=f6e1634]: Black Friday
+                          - generic [ref=f6e1636]: Day after Thanksgiving every year
+                      - cell [ref=f6e1637]:
+                        - combobox [ref=f6e1638] [cursor=pointer]:
+                          - generic [ref=f6e1639]: Open
+                          - button "Select" [ref=f6e1641]:
+                            - generic [ref=f6e1642]: 
+                      - cell [ref=f6e1644]
+                    - row [ref=f6e1645]:
+                      - cell "Thu, Dec 24, 2026" [ref=f6e1646]
+                      - cell "Christmas Eve Fixed date every year" [ref=f6e1648]:
+                        - generic [ref=f6e1649]:
+                          - generic [ref=f6e1650]: Christmas Eve
+                          - generic [ref=f6e1652]: Fixed date every year
+                      - cell [ref=f6e1653]:
+                        - combobox [ref=f6e1654] [cursor=pointer]:
+                          - generic [ref=f6e1655]: Open
+                          - button "Select" [ref=f6e1657]:
+                            - generic [ref=f6e1658]: 
+                      - cell [ref=f6e1660]
+                    - row [ref=f6e1661]:
+                      - cell "Fri, Dec 25, 2026" [ref=f6e1662]
+                      - cell "Christmas Day Federal Fixed date every year" [ref=f6e1664]:
+                        - generic [ref=f6e1665]:
+                          - generic [ref=f6e1666]:
+                            - generic [ref=f6e1667]: Christmas Day
+                            - generic [ref=f6e1668]: Federal
+                          - generic [ref=f6e1669]: Fixed date every year
+                      - cell [ref=f6e1670]:
+                        - combobox [ref=f6e1671] [cursor=pointer]:
+                          - generic [ref=f6e1672]: Open
+                          - button "Select" [ref=f6e1674]:
+                            - generic [ref=f6e1675]: 
+                      - cell [ref=f6e1677]
+                    - row [ref=f6e1678]:
+                      - cell "Thu, Dec 31, 2026" [ref=f6e1679]
+                      - cell "New Year's Eve Fixed date every year" [ref=f6e1681]:
+                        - generic [ref=f6e1682]:
+                          - generic [ref=f6e1683]: New Year's Eve
+                          - generic [ref=f6e1685]: Fixed date every year
+                      - cell [ref=f6e1686]:
+                        - combobox [ref=f6e1687] [cursor=pointer]:
+                          - generic [ref=f6e1688]: Open
+                          - button "Select" [ref=f6e1690]:
+                            - generic [ref=f6e1691]: 
+                      - cell [ref=f6e1693]
+                - generic [ref=f6e1694]: Custom Days
+                - paragraph [ref=f6e1696]: Add dealership-specific closures or special-hour days.
+                - generic [ref=f6e1697]:
+                  - generic [ref=f6e1698]:
+                    - tablist [ref=f6e1700]:
+                      - tab "Upcoming" [selected] [ref=f6e1701]
+                      - tab "Past" [ref=f6e1703]
+                    - tabpanel "Upcoming" [ref=f6e1705]:
+                      - generic [ref=f6e1707]:
+                        - text: No upcoming custom days. Click
+                        - strong [ref=f6e1708]: Add
+                        - text: to create one.
+                  - button " Add" [ref=f6e1711] [cursor=pointer]:
+                    - generic [ref=f6e1712]: 
+                    - generic [ref=f6e1713]: Add
+      - tooltip "CARWARRIORS LLC" [ref=f6e1734]

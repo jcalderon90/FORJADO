@@ -1,0 +1,445 @@
+- generic [active] [ref=f7e1]:
+  - generic [ref=f7e4]:
+    - generic [ref=f7e18]:
+      - generic [ref=f7e19]:
+        - link "" [ref=f7e20] [cursor=pointer]:
+          - /url: reports/home
+        - generic [ref=f7e24]:
+          - textbox "Search Inventory, Customer, Deal ..." [ref=f7e25]
+          - button "" [ref=f7e27] [cursor=pointer]
+      - generic [ref=f7e29]:
+        - button "CARWARRIORS LLC Miami, FL " [ref=f7e31] [cursor=pointer]:
+          - generic [ref=f7e32]:
+            - generic [ref=f7e33]:
+              - generic [ref=f7e34]: CARWARRIORS LLC
+              - generic [ref=f7e35]: Miami, FL
+            - generic [ref=f7e36]: 
+        - generic [ref=f7e37]:
+          - button "" [ref=f7e39] [cursor=pointer]
+          - generic [ref=f7e41]:
+            - button "" [ref=f7e42] [cursor=pointer]
+            - generic: "1"
+          - generic [ref=f7e45]:
+            - button "" [ref=f7e46] [cursor=pointer]
+            - generic: "1"
+          - button "" [ref=f7e50] [cursor=pointer]
+          - button "" [ref=f7e53] [cursor=pointer]
+        - button "" [ref=f7e56] [cursor=pointer]
+        - button "JC" [ref=f7e59] [cursor=pointer]
+    - generic [ref=f7e8]:
+      - menubar [ref=f7e62]:
+        - menuitem "Home" [ref=f7e63] [cursor=pointer]:
+          - generic [ref=f7e64]:
+            - generic [ref=f7e65]: 
+            - generic [ref=f7e66]: Home
+        - menuitem "Reports" [ref=f7e67] [cursor=pointer]:
+          - generic [ref=f7e68]:
+            - generic [ref=f7e69]: 
+            - generic [ref=f7e70]: Reports
+        - menuitem "Inventory" [ref=f7e71] [cursor=pointer]:
+          - generic [ref=f7e72]:
+            - generic [ref=f7e73]: 
+            - generic [ref=f7e74]: Inventory
+        - menuitem "Auctions" [ref=f7e75] [cursor=pointer]:
+          - generic [ref=f7e76]:
+            - generic [ref=f7e77]: 
+            - generic [ref=f7e78]: Auctions
+        - menuitem "Customer" [ref=f7e79] [cursor=pointer]:
+          - generic [ref=f7e80]:
+            - generic [ref=f7e81]: 
+            - generic [ref=f7e82]: Customer
+        - menuitem "Deal" [ref=f7e83] [cursor=pointer]:
+          - generic [ref=f7e84]:
+            - generic [ref=f7e85]: 
+            - generic [ref=f7e86]: Deal
+        - menuitem "BHPH" [ref=f7e87] [cursor=pointer]:
+          - generic [ref=f7e88]:
+            - generic [ref=f7e89]: 
+            - generic [ref=f7e90]: BHPH
+        - menuitem "Marketing" [ref=f7e91] [cursor=pointer]:
+          - generic [ref=f7e92]:
+            - generic [ref=f7e93]: 
+            - generic [ref=f7e94]: Marketing
+        - menuitem "Accounting" [ref=f7e95] [cursor=pointer]:
+          - generic [ref=f7e96]:
+            - generic [ref=f7e97]: 
+            - generic [ref=f7e98]: Accounting
+        - menuitem "QuickBooks" [ref=f7e99] [cursor=pointer]:
+          - generic [ref=f7e100]:
+            - generic [ref=f7e101]: 
+            - generic [ref=f7e102]: QuickBooks
+        - menuitem "Force" [ref=f7e103] [cursor=pointer]:
+          - generic [ref=f7e104]:
+            - generic [ref=f7e105]: 
+            - generic [ref=f7e106]: Support
+        - menuitem "Admin" [ref=f7e107] [cursor=pointer]:
+          - generic [ref=f7e108]:
+            - generic [ref=f7e109]: 
+            - generic [ref=f7e110]: Admin
+        - menuitem "Dealer Settings" [ref=f7e111] [cursor=pointer]:
+          - generic [ref=f7e112]:
+            - generic [ref=f7e113]: 
+            - generic [ref=f7e114]: Settings
+      - generic [ref=f7e850]:
+        - generic [ref=f7e1120]:
+          - generic [ref=f7e1121]:
+            - button " Back to Report List" [ref=f7e1122] [cursor=pointer]:
+              - generic [ref=f7e1123]: 
+              - generic [ref=f7e1124]: Back to Report List
+            - generic [ref=f7e1125]:
+              - generic [ref=f7e1126]: 1 of 1
+              - generic "Prev Record" [ref=f7e1127]:
+                - button "" [disabled]
+              - generic "Next Record" [ref=f7e1128]:
+                - button "" [disabled]
+              - button "" [ref=f7e1131] [cursor=pointer]
+          - generic [ref=f7e1136]:
+            - generic [ref=f7e1139]:
+              - generic [ref=f7e1140]:
+                - generic [ref=f7e1141]:
+                  - generic [ref=f7e1142]:
+                    - generic [ref=f7e1143]: Forjado Test Lead - Borrar
+                    - generic [ref=f7e1144]: New
+                  - combobox [ref=f7e1146] [cursor=pointer]:
+                    - generic [ref=f7e1149]:
+                      - generic [ref=f7e1150]: 
+                      - text: Normal
+                    - button "Select" [ref=f7e1151]:
+                      - generic [ref=f7e1152]: 
+                - generic [ref=f7e1155]:
+                  - text: We value your feedback
+                  - link "Email" [ref=f7e1156] [cursor=pointer]:
+                    - /url: mailto:DCCRM@nowcom.com;wwong@nowcom.com;rbourothu@nowcom.com?subject=CRM%20Redesign%20feedback
+                  - text: Us.
+              - generic [ref=f7e1158]:
+                - button "Check - In" [ref=f7e1159] [cursor=pointer]
+                - button "Start Deal" [ref=f7e1161] [cursor=pointer]
+                - button "Start Desk" [ref=f7e1163] [cursor=pointer]
+                - button "Save" [ref=f7e1165] [cursor=pointer]
+                - button "Close" [ref=f7e1167] [cursor=pointer]
+                - button [ref=f7e1171] [cursor=pointer]:
+                  - generic [ref=f7e1172]: 
+                - button "" [ref=f7e1174] [cursor=pointer]
+            - generic [ref=f7e1176]:
+              - generic [ref=f7e1182]:
+                - generic [ref=f7e1183]:
+                  - tablist [ref=f7e1185]:
+                    - tab "Buyer" [selected] [ref=f7e1186]
+                    - tab "Add Co-Buyer" [ref=f7e1188]
+                    - tab "Referrer" [ref=f7e1190]
+                  - tabpanel "Buyer"
+                - generic [ref=f7e1195]:
+                  - generic [ref=f7e1196]:
+                    - generic [ref=f7e1197]: Buyer Name
+                    - generic [ref=f7e1200]:
+                      - generic [ref=f7e1201]:
+                        - text: 
+                        - textbox [ref=f7e1202]: Forjado Test Lead - Borrar
+                      - generic [ref=f7e1203]: 
+                  - generic [ref=f7e1206]:
+                    - generic [ref=f7e1207]: Cell Phone
+                    - generic [ref=f7e1210]:
+                      - generic [ref=f7e1211]: 
+                      - generic [ref=f7e1214]:
+                        - generic [ref=f7e1215]:
+                          - text: 
+                          - textbox [ref=f7e1216] [cursor=pointer]: (786) 000-0001
+                        - button "" [ref=f7e1217] [cursor=pointer]:
+                          - generic [ref=f7e1219]:
+                            - generic [ref=f7e1220]: 
+                            - generic [ref=f7e1221]: 
+                  - generic [ref=f7e1222]:
+                    - generic [ref=f7e1223]: Home Phone
+                    - generic [ref=f7e1226]:
+                      - generic [ref=f7e1227]: 
+                      - generic [ref=f7e1230]:
+                        - generic [ref=f7e1231]:
+                          - text: 
+                          - textbox [ref=f7e1232] [cursor=pointer]: (786) 000-0001
+                        - button "" [ref=f7e1233] [cursor=pointer]
+                  - generic [ref=f7e1237]:
+                    - generic [ref=f7e1238]: Work Phone
+                    - generic [ref=f7e1242]:
+                      - generic [ref=f7e1243]:
+                        - text: 
+                        - textbox [ref=f7e1244] [cursor=pointer]
+                      - button "" [ref=f7e1245] [cursor=pointer]
+                  - generic [ref=f7e1249]:
+                    - generic [ref=f7e1250]: Email
+                    - generic [ref=f7e1254]:
+                      - generic [ref=f7e1255]:
+                        - text: 
+                        - textbox [ref=f7e1256] [cursor=pointer]: forjado-test@example.com
+                      - button "" [ref=f7e1257] [cursor=pointer]
+                  - generic [ref=f7e1261]:
+                    - generic [ref=f7e1262]: Lead Type
+                    - generic [ref=f7e1265]:
+                      - text: 
+                      - combobox [ref=f7e1267]: Internet
+                      - button "Select" [ref=f7e1268] [cursor=pointer]:
+                        - generic [ref=f7e1269]: 
+                  - generic [ref=f7e1271]:
+                    - generic [ref=f7e1272]: Lead Source
+                    - generic [ref=f7e1275]:
+                      - text: 
+                      - combobox [ref=f7e1277]: Carwarriors LLC - GHL - FORJADO TEST - WhatsApp / Instagram / Messenger
+                      - button "Select" [ref=f7e1278] [cursor=pointer]:
+                        - generic [ref=f7e1279]: 
+                  - generic [ref=f7e1281]:
+                    - generic [ref=f7e1282]: Inquiry Type
+                    - generic [ref=f7e1284]:
+                      - text: 
+                      - combobox [ref=f7e1286]
+                      - button "Select" [ref=f7e1287] [cursor=pointer]:
+                        - generic [ref=f7e1288]: 
+                  - generic [ref=f7e1290]:
+                    - generic [ref=f7e1291]: Preferred Lang.
+                    - generic [ref=f7e1293]:
+                      - text: 
+                      - combobox [ref=f7e1295]
+                      - button "Select" [ref=f7e1296] [cursor=pointer]:
+                        - generic [ref=f7e1297]: 
+                  - generic [ref=f7e1299]:
+                    - generic [ref=f7e1300]: Contact Method
+                    - generic [ref=f7e1302]:
+                      - text: 
+                      - combobox [ref=f7e1304]
+                      - button "Select" [ref=f7e1305] [cursor=pointer]:
+                        - generic [ref=f7e1306]: 
+                  - generic [ref=f7e1308]:
+                    - generic [ref=f7e1309]: Contact Time
+                    - generic [ref=f7e1311]:
+                      - text: 
+                      - combobox [ref=f7e1313]
+                      - button "Select" [ref=f7e1314] [cursor=pointer]:
+                        - generic [ref=f7e1315]: 
+                  - generic [ref=f7e1321]:
+                    - generic [ref=f7e1322]:
+                      - generic [ref=f7e1323]: BDC Rep
+                      - generic [ref=f7e1329]:
+                        - textbox [ref=f7e1331]
+                        - button "Search" [ref=f7e1333] [cursor=pointer]:
+                          - generic [ref=f7e1334]: 
+                    - generic [ref=f7e1336]:
+                      - generic [ref=f7e1337]: Sales Rep
+                      - generic [ref=f7e1343]:
+                        - textbox [ref=f7e1345]
+                        - button "Search" [ref=f7e1347] [cursor=pointer]:
+                          - generic [ref=f7e1348]: 
+                    - textbox "Special Notes" [ref=f7e1352]
+                  - generic [ref=f7e1354]:
+                    - checkbox "For Manager Review" [ref=f7e1355] [cursor=pointer]
+                    - text: For Manager Review
+                  - button "Find / Merge Duplicates" [ref=f7e1358] [cursor=pointer]
+              - generic [ref=f7e1362]:
+                - navigation [ref=f7e1364]:
+                  - list [ref=f7e1365]:
+                    - listitem [ref=f7e1366]:
+                      - link "New" [disabled] [ref=f7e1367]:
+                        - /url: "#"
+                    - listitem [ref=f7e1372]:
+                      - link "Contact Attempt" [disabled] [ref=f7e1373]:
+                        - /url: "#"
+                    - listitem [ref=f7e1377]:
+                      - link "Contacted" [disabled] [ref=f7e1378]:
+                        - /url: "#"
+                    - listitem [ref=f7e1382]:
+                      - link "Appt. Scheduled" [disabled] [ref=f7e1383]:
+                        - /url: "#"
+                    - listitem [ref=f7e1387]:
+                      - link "Working Deal" [disabled] [ref=f7e1388]:
+                        - /url: "#"
+                    - listitem [ref=f7e1392]:
+                      - link "Missed Appt." [disabled] [ref=f7e1393]:
+                        - /url: "#"
+                    - listitem [ref=f7e1397]:
+                      - link "Visit Followup" [disabled] [ref=f7e1398]:
+                        - /url: "#"
+                    - listitem [ref=f7e1402]:
+                      - link "Sold" [disabled] [ref=f7e1403]:
+                        - /url: "#"
+                    - listitem [ref=f7e1407]:
+                      - link "Lost" [disabled] [ref=f7e1408]:
+                        - /url: "#"
+                - button "Update Status" [ref=f7e1414] [cursor=pointer]
+              - generic [ref=f7e1418]:
+                - generic [ref=f7e1419]:
+                  - button "Credit Report" [ref=f7e1420] [cursor=pointer]:
+                    - generic [ref=f7e1421]:
+                      - generic [ref=f7e1422]: 
+                      - text: Credit Report
+                  - button "Pre-Qual" [ref=f7e1423] [cursor=pointer]:
+                    - generic [ref=f7e1424]:
+                      - generic [ref=f7e1425]: 
+                      - text: Pre-Qual
+                  - generic [ref=f7e1427]:
+                    - generic "Not Applicable" [ref=f7e1428]: 
+                    - text: ID Verification
+                  - generic [ref=f7e1430]:
+                    - generic "Not Applicable" [ref=f7e1431]: 
+                    - text: OFAC
+                  - generic [ref=f7e1433]:
+                    - generic "Not Applicable" [ref=f7e1434]: 
+                    - text: Adverse Action
+                  - generic [ref=f7e1436]:
+                    - generic "Not Applicable" [ref=f7e1437]: 
+                    - text: CSDEN
+                  - generic [ref=f7e1439]:
+                    - generic "Not Applicable" [ref=f7e1440]: 
+                    - text: Privacy Notice
+                - generic [ref=f7e1441]:
+                  - generic [ref=f7e1442]:
+                    - generic [ref=f7e1443]:
+                      - text: Next Appt.
+                      - generic [ref=f7e1444]: Not Scheduled
+                    - generic [ref=f7e1445]:
+                      - text: Overdue Tasks
+                      - generic [ref=f7e1446]: None
+                    - generic [ref=f7e1447]:
+                      - text: Deposit
+                      - button "Take Deposit" [ref=f7e1449] [cursor=pointer]
+                    - generic [ref=f7e1451]:
+                      - text: Last Appt.
+                      - generic [ref=f7e1452]: None
+                    - generic [ref=f7e1453]:
+                      - text: Pending Tasks
+                      - generic [ref=f7e1454]: None
+                    - generic [ref=f7e1455]:
+                      - text: Deals
+                      - generic [ref=f7e1456]: None
+                  - generic [ref=f7e1457]:
+                    - generic [ref=f7e1458]:
+                      - text: Last Contact Attempt
+                      - generic [ref=f7e1459]: N/A
+                    - generic [ref=f7e1460]:
+                      - generic [ref=f7e1461]: Days Old
+                      - generic [ref=f7e1462]: "0"
+                    - generic [ref=f7e1463]:
+                      - text: Last Contacted
+                      - generic [ref=f7e1464]: N/A
+                    - generic [ref=f7e1465]:
+                      - generic [ref=f7e1466]: Days Since Activity
+                      - generic [ref=f7e1467]: "0"
+              - generic [ref=f7e1471]:
+                - generic [ref=f7e1472]:
+                  - tablist [ref=f7e1474]:
+                    - tab "Lead" [selected] [ref=f7e1475]
+                    - tab "Credit App" [ref=f7e1477]
+                    - tab "Pre-Qual" [ref=f7e1479]
+                    - tab "Vehicle" [ref=f7e1481]
+                    - tab "Deals" [ref=f7e1483]
+                    - tab "Files" [ref=f7e1485]
+                    - tab "Compliance" [ref=f7e1487]
+                    - tab "Duplicates" [ref=f7e1489]
+                    - tab "Journal Entries" [ref=f7e1491]
+                    - tab "Logs" [ref=f7e1493]
+                  - tabpanel "Buyer"
+                - generic [ref=f7e1497]:
+                  - generic [ref=f7e1499]:
+                    - generic [ref=f7e1500]:
+                      - button "Phone Call" [ref=f7e1504] [cursor=pointer]
+                      - button "Send SMS" [ref=f7e1507] [cursor=pointer]
+                      - button "Send Email" [ref=f7e1510] [cursor=pointer]
+                      - button "Schedule Appt" [ref=f7e1513] [cursor=pointer]
+                      - button "Add Task" [ref=f7e1516] [cursor=pointer]
+                      - button "Add Note" [ref=f7e1518] [cursor=pointer]
+                      - button "Disposition" [ref=f7e1521] [cursor=pointer]
+                    - generic [ref=f7e1524]:
+                      - generic [ref=f7e1525]:
+                        - text: Workflow
+                        - strong [ref=f7e1526]: FOLLOW UP WITH CUSTOMERS
+                      - button "" [ref=f7e1527] [cursor=pointer]
+                  - generic [ref=f7e1532]:
+                    - heading "Activity (3)" [level=3] [ref=f7e1534]
+                    - generic [ref=f7e1536]:
+                      - tablist [ref=f7e1539]:
+                        - tab [selected] [ref=f7e1540]
+                        - tab [ref=f7e1542]
+                        - tab [ref=f7e1544]
+                        - tab [ref=f7e1546]
+                        - tab [ref=f7e1548]
+                        - tab [ref=f7e1550]
+                        - tab [ref=f7e1552]
+                        - tab [ref=f7e1554]
+                        - tab [ref=f7e1556]
+                      - generic [ref=f7e1562]:
+                        - generic [ref=f7e1563]:
+                          - generic [ref=f7e1565]:
+                            - generic [ref=f7e1572]:
+                              - textbox "Search" [ref=f7e1573]
+                              - button [ref=f7e1575] [cursor=pointer]:
+                                - generic [ref=f7e1576]: 
+                            - generic [ref=f7e1579]:
+                              - generic [ref=f7e1580]: 
+                              - button "" [ref=f7e1583] [cursor=pointer]
+                          - generic [ref=f7e1587]:
+                            - button [disabled]
+                            - button "1" [disabled]
+                            - button [disabled]
+                        - generic [ref=f7e1589]:
+                          - generic [ref=f7e1590] [cursor=pointer]:
+                            - generic [ref=f7e1591]: Note
+                            - button [ref=f7e1599]:
+                              - generic [ref=f7e1600]: 
+                          - generic [ref=f7e1604] [cursor=pointer]:
+                            - generic [ref=f7e1605]: Disposition
+                            - generic [ref=f7e1606]: Add Note
+                          - generic [ref=f7e1607]:
+                            - generic [ref=f7e1609] [cursor=pointer]:
+                              - generic [ref=f7e1610]:
+                                - text: "Received request:"
+                                - generic [ref=f7e1612]:
+                                  - text: FORJADO-TEST-20260722 2026-07-22T04:55:28 sales
+                                  - generic [ref=f7e1613]: 2020 Toyota Camry
+                                  - generic [ref=f7e1614]:
+                                    - generic [ref=f7e1615]: FORJADO TEST LEAD - BORRAR forjado-test@example.com 7860000001
+                                    - text: TEST LEAD - validacion de integracion SFTP FORJADO 2026-07-22, favor ignorar/borrar
+                                  - generic [ref=f7e1616]: 14031841 Carwarriors LLC
+                                  - generic [ref=f7e1617]: GoHighLevel Carwarriors LLC - GHL - FORJADO TEST WhatsApp / Instagram / Messenger
+                              - button "Click to view full activity details" [ref=f7e1618]: •••
+                            - generic [ref=f7e1619]: "By: SYSTEM USER - systemuser - Wed July 22, 2026 12:58 AM"
+                        - generic [ref=f7e1623]:
+                          - generic [ref=f7e1624] [cursor=pointer]:
+                            - generic [ref=f7e1625]: Note
+                            - button [ref=f7e1633]:
+                              - generic [ref=f7e1634]: 
+                          - generic [ref=f7e1636] [cursor=pointer]:
+                            - generic [ref=f7e1638]:
+                              - generic [ref=f7e1639]: Disposition
+                              - generic [ref=f7e1640]: Add Note
+                            - generic [ref=f7e1642]:
+                              - generic [ref=f7e1643]: Subject
+                              - generic [ref=f7e1644]: Customer Note
+                          - generic [ref=f7e1645]:
+                            - generic [ref=f7e1646] [cursor=pointer]: TEST LEAD - validacion de integracion SFTP FORJADO 2026-07-22, favor ignorar/borrar
+                            - generic [ref=f7e1649]: "By: SYSTEM USER - systemuser - Wed July 22, 2026 12:58 AM"
+                        - generic [ref=f7e1653]:
+                          - generic [ref=f7e1654] [cursor=pointer]:
+                            - generic [ref=f7e1655]: Note
+                            - button [ref=f7e1663]:
+                              - generic [ref=f7e1664]: 
+                          - generic [ref=f7e1668] [cursor=pointer]:
+                            - generic [ref=f7e1669]: Disposition
+                            - generic [ref=f7e1670]: Add Note
+                          - generic [ref=f7e1671]:
+                            - generic [ref=f7e1672] [cursor=pointer]: There was no BDC rep ready for leads during automatic assignment.
+                            - generic [ref=f7e1675]: "By: SYSTEM USER - systemuser - Wed July 22, 2026 12:58 AM"
+                  - paragraph [ref=f7e1679]: Interested Vehicle
+        - text:                  
+    - iframe [ref=f7e848]:
+      - main [ref=f8e4]:
+        - generic [ref=f8e5]:
+          - generic [ref=f8e8]:
+            - generic "AI-powered assistant" [ref=f8e9]:
+              - generic [ref=f8e10]:
+                - generic [ref=f8e11]: 
+                - generic [ref=f8e12]: AI-powered assistant
+              - generic [ref=f8e13]:
+                - button "Expand chat" [ref=f8e15] [cursor=pointer]:
+                  - generic [ref=f8e16]: 
+                - button "Close chat" [ref=f8e18] [cursor=pointer]:
+                  - generic [ref=f8e19]: 
+            - text:     
+          - generic:
+            - alertdialog
+  - generic: Loading...
