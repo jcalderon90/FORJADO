@@ -4,7 +4,7 @@ tipo: investigacion-tecnica
 estado: en-progreso
 cliente: Carwarriors LLC
 creado: 2026-07-08
-actualizado: 2026-07-08
+actualizado: 2026-07-22
 ---
 
 # Investigación — Envío de leads a DealerCenter por SFTP (ADF/XML)
@@ -49,6 +49,9 @@ El archivo ADF/XML que se sube **debe incluir el tag `<vendor><id source="dealer
 
 - El DCID se encuentra en DealerCenter bajo **Dealer Setting → Dealer Profile Settings**.
 - Con 3 subcuentas GHL (Carwarriors LLC, Car Express Servicess, Rances Car) hay que confirmar si las 3 comparten un solo DCID en DealerCenter o si cada una tiene su propio DCID — esto define si se necesita un mapeo de "subcuenta GHL → DCID" antes de generar el XML.
+
+> [!success] Resuelto 2026-07-22 (audio de Bianca Cangialosi)
+> **Un solo DCID para todo el ecosistema** (14031841, ya confirmado en [[Carwarriors LLC]]). Rances Car y Carwarriors LLC comparten la misma cuenta DealerCenter — no hay mapeo "subcuenta GHL → DCID" que construir. La distinción entre dealers se hace dentro de DealerCenter con el campo **Lead Source** (convención de nombre con sufijo por dealer: `Trade-In CW` vs `Rances Trade-In`, `Tesla CW` vs `Tesla Rances`, `previous customer`, etc.) combinado con **Lead Type** (`Internet` por defecto para redes sociales/campañas, `Phone`, `Chat`, `Walk-in`). Esto sí introduce un requisito nuevo para el XML: falta confirmar qué tag ADF puebla estos dos campos nativos de DealerCenter (ver sección 4).
 
 ## 4. Formato ADF/XML — qué es y estructura
 
@@ -101,6 +104,9 @@ Fuentes de referencia:
 
 **Campos obligatorios según el estándar:** `requestdate` (ISO 8601, sin milisegundos ni zona horaria en el ejemplo de referencia) y al menos un dato de contacto del `customer`. El bloque `vehicle` es requerido por el estándar pero puede ir vacío/genérico si el lead aún no mostró interés en un auto puntual — a confirmar si DealerCenter lo exige poblado o acepta placeholder.
 
+> [!warning] Pendiente 2026-07-22 — mapeo de Lead Type / Lead Source
+> El XML de prueba pobló `<provider><name>` con texto libre ("CARWARRIORS LLC - GHL - FORJADO TEST"), y eso apareció en DealerCenter como el campo **Source** del lead — pero no se probó todavía con uno de los valores reales de negocio que usa el equipo (`Trade-In CW`, `Rances Trade-In`, `Tesla CW`, `Tesla Rances`, `previous customer`). Falta: (1) confirmar si `<provider><name>` es efectivamente el tag que puebla el campo **Lead Source** de DealerCenter (parece que sí, por lo visto en la prueba) o si Lead Source es un campo separado no cubierto por el estándar ADF; (2) confirmar qué tag mapea a **Lead Type** (`Internet`/`Phone`/`Chat`/`Walk-in`) — no se identificó todavía en el ejemplo de payload; (3) levantar la tabla completa de valores de Lead Source por campaña/dealer con Jorge/Bianca. Detalle de negocio completo en [[Carwarriors LLC]], sección "Cómo se distribuyen los leads dentro de DealerCenter".
+
 **Convención de nombre de archivo:** no confirmado para DealerCenter específicamente — es común en integraciones ADF/SFTP usar `[timestamp]_[contactId].xml` o `.adf.xml` para que el proceso de importación en el otro lado identifique archivos nuevos y no reprocese los ya importados. Hay que confirmarlo cuando se generen las credenciales (a veces el proveedor especifica una convención o un directorio de "procesados").
 
 ## 5. n8n vs Cloudflare Worker para este tramo — datos para decidir después
@@ -129,11 +135,12 @@ Se encontró un proveedor externo, **Supergood**, que ofrece una **API no oficia
 
 ## 7. Qué falta para poder implementar (bloqueadores reales)
 
-- [ ] Que Jorge o Karel generen las credenciales SFTP desde DealerCenter (Dealer Settings → Customer → Lead Management → Generate SFTP Credentials).
-- [ ] Confirmar el DCID de cada subcuenta (¿una sola cuenta DealerCenter para las 3 subcuentas GHL, o una por dealer?).
+- [x] Que Jorge o Karel generen las credenciales SFTP desde DealerCenter (Dealer Settings → Customer → Lead Management → Generate SFTP Credentials). -> Hecho 2026-07-22.
+- [x] Confirmar el DCID de cada subcuenta (¿una sola cuenta DealerCenter para las 3 subcuentas GHL, o una por dealer?). -> **Una sola cuenta/DCID (14031841) para las 3 subcuentas**, confirmado por Bianca 2026-07-22.
 - [ ] Confirmar si DealerCenter exige el bloque `<vehicle>` poblado o acepta un lead sin interés de vehículo específico (común en leads de primer contacto por redes sociales).
 - [ ] Confirmar convención de nombre de archivo y si hay una carpeta de "procesados"/logs de error que DealerCenter deje ver.
 - [ ] Decidir con el usuario: construir el armado de XML + subida SFTP dentro del mismo workflow n8n del agente de captura de leads, o como workflow separado.
+- [ ] **Nuevo (2026-07-22):** confirmar el tag ADF exacto que puebla Lead Type y Lead Source en DealerCenter, y levantar la tabla de valores de Lead Source por campaña/dealer (ver sección 4).
 
 ## Relacionado
 
