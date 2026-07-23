@@ -1,0 +1,349 @@
+- generic [ref=f5e4]:
+  - generic:         
+  - generic [ref=f5e51]:
+    - generic:             
+    - generic [ref=f5e1731]:
+      - generic [ref=f5e11024]:
+        - generic [ref=f5e11025]:
+          - button " Back to Report List" [ref=f5e11026] [cursor=pointer]:
+            - generic [ref=f5e11027]: 
+            - generic [ref=f5e11028]: Back to Report List
+          - generic [ref=f5e11029]:
+            - generic [ref=f5e11030]: 1 of 2
+            - generic "Prev Record" [ref=f5e11031]:
+              - button "" [disabled]
+            - generic "Next Record" [ref=f5e11032]:
+              - button "" [ref=f5e11033] [cursor=pointer]
+            - button "" [ref=f5e11559] [cursor=pointer]
+        - generic [ref=f5e11045]:
+          - generic [ref=f5e11048]:
+            - generic [ref=f5e11049]:
+              - generic [ref=f5e11050]:
+                - generic [ref=f5e11051]:
+                  - generic [ref=f5e11052]: Forjado Test Leadsource Borrar 3
+                  - generic [ref=f5e11053]: New
+                - combobox [ref=f5e11055] [cursor=pointer]:
+                  - generic [ref=f5e11058]:
+                    - generic [ref=f5e11059]: 
+                    - text: Normal
+                  - button "Select" [ref=f5e11060]:
+                    - generic [ref=f5e11061]: 
+              - generic [ref=f5e11064]:
+                - text: We value your feedback
+                - link "Email" [ref=f5e11065] [cursor=pointer]:
+                  - /url: mailto:DCCRM@nowcom.com;wwong@nowcom.com;rbourothu@nowcom.com?subject=CRM%20Redesign%20feedback
+                - text: Us.
+            - generic [ref=f5e11067]:
+              - button "Check - In" [ref=f5e11068] [cursor=pointer]
+              - button "Start Deal" [ref=f5e11070] [cursor=pointer]
+              - button "Start Desk" [ref=f5e11072] [cursor=pointer]
+              - button "Save" [ref=f5e11074] [cursor=pointer]
+              - button "Close" [ref=f5e11076] [cursor=pointer]
+              - button [ref=f5e11080] [cursor=pointer]:
+                - generic [ref=f5e11081]: 
+              - button "" [active] [ref=f5e11083] [cursor=pointer]
+          - generic [ref=f5e11085]:
+            - generic [ref=f5e11091]:
+              - generic [ref=f5e11092]:
+                - tablist [ref=f5e11094]:
+                  - tab "Buyer" [selected] [ref=f5e11095]
+                  - tab "Add Co-Buyer" [ref=f5e11097]
+                  - tab "Referrer" [ref=f5e11099]
+                - tabpanel "Buyer"
+              - generic [ref=f5e11104]:
+                - generic [ref=f5e11105]:
+                  - generic [ref=f5e11106]: Buyer Name
+                  - generic [ref=f5e11109]:
+                    - generic [ref=f5e11110]:
+                      - text: 
+                      - textbox [ref=f5e11111]: Forjado Test Leadsource Borrar 3
+                    - generic [ref=f5e11112]: 
+                - generic [ref=f5e11115]:
+                  - generic [ref=f5e11116]: Cell Phone
+                  - generic [ref=f5e11119]:
+                    - generic [ref=f5e11120]: 
+                    - generic [ref=f5e11123]:
+                      - generic [ref=f5e11124]:
+                        - text: 
+                        - textbox [ref=f5e11125] [cursor=pointer]: (305) 123-4568
+                      - button "" [ref=f5e11126] [cursor=pointer]:
+                        - generic [ref=f5e11128]:
+                          - generic [ref=f5e11129]: 
+                          - generic [ref=f5e11130]: 
+                - generic [ref=f5e11131]:
+                  - generic [ref=f5e11132]: Home Phone
+                  - generic [ref=f5e11135]:
+                    - generic [ref=f5e11136]: 
+                    - generic [ref=f5e11139]:
+                      - generic [ref=f5e11140]:
+                        - text: 
+                        - textbox [ref=f5e11141] [cursor=pointer]: (305) 123-4568
+                      - button "" [ref=f5e11142] [cursor=pointer]
+                - generic [ref=f5e11146]:
+                  - generic [ref=f5e11147]: Work Phone
+                  - generic [ref=f5e11151]:
+                    - generic [ref=f5e11152]:
+                      - text: 
+                      - textbox [ref=f5e11153] [cursor=pointer]
+                    - button "" [ref=f5e11154] [cursor=pointer]
+                - generic [ref=f5e11158]:
+                  - generic [ref=f5e11159]: Email
+                  - generic [ref=f5e11163]:
+                    - generic [ref=f5e11164]:
+                      - text: 
+                      - textbox [ref=f5e11165] [cursor=pointer]: forjado.test.leadsource3@example.com
+                    - button "" [ref=f5e11166] [cursor=pointer]
+                - generic [ref=f5e11170]:
+                  - generic [ref=f5e11171]: Lead Type
+                  - generic [ref=f5e11174]:
+                    - text: 
+                    - combobox [ref=f5e11176]: Internet
+                    - button "Select" [ref=f5e11177] [cursor=pointer]:
+                      - generic [ref=f5e11178]: 
+                - generic [ref=f5e11180]:
+                  - generic [ref=f5e11181]: Lead Source
+                  - generic [ref=f5e11184]:
+                    - text: 
+                    - combobox [ref=f5e11186]: Trade-In CW
+                    - button "Select" [ref=f5e11187] [cursor=pointer]:
+                      - generic [ref=f5e11188]: 
+                - generic [ref=f5e11190]:
+                  - generic [ref=f5e11191]: Inquiry Type
+                  - generic [ref=f5e11193]:
+                    - text: 
+                    - combobox [ref=f5e11195]
+                    - button "Select" [ref=f5e11196] [cursor=pointer]:
+                      - generic [ref=f5e11197]: 
+                - generic [ref=f5e11199]:
+                  - generic [ref=f5e11200]: Preferred Lang.
+                  - generic [ref=f5e11202]:
+                    - text: 
+                    - combobox [ref=f5e11204]
+                    - button "Select" [ref=f5e11205] [cursor=pointer]:
+                      - generic [ref=f5e11206]: 
+                - generic [ref=f5e11208]:
+                  - generic [ref=f5e11209]: Contact Method
+                  - generic [ref=f5e11211]:
+                    - text: 
+                    - combobox [ref=f5e11213]
+                    - button "Select" [ref=f5e11214] [cursor=pointer]:
+                      - generic [ref=f5e11215]: 
+                - generic [ref=f5e11217]:
+                  - generic [ref=f5e11218]: Contact Time
+                  - generic [ref=f5e11220]:
+                    - text: 
+                    - combobox [ref=f5e11222]
+                    - button "Select" [ref=f5e11223] [cursor=pointer]:
+                      - generic [ref=f5e11224]: 
+                - generic [ref=f5e11230]:
+                  - generic [ref=f5e11231]:
+                    - generic [ref=f5e11232]: BDC Rep
+                    - generic [ref=f5e11238]:
+                      - textbox [ref=f5e11240]
+                      - button "Search" [ref=f5e11242] [cursor=pointer]:
+                        - generic [ref=f5e11243]: 
+                  - generic [ref=f5e11245]:
+                    - generic [ref=f5e11246]: Sales Rep
+                    - generic [ref=f5e11252]:
+                      - textbox [ref=f5e11254]
+                      - button "Search" [ref=f5e11256] [cursor=pointer]:
+                        - generic [ref=f5e11257]: 
+                  - textbox "Special Notes" [ref=f5e11261]
+                - generic [ref=f5e11263]:
+                  - checkbox "For Manager Review" [ref=f5e11264] [cursor=pointer]
+                  - text: For Manager Review
+                - button "Find / Merge Duplicates" [ref=f5e11267] [cursor=pointer]
+            - generic [ref=f5e11271]:
+              - navigation [ref=f5e11273]:
+                - list [ref=f5e11274]:
+                  - listitem [ref=f5e11275]:
+                    - link "New" [disabled] [ref=f5e11276]:
+                      - /url: "#"
+                  - listitem [ref=f5e11281]:
+                    - link "Contact Attempt" [disabled] [ref=f5e11282]:
+                      - /url: "#"
+                  - listitem [ref=f5e11286]:
+                    - link "Contacted" [disabled] [ref=f5e11287]:
+                      - /url: "#"
+                  - listitem [ref=f5e11291]:
+                    - link "Appt. Scheduled" [disabled] [ref=f5e11292]:
+                      - /url: "#"
+                  - listitem [ref=f5e11296]:
+                    - link "Working Deal" [disabled] [ref=f5e11297]:
+                      - /url: "#"
+                  - listitem [ref=f5e11301]:
+                    - link "Missed Appt." [disabled] [ref=f5e11302]:
+                      - /url: "#"
+                  - listitem [ref=f5e11306]:
+                    - link "Visit Followup" [disabled] [ref=f5e11307]:
+                      - /url: "#"
+                  - listitem [ref=f5e11311]:
+                    - link "Sold" [disabled] [ref=f5e11312]:
+                      - /url: "#"
+                  - listitem [ref=f5e11316]:
+                    - link "Lost" [disabled] [ref=f5e11317]:
+                      - /url: "#"
+              - button "Update Status" [ref=f5e11323] [cursor=pointer]
+            - generic [ref=f5e11327]:
+              - generic [ref=f5e11328]:
+                - button "Credit Report" [ref=f5e11329] [cursor=pointer]:
+                  - generic [ref=f5e11330]:
+                    - generic [ref=f5e11331]: 
+                    - text: Credit Report
+                - button "Pre-Qual" [ref=f5e11332] [cursor=pointer]:
+                  - generic [ref=f5e11333]:
+                    - generic [ref=f5e11334]: 
+                    - text: Pre-Qual
+                - generic [ref=f5e11336]:
+                  - generic "Not Applicable" [ref=f5e11337]: 
+                  - text: ID Verification
+                - generic [ref=f5e11339]:
+                  - generic "Not Applicable" [ref=f5e11340]: 
+                  - text: OFAC
+                - generic [ref=f5e11342]:
+                  - generic "Not Applicable" [ref=f5e11343]: 
+                  - text: Adverse Action
+                - generic [ref=f5e11345]:
+                  - generic "Not Applicable" [ref=f5e11346]: 
+                  - text: CSDEN
+                - generic [ref=f5e11348]:
+                  - generic "Not Applicable" [ref=f5e11349]: 
+                  - text: Privacy Notice
+              - generic [ref=f5e11350]:
+                - generic [ref=f5e11351]:
+                  - generic [ref=f5e11352]:
+                    - text: Next Appt.
+                    - generic [ref=f5e11353]: Not Scheduled
+                  - generic [ref=f5e11354]:
+                    - text: Overdue Tasks
+                    - generic [ref=f5e11355]: None
+                  - generic [ref=f5e11356]:
+                    - text: Deposit
+                    - button "Take Deposit" [ref=f5e11358] [cursor=pointer]
+                  - generic [ref=f5e11360]:
+                    - text: Last Appt.
+                    - generic [ref=f5e11361]: None
+                  - generic [ref=f5e11362]:
+                    - text: Pending Tasks
+                    - generic [ref=f5e11363]: None
+                  - generic [ref=f5e11364]:
+                    - text: Deals
+                    - generic [ref=f5e11365]: None
+                - generic [ref=f5e11366]:
+                  - generic [ref=f5e11367]:
+                    - text: Last Contact Attempt
+                    - generic [ref=f5e11368]: N/A
+                  - generic [ref=f5e11369]:
+                    - generic [ref=f5e11370]: Days Old
+                    - generic [ref=f5e11371]: "0"
+                  - generic [ref=f5e11372]:
+                    - text: Last Contacted
+                    - generic [ref=f5e11373]: N/A
+                  - generic [ref=f5e11374]:
+                    - generic [ref=f5e11375]: Days Since Activity
+                    - generic [ref=f5e11376]: "0"
+            - generic [ref=f5e11380]:
+              - generic [ref=f5e11381]:
+                - tablist [ref=f5e11383]:
+                  - tab "Lead" [selected] [ref=f5e11384]
+                  - tab "Credit App" [ref=f5e11386]
+                  - tab "Pre-Qual" [ref=f5e11388]
+                  - tab "Vehicle" [ref=f5e11390]
+                  - tab "Deals" [ref=f5e11392]
+                  - tab "Files" [ref=f5e11394]
+                  - tab "Compliance" [ref=f5e11396]
+                  - tab "Duplicates" [ref=f5e11398]
+                  - tab "Journal Entries" [ref=f5e11400]
+                  - tab "Logs" [ref=f5e11402]
+                - tabpanel "Buyer"
+              - generic [ref=f5e11406]:
+                - generic [ref=f5e11408]:
+                  - generic [ref=f5e11409]:
+                    - button "Phone Call" [ref=f5e11413] [cursor=pointer]
+                    - button "Send SMS" [ref=f5e11416] [cursor=pointer]
+                    - button "Send Email" [ref=f5e11419] [cursor=pointer]
+                    - button "Schedule Appt" [ref=f5e11422] [cursor=pointer]
+                    - button "Add Task" [ref=f5e11425] [cursor=pointer]
+                    - button "Add Note" [ref=f5e11427] [cursor=pointer]
+                    - button "Disposition" [ref=f5e11430] [cursor=pointer]
+                  - generic [ref=f5e11433]:
+                    - generic [ref=f5e11434]:
+                      - text: Workflow
+                      - strong [ref=f5e11435]: FOLLOW UP WITH CUSTOMERS
+                    - button "" [ref=f5e11436] [cursor=pointer]
+                - generic [ref=f5e11441]:
+                  - heading "Activity (2)" [level=3] [ref=f5e11443]
+                  - generic [ref=f5e11445]:
+                    - tablist [ref=f5e11448]:
+                      - tab [selected] [ref=f5e11449]
+                      - tab [ref=f5e11451]
+                      - tab [ref=f5e11453]
+                      - tab [ref=f5e11455]
+                      - tab [ref=f5e11457]
+                      - tab [ref=f5e11459]
+                      - tab [ref=f5e11461]
+                      - tab [ref=f5e11463]
+                      - tab [ref=f5e11465]
+                    - generic [ref=f5e11471]:
+                      - generic [ref=f5e11472]:
+                        - generic [ref=f5e11474]:
+                          - generic [ref=f5e11481]:
+                            - textbox "Search" [ref=f5e11482]
+                            - button [ref=f5e11484] [cursor=pointer]:
+                              - generic [ref=f5e11485]: 
+                          - generic [ref=f5e11488]:
+                            - generic [ref=f5e11489]: 
+                            - button "" [ref=f5e11492] [cursor=pointer]
+                        - generic [ref=f5e11496]:
+                          - button [disabled]
+                          - button "1" [disabled]
+                          - button [disabled]
+                      - generic [ref=f5e11498]:
+                        - generic [ref=f5e11499] [cursor=pointer]:
+                          - generic [ref=f5e11500]: Note
+                          - button [ref=f5e11508]:
+                            - generic [ref=f5e11509]: 
+                        - generic [ref=f5e11513] [cursor=pointer]:
+                          - generic [ref=f5e11514]: Disposition
+                          - generic [ref=f5e11515]: Add Note
+                        - generic [ref=f5e11516]:
+                          - generic [ref=f5e11518] [cursor=pointer]:
+                            - generic [ref=f5e11519]:
+                              - text: "Received request:"
+                              - generic [ref=f5e11521]:
+                                - text: FORJADO-TEST-LEADSOURCE-3 2026-07-23T01:00:00 sales
+                                - generic [ref=f5e11522]: 2018 Ford Focus
+                                - generic [ref=f5e11523]: FORJADO TEST LEADSOURCE BORRAR 3 forjado.test.leadsource3@example.com 3051234568
+                                - generic [ref=f5e11525]: 14031841 Carwarriors LLC
+                                - generic [ref=f5e11526]: GoHighLevel Trade-In CW
+                            - button "Click to view full activity details" [ref=f5e11527]: •••
+                          - generic [ref=f5e11528]: "By: SYSTEM USER - systemuser - Wed July 22, 2026 9:26 PM"
+                      - generic [ref=f5e11532]:
+                        - generic [ref=f5e11533] [cursor=pointer]:
+                          - generic [ref=f5e11534]: Note
+                          - button [ref=f5e11542]:
+                            - generic [ref=f5e11543]: 
+                        - generic [ref=f5e11547] [cursor=pointer]:
+                          - generic [ref=f5e11548]: Disposition
+                          - generic [ref=f5e11549]: Add Note
+                        - generic [ref=f5e11550]:
+                          - generic [ref=f5e11551] [cursor=pointer]: There was no BDC rep ready for leads during automatic assignment.
+                          - generic [ref=f5e11554]: "By: SYSTEM USER - systemuser - Wed July 22, 2026 9:26 PM"
+                - paragraph [ref=f5e11558]: Interested Vehicle
+      - text:                      
+  - iframe [ref=f5e1628]:
+    - main [ref=f6e4]:
+      - generic [ref=f6e5]:
+        - generic [ref=f6e8]:
+          - generic "AI-powered assistant" [ref=f6e9]:
+            - generic [ref=f6e10]:
+              - generic [ref=f6e11]: 
+              - generic [ref=f6e12]: AI-powered assistant
+            - generic [ref=f6e13]:
+              - button "Expand chat" [ref=f6e15] [cursor=pointer]:
+                - generic [ref=f6e16]: 
+              - button "Close chat" [ref=f6e18] [cursor=pointer]:
+                - generic [ref=f6e19]: 
+          - text:     
+        - generic:
+          - alertdialog

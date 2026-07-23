@@ -1,0 +1,105 @@
+- generic [ref=f1e1]:
+  - generic [ref=f1e2]:
+    - navigation [ref=f1e3]:
+      - generic [ref=f1e5]:
+        - generic [ref=f1e6]:
+          - link [ref=f1e8] [cursor=pointer]:
+            - /url: https://mail.google.com/mail/&ogbl
+            - text: Gmail
+          - link [ref=f1e10] [cursor=pointer]:
+            - /url: https://www.google.com/imghp?hl=es-419&ogbl
+            - text: Imágenes
+        - button [ref=f1e13] [cursor=pointer]
+        - link [ref=f1e18] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=es-419&passive=true&continue=https://www.google.com/&ec=futura_exp_og_so_72776762_e
+          - text: Acceder
+    - search [ref=f1e24]:
+      - generic [ref=f1e26]:
+        - generic [ref=f1e28]:
+          - button [ref=f1e33] [cursor=pointer]
+          - combobox [ref=f1e38]
+          - generic [ref=f1e39]:
+            - generic [ref=f1e40]:
+              - button [ref=f1e43] [cursor=pointer]
+              - button [ref=f1e48] [cursor=pointer]
+            - link [ref=f1e51] [cursor=pointer]:
+              - generic [ref=f1e53]: Modo IA
+        - generic [ref=f1e64]:
+          - button [ref=f1e65] [cursor=pointer]: Buscar con Google
+          - button [ref=f1e66] [cursor=pointer]: Voy a tener suerte
+    - generic [ref=f1e69]:
+      - text: "Google disponible en:"
+      - link [ref=f1e70] [cursor=pointer]:
+        - /url: https://www.google.com/setprefs?sig=0_yC4qGipz0TRs-STqJvg-vwT7L7s%3D&hl=nl&source=homepage&sa=X&ved=0ahUKEwjtlcHMyOeVAxXAh_0HHdqvEbQQ2ZgBCCU
+        - text: Nederlands
+      - link [ref=f1e71] [cursor=pointer]:
+        - /url: https://www.google.com/setprefs?sig=0_yC4qGipz0TRs-STqJvg-vwT7L7s%3D&hl=fy&source=homepage&sa=X&ved=0ahUKEwjtlcHMyOeVAxXAh_0HHdqvEbQQ2ZgBCCY
+        - text: Frysk
+    - contentinfo [ref=f1e73]:
+      - generic [ref=f1e74]: Países Bajos
+      - generic [ref=f1e75]:
+        - generic [ref=f1e76]:
+          - link [ref=f1e77] [cursor=pointer]:
+            - /url: https://about.google/?utm_source=google-NL&utm_medium=referral&utm_campaign=hp-footer&fg=1
+            - text: Sobre Google
+          - link [ref=f1e78] [cursor=pointer]:
+            - /url: https://www.google.com/intl/es-419_nl/ads/?subid=ww-ww-et-g-awa-a-g_hpafoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpafooter&fg=1
+            - text: Publicidad
+          - link [ref=f1e79] [cursor=pointer]:
+            - /url: https://www.google.com/services/?subid=ww-ww-et-g-awa-a-g_hpbfoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpbfooter&fg=1
+            - text: Negocios
+          - link [ref=f1e80] [cursor=pointer]:
+            - /url: https://google.com/search/howsearchworks/?fg=1
+            - text: Cómo funciona la Búsqueda
+        - generic [ref=f1e81]:
+          - link [ref=f1e82] [cursor=pointer]:
+            - /url: https://policies.google.com/privacy?hl=es-419&fg=1
+            - text: Privacidad
+          - link [ref=f1e83] [cursor=pointer]:
+            - /url: https://policies.google.com/terms?hl=es-419&fg=1
+            - text: Condiciones
+          - button [ref=f1e87] [cursor=pointer]:
+            - generic [ref=f1e88]: Configuración
+  - generic:
+    - dialog "Antes de ir a la Búsqueda de Google":
+      - generic [ref=f1e95]:
+        - generic [ref=f1e97]:
+          - img "Google" [ref=f1e98]
+          - generic [ref=f1e99]:
+            - 'button "Idioma: ‪Español (Latinoamérica)‬" [active] [ref=f1e101] [cursor=pointer]':
+              - generic [ref=f1e102]: es
+            - link "Acceder" [ref=f1e104] [cursor=pointer]
+        - generic [ref=f1e105]:
+          - heading "Antes de ir a Google" [level=1] [ref=f1e106]
+          - generic [ref=f1e107]:
+            - generic [ref=f1e108]:
+              - text: Usamos las
+              - link "cookies" [ref=f1e109] [cursor=pointer]:
+                - /url: https://policies.google.com/technologies/cookies?utm_source=ucbs&hl=es-419
+              - text: "y los datos para realizar las siguientes acciones:"
+              - list [ref=f1e110]:
+                - listitem [ref=f1e111]: Proporcionar y mantener los servicios de Google
+                - listitem [ref=f1e112]: Realizar un seguimiento de las interrupciones y protegerte contra spam, fraude y abuso
+                - listitem [ref=f1e113]: Medir la participación del público y las estadísticas de los sitios a fin de comprender cómo usas nuestros servicios y mejorar la calidad
+            - generic [ref=f1e114]:
+              - text: "Si seleccionas \"Aceptar todo\", usaremos las cookies y los datos para realizar las siguientes acciones:"
+              - list [ref=f1e115]:
+                - listitem [ref=f1e116]: Desarrollar y mejorar nuevos servicios
+                - listitem [ref=f1e117]: Proporcionar anuncios y medir su eficacia
+                - listitem [ref=f1e118]: Mostrar contenido personalizado en función de tu configuración
+                - listitem [ref=f1e119]: Mostrar anuncios personalizados en función de tu configuración
+              - generic [ref=f1e120]: Si seleccionas "Rechazar todo", no usaremos las cookies para estos fines adicionales.
+            - generic [ref=f1e121]: El contenido no personalizado está influenciado por aspectos como el contenido que estás viendo, tu actividad en la sesión activa de la Búsqueda y la ubicación. Los anuncios no personalizados están influenciados por el contenido que estás viendo y tu ubicación general. El contenido y los anuncios personalizados también pueden incluir resultados y recomendaciones más relevantes y anuncios personalizados según tu actividad anterior en este navegador, como las búsquedas que hayas hecho en Google. También utilizamos cookies y datos para adaptar la experiencia a fin de que sea adecuada para la edad, en caso de que sea relevante.
+            - generic [ref=f1e122]: Selecciona "Más opciones" para ver información adicional, incluidos detalles sobre la administración de tu configuración de privacidad. También puedes visitar g.co/privacytools en cualquier momento.
+        - generic [ref=f1e123]:
+          - generic [ref=f1e124]:
+            - button "Rechazar todo" [ref=f1e125] [cursor=pointer]
+            - button "Aceptar todo" [ref=f1e126] [cursor=pointer]
+          - link "Más opciones para las cookies y la configuración de personalización" [ref=f1e128] [cursor=pointer]:
+            - generic "Más opciones para las cookies y la configuración de personalización" [ref=f1e129]: Más opciones
+        - generic [ref=f1e130]:
+          - link "Privacidad" [ref=f1e131] [cursor=pointer]:
+            - /url: https://policies.google.com/privacy?hl=es-419&fg=1&utm_source=ucbs
+          - generic [ref=f1e132]: ·
+          - link "Condiciones" [ref=f1e133] [cursor=pointer]:
+            - /url: https://policies.google.com/terms?hl=es-419&fg=1&utm_source=ucbs

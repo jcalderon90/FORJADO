@@ -1,0 +1,1069 @@
+- generic [ref=f5e1]:
+  - generic [ref=f5e4]:
+    - generic [ref=f5e8]:
+      - generic [ref=f5e9]:
+        - link "" [ref=f5e10] [cursor=pointer]:
+          - /url: reports/home
+        - generic [ref=f5e14]:
+          - textbox "Search Inventory, Customer, Deal ..." [ref=f5e15]
+          - button "" [ref=f5e17] [cursor=pointer]
+      - generic [ref=f5e19]:
+        - button "CARWARRIORS LLC Miami, FL " [ref=f5e21] [cursor=pointer]:
+          - generic [ref=f5e22]:
+            - generic [ref=f5e23]:
+              - generic [ref=f5e24]: CARWARRIORS LLC
+              - generic [ref=f5e25]: Miami, FL
+            - generic [ref=f5e26]: 
+        - generic [ref=f5e27]:
+          - button "" [ref=f5e29] [cursor=pointer]
+          - generic [ref=f5e31]:
+            - button "" [ref=f5e32] [cursor=pointer]
+            - generic: "1"
+          - button "" [ref=f5e36] [cursor=pointer]
+          - button "" [ref=f5e39] [cursor=pointer]
+          - button "" [ref=f5e42] [cursor=pointer]
+        - button "" [ref=f5e45] [cursor=pointer]
+        - button "JC" [ref=f5e48] [cursor=pointer]
+    - generic [ref=f5e51]:
+      - generic [ref=f5e52]:
+        - menubar [ref=f5e55]:
+          - menuitem "Home" [ref=f5e56] [cursor=pointer]:
+            - generic [ref=f5e57]:
+              - generic [ref=f5e58]: 
+              - generic [ref=f5e59]: Home
+          - menuitem "Reports" [ref=f5e60] [cursor=pointer]:
+            - generic [ref=f5e61]:
+              - generic [ref=f5e62]: 
+              - generic [ref=f5e63]: Reports
+          - menuitem "Inventory" [ref=f5e64] [cursor=pointer]:
+            - generic [ref=f5e65]:
+              - generic [ref=f5e66]: 
+              - generic [ref=f5e67]: Inventory
+          - menuitem "Auctions" [ref=f5e68] [cursor=pointer]:
+            - generic [ref=f5e69]:
+              - generic [ref=f5e70]: 
+              - generic [ref=f5e71]: Auctions
+          - menuitem "Customer" [active] [ref=f5e72] [cursor=pointer]:
+            - generic [ref=f5e73]:
+              - generic [ref=f5e74]: 
+              - generic [ref=f5e75]: Customer
+          - menuitem "Deal" [ref=f5e76] [cursor=pointer]:
+            - generic [ref=f5e77]:
+              - generic [ref=f5e78]: 
+              - generic [ref=f5e79]: Deal
+          - menuitem "BHPH" [ref=f5e80] [cursor=pointer]:
+            - generic [ref=f5e81]:
+              - generic [ref=f5e82]: 
+              - generic [ref=f5e83]: BHPH
+          - menuitem "Marketing" [ref=f5e84] [cursor=pointer]:
+            - generic [ref=f5e85]:
+              - generic [ref=f5e86]: 
+              - generic [ref=f5e87]: Marketing
+          - menuitem "Accounting" [ref=f5e88] [cursor=pointer]:
+            - generic [ref=f5e89]:
+              - generic [ref=f5e90]: 
+              - generic [ref=f5e91]: Accounting
+          - menuitem "QuickBooks" [ref=f5e92] [cursor=pointer]:
+            - generic [ref=f5e93]:
+              - generic [ref=f5e94]: 
+              - generic [ref=f5e95]: QuickBooks
+          - menuitem "Force" [ref=f5e96] [cursor=pointer]:
+            - generic [ref=f5e97]:
+              - generic [ref=f5e98]: 
+              - generic [ref=f5e99]: Support
+          - menuitem "Admin" [ref=f5e100] [cursor=pointer]:
+            - generic [ref=f5e101]:
+              - generic [ref=f5e102]: 
+              - generic [ref=f5e103]: Admin
+          - menuitem "Dealer Settings" [ref=f5e104] [cursor=pointer]:
+            - generic [ref=f5e105]:
+              - generic [ref=f5e106]: 
+              - generic [ref=f5e107]: Settings
+        - generic [ref=f5e1630]:
+          - button " New Prospect" [ref=f5e1634] [cursor=pointer]:
+            - generic [ref=f5e1635]: 
+            - generic [ref=f5e1636]: New Prospect
+          - generic [ref=f5e1637]:
+            - button "" [ref=f5e1638] [cursor=pointer]
+            - button "" [ref=f5e1641] [cursor=pointer]:
+              - generic "Pin sidenav" [ref=f5e1643]: 
+      - generic [ref=f5e115]:
+        - generic [ref=f5e116]:
+          - button " Edit Home Page" [ref=f5e121] [cursor=pointer]:
+            - generic [ref=f5e122]: 
+            - generic [ref=f5e123]: Edit Home Page
+          - generic [ref=f5e127]:
+            - button "" [disabled]
+        - generic [ref=f5e128]:
+          - text:     
+          - generic [ref=f5e133]:
+            - generic [ref=f5e137]:
+              - generic [ref=f5e138]:
+                - generic "RECENT LENDER DECISIONS" [ref=f5e139]:
+                  - img "Lender Decisions" [ref=f5e140]
+                  - text: RECENT LENDER DECISIONS
+                - group [ref=f5e145]:
+                  - button "Today" [ref=f5e146] [cursor=pointer]
+                  - button "This Week" [pressed] [ref=f5e147] [cursor=pointer]
+                  - button "This Month" [ref=f5e148] [cursor=pointer]
+                  - button "Last Week" [ref=f5e149] [cursor=pointer]
+                  - button "Last Month" [ref=f5e150] [cursor=pointer]
+                  - button "" [ref=f5e151] [cursor=pointer]
+              - generic [ref=f5e157]:
+                - separator [ref=f5e158]
+                - table [ref=f5e162]:
+                  - rowgroup [ref=f5e163]:
+                    - row [ref=f5e164]:
+                      - columnheader "Deal No." [ref=f5e165]
+                      - columnheader "Customer" [ref=f5e166]
+                      - columnheader "Lender" [ref=f5e167]
+                      - columnheader "Decision Status" [ref=f5e168]
+                      - columnheader "Date" [ref=f5e169]
+                      - columnheader "Decisioned Vehicle" [ref=f5e170]
+                  - rowgroup [ref=f5e171]:
+                    - row [ref=f5e172]:
+                      - cell [ref=f5e173]:
+                        - button "13191" [ref=f5e175] [cursor=pointer]
+                      - cell "DAIDELYS CRUZ COY" [ref=f5e176]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e178]
+                      - cell "DENIED" [ref=f5e180]
+                      - cell "07/22/2026 23:45:57" [ref=f5e182]
+                      - cell "2024 NISSAN ROGUE" [ref=f5e184]
+                    - row [ref=f5e186]:
+                      - cell [ref=f5e187]:
+                        - button "13191" [ref=f5e189] [cursor=pointer]
+                      - cell "DAIDELYS CRUZ COY" [ref=f5e190]
+                      - cell "WESTERN FUNDING" [ref=f5e192]
+                      - cell "DENIED" [ref=f5e194]
+                      - cell "07/22/2026 23:45:15" [ref=f5e196]
+                      - cell "2024 NISSAN ROGUE" [ref=f5e198]
+                    - row [ref=f5e200]:
+                      - cell [ref=f5e201]:
+                        - button "13191" [ref=f5e203] [cursor=pointer]
+                      - cell "DAIDELYS CRUZ COY" [ref=f5e204]
+                      - cell "LENDBUZZ INC." [ref=f5e206]
+                      - cell "APPROVED" [ref=f5e208]
+                      - cell "07/22/2026 23:34:03" [ref=f5e210]
+                      - cell "2018 HONDA ACCORD" [ref=f5e212]
+                    - row [ref=f5e214]:
+                      - cell [ref=f5e215]:
+                        - button "14251" [ref=f5e217] [cursor=pointer]
+                      - cell "REYNIER QUINTERO JIMENEZ" [ref=f5e218]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e220]
+                      - cell "APPROVED" [ref=f5e222]
+                      - cell "07/22/2026 23:07:23" [ref=f5e224]
+                      - cell "2024 CHRYSLER PACIFICA" [ref=f5e226]
+                    - row [ref=f5e228]:
+                      - cell [ref=f5e229]:
+                        - button "14251" [ref=f5e231] [cursor=pointer]
+                      - cell "REYNIER QUINTERO JIMENEZ" [ref=f5e232]
+                      - cell "WESTERN FUNDING" [ref=f5e234]
+                      - cell "DENIED" [ref=f5e236]
+                      - cell "07/22/2026 23:06:23" [ref=f5e238]
+                      - cell "2024 CHRYSLER PACIFICA" [ref=f5e240]
+                    - row [ref=f5e242]:
+                      - cell [ref=f5e243]:
+                        - button "14268" [ref=f5e245] [cursor=pointer]
+                      - cell "JOSE RODRIGUEZ ARENAS" [ref=f5e246]
+                      - cell "LENDBUZZ INC." [ref=f5e248]
+                      - cell "DENIED" [ref=f5e250]
+                      - cell "07/22/2026 22:59:37" [ref=f5e252]
+                      - cell "2017 MERCEDES-BENZ C-CLASS" [ref=f5e254]
+                    - row [ref=f5e256]:
+                      - cell [ref=f5e257]:
+                        - button "14268" [ref=f5e259] [cursor=pointer]
+                      - cell "JOSE RODRIGUEZ ARENAS" [ref=f5e260]
+                      - cell "ALLY" [ref=f5e262]
+                      - cell "DENIED" [ref=f5e264]
+                      - cell "07/22/2026 22:58:29" [ref=f5e266]
+                      - cell "2017 MERCEDES-BENZ C-CLASS" [ref=f5e268]
+                    - row [ref=f5e270]:
+                      - cell [ref=f5e271]:
+                        - button "14268" [ref=f5e273] [cursor=pointer]
+                      - cell "JOSE RODRIGUEZ ARENAS" [ref=f5e274]
+                      - cell "WESTERN FUNDING" [ref=f5e276]
+                      - cell "APPROVED" [ref=f5e278]
+                      - cell "07/22/2026 22:55:58" [ref=f5e280]
+                      - cell "2017 MERCEDES-BENZ C-CLASS" [ref=f5e282]
+                    - row [ref=f5e284]:
+                      - cell [ref=f5e285]:
+                        - button "14268" [ref=f5e287] [cursor=pointer]
+                      - cell "JOSE RODRIGUEZ ARENAS" [ref=f5e288]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e290]
+                      - cell "APPROVED" [ref=f5e292]
+                      - cell "07/22/2026 22:55:57" [ref=f5e294]
+                      - cell "2017 MERCEDES-BENZ C-CLASS" [ref=f5e296]
+                    - row [ref=f5e298]:
+                      - cell [ref=f5e299]:
+                        - button "14217" [ref=f5e301] [cursor=pointer]
+                      - cell "YANETXI CONCEPCION" [ref=f5e302]
+                      - cell "WESTERN FUNDING" [ref=f5e304]
+                      - cell "DENIED" [ref=f5e306]
+                      - cell "07/22/2026 22:39:03" [ref=f5e308]
+                      - cell "2024 CHEVROLET EQUINOX" [ref=f5e310]
+                    - row [ref=f5e312]:
+                      - cell [ref=f5e313]:
+                        - button "14217" [ref=f5e315] [cursor=pointer]
+                      - cell "YANETXI CONCEPCION" [ref=f5e316]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e318]
+                      - cell "DENIED" [ref=f5e320]
+                      - cell "07/22/2026 22:39:02" [ref=f5e322]
+                      - cell "2024 CHEVROLET EQUINOX" [ref=f5e324]
+                    - row [ref=f5e326]:
+                      - cell [ref=f5e327]:
+                        - button "14218" [ref=f5e329] [cursor=pointer]
+                      - cell "ELIESER TRAVIESO PEDROSO" [ref=f5e330]
+                      - cell "WESTERN FUNDING" [ref=f5e332]
+                      - cell "DENIED" [ref=f5e334]
+                      - cell "07/22/2026 22:38:05" [ref=f5e336]
+                      - cell "2024 CHEVROLET EQUINOX" [ref=f5e338]
+                    - row [ref=f5e340]:
+                      - cell [ref=f5e341]:
+                        - button "14218" [ref=f5e343] [cursor=pointer]
+                      - cell "ELIESER TRAVIESO PEDROSO" [ref=f5e344]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e346]
+                      - cell "DENIED" [ref=f5e348]
+                      - cell "07/22/2026 22:38:05" [ref=f5e350]
+                      - cell "2024 CHEVROLET EQUINOX" [ref=f5e352]
+                    - row [ref=f5e354]:
+                      - cell [ref=f5e355]:
+                        - button "14267" [ref=f5e357] [cursor=pointer]
+                      - cell "VILMA BARCENAS" [ref=f5e358]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e360]
+                      - cell "APPROVED" [ref=f5e362]
+                      - cell "07/22/2026 22:35:50" [ref=f5e364]
+                      - cell "2021 TESLA MODEL Y" [ref=f5e366]
+                    - row [ref=f5e368]:
+                      - cell [ref=f5e369]:
+                        - button "14220" [ref=f5e371] [cursor=pointer]
+                      - cell "CARLOS RODRIGUEZ VELAZQUEZ" [ref=f5e372]
+                      - cell "WESTERN FUNDING" [ref=f5e374]
+                      - cell "DENIED" [ref=f5e376]
+                      - cell "07/22/2026 22:33:59" [ref=f5e378]
+                      - cell "2024 CHEVROLET EQUINOX" [ref=f5e380]
+                    - row [ref=f5e382]:
+                      - cell [ref=f5e383]:
+                        - button "14220" [ref=f5e385] [cursor=pointer]
+                      - cell "CARLOS RODRIGUEZ VELAZQUEZ" [ref=f5e386]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e388]
+                      - cell "DENIED" [ref=f5e390]
+                      - cell "07/22/2026 22:33:59" [ref=f5e392]
+                      - cell "2024 CHEVROLET EQUINOX" [ref=f5e394]
+                    - row [ref=f5e396]:
+                      - cell [ref=f5e397]:
+                        - button "14221" [ref=f5e399] [cursor=pointer]
+                      - cell "YESIKA MEDINA ZULUETA" [ref=f5e400]
+                      - cell "WESTERN FUNDING" [ref=f5e402]
+                      - cell "DENIED" [ref=f5e404]
+                      - cell "07/22/2026 22:32:19" [ref=f5e406]
+                      - cell "2024 CHEVROLET EQUINOX" [ref=f5e408]
+                    - row [ref=f5e410]:
+                      - cell [ref=f5e411]:
+                        - button "14221" [ref=f5e413] [cursor=pointer]
+                      - cell "YESIKA MEDINA ZULUETA" [ref=f5e414]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e416]
+                      - cell "DENIED" [ref=f5e418]
+                      - cell "07/22/2026 22:32:19" [ref=f5e420]
+                      - cell "2024 CHEVROLET EQUINOX" [ref=f5e422]
+                    - row [ref=f5e424]:
+                      - cell [ref=f5e425]:
+                        - button "14259" [ref=f5e427] [cursor=pointer]
+                      - cell "ADAN GONZALEZ HERRERA" [ref=f5e428]
+                      - cell "WESTERN FUNDING" [ref=f5e430]
+                      - cell "DENIED" [ref=f5e432]
+                      - cell "07/22/2026 22:27:17" [ref=f5e434]
+                      - cell "2024 CHEVROLET EQUINOX" [ref=f5e436]
+                    - row [ref=f5e438]:
+                      - cell [ref=f5e439]:
+                        - button "14259" [ref=f5e441] [cursor=pointer]
+                      - cell "ADAN GONZALEZ HERRERA" [ref=f5e442]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e444]
+                      - cell "DENIED" [ref=f5e446]
+                      - cell "07/22/2026 22:27:16" [ref=f5e448]
+                      - cell "2024 CHEVROLET EQUINOX" [ref=f5e450]
+                    - row [ref=f5e452]:
+                      - cell [ref=f5e453]:
+                        - button "14266" [ref=f5e455] [cursor=pointer]
+                      - cell "ISEL CUEVAS MARRON" [ref=f5e456]
+                      - cell "EXETER FINANCE" [ref=f5e458]
+                      - cell "APPROVED" [ref=f5e460]
+                      - cell "07/22/2026 21:06:44" [ref=f5e462]
+                      - cell "2020 MERCEDES-BENZ GLE" [ref=f5e464]
+                    - row [ref=f5e466]:
+                      - cell [ref=f5e467]:
+                        - button "14266" [ref=f5e469] [cursor=pointer]
+                      - cell "ISEL CUEVAS MARRON" [ref=f5e470]
+                      - cell "LENDBUZZ INC." [ref=f5e472]
+                      - cell "DENIED" [ref=f5e474]
+                      - cell "07/22/2026 20:57:38" [ref=f5e476]
+                      - cell "2020 MERCEDES-BENZ GLE" [ref=f5e478]
+                    - row [ref=f5e480]:
+                      - cell [ref=f5e481]:
+                        - button "14266" [ref=f5e483] [cursor=pointer]
+                      - cell "ISEL CUEVAS MARRON" [ref=f5e484]
+                      - cell "WESTERN FUNDING" [ref=f5e486]
+                      - cell "APPROVED" [ref=f5e488]
+                      - cell "07/22/2026 20:42:35" [ref=f5e490]
+                      - cell "2020 MERCEDES-BENZ GLE" [ref=f5e492]
+                    - row [ref=f5e494]:
+                      - cell [ref=f5e495]:
+                        - button "14266" [ref=f5e497] [cursor=pointer]
+                      - cell "ISEL CUEVAS MARRON" [ref=f5e498]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e500]
+                      - cell "APPROVED" [ref=f5e502]
+                      - cell "07/22/2026 20:42:34" [ref=f5e504]
+                      - cell "2020 MERCEDES-BENZ GLE" [ref=f5e506]
+                    - row [ref=f5e508]:
+                      - cell [ref=f5e509]:
+                        - button "14162" [ref=f5e511] [cursor=pointer]
+                      - cell "ENRIQUE GUEVARA CEDENO" [ref=f5e512]
+                      - cell "LENDBUZZ INC." [ref=f5e514]
+                      - cell "DENIED" [ref=f5e516]
+                      - cell "07/22/2026 18:32:33" [ref=f5e518]
+                      - cell "2020 TESLA MODEL 3" [ref=f5e520]
+                    - row [ref=f5e522]:
+                      - cell [ref=f5e523]:
+                        - button "14162" [ref=f5e525] [cursor=pointer]
+                      - cell "ENRIQUE GUEVARA CEDENO" [ref=f5e526]
+                      - cell "ALLY" [ref=f5e528]
+                      - cell "DENIED" [ref=f5e530]
+                      - cell "07/22/2026 18:31:35" [ref=f5e532]
+                      - cell "2020 TESLA MODEL 3" [ref=f5e534]
+                    - row [ref=f5e536]:
+                      - cell [ref=f5e537]:
+                        - button "14264" [ref=f5e539] [cursor=pointer]
+                      - cell "ENRIQUE GUEVARA CEDENO" [ref=f5e540]
+                      - cell "LENDBUZZ INC." [ref=f5e542]
+                      - cell "APPROVED" [ref=f5e544]
+                      - cell "07/22/2026 18:24:30" [ref=f5e546]
+                      - cell "2025 CHEVROLET EQUINOX EV" [ref=f5e548]
+                    - row [ref=f5e550]:
+                      - cell [ref=f5e551]:
+                        - button "14264" [ref=f5e553] [cursor=pointer]
+                      - cell "ENRIQUE GUEVARA CEDENO" [ref=f5e554]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e556]
+                      - cell "APPROVED" [ref=f5e558]
+                      - cell "07/22/2026 18:23:10" [ref=f5e560]
+                      - cell "2025 CHEVROLET EQUINOX EV" [ref=f5e562]
+                    - row [ref=f5e564]:
+                      - cell [ref=f5e565]:
+                        - button "14264" [ref=f5e567] [cursor=pointer]
+                      - cell "ENRIQUE GUEVARA CEDENO" [ref=f5e568]
+                      - cell "ALLY" [ref=f5e570]
+                      - cell "DENIED" [ref=f5e572]
+                      - cell "07/22/2026 18:22:17" [ref=f5e574]
+                      - cell "2025 CHEVROLET EQUINOX EV" [ref=f5e576]
+                    - row [ref=f5e578]:
+                      - cell [ref=f5e579]:
+                        - button "14264" [ref=f5e581] [cursor=pointer]
+                      - cell "ENRIQUE GUEVARA CEDENO" [ref=f5e582]
+                      - cell "WESTERN FUNDING" [ref=f5e584]
+                      - cell "APPROVED" [ref=f5e586]
+                      - cell "07/22/2026 18:20:09" [ref=f5e588]
+                      - cell "2025 CHEVROLET EQUINOX EV" [ref=f5e590]
+                    - row [ref=f5e592]:
+                      - cell [ref=f5e593]:
+                        - button "14252" [ref=f5e595] [cursor=pointer]
+                      - cell "YANIET KINDELAN BATAILLE" [ref=f5e596]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e598]
+                      - cell "DENIED" [ref=f5e600]
+                      - cell "07/22/2026 18:11:22" [ref=f5e602]
+                      - cell "2020 MERCEDES-BENZ GLC" [ref=f5e604]
+                    - row [ref=f5e606]:
+                      - cell [ref=f5e607]:
+                        - button "14252" [ref=f5e609] [cursor=pointer]
+                      - cell "YANIET KINDELAN BATAILLE" [ref=f5e610]
+                      - cell "WESTERN FUNDING" [ref=f5e612]
+                      - cell "DENIED" [ref=f5e614]
+                      - cell "07/22/2026 18:11:22" [ref=f5e616]
+                      - cell "2020 MERCEDES-BENZ GLC" [ref=f5e618]
+                    - row [ref=f5e620]:
+                      - cell [ref=f5e621]:
+                        - button "14263" [ref=f5e623] [cursor=pointer]
+                      - cell "CELIA CONTRERAS REYES" [ref=f5e624]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e626]
+                      - cell "APPROVED" [ref=f5e628]
+                      - cell "07/22/2026 18:09:51" [ref=f5e630]
+                      - cell "2019 RAM 1500 CREW CAB" [ref=f5e632]
+                    - row [ref=f5e634]:
+                      - cell [ref=f5e635]:
+                        - button "14263" [ref=f5e637] [cursor=pointer]
+                      - cell "CELIA CONTRERAS REYES" [ref=f5e638]
+                      - cell "ALLY" [ref=f5e640]
+                      - cell "DENIED" [ref=f5e642]
+                      - cell "07/22/2026 18:08:06" [ref=f5e644]
+                      - cell "2019 RAM 1500 CREW CAB" [ref=f5e646]
+                    - row [ref=f5e648]:
+                      - cell [ref=f5e649]:
+                        - button "14264" [ref=f5e651] [cursor=pointer]
+                      - cell "ENRIQUE GUEVARA CEDENO" [ref=f5e652]
+                      - cell "ONEMAIN AUTO" [ref=f5e654]
+                      - cell "DENIED" [ref=f5e656]
+                      - cell "07/22/2026 18:02:22" [ref=f5e658]
+                      - cell "2025 CHEVROLET EQUINOX EV" [ref=f5e660]
+                    - row [ref=f5e662]:
+                      - cell [ref=f5e663]:
+                        - button "14268" [ref=f5e665] [cursor=pointer]
+                      - cell "JOSE RODRIGUEZ ARENAS" [ref=f5e666]
+                      - cell "CAPITALONE" [ref=f5e668]
+                      - cell "DENIED" [ref=f5e670]
+                      - cell "07/22/2026 17:56:08" [ref=f5e672]
+                      - cell "2017 MERCEDES-BENZ C-CLASS" [ref=f5e674]
+                    - row [ref=f5e676]:
+                      - cell [ref=f5e677]:
+                        - button "14257" [ref=f5e679] [cursor=pointer]
+                      - cell "DAYLIANYS ORTIZ PEREZ" [ref=f5e680]
+                      - cell "WESTERN FUNDING" [ref=f5e682]
+                      - cell "DENIED" [ref=f5e684]
+                      - cell "07/22/2026 17:55:03" [ref=f5e686]
+                      - cell "2024 MAZDA CX-30" [ref=f5e688]
+                    - row [ref=f5e690]:
+                      - cell [ref=f5e691]:
+                        - button "14257" [ref=f5e693] [cursor=pointer]
+                      - cell "DAYLIANYS ORTIZ PEREZ" [ref=f5e694]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e696]
+                      - cell "DENIED" [ref=f5e698]
+                      - cell "07/22/2026 17:55:02" [ref=f5e700]
+                      - cell "2024 MAZDA CX-30" [ref=f5e702]
+                    - row [ref=f5e704]:
+                      - cell [ref=f5e705]:
+                        - button "13881" [ref=f5e707] [cursor=pointer]
+                      - cell "GOLD APR" [ref=f5e708]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e710]
+                      - cell "APPROVED" [ref=f5e712]
+                      - cell "07/22/2026 17:27:10" [ref=f5e714]
+                      - cell "2024 MAZDA CX-30" [ref=f5e716]
+                    - row [ref=f5e718]:
+                      - cell [ref=f5e719]:
+                        - button "14263" [ref=f5e721] [cursor=pointer]
+                      - cell "CELIA CONTRERAS REYES" [ref=f5e722]
+                      - cell "WESTERN FUNDING" [ref=f5e724]
+                      - cell "APPROVED" [ref=f5e726]
+                      - cell "07/22/2026 17:26:04" [ref=f5e728]
+                      - cell "2019 RAM 1500 CREW CAB" [ref=f5e730]
+                    - row [ref=f5e732]:
+                      - cell [ref=f5e733]:
+                        - button "14230" [ref=f5e735] [cursor=pointer]
+                      - cell "JUAN GUERRERO MORALES" [ref=f5e736]
+                      - cell "WESTERN FUNDING" [ref=f5e738]
+                      - cell "APPROVED" [ref=f5e740]
+                      - cell "07/22/2026 17:17:23" [ref=f5e742]
+                      - cell "2017 MERCEDES-BENZ C-CLASS" [ref=f5e744]
+                    - row [ref=f5e746]:
+                      - cell [ref=f5e747]:
+                        - button "14230" [ref=f5e749] [cursor=pointer]
+                      - cell "JUAN GUERRERO MORALES" [ref=f5e750]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e752]
+                      - cell "DENIED" [ref=f5e754]
+                      - cell "07/22/2026 17:17:23" [ref=f5e756]
+                      - cell "2017 MERCEDES-BENZ C-CLASS" [ref=f5e758]
+                    - row [ref=f5e760]:
+                      - cell [ref=f5e761]:
+                        - button "14238" [ref=f5e763] [cursor=pointer]
+                      - cell "LISANDRA REYES MARTINEZ" [ref=f5e764]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e766]
+                      - cell "APPROVED" [ref=f5e768]
+                      - cell "07/22/2026 16:52:32" [ref=f5e770]
+                      - cell "2022 HONDA ACCORD" [ref=f5e772]
+                    - row [ref=f5e774]:
+                      - cell [ref=f5e775]:
+                        - button "14262" [ref=f5e777] [cursor=pointer]
+                      - cell "LEONARDO VELAZQUEZ DOMINGUEZ" [ref=f5e778]
+                      - cell "WESTERN FUNDING" [ref=f5e780]
+                      - cell "DENIED" [ref=f5e782]
+                      - cell "07/22/2026 16:16:38" [ref=f5e784]
+                      - cell "2020 MERCEDES-BENZ GLE" [ref=f5e786]
+                    - row [ref=f5e788]:
+                      - cell [ref=f5e789]:
+                        - button "14262" [ref=f5e791] [cursor=pointer]
+                      - cell "LEONARDO VELAZQUEZ DOMINGUEZ" [ref=f5e792]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e794]
+                      - cell "APPROVED" [ref=f5e796]
+                      - cell "07/22/2026 16:16:38" [ref=f5e798]
+                      - cell "2020 MERCEDES-BENZ GLE" [ref=f5e800]
+                    - row [ref=f5e802]:
+                      - cell [ref=f5e803]:
+                        - button "14262" [ref=f5e805] [cursor=pointer]
+                      - cell "LEONARDO VELAZQUEZ DOMINGUEZ" [ref=f5e806]
+                      - cell "LENDBUZZ INC." [ref=f5e808]
+                      - cell "APPROVED" [ref=f5e810]
+                      - cell "07/22/2026 16:15:16" [ref=f5e812]
+                      - cell "2020 MERCEDES-BENZ GLE" [ref=f5e814]
+                    - row [ref=f5e816]:
+                      - cell [ref=f5e817]:
+                        - button "14266" [ref=f5e819] [cursor=pointer]
+                      - cell "ISEL CUEVAS MARRON" [ref=f5e820]
+                      - cell "CAPITALONE" [ref=f5e822]
+                      - cell "DENIED" [ref=f5e824]
+                      - cell "07/22/2026 15:59:17" [ref=f5e826]
+                      - cell "2020 MERCEDES-BENZ GLE" [ref=f5e828]
+                    - row [ref=f5e830]:
+                      - cell [ref=f5e831]:
+                        - button "14260" [ref=f5e833] [cursor=pointer]
+                      - cell "ADAN GONZALEZ HERRERA" [ref=f5e834]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e836]
+                      - cell "DENIED" [ref=f5e838]
+                      - cell "07/22/2026 15:04:05" [ref=f5e840]
+                      - cell "2024 NISSAN ROGUE" [ref=f5e842]
+                    - row [ref=f5e844]:
+                      - cell [ref=f5e845]:
+                        - button "14261" [ref=f5e847] [cursor=pointer]
+                      - cell "EDWIN MUNOZ GARCIA" [ref=f5e848]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e850]
+                      - cell "APPROVED" [ref=f5e852]
+                      - cell "07/22/2026 15:02:40" [ref=f5e854]
+                      - cell "2024 NISSAN ROGUE" [ref=f5e856]
+                    - row [ref=f5e858]:
+                      - cell [ref=f5e859]:
+                        - button "14261" [ref=f5e861] [cursor=pointer]
+                      - cell "EDWIN MUNOZ GARCIA" [ref=f5e862]
+                      - cell "WESTERN FUNDING" [ref=f5e864]
+                      - cell "APPROVED" [ref=f5e866]
+                      - cell "07/22/2026 14:59:56" [ref=f5e868]
+                      - cell "2024 NISSAN ROGUE" [ref=f5e870]
+                    - row [ref=f5e872]:
+                      - cell [ref=f5e873]:
+                        - button "14135" [ref=f5e875] [cursor=pointer]
+                      - cell "DENIS F CONTRERAS" [ref=f5e876]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e878]
+                      - cell "DENIED" [ref=f5e880]
+                      - cell "07/22/2026 14:36:13" [ref=f5e882]
+                      - cell "2021 TESLA MODEL Y" [ref=f5e884]
+                    - row [ref=f5e886]:
+                      - cell [ref=f5e887]:
+                        - button "14133" [ref=f5e889] [cursor=pointer]
+                      - cell "DENIS F CONTRERAS" [ref=f5e890]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e892]
+                      - cell "DENIED" [ref=f5e894]
+                      - cell "07/22/2026 14:36:01" [ref=f5e896]
+                      - cell "2021 TESLA MODEL Y" [ref=f5e898]
+                    - row [ref=f5e900]:
+                      - cell [ref=f5e901]:
+                        - button "14266" [ref=f5e903] [cursor=pointer]
+                      - cell "ISEL CUEVAS MARRON" [ref=f5e904]
+                      - cell "CONSUMER PORTFOLIO SERVICES" [ref=f5e906]
+                      - cell "DENIED" [ref=f5e908]
+                      - cell "07/22/2026 13:51:03" [ref=f5e910]
+                      - cell "2020 MERCEDES-BENZ GLE" [ref=f5e912]
+                    - row [ref=f5e914]:
+                      - cell [ref=f5e915]:
+                        - button "14162" [ref=f5e917] [cursor=pointer]
+                      - cell "ENRIQUE GUEVARA CEDENO" [ref=f5e918]
+                      - cell "CAPITALONE" [ref=f5e920]
+                      - cell "DENIED" [ref=f5e922]
+                      - cell "07/22/2026 13:31:30" [ref=f5e924]
+                      - cell "2020 TESLA MODEL 3" [ref=f5e926]
+                    - row [ref=f5e928]:
+                      - cell [ref=f5e929]:
+                        - button "14264" [ref=f5e931] [cursor=pointer]
+                      - cell "ENRIQUE GUEVARA CEDENO" [ref=f5e932]
+                      - cell "GLOBAL LENDING SERVICES" [ref=f5e934]
+                      - cell "DENIED" [ref=f5e936]
+                      - cell "07/22/2026 13:22:04" [ref=f5e938]
+                      - cell "2025 CHEVROLET EQUINOX EV" [ref=f5e940]
+                    - row [ref=f5e942]:
+                      - cell [ref=f5e943]:
+                        - button "14263" [ref=f5e945] [cursor=pointer]
+                      - cell "CELIA CONTRERAS REYES" [ref=f5e946]
+                      - cell "GLOBAL LENDING SERVICES" [ref=f5e948]
+                      - cell "APPROVED" [ref=f5e950]
+                      - cell "07/22/2026 12:28:48" [ref=f5e952]
+                      - cell "2019 RAM 1500 CREW CAB" [ref=f5e954]
+                    - row [ref=f5e956]:
+                      - cell [ref=f5e957]:
+                        - button "14263" [ref=f5e959] [cursor=pointer]
+                      - cell "CELIA CONTRERAS REYES" [ref=f5e960]
+                      - cell "CAPITALONE" [ref=f5e962]
+                      - cell "DENIED" [ref=f5e964]
+                      - cell "07/22/2026 12:26:11" [ref=f5e966]
+                      - cell "2019 RAM 1500 CREW CAB" [ref=f5e968]
+                    - row [ref=f5e970]:
+                      - cell [ref=f5e971]:
+                        - button "14262" [ref=f5e973] [cursor=pointer]
+                      - cell "LEONARDO VELAZQUEZ DOMINGUEZ" [ref=f5e974]
+                      - cell "GLOBAL LENDING SERVICES" [ref=f5e976]
+                      - cell "DENIED" [ref=f5e978]
+                      - cell "07/22/2026 11:08:58" [ref=f5e980]
+                      - cell "2020 MERCEDES-BENZ GLE" [ref=f5e982]
+                    - row [ref=f5e984]:
+                      - cell [ref=f5e985]:
+                        - button "14263" [ref=f5e987] [cursor=pointer]
+                      - cell "CELIA CONTRERAS REYES" [ref=f5e988]
+                      - cell "CONSUMER PORTFOLIO SERVICES" [ref=f5e990]
+                      - cell "APPROVED" [ref=f5e992]
+                      - cell "07/22/2026 11:08:16" [ref=f5e994]
+                      - cell "2019 RAM 1500 CREW CAB" [ref=f5e996]
+                    - row [ref=f5e998]:
+                      - cell [ref=f5e999]:
+                        - button "14262" [ref=f5e1001] [cursor=pointer]
+                      - cell "LEONARDO VELAZQUEZ DOMINGUEZ" [ref=f5e1002]
+                      - cell "CAPITALONE" [ref=f5e1004]
+                      - cell "DENIED" [ref=f5e1006]
+                      - cell "07/22/2026 10:57:07" [ref=f5e1008]
+                      - cell "2020 MERCEDES-BENZ GLE" [ref=f5e1010]
+                    - row [ref=f5e1012]:
+                      - cell [ref=f5e1013]:
+                        - button "14253" [ref=f5e1015] [cursor=pointer]
+                      - cell "YANIET KINDELAN BATAILLE" [ref=f5e1016]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e1018]
+                      - cell "APPROVED" [ref=f5e1020]
+                      - cell "07/22/2026 00:56:58" [ref=f5e1022]
+                      - cell "2023 MERCEDES-BENZ GLC COUPE" [ref=f5e1024]
+                    - row [ref=f5e1026]:
+                      - cell [ref=f5e1027]:
+                        - button "14259" [ref=f5e1029] [cursor=pointer]
+                      - cell "ADAN GONZALEZ HERRERA" [ref=f5e1030]
+                      - cell "ALLY" [ref=f5e1032]
+                      - cell "DENIED" [ref=f5e1034]
+                      - cell "07/22/2026 00:25:12" [ref=f5e1036]
+                      - cell "2024 NISSAN ROGUE" [ref=f5e1038]
+                    - row [ref=f5e1040]:
+                      - cell [ref=f5e1041]:
+                        - button "14259" [ref=f5e1043] [cursor=pointer]
+                      - cell "ADAN GONZALEZ HERRERA" [ref=f5e1044]
+                      - cell "LOBEL FINANCIAL" [ref=f5e1046]
+                      - cell "DENIED" [ref=f5e1048]
+                      - cell "07/22/2026 00:25:09" [ref=f5e1050]
+                      - cell "2024 NISSAN ROGUE" [ref=f5e1052]
+                    - row [ref=f5e1054]:
+                      - cell [ref=f5e1055]:
+                        - button "14258" [ref=f5e1057] [cursor=pointer]
+                      - cell "PEDRO MORENO CRUZ" [ref=f5e1058]
+                      - cell "ALLY" [ref=f5e1060]
+                      - cell "APPROVED" [ref=f5e1062]
+                      - cell "07/22/2026 00:14:52" [ref=f5e1064]
+                      - cell "2022 BMW 4 SERIES" [ref=f5e1066]
+                    - row [ref=f5e1068]:
+                      - cell [ref=f5e1069]:
+                        - button "14257" [ref=f5e1071] [cursor=pointer]
+                      - cell "DAYLIANYS ORTIZ PEREZ" [ref=f5e1072]
+                      - cell "ALLY" [ref=f5e1074]
+                      - cell "APPROVED" [ref=f5e1076]
+                      - cell "07/22/2026 00:13:49" [ref=f5e1078]
+                      - cell "2020 MERCEDES-BENZ GLC" [ref=f5e1080]
+                    - row [ref=f5e1082]:
+                      - cell [ref=f5e1083]:
+                        - button "14258" [ref=f5e1085] [cursor=pointer]
+                      - cell "PEDRO MORENO CRUZ" [ref=f5e1086]
+                      - cell "WESTLAKE FINANCIAL" [ref=f5e1088]
+                      - cell "APPROVED" [ref=f5e1090]
+                      - cell "07/22/2026 00:13:02" [ref=f5e1092]
+                      - cell "2022 BMW 4 SERIES" [ref=f5e1094]
+                  - rowgroup
+            - generic [ref=f5e1103]:
+              - generic [ref=f5e1104]:
+                - img "DC" [ref=f5e1105]
+                - generic [ref=f5e1106]: LENDER INTEGRATION
+              - generic [ref=f5e1107]:
+                - generic [ref=f5e1108]:
+                  - generic [ref=f5e1109]:
+                    - img "Dealertrack" [ref=f5e1110]
+                    - paragraph [ref=f5e1111]: "ID: 410189"
+                  - generic [ref=f5e1113]:
+                    - heading "275" [level=5] [ref=f5e1114]
+                    - button "Submitted (Last 30)" [ref=f5e1115] [cursor=pointer]
+                - generic [ref=f5e1116]:
+                  - generic [ref=f5e1117]:
+                    - img "RouteOne" [ref=f5e1118]
+                    - paragraph [ref=f5e1119]: "ID: ZQ5PP"
+                  - generic [ref=f5e1121]:
+                    - heading "32" [level=5] [ref=f5e1122]
+                    - button "Submitted (Last 30)" [ref=f5e1123] [cursor=pointer]
+                - generic [ref=f5e1124]:
+                  - img "CUDL" [ref=f5e1126]
+                  - button "How to activate CUDL" [ref=f5e1129] [cursor=pointer]
+            - generic [ref=f5e1137]:
+              - generic [ref=f5e1138]:
+                - img "DC" [ref=f5e1139]
+                - generic [ref=f5e1140]: PREFERRED LENDERS
+              - generic [ref=f5e1141]:
+                - img "Lentegrity" [ref=f5e1143]
+                - generic [ref=f5e1144]:
+                  - generic [ref=f5e1145]: Learn More
+                  - generic [ref=f5e1147]: Contact Lender
+                  - generic [ref=f5e1149]: Print Agreement
+              - generic [ref=f5e1151]:
+                - img "Consumer Portfolio Services" [ref=f5e1153]
+                - generic [ref=f5e1154]:
+                  - generic [ref=f5e1155]: Learn More
+                  - generic [ref=f5e1158]: Print Agreement
+              - generic [ref=f5e1160]:
+                - img "Golf Acceptance" [ref=f5e1162]
+                - generic [ref=f5e1163]:
+                  - generic [ref=f5e1164]: Learn More
+                  - generic [ref=f5e1166]: Contact Lender
+              - generic [ref=f5e1168]:
+                - img "Sensible Auto" [ref=f5e1170]
+                - generic [ref=f5e1171]:
+                  - generic [ref=f5e1172]: Learn More
+                  - generic [ref=f5e1174]: Contact Lender
+                  - generic [ref=f5e1176]: Print Agreement
+              - generic [ref=f5e1178]:
+                - img "Exeter Finance" [ref=f5e1180]
+                - generic [ref=f5e1181]:
+                  - generic [ref=f5e1182]: Learn More
+                  - generic [ref=f5e1185]: Print Agreement
+              - generic [ref=f5e1187]:
+                - img "MidAtlantic Finance" [ref=f5e1189]
+                - generic [ref=f5e1190]:
+                  - generic [ref=f5e1191]: Learn More
+                  - generic [ref=f5e1193]: Contact Lender
+              - generic [ref=f5e1195]:
+                - img "Agora" [ref=f5e1197]
+                - generic [ref=f5e1198]:
+                  - generic [ref=f5e1199]: Learn More
+                  - generic [ref=f5e1201]: Contact Lender
+                  - generic [ref=f5e1203]: Sign Up
+              - generic [ref=f5e1205]:
+                - img "Carvant" [ref=f5e1207]
+                - generic [ref=f5e1208]:
+                  - generic [ref=f5e1209]: Learn More
+                  - generic [ref=f5e1211]: Contact Lender
+              - generic [ref=f5e1213]:
+                - img "Flagship Credit Acceptance" [ref=f5e1215]
+                - generic [ref=f5e1216]:
+                  - generic [ref=f5e1217]: Learn More
+                  - generic [ref=f5e1220]: Print Agreement
+            - generic [ref=f5e1230]:
+              - img "carzing-premium-logo" [ref=f5e1231]
+              - generic:
+                - link "Upgrade Now":
+                  - /url: javascript:;
+            - generic [ref=f5e1239]:
+              - generic [ref=f5e1240]:
+                - img "Western Funding" [ref=f5e1242]
+                - generic [ref=f5e1243]:
+                  - text: "Tier:"
+                  - strong [ref=f5e1244] [cursor=pointer]: "456"
+                  - text: "| Holds:"
+                  - strong [ref=f5e1245]: NONE
+                  - button "Upload Docs" [ref=f5e1246] [cursor=pointer]
+              - generic [ref=f5e1247]:
+                - button "Start a WFI Deal" [ref=f5e1249] [cursor=pointer]
+                - generic [ref=f5e1250]:
+                  - heading [level=5] [ref=f5e1251]:
+                    - text: 3t -
+                    - superscript [ref=f5e1252]: $
+                    - text: 60,000
+                  - text: Title Float
+              - generic [ref=f5e1253]:
+                - generic [ref=f5e1254]:
+                  - heading "2" [level=5] [ref=f5e1255]
+                  - text: Deals to Fill Float
+                - generic [ref=f5e1257]:
+                  - heading "1" [level=5] [ref=f5e1258]
+                  - text: Outstanding Titles
+                - generic [ref=f5e1259]:
+                  - heading "0" [level=5] [ref=f5e1260]
+                  - text: Repurchase Demands
+              - generic [ref=f5e1261]:
+                - generic [ref=f5e1262]:
+                  - heading "95" [level=5] [ref=f5e1263]
+                  - text: Funding Notices
+                - generic [ref=f5e1265]:
+                  - heading "32 / 50" [level=5] [ref=f5e1266]
+                  - text: Deals in Open Pool
+                - generic [ref=f5e1267]:
+                  - heading "-" [level=5] [ref=f5e1268]
+                  - text: Days to Lose Pool
+              - generic [ref=f5e1269]: Dealer Reports
+              - generic [ref=f5e1271]:
+                - generic [ref=f5e1272] [cursor=pointer]: View Account Dashboard
+                - generic [ref=f5e1273] [cursor=pointer]: Top Vehicles
+                - generic [ref=f5e1274] [cursor=pointer]: Triple Pay Statement
+                - link "Visit WFI Website" [ref=f5e1275] [cursor=pointer]:
+                  - /url: https://www.westernfundinginc.com/indirect-auto-finance/
+              - generic [ref=f5e1276]:
+                - link "Program Guidelines" [ref=f5e1278] [cursor=pointer]:
+                  - /url: https://app.dealercenter.net/apps/shell/admin/document360-redirect?redirectPath=%2Fdocs%2Fen%2Fwestern-funding-program-guidelines
+                - link "Payoffs / Titles" [ref=f5e1280] [cursor=pointer]:
+                  - /url: https://mytitle.westernfundinginc.com
+                - link [ref=f5e1282] [cursor=pointer]:
+                  - /url: https://www.globaltrackllc.com/discount/wfi15%2525off?redirect=%2fproducts%2ftrace
+                  - text: Order GPS
+                  - img "Global Track" [ref=f5e1283]
+                - link [ref=f5e1285] [cursor=pointer]:
+                  - /url: https://www.linkedin.com/company/western-funding-incorporated
+                  - text: Follow us on
+                  - img "LinkedIn" [ref=f5e1286]
+                - generic [ref=f5e1287]:
+                  - heading "Sales Rep:" [level=6] [ref=f5e1288]
+                  - heading "DARYL BOSCH" [level=6] [ref=f5e1290] [cursor=pointer]
+            - generic [ref=f5e1298]:
+              - generic [ref=f5e1299]:
+                - img "Westlake Financial" [ref=f5e1301]
+                - generic [ref=f5e1302]:
+                  - text: "Grade:"
+                  - strong [ref=f5e1303] [cursor=pointer]: CCD
+                  - text: "| Holds:"
+                  - strong [ref=f5e1304]: DC
+                  - button "Upload Docs" [ref=f5e1305] [cursor=pointer]
+              - generic [ref=f5e1306]:
+                - generic [ref=f5e1307]:
+                  - heading "320" [level=5] [ref=f5e1308]
+                  - text: Buy Program Runs (Last 30)
+                - generic [ref=f5e1310]:
+                  - heading "3" [level=5] [ref=f5e1311]
+                  - text: Pending Funding
+                - generic [ref=f5e1312]:
+                  - heading "29" [level=5] [ref=f5e1313]
+                  - text: Funding Notices / Hold Logs
+              - generic [ref=f5e1314]:
+                - generic [ref=f5e1315]:
+                  - heading "1" [level=5] [ref=f5e1316]
+                  - text: Repurchase Demands
+                - generic [ref=f5e1318]:
+                  - heading [level=5] [ref=f5e1319]:
+                    - text: 6t -
+                    - superscript [ref=f5e1320]: $
+                    - text: 120,000
+                  - text: Title Float
+                - generic [ref=f5e1321]:
+                  - heading "N/A" [level=5] [ref=f5e1322]
+                  - text: Reward Points
+              - generic [ref=f5e1323]:
+                - generic [ref=f5e1325]:
+                  - heading "10" [level=5] [ref=f5e1326]
+                  - text: Outstanding Titles
+                - generic [ref=f5e1327]:
+                  - heading "0" [level=5] [ref=f5e1328]
+                  - text: Deals to Fill Float
+              - generic [ref=f5e1329]:
+                - generic [ref=f5e1331]:
+                  - heading "28" [level=5] [ref=f5e1332]
+                  - text: Deals Paid to Dealer
+                - generic [ref=f5e1333]:
+                  - heading "1" [level=5] [ref=f5e1334]
+                  - text: Return to Dealer
+              - generic [ref=f5e1335]:
+                - generic [ref=f5e1336]:
+                  - generic [ref=f5e1337]: Dealer Solutions to Help Drive Your Business
+                  - link "Westlake Products and Services" [ref=f5e1338] [cursor=pointer]:
+                    - /url: https://www.westlakefinancial.com/additional-services
+                - generic [ref=f5e1339]:
+                  - generic [ref=f5e1340]: Credit Lines & Commercial Real States Loans
+                  - link "Westlake Capital Finance" [ref=f5e1341] [cursor=pointer]:
+                    - /url: https://www.westlakefinancial.com/other-finance-solutions
+                - generic [ref=f5e1342]:
+                  - generic [ref=f5e1343]: Stay Up-to-Date with the Latest Program Updates
+                  - link "Westlake Promos" [ref=f5e1344] [cursor=pointer]:
+                    - /url: https://www.westlakepromos.com
+              - generic [ref=f5e1346]:
+                - link "Program Guidelines" [ref=f5e1348] [cursor=pointer]:
+                  - /url: https://support.dealercenter.net/hc/en-us/articles/205948056-WF-Westlake-Program-Guidelines
+                - generic [ref=f5e1349]: Signup with TurboPass
+                - link "Payoffs / Titles" [ref=f5e1351] [cursor=pointer]:
+                  - /url: https://mytitle.westlakefinancial.com/wts-ui/main
+                - generic [ref=f5e1352]:
+                  - heading "Sales Rep:" [level=6] [ref=f5e1353]
+                  - heading "ALAIN PEREZ" [level=6] [ref=f5e1354] [cursor=pointer]
+            - generic [ref=f5e1363]:
+              - generic [ref=f5e1364]:
+                - generic [ref=f5e1365]: BHPH
+                - generic [ref=f5e1366]:
+                  - generic [ref=f5e1367] [cursor=pointer]: Dashboard
+                  - generic "Refresh" [ref=f5e1368] [cursor=pointer]: 
+              - separator [ref=f5e1369]
+              - generic [ref=f5e1370]:
+                - generic [ref=f5e1372]:
+                  - button "59" [ref=f5e1373] [cursor=pointer]
+                  - text: Active Accounts
+                - generic [ref=f5e1375]:
+                  - button "30" [ref=f5e1376] [cursor=pointer]
+                  - text: Past Due Accounts
+                - generic [ref=f5e1378]:
+                  - button "4" [ref=f5e1379] [cursor=pointer]
+                  - text: Payments Due (Next 7)
+                - generic [ref=f5e1381]:
+                  - button "18" [ref=f5e1382] [cursor=pointer]
+                  - text: Payments Received (Last 7)
+                - generic [ref=f5e1384]:
+                  - button "0" [ref=f5e1385] [cursor=pointer]
+                  - text: Insurance Expirations (Next 30)
+                - generic [ref=f5e1387]:
+                  - button "0" [ref=f5e1388] [cursor=pointer]
+                  - text: Extensions Given (Last 7)
+            - generic [ref=f5e1397]:
+              - generic [ref=f5e1398]:
+                - generic [ref=f5e1399]: Deal
+                - generic [ref=f5e1400]:
+                  - generic [ref=f5e1401] [cursor=pointer]: Dashboard
+                  - generic "Refresh" [ref=f5e1402] [cursor=pointer]: 
+              - separator [ref=f5e1403]
+              - generic [ref=f5e1404]:
+                - generic [ref=f5e1406]:
+                  - button "406" [ref=f5e1407] [cursor=pointer]
+                  - text: Pending Deals (Last 30)
+                - generic [ref=f5e1409]:
+                  - button "122" [ref=f5e1410] [cursor=pointer]
+                  - text: Submitted Deals (Last 7)
+                - generic [ref=f5e1412]:
+                  - button "378" [ref=f5e1413] [cursor=pointer]
+                  - text: Lender Decisions (Last 7)
+                - generic [ref=f5e1415]:
+                  - button "138" [ref=f5e1416] [cursor=pointer]
+                  - text: Contracts In Transit
+                - generic [ref=f5e1418]:
+                  - button "219" [ref=f5e1419] [cursor=pointer]
+                  - text: Pending Deferred Downs
+                - generic [ref=f5e1421]:
+                  - button "29" [ref=f5e1422] [cursor=pointer]
+                  - text: Payments Received (Last 7)
+            - generic [ref=f5e1431]:
+              - generic [ref=f5e1432]:
+                - generic [ref=f5e1433]: Inventory
+                - generic [ref=f5e1434]:
+                  - generic [ref=f5e1435] [cursor=pointer]: Dashboard
+                  - generic "Refresh" [ref=f5e1436] [cursor=pointer]: 
+              - separator [ref=f5e1437]
+              - generic [ref=f5e1438]:
+                - generic [ref=f5e1439]:
+                  - generic [ref=f5e1440]:
+                    - button "115" [ref=f5e1441] [cursor=pointer]
+                    - text: Active Inventory
+                  - generic [ref=f5e1442]: 76 Needs Attention
+                - generic [ref=f5e1445]:
+                  - button "1/0" [ref=f5e1446] [cursor=pointer]
+                  - text: Cars in Recon / Cars in Bound
+                - generic [ref=f5e1448]:
+                  - button "78/109" [ref=f5e1449] [cursor=pointer]
+                  - text: Not Posted / Posted Online
+                - generic [ref=f5e1451]:
+                  - button "0" [ref=f5e1452] [cursor=pointer]
+                  - text: Alerts
+                - generic [ref=f5e1454]:
+                  - button "0" [ref=f5e1455] [cursor=pointer]
+                  - text: Pending Tasks
+                - generic [ref=f5e1457]:
+                  - button "81" [ref=f5e1458] [cursor=pointer]
+                  - text: Missing Titles
+            - generic [ref=f5e1467]:
+              - generic [ref=f5e1468]:
+                - generic [ref=f5e1469]: Customer
+                - generic [ref=f5e1470]:
+                  - generic [ref=f5e1471] [cursor=pointer]: Dashboard
+                  - generic "Refresh" [ref=f5e1472] [cursor=pointer]: 
+              - separator [ref=f5e1473]
+              - generic [ref=f5e1474]:
+                - generic [ref=f5e1475]:
+                  - generic [ref=f5e1476]:
+                    - button "0" [ref=f5e1477] [cursor=pointer]
+                    - text: My Appointment
+                  - generic [ref=f5e1478]: 9 Total
+                - generic [ref=f5e1480]:
+                  - generic [ref=f5e1481]:
+                    - button "0" [ref=f5e1482] [cursor=pointer]
+                    - text: My New Prospects
+                  - generic [ref=f5e1483]: 1 Total
+                - generic [ref=f5e1485]:
+                  - generic [ref=f5e1486]:
+                    - button "0" [ref=f5e1487] [cursor=pointer]
+                    - text: My Inbox
+                  - generic [ref=f5e1488]: 69 Total
+                - generic [ref=f5e1490]:
+                  - generic [ref=f5e1491]:
+                    - button "0" [ref=f5e1492] [cursor=pointer]
+                    - text: My Follow Ups
+                  - generic [ref=f5e1493]: 8 Total
+                - generic [ref=f5e1495]:
+                  - generic [ref=f5e1496]:
+                    - button "0" [ref=f5e1497] [cursor=pointer]
+                    - text: My New Credit Apps
+                  - generic [ref=f5e1498]: 0 Total
+                - generic [ref=f5e1500]:
+                  - generic [ref=f5e1501]:
+                    - button "0" [ref=f5e1502] [cursor=pointer]
+                    - text: My Active Deposits
+                  - generic [ref=f5e1503]: 4 Total
+            - generic [ref=f5e1514]:
+              - list [ref=f5e1515]:
+                - listitem [ref=f5e1524]:
+                  - link [ref=f5e1526] [cursor=pointer]:
+                    - /url: https://www.dealercenter.com:443/plp-hub/?dcid=ooD5sBufYcYwVZf2Bp5ybpnD3n%252ft6hzrBY780YSFDGc%253d
+                - listitem [ref=f5e1516]:
+                  - link [ref=f5e1518] [cursor=pointer]:
+                    - /url: https://www.dealercenter.com:443/crm-pro/?v=1&dcid=ooD5sBufYcYwVZf2Bp5ybpnD3n%252ft6hzrBY780YSFDGc%253d
+                - listitem [ref=f5e1520]:
+                  - link [ref=f5e1522] [cursor=pointer]:
+                    - /url: https://www.westlakefinancial.com/other-finance-solutions/wcf-commercial-real-estate/?utm_source=dealercenter&utm_medium=dc_ad&utm_campaign=wcf_tax_season&utm_content=carousel
+              - generic [ref=f5e1528]:
+                - generic "previous" [ref=f5e1529] [cursor=pointer]: 
+                - generic "next" [ref=f5e1532] [cursor=pointer]: 
+            - generic [ref=f5e1542]:
+              - generic [ref=f5e1543]: QUICKLINKS
+              - separator [ref=f5e1546]
+              - generic [ref=f5e1547]:
+                - generic [ref=f5e1548]:
+                  - generic [ref=f5e1549]: 
+                  - generic [ref=f5e1551] [cursor=pointer]: Start a Deal
+                - generic [ref=f5e1552]:
+                  - generic [ref=f5e1553]: 
+                  - generic [ref=f5e1555] [cursor=pointer]: Desk a Deal
+                - generic [ref=f5e1556]:
+                  - generic [ref=f5e1557]: 
+                  - generic [ref=f5e1559] [cursor=pointer]: Run AutoCheck
+                - generic [ref=f5e1560]:
+                  - generic [ref=f5e1561]: 
+                  - generic [ref=f5e1563] [cursor=pointer]: Dashboard Reports
+                - generic [ref=f5e1564]:
+                  - generic [ref=f5e1565]: 
+                  - generic [ref=f5e1567] [cursor=pointer]: Add a Vehicle
+                - generic [ref=f5e1568]:
+                  - generic [ref=f5e1569]: 
+                  - generic [ref=f5e1571] [cursor=pointer]: Run Credit
+                - generic [ref=f5e1572]:
+                  - generic [ref=f5e1573]: 
+                  - generic [ref=f5e1575] [cursor=pointer]: Settings
+                - generic [ref=f5e1576]:
+                  - generic [ref=f5e1577]: 
+                  - generic [ref=f5e1579] [cursor=pointer]: Management Reports
+                - generic [ref=f5e1580]:
+                  - generic [ref=f5e1581]: 
+                  - generic [ref=f5e1583] [cursor=pointer]: Add a Prospect
+                - generic [ref=f5e1584]:
+                  - generic [ref=f5e1585]: 
+                  - generic [ref=f5e1587] [cursor=pointer]: Auction Run List
+                - generic [ref=f5e1588]:
+                  - generic [ref=f5e1589]: 
+                  - generic [ref=f5e1591] [cursor=pointer]: System Reports
+                - generic [ref=f5e1592]:
+                  - generic [ref=f5e1593]: 
+                  - generic [ref=f5e1595] [cursor=pointer]: AutoCheck Reports
+            - generic [ref=f5e1603]:
+              - generic [ref=f5e1604]:
+                - img "Westlake Flooring Services" [ref=f5e1606]
+                - generic "N/A" [ref=f5e1607]:
+                  - text: "Grade:"
+                  - strong [ref=f5e1608]: N/A
+              - generic [ref=f5e1609]:
+                - switch [checked] [ref=f5e1612] [cursor=pointer]
+                - generic [ref=f5e1614]: Auto Sync
+              - generic [ref=f5e1615]:
+                - generic [ref=f5e1616]: N/A
+                - generic [ref=f5e1617]: Floorplan Credit Line
+                - generic [ref=f5e1618]: N/A
+                - generic [ref=f5e1619]: Units Floored
+                - generic [ref=f5e1620] [cursor=pointer]: View Upcoming Curtailments
+                - generic [ref=f5e1621] [cursor=pointer]: View Flooring Fees Paid
+                - link "Visit Flooring Website" [ref=f5e1622] [cursor=pointer]:
+                  - /url: https://www.westlakeflooringservices.com
+                - generic [ref=f5e1624]:
+                  - heading "Sales Rep:" [level=6] [ref=f5e1625]
+                  - heading [level=6] [ref=f5e1626]
+    - iframe [ref=f5e1628]:
+      - main [ref=f6e4]:
+        - generic [ref=f6e5]:
+          - generic [ref=f6e8]:
+            - generic "AI-powered assistant" [ref=f6e9]:
+              - generic [ref=f6e10]:
+                - generic [ref=f6e11]: 
+                - generic [ref=f6e12]: AI-powered assistant
+              - generic [ref=f6e13]:
+                - button "Expand chat" [ref=f6e15] [cursor=pointer]:
+                  - generic [ref=f6e16]: 
+                - button "Close chat" [ref=f6e18] [cursor=pointer]:
+                  - generic [ref=f6e19]: 
+            - text:     
+          - generic:
+            - alertdialog
+  - generic: Loading...

@@ -1,0 +1,286 @@
+- generic [ref=f5e4]:
+  - generic [ref=f5e8]:
+    - generic [ref=f5e9]:
+      - link "" [ref=f5e10] [cursor=pointer]:
+        - /url: reports/home
+      - generic [ref=f5e14]:
+        - textbox "Search Inventory, Customer, Deal ..." [ref=f5e15]
+        - button "" [ref=f5e17] [cursor=pointer]
+    - generic [ref=f5e19]:
+      - button "CARWARRIORS LLC Miami, FL " [ref=f5e21] [cursor=pointer]:
+        - generic [ref=f5e22]:
+          - generic [ref=f5e23]:
+            - generic [ref=f5e24]: CARWARRIORS LLC
+            - generic [ref=f5e25]: Miami, FL
+          - generic [ref=f5e26]: 
+      - generic [ref=f5e27]:
+        - button "" [ref=f5e29] [cursor=pointer]
+        - generic [ref=f5e31]:
+          - button "" [ref=f5e32] [cursor=pointer]
+          - generic: "1"
+        - button "" [ref=f5e36] [cursor=pointer]
+        - button "" [ref=f5e39] [cursor=pointer]
+        - button "" [ref=f5e42] [cursor=pointer]
+      - button "" [ref=f5e45] [cursor=pointer]
+      - button "JC" [ref=f5e48] [cursor=pointer]
+  - generic [ref=f5e51]:
+    - menubar [ref=f5e55]:
+      - menuitem "Home" [ref=f5e56] [cursor=pointer]:
+        - generic [ref=f5e57]:
+          - generic [ref=f5e58]: 
+          - generic [ref=f5e59]: Home
+      - menuitem "Reports" [ref=f5e60] [cursor=pointer]:
+        - generic [ref=f5e61]:
+          - generic [ref=f5e62]: 
+          - generic [ref=f5e63]: Reports
+      - menuitem "Inventory" [ref=f5e64] [cursor=pointer]:
+        - generic [ref=f5e65]:
+          - generic [ref=f5e66]: 
+          - generic [ref=f5e67]: Inventory
+      - menuitem "Auctions" [ref=f5e68] [cursor=pointer]:
+        - generic [ref=f5e69]:
+          - generic [ref=f5e70]: 
+          - generic [ref=f5e71]: Auctions
+      - menuitem "Customer" [ref=f5e72] [cursor=pointer]:
+        - generic [ref=f5e73]:
+          - generic [ref=f5e74]: 
+          - generic [ref=f5e75]: Customer
+      - menuitem "Deal" [ref=f5e76] [cursor=pointer]:
+        - generic [ref=f5e77]:
+          - generic [ref=f5e78]: 
+          - generic [ref=f5e79]: Deal
+      - menuitem "BHPH" [ref=f5e80] [cursor=pointer]:
+        - generic [ref=f5e81]:
+          - generic [ref=f5e82]: 
+          - generic [ref=f5e83]: BHPH
+      - menuitem "Marketing" [ref=f5e84] [cursor=pointer]:
+        - generic [ref=f5e85]:
+          - generic [ref=f5e86]: 
+          - generic [ref=f5e87]: Marketing
+      - menuitem "Accounting" [ref=f5e88] [cursor=pointer]:
+        - generic [ref=f5e89]:
+          - generic [ref=f5e90]: 
+          - generic [ref=f5e91]: Accounting
+      - menuitem "QuickBooks" [ref=f5e92] [cursor=pointer]:
+        - generic [ref=f5e93]:
+          - generic [ref=f5e94]: 
+          - generic [ref=f5e95]: QuickBooks
+      - menuitem "Force" [ref=f5e96] [cursor=pointer]:
+        - generic [ref=f5e97]:
+          - generic [ref=f5e98]: 
+          - generic [ref=f5e99]: Support
+      - menuitem "Admin" [ref=f5e100] [cursor=pointer]:
+        - generic [ref=f5e101]:
+          - generic [ref=f5e102]: 
+          - generic [ref=f5e103]: Admin
+      - menuitem "Dealer Settings" [ref=f5e104] [cursor=pointer]:
+        - generic [ref=f5e105]:
+          - generic [ref=f5e106]: 
+          - generic [ref=f5e107]: Settings
+    - generic [ref=f5e1733]:
+      - generic [ref=f5e1735]:
+        - button "All Customers " [ref=f5e1737] [cursor=pointer]:
+          - generic [ref=f5e1738]:
+            - generic [ref=f5e1739]: All Customers
+            - generic [ref=f5e1740]: 
+        - generic [ref=f5e1743]:
+          - generic [ref=f5e1746]:
+            - combobox [ref=f5e1747] [cursor=pointer]:
+              - generic [ref=f5e1748]: Detail View
+              - button "Select" [ref=f5e1750]:
+                - generic [ref=f5e1751]: 
+            - button " Save as" [ref=f5e1754] [cursor=pointer]:
+              - generic [ref=f5e1755]: 
+              - generic [ref=f5e1756]: Save as
+            - generic "Revert Changes" [ref=f5e10695]:
+              - button " Revert Changes" [ref=f5e10696] [cursor=pointer]:
+                - generic [ref=f5e10697]: 
+                - generic [ref=f5e10698]: Revert Changes
+            - generic "Schedule this report" [ref=f5e1757]:
+              - button " Schedule" [ref=f5e1758] [cursor=pointer]:
+                - generic [ref=f5e1759]: 
+                - generic [ref=f5e1760]: Schedule
+            - generic "Print / Export Report" [ref=f5e1761]:
+              - button " Print / Export" [ref=f5e1762] [cursor=pointer]:
+                - generic [ref=f5e1763]: 
+                - generic [ref=f5e1764]: Print / Export
+            - button " More" [ref=f5e1768] [cursor=pointer]:
+              - generic [ref=f5e1769]: 
+              - generic [ref=f5e1770]: More
+          - generic [ref=f5e1771]:
+            - button " Add New Report" [ref=f5e1773] [cursor=pointer]:
+              - generic [ref=f5e1774]: 
+              - generic [ref=f5e1775]: Add New Report
+            - generic [ref=f5e1777]:
+              - generic [ref=f5e1779]:
+                - button "" [pressed] [ref=f5e1781] [cursor=pointer]
+                - button "" [ref=f5e1784] [cursor=pointer]
+                - button "" [ref=f5e1787] [cursor=pointer]
+              - button "" [ref=f5e1791] [cursor=pointer]
+      - generic [ref=f5e1796]:
+        - generic [ref=f5e1797]:
+          - generic [ref=f5e1801]:
+            - generic [ref=f5e1802]:
+              - generic [ref=f5e1803]:
+                - generic [ref=f5e1804]: Created Date
+                - generic [ref=f5e1806]:
+                  - generic [ref=f5e1808]:
+                    - combobox [ref=f5e1810]: Last X Days
+                    - text: 
+                    - button "Select" [ref=f5e1811] [cursor=pointer]:
+                      - generic [ref=f5e1812]: 
+                  - spinbutton [ref=f5e1816]: "90"
+              - generic [ref=f5e1817]:
+                - generic [ref=f5e1818]: Lead Source
+                - combobox [ref=f5e1823]
+              - generic [ref=f5e1824]:
+                - generic [ref=f5e1825]: Lead Type
+                - generic [ref=f5e1827]:
+                  - combobox [ref=f5e1829]
+                  - button "Select" [ref=f5e1830] [cursor=pointer]:
+                    - generic [ref=f5e1831]: 
+              - generic [ref=f5e1833]:
+                - generic [ref=f5e1834]: Customer Name
+                - textbox "Search Customer Name..." [ref=f5e1836]: FORJADO
+              - generic [ref=f5e1837]:
+                - generic [ref=f5e1838]: Customer Status
+                - generic [ref=f5e1841]:
+                  - generic [ref=f5e10714] [cursor=pointer]:
+                    - generic [ref=f5e10717]:
+                      - generic [ref=f5e10718]: New
+                      - generic [ref=f5e10719]: (+7)
+                    - generic [ref=f5e10720]: 
+                  - combobox [ref=f5e1853]
+              - generic [ref=f5e1854]:
+                - generic [ref=f5e1855]: Inquiry Type
+                - combobox [ref=f5e1860]
+              - generic [ref=f5e1861]:
+                - generic [ref=f5e1862]: Sales Rep
+                - combobox [ref=f5e1867]
+              - generic [ref=f5e1868]:
+                - generic [ref=f5e1869]: BDC Rep
+                - combobox [ref=f5e1874]
+              - generic [ref=f5e1878]:
+                - checkbox "Prequal Leads" [ref=f5e1879] [cursor=pointer]
+                - text: Prequal Leads
+            - generic [ref=f5e1881]:
+              - button "Run" [active] [ref=f5e1882] [cursor=pointer]
+              - button "Reset" [ref=f5e1884] [cursor=pointer]
+            - generic [ref=f5e1886]:
+              - button " FILTER+" [ref=f5e1888] [cursor=pointer]:
+                - generic [ref=f5e1889]: 
+                - generic [ref=f5e1890]: FILTER+
+              - generic [ref=f5e1891]:
+                - generic [ref=f5e1892]: "1"
+                - button " SORT" [ref=f5e1893] [cursor=pointer]:
+                  - generic [ref=f5e1894]: 
+                  - generic [ref=f5e1895]: SORT
+          - generic [ref=f5e1897]:
+            - button " Show Multi-Select" [ref=f5e1901] [cursor=pointer]:
+              - generic [ref=f5e1902]: 
+              - generic [ref=f5e1903]: Show Multi-Select
+            - generic [ref=f5e1904]: This report is scheduled daily at 09:00 AM View schedule | Turn off schedule
+            - generic [ref=f5e1909]:
+              - generic [ref=f5e10724]: 1 Result Found
+              - combobox [ref=f5e1911] [cursor=pointer]:
+                - generic [ref=f5e1912]: "50"
+                - button "Select" [ref=f5e1914]:
+                  - generic [ref=f5e1915]: 
+              - button "" [disabled]
+              - spinbutton [ref=f5e1918]: "1"
+              - generic [ref=f5e10725]: of 1
+              - button "" [disabled]
+        - group [ref=f5e1924]:
+          - group "Data grid with 1 rows and 14 columns" [ref=f5e10726]:
+            - table [ref=f5e6317]:
+              - row [ref=f5e6332]:
+                - columnheader "Column Customer" [ref=f5e6333] [cursor=pointer]: Customer
+                - columnheader "Column Lead Info" [ref=f5e6334] [cursor=pointer]: Lead Info
+                - columnheader "Column Date" [ref=f5e6335] [cursor=pointer]: Date
+                - columnheader "Column Employment" [ref=f5e6336] [cursor=pointer]: Employment
+                - columnheader "Column Interested Vehicle" [ref=f5e6337] [cursor=pointer]: Interested Vehicle
+                - columnheader "Column Sold Vehicle" [ref=f5e6338] [cursor=pointer]: Sold Vehicle
+                - columnheader "Column Trade" [ref=f5e6339] [cursor=pointer]: Trade
+                - columnheader "Column Softpull Details" [ref=f5e6340] [cursor=pointer]: Softpull Details
+                - columnheader "Column Voucher" [ref=f5e6341] [cursor=pointer]: Voucher
+                - columnheader "Column Customer Offer" [ref=f5e6342] [cursor=pointer]: Customer Offer
+                - columnheader "Column Deal Info" [ref=f5e6343] [cursor=pointer]: Deal Info
+                - columnheader "Column Compliance" [ref=f5e6344] [cursor=pointer]: Compliance
+                - columnheader "Column" [ref=f5e6345] [cursor=pointer]
+            - table [ref=f5e10727]:
+              - row [ref=f5e10742]:
+                - 'gridcell "FORJADO TEST LEADSOURCE BORRAR 2 FORJADO.TEST.LEADSOURCE2@EXAMPLE.COM H: (305) 123-4567 C: (305) 123-4567 DOB:" [ref=f5e10743]':
+                  - generic [ref=f5e10744]:
+                    - generic "FORJADO TEST LEADSOURCE BORRAR 2" [ref=f5e10746]
+                    - link "FORJADO.TEST.LEADSOURCE2@EXAMPLE.COM" [ref=f5e10748] [cursor=pointer]:
+                      - /url: "#"
+                    - generic [ref=f5e10749]:
+                      - generic [ref=f5e10750]:
+                        - text: "H:"
+                        - link "(305) 123-4567" [ref=f5e10751] [cursor=pointer]:
+                          - /url: "#"
+                      - generic [ref=f5e10752]:
+                        - text: "C:"
+                        - link "(305) 123-4567" [ref=f5e10753] [cursor=pointer]:
+                          - /url: "#"
+                    - generic [ref=f5e10754]: "DOB:"
+                - gridcell [ref=f5e10756]:
+                  - generic [ref=f5e10758]:
+                    - generic [ref=f5e10759]:
+                      - generic "null" [ref=f5e10761]: "Sales Rep:"
+                      - generic "null" [ref=f5e10763]: "BDC Rep:"
+                      - generic "TRADE-IN CW - WHATSAPP / INSTAGRAM / MESSENGER" [ref=f5e10765]: Source:TRADE-IN CW - WHATSAPP / INSTAGRAM / MESSENGER
+                      - generic "INTERNET" [ref=f5e10767]: Type:INTERNET
+                      - generic [ref=f5e10768]: Workflow:FOLLOW UP WITH CUSTOMERS
+                      - generic [ref=f5e10770]: Cash Down:$0.00
+                    - generic [ref=f5e10772]:
+                      - generic "null" [ref=f5e10774]: "Inquiry Type:"
+                      - generic "NEW" [ref=f5e10776]: Status:NEW
+                      - generic "null" [ref=f5e10778]: "Lost Reason:"
+                      - generic "No" [ref=f5e10780]: Credit App Completed:No
+                - gridcell [ref=f5e10781]:
+                  - generic [ref=f5e10782]:
+                    - generic "07/22/2026" [ref=f5e10784]: Created:07/22/2026
+                    - generic "null" [ref=f5e10786]: "Sales Rep Assigned:"
+                    - generic "null" [ref=f5e10788]: "BDC Rep Assigned:"
+                    - generic "0" [ref=f5e10790]: Days Old:0
+                    - generic "0" [ref=f5e10792]: Last Contacted Day:0
+                    - generic "null" [ref=f5e10794]: "Visit Date:"
+                - gridcell [ref=f5e10795]:
+                  - generic [ref=f5e10796]:
+                    - generic "null" [ref=f5e10798]: "Employer Name:"
+                    - generic "null" [ref=f5e10800]: "Occupation:"
+                    - generic [ref=f5e10801]: "Length at Job:"
+                    - generic "$0" [ref=f5e10804]: Income:$0
+                    - generic "null" [ref=f5e10806]: "Work Phone:"
+                - gridcell [ref=f5e10807]
+                - gridcell [ref=f5e10808]
+                - gridcell [ref=f5e10809]
+                - gridcell [ref=f5e10810]
+                - gridcell [ref=f5e10811]
+                - gridcell [ref=f5e10812]
+                - gridcell [ref=f5e10813]
+                - 'gridcell "AAN Mailed Date: Risk Based Pricing Notice Mailed Date: ID Verification Completed: No OFAC Completed: No Privacy Notice Completed: No" [ref=f5e10814]':
+                  - generic [ref=f5e10815]:
+                    - generic [ref=f5e10816]: "AAN Mailed Date:"
+                    - generic [ref=f5e10818]: "Risk Based Pricing Notice Mailed Date:"
+                    - generic [ref=f5e10820]: "ID Verification Completed: No"
+                    - generic [ref=f5e10822]: "OFAC Completed: No"
+                    - generic [ref=f5e10824]: "Privacy Notice Completed: No"
+                - gridcell [ref=f5e10826]
+  - iframe [ref=f5e1628]:
+    - main [ref=f6e4]:
+      - generic [ref=f6e5]:
+        - generic [ref=f6e8]:
+          - generic "AI-powered assistant" [ref=f6e9]:
+            - generic [ref=f6e10]:
+              - generic [ref=f6e11]: 
+              - generic [ref=f6e12]: AI-powered assistant
+            - generic [ref=f6e13]:
+              - button "Expand chat" [ref=f6e15] [cursor=pointer]:
+                - generic [ref=f6e16]: 
+              - button "Close chat" [ref=f6e18] [cursor=pointer]:
+                - generic [ref=f6e19]: 
+          - text:     
+        - generic:
+          - alertdialog

@@ -104,8 +104,8 @@ Fuentes de referencia:
 
 **Campos obligatorios según el estándar:** `requestdate` (ISO 8601, sin milisegundos ni zona horaria en el ejemplo de referencia) y al menos un dato de contacto del `customer`. El bloque `vehicle` es requerido por el estándar pero puede ir vacío/genérico si el lead aún no mostró interés en un auto puntual — a confirmar si DealerCenter lo exige poblado o acepta placeholder.
 
-> [!warning] Pendiente 2026-07-22 — mapeo de Lead Type / Lead Source
-> El XML de prueba pobló `<provider><name>` con texto libre ("CARWARRIORS LLC - GHL - FORJADO TEST"), y eso apareció en DealerCenter como el campo **Source** del lead — pero no se probó todavía con uno de los valores reales de negocio que usa el equipo (`Trade-In CW`, `Rances Trade-In`, `Tesla CW`, `Tesla Rances`, `previous customer`). Falta: (1) confirmar si `<provider><name>` es efectivamente el tag que puebla el campo **Lead Source** de DealerCenter (parece que sí, por lo visto en la prueba) o si Lead Source es un campo separado no cubierto por el estándar ADF; (2) confirmar qué tag mapea a **Lead Type** (`Internet`/`Phone`/`Chat`/`Walk-in`) — no se identificó todavía en el ejemplo de payload; (3) levantar la tabla completa de valores de Lead Source por campaña/dealer con Jorge/Bianca. Detalle de negocio completo en [[Carwarriors LLC]], sección "Cómo se distribuyen los leads dentro de DealerCenter".
+> [!success] RESUELTO 2026-07-23 — mapeo de Lead Type / Lead Source confirmado
+> Se probó con 2 XML reales subidos por SFTP: `<provider><name part="full">Trade-In CW</name></provider>` **sin** el sub-tag `<service>` produjo un Lead Source **exacto** "Trade-In CW" en DealerCenter (coincidiendo con el valor real del dropdown del equipo, no como texto libre). Si se incluye `<service>`, DealerCenter concatena "NAME - SERVICE" en mayúsculas, arruinando el match limpio — por eso el XML de producción debe omitir `<service>`. **Lead Type no se mapea desde ningún tag ADF probado**: quedó fijo en "Internet" en ambas pruebas, consistente con que Internet es el default de DealerCenter para cualquier lead social/campaña (el 100% de lo que manda este workflow). Queda pendiente levantar la tabla completa de valores de Lead Source por campaña/dealer con Jorge/Bianca (ver sección 4 y [[Carwarriors LLC]]).
 
 **Convención de nombre de archivo:** no confirmado para DealerCenter específicamente — es común en integraciones ADF/SFTP usar `[timestamp]_[contactId].xml` o `.adf.xml` para que el proceso de importación en el otro lado identifique archivos nuevos y no reprocese los ya importados. Hay que confirmarlo cuando se generen las credenciales (a veces el proveedor especifica una convención o un directorio de "procesados").
 
@@ -140,7 +140,52 @@ Se encontró un proveedor externo, **Supergood**, que ofrece una **API no oficia
 - [ ] Confirmar si DealerCenter exige el bloque `<vehicle>` poblado o acepta un lead sin interés de vehículo específico (común en leads de primer contacto por redes sociales).
 - [ ] Confirmar convención de nombre de archivo y si hay una carpeta de "procesados"/logs de error que DealerCenter deje ver.
 - [ ] Decidir con el usuario: construir el armado de XML + subida SFTP dentro del mismo workflow n8n del agente de captura de leads, o como workflow separado.
-- [ ] **Nuevo (2026-07-22):** confirmar el tag ADF exacto que puebla Lead Type y Lead Source en DealerCenter, y levantar la tabla de valores de Lead Source por campaña/dealer (ver sección 4).
+- [x] ~~Confirmar el tag ADF exacto que puebla Lead Type y Lead Source~~ → **RESUELTO 2026-07-23** (ver sección 4). Sigue pendiente levantar la tabla de valores de Lead Source por campaña/dealer con Jorge/Bianca — bloqueador humano, no técnico.
+- [ ] Acceso al n8n real del cliente para construir e importar el workflow (no confirmado todavía si existe una instancia n8n propia del cliente o si se usa la de FORJADO).
+
+## 8. Diseño del workflow n8n (borrador, sin construir — falta acceso a n8n + tabla de Lead Source)
+
+Patrón: **Webhook Processing** (trigger de GHL) con salida vía protocolo SFTP en vez de HTTP.
+
+```
+1. Webhook (GHL Workflow Action → HTTP Request/Webhook, POST)
+   - Recibe: datos de contacto (nombre, email, teléfono) + un campo que identifique
+     la campaña/canal de origen (ej. "campaignKey": "trade-in-cw") — este campo lo
+     tiene que setear la automatización de GHL antes de llamar al webhook, según de
+     qué workflow/tag vino el lead.
+
+2. Set/Code — "Mapear Lead Source"
+   - Tabla de mapeo campaignKey → valor exacto de Lead Source (la tabla pendiente
+     de Jorge/Bianca). Ej.: "trade-in-cw" -> "Trade-In CW", "rances-trade-in" ->
+     "Rances Trade-In", "tesla-cw" -> "Tesla CW", etc.
+   - Si campaignKey no matchea ninguna entrada conocida: fallback explícito (¿usar
+     un valor genérico como "GHL - Sin Categoría" o fallar el workflow y avisar?
+     — decisión de negocio pendiente, no asumir).
+
+3. Code — "Armar XML ADF"
+   - Interpola los datos del contacto + DCID fijo (14031841) + el Lead Source
+     mapeado en <provider><name part="full">VALOR</name></provider> — SIN <service>.
+   - <requestdate> en ISO 8601 sin milisegundos/zona (formato validado en la prueba).
+   - <vehicle> puede ir con placeholder genérico si no hay interés en un auto puntual
+     (no confirmado si DealerCenter lo exige poblado — no bloqueante, ya se probó
+     poblado y funcionó).
+
+4. FTP node (protocolo SFTP) — "Subir a DealerCenter"
+   - Host: dccrmleadsprod.blob.core.windows.net, puerto 22, directorio /Leads/,
+     credenciales ya guardadas arriba en Carwarriors LLC.md.
+   - Nombre de archivo único (timestamp + contact id) para evitar colisiones.
+
+5. Error handling
+   - Si el SFTP falla (como pasó con el `close remote: Failure` de la prueba
+     interrumpida), el lead se pierde silenciosamente si no hay manejo de error.
+     Agregar rama de error → notificación (Slack/email) con el payload original
+     para poder reintentar manualmente.
+```
+
+**Bloqueadores para construir esto de verdad:**
+- Acceso a una instancia n8n para Carwarriors (confirmar cuál usar).
+- Tabla completa de Lead Source por campaña/dealer (Jorge/Bianca).
+- Definir en GHL cómo cada automatización/tag setea el `campaignKey` que dispara el webhook — esto no se ha diseñado del lado de GHL todavía, solo del lado de DealerCenter.
 
 ## Relacionado
 

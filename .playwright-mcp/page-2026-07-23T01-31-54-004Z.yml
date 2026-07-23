@@ -1,0 +1,35 @@
+- generic [active] [ref=f5e1]:
+  - generic [ref=f5e4]:
+    - generic:         
+    - generic [ref=f5e51]:
+      - generic:             
+      - generic [ref=f5e1731]:
+        - generic [ref=f5e11578]:
+          - button " Back to Report List" [ref=f5e11579] [cursor=pointer]:
+            - generic [ref=f5e11580]: 
+            - generic [ref=f5e11581]: Back to Report List
+          - generic [ref=f5e11582]:
+            - generic [ref=f5e11583]: 2 of 2
+            - generic "Prev Record" [ref=f5e11584]:
+              - button "" [ref=f5e11585] [cursor=pointer]
+            - generic "Next Record" [ref=f5e11587]:
+              - button "" [disabled]
+            - button "" [ref=f5e11590] [cursor=pointer]
+        - text:                      
+    - iframe [ref=f5e1628]:
+      - main [ref=f6e4]:
+        - generic [ref=f6e5]:
+          - generic [ref=f6e8]:
+            - generic "AI-powered assistant" [ref=f6e9]:
+              - generic [ref=f6e10]:
+                - generic [ref=f6e11]: 
+                - generic [ref=f6e12]: AI-powered assistant
+              - generic [ref=f6e13]:
+                - button "Expand chat" [ref=f6e15] [cursor=pointer]:
+                  - generic [ref=f6e16]: 
+                - button "Close chat" [ref=f6e18] [cursor=pointer]:
+                  - generic [ref=f6e19]: 
+            - text:     
+          - generic:
+            - alertdialog
+  - generic: Loading...
