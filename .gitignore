@@ -11,3 +11,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .claude/settings.local.json
+
+# Playwright MCP session artifacts (may contain sensitive client data)
+.playwright-mcp/

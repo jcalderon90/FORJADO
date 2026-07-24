@@ -1,6 +1,0 @@
-- dialog "Login" [ref=f4e9]:
-  - generic [ref=f4e10]:
-    - generic [ref=f4e11]: Login
-    - text: 
-  - generic [ref=f4e12]: You are currently not authenticated.
-  - button "Login Now" [active] [ref=f4e16] [cursor=pointer]

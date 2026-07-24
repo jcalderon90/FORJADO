@@ -1,9 +1,0 @@
-[    1096ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://app.gohighlevel.com/v2/location/1j1dHo8HEbZdElQUGFoC/ai-agents/getting-started:0
-[    1726ms] [WARNING] The PerformanceObserver does not support buffered flag with the entryTypes argument. @ https://static.leadconnectorhq.com/1661/js/chunk.Dsp8Brkb.js:17
-[    1953ms] [LOG] This is test file @ https://static.leadconnectorhq.com/1661/js/chunk.BFik7euT.js:16
-[    7216ms] [ERROR] Failed to load resource: the server responded with a status of 429 () @ https://o176457.ingest.sentry.io/api/1723141/envelope/?sentry_version=7&sentry_key=c67431ff70d6440fb529c2705792425f&sentry_client=sentry.javascript.vue%2F10.19.0:0
-[   11598ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://backend.leadconnectorhq.com/phone-system/whatsapp/location/1j1dHo8HEbZdElQUGFoC/phone-numbers-meta?fields[]=config&fields[]=settings:0
-[   11599ms] [ERROR] [whatsapp] init catch AxiosError: Request failed with status code 400
-    at xe (https://appcdn.leadconnectorhq.com/revex/power-dialer/1685/power-dialer.ad55fd20cf52ef81a68b.js:2:3916335)
-    at XMLHttpRequest.A (https://appcdn.leadconnectorhq.com/revex/power-dialer/1685/power-dialer.ad55fd20cf52ef81a68b.js:2:3920840)
-    at lt.request (https://appcdn.leadconnectorhq.com/revex/power-dialer/1685/power-dialer.ad55fd20cf52ef81a68b.js:2:3929477) @ https://static.leadconnectorhq.com/1661/js/chunk.BFik7euT.js:16
