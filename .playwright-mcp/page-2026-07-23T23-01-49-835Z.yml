@@ -1,0 +1,31 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link [ref=e4] [cursor=pointer]:
+        - /url: http://www.mycase.com
+        - img "MyCase logo" [ref=e5]
+      - navigation [ref=e6]:
+        - link "(800) 571-8062" [ref=e7] [cursor=pointer]:
+          - /url: tel:18005718062
+        - link "Email Us" [ref=e9] [cursor=pointer]:
+          - /url: mailto:support@mycase.com
+        - link [ref=e11] [cursor=pointer]:
+          - /url: http://www.facebook.com/MyCase
+        - link [ref=e13] [cursor=pointer]:
+          - /url: http://www.linkedin.com/company/mycase
+        - link [ref=e15] [cursor=pointer]:
+          - /url: http://twitter.com/mycaseinc
+  - main [ref=e17]:
+    - generic [ref=e18]:
+      - heading "Error 404" [level=1] [ref=e21]
+      - paragraph [ref=e22]: The page you requested cannot be found.
+      - paragraph [ref=e23]: "It may have been removed, or just moved to a new URL. Please double-check that you typed the URL correctly, or try one of the links below:"
+      - paragraph [ref=e24]:
+        - link "https://status.mycase.com" [ref=e25] [cursor=pointer]:
+          - /url: https://status.mycase.com
+        - link "https://mycase.com" [ref=e26] [cursor=pointer]:
+          - /url: https://mycase.com
+        - link "https://mycase.com/login" [ref=e27] [cursor=pointer]:
+          - /url: https://mycase.com/login
+  - contentinfo [ref=e28]:
+    - generic [ref=e29]: © 2025 AffiniPay, LLC. All Rights Reserved. No portion of this site may be copied or reproduced without written permission.

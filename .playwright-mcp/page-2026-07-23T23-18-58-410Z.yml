@@ -1,0 +1,294 @@
+- generic [ref=f13e1]:
+  - generic [ref=f13e2]:
+    - generic [ref=f13e3]:
+      - img "8am MyCase logo" [ref=f13e6]
+      - list [ref=f13e7]:
+        - listitem [ref=f13e8]:
+          - link " Home" [ref=f13e9] [cursor=pointer]:
+            - /url: /dashboard
+            - generic [ref=f13e10]: 
+            - generic [ref=f13e11]: Home
+        - listitem [ref=f13e12]:
+          - link " Calendar 66" [ref=f13e13] [cursor=pointer]:
+            - /url: https://law-office-of-mario-varela-pllc.mycase.com/events
+            - generic [ref=f13e14]: 
+            - generic [ref=f13e15]: Calendar
+            - generic [ref=f13e16]: "66"
+        - listitem [ref=f13e17]:
+          - link " Tasks 5" [ref=f13e18] [cursor=pointer]:
+            - /url: https://law-office-of-mario-varela-pllc.mycase.com/tasks
+            - generic [ref=f13e19]: 
+            - generic [ref=f13e20]: Tasks
+            - generic [ref=f13e21]: "5"
+        - listitem [ref=f13e22]:
+          - link " Cases" [ref=f13e23] [cursor=pointer]:
+            - /url: /court_cases
+            - generic [ref=f13e24]: 
+            - generic [ref=f13e25]: Cases
+        - listitem [ref=f13e26]:
+          - link " Contacts" [ref=f13e27] [cursor=pointer]:
+            - /url: /contacts/clients
+            - generic [ref=f13e28]: 
+            - generic [ref=f13e29]: Contacts
+        - listitem [ref=f13e30]:
+          - link " Reports 1" [ref=f13e31] [cursor=pointer]:
+            - /url: /reporting/dashboard
+            - generic [ref=f13e32]: 
+            - generic [ref=f13e33]: Reports
+            - generic [ref=f13e34]: "1"
+        - generic [ref=f13e35]: Modules
+        - listitem [ref=f13e36]:
+          - button " Billing " [ref=f13e37] [cursor=pointer]:
+            - generic [ref=f13e38]: 
+            - generic [ref=f13e39]: Billing
+            - generic [ref=f13e40]: 
+        - listitem [ref=f13e42]:
+          - button " Payments " [ref=f13e43] [cursor=pointer]:
+            - generic [ref=f13e44]: 
+            - generic [ref=f13e45]: Payments
+            - generic [ref=f13e46]: 
+        - listitem [ref=f13e47]:
+          - button " Accounting " [ref=f13e48] [cursor=pointer]:
+            - generic [ref=f13e49]: 
+            - generic [ref=f13e50]: Accounting
+            - generic [ref=f13e51]: 
+        - listitem [ref=f13e52]:
+          - button " Documents Unread items " [ref=f13e53] [cursor=pointer]:
+            - generic [ref=f13e54]: 
+            - generic [ref=f13e55]: Documents
+            - generic [ref=f13e56]:
+              - generic "Unread items" [ref=f13e57]: 
+              - generic [ref=f13e58]: 
+        - listitem [ref=f13e59]:
+          - button " Communications Unread items " [ref=f13e60] [cursor=pointer]:
+            - generic [ref=f13e61]: 
+            - generic [ref=f13e62]: Communications
+            - generic [ref=f13e63]:
+              - generic "Unread items" [ref=f13e64]: 
+              - generic [ref=f13e65]: 
+        - listitem [ref=f13e66]:
+          - button " Leads " [ref=f13e67] [cursor=pointer]:
+            - generic [ref=f13e68]: 
+            - generic [ref=f13e69]: Leads
+            - generic [ref=f13e70]: 
+      - generic [ref=f13e74]:
+        - link " Smart time finder" [ref=f13e75] [cursor=pointer]:
+          - /url: /time_tracking
+          - generic [ref=f13e76]: 
+          - text: Smart time finder
+        - 'link " My hours billed: 0.0" [ref=f13e77] [cursor=pointer]':
+          - /url: /time_entries?user_id=23703361&start_date=2026-07-23&end_date=2026-07-23
+          - generic [ref=f13e78]: 
+          - generic [ref=f13e79]: "My hours billed:"
+          - generic [ref=f13e80]: "0.0"
+    - generic [ref=f13e81]:
+      - navigation [ref=f13e83]:
+        - button "Toggle sidebar  Toggle sidebar" [ref=f13e84] [cursor=pointer]:
+          - text: Toggle sidebar
+          - generic [ref=f13e85]: 
+          - generic [ref=f13e86]: Toggle sidebar
+        - generic [ref=f13e90]:
+          - generic [ref=f13e95]:
+            - generic [ref=f13e96]: All
+            - textbox [ref=f13e99]
+          - generic [ref=f13e107]:
+            - generic [ref=f13e108]:
+              - generic [ref=f13e109]: 
+              - generic [ref=f13e110]: Search
+            - textbox [ref=f13e113]
+        - generic [ref=f13e116]:
+          - button "Open timer panel  …" [ref=f13e122] [cursor=pointer]:
+            - text: Open timer panel
+            - generic [ref=f13e123]: 
+            - text: …
+          - button "Open date calculator Open date calculator " [ref=f13e125] [cursor=pointer]:
+            - text: Open date calculator
+            - generic [ref=f13e126]: Open date calculator
+            - generic [ref=f13e127]: 
+          - link "Manage integrations Manage integrations " [ref=f13e128] [cursor=pointer]:
+            - /url: https://law-office-of-mario-varela-pllc.mycase.com/apps
+            - text: Manage integrations
+            - generic [ref=f13e129]: Manage integrations
+            - generic [ref=f13e130]: 
+          - button "Open chat  Open chat" [ref=f13e132] [cursor=pointer]:
+            - text: Open chat
+            - generic [ref=f13e133]: 
+            - generic [ref=f13e134]: Open chat
+          - button "Chat with support Chat with support " [ref=f13e136] [cursor=pointer]:
+            - text: Chat with support
+            - generic [ref=f13e137]: Chat with support
+            - generic [ref=f13e138]: 
+          - button "Add new item" [ref=f13e140] [cursor=pointer]
+          - button "Mario Varela" [ref=f13e144] [cursor=pointer]
+      - generic [ref=f13e147]:
+        - generic [ref=f13e148]:
+          - generic [ref=f13e149]:
+            - generic [ref=f13e150]:
+              - link "Cases" [ref=f13e151] [cursor=pointer]:
+                - /url: /court_cases
+              - generic [ref=f13e152]: 
+            - generic [ref=f13e153]: 
+          - generic [ref=f13e154]:
+            - heading "Byron Rafael Batres 202502982 vs Mazariegos, Cindy Amarilis Dardon" [level=2] [ref=f13e155]
+            - generic [ref=f13e156]:
+              - generic [ref=f13e157]: 26-1394
+              - generic [ref=f13e159]:
+                - generic [ref=f13e160]: "Statute of Limitations:"
+                - generic [ref=f13e161]: Not Specified
+          - generic [ref=f13e162]:
+            - button "Tell us what you think" [ref=f13e163] [cursor=pointer]
+            - button " Print" [ref=f13e164] [cursor=pointer]:
+              - generic [ref=f13e165]: 
+              - text: Print
+            - button "Close Case" [ref=f13e166] [cursor=pointer]
+            - button "Edit Case" [ref=f13e167] [cursor=pointer]
+            - button [ref=f13e169] [cursor=pointer]:
+              - paragraph [ref=f13e172]: 8am IQ
+        - generic [ref=f13e173]:
+          - generic [ref=f13e174]: Click to expand case contacts, details, and description
+          - generic [ref=f13e176]:
+            - heading [level=4] [ref=f13e177]:
+              - button "Case Overview" [expanded] [ref=f13e178] [cursor=pointer]
+            - generic [ref=f13e180]:
+              - generic [ref=f13e181]:
+                - link [ref=f13e182] [cursor=pointer]:
+                  - /url: /court_cases/46275856/case_link
+                  - heading "Contacts (1)" [level=5] [ref=f13e183]
+                - generic [ref=f13e186]:
+                  - generic [ref=f13e187]: BB
+                  - generic [ref=f13e190]:
+                    - generic [ref=f13e191]:
+                      - link "Byron Batres" [ref=f13e192] [cursor=pointer]:
+                        - /url: /contacts/clients/71393240
+                      - generic [ref=f13e193]: (Client)
+                    - generic [ref=f13e195]:
+                      - link "Byronba3@gmail.com" [ref=f13e197] [cursor=pointer]:
+                        - /url: mailto:Byronba3@gmail.com
+                      - text: 
+                    - generic [ref=f13e199]:
+                      - generic [ref=f13e200]:
+                        - link "(832) 621-5165" [ref=f13e201] [cursor=pointer]:
+                          - /url: tel:8326215165
+                        - text: (p)
+                      - text: 
+              - generic [ref=f13e202]:
+                - heading "Details" [level=5] [ref=f13e203]
+                - generic [ref=f13e204]:
+                  - generic [ref=f13e205]: "Date opened: 03/30/2026"
+                  - generic [ref=f13e206]: "Practice area: FAMILY"
+                  - generic [ref=f13e207]:
+                    - generic [ref=f13e208]: "Case stage:"
+                    - generic [ref=f13e210]:
+                      - generic [ref=f13e213]:
+                        - text: FAM - DRAFTING INITIAL PLEADINGS
+                        - generic [ref=f13e214] [cursor=pointer]: 
+                      - option "--"
+                      - option "IMM - Asilo"
+                      - option "IMM - CAA"
+                      - option "IMM - CFI-Bond"
+                      - option "IMM - EAD"
+                      - option "IMM - Fam Petition"
+                      - option "IMM - FOIA"
+                      - option "IMM - Employment Visa"
+                      - option "IMM - U Visa Certification"
+                      - option "IMM - U visa"
+                      - option "IMM - TPS"
+                      - option "IMM - Labor Certification"
+                      - option "IMM - Referred"
+                      - option "IMM - RFE"
+                      - option "IMM - VAWA"
+                      - option "IMM - Hearing Only"
+                      - option "IMM - MTW"
+                      - option "IMM - Appeal"
+                      - option "IMM - MTReopen"
+                      - option "FAM - INTAKE"
+                      - option "FAM - ONBOARDING"
+                      - option "FAM - DRAFTING INITIAL PLEADINGS" [selected]
+                      - option "FAM - INITIAL PLEADINGS FILED"
+                      - option "FAM - SERVICE"
+                      - option "FAM - TRO"
+                      - option "FAM - MEDIATION"
+                      - option "FAM - DISCOVERY"
+                      - option "FAM - TEMPORARY ORDERS"
+                      - option "FAM - TRIAL PREP"
+                      - option "FAM - TRIAL"
+                      - option "FAM - SETTLED"
+                      - option "FAM - CLOSED"
+                      - option "FAM - WITHDRAWAL"
+                      - option "FAM - HOLD"
+                      - option "FAM - ENTRY"
+                      - option "On Hold"
+                      - option "PI - INTAKE"
+                      - option "PI - TREATING"
+                      - option "PI - MEDICAL RECORDS"
+                      - option "PI - DEMAND"
+                      - option "PI - NEGOTIATION"
+                      - option "PI - SETTLED"
+                      - option "PI - CLOSING"
+                      - option "CV - INITIAL PLEADINGS"
+                      - option "CV - SERVICE"
+                      - option "CV - DISCOVERY"
+                      - option "CV - MEDIATION"
+                      - option "CV - TRIAL"
+                      - option "CV - SETTLED"
+                      - option "CV - CLOSED"
+                  - generic [ref=f13e215]: "Office: Primary"
+                  - generic [ref=f13e216]:
+                    - text: "Lead attorney:"
+                    - link "Jonathan Mata" [ref=f13e217] [cursor=pointer]:
+                      - /url: /contacts/attorneys/66041372
+                  - generic [ref=f13e218]:
+                    - text: "Originating attorney:"
+                    - link "Mario Varela" [ref=f13e219] [cursor=pointer]:
+                      - /url: /contacts/attorneys/23703361
+                  - generic [ref=f13e220]:
+                    - generic [ref=f13e221]: "Staff:"
+                    - link "Rosa Sirias" [ref=f13e224] [cursor=pointer]:
+                      - /url: /contacts/attorneys/73479577
+                  - generic [ref=f13e225]:
+                    - text: "Created: 03/30/2026 by"
+                    - link "Jonathan Mata" [ref=f13e226] [cursor=pointer]:
+                      - /url: /contacts/attorneys/66041372
+              - generic [ref=f13e227]:
+                - heading "Description" [level=5] [ref=f13e228]
+                - paragraph [ref=f13e232]: Enforcement
+        - generic [ref=f13e236]:
+          - generic [ref=f13e237]:
+            - link "Items & info" [ref=f13e239] [cursor=pointer]:
+              - /url: /court_cases/46275856/items
+            - link "Time & billing" [active] [ref=f13e241] [cursor=pointer]:
+              - /url: /court_cases/46275856/billing
+            - link "Communications" [ref=f13e243] [cursor=pointer]:
+              - /url: /court_cases/46275856/communications
+            - link "Contacts & staff" [ref=f13e245] [cursor=pointer]:
+              - /url: /court_cases/46275856/case_link
+            - link "Status updates" [ref=f13e247] [cursor=pointer]:
+              - /url: /court_cases/46275856/status_updates
+          - generic [ref=f13e248]:
+            - text:             
+            - generic [ref=f13e289]:
+              - link "$ Info" [ref=f13e291] [cursor=pointer]:
+                - /url: /court_cases/46275856/overview
+                - generic [ref=f13e292]: $
+                - text: Info
+              - link " Time entries" [ref=f13e294] [cursor=pointer]:
+                - /url: /court_cases/46275856/time_entries
+                - generic [ref=f13e295]: 
+                - text: Time entries
+              - link " Expenses" [ref=f13e297] [cursor=pointer]:
+                - /url: /court_cases/46275856/expenses
+                - generic [ref=f13e298]: 
+                - text: Expenses
+              - link " Invoices" [ref=f13e300] [cursor=pointer]:
+                - /url: /court_cases/46275856/invoices
+                - generic [ref=f13e301]: 
+                - text: Invoices
+              - link " Payment activity" [ref=f13e303] [cursor=pointer]:
+                - /url: /court_cases/46275856/activity
+                - generic [ref=f13e304]: 
+                - text: Payment activity
+            - text:     
+  - generic [ref=f13e285]:
+    - region:
+      - region "Notifications (F8)":
+        - list

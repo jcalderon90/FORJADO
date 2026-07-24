@@ -4,7 +4,7 @@ tipo: proyecto
 cliente: Varela Law
 estado: en curso
 creado: 2026-06-20
-actualizado: 2026-07-15
+actualizado: 2026-07-23
 ---
 
 # Varela Law — Automatización: Radar Billing & Payments
@@ -15,18 +15,23 @@ Mario llena manualmente la pestaña **Billing & Payments** del Google Sheet "Rad
 
 ---
 
-## Estado actual (resumen — 2026-07-15)
+## Estado actual (resumen — 2026-07-23)
 
 - **Join de identidad resuelto:** se abandonó el join por "Case No." (eran dos sistemas de numeración distintos, nunca compatibles) y se construyó la pestaña **ID MAP** vía el workflow `Radar Billing - Build ID MAP (TEST)` (n8n `JoQ4f8txlZTi89O4`). Cobertura automática original: 69% match limpio, 2% ambiguo, 28% sin match.
 - **Join real reconstruido usando ID MAP como llave estable (2026-07-13):** `Radar Billing - Join to TEST2` (`UPrV8mk5weAKswuT`) ya no re-deriva el match por nombre en cada corrida — lee ID MAP directamente, limpia TEST2 antes de escribir (re-ejecutable sin duplicar) y deja en blanco las filas `AMBIGUOUS`/`NO MATCH` para revisión manual. Ejecutado con éxito (ejecución `2026`, status `success`). **Pendiente confirmar en el Sheet real** cuántas de las 68 filas limpias trajeron billing — no se pudo verificar el contenido de TEST2 desde esta sesión (sin acceso de lectura directo al Sheet).
 - **24 de las 28 filas `NO MATCH` resueltas manualmente (2026-07-15):** el "NO MATCH" no era un caso genuinamente irresoluble — el parser de `Build ID MAP` asume que el nombre en MyCase sigue el orden "Apellido, Nombre", pero muchos casos en MyCase están en orden "Nombre Apellido" o con el número de expediente pegado al nombre sin separador. Se cruzó cada apellido sin match contra los 994 casos completos de MyCase (abiertos+cerrados) y se encontró candidato de alta confianza para 24 de los 28 (la mayoría confirmado porque el docket del Sheet aparece embebido literalmente en el nombre de MyCase). Se construyó un workflow puntual **"Radar Billing - ID MAP Manual Corrections"** (n8n `Fo0Jh3eNIHcEaIcm`) que escribió esas 24 correcciones directo en ID MAP (ejecución `2032`, éxito), marcadas con `Match Method = "manual - resolved 2026-07-15"`. **Cobertura actual de ID MAP: 94 de 98 clientes (~96%).**
 - **Quedan 4 filas sin resolver**, genuinamente necesitan criterio humano (ver detalle en la sección "Estado" más abajo): 2 `AMBIGUOUS` (Joj, Santos / Medina, Manuel — múltiples casos candidatos en MyCase, sin docket para desempatar) y 2 de confianza media (Marquez, Dimas / Rojas Tovar, Manuel — coincide el nombre pero no hay expediente para confirmar).
 - **Bug de fondo detectado, sin corregir todavía:** si `Radar Billing - Build ID MAP (TEST)` (`JoQ4f8txlZTi89O4`) se vuelve a correr completo (p.ej. al agregar clientes nuevos a CIVIL CASES), su parser regenerará estas mismas 24 filas como `NO MATCH` otra vez, porque no maneja nombres en orden invertido ni dockets pegados sin separador. Vale la pena parchear el parser antes de la próxima corrida completa — si no, hay que repetir esta reconciliación manual.
-- **Bloqueado en 2 frentes, ambos esperando a Mario** (mensaje de WhatsApp enviado 2026-07-08, **todavía sin respuesta** al 2026-07-15):
-  1. Layout final de destino (07-05-26 vs Billing & Payments) y alcance de Trust Balance/Invoices Awaiting Payment (no disponible vía API pública de MyCase) — ver preguntas exactas en [[mensaje-mario-2026-07-08.txt]].
-  2. Revisión manual de las 4 filas `AMBIGUOUS`/media-confianza que quedan en ID MAP (puede resolverlas Mario o cualquiera con acceso a MyCase, no requiere su respuesta de WhatsApp específicamente).
-  - **Instrucción del usuario (2026-07-15):** no volver a preguntar proactivamente si Mario respondió — el usuario avisará cuando llegue la respuesta.
-- **No tocar aún:** "Billing & Payments" ni la pestaña 07-05-26 real — todo el trabajo de automatización sigue aislado en TEST/TEST2/ID MAP hasta validar montos y layout con Mario.
+- **RESUELTO — ambas preguntas a Mario respondidas.** (1) Layout final: tab **07-05-26**, ignorar "Billing & Payments" (respondió 2026-07-08). (2) Trust Balance/Invoices Awaiting Payment: soporte de MyCase confirmó que no están disponibles vía API (respondió 2026-07-23) — automatización parcial confirmada como alcance final.
+- **Queda pendiente, no depende de Mario:** revisión manual de las 4 filas `AMBIGUOUS`/media-confianza en ID MAP (ver detalle en sección "Estado" abajo).
+- **RESUELTO 2026-07-23 — layout real de 07-05-26 confirmado leyendo la pestaña en vivo.** Ver sección "Layout real de la pestaña 07-05-26" más abajo. Solo F (Total Amount Collected), H (Total Invoiced Amount) y J (Uninvoiced Balance) son automatizables; G/I/K/L/M quedan manuales (cadena de dependencia de Trust Balance). Fórmula real de Net Trust Balance resuelta: `Available Trust Balance − (Invoices Awaiting Payment + Uninvoiced Balance)`.
+- **RESUELTO 2026-07-23 — "07-05-26" confirmado como pestaña fija (sin preguntarle a Mario).** Se listaron las 8 pestañas reales del Sheet (`sheetsSearch`): ninguna otra tiene nombre de fecha — descarta rotación por ciclo. `07-05-26` (gid `2118643852`) es el destino final.
+- **EN CURSO 2026-07-23 — reconstruido `Radar Billing - Join to TEST2` (`UPrV8mk5weAKswuT`) para escribir solo F/H/J.** El nodo `Join via ID MAP` ahora solo calcula y expone `Total Amount Collected (F)`, `Total Invoiced Amount (H)`, `Uninvoiced Balance (J)` + `Client`/`Match Type` (antes traía columnas de un layout viejo que ya no aplica); `Clear TEST2` ahora limpia también el header (antes solo el cuerpo) para que el header nuevo se escriba solo. Ejecutado con éxito (ejecución `2080`, ~3.5 min).
+- **✅ RESUELTO Y VERIFICADO 2026-07-23 — bug de signo en F (Total Amount Collected).** Investigado a fondo vía un workflow de diagnóstico puntual (`DIAG - Invoice Payments Sign Investigation`, n8n id `Xvjn45vTFsBb6nqf`, ejecución `2082`) que desglosó los 2835 registros de `/invoice_payments` por `transaction_type`: los tipos `Trust` (590 registros, -598,824 en total) y `CREDIT` (6 registros, -6,328) son los únicos negativos; todo lo demás (Purchase/Other/Check/Cash/Credit Card/Zelle) ya es positivo. `Trust` representa dinero trasladado desde la cuenta de trust del cliente hacia operativo para pagar una factura — sí cuenta como "cobrado" para MyCase, solo que su ledger interno lo registra en negativo (confirmado una nota real: *"Traslado de trust a operationg para cerrar caso"*). **Fix aplicado:** en el nodo `Sum Payments By Case`, tomar `Math.abs()` solo de los montos `Trust` antes de sumar (se dejan `CREDIT` en negativo, ya que un reembolso real sí debe restar). **Verificado contra la UI real de MyCase** (login con Playwright, caso de Byron Batres, id `46275856`, Case Billing Totals): Total Amount Collected real = **$2,822.25**; nuestro cálculo corregido dio exactamente **$2,822.25** (ejecución `2086`). También Alvarado, Irma dio `$5,863.30`, coincidiendo con la magnitud vista antes en la pestaña real. **F queda confiable.**
+- **✅ RESUELTO Y VERIFICADO 2026-07-23 — H (Total Invoiced Amount) incompleto por un filtro por defecto de la API, no un bug de código.** Al verificar Batres contra la UI real: Total Invoiced Amount real = **$3,015.69**, nuestro cálculo daba **$0**. El endpoint `/invoices` reportaba en su propio header `item-count: 233` (total real según la API, no fallo de paginación nuestro) — sospechosamente bajo para 999 casos y miles de pagos. **Causa raíz encontrada en la documentación oficial de MyCase** (https://mycaseapi.stoplight.io/docs/mycase-api-documentation/163a0a18de0f2-get-invoices): la descripción del endpoint dice textualmente *"By default, only invoices with 'Online Payments Enabled' will be returned."* — existe un parámetro `only_allowed_online_payments` (boolean, default `true`) para desactivar ese filtro. **Fix:** se agregó `&only_allowed_online_payments=false` a la URL del nodo `Fetch Invoices (Paginated)`. **Verificado contra la UI real:** Batres pasó de $0 a **$3,015.69 exacto** (ejecución `2088`). **Bonus de verificación cruzada:** Alvarado, Irma ahora da F=$5,863.30 y H=$9,169.80, coincidiendo EXACTO con la fila de ejemplo leída antes de la pestaña real 07-05-26 (fila 2) — confirma con un segundo caso independiente que ambos bugs (F y H) quedaron resueltos. **0 de 20 filas de muestra con H=0** tras el fix (antes eran 5 de 10). **H queda confiable.**
+- **Estado final de F/H/J: los tres quedan automatizables y verificados.** F y H verificados contra 2 casos reales independientes (Batres via UI en vivo, Alvarado via el ejemplo de 07-05-26). J (Uninvoiced Balance) no tuvo casos de prueba con valor distinto de 0 en la muestra, pero su lógica no cambió y no mostró señales de bug.
+- **Próximo paso real:** (1) revisar visualmente TEST2 en el Sheet para una pasada final de sanity-check con más filas, (2) construir/activar el workflow de producción que escriba F/H/J en la pestaña 07-05-26 real (trigger manual o programado, a decidir), (3) revisar las 4 filas de ID MAP que aún necesitan criterio humano (no bloqueante, en paralelo).
+- **No tocar aún:** "Billing & Payments" ni la pestaña 07-05-26 real — sigue pendiente el paso de pasar de TEST2 (validación) a producción, pero ya no hay bugs conocidos bloqueando ese paso.
 
 ---
 
@@ -63,7 +68,9 @@ Mario llena manualmente la pestaña **Billing & Payments** del Google Sheet "Rad
 | K | Case No. | Número de caso |
 | L | Notes | Notas internas |
 
-### Pestaña: Billing & Payments (destino de la automatización)
+### Pestaña: Billing & Payments (histórico — SUPERADO, ver nota abajo)
+
+> [!bug] OBSOLETO — Mario confirmó 2026-07-08 que esta pestaña se ignora. El destino real es **07-05-26**, ver sección "Layout real de la pestaña 07-05-26" más abajo (única fuente confiable de columnas/fórmulas). Tabla dejada aquí solo como referencia histórica de cómo arrancó el proyecto.
 
 | Col | Campo | Origen |
 |---|---|---|
@@ -82,9 +89,9 @@ Mario llena manualmente la pestaña **Billing & Payments** del Google Sheet "Rad
 
 ---
 
-## Datos a extraer de MyCase
+## Datos a extraer de MyCase (histórico — columnas de Sheet abajo se refieren a Billing & Payments, ya OBSOLETO)
 
-Ruta en MyCase: **Caso → Time & Billing → Info → Case Billing Totals**
+Ruta en MyCase: **Caso → Time & Billing → Info → Case Billing Totals**. Los campos de MyCase en sí siguen vigentes; el mapeo "Col Sheet" de abajo es viejo — ver el mapeo real a columnas F-M de la pestaña 07-05-26 más abajo.
 
 | Campo MyCase | Col Sheet |
 |---|---|
@@ -160,9 +167,14 @@ GET /time_entries?case_id={id}      → entradas de tiempo
 - [ ] **Pendiente:** revisar manualmente en la pestaña ID MAP las filas `AMBIGUOUS`/`NO MATCH` (filtrar por columna "Match Method") y completar a mano el MyCase ID/Case No. donde se pueda determinar.
 - [ ] Una vez revisado ID MAP: reconstruir el join real usando ID MAP como llave persistente (no re-derivar el matching por nombre en cada corrida), escribir en TEST2 para validar, y solo después tocar "Billing & Payments" — validando montos de un par de casos reales contra la UI de MyCase.
 - [x] **Respuesta de Mario (2026-07-08):** confirmó que la pestaña **07-05-26** es la más actualizada (la que llena a mano día a día) y que la pestaña **Billing and Payments** puede ignorarse — queda descartada como destino/referencia. Falta re-derivar el layout de columnas y la fórmula de Net Trust Balance contra 07-05-26 en vez de contra Billing & Payments.
-- [ ] **En curso — Mario va a checar con soporte de MyCase (2026-07-08)** sobre si hay forma de obtener **Trust Balance** e **Invoices Awaiting Payment** (el hallazgo del 2026-07-05 de que no están disponibles vía la API pública de MyCase). Ni el join ni el matching resuelven esto — bloqueado en espera de su respuesta antes de decidir si la automatización parcial (Total Invoiced, Total Collected, Un-Invoiced) es suficiente.
-- [ ] Con la pestaña 07-05-26 confirmada como referencia: releer su layout de columnas y fórmulas (reemplaza la sección "Procedimiento manual actualizado" abajo, que estaba basada en un layout hipotético de TEST/Billing & Payments) y confirmar la fórmula real de Net Trust Balance.
-- [ ] Despliegue y programación del trigger (recién después de validar el join, los montos, y el layout final con Mario).
+- [x] **RESUELTO 2026-07-23 — Mario confirmó con soporte de MyCase.** No hay forma de obtener **Trust Balance** ni **Invoices Awaiting Payment** vía API — soporte de MyCase lo confirmó directamente, coincide con el hallazgo propio del 2026-07-05. **Decisión de alcance final: automatización parcial** — Total Amount Collected, Total Invoiced Amount y Un-Invoiced Balance se automatizan desde MyCase; Trust Balance (Available/Running) e Invoices Awaiting Payment quedan manuales, como hace Mario hoy.
+- [x] **RESUELTO 2026-07-23 — releído el layout real de 07-05-26** vía workflow de inspección `Radar Billing - Read 07-05-26 (Inspection)` (`uaI9ESCgYiB6VGFd`, ejecución `2079`). Ver sección "Layout real de la pestaña 07-05-26" más abajo — reemplaza por completo la vieja sección "Procedimiento manual actualizado". Fórmula real de Net Trust Balance confirmada.
+- [x] **RESUELTO 2026-07-23 — confirmado que "07-05-26" es la pestaña fija** (no rotativa), listando las 8 pestañas reales del Sheet — no fue necesario preguntarle a Mario.
+- [x] **Reconstruido `Join via ID MAP` para escribir solo F/H/J (2026-07-23)** — antes tenía columnas de un layout viejo (Status, Practice Area, Outstanding Balance...) que ya no aplican al destino real. Ejecutado con éxito (ejecución `2080`).
+- [x] **RESUELTO Y VERIFICADO 2026-07-23 — bug de signo en "Total Amount Collected" (col F).** Diagnóstico puntual (`DIAG - Invoice Payments Sign Investigation`, `Xvjn45vTFsBb6nqf`, ejecución `2082`) confirmó que solo los `transaction_type` `Trust` y `CREDIT` de `/invoice_payments` vienen negativos; `Trust` sí es dinero cobrado (traslado interno de fondos ya en trust), solo que MyCase lo registra en negativo. Fix: `Math.abs()` únicamente sobre montos `Trust` en `Sum Payments By Case`, dejando `CREDIT` como resta legítima. Verificado contra la UI real de MyCase (caso Batres, id `46275856`): real $2,822.25, calculado $2,822.25 exacto (ejecución `2086`). **F queda confiable.** Pendiente replicar el mismo fix en `Radar Billing - Auto Fill (TEST)` (`gQjtpc3B4NinSsW5`) si se sigue usando, ya que comparte el código viejo (con bug).
+- [x] **RESUELTO Y VERIFICADO 2026-07-23 — H (Total Invoiced Amount) incompleto por filtro por defecto de la API.** Verificado contra Batres: real $3,015.69, calculado $0. Causa encontrada en la documentación oficial de MyCase: `/invoices` por defecto solo devuelve invoices con "Online Payments Enabled" (parámetro `only_allowed_online_payments`, default `true`). Fix: agregado `&only_allowed_online_payments=false` a la URL de `Fetch Invoices (Paginated)`. Verificado: Batres pasó a $3,015.69 exacto (ejecución `2088`); Alvarado, Irma coincidió exacto con la fila de ejemplo de 07-05-26 (F=$5,863.30, H=$9,169.80) — segundo caso independiente confirmando ambos fixes. 0 de 20 filas de muestra con H=0 tras el fix. **H queda confiable.**
+- [ ] **Sanity-check final antes de producción:** revisar visualmente TEST2 en el Sheet con más filas, y confirmar J (Uninvoiced Balance) con al menos un caso de valor distinto de cero (la muestra actual solo tuvo J=0/20, salvo Boutte con J=20).
+- [ ] Despliegue y programación del trigger hacia la pestaña 07-05-26 real (ya no hay bugs conocidos bloqueando este paso — F y H verificados contra 2 casos reales independientes).
 - [x] **Reconstruido el join real usando ID MAP como llave persistente (2026-07-13).** Se modificó `Radar Billing - Join to TEST2` (`UPrV8mk5weAKswuT`) mientras se espera respuesta de Mario: (1) nodo nuevo `Clear TEST2` limpia la pestaña antes de cada corrida (mismo patrón idempotente que ya usaba `Build ID MAP`, evita duplicar filas al re-ejecutar); (2) el nodo antes llamado `Read Civil Cases` ahora lee la pestaña **ID MAP** en vez de CIVIL CASES; (3) el nodo de join (`Join via ID MAP`, antes `Join Civil Cases with MyCase`) ya no re-deriva el match por nombre en cada corrida — usa directamente el `MyCase Case No.` guardado en ID MAP como llave estable, eliminando el riesgo del bug de matching por primer nombre (Correa Jose/Vladimir) que sí existía en esta versión vieja. Las filas `AMBIGUOUS`/`NO MATCH` de ID MAP pasan a TEST2 con billing en blanco (visibles, no bloquean el resto). Ejecutado en modo manual (ejecución `2026`, 2026-07-13, ~3.5 min, status `success`). **Pendiente confirmar en el Sheet:** cuántas de las 68 filas limpias de ID MAP trajeron billing real en TEST2 — no hay acceso directo de lectura al Sheet desde esta sesión para verificarlo automáticamente.
 - [x] **Resueltas manualmente 24 de las 28 filas `NO MATCH` de ID MAP (2026-07-15).** Diagnóstico: el parser de `Build ID MAP` (`JoQ4f8txlZTi89O4`) asume nombre de MyCase en orden "Apellido, Nombre" — falla con "Nombre Apellido", "Nombre, Apellido" (coma invertida), o docket pegado al nombre sin separador. Se buscó cada apellido sin match por substring contra los 994 casos completos de MyCase (abiertos+cerrados, no solo los activos) y se encontró un candidato único de alta confianza para 24 de los 28, la mayoría confirmado porque el número de expediente del Sheet aparece literalmente embebido en el nombre de MyCase (ej. Batres, Byron → docket `2025-02982` = `202502982` en el nombre MyCase "Byron Rafael Batres 202502982..."). Se construyó el workflow puntual **"Radar Billing - ID MAP Manual Corrections"** (n8n `Fo0Jh3eNIHcEaIcm`, Code node con las 24 correcciones hardcodeadas → Google Sheets Update matcheando por "Client (Sheet)") y se ejecutó (ejecución `2032`, éxito) — las 24 filas quedaron escritas en ID MAP con `Match Method = "manual - resolved 2026-07-15"`. Usuario confirmó explícitamente esta escritura (ID MAP es la pestaña de staging designada, no producción, pero el clasificador de modo automático de Claude Code pidió confirmación igual antes de escribir).
 - [ ] **Quedan 4 filas sin resolver en ID MAP**, necesitan criterio humano (no se pueden auto-resolver con más búsqueda):
@@ -174,49 +186,38 @@ GET /time_entries?case_id={id}      → entradas de tiempo
 
 ---
 
-## Procedimiento manual actualizado (versión 2026-07-06)
+## Layout real de la pestaña 07-05-26 (CONFIRMADO 2026-07-23, leído en vivo)
 
-> [!warning] Reemplaza la definición anterior de la pestaña "Billing & Payments" — layout y fuente de columnas distintos
-> Mario describió este procedimiento el 2026-07-06 como el que está siguiendo manualmente ahora mismo, usando la pestaña **07-05-26** como referencia (la va llenando a mano día a día). Tiene columnas y origen de datos diferentes a lo documentado antes en este archivo — ver conflictos abajo.
+> [!important] Reemplaza por completo la sección anterior ("Procedimiento manual actualizado 2026-07-06"), que era una descripción verbal de Mario sobre un layout parecido en TEST — nunca confirmada contra 07-05-26 misma. Esta sección sí viene de una lectura real de la pestaña 07-05-26 (workflow de inspección `Radar Billing - Read 07-05-26 (Inspection)`, n8n id `uaI9ESCgYiB6VGFd`, ejecución `2079`, 2026-07-23, modo `general: 'FORMULA'` para ver fórmulas crudas).
 
-**(1) Copiar de la pestaña Civil Cases a las columnas A-E de la pestaña nueva (TEST):**
+**Columnas A-E — NO son estáticas, se generan solas:** están pobladas por una fórmula array `=QUERY('CIVIL CASES'!A:J, "SELECT A, B, G, I, J", 1)` anclada en A1, que trae en vivo Client Name/Case Type/Retained/Age/Resp desde CIVIL CASES. **La automatización no necesita tocar ni escribir estas columnas** — ya están sincronizadas por el propio Sheet.
 
-| Col TEST | Campo | Origen (Civil Cases) |
-|---|---|---|
-| A | Client Name | Col A |
-| B | Case Type | Col B |
-| C | Retained | Col G |
-| D | Age | Col I |
-| E | Resp | Col J |
+**Columnas F en adelante (datos MyCase + fórmulas), confirmadas con datos reales de 5 filas de ejemplo:**
 
-**(2) Llenar columnas F-K con datos de MyCase (Caso → Time & Billing → Info):**
+| Col | Campo | Origen | ¿Automatizable? |
+|---|---|---|---|
+| F | Total Amount Collected | MyCase | ✅ Sí |
+| G | Invoices Awaiting Payment | MyCase | ❌ No — confirmado sin API (Mario, 2026-07-23) |
+| H | Total Invoiced Amount | MyCase | ✅ Sí |
+| I | Available Trust Balance | MyCase | ❌ No — confirmado sin API (Mario, 2026-07-23) |
+| J | Uninvoiced Balance | MyCase | ✅ Sí (vía agregación de time_entries/expenses billable, ver hallazgo 2026-07-05) |
+| K | Running Trust Balance | Fórmula `=I{row}-J{row}` | ❌ No — depende de I (bloqueada) |
+| L | Total Outstanding | Fórmula `=G{row}+J{row}` | ❌ No — depende de G (bloqueada) |
+| M | **Net Trust Balance** | Fórmula `=I{row}-L{row}` | ❌ No — depende de I y L |
+| N | Num Overdue Invoices | Sin confirmar origen | 🟡 Por investigar (posible via conteo de `/invoices` vencidas) |
+| O | Type | Manual, vacío en la muestra | — |
+| P | "Amount Collected " (con espacio final) | Vacío en toda la muestra — posible columna legacy sin uso | — |
+| Q+ | Notas de actividad fechadas en texto libre (ej. "7/13/26 invoices sent", "7/14 Unbilled Charges") | Manual, log de seguimiento del staff | — (fuera de alcance) |
 
-| Col TEST | Campo | Origen MyCase |
-|---|---|---|
-| F | Total Amount Collected | Case Billing Totals |
-| G | Invoices Awaiting Payment | Case Billing Totals |
-| H | Total Invoiced Amount | Case Billing Totals |
-| I | Available Trust Balance | Running Trust Balance |
-| J | Uninvoiced Balance | Running Trust Balance |
-| K | Running Trust Balance | Running Trust Balance |
+**RESUELTA la duda pendiente de la fórmula de Net Trust Balance:** no es `G - E - H` (esa era una hipótesis sobre un layout equivocado). La real es **`Available Trust Balance − Total Outstanding`**, donde `Total Outstanding = Invoices Awaiting Payment + Uninvoiced Balance`. Como I y G están bloqueadas (no vía API), el bloqueo se propaga en cadena a K, L y M.
 
-**(3) Columnas calculadas:**
+**Conclusión práctica — alcance final de la automatización:** de las columnas numéricas F-M, **solo F (Total Amount Collected), H (Total Invoiced Amount) y J (Uninvoiced Balance) son automatizables**. G, I, K, L y M quedan manuales, tal como Mario ya las llena. N queda pendiente de investigar (no es MyCase Billing Totals clásico, podría salir de `/invoices` filtrando vencidas).
 
-| Col TEST | Campo | Fórmula |
-|---|---|---|
-| L | Total Outstanding | `H + J` (Total Invoiced Amount + Uninvoiced Balance) |
-| M | Net Trust Balance | `G - E - H` (ver duda abajo) |
-| N | Type | En blanco por ahora |
+**Nota técnica menor:** en la fila de ejemplo 6, la columna K (Running Trust Balance) no tenía fórmula sino un valor fijo (`1500`) — evidencia de que Mario a veces sobreescribe manualmente el resultado calculado. La automatización de F/H/J no debería tocar K/L/M, así que esto no es un conflicto, pero confirma que estas columnas se editan a mano con cierta frecuencia.
 
-> [!bug] Duda sin resolver — fórmula de Net Trust Balance (col M)
-> La fórmula `G - E - H` resta la columna **E**, que en este layout es **"Resp"** (paralegal/abogado asignado — texto, no un número). Restar texto de una fórmula financiera no tiene sentido; en Sheets se trataría como 0 y el resultado real sería `G - H` (Invoices Awaiting Payment − Total Invoiced Amount), lo cual tampoco es claramente "Net Trust Balance" en términos conceptuales. Hipótesis: desfase de letras de columna, posiblemente copiado de una versión anterior del Sheet antes de insertar Case Type/Age/Resp al inicio. **Pendiente:** confirmar contra la pestaña `07-05-26` (que Mario llena a mano) cuál es el cálculo real antes de automatizar o dar esto por definitivo.
+**RESUELTO 2026-07-23 — "07-05-26" es la pestaña fija, no rotativa.** Se listaron las 8 pestañas reales del Sheet (`sheetsSearch` vía n8n): CIVIL CASES, 07-05-26, CLOSED CASES/OWE MONEY, Billing & Payments, FMF, TEST2, TEST, ID MAP. Solo existe **una** pestaña con nombre de fecha — no hay ninguna otra fechada anterior (ej. 06-28-26), lo que descarta la hipótesis de rotación por ciclo sin necesidad de preguntarle a Mario. `07-05-26` (gid `2118643852`) es el destino final confirmado.
 
-> [!bug] SUPERADO 2026-07-08 — Mario confirmó ignorar "Billing and Payments" y usar la pestaña 07-05-26 como referencia. Este bloque de conflicto queda obsoleto en cuanto se releve el layout contra 07-05-26.
-
-> [!bug] Conflicto — nombre de pestaña "TEST" ya está en uso con otro layout
-> La pestaña **TEST** ya fue poblada el 2026-07-06 por el workflow n8n `Radar Billing - Auto Fill (TEST)` (`gQjtpc3B4NinSsW5`) con **993 filas** y columnas `Client, Case No. (MyCase), Status, Practice Area, Billing Type, Outstanding Balance, Opened/Closed Date, Tot Invoiced, Tot Collected, Uninvoiced` (ver sección "Estado" más abajo). Es un layout distinto al de este procedimiento manual (A-N). **Pendiente confirmar con Mario:** si este procedimiento manual va en la misma pestaña TEST (pisando el volcado automático) o en una pestaña separada, y si el volcado automático de 993 filas sigue vigente o se reemplaza por este enfoque.
->
-> También difiere de la definición anterior de la pestaña **Billing & Payments** (A-L, sin Case Type/Age/Resp, "Para" en vez de esas tres columnas) — ver tabla al inicio de este archivo. No está claro si "Billing & Payments" y este nuevo layout de "TEST" son el mismo destino final o dos cosas paralelas.
+**Pendiente de resolver, no bloqueante:** confirmar si "Num Overdue Invoices" (col N) es automatizable desde `/invoices` de MyCase.
 
 ---
 
