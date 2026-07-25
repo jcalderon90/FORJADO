@@ -2,9 +2,9 @@
 tags: [forjado, varela-law, automatizacion, mycase, google-sheets, n8n]
 tipo: proyecto
 cliente: Varela Law
-estado: en curso
+estado: en producción
 creado: 2026-06-20
-actualizado: 2026-07-23
+actualizado: 2026-07-25
 ---
 
 # Varela Law — Automatización: Radar Billing & Payments
@@ -32,6 +32,25 @@ Mario llena manualmente la pestaña **Billing & Payments** del Google Sheet "Rad
 - **Estado final de F/H/J: los tres quedan automatizables y verificados.** F y H verificados contra 2 casos reales independientes (Batres via UI en vivo, Alvarado via el ejemplo de 07-05-26). J (Uninvoiced Balance) no tuvo casos de prueba con valor distinto de 0 en la muestra, pero su lógica no cambió y no mostró señales de bug.
 - **Próximo paso real:** (1) revisar visualmente TEST2 en el Sheet para una pasada final de sanity-check con más filas, (2) construir/activar el workflow de producción que escriba F/H/J en la pestaña 07-05-26 real (trigger manual o programado, a decidir), (3) revisar las 4 filas de ID MAP que aún necesitan criterio humano (no bloqueante, en paralelo).
 - **No tocar aún:** "Billing & Payments" ni la pestaña 07-05-26 real — sigue pendiente el paso de pasar de TEST2 (validación) a producción, pero ya no hay bugs conocidos bloqueando ese paso.
+- **✅ SANITY-CHECK COMPLETO 2026-07-25 — TEST2 leída completa (99 filas) por primera vez.** F y H se sostienen a escala (Batres y Alvarado siguen exactos). **J (Uninvoiced Balance) confirmado con 7 casos reales ≠ 0** (Boutte $20, Gonzalez Juan Luis $35, Lucas Jorge Manuel $60, Reyes David $60, Diaz Betty $175, Zaldivar Luis $52.50, Torres Sigifredo $560) — cierra el pendiente que solo tenía un caso de muestra (Boutte). Dos hallazgos nuevos:
+  - **Posible duplicado sin resolver:** "Castano, Juan" y "Castano, Juan / FAA Financial" (CIVIL CASES, filas separadas) mapean al mismo MyCase ID (43824618, caso 25-1268) — mismos montos F/H en ambas filas. No confirmado con Mario si son dos partes reales del mismo caso o un duplicado de captura — no bloqueante, informativo.
+  - **3 filas NO MATCH no documentadas en el pendiente de "4 filas" del 2026-07-15:** Flores Juan, Montoya Pedro (Hold), Tamez Juan.
+- **✅ RESUELTO 2026-07-25 — investigadas y corregidas las 3 filas nuevas + descubierto un bug de escritura silenciosa.** Búsqueda contra todo MyCase (abierto+cerrado) encontró candidato único de alta confianza para las 3:
+  - Flores, Juan → MyCase ID 47640892, caso 26-1436 "Juan Flores- Divorce w/children" (nuevo, no estaba en la corrección del 07-15)
+  - Montoya, Pedro (Hold) → MyCase ID 42709138, caso 25-1207 "Pedro Montoya & Revias Group, Inc. vs. Jefte Villazana" (nuevo)
+  - Tamez, Juan → MyCase ID 44656119, caso 26-1302 "Juan Tamez- Enforcement of Possession and Access" — **este NO era nuevo**: ya estaba en las 24 correcciones escritas el 2026-07-15, pero la escritura falló silenciosamente porque el nombre en ID MAP tiene un espacio final ("Tamez, Juan ") que no coincidía con el valor usado como llave de match ("Tamez, Juan") — el nodo de Google Sheets Update no encontró la fila, la saltó, y la ejecución reportó éxito igual (0 errores, pero 0 filas realmente actualizadas para ese caso puntual).
+  - **Lección de proceso:** una ejecución "success" en un Update-by-match de Google Sheets no garantiza que la fila objetivo se haya escrito — si el valor de la columna de match no coincide exactamente (espacios/saltos de línea invisibles), la fila se salta sin error. A partir de ahora, verificar por relectura después de escrituras por match, no confiar solo en el status de ejecución.
+  - Corrección escrita vía workflow puntual **"Radar Billing - ID MAP Manual Corrections 2 (2026-07-25)"** (n8n id `RhWCqXdeWQvRrBX1`, ejecución `2108`), usando el valor exacto con espacio para que el match funcionara. **Verificado por relectura** (ejecución `2109`): las 3 filas quedaron con el MyCase ID correcto y `Match Method = "manual - resolved 2026-07-25"`.
+  - **ID MAP pasó de 94/98 a 95/99 filas resueltas.** Quedan las mismas 4 de siempre sin resolver (genuinamente necesitan criterio humano, sin cambios): Joj Santos y Medina Manuel (AMBIGUOUS), Marquez Dimas y Rojas Tovar Manuel (NO MATCH, confianza insuficiente).
+
+- **✅ PRODUCCIÓN — primer despliegue real 2026-07-25.** Construido **"Radar Billing - Write Production (07-05-26)"** (n8n id `5wpx12QtdLtyRT0Z`), adaptado de `Join to TEST2` pero con dos diferencias de seguridad clave para escribir en la hoja real que Mario usa a diario:
+  - **No limpia la pestaña** (a diferencia de TEST2) — usa `Update` matcheando por la columna real `Client Name`, tocando solo F/H/J. Las columnas A-E (fórmula), G/I (bloqueadas) y K-Q+ (manuales/notas de staff) quedan intactas.
+  - **Los 4 clientes sin match confirmado se saltan por completo** (no se les escribe blanco) para no pisar sus valores manuales existentes con vacíos.
+  - Confirmado con el usuario antes de ejecutar (primera escritura en la hoja real de Mario) — trigger quedó manual en el primer despliegue; **2026-07-25 (más tarde el mismo día): se agregó un Schedule Trigger ("Daily 5AM", todos los días 5:00 AM) por pedido explícito del usuario de automatizar la corrida.** El botón manual ("Start") se dejó también, por si se necesita forzar una corrida fuera de horario. Workflow publicado/activo.
+  - **Ejecutado con éxito** (ejecución `2111`, ~3.5 min): **95 de 99 filas escritas**, 4 saltadas (las mismas de siempre), 0 "stale". **Verificado por relectura de 07-05-26 real**: Alvarado y Batres muestran los valores nuevos exactos calculados por el workflow; Joj Santos, Medina Manuel, Marquez Dimas y Rojas Tovar Manuel conservan sus valores propios existentes, sin blanquear — el diseño de seguridad funcionó como esperado.
+  - **Detalle menor corregido:** la fila de resumen (`__summary`) del nodo de join se colaba hasta el nodo de Update (sin causar daño — no tenía "Client Name" para matchear, así que no se escribió nada). Corregido moviendo el resumen a un `console.log` en vez de devolverlo como item.
+  - **Radar Billing Automation queda operativo en producción y corriendo solo, todos los días a las 5:00 AM.** Próximo paso real: confirmar que la primera corrida automática (mañana) se ejecute sin disparo manual, igual que se verificó en su momento con el Token Manager.
+- **Mensaje redactado para Mario (2026-07-25), pendiente de enviar** ([[mensaje-mario-2026-07-25-radar-billing-completo.txt]]): en lenguaje coloquial, explica de principio a fin el problema original, los dos obstáculos técnicos (numeración de expedientes vs. `case_number` de MyCase; Trust Balance no disponible vía API), qué quedó automatizado y cómo se verificó, y pide su confirmación sobre las 4 filas pendientes de ID MAP (Joj Santos, Medina Manuel, Marquez Dimas, Rojas Tovar Manuel).
 
 ---
 

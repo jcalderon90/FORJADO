@@ -1,0 +1,40 @@
+Hola Mario! Te escribo largo porque quiero que quede bien claro todo lo que se hizo con el tema de la pestaña de Billing, de principio a fin. Nada técnico, te lo cuento como si te lo estuviera explicando en persona.
+
+CUÁL ERA EL PROBLEMA
+
+Tú me contaste que cada vez que ibas a actualizar la pestaña de Billing, te tocaba entrar a MyCase cliente por cliente, buscar su caso, entrar a "Time & Billing", copiar los números a mano, y pegarlos en el Sheet. Eso te tomaba entre 2 y 3 horas cada vez que lo hacías. La idea desde el principio fue: que eso lo haga un sistema solo, sin que tú tengas que tocar nada.
+
+EL PRIMER OBSTÁCULO QUE NOS ENCONTRAMOS
+
+Para que un sistema pueda "leer" MyCase automáticamente, primero tiene que saber exactamente a qué cliente del Sheet le corresponde qué caso dentro de MyCase. Sonaba simple, pero no lo fue: el número de expediente que tienes en la pestaña de "CIVIL CASES" (el que viene de la corte) y el número de caso que usa MyCase por dentro son dos numeraciones completamente distintas — nunca fueron el mismo número, aunque a primera vista uno pensaría que sí. Esto nos hizo perder tiempo al principio porque el cruce automático fallaba y no entendíamos por qué.
+
+Una vez que entendimos eso, construimos algo así como una "libreta de traducción" (nosotros la llamamos ID MAP) que conecta cada cliente de tu Sheet con su caso real dentro de MyCase, comparando nombres con mucho cuidado. De 98 clientes, el sistema logró identificar solo el 96% automáticamente sin ayuda de nadie más. El resto los fuimos revisando a mano, comparando nombres y números de expediente, hasta dejar resuelto casi el 100%. Solo quedan 4 casos genuinamente confusos donde necesito que tú me confirmes cuál es el caso correcto (te los detallo más abajo).
+
+EL SEGUNDO OBSTÁCULO: NO TODO SE PUEDE SACAR AUTOMÁTICO
+
+Como ya hablamos hace un tiempo y tú mismo lo confirmaste con soporte de MyCase: el "Trust Balance" (Available Trust Balance) y el "Invoices Awaiting Payment" simplemente no están disponibles por la vía que usan los sistemas para conectarse a MyCase — MyCase no los expone ahí, seguramente por temas de manejo de cuentas fiduciarias. No es un problema nuestro ni algo que se pueda resolver con más trabajo — es una limitación real de MyCase. Por eso esos dos datos los sigues llenando tú a mano, como siempre. Y como las columnas de "Running Trust Balance", "Total Outstanding" y "Net Trust Balance" son fórmulas que dependen de esos dos números, también se quedan tal cual las llenas tú.
+
+LO QUE SÍ SE PUDO AUTOMATIZAR (Y YA ESTÁ FUNCIONANDO)
+
+Las otras 3 columnas sí se pueden sacar completas de MyCase:
+
+- Total Amount Collected (lo que se ha cobrado)
+- Total Invoiced Amount (lo que se ha facturado)
+- Uninvoiced Balance (lo que falta por facturar)
+
+Antes de dejarlo corriendo de verdad, no me quedé solo con que "el cálculo parece correcto" — entré a MyCase directamente y comparé, caso por caso (usé el de Byron Batres y el de Irma Alvarado como prueba), el número que calculaba el sistema contra el número real que se ve en pantalla en MyCase. Coincidieron exactos en los dos. Recién ahí, con la certeza de que el cálculo es confiable, lo conecté a tu pestaña real "07-05-26".
+
+Y ya lo dejé corriendo: todos los días a las 5 de la mañana, el sistema entra solo a MyCase, revisa todos los casos, y actualiza esas 3 columnas en tu pestaña real, antes de que empieces tu día. No toca ninguna otra columna — ni las que llenas tú a mano, ni las notas de seguimiento, ni nada. Solo entra, actualiza esos 3 números por cliente, y sale.
+
+LO ÚNICO QUE NECESITO DE TI AHORA
+
+Como te mencioné arriba, hay 4 clientes donde el sistema no encontró con seguridad suficiente cuál caso de MyCase les corresponde, así que por seguridad los dejó tal cual estaban (no les tocó nada, ni bien ni mal):
+
+1. Joj, Santos — encontré 3 casos distintos en MyCase a su nombre, y no hay forma de saber cuál es el correcto sin que tú me lo digas.
+2. Medina, Manuel — hay 2 casos (uno de divorcio y uno de visa TN), no está claro cuál corresponde a esta fila del Sheet.
+3. Marquez, Dimas — encontré un caso a su nombre en MyCase, pero el número de expediente ahí no coincide con el que tienes anotado en tu Sheet, así que preferí no asumir y confirmarlo contigo primero.
+4. Rojas Tovar, Manuel — encontré un candidato probable, pero sin un dato que lo confirme al 100%.
+
+Si me dices cuál caso de MyCase corresponde a cada uno (o simplemente me confirmas que está bien que sigan como están), los agrego al sistema y quedan los 99 clientes completamente automáticos.
+
+Fuera de esos 4, no hay nada más pendiente de tu lado — el sistema ya quedó trabajando solo, todos los días, sin que nadie tenga que acordarse de correrlo.
