@@ -4,7 +4,7 @@ tipo: proyecto
 cliente: Varela Law
 estado: en producción
 creado: 2026-06-20
-actualizado: 2026-07-25
+actualizado: 2026-07-28
 ---
 
 # Varela Law — Automatización: Radar Billing & Payments
@@ -51,6 +51,7 @@ Mario llena manualmente la pestaña **Billing & Payments** del Google Sheet "Rad
   - **Detalle menor corregido:** la fila de resumen (`__summary`) del nodo de join se colaba hasta el nodo de Update (sin causar daño — no tenía "Client Name" para matchear, así que no se escribió nada). Corregido moviendo el resumen a un `console.log` en vez de devolverlo como item.
   - **Radar Billing Automation queda operativo en producción y corriendo solo, todos los días a las 5:00 AM.** Próximo paso real: confirmar que la primera corrida automática (mañana) se ejecute sin disparo manual, igual que se verificó en su momento con el Token Manager.
 - **Mensaje redactado para Mario (2026-07-25), pendiente de enviar** ([[mensaje-mario-2026-07-25-radar-billing-completo.txt]]): en lenguaje coloquial, explica de principio a fin el problema original, los dos obstáculos técnicos (numeración de expedientes vs. `case_number` de MyCase; Trust Balance no disponible vía API), qué quedó automatizado y cómo se verificó, y pide su confirmación sobre las 4 filas pendientes de ID MAP (Joj Santos, Medina Manuel, Marquez Dimas, Rojas Tovar Manuel).
+- **✅ RESUELTO 2026-07-28 — incidente de dos días bloqueó la corrida diaria, ya solucionado.** El 2026-07-27 la corrida programada falló con `405 Method Not Allowed` de MyCase en el nodo `Fetch Time Entries (Paginated)` — comparado contra ejecuciones previas (éxito 25 y 26-jul con la misma request), se concluyó que fue un glitch puntual de la API, no reapareció después. El 2026-07-28 la corrida falló por separado con un error de autenticación de MongoDB Atlas (`bad auth`, credencial `Varela Law`) que bloqueaba el Token Manager antes de llegar siquiera a MyCase — resuelto actualizando la credencial en n8n (usuario/password de Atlas compartido con Carwarriors, solo cambia el nombre de la base). Verificado con ejecución manual completa y exitosa (id `2133`, 2026-07-28, ~3m44s). Detalle técnico completo en [[Varela Law - MyCase API]].
 
 ---
 

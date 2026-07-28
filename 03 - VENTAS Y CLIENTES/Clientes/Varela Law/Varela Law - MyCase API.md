@@ -3,7 +3,7 @@ tags: [forjado, varela-law, api, mycase, documentacion]
 tipo: referencia-tecnica
 cliente: Varela Law
 creado: 2026-06-20
-actualizado: 2026-06-20
+actualizado: 2026-07-28
 ---
 
 # MyCase API — Documentación Técnica
@@ -344,6 +344,13 @@ Workflow `MyCase - Token Manager` (n8n id `MOpVRrvErCfgs2mn`, archivo `mycase_to
 **Pendiente:**
 - [ ] Confirmar una corrida real disparada por el Schedule Trigger (23h), sin ejecución manual
 - [ ] (Opcional) Sacar `N8N_BLOCK_ENV_ACCESS_IN_NODE` del VPS y volver a `$env.MYCASE_CLIENT_ID`/`$env.MYCASE_CLIENT_SECRET` en vez de hardcodeado
+
+### Incidente 2026-07-27/28 — 405 transitorio en `time_entries` + auth Mongo Atlas rota — RESUELTO
+
+- **2026-07-27:** `Radar Billing - Write Production` (`5wpx12QtdLtyRT0Z`) falló en el nodo `Fetch Time Entries (Paginated)` — `GET /time_entries?per_page=200` devolvió `405 Method Not Allowed`. La misma request había funcionado sin cambios el 25 y 26-jul (mismo workflow, mismo código) — no reapareció el 28-jul, se concluye que fue un glitch transitorio de la API de MyCase, no un endpoint roto/deprecado.
+- **2026-07-28:** el Token Manager (standalone, ejecuciones `2128`/`2130`) y `Radar Billing - Write Production` (`2129`) fallaron en el nodo `Find Stored Token` con `MongoServerError: bad auth: authentication failed` (Atlas error code `8000`) contra la credencial `Varela Law` (id `UZv1zIWjbmmfIJyv`) — bloqueante, sin credencial Mongo alterna disponible en esta instancia de n8n.
+- **Causa y fix:** el usuario confirmó que el usuario/password de MongoDB Atlas es el mismo compartido con Carwarriors (solo cambia el nombre de la base) y actualizó la credencial `Varela Law` en n8n copiando esos valores desde la credencial `MongoDB Carwarriors` de esa otra instancia.
+- **Verificado 2026-07-28:** ejecución manual de `MyCase - Token Manager` exitosa (id `2132`), seguida de `Radar Billing - Write Production` completo y exitoso (id `2133`, ~3m44s) — el 405 de `time_entries` no reapareció. Ambos workflows quedan operativos.
 
 ### Migración de "MyCase INTEGRATION" al Token Manager (2026-07-05) — COMPLETA
 
