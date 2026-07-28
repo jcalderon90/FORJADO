@@ -4,10 +4,31 @@ tipo: spec
 cliente: Carwarriors LLC
 estado: en-implementación
 creado: 2026-07-09
-actualizado: 2026-07-24
+actualizado: 2026-07-28
 ---
 
 # Agente de IA 24/7 — Carwarriors LLC
+
+## Estado actual (resumen ejecutivo — 2026-07-28)
+
+**Hallazgo nuevo, a partir de una captura que Bianca compartió:** el bot **está respondiendo de nuevo** (contradice el hallazgo del 24-jul de que estaba en `Off` — no se confirmó cuándo se reactivó ni quién lo hizo). La captura muestra un DM de Instagram de un remitente ("Ida Laurie") que en realidad es spam masivo — un "proveedor de China" ofreciendo ropa/bolsos/zapatos/relojes (probable mercadería replicada, con redirección a WhatsApp) — y el bot respondió con una pregunta razonable pero **fuera del flujo documentado de calificación**: *"Are you offering B2B wholesale to CarWarriors or seeking retail buyers?"*.
+
+**Investigación de si esto ensució el CRM (inconclusa):** se buscó el contacto por API en Carwarriors LLC y en Rances Car — no aparece en ninguna. Se revisaron además los últimos 50 contactos creados en Carwarriors LLC (24 al 28-jul): todos son de WhatsApp/llamadas, ninguno de Instagram. No es una confirmación de que no se creó nada — puede estar en **Car Express Servicess** (sin token API todavía) o guardado con otro nombre/`source`. Queda pendiente cerrar esto con acceso a Conversations vía Playwright.
+
+**Regla nueva redactada, todavía NO aplicada en GHL** (mismo formato que `Credit Objection Rule`, para pegar en Bot Goals → Additional Information):
+```
+Vendor/Spam Outreach Rule:
+- If the inbound message is a supplier/wholesaler pitch for unrelated goods (clothing, shoes, bags, watches, electronics, etc.) instead of a vehicle inquiry, do not run the standard qualification flow (vehicle, location, use case, timing, payment).
+- Ask once, briefly, whether it's a business/wholesale inquiry unrelated to buying a car.
+- If confirmed unrelated, or if there is no reply, close the conversation politely in one short sentence and stop — do not offer a visit, do not ask further qualifying questions, do not escalate to a human.
+```
+
+**Caveat estructural que esta regla no resuelve:** según la sección 9 de [[Carwarriors - Comportamiento del Bot (Resumen)]], `Workflow Contactado` se dispara con el primer mensaje real del cliente sin importar el contenido — este spam probablemente ya entró al pipeline antes de que el bot respondiera nada. La regla evita que el bot pierda turnos calificando al proveedor, pero no evita la entrada al pipeline; falta revisar si el trigger de ese workflow puede filtrar por palabras clave.
+
+> [!warning] Intento de aplicar la regla en vivo — interrumpido, nada se cambió en GHL
+> Se instaló Playwright en el scratchpad de la sesión (sin Chromium propio disponible en este Mac — se usó `channel: 'chrome'` sobre el Google Chrome instalado, con un `userDataDir` dedicado para no tocar el perfil personal del usuario). El navegador con CDP en el puerto 9222 llegó a abrir `app.gohighlevel.com`, pero la sesión se interrumpió mientras el SPA todavía cargaba (antes de intentar login/2FA). **No se llegó a autenticar ni a tocar Bot Goals — la regla sigue solo en este documento, no en GHL.** Los procesos de Chrome/Node de ese intento se cerraron al terminar la sesión.
+
+---
 
 ## Estado actual (resumen ejecutivo — 2026-07-24)
 
@@ -762,9 +783,12 @@ Condiciones de salida obligatorias (definir como reglas del agente en Agent Stud
 13. ¿Qué aparece en la pestaña **"Needs review (1)"** de Workflows?
 14. El workflow **"N8N"** (draft, dentro de la carpeta "Agente AI") tiene **6 inscritos activos ahora mismo** — algo lo sigue alimentando. ¿Qué es y para qué se usa?
 
-## Pendientes abiertos (2026-07-24)
+## Pendientes abiertos (actualizado 2026-07-28)
 
-- [ ] Confirmar por qué el bot está en `Off` ahora mismo (se apagó entre el 2026-07-23 10:35pm y el 2026-07-24 9:00am) — revisar Agent Logs o preguntar al cliente si alguien lo apagó a propósito.
+- [ ] **Nuevo:** aplicar en vivo la `Vendor/Spam Outreach Rule` (texto completo en "Estado actual — 2026-07-28" arriba) en Bot Goals → Additional Information — redactada pero no pegada; el intento de aplicarla por Playwright/Chrome CDP se interrumpió antes de llegar al login, no se tocó nada en GHL.
+- [ ] **Nuevo:** confirmar si el DM de spam de Instagram ("Ida Laurie", proveedor de China) creó un contacto/oportunidad en el CRM — no se encontró por API en Carwarriors LLC ni Rances Car; falta revisar Car Express Servicess (sin token) y/o Conversations directamente.
+- [ ] **Nuevo:** confirmar cuándo y por qué el bot volvió a `Auto-Pilot`/respondiendo — el hallazgo del 24-jul lo daba en `Off`, y esta sesión (28-jul) confirmó una respuesta real del bot sin que se haya documentado quién lo reactivó.
+- [ ] Confirmar por qué el bot estuvo en `Off` entre el 2026-07-23 10:35pm y al menos el 2026-07-24 9:00am — revisar Agent Logs o preguntar al cliente si alguien lo apagó a propósito (sigue sin causa confirmada, independiente de que ya esté de nuevo activo).
 - [ ] Confirmar que el bot renombrado/reactivado sigue siendo el plan — hoy sigue como `Asistente Social CarWarriors`, no `Asistente CarWarriors 24/7`.
 - [ ] Confirmar que el cliente pegó y guardó el bloque `Credit Objection Rule` + la línea nueva de `Mandatory Escalation Triggers` en Bot Goals → Additional Information.
 - [ ] Decidir/crear la sub-acción de `Contact Info` que capture el teléfono del cliente (hoy no existe un campo mapeado a `Phone` en esa acción) — necesario para que el flujo de "pedir número para llamar hoy" quede registrado en el CRM y no solo en el chat.

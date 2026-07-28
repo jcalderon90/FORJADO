@@ -1,0 +1,30 @@
+Hola Mario! Ya revisé completo el link que me pasaste del API de MyCase. Te resumo qué encontré y en qué le veo valor real para el despacho, sin tecnicismos.
+
+PRIMERO, LO QUE YA TIENEN FUNCIONANDO
+
+Solo para ubicarnos: hoy el sistema ya usa el API de MyCase para el Radar Billing (las 3 columnas de la pestaña 07-05-26 que se actualizan solas cada mañana a las 5 AM). Eso sigue corriendo normal, no lo toqué. Lo de abajo son ideas NUEVAS, aparte de eso.
+
+QUÉ NO SE PUEDE SACAR DE MyCASE (para que quede claro de una vez)
+
+Como ya sabíamos: el Trust Balance y los datos de cuentas fiduciarias no los expone MyCase por API a ningún sistema, de nadie — es un tema de cumplimiento (IOLTA), no una limitación nuestra. Eso seguirá siendo manual pase lo que pase.
+
+DÓNDE SÍ VEO VALOR NUEVO
+
+1) Facturas vencidas / cobros pendientes
+Como hablaste con Rosa de contabilidad, esto les puede servir directo a ella: un reporte automático (semanal, por ejemplo) de qué facturas están vencidas y hace cuánto, por cliente. Incluso se puede automatizar un recordatorio que le llegue solo al cliente cuando su factura lleva X días vencida, sin que nadie tenga que acordarse de mandarlo. Esto ya reutiliza la misma conexión que usamos para Radar Billing, así que sería rápido de construir.
+
+2) Prospectos nuevos (Leads)
+MyCase tiene una sección de "Leads" que hoy no estamos tocando. Se puede automatizar que, apenas entra un prospecto nuevo, se le asigne a alguien del equipo y se cree un recordatorio de seguimiento automático. Esto ayuda a que ningún prospecto se quede "frío" por olvido — es plata que se puede estar perdiendo sin que se note.
+
+3) Tareas y fechas límite por caso
+Se puede automatizar que, cuando se abre un caso nuevo, el sistema cree automáticamente la lista de tareas típicas (mandar contrato, agendar consulta inicial, etc.) y que mande recordatorios antes de fechas de corte o audiencias, tanto al abogado/paralegal como al cliente si quieren. Esto es más un tema de evitar que se les pase una fecha importante que de ahorrar tiempo.
+
+4) Mensajes automáticos a clientes
+Cosas como avisarle a un cliente que ya se le generó una factura, o que su próxima cita está por venir, se pueden mandar solas sin que alguien del equipo tenga que escribirlas a mano cada vez.
+
+5) Documentos / contratos
+Esto se conecta con lo que hablamos de armar un sistema para generar contratos automáticos — cuando hablemos con Adalberto podemos ver si tiene sentido meterlo por acá también.
+
+CÓMO SEGUIMOS
+
+No hace falta que me contestes las 5 de una. Dime cuál de estas te llama más la atención (o si Rosa tiene alguna prioridad puntual de contabilidad) y con eso te armo el primero para que lo veas funcionando antes de meterle tiempo a los demás.

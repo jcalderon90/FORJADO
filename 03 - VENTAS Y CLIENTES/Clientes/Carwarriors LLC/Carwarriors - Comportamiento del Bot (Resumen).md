@@ -4,7 +4,7 @@ tipo: resumen
 cliente: Carwarriors LLC
 estado: vigente
 creado: 2026-07-14
-actualizado: 2026-07-24
+actualizado: 2026-07-28
 ---
 
 # Comportamiento completo del bot — Asistente Social CarWarriors (24/7)
@@ -101,7 +101,8 @@ Al escalar: mensaje final de aviso, se crea una tarea en el contacto, tag `human
 No hay transferencia a un asesor específico — la cita cae directo en DealerCenter y la atiende el primer vendedor disponible. La IA queda registrada como el "BDC" que originó el lead.
 
 ## 14. Pendientes / no cerrado todavía
-- **Hallazgo nuevo (2026-07-24, verificado en vivo):** el bot está en **`Off`** ahora mismo (actualizado hoy 9:00 AM) y sigue llamándose `Asistente Social CarWarriors` — nunca se renombró a `Asistente CarWarriors 24/7`. Contradice la sección 0 de este documento (bot "vigente" desde 2026-07-14). La conversación con Alfredo Blanco que trajo el cliente (jueves 2026-07-23, 10:35pm) confirma que sí respondió ese día — se apagó después, causa sin confirmar todavía.
+- **Hallazgo nuevo (2026-07-28):** el bot vuelve a responder en vivo (contradice el `Off` del 24-jul, sin confirmar cuándo/quién lo reactivó). Una captura de Bianca mostró un DM de Instagram de spam (proveedor de "China" ofreciendo ropa/zapatos/bolsos falsificados) al que el bot respondió con una pregunta B2B fuera del flujo estándar de calificación — no hay ninguna regla hoy que cubra "mensaje entrante que no es de un comprador de auto". Se redactó una `Vendor/Spam Outreach Rule` (mismo formato que `Credit Objection Rule`) para pegar en Bot Goals → Additional Information — **todavía no aplicada**, un intento de pegarla por Playwright/Chrome CDP se interrumpió antes del login. Tampoco se confirmó si ese DM ya creó un contacto/oportunidad en el CRM (no aparece por API en Carwarriors LLC ni Rances Car; falta revisar Car Express Servicess). Nota aparte: aunque se aplique la regla, `Workflow Contactado` (ver sección 9) se dispara con el primer mensaje real sin filtrar contenido, así que este tipo de spam probablemente entra al pipeline igual — pendiente revisar el trigger. Detalle completo en [[Carwarriors - Agente IA 24-7 (Diseño)]].
+- **Hallazgo (2026-07-24, verificado en vivo):** el bot está en **`Off`** ahora mismo (actualizado hoy 9:00 AM) y sigue llamándose `Asistente Social CarWarriors` — nunca se renombró a `Asistente CarWarriors 24/7`. Contradice la sección 0 de este documento (bot "vigente" desde 2026-07-14). La conversación con Alfredo Blanco que trajo el cliente (jueves 2026-07-23, 10:35pm) confirma que sí respondió ese día — se apagó después, causa sin confirmar todavía.
 - **Pendiente de aplicar (2026-07-24):** regla nueva "Credit Objection Rule" — cuando el cliente objeta crédito ("no tengo credito"), en vez del mensaje genérico de "te conecté con un asesor", el bot debe pedir el teléfono para que un humano llame ese mismo día. Texto exacto redactado y entregado al cliente para pegar en Bot Goals → Additional Information; falta confirmar que se guardó, y falta agregar un campo de teléfono en la acción `Contact Info` para que quede registrado en el CRM. Detalle completo en [[Carwarriors - Agente IA 24-7 (Diseño)]].
 - **Bloqueado ahora mismo:** se perdió el acceso a la cuenta de GHL a mitad de verificar si la reserva de prueba (14 jul 2026, 12:20 PM) creó un evento/contacto real en Showroom — Advisors — sin confirmar.
 - Tarea de confirmación de cita 24h antes (BDC humano o IA) — requiere workflow nuevo, no existe todavía (Fase 2).
