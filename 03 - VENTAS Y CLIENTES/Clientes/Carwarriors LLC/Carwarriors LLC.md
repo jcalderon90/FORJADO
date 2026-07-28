@@ -4,10 +4,10 @@ tipo: cliente
 estado: activo
 servicio: automatizacion
 contacto: Jorge (Dueño)
-proximo_paso: Rances Car en producción, sin pendientes conocidos (ver historial 2026-07-21). Investigación técnica de Lead Sync GHL→DealerCenter CERRADA (2026-07-23): mapeo XML ADF → Lead Type/Lead Source resuelto (`<provider><name>` sin `<service>` = Lead Source exacto; Lead Type fijo en "Internet"). **Bloqueado en construcción (confirmado 2026-07-26):** Jorge todavía no tiene una instancia n8n propia de Carwarriors — decidió esperar a tenerla antes de construir el workflow, no diseñarlo en el papel de antemano. Quedan 2 pendientes no técnicos: (1) esa instancia n8n, (2) tabla de valores de Lead Source por campaña/dealer (Jorge puede sacarla él mismo o esperar a Bianca).
+proximo_paso: "Infraestructura propia resuelta (2026-07-27): VPS Hostinger + Coolify + n8n desplegados y accesibles; workflow 'Agente de Captura de Leads (GHL+Mongo)' construido y activo. GHL ya dispara ese webhook (2026-07-28): se publicó el workflow 'N8N' existente en Automation → Agente AI, apuntando al nuevo n8n. Bot IA 24/7 de Carwarriors LLC encontrado apagado (Off) el 2026-07-24, causa sin confirmar — pendiente reactivar. Lead Sync GHL→DealerCenter (el envío ADF/XML en sí) sigue sin construirse; ya no bloqueado por falta de instancia n8n, solo falta la tabla de Lead Source por campaña/dealer."
 estado_comercial: pruebas-en-curso
 creado: 2026-06-18
-actualizado: 2026-07-26
+actualizado: 2026-07-28
 ---
 
 # Cliente — Carwarriors LLC
@@ -362,6 +362,9 @@ Generadas desde Dealer Settings → Customer → Lead Management → SFTP to Lea
 - 2026-07-23 — **Simplificado el único pedido pendiente a Bianca (tabla de Lead Source por campaña/dealer).** El pedido original (mapear cada campaña/canal de GHL a su valor exacto de Lead Source en DealerCenter) se explicaba en términos técnicos y Bianca no entendía qué se le pedía. Se redujo a algo mecánico: pedirle un screenshot del dropdown de filtro "Lead Source" en DealerCenter (Customer → Customer List), sin necesidad de que entienda la automatización. Además se confirmó que **Jorge puede obtener esa lista él mismo** entrando a DealerCenter y abriendo ese mismo filtro — no depende de Bianca. Queda pendiente que Jorge decida si la saca él mismo (manual o con ayuda de Playwright) o espera la respuesta de Bianca; no se ejecutó la automatización en esta sesión (no había sesión de navegador viva, requeriría login + 2FA nuevos).
 - 2026-07-22 — **Lead Sync GHL→DealerCenter: mecanismo validado end-to-end por primera vez.** Jorge confirmó tener acceso a DealerCenter (usuario jcalderon90) y se logueó en vivo (2FA por email) en la misma sesión de Playwright ya usada para GHL. Se generaron las credenciales SFTP reales (Dealer Settings → Customer → Lead Management → SFTP to Lead) y se confirmó el DCID de Carwarriors LLC (**14031841**, en Dealership → General → "DC Company ID"). Se armó un XML de prueba en formato ADF, se subió por SFTP con `curl` (soporta SFTP vía libssh2, pinneando el host key con `--hostpubsha256`) a `/Leads/`, y apareció como lead real en DealerCenter (Customer → Reports → My New Prospects) con todos los datos coincidiendo — confirmando que el mecanismo oficial de DealerCenter funciona de verdad, no solo en documentación. El lead de prueba se marcó como `Deleted` para no confundir al equipo de ventas. Hallazgo técnico: el host SFTP es Azure Blob Storage con soporte SFTP nativo (banner `AzureSSH_1.0.0`). Hallazgo sin explicar: el directorio `/Leads/` ya tenía 2 archivos con nombres aleatorios no legibles (permiso denegado, cuenta de solo escritura) antes de la prueba — posible residuo de un intento anterior, sin confirmar con Jorge/Karel. **Arquitectura decidida: n8n** (no Cloudflare Worker) para construir el workflow de producción que arme el XML y lo suba por SFTP automáticamente ante cada lead nuevo de GHL. Se le explicó todo esto a Jorge Calderón en lenguaje simple (analogía de "buzón" y "carta") para que se lo reenviara a Jorge González, incluyendo la pregunta pendiente de si Rances Car/Car Express comparten el DCID 14031841 o necesitan cuenta propia en DealerCenter — mensaje ya enviado, a la espera de respuesta. Detalle técnico completo (credenciales, ejemplo de XML, hallazgos) en la sección "DealerCenter" más abajo en esta misma nota.
 - 2026-07-26 — **Confirmado: sigue sin resolverse el acceso a una instancia n8n de Carwarriors.** Jorge indicó explícitamente "aun no tengo la instancia de n8n de Carwarriors". Con la investigación técnica ya cerrada desde el 23-jul, este es ahora el único bloqueador real para empezar a construir el workflow de producción (el otro pendiente, la tabla de Lead Source por campaña/dealer, sigue en manos de Jorge/Bianca). Se le ofreció diseñar el workflow en JSON de antemano (para importar en cuanto haya acceso) o ayudar a destrabar el acceso — eligió esperar a tener la instancia antes de avanzar en cualquier construcción. Sin cambios técnicos en esta sesión.
+- 2026-07-24 — **Hallazgo: el bot "Asistente Social CarWarriors" (subcuenta principal) está apagado (`Off`)**, verificado en vivo por Playwright/CDP contra GHL — contradice el estado "en vivo" reportado desde el 14-jul. "Last Updated" marcaba ese mismo día 9:00 AM; una conversación real con un lead (Alfredo Blanco, 23-jul 10:35pm) confirma que sí respondió el día anterior — se apagó en algún momento entre esa conversación y la mañana siguiente. **Causa sin confirmar todavía** (no se investigó por qué ni quién lo apagó). En paralelo, a partir de esa misma conversación, el cliente pidió una regla nueva: cuando un lead dice que no tiene crédito, el bot debe pedir el teléfono para que un humano llame ese mismo día, en vez del mensaje genérico de "te conecté con un asesor". Se redactó el bloque `Credit Objection Rule` y se le entregó al cliente para pegarlo manualmente en Bot Goals → Additional Information (sin API/browser propio para Conversation AI en esa sesión) — **sin confirmar todavía que lo guardó**. Detalle completo en [[Carwarriors - Agente IA 24-7 (Diseño)]].
+- 2026-07-27 — **Infraestructura propia de n8n desplegada.** Cliente contrató VPS Hostinger KVM1 (`2.24.106.87`); se instaló Coolify v4.1.2 y se desplegó el stack oficial de n8n (n8n + worker + Postgres + Redis) — tuvo el error típico de "secure cookie" al primer acceso, resuelto por el propio Jorge. Sobre esa instancia ya desplegada se construyó y activó el workflow **"Carwarriors - Agente de Captura de Leads (GHL + Mongo)"** (ID `6QGLivaPilh09R21`, 15 nodos) a partir del diseño `carwarriors_lead_intake_agent_workflow.json` — se corrigieron 2 bugs reales de la implementación original al probarlo (nodo Mongo que cortaba la cadena sin registro previo; lógica de "Has Pending Record?" rota por el fix anterior). Webhook de producción listo: `.../webhook/d7cd6008-dc30-4ec4-827d-58e009a39a09/carwarriors-lead-intake`. Quedó pendiente el lado de GHL (nada disparaba ese webhook todavía) y rotar el Location API Key que quedó expuesto en el chat de esa sesión. Detalle completo en [[Carwarriors - Infraestructura (Diseño)]].
+- 2026-07-28 — **Conectado el lado de GHL al webhook de n8n — publicado y en vivo.** En vez de crear una automatización nueva, se encontró que ya existía un workflow llamado **"N8N"** en Automation → Workflows → carpeta "Agente AI" (subcuenta Carwarriors LLC) — resolviendo una pregunta pendiente desde hace semanas ("¿para qué se usa el workflow N8N en Draft?"). Ya tenía armado el trigger correcto (Customer Replied en Facebook Messenger o Instagram DM) → acción Custom Webhook. Se descubrió que esa URL apuntaba a `n8n.apps.carwarriorsllc.com`, un dominio **real y activo** (IP distinta a la del VPS de Hostinger) que Jorge reconoce como suyo/del cliente pero queda pendiente de investigar a fondo. Se actualizó la URL al nuevo webhook, se eliminó un paso final ("Enviar mensaje en Messenger") que estaba completamente sin configurar, y se publicó el workflow — confirmado tras recarga completa y en la lista de Workflows (Status = Published). Con acceso MCP a la instancia de n8n (`n8n-carwarriors`, conectado esta misma sesión), se confirmó que el cableado es correcto pero aún no ha llegado tráfico real, y se corrigió el nodo "Normalize Payload" para leer `message_body` (el campo real que manda GHL) en vez de solo `message`/`lastMessage`/`body` — publicado como nueva versión activa. Queda pendiente, a propósito: `channel` y `locationId` no vienen en el payload de GHL (el código cae a `'unknown'` sin romperse); rotar el Location API Key expuesto el 27-jul; confirmar URL final/dominio propio de n8n; investigar `n8n.apps.carwarriorsllc.com`.
 
 ## Auditoría Técnica Pendiente
 
@@ -382,10 +385,10 @@ Generadas desde Dealer Settings → Customer → Lead Management → SFTP to Lea
 
 ### Agente de Captura de Leads en n8n (nuevo, 2026-07-08)
 - [x] Workflow diseñado y exportado: `carwarriors_lead_intake_agent_workflow.json` (webhook GHL → clasifica canal → pide teléfono si falta [IG/Messenger] → guarda en MongoDB Atlas colección `leads`)
-- [ ] Importar el workflow en el n8n real del cliente y conectar credenciales (GHL API token ya documentado arriba, MongoDB Atlas — falta URI de conexión)
-- [ ] Crear la automatización del lado de GHL (usando el snapshot "Carwarrior Base") que dispare el webhook `carwarriors-lead-intake` en n8n ante un contacto nuevo o mensaje entrante
-- [ ] Capturar un payload real de ese webhook y ajustar los nombres de campo en el nodo "Normalize Payload" (los nombres actuales son un supuesto razonable, no están confirmados contra el payload real de GHL)
-- [ ] Probar los 2 caminos: lead de WhatsApp (debe guardarse directo) y lead de Instagram/Messenger sin teléfono (el agente debe preguntar y, al responder con un número, actualizar el contacto en GHL y guardar en Mongo)
+- [x] Importar el workflow en el n8n real del cliente y conectar credenciales → **hecho 2026-07-27**: workflow recreado vía MCP (`Carwarriors - Agente de Captura de Leads`, ID `6QGLivaPilh09R21`), credenciales `MongoDB Carwarriors` y `Header Auth GHL` conectadas, **activo**.
+- [x] Crear la automatización del lado de GHL que dispare el webhook `carwarriors-lead-intake` en n8n → **hecho 2026-07-28**: se reusó y publicó el workflow existente "N8N" (Automation → Agente AI, Carwarriors LLC) apuntando a la nueva URL.
+- [x] Capturar un payload real y ajustar "Normalize Payload" → **parcial, 2026-07-28**: se confirmó el payload real de GHL (`id`, `name`, `phone`, `message_body`, sin `channel`/`locationId`) y se corrigió el nodo para leer `message_body`. `channel`/`locationId` siguen sin llegar — código cae a `'unknown'` sin romperse, pendiente decidir si se resuelve editando el JSON de GHL o partiendo el webhook por canal.
+- [ ] Probar los 2 caminos con tráfico real: lead de WhatsApp (debe guardarse directo) y lead de Instagram/Messenger sin teléfono (el agente debe preguntar y, al responder con un número, actualizar el contacto en GHL y guardar en Mongo) — a la espera de la primera ejecución real desde que se publicó el webhook (2026-07-28), las únicas ejecuciones hasta ahora son pruebas manuales.
 
 ### WhatsApp en GHL — Estado de integración (Módulo A)
 - [ ] El cliente usa `https://applevel-dashboard.ilumosdigital.com/user/apps` como puente WhatsApp → GHL (servicio de Ilumos Digital)
@@ -409,9 +412,13 @@ Generadas desde Dealer Settings → Customer → Lead Management → SFTP to Lea
 
 - [x] Bot en vivo desde 2026-07-14: `Primary` + `Auto-Pilot`, Appointment Booking, Trigger a Workflow, Auto Followup y Human Handover (Nallely de Leon) configurados.
 - [x] Acceso a GHL recuperado 2026-07-15 (el bloqueo de "me expulsaron" del 14-jul no volvió a mencionarse desde entonces; el trabajo en Rances Car y DealerCenter continuó con normalidad en la misma cuenta de agencia).
+- [x] ~~Workflow "N8N" con 6 inscritos, ¿para qué se usa?~~ → **RESUELTO 2026-07-28**: era un workflow a medio construir (trigger Customer Replied FB/IG → Custom Webhook) apuntando a un n8n legacy (`n8n.apps.carwarriorsllc.com`) — reutilizado, apuntado al nuevo n8n de Hostinger y publicado. Ver sección "Agente de Captura de Leads en n8n" e historial del 2026-07-28.
+- [ ] **⚠️ Hallazgo 2026-07-24: el bot está apagado (`Off`) ahora mismo** — se activó el 14-jul pero se apagó en algún momento entre el 23-jul 10:35pm y el 24-jul 9am, causa sin confirmar. **Pendiente reactivarlo y averiguar por qué se apagó** (revisar Agent Logs o preguntarle al cliente).
+- [ ] Confirmar que el cliente pegó y guardó la regla nueva "Credit Objection Rule" (pedir teléfono ante objeción de crédito) en Bot Goals → Additional Information — entregada 2026-07-24, sin confirmar.
+- [ ] Crear el campo de teléfono en la acción `Contact Info` del bot (hoy no existe uno mapeado a `Phone`) — necesario para que el flujo de "pedir número por objeción de crédito" quede registrado en el CRM.
 - [ ] Sigue sin confirmarse si la cita de prueba (14 jul, 12:20 PM) creó un evento/contacto real en GHL — no se retomó esta verificación específica, no bloquea nada más.
 - [ ] (Mensaje pendiente de enviar) Preguntar a Jorge González directo sobre `BDC Callback`/calendario de Maria Eleonor
-- [ ] (Mensaje pendiente de enviar) 3 preguntas técnicas a soporte GHL: 74M inscritos en 2 workflows, pestaña "Needs review", workflow "N8N" con 6 inscritos
+- [ ] (Mensaje pendiente de enviar) 2 preguntas técnicas a soporte GHL: 74M inscritos en 2 workflows, pestaña "Needs review" (la 3ra, sobre el workflow "N8N", ya no aplica — resuelta arriba)
 - [ ] Fase 2: tarea de confirmación de cita día -1, explicar Knowledge Base al cliente + sync de inventario diario, destrabar calendario BDC-A
 
 ### Agente IA — subcuenta Rances Car — ✅ EN PRODUCCIÓN desde 2026-07-20 (ver detalle en [[Carwarriors - Agente IA Rances Car (Diseño)]])
@@ -449,26 +456,37 @@ Generadas desde Dealer Settings → Customer → Lead Management → SFTP to Lea
 - [x] ~~Probar con lead real~~ → hecho 2026-07-22, confirmado que llega y se crea correctamente.
 - [x] ~~Confirmar con Jorge González si Rances Car/Car Express comparten este DCID o necesitan cuenta propia~~ → Confirmado por Bianca (audio, 2026-07-22): **comparten el mismo DCID**, se distinguen por el campo Lead Source (no por cuenta separada).
 - [x] ~~Confirmar qué tag del XML ADF mapea a Lead Type / Lead Source~~ → **RESUELTO 2026-07-23**: `<provider><name>` sin `<service>` = Lead Source exacto; Lead Type no se mapea, queda fijo en "Internet".
-- [ ] **Bloqueador activo (confirmado 2026-07-26):** conseguir acceso a una instancia n8n propia de Carwarriors — hoy no existe/no está confirmada cuál usar. Jorge decidió esperar a tenerla antes de construir nada (no diseñar el workflow en el papel de antemano).
-- [ ] Levantar con Jorge/Bianca la tabla completa de valores de Lead Source por campaña/dealer para poder mapearlos en el workflow.
-- [ ] Construir el workflow real en n8n: trigger de lead nuevo en GHL → armar XML ADF con datos reales (`<provider><name>` = valor exacto de Lead Source, sin `<service>`) → subir por SFTP a DealerCenter.
+- [x] ~~Bloqueador: conseguir acceso a una instancia n8n propia de Carwarriors~~ → **RESUELTO 2026-07-27**: VPS Hostinger + Coolify + n8n desplegados y accesibles. MCP `n8n-carwarriors` conectado 2026-07-28 para gestionarlo directo.
+- [ ] Levantar con Jorge/Bianca la tabla completa de valores de Lead Source por campaña/dealer para poder mapearlos en el workflow — **único pendiente real que queda para este módulo**.
+- [ ] Construir el workflow real en n8n: trigger de lead nuevo en GHL → armar XML ADF con datos reales (`<provider><name>` = valor exacto de Lead Source, sin `<service>`) → subir por SFTP a DealerCenter. **Nota:** el workflow de captura de leads (GHL+Mongo) ya construido es un módulo distinto — este envío ADF hacia DealerCenter en sí todavía no se ha construido.
 - [ ] Monitorear primeras 24h de operación una vez esté en producción.
+
+### Infraestructura n8n propia — VPS Hostinger + Coolify (nuevo, 2026-07-27)
+
+> [!success] Stack desplegado y accesible
+> VPS Hostinger KVM1 (`2.24.106.87`) + Coolify v4.1.2 + stack oficial de n8n (n8n + worker + Postgres + Redis). Detalle completo en [[Carwarriors - Infraestructura (Diseño)]].
+
+**Próximas acciones:**
+- [ ] Rotar el Location API Key de Carwarriors LLC en GHL (quedó expuesto en el chat de la sesión del 27-jul al crear la credencial `Header Auth GHL`) y actualizar la credencial en n8n con el nuevo valor.
+- [ ] Confirmar la URL final de acceso a n8n (dominio sslip.io) y evaluar si conviene mapear un dominio propio.
+- [ ] Revisar el firewall del panel de Hostinger (puertos 80/443 entrantes) para que la renovación automática de Let's Encrypt no falle a futuro.
+- [ ] Investigar qué es `n8n.apps.carwarriorsllc.com` — instancia n8n real y activa, distinta a la de Hostinger, encontrada 2026-07-28 al revisar el workflow "N8N" de GHL. Jorge confirmó que es suya/del cliente pero no se investigó a fondo qué hace ni quién la administra.
 
 ### Agente de Captura de Leads en n8n
 
-> [!success] Primer workflow construido (2026-07-08)
-> `carwarriors_lead_intake_agent_workflow.json` — recibe leads de GHL, guarda directo los que ya traen teléfono (WhatsApp) y pide el teléfono conversacionalmente a los que no lo traen (Instagram/Messenger), guardando todo en MongoDB Atlas.
+> [!success] Construido y activo en producción (2026-07-27), lado de GHL conectado (2026-07-28)
+> `Carwarriors - Agente de Captura de Leads (GHL + Mongo)` (ID `6QGLivaPilh09R21`) — recibe leads de GHL, guarda directo los que ya traen teléfono (WhatsApp) y pide el teléfono conversacionalmente a los que no lo traen (Instagram/Messenger), guardando todo en MongoDB Atlas. El webhook de GHL que lo dispara (workflow "N8N" reutilizado, Automation → Agente AI) quedó publicado el 2026-07-28.
 
 **Próximas acciones:**
-- [ ] Importar el workflow en el n8n del cliente y conectar credenciales (GHL API + MongoDB Atlas)
-- [ ] Crear la automatización en GHL que dispare el webhook hacia n8n
-- [ ] Validar el payload real de GHL y ajustar el nodo de normalización si hace falta
-- [ ] Probar los dos caminos (WhatsApp directo / Instagram-Messenger con pregunta de teléfono)
+- [x] ~~Importar el workflow en el n8n del cliente y conectar credenciales~~ → hecho 2026-07-27.
+- [x] ~~Crear la automatización en GHL que dispare el webhook hacia n8n~~ → hecho 2026-07-28.
+- [x] ~~Validar el payload real de GHL y ajustar el nodo de normalización~~ → parcial 2026-07-28: `message_body` corregido; `channel`/`locationId` siguen sin llegar (aceptado, no bloquea).
+- [ ] Probar los dos caminos (WhatsApp directo / Instagram-Messenger con pregunta de teléfono) con **tráfico real** — a la espera de la primera ejecución real desde que se publicó el webhook.
 
 ### Otros pendientes
 - [ ] Verificar puente WhatsApp → GHL (Ilumos Digital) — ¿activo?
 - [ ] Confirmar con el cliente si hoy en día IG/Messenger corren por GHL o por ManyChat (el usuario no está seguro) — de esto depende si el webhook de entrada debe ser de GHL o de ManyChat
-- [ ] Cliente contrata VPS Hostinger KVM 1
+- [x] ~~Cliente contrata VPS Hostinger KVM 1~~ → hecho 2026-07-27, ver sección de Infraestructura arriba.
 - [ ] Formalizar contrato una vez validadas las pruebas
 
 ## Relacionado
