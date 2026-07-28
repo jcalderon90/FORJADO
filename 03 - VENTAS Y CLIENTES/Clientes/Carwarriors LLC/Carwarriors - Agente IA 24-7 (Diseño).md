@@ -4,10 +4,35 @@ tipo: spec
 cliente: Carwarriors LLC
 estado: en-implementación
 creado: 2026-07-09
-actualizado: 2026-07-13
+actualizado: 2026-07-24
 ---
 
 # Agente de IA 24/7 — Carwarriors LLC
+
+## Estado actual (resumen ejecutivo — 2026-07-24)
+
+**Hallazgo (verificado en vivo por Playwright/CDP contra GHL, 2026-07-24):** el bot sigue llamándose **`Asistente Social CarWarriors`** — **no se renombró** a `Asistente CarWarriors 24/7` como decía el plan — y su **Bot Status está en `Off`**, con "Last Updated: 24 Jul 2026, 9:00 AM" (hoy mismo). Esto contradice directamente la entrada del 2026-07-14 que decía "el bot está en vivo desde este momento" en Auto-Pilot + Primary. La captura que trajo el cliente (conversación con Alfredo Blanco, "Jue" = 2026-07-23 10:35pm) muestra que el bot sí respondió ese día — así que estuvo activo al menos hasta ayer y se apagó en algún momento entre esa conversación y hoy 9:00 AM. **No se investigó todavía por qué se apagó ni quién lo apagó** — pendiente confirmar con el cliente o revisar Agent Logs.
+
+**Pedido del cliente (2026-07-24), a partir de una conversación real del bot:** cuando un lead objeta crédito ("No tengo credit"/"no tengo crédito") con intención de compra ya manifestada, el bot hoy responde con un mensaje genérico tipo *"trabajamos con todo tipo de crédito... te he conectado con un asesor para que te explique"* y dispara Human Handover sin pedir un número de contacto. El cliente quiere que en ese caso puntual el bot **pida el teléfono directamente para que un humano llame ese mismo día**, en vez de la frase genérica de "te conecté con un asesor".
+
+**Cambio redactado y entregado al cliente para pegar manualmente en GHL** (Bot Goals → Prompt → Additional Information, bot `Asistente Social CarWarriors`; no hay API/browser propio para Conversation AI así que se le pasaron las instrucciones exactas por chat en vez de aplicarlo por Playwright en la misma sesión):
+
+1. Nuevo bloque `Credit Objection Rule:` insertado antes de `Approved Campaign Exception:` (después de `Pricing and Financing Rules`):
+   ```
+   Credit Objection Rule:
+   - If the customer says they have no credit, bad credit, or worry their credit will not qualify, do not send the generic "connect you with an advisor" reply.
+   - Reassure in one short sentence that all credit types are welcome.
+   - Immediately ask for the best phone number to call them today.
+   - Once the phone number is provided, escalate to advisor for an immediate same-day callback instead of the standard escalation message.
+   ```
+2. Nueva línea agregada a `Mandatory Escalation Triggers`: `- credit objection (no credit / bad credit) once phone number is captured`
+
+> [!warning] Pendiente de confirmar
+> El cliente/usuario todavía no confirma haber pegado y guardado este cambio en GHL. **Falta verificar** (por captura de pantalla o revisión directa vía Playwright) que quedó guardado, y falta decidir qué custom field guarda el teléfono capturado (hoy `Contact Info` no tiene una sub-acción mapeada a `Phone` — probablemente haga falta agregarla, porque en leads de Facebook/Instagram como el del ejemplo GHL no siempre trae el teléfono real del contacto).
+>
+> Alcance decidido con el cliente: esta regla aplica **solo** a la objeción de crédito explícita — no se generalizó a otras dudas de financiamiento (down payment, aprobación, estructura de pago), que siguen sin ser escalamiento automático por sí solas (ver regla de intención fuerte más abajo).
+
+---
 
 ## Estado actual (resumen ejecutivo — 2026-07-13)
 
@@ -736,6 +761,14 @@ Condiciones de salida obligatorias (definir como reglas del agente en Agent Stud
 12. Los workflows **"Asignación por Turno (Control Principal)"** y **"Reintento de Asignación por Turno"** tienen **74 millones de inscritos** cada uno — cifra imposible para el volumen real de leads. Parece un bucle/bug que podría estar generando costo de cuota en GHL. Requiere auditoría antes de construir nada encima.
 13. ¿Qué aparece en la pestaña **"Needs review (1)"** de Workflows?
 14. El workflow **"N8N"** (draft, dentro de la carpeta "Agente AI") tiene **6 inscritos activos ahora mismo** — algo lo sigue alimentando. ¿Qué es y para qué se usa?
+
+## Pendientes abiertos (2026-07-24)
+
+- [ ] Confirmar por qué el bot está en `Off` ahora mismo (se apagó entre el 2026-07-23 10:35pm y el 2026-07-24 9:00am) — revisar Agent Logs o preguntar al cliente si alguien lo apagó a propósito.
+- [ ] Confirmar que el bot renombrado/reactivado sigue siendo el plan — hoy sigue como `Asistente Social CarWarriors`, no `Asistente CarWarriors 24/7`.
+- [ ] Confirmar que el cliente pegó y guardó el bloque `Credit Objection Rule` + la línea nueva de `Mandatory Escalation Triggers` en Bot Goals → Additional Information.
+- [ ] Decidir/crear la sub-acción de `Contact Info` que capture el teléfono del cliente (hoy no existe un campo mapeado a `Phone` en esa acción) — necesario para que el flujo de "pedir número para llamar hoy" quede registrado en el CRM y no solo en el chat.
+- [ ] Probar en "Test Your Bot" el escenario "no tengo credito" una vez guardado el cambio, para confirmar que pide el teléfono en vez de la frase genérica.
 
 ## Relacionado
 

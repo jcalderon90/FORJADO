@@ -1,10 +1,10 @@
 ---
-tags: [forjado, carwarriors, infraestructura, diseño, n8n, mongodb]
+tags: [forjado, carwarriors, infraestructura, diseño, n8n, mongodb, coolify]
 tipo: spec
 estado: aprobado
 cliente: Carwarriors LLC
 creado: 2026-06-18
-actualizado: 2026-07-08
+actualizado: 2026-07-27
 ---
 
 # Diseño de Infraestructura — Carwarriors LLC
@@ -13,7 +13,8 @@ actualizado: 2026-07-08
 
 | Capa | Servicio | Detalle |
 |---|---|---|
-| **Servidor** | Hostinger KVM 1 · ~$8/mes | n8n + Traefik + Redis. MongoDB es externo, el VPS no carga DB |
+| **Servidor** | Hostinger KVM 1 · ~$8/mes | IP `2.24.106.87`. n8n + Traefik + Redis. MongoDB es externo, el VPS no carga DB |
+| **Orquestación** | Coolify v4.1.2 | Instalado sobre el VPS para gestionar el stack por UI en vez de docker-compose manual |
 | **Automatización + Agentes IA** | n8n (self-hosted) | Todo el logic layer — automatizaciones y agentes IA centralizados aquí |
 | **Reverse proxy** | Traefik | HTTPS automático con Let's Encrypt |
 | **Caché / colas** | Redis | Workflows de alto volumen, control de duplicados |
@@ -25,6 +26,44 @@ actualizado: 2026-07-08
 | **CRM dealer** | DealerCenter | Importación de leads por SFTP + ADF/XML (oficial, confirmado en investigación del 2026-07-08) |
 | **Lead Sync GHL → DC** | n8n *(en re-evaluación)* o Cloudflare Worker | Webhook de GHL → genera ADF/XML → sube por SFTP a DealerCenter. Ver [[Carwarriors - SFTP DealerCenter (Investigación)]] — SFTP es difícil de implementar en el runtime de Cloudflare Workers, n8n trae nodo FTP/SFTP nativo |
 | **Captura de leads (Módulo A)** | n8n + Agente IA + MongoDB | Workflow `carwarriors_lead_intake_agent_workflow.json`: pide teléfono a leads de IG/Messenger sin dato estructurado, guarda en Mongo colección `leads` |
+
+---
+
+## Progreso de implementación (2026-07-27)
+
+Cliente contrató el VPS Hostinger KVM1 (IP `2.24.106.87`). Se instaló Coolify (v4.1.2) sobre el VPS y se está desplegando n8n usando la plantilla oficial de Coolify "n8n" (service stack), que trae:
+
+- **N8N** (`n8nio/n8n:2.10.4`) — expuesto en `http://n8n-x5jtc0a7f0lbanybimocyidl.2.24.106.87.sslip.io:567...` (dominio sslip.io autogenerado por Coolify, URL truncada en captura — confirmar puerto/URL completa)
+- **N8N Worker** (`n8nio/n8n:2.10.4`) — modo queue
+- **Task Runners** (`n8nio/runners:2.10.4`)
+- **Postgresql** (`postgres:16-alpine`) — reemplaza a MongoDB como DB propia de n8n (MongoDB Atlas se mantiene aparte, solo para datos de leads/embeddings, ver tabla de Stack)
+- **Redis** (`redis:6-alpine`)
+
+> [!info] Resuelto — stack levantado, acceso funcionando (2026-07-27)
+> Los 5 contenedores llegaron a estar en `Exited` en algún punto del deploy inicial, y luego al acceder a n8n por primera vez apareció el error estándar *"Your n8n server is configured to use a secure cookie, however you are either visiting this via an insecure URL, or using Safari"* (n8n exige cookie segura pero el navegador no detectaba HTTPS válido — típico cuando Traefik/Let's Encrypt no ha terminado de emitir el certificado del dominio sslip.io, o se accede por IP/HTTP en vez del dominio https). **El usuario lo resolvió por su cuenta** — n8n ya es accesible. Queda pendiente confirmar la URL final de acceso y, en algún momento, revisar el firewall del panel de Hostinger (puertos 80/443 entrantes) para asegurar que la renovación automática de Let's Encrypt no falle a futuro.
+
+Esto reemplaza el plan original de n8n + Traefik + Redis manual (fila "Servidor" de la tabla de Stack) por el stack gestionado de Coolify, que además usa Postgres en vez de SQLite para la DB interna de n8n (mejor para el modo queue con worker separado).
+
+---
+
+## Agente de Captura de Leads — implementado y activo en n8n (2026-07-27)
+
+Se construyó, probó y activó el workflow `Carwarriors - Agente de Captura de Leads (GHL + Mongo)` directamente en el n8n ya desplegado (vía MCP `n8n-carwarriors`), a partir del diseño de `carwarriors_lead_intake_agent_workflow.json`.
+
+- **Workflow ID:** `6QGLivaPilh09R21` — 15 nodos, **activo**.
+- **Credenciales creadas en n8n:** `MongoDB Carwarriors` (Atlas, base de datos `Carwarriors`) y `Header Auth GHL` (Location API Key de Carwarriors LLC como `Authorization: Bearer <token>`).
+- **Webhook de producción (listo para recibir tráfico):**
+  `https://n8n-x5jtc0a7f0lbanybimocyidl.2.24.106.87.sslip.io/webhook/d7cd6008-dc30-4ec4-827d-58e009a39a09/carwarriors-lead-intake`
+- **2 bugs reales encontrados y corregidos al probar con `test_workflow` (no estaban en el diseño original):**
+  1. El nodo `Check Pending State` (Mongo `find`) detenía toda la cadena cuando no había registro previo (caso normal de lead nuevo) — n8n no ejecuta nodos siguientes cuando un nodo devuelve 0 items. Se corrigió con `alwaysOutputData: true`.
+  2. Eso rompía `Has Pending Record?`, que solo miraba `items.length` y ahora siempre veía `pending: true` (por el item sintético vacío que fuerza `alwaysOutputData`). Se corrigió para distinguir un item real (con campos) del item sintético `{}`.
+- **Nodo nativo `HighLevel` evaluado y descartado:** no tiene recurso de conversaciones/mensajes (solo contact/opportunity/task/calendar) y requiere credencial OAuth2 (app en el marketplace de HighLevel) en vez del token simple ya configurado. Se mantiene HTTP Request + Header Auth para las 2 llamadas a GHL.
+
+> [!warning] Pendiente — el lado de GHL no dispara este webhook todavía
+> El workflow está listo y activo en n8n, pero **en GHL no existe todavía la automatización que llame a esta URL** cuando entra un mensaje nuevo de un lead. Se empezó a configurar vía Playwright + CDP persistente (mismo patrón que Agent Studio — ver memoria `feedback-ghl-playwright-persistent-cdp`): se navegó a Automation → Workflows dentro de la subcuenta Carwarriors LLC (location `DSe5PdPEScZL8cbZTkKI`) y se ubicaron las carpetas `Agente AI`, `Asignacion`, `Campañas`, `Fuente` (más el workflow publicado `Importar Contactos`, 14336 inscritos). Falta entrar a la carpeta `Agente AI` para ubicar el workflow correcto y agregar la acción de webhook. La sesión de Chrome se perdió a mitad de camino (se relanzó con perfil persistente en disco para no repetir login la próxima vez) — **queda pendiente retomar el login y completar la config**.
+
+> [!danger] Rotar el Location API Key de Carwarriors
+> El token (Location API Key legacy, no PIT) quedó pegado en el chat de esta sesión al crear la credencial `Header Auth GHL`. Por seguridad, **regenerarlo en GHL → Settings → Business Profile → API Keys** una vez confirmado que el workflow funciona con el nuevo token, y actualizar la credencial en n8n.
 
 ---
 
@@ -115,6 +154,12 @@ Con MongoDB Atlas externo, el VPS solo corre n8n + Traefik + Redis. El cliente y
 - [ ] Obtener credenciales SFTP de DealerCenter (las genera el propio dealer desde su panel)
 - [x] Definir módulo inicial de desarrollo -> Se arrancó con el Agente de Captura de Leads en n8n (`carwarriors_lead_intake_agent_workflow.json`), pendiente de importar y probar
 - [ ] Formalizar propuesta y retainer con Jorge / Bianca
+- [x] Diagnosticar por qué el stack de Coolify quedó en `Exited` -> **Resuelto (2026-07-27)**: n8n ya es accesible, usuario resolvió el error de secure cookie por su cuenta
+- [ ] Revisar el firewall del panel de Hostinger (puertos 80/443 entrantes) para asegurar renovación automática de Let's Encrypt a futuro
+- [x] Importar el workflow `carwarriors_lead_intake_agent_workflow.json` en el n8n ya desplegado y conectar credenciales -> **Resuelto (2026-07-27)**: workflow recreado vía SDK/MCP (ID `6QGLivaPilh09R21`), credenciales `MongoDB Carwarriors` y `Header Auth GHL` conectadas, probado con 2 escenarios reales (2 bugs encontrados y corregidos), **activo**. Detalle en la sección "Agente de Captura de Leads" arriba.
+- [ ] Configurar en GHL (subcuenta Carwarriors LLC, Automation → Workflows → carpeta `Agente AI`) la acción que llame al webhook de n8n `.../webhook/d7cd6008-dc30-4ec4-827d-58e009a39a09/carwarriors-lead-intake` cuando entra un mensaje nuevo de un lead — en progreso, interrumpido a mitad de la navegación por Playwright (ver sección de arriba)
+- [ ] Rotar el Location API Key de Carwarriors LLC en GHL (quedó expuesto en el chat de esta sesión) y actualizar la credencial `Header Auth GHL` en n8n con el nuevo valor
+- [ ] Confirmar la URL final de acceso a n8n (dominio sslip.io) y revisar si conviene mapear un dominio propio antes de dar el workflow por definitivo de cara al cliente
 
 ---
 
