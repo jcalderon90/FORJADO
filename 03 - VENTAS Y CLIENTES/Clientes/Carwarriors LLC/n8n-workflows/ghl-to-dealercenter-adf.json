@@ -1,0 +1,86 @@
+{
+  "nodes": [
+    {
+      "id": "wh-node-001",
+      "name": "GHL Lead Webhook (ADF)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ghl-dealercenter-adf",
+        "responseMode": "onReceived",
+        "options": {}
+      }
+    },
+    {
+      "id": "code-node-001",
+      "name": "Select Dealer + Token",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [220, 0],
+      "parameters": {
+        "jsCode": "const body = $input.item.json.body || $input.item.json;\nconst locationId = body.locationId;\nconst contactId = body.contactId;\n\nif (!contactId || !locationId) {\n  throw new Error('Falta contactId o locationId en el payload del webhook de GHL. Body recibido: ' + JSON.stringify(body));\n}\n\n// Location IDs y tokens de GHL (verificar contra el vault Carwarriors LLC.md si cambian)\nconst LOCATIONS = {\n  'DSe5PdPEScZL8cbZTkKI': { dealer: 'CW', vendorName: 'Carwarriors LLC', token: 'pit-20fb00b2-9c40-4e3e-a3cb-4d38736bcbb3' },\n  '1j1dHo8HEbZdElQUGFoC': { dealer: 'RANCES', vendorName: 'Rances Car', token: 'pit-c30b22ca-d09c-45a4-967e-8b75e574a783' }\n};\n\nconst loc = LOCATIONS[locationId];\nif (!loc) {\n  throw new Error('Location de GHL desconocida (no es Carwarriors LLC ni Rances Car): ' + locationId);\n}\n\nreturn [{\n  json: {\n    contactId,\n    locationId,\n    dealer: loc.dealer,\n    vendorName: loc.vendorName,\n    ghlToken: loc.token\n  }\n}];"
+      }
+    },
+    {
+      "id": "http-node-001",
+      "name": "Get GHL Contact",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [440, 0],
+      "parameters": {
+        "method": "GET",
+        "url": "={{ 'https://services.leadconnectorhq.com/contacts/' + $json.contactId }}",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "={{ 'Bearer ' + $json.ghlToken }}" },
+            { "name": "Version", "value": "2021-07-28" },
+            { "name": "Accept", "value": "application/json" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "code-node-002",
+      "name": "Build ADF XML",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [660, 0],
+      "parameters": {
+        "jsCode": "const contact = $json.contact;\nconst dealerInfo = $('Select Dealer + Token').item.json;\nconst dealer = dealerInfo.dealer;\nconst vendorName = dealerInfo.vendorName;\n\nconst attribution = contact.attributionSource || {};\nconst campaign = (attribution.campaign || '').toUpperCase();\n\nlet leadSource;\nif (campaign.includes('TESLA')) {\n  leadSource = `TESLA ${dealer}`;\n} else if (campaign.includes('TRADE')) {\n  leadSource = `TRADE IN ${dealer}`;\n} else {\n  leadSource = `META ${dealer}`;\n}\n\nconst fullName = [contact.firstName, contact.lastName].filter(Boolean).join(' ') || 'Sin Nombre';\nconst email = contact.email || '';\nconst phone = contact.phone || '';\n\nconst customFields = contact.customFields || [];\nconst vehicleInterestField = customFields.find(f => f.id === 'HeQZLqZ0JXldicPk1AOJ');\nconst vehicleInterest = vehicleInterestField ? vehicleInterestField.value : '';\n\n// requestdate ISO 8601 sin milisegundos ni zona horaria (formato validado en la prueba 2026-07-22)\nconst now = new Date().toISOString().replace(/\\.\\d{3}Z$/, '');\n\nconst escapeXml = (s) => String(s)\n  .replace(/&/g, '&amp;')\n  .replace(/</g, '&lt;')\n  .replace(/>/g, '&gt;')\n  .replace(/\"/g, '&quot;')\n  .replace(/'/g, '&apos;');\n\nconst vehicleBlock = vehicleInterest\n  ? `<vehicle status=\"used\" interest=\"buy\"><make>${escapeXml(vehicleInterest)}</make></vehicle>`\n  : `<vehicle status=\"used\" interest=\"buy\"><make>N/A</make></vehicle>`;\n\nconst xml = `<?xml version=\"1.0\"?>\n<?adf version=\"1.0\"?>\n<adf>\n  <prospect>\n    <id sequence=\"1\" source=\"ghl-contact-id\">${escapeXml(contact.id)}</id>\n    <requestdate>${now}</requestdate>\n    <requesttype>sales</requesttype>\n    ${vehicleBlock}\n    <customer>\n      <contact>\n        <name part=\"full\">${escapeXml(fullName)}</name>\n        ${email ? `<email>${escapeXml(email)}</email>` : ''}\n        ${phone ? `<phone type=\"voice\">${escapeXml(phone)}</phone>` : ''}\n      </contact>\n    </customer>\n    <vendor>\n      <id sequence=\"1\" source=\"dealerId\">14031841</id>\n      <vendorname>${escapeXml(vendorName)}</vendorname>\n    </vendor>\n    <provider>\n      <id sequence=\"1\" source=\"sourcename\">GoHighLevel</id>\n      <name part=\"full\">${escapeXml(leadSource)}</name>\n    </provider>\n  </prospect>\n</adf>`;\n\nconst fileName = `${Date.now()}_${contact.id}.xml`;\n\nreturn [{\n  json: { leadSource, fileName, dealer },\n  binary: {\n    data: {\n      data: Buffer.from(xml).toString('base64'),\n      mimeType: 'application/xml',\n      fileName\n    }\n  }\n}];"
+      }
+    },
+    {
+      "id": "ftp-node-001",
+      "name": "Subir a DealerCenter (SFTP)",
+      "type": "n8n-nodes-base.ftp",
+      "typeVersion": 1,
+      "position": [880, 0],
+      "parameters": {
+        "protocol": "sftp",
+        "operation": "upload",
+        "path": "={{ '/Leads/' + $json.fileName }}",
+        "binaryData": true,
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "GHL Lead Webhook (ADF)": {
+      "main": [[{ "node": "Select Dealer + Token", "type": "main", "index": 0 }]]
+    },
+    "Select Dealer + Token": {
+      "main": [[{ "node": "Get GHL Contact", "type": "main", "index": 0 }]]
+    },
+    "Get GHL Contact": {
+      "main": [[{ "node": "Build ADF XML", "type": "main", "index": 0 }]]
+    },
+    "Build ADF XML": {
+      "main": [[{ "node": "Subir a DealerCenter (SFTP)", "type": "main", "index": 0 }]]
+    }
+  }
+}
