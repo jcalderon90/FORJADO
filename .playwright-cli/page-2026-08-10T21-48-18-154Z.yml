@@ -1,0 +1,54 @@
+- iframe [active] [ref=f16e169]:
+  - generic [active] [ref=f19e1]:
+    - generic [ref=f19e3]:
+      - list:
+        - listitem:
+          - link "Skip to main content" [ref=f19e4] [cursor=pointer]:
+            - /url: "#main"
+      - generic [ref=f19e460]:
+        - generic [ref=f19e461]:
+          - generic [ref=f19e462]:
+            - generic [ref=f19e463]:
+              - button "Workflows list" [ref=f19e464] [cursor=pointer]
+              - button "Toggle sidebar" [ref=f19e469] [cursor=pointer]
+            - paragraph [ref=f19e474]:
+              - button [ref=f19e475] [cursor=pointer]
+            - generic [ref=f19e477]:
+              - generic:
+                - group
+              - generic [ref=f19e479]:
+                - button "Recent changes" [ref=f19e481] [cursor=pointer]:
+                  - img "Recent changes" [ref=f19e483]
+                - button "Undo" [disabled] [ref=f19e485]
+                - button "Redo" [disabled] [ref=f19e489]
+              - button "Save workflow button" [disabled] [ref=f19e495]:
+                - generic [ref=f19e496]: Saved
+          - generic [ref=f19e501]:
+            - tablist [ref=f19e509]:
+              - tab "Builder" [selected] [ref=f19e511] [cursor=pointer]:
+                - paragraph [ref=f19e513]: Builder
+              - tab "Settings" [ref=f19e516] [cursor=pointer]:
+                - paragraph [ref=f19e518]: Settings
+              - tab "Enrollment history" [ref=f19e521] [cursor=pointer]:
+                - paragraph [ref=f19e523]: Enrollment history
+              - tab "Execution logs" [ref=f19e526] [cursor=pointer]:
+                - paragraph [ref=f19e528]: Execution logs
+            - generic [ref=f19e530]:
+              - button "Test workflow" [ref=f19e531] [cursor=pointer]
+              - generic [ref=f19e533]:
+                - paragraph [ref=f19e534]: Draft
+                - switch "Toggle draft publish workflow" [ref=f19e535]:
+                  - generic [ref=f19e536] [cursor=pointer]
+                - paragraph [ref=f19e538]: Publish
+        - generic [ref=f19e541]:
+          - generic [ref=f19e544]:
+            - button [ref=f19e545] [cursor=pointer]
+            - button [ref=f19e549] [cursor=pointer]
+            - button [ref=f19e553] [cursor=pointer]
+            - button [ref=f19e557] [cursor=pointer]
+            - button [ref=f19e561] [cursor=pointer]
+            - button [ref=f19e565] [cursor=pointer]
+            - button [ref=f19e569] [cursor=pointer]
+            - button [ref=f19e573] [cursor=pointer]
+          - img "loading" [ref=f19e581]
+    - log [ref=f19e457]

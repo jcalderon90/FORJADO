@@ -1,0 +1,238 @@
+- iframe [active] [ref=f16e169]:
+  - generic [ref=f19e1]:
+    - generic [ref=f19e3]:
+      - list:
+        - listitem:
+          - link "Skip to main content" [ref=f19e4] [cursor=pointer]:
+            - /url: "#main"
+      - generic [ref=f19e460]:
+        - generic [ref=f19e461]:
+          - generic [ref=f19e462]:
+            - generic [ref=f19e463]:
+              - button "Workflows list" [ref=f19e464] [cursor=pointer]
+              - button "Toggle sidebar" [ref=f19e469] [cursor=pointer]
+            - paragraph [ref=f19e474]:
+              - button [ref=f19e587] [cursor=pointer]:
+                - heading "Workflow name" [level=1] [ref=f19e589]: DealerCenter Sync - Opportunity Created
+            - generic [ref=f19e477]:
+              - group [ref=f19e594]:
+                - generic [ref=f19e595]: JC
+              - generic [ref=f19e479]:
+                - button "Recent changes" [ref=f19e481] [cursor=pointer]:
+                  - img "Recent changes" [ref=f19e483]
+                - button "Undo" [disabled] [ref=f19e485]
+                - button "Redo" [disabled] [ref=f19e489]
+              - button "Save workflow button" [disabled] [ref=f19e495]:
+                - generic [ref=f19e496]: Saved
+          - generic [ref=f19e501]:
+            - generic [ref=f19e600] [cursor=pointer]:
+              - generic [ref=f19e601]: Standard builder
+              - img "loading" [ref=f19e603]
+            - tablist [ref=f19e509]:
+              - tab "Builder" [selected] [ref=f19e511] [cursor=pointer]:
+                - paragraph [ref=f19e513]: Builder
+              - tab "Settings" [ref=f19e516] [cursor=pointer]:
+                - paragraph [ref=f19e518]: Settings
+              - tab "Enrollment history" [ref=f19e521] [cursor=pointer]:
+                - paragraph [ref=f19e523]: Enrollment history
+              - tab "Execution logs" [ref=f19e526] [cursor=pointer]:
+                - paragraph [ref=f19e528]: Execution logs
+            - generic [ref=f19e530]:
+              - button "Test workflow" [ref=f19e531] [cursor=pointer]
+              - generic [ref=f19e533]:
+                - paragraph [ref=f19e534]: Draft
+                - switch "Toggle draft publish workflow" [checked] [ref=f19e535]:
+                  - generic [ref=f19e536] [cursor=pointer]
+                - paragraph [ref=f19e538]: Publish
+        - generic [ref=f19e541]:
+          - generic [ref=f19e544]:
+            - button [ref=f19e545] [cursor=pointer]
+            - button [ref=f19e549] [cursor=pointer]
+            - button [ref=f19e553] [cursor=pointer]
+            - button [ref=f19e557] [cursor=pointer]
+            - button [ref=f19e561] [cursor=pointer]
+            - button [ref=f19e565] [cursor=pointer]
+            - button [ref=f19e569] [cursor=pointer]
+            - button [ref=f19e573] [cursor=pointer]
+          - generic "Workflow tree" [ref=f19e614]:
+            - generic [ref=f19e616]:
+              - generic:
+                - img:
+                  - button "Edge from 2f31c008-75d3-4cb9-b102-4691edb1d887 to c0e9b595-fde6-4fb6-8d3f-e8a400ea90c3" [ref=f19e617] [cursor=pointer]
+                - img:
+                  - button "Edge from 2f31c008-75d3-4cb9-b102-4691edb1d887 to 9668f90d-bec6-45b3-b607-e5c0b9a8a67f" [ref=f19e620] [cursor=pointer]
+                - img:
+                  - button "Edge from c0e9b595-fde6-4fb6-8d3f-e8a400ea90c3 to 0b9b5428-af8e-496c-8bc4-d055d5a46fff" [ref=f19e623] [cursor=pointer]
+                - img:
+                  - button "Edge from 9668f90d-bec6-45b3-b607-e5c0b9a8a67f to 9668f90d-bec6-45b3-b607-e5c0b9a8a67f-end" [ref=f19e626] [cursor=pointer]
+                - img:
+                  - button "Edge from 0b9b5428-af8e-496c-8bc4-d055d5a46fff to 0b9b5428-af8e-496c-8bc4-d055d5a46fff-end"
+                - img:
+                  - button "Edge from JrQkiziA0usCpg8jjwNQ to 2f31c008-75d3-4cb9-b102-4691edb1d887" [ref=f19e629] [cursor=pointer]
+                - img:
+                  - button "Edge from add-new-trigger to 2f31c008-75d3-4cb9-b102-4691edb1d887" [ref=f19e632] [cursor=pointer]
+                - generic:
+                  - generic "Add action" [ref=f19e638]:
+                    - button "Add action" [ref=f19e640] [cursor=pointer]
+                  - generic "Add action" [ref=f19e648]:
+                    - button "Add action" [ref=f19e650] [cursor=pointer]
+                  - generic "Add action" [ref=f19e658]:
+                    - button "Add action" [ref=f19e660] [cursor=pointer]
+                - generic:
+                  - button [ref=f19e665] [cursor=pointer]:
+                    - button "Condition Action" [ref=f19e666]:
+                      - button "Add action" [ref=f19e670]
+                      - button "Condition" [ref=f19e675]:
+                        - button [ref=f19e687]
+                  - button [ref=f19e690] [cursor=pointer]:
+                    - generic [ref=f19e693]:
+                      - button "No ZONITEL" [ref=f19e694]
+                      - button "If \"Tags\" does not include \"zonitel/a..." [ref=f19e700]
+                  - button [ref=f19e704] [cursor=pointer]:
+                    - generic [ref=f19e708]:
+                      - button "None" [ref=f19e709]
+                      - button "When none of the conditions are met" [ref=f19e715]
+                  - button [ref=f19e717] [cursor=pointer]:
+                    - button "#1 N8N Webhook - DealerCenter Action" [ref=f19e718]:
+                      - button "#1 N8N Webhook - DealerCenter" [ref=f19e720]:
+                        - button [ref=f19e735]
+                  - button "END" [ref=f19e738] [cursor=pointer]
+            - img "Vue Flow mini map" [ref=f19e746]
+            - button "Add" [ref=f19e756] [cursor=pointer]
+            - generic [ref=f19e761]:
+              - button [ref=f19e763] [cursor=pointer]
+              - group [ref=f19e768]:
+                - button "Zoom in" [ref=f19e769] [cursor=pointer]
+                - button "100%" [ref=f19e773] [cursor=pointer]
+                - button "Zoom out" [ref=f19e775] [cursor=pointer]
+              - group [ref=f19e778]:
+                - button "Fit to Screen" [ref=f19e779] [cursor=pointer]
+            - button [ref=f19e784] [cursor=pointer]
+          - generic [ref=f19e793]:
+            - generic [ref=f19e794]:
+              - generic [ref=f19e795]:
+                - generic [ref=f19e796]:
+                  - generic [ref=f19e797]:
+                    - button "Previous" [ref=f19e798] [cursor=pointer]
+                    - button "Next" [ref=f19e802] [cursor=pointer]
+                  - generic [ref=f19e806]:
+                    - button [ref=f19e807] [cursor=pointer]:
+                      - paragraph [ref=f19e811]: Learn more
+                    - button [ref=f19e812] [cursor=pointer]
+                    - button "Close panel" [ref=f19e816] [cursor=pointer]
+                - generic [ref=f19e826]:
+                  - generic [ref=f19e827]: If / else
+                  - paragraph [ref=f19e829]: Fork the Contact journey through this workflow based on conditions
+              - group [ref=f19e832]:
+                - generic [ref=f19e834]:
+                  - generic [ref=f19e835]: Action name
+                  - generic [ref=f19e839]:
+                    - textbox "Please Input" [ref=f19e841]: Condition
+                    - generic [ref=f19e842]: "9"
+                  - generic [ref=f19e843]: Scenario recipe
+                  - generic [ref=f19e844]: Select from one of the pre-built condition templates
+                  - generic [ref=f19e848] [cursor=pointer]:
+                    - generic [ref=f19e849]: Build your own
+                    - img "loading" [ref=f19e851]
+                  - generic [ref=f19e858]: Branches
+                  - generic [ref=f19e859]:
+                    - generic [ref=f19e862]:
+                      - generic [ref=f19e872]:
+                        - generic [ref=f19e873]:
+                          - generic [ref=f19e878]:
+                            - textbox "Please Input" [ref=f19e880]: No ZONITEL
+                            - generic [ref=f19e881]: "10"
+                          - generic [ref=f19e882]:
+                            - button [ref=f19e884] [cursor=pointer]
+                            - button [expanded] [ref=f19e888] [cursor=pointer]:
+                              - button [ref=f19e889]
+                        - generic [ref=f19e895]:
+                          - generic [ref=f19e899]:
+                            - generic [ref=f19e901]:
+                              - generic [ref=f19e902]:
+                                - textbox "Select" [ref=f19e908]: Tags
+                                - generic [ref=f19e915] [cursor=pointer]:
+                                  - generic [ref=f19e916]: Does not include
+                                  - img "loading" [ref=f19e918]
+                                - generic [ref=f19e925]:
+                                  - generic [ref=f19e932] [cursor=pointer]:
+                                    - generic [ref=f19e934]:
+                                      - generic [ref=f19e935]: zonitel/autocreated
+                                      - button "close" [ref=f19e936]
+                                    - img "loading" [ref=f19e942]
+                                  - generic [ref=f19e949]: The condition will be true if any of the selected tags is not added to the contact
+                              - button [ref=f19e1023] [cursor=pointer]
+                            - generic [ref=f19e1026]:
+                              - generic [ref=f19e1027]: And
+                              - generic [ref=f19e1029]:
+                                - generic [ref=f19e1030]:
+                                  - generic [ref=f19e1035] [cursor=pointer]:
+                                    - textbox "Type to search" [active] [ref=f19e1095]
+                                    - generic: Type to search
+                                  - generic [ref=f19e1043] [cursor=pointer]:
+                                    - generic: Select operator
+                                    - img "loading" [ref=f19e1044]
+                                - button [ref=f19e1051] [cursor=pointer]
+                            - generic [ref=f19e1055]:
+                              - generic [ref=f19e1058] [cursor=pointer]:
+                                - generic [ref=f19e1059]: AND
+                                - img "loading" [ref=f19e1062]
+                              - generic [ref=f19e1072]:
+                                - button [disabled] [ref=f19e1073]
+                                - generic [ref=f19e1077] [cursor=pointer]
+                                - generic [ref=f19e1078] [cursor=pointer]
+                          - button "Add segment" [disabled] [ref=f19e1080]
+                      - generic [ref=f19e977]:
+                        - generic [ref=f19e1088]:
+                          - button "Add branch" [disabled] [ref=f19e1089]
+                          - generic [ref=f19e1093] [cursor=pointer]
+                          - generic [ref=f19e1094] [cursor=pointer]
+                        - button "Reorder branches" [disabled] [ref=f19e985]
+                    - generic [ref=f19e1001]:
+                      - generic [ref=f19e1002]: None branch
+                      - generic [ref=f19e1003]: When no condition is met
+                      - generic [ref=f19e1005]:
+                        - textbox "Please Input" [ref=f19e1007]: None
+                        - generic [ref=f19e1008]: "4"
+            - generic [ref=f19e1009]:
+              - button "Delete" [ref=f19e1011] [cursor=pointer]
+              - generic [ref=f19e1013]:
+                - button "Cancel" [ref=f19e1014] [cursor=pointer]
+                - button "Save action" [ref=f19e1016] [cursor=pointer]
+    - log [ref=f19e457]
+    - generic [ref=f19e1097]:
+      - button "All fields" [ref=f19e1101] [cursor=pointer]
+      - generic [ref=f19e1104]:
+        - button "Contact details" [ref=f19e1106] [cursor=pointer]
+        - button "Company" [ref=f19e1113] [cursor=pointer]
+        - button "Date/Time" [ref=f19e1120] [cursor=pointer]
+        - button "Workflow trigger" [ref=f19e1127] [cursor=pointer]
+        - button "Workflow contact" [ref=f19e1131] [cursor=pointer]
+        - button "Events" [ref=f19e1135] [cursor=pointer]
+        - button "Opportunities" [ref=f19e1142] [cursor=pointer]
+        - button "Custom values" [ref=f19e1149] [cursor=pointer]
+        - button "Contact reply" [disabled] [ref=f19e1156]
+        - button "Inbound email" [disabled] [ref=f19e1161]
+        - button "Appointment" [disabled] [ref=f19e1166]
+        - button "Service booking" [disabled] [ref=f19e1171]
+        - button "Rental booking" [disabled] [ref=f19e1176]
+        - button "Note" [disabled] [ref=f19e1181]
+        - button "Ecommerce stores" [disabled] [ref=f19e1186]
+        - button "Invoice" [disabled] [ref=f19e1191]
+        - button "Event" [disabled] [ref=f19e1196]
+        - button "Order" [disabled] [ref=f19e1201]
+        - button "Payment" [disabled] [ref=f19e1206]
+        - button "Video tracking" [disabled] [ref=f19e1211]
+        - button "Courses" [disabled] [ref=f19e1216]
+        - button "Inbound webhook trigger" [disabled] [ref=f19e1221]
+        - button "Google Sheets lookup" [disabled] [ref=f19e1224]
+        - button "Date/time formatter" [disabled] [ref=f19e1227]
+        - button "Number formatter" [disabled] [ref=f19e1230]
+        - button "Add task" [disabled] [ref=f19e1233]
+        - button "Text formatter" [disabled] [ref=f19e1236]
+        - button "Math operation" [disabled] [ref=f19e1239]
+        - button "Custom webhook" [disabled] [ref=f19e1242]
+        - button "GPT" [disabled] [ref=f19e1245]
+        - button "Array formatter" [disabled] [ref=f19e1248]
+        - button "Custom code" [disabled] [ref=f19e1251]
+        - button "AI Agent" [disabled] [ref=f19e1254]
