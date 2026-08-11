@@ -1,0 +1,26 @@
+[   22412ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://accounts.google.com/gsi/client:0
+[   53397ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://production.app-manifest.leadconnectorhq.com/latest/manifest.json:0
+[   53398ms] [ERROR] Failed to fetch latest manifest:  TypeError: Failed to fetch
+    at loadManifestAndBootstrap (https://app.gohighlevel.com/:75:34)
+    at HTMLDocument.<anonymous> (https://app.gohighlevel.com/:129:9) @ https://app.gohighlevel.com/:82
+[   53398ms] [LOG] Attempting to fetch fallback manifest... @ https://app.gohighlevel.com/:83
+[   53398ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://www.google-analytics.com/analytics.js:0
+[   53398ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://content.pathfinder.gohighlevel.com/agent/static/2609845c-58c9-4b6e-7126-639c4121d0b7/pendo.js:0
+[   76133ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://production.app-manifest.leadconnectorhq.com/fallback/manifest.json:0
+[   76133ms] [ERROR] Error loading manifest: TypeError: Failed to fetch
+    at https://app.gohighlevel.com/:85:41
+    at async loadManifestAndBootstrap (https://app.gohighlevel.com/:75:28) @ https://app.gohighlevel.com/:117
+[   76134ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://sdk.canny.io/sdk.js:0
+[  173665ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://accounts.google.com/gsi/client:0
+[  173666ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://production.app-manifest.leadconnectorhq.com/latest/manifest.json:0
+[  173666ms] [ERROR] Failed to fetch latest manifest:  TypeError: Failed to fetch
+    at loadManifestAndBootstrap (https://app.gohighlevel.com/:75:34)
+    at HTMLDocument.<anonymous> (https://app.gohighlevel.com/:129:9) @ https://app.gohighlevel.com/:82
+[  173666ms] [LOG] Attempting to fetch fallback manifest... @ https://app.gohighlevel.com/:83
+[  173667ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://www.google-analytics.com/analytics.js:0
+[  173667ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://content.pathfinder.gohighlevel.com/agent/static/2609845c-58c9-4b6e-7126-639c4121d0b7/pendo.js:0
+[  196400ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://sdk.canny.io/sdk.js:0
+[  196400ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://production.app-manifest.leadconnectorhq.com/fallback/manifest.json:0
+[  196400ms] [ERROR] Error loading manifest: TypeError: Failed to fetch
+    at https://app.gohighlevel.com/:85:41
+    at async loadManifestAndBootstrap (https://app.gohighlevel.com/:75:28) @ https://app.gohighlevel.com/:117
