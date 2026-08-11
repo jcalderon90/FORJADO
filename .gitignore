@@ -14,3 +14,7 @@ yarn-error.log*
 
 # Playwright MCP session artifacts (may contain sensitive client data)
 .playwright-mcp/
+.playwright-cli/
+
+# Debug screenshots dropped in repo root by browser-automation sessions
+/*.png

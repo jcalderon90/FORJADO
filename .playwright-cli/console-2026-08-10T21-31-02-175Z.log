@@ -1,6 +1,0 @@
-[    2028ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://app.gohighlevel.com/v2/location/DSe5PdPEScZL8cbZTkKI/automation/workflows/494172cc-0b8e-406b-a617-8aa60517bd62:0
-[   28202ms] [WARNING] The PerformanceObserver does not support buffered flag with the entryTypes argument. @ https://static.leadconnectorhq.com/1721/js/chunk.D_lAmGX1.js:17
-[   28271ms] [ERROR] The user is not logged in. user_not_logged_in @ https://static.leadconnectorhq.com/1721/js/chunk.Eg_z--Qv.js:16
-[   30647ms] [LOG] This is test file @ https://static.leadconnectorhq.com/1721/js/chunk.Eg_z--Qv.js:16
-[   31534ms] [ERROR] Bootstrap - Error while checking firebase token The user is not logged in. user_not_logged_in @ https://static.leadconnectorhq.com/1721/js/chunk.Eg_z--Qv.js:16
-[   33622ms] [ERROR] Failed to load resource: the server responded with a status of 429 () @ https://o176457.ingest.sentry.io/api/1723141/envelope/?sentry_version=7&sentry_key=c67431ff70d6440fb529c2705792425f&sentry_client=sentry.javascript.vue%2F10.19.0:0
