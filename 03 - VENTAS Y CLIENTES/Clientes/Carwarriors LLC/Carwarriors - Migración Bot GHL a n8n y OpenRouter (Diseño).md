@@ -4,16 +4,34 @@ tipo: spec
 cliente: Carwarriors LLC
 creado: 2026-08-12
 actualizado: 2026-08-12
-estado: en-diseño
+estado: en-construcción
 ---
 
 # Migración del bot conversacional: GHL Conversation AI → n8n + OpenRouter (copia adaptada de Spectrum)
 
 > Decisión tomada en reunión 2026-08-12 con Jorge González (CARWARRIORS LLC). Los bots de GHL Conversation AI documentados en [[Carwarriors - Agente IA 24-7 (Diseño)]] y [[Carwarriors - Agente IA Rances Car (Diseño)]] quedan **deprecados**. La lógica conversacional se reconstruye en n8n copiando y adaptando el sistema de agentes ya construido para el cliente **Spectrum** (proyecto real estate, repo `Garoo/Agent-Spectrum`), usando **OpenRouter** como proveedor de modelos. GoHighLevel se conserva como **CRM y para ciertas automatizaciones** — no se elimina, solo se le quita la capa de IA conversacional nativa (Conversation AI).
 
-## Estado actual (resumen ejecutivo — 2026-08-12)
+## Estado actual (resumen ejecutivo — 2026-08-12, actualizado misma tarde/noche)
 
-**Fase: diseño / arranque de migración — nada construido todavía en n8n para este bot.** La decisión y el alcance quedaron cerrados en la reunión; lo que sigue es puramente ejecución. Bloqueadores reales antes de poder escribir el primer workflow: (1) acceso a OpenRouter (depende de Bianca/Jorge González), (2) contenido de la base de conocimiento (depende de Bianca), (3) horarios de asesores por día (depende de Jorge González). Sin esos tres insumos, Jorge Calderón puede avanzar en paralelo con la copia/adaptación estructural del repo Agent-Spectrum (nodos, parametrización por `locationId`, webhook GHL en vez de ManyChat), pero no puede probar el flujo completo end-to-end. **Los bots de GHL Conversation AI siguen activos en producción sin cambios** — no se toca nada de lo ya calibrado en [[Carwarriors - Agente IA 24-7 (Diseño)]] / [[Carwarriors - Agente IA Rances Car (Diseño)]] hasta tener el reemplazo probado. Objetivo de fecha puesto por el cliente: **lunes o martes siguiente (2026-08-17/18)** — ambicioso dado que ninguno de los 3 bloqueadores está resuelto todavía a la fecha de este documento.
+**Fase: construcción activa en n8n — ya no es solo diseño.** Jorge Calderón copió los 9 workflows de Agent-Spectrum directamente a la instancia n8n de Carwarriors (`n8n-carwarriors`) y se están podando/adaptando uno por uno.
+
+**Resuelto desde la última actualización:**
+- Acceso a **OpenRouter** — ya no es bloqueador, credencial `OpenRouter account` creada y funcionando en n8n.
+- **Redis** conectado (Coolify) para el patrón de debounce de mensajes de Spectrum — requirió puentear manualmente 2 redes Docker distintas (la app de n8n y la base Redis standalone quedaron en redes separadas por diseño de Coolify); documentado en memoria `reference_coolify-network-isolation`.
+- **KB - SEARCH** adaptado: filtro Mongo Atlas de `proyecto` → `dealer`, prompt reescrito para consultas de concesionario de auto en vez de Spectrum Vivienda.
+- **LEAD - COLLECTOR** adaptado: extrae city/interés de vehículo/método de pago/timing de compra/idioma/resumen (no nombre/correo/teléfono — eso ya lo tiene GHL desde que se crea el contacto). Se eliminó por completo el bloque SOAP a Dynamics. Escribe a Mongo (`leads`, upsert por `contactId`) y a GHL (`city`, campo estándar; el resto de campos queda con nota en el nodo hasta tener el token GHL renovado + IDs reales de custom fields).
+- **Decisión: `SYNC - CRM` se elimina del alcance** — GHL ya es el único CRM, no hay un segundo sistema (Dynamics/SOAP) que sincronizar; Lead Collector/PRINCIPAL actualizan GHL directo. Workflow archivado en n8n.
+- **Decisión: no se adopta el nodo nativo `HighLevel` de n8n** — existe y cubre contact/opportunity/task/calendar, pero solo soporta credencial OAuth2 (habría que registrar una app en el marketplace de GHL y autorizarla en las 2 subcuentas) y no cubre envío de mensajes de conversación de todas formas. Se sigue con HTTP Request + el Private Integration Token ya usado en producción — un solo mecanismo de auth para todo.
+- **Decisión: un solo despliegue n8n para las 2 subcuentas**, parametrizado por `locationId`/`dealer` (no dos flujos separados) — ya construido así en KB-SEARCH y LEAD-COLLECTOR.
+- **Notificaciones por Slack** (no email/Gmail) — decidido; los workflows `NOTIFICATIONS` y `ERROR HANDLER` ya traían un nodo Slack (deshabilitado) copiado de Spectrum, solo falta credencial + habilitar + rebrandear.
+
+**Bloqueadores nuevos encontrados durante la construcción:**
+- La credencial **"Header Auth GHL"** (el Private Integration Token usado en producción) está devolviendo `401 Invalid JWT` en ambas subcuentas — confirmado con un workflow de prueba y con el workflow de producción de captura de leads. Ningún lead real se perdió (solo fallaron pruebas manuales), pero bloquea leer custom field IDs reales, escribir a GHL, y armar RSVP. **Requiere que alguien con acceso a GHL renueve el token.**
+- Falta una **credencial de OpenAI aparte de OpenRouter** para el paso de embeddings (OpenRouter no hace embeddings; Spectrum usa una API key de OpenAI dedicada para eso) — no creada todavía en n8n-carwarriors.
+
+**Pendiente de insumos externos (sin cambios):** contenido real de la base de conocimiento (Bianca) y fuente de fotos/inventario de autos para `SEND - MEDIA` (ligado a DealerCenter). El requisito de "horarios de asesores" se simplificó: como GHL ya agenda citas reales hoy contra calendarios reales, RSVP se adapta contra la API de calendarios de GHL directamente — solo faltan los `calendarId` reales (Nallely de Leon / Samuel Aguilar / Scarleth Hassiel Rubi), no cargar un sistema de horarios nuevo en DealerCenter.
+
+**Los bots de GHL Conversation AI siguen activos en producción sin cambios** — no se apagan hasta validar el reemplazo. Objetivo de fecha del cliente: **lunes o martes (2026-08-17/18)** — sigue siendo ambicioso: PRINCIPAL (el orquestador, la pieza más grande) todavía no se ha tocado, y 3 de los 8 workflows restantes (RSVP, SEND-MEDIA, VECTORIZAR-KB) siguen bloqueados por insumos externos o por el token GHL.
 
 ## Por qué el cambio (contexto de la reunión)
 
@@ -43,9 +61,9 @@ Repo fuente: `Garoo/Agent-Spectrum` (n8n instance `agentsprod.redtec.ai`). Es un
 | `AGENT PRINCIPAL` (orquestador, 86 nodos) | Recibe webhook de ManyChat, valida gate name+email+phone, clasifica intención, delega a los tools de abajo, protección spam/DDoS (Redis) | Recibe webhook de **GHL** (conversaciones) en vez de ManyChat, mismo gate de datos mínimos (teléfono/correo/nombre), delega a los mismos tipos de sub-workflow. Debe soportar **2 subcuentas** (Carwarriors LLC + Rances Car) — parametrizar por `locationId`, igual que Spectrum parametriza por `proyecto` |
 | `Lead Collector` | Captura name/email/phone, separa nombre/apellido con LLM, persiste a Mongo | Igual, pero además crea/actualiza el contacto en GHL (find-or-create, como ya hace hoy `carwarriors_lead_intake_agent_workflow.json`) |
 | `KB SEARCH` | RAG sobre Mongo Atlas Vector Index, filtrado por `proyecto` | RAG sobre inventario + políticas de Carwarriors, filtrado por **dealer** (Carwarriors LLC / Rances Car) en vez de proyecto. Fuente de los datos: DealerCenter (inventario) + documento de Bianca (políticas, promos, info general) |
-| `RSVP` | Agenda citas, persistencia progresiva en colección `appointments` | Agenda citas (llamada / virtual / presencial) validando contra los horarios de asesores por día cargados en DealerCenter. Reutiliza el patrón de persistencia progresiva |
-| `Send Media` | Envía brochures/renders vía API de ManyChat | Envía PDF/imágenes/video/enlaces vía API de conversaciones de GHL |
-| `Sync_CRM` | Scheduled (~15 min), POST a Dynamics 365 SOAP | Aquí el "CRM externo" **es GHL mismo** — este workflow probablemente se simplifica o se fusiona con `Lead Collector`, ya que no hay un segundo CRM SOAP que sincronizar. Revisar si sigue teniendo sentido como workflow separado o si su única función real (mantener GHL actualizado) ya la cubre el resto |
+| `RSVP` | Agenda citas, persistencia progresiva en colección `appointments` | Agenda citas (test-drive / visita / llamada) contra la **API de calendarios de GHL** (`getFreeSlots`/`bookAppointment` vía HTTP Request), no contra horarios cargados en DealerCenter — GHL ya tiene calendarios reales hoy (Nallely de Leon / Samuel Aguilar / Scarleth Hassiel Rubi). Falta obtener los `calendarId` reales — **pendiente** |
+| `Send Media` | Envía brochures/renders vía API de ManyChat | Envía fotos/inventario de autos vía API de conversaciones de GHL — **pendiente**, falta fuente real de fotos/inventario (DealerCenter) |
+| ~~`Sync_CRM`~~ | Scheduled (~15 min), POST a Dynamics 365 SOAP | **Descartado y archivado (decidido 2026-08-12).** GHL es el único CRM, sin segundo sistema SOAP que sincronizar — Lead Collector/PRINCIPAL actualizan GHL directo por turno |
 | `Notifications Master` | Emails HTML por evento (nuevo lead, precios, cita, escalación) | Mismo patrón — nuevo lead / escalación / cita, con destinatarios de Carwarriors (Nallely de Leon / Scarleth Hassiel Rubi según subcuenta, ver [[Carwarriors - Comportamiento del Bot (Resumen)]] sección 11 y [[Rances Car - Comportamiento del Bot (Resumen)]] sección 12) |
 | `Analytics Centralizado` | Scheduled diario, métricas por usuario vía LLM → Mongo | Reutilizable tal cual, útil para reemplazar el panel roto "Metricas Deeler Center" (ver [[Carwarriors LLC]], sección Integración DealerCenter) |
 | `Health Check Conversaciones` | Alerta por email si no hubo conversaciones en 6h | Reutilizable tal cual — cubre el mismo tipo de apagón silencioso que ya afectó a los bots de GHL varias veces |
@@ -56,14 +74,24 @@ Repo fuente: `Garoo/Agent-Spectrum` (n8n instance `agentsprod.redtec.ai`). Es un
 ## Pendientes
 
 **Bloqueadores — insumos externos, sin ellos no se puede probar end-to-end:**
-- [ ] Contratar/dar acceso a OpenRouter — *CARWARRIORS LLC (Jorge González) + Bianca*: Jorge González paga la cuenta; Bianca agrega a Jorge Calderón como colaborador
+- [x] ~~Contratar/dar acceso a OpenRouter~~ — resuelto, credencial creada y funcionando en n8n
+- [ ] **Renovar el token de GHL** ("Header Auth GHL" devuelve 401 Invalid JWT en ambas subcuentas desde al menos 2026-08-08) — *quien administre el acceso API de GHL*: sin esto no se puede leer custom fields reales, escribir a GHL, ni armar RSVP
+- [ ] Crear credencial de **OpenAI** (separada de OpenRouter) para embeddings de KB-SEARCH/VECTORIZAR-KB — *Jorge Calderón*, técnico, no depende de terceros
 - [ ] Entregar base de conocimiento — *Bianca*: inventario (vehículos, millas, años), políticas, promos; hoy vive en Knowledge Base de GHL, hay que exportarlo/documentarlo para vectorizarlo (mismo patrón que `KBs/*.json` de Spectrum)
-- [ ] Horarios de trabajo de los asesores por día — *CARWARRIORS LLC (Jorge González) → Jorge Calderón*: hoy no existen en ningún sistema; Jorge González se los pasa, Jorge Calderón los carga en DealerCenter (por asesor, por día) para que el workflow tipo `RSVP` los lea de ahí
+- [ ] `calendarId` reales de GHL (Nallely de Leon / Samuel Aguilar / Scarleth Hassiel Rubi) — *Jorge Calderón, vía API de GHL una vez el token esté renovado* — necesario para adaptar RSVP
+- [ ] Fuente real de fotos/inventario de autos para `SEND - MEDIA` — ligado a la integración DealerCenter, no definido todavía
 
-**Trabajo técnico — puede avanzar en paralelo sin esperar los bloqueadores:**
-- [ ] Copiar y adaptar el repo Agent-Spectrum al vertical automotriz y a las 2 subcuentas GHL — *Jorge Calderón*: ver tabla de mapeo arriba
+**Trabajo técnico — en curso:**
+- [x] ~~Copiar el repo Agent-Spectrum a la instancia n8n de Carwarriors~~ — hecho, 9 workflows pegados (PRINCIPAL, LEAD-COLLECTOR, KB-SEARCH, RSVP, SEND-MEDIA, NOTIFICATIONS, VECTORIZAR-KB, SYNC-CRM, ERROR HANDLER)
+- [x] ~~Conectar Redis (debounce)~~ — hecho, requirió puentear redes Docker en Coolify
+- [x] ~~Adaptar KB - SEARCH~~ — hecho (proyecto→dealer, prompt de autos)
+- [x] ~~Adaptar LEAD - COLLECTOR~~ — hecho (campos de auto, sin SOAP, escribe a Mongo+GHL)
+- [ ] Adaptar `NOTIFICATIONS` + `ERROR HANDLER` a Slack — *Jorge Calderón*, esperando que Jorge cree la credencial de Slack en n8n
+- [ ] Adaptar `RSVP` a la API de calendarios de GHL — *Jorge Calderón*, bloqueado por `calendarId` reales
+- [ ] Adaptar `SEND - MEDIA` — *Jorge Calderón*, bloqueado por fuente de fotos/inventario
+- [ ] Adaptar `VECTORIZAR - KB` — *Jorge Calderón*, bloqueado por contenido real de Bianca
+- [ ] Adaptar `PRINCIPAL` (el orquestador) — *Jorge Calderón*, se hace al final, una vez los sub-workflows que llama estén listos
 - [ ] Elegir modelo(s) en OpenRouter — *Jorge Calderón*: Spectrum ya usa `gpt-5-mini` en su orquestador, punto de partida razonable; ajustar por costo/calidad según volumen de Carwarriors
-- [ ] Definir cómo se sincroniza el inventario de DealerCenter hacia el RAG — *Jorge Calderón*: ¿lectura directa por API/SFTP o exportación periódica? No definido en la reunión
 
 **Cierre — solo después de validar el reemplazo en producción:**
 - [ ] Apagar los bots de GHL Conversation AI — *Jorge Calderón*: **solo** una vez el bot de n8n esté probado y en producción, dejarlos en paralelo hasta entonces
@@ -82,10 +110,10 @@ Objetivo puesto por el cliente en la reunión: **listo para el lunes o martes si
 
 ## Preguntas abiertas (no cerradas en la reunión)
 
-- ¿El mismo despliegue n8n cubre las 2 subcuentas (Carwarriors LLC + Rances Car) parametrizado por `locationId`, o son 2 despliegues/flujos separados? Ambas ya tienen reglas de negocio parcialmente distintas (asesor de Human Handover, calendarios, promos) — ver sus respectivos [[Carwarriors - Comportamiento del Bot (Resumen)|resúmenes]].
+- ~~¿Un solo despliegue n8n o dos separados?~~ **Resuelto 2026-08-12**: un solo despliegue, parametrizado por `locationId`/`dealer`.
+- ~~Qué pasa con `Sync_CRM`?~~ **Resuelto 2026-08-12**: se descarta, GHL es el único CRM.
 - ¿Car Express Servicess (la 3ra subcuenta del ecosistema) entra en este alcance? No se mencionó en la reunión — no tiene bot construido todavía (ver [[Carwarriors LLC]]).
 - Formato exacto en que Bianca va a entregar la base de conocimiento (documento, hoja de cálculo, acceso directo a un sistema).
-- Qué pasa con `Sync_CRM` en la adaptación — ¿se simplifica/fusiona con `Lead Collector` dado que GHL ya es el único CRM, sin un segundo sistema SOAP que sincronizar?
 - Qué automatizaciones específicas de GHL se mantienen ("ciertas automatizaciones", palabras del cliente) vs. cuáles migran también a n8n — no se detalló una lista.
 
 ## Relacionado
