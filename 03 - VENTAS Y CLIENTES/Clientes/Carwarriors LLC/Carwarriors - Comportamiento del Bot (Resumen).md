@@ -2,12 +2,15 @@
 tags: [forjado, carwarriors, gohighlevel, ia, agente-conversacional]
 tipo: resumen
 cliente: Carwarriors LLC
-estado: vigente
+estado: en-migración (bot GHL sigue activo en paralelo — ver [[Carwarriors - Migración Bot GHL a n8n y OpenRouter (Diseño)]])
 creado: 2026-07-14
 actualizado: 2026-08-12
 ---
 
 # Comportamiento completo del bot — Asistente Social CarWarriors (24/7)
+
+> [!important] Pivote 2026-08-12 — este bot se está migrando a n8n
+> Decisión tomada con Jorge González: el bot de GHL Conversation AI aquí descrito queda **deprecado** — la lógica conversacional se reconstruye en n8n + OpenRouter, copiando y adaptando el sistema de agentes de Spectrum. Ver [[Carwarriors - Migración Bot GHL a n8n y OpenRouter (Diseño)]]. **Este documento pasa a ser la especificación funcional de referencia para la migración** (qué debe igualar o mejorar el nuevo agente), no la descripción de un bot que se seguirá manteniendo en GHL. No apagar el bot de GHL hasta validar el reemplazo en producción.
 
 > Resumen operativo de cómo se comporta el bot en vivo (Primary + Auto-Pilot en WhatsApp/Instagram/Facebook/SMS desde 2026-07-14). Detalle completo del proceso de construcción en [[Carwarriors - Agente IA 24-7 (Diseño)]].
 

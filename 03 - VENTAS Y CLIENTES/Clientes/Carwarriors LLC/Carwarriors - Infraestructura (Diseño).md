@@ -9,6 +9,9 @@ actualizado: 2026-07-27
 
 # Diseño de Infraestructura — Carwarriors LLC
 
+> [!important] Pivote 2026-08-12 — GHL Conversation AI se deprecia
+> Decisión tomada con Jorge González: el bot de IA conversacional deja de vivir en GHL Conversation AI y se reconstruye en n8n copiando/adaptando el sistema de agentes de **Spectrum** (Garoo/Agent-Spectrum), usando **OpenRouter** como proveedor de modelos. GoHighLevel se conserva como CRM y para ciertas automatizaciones puntuales, pero deja de ser la capa de IA. Esto **amplía el alcance** de la fila "Captura de leads (Módulo A)" de la tabla de abajo — ya no es solo captura de teléfono, es todo el flujo conversacional (calificación, base de conocimiento, booking, escalamiento). Detalle completo en [[Carwarriors - Migración Bot GHL a n8n y OpenRouter (Diseño)]].
+
 ## Stack
 
 | Capa | Servicio | Detalle |
@@ -149,6 +152,10 @@ Con MongoDB Atlas externo, el VPS solo corre n8n + Traefik + Redis. El cliente y
 
 ## Decisiones pendientes
 
+- [ ] Copiar y adaptar el repo Agent-Spectrum al vertical automotriz y a las 2 subcuentas GHL de Carwarriors — ver mapeo de workflows en [[Carwarriors - Migración Bot GHL a n8n y OpenRouter (Diseño)]]
+- [ ] Contratar/dar acceso a OpenRouter (dueño: Jorge González paga, Bianca da acceso) y elegir modelo(s)
+- [ ] Definir mecanismo de sincronización de inventario DealerCenter → RAG del agente n8n
+- [ ] Cargar en DealerCenter los horarios de trabajo por asesor/día (hoy no existen en ningún sistema) — insumo para el booking de citas del nuevo agente
 - [x] Auditar API de DealerCenter -> **Resuelto**: no hay API oficial directa. Existe una API no oficial de tercero (Supergood, documentada como plan B). El camino principal es SFTP + ADF/XML, confirmado como oficial.
 - [ ] Decidir n8n vs Cloudflare Worker para el tramo SFTP → DealerCenter (ver hallazgos en [[Carwarriors - SFTP DealerCenter (Investigación)]])
 - [ ] Obtener credenciales SFTP de DealerCenter (las genera el propio dealer desde su panel)

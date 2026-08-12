@@ -2,12 +2,15 @@
 tags: [forjado, rancescar, carwarriors, gohighlevel, ia, agente-conversacional]
 tipo: resumen
 cliente: Rances Car (subcuenta hermana de Carwarriors LLC)
-estado: vigente
+estado: en-migración (bot GHL sigue activo en paralelo — ver [[Carwarriors - Migración Bot GHL a n8n y OpenRouter (Diseño)]])
 creado: 2026-07-21
 actualizado: 2026-07-21
 ---
 
 # Comportamiento completo del bot — Agente Social RancesCar
+
+> [!important] Pivote 2026-08-12 — este bot se está migrando a n8n
+> Decisión tomada con Jorge González: el bot de GHL Conversation AI aquí descrito queda **deprecado** — la lógica conversacional se reconstruye en n8n + OpenRouter, copiando y adaptando el sistema de agentes de Spectrum, para las 2 subcuentas GHL de Carwarriors (esta incluida). Ver [[Carwarriors - Migración Bot GHL a n8n y OpenRouter (Diseño)]]. **Este documento pasa a ser la especificación funcional de referencia para la migración**, no la descripción de un bot que se seguirá manteniendo en GHL. No apagar el bot de GHL hasta validar el reemplazo en producción.
 
 > Resumen operativo de cómo se comporta el bot en vivo (Primary + Auto-Pilot en Facebook/Instagram/WhatsApp/SMS desde 2026-07-20). Detalle completo del proceso de construcción en [[Carwarriors - Agente IA Rances Car (Diseño)]]. El prompt es una copia calibrada del de [[Carwarriors - Comportamiento del Bot (Resumen)|Carwarriors LLC]] — donde no se dice lo contrario, el comportamiento es idéntico al de ese bot hermano.
 
