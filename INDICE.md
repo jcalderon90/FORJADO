@@ -2,7 +2,7 @@
 tags: [forjado, indice, navegacion]
 tipo: indice
 aliases: [indice, mapa, index]
-actualizado: 2026-07-07
+actualizado: 2026-08-13
 ---
 
 # FORJADO — Índice de la Bóveda
@@ -15,6 +15,7 @@ actualizado: 2026-07-07
 | Nota | Descripción |
 |---|---|
 | [[🏠 FORJADO — Panel (MOC)]] | Dashboard principal de la bóveda |
+| [[Estado del Proyecto]] | Estado consolidado y pendientes al día (Carwarriors, Varela Law, agencia) |
 
 ## 01 - MARCA
 | Nota | Descripción |
@@ -39,7 +40,7 @@ actualizado: 2026-07-07
 | [[Pipeline (MOC)]] | Tablero de pipeline de ventas con etapas |
 | [[Carwarriors LLC]] | Cliente activo — car dealer Miami, GHL + ManyChat + DealerCenter |
 | [[Carwarriors - Infraestructura (Diseño)]] | Diseño técnico de infraestructura para Carwarriors |
-| [[Carwarriors - Migración Bot GHL a n8n y OpenRouter (Diseño)]] | Pivote 2026-08-12: GHL Conversation AI se deprecia, IA conversacional se copia de Spectrum a n8n + OpenRouter |
+| [[Carwarriors - Migración Bot GHL a n8n y OpenRouter (Diseño)]] | Pivote 2026-08-12: GHL Conversation AI se deprecia, IA conversacional se copia de Spectrum a n8n + OpenRouter. Slack conectado 2026-08-13 |
 | [[Carwarriors - Justificación de Infraestructura (Cliente)]] | Doc para el cliente justificando la infraestructura |
 | [[Carwarriors - Propuesta Formal]] | Propuesta formal enviada a Carwarriors |
 | [[Carwarriors - SFTP DealerCenter (Investigación)]] | Investigación técnica de ADF/XML y SFTP para importar leads a DealerCenter |
