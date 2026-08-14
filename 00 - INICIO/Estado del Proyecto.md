@@ -15,7 +15,7 @@ actualizado: 2026-08-13
 
 | Área | Estado | Última actividad |
 |---|---|---|
-| Carwarriors LLC | 🟡 Migración de arquitectura en curso | 2026-08-13 (Slack conectado, token GHL 401) |
+| Carwarriors LLC | 🟡 Migración de arquitectura en curso | 2026-08-13 (Slack DM/mención validado end-to-end, token GHL renovado) |
 | Varela Law | 🟢 En producción, sin bloqueos | 2026-08-12 (error handler conectado) |
 | Pipeline / prospección | Esperando validación para formalizar contratos | — |
 
@@ -28,14 +28,13 @@ actualizado: 2026-08-13
 ### Frentes activos
 
 1. **Migración del bot conversacional: GHL Conversation AI → n8n + OpenRouter** (decidido 2026-08-12). Copia adaptada del sistema Agent-Spectrum. GHL queda como CRM. Los bots nativos de GHL siguen en producción hasta validar el reemplazo. Detalle: [[Carwarriors - Migración Bot GHL a n8n y OpenRouter (Diseño)]].
-2. **Notificaciones → Slack** (nuevo canal de alertas, 2026-08-13). NOTIFICATIONS y ERROR HANDLER recableados a credencial Access Token, canal real `notificaciones`. Receptor de DM/menciones `SLACK - INBOUND` publicado y activo.
+2. **Notificaciones → Slack** (nuevo canal de alertas, 2026-08-13). NOTIFICATIONS y ERROR HANDLER recableados a credencial Access Token, canal real `notificaciones`. Receptor de DM/menciones `SLACK - INBOUND` **validado end-to-end en producción** (2026-08-13 noche): Request URL corregida (Jorge había pegado la del OAuth callback, no la del trigger), Socket Mode desactivado, y se encontraron y corrigieron 2 bugs reales de loop de auto-respuesta (el bot se contestaba a sí mismo al no filtrar sus propios mensajes/ediciones/borrados — ver [[Carwarriors - Migración Bot GHL a n8n y OpenRouter (Diseño)]]). Confirmado con una respuesta limpia, una sola vez, sin loop.
 3. **Lead Sync GHL ↔ DealerCenter** — en producción en ambas subcuentas (workflow `DealerCenter Sync - Opportunity Created`, SFTP + ADF/XML validado end-to-end).
 
 ### Pendientes críticos
 
-- [ ] **Renovar token GHL** — credencial `Header Auth GHL` devuelve `401 Invalid JWT` en ambas subcuentas (reconfirmado en vivo 2026-08-13). Bloquea escribir a GHL, leer custom fields y armar RSVP. Jorge: Settings → Private Integrations → generar nuevo token y actualizarlo en n8n.
-- [ ] **Slack — prueba real end-to-end**: que Jorge pegue la Request URL en Slack → Event Subscriptions y pruebe un DM/mención real del workflow receptor.
-- [ ] **Credencial Slack API** (Bot Token `xoxb-` + Signing Secret) en n8n para el nodo `Slack Trigger` del workflow receptor.
+- [x] ~~Renovar token GHL~~ — **resuelto 2026-08-13.** Tokens nuevos generados y verificados en ambas subcuentas; corregidos en los 2 workflows que lo tenían hardcodeado (`Subir a DealerCenter`, `DealerCenter -> Mongo -> GHL Lead Sync`) y en la credencial `Header Auth GHL`. Detalle en [[Carwarriors LLC]].
+- [x] ~~Slack — prueba real end-to-end~~ — **resuelto 2026-08-13.** DM y mención probados en vivo; en el camino se corrigieron 2 bugs de loop de auto-respuesta en `Filtrar DM o Mencion`. Detalle en [[Carwarriors LLC]].
 - [ ] **Credencial OpenAI** separada (embeddings) en n8n — no depende de terceros.
 - [ ] **Insumos externos para terminar workflows**: KB real (Bianca), `calendarId` reales de GHL (Nallely/Scarleth/Samuel), fuente de fotos/inventario (DealerCenter).
 - [ ] **Adaptar `PRINCIPAL`** (el orquestador, la pieza más grande) — se hace al final, cuando los sub-workflows estén listos.
