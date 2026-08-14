@@ -2,12 +2,12 @@
 tags: [forjado, estado, pendientes, dashboard]
 tipo: estado
 estado: activo
-actualizado: 2026-08-13
+actualizado: 2026-08-14
 ---
 
 # Estado del Proyecto — FORJADO
 
-> Estado consolidado de la agencia al **2026-08-13**. Fuente de verdad: notas de cliente individuales — este resumen se actualiza a mano.
+> Estado consolidado de la agencia al **2026-08-14**. Fuente de verdad: notas de cliente individuales — este resumen se actualiza a mano.
 
 ---
 
@@ -15,8 +15,8 @@ actualizado: 2026-08-13
 
 | Área | Estado | Última actividad |
 |---|---|---|
-| Carwarriors LLC | 🟡 Migración de arquitectura en curso | 2026-08-13 (Slack DM/mención validado end-to-end, token GHL renovado) |
-| Varela Law | 🟢 En producción, sin bloqueos | 2026-08-12 (error handler conectado) |
+| Carwarriors LLC | 🟡 PRINCIPAL adaptado y probado de punta a punta con modelo gratuito | 2026-08-14 (PRINCIPAL reescrito, prueba real exitosa con modelo `:free` de OpenRouter; falta cargar saldo real para usar el modelo definitivo) |
+| Varela Law | 🟢 En producción, sin bloqueos | 2026-08-14 (corrida automática confirmada limpia, parser de `Build ID MAP` corregido y probado) |
 | Pipeline / prospección | Esperando validación para formalizar contratos | — |
 
 ---
@@ -35,16 +35,17 @@ actualizado: 2026-08-13
 
 - [x] ~~Renovar token GHL~~ — **resuelto 2026-08-13.** Tokens nuevos generados y verificados en ambas subcuentas; corregidos en los 2 workflows que lo tenían hardcodeado (`Subir a DealerCenter`, `DealerCenter -> Mongo -> GHL Lead Sync`) y en la credencial `Header Auth GHL`. Detalle en [[Carwarriors LLC]].
 - [x] ~~Slack — prueba real end-to-end~~ — **resuelto 2026-08-13.** DM y mención probados en vivo; en el camino se corrigieron 2 bugs de loop de auto-respuesta en `Filtrar DM o Mencion`. Detalle en [[Carwarriors LLC]].
+- [ ] **Cargar crédito real en OpenRouter** — **hallazgo crítico 2026-08-14**: la credencial existe y funciona, pero la cuenta nunca se cargó con saldo (`402 Insufficient credits`, confirmado probando `PRINCIPAL` real). Bloquea toda llamada de IA en Carwarriors ahora mismo (PRINCIPAL, LEAD-COLLECTOR, KB-SEARCH) — https://openrouter.ai/settings/credits
 - [ ] **Credencial OpenAI** separada (embeddings) en n8n — no depende de terceros.
 - [ ] **Insumos externos para terminar workflows**: KB real (Bianca), `calendarId` reales de GHL (Nallely/Scarleth/Samuel), fuente de fotos/inventario (DealerCenter).
-- [ ] **Adaptar `PRINCIPAL`** (el orquestador, la pieza más grande) — se hace al final, cuando los sub-workflows estén listos.
-- [ ] **Elegir modelo(s) en OpenRouter** (punto de partida: `gpt-5-mini`).
+- [x] ~~Adaptar `PRINCIPAL`~~ — **resuelto 2026-08-14.** Reescrito de Spectrum a GHL en 3 fases (identidad/infra, referencias de sub-workflows, prompt de negocio); Data Table `GHL Locations` para dealer/token por `locationId` en vez de hardcodear; eliminada lógica de proyecto inmobiliario y Leads Fase 2 (sin equivalente en Carwarriors); corregidos 7 IDs de sub-workflow rotos que apuntaban a Spectrum. **Probado de punta a punta con un modelo gratuito de OpenRouter** (ejecución `841`, éxito): el bot respondió en tono/idioma correcto y avanzó el eje de calificación correcto (vehículo→ubicación) ante un mensaje simulado real. Sigue **inactivo** — no reemplaza a los bots de GHL todavía. Detalle completo en [[Carwarriors - Migración Bot GHL a n8n y OpenRouter (Diseño)]].
+- [x] ~~Elegir modelo(s) en OpenRouter~~ — **resuelto 2026-08-14** (decisión). Orquestador/`PRINCIPAL`: `deepseek/deepseek-v4-flash` (más barato que `deepseek/deepseek-v4-pro` — ~$0.07/$0.17 vs ~$0.41/$0.83 por millón de tokens in/out, confirmado en OpenRouter). Resto de sub-workflows: `openai/gpt-4.1-mini`. **Falta aplicar** — los nodos de modelo en PRINCIPAL/LEAD-COLLECTOR/KB-SEARCH siguen con los modelos copiados de Spectrum, no se cambiaron todavía.
 - [ ] **Apagar bots de GHL Conversation AI** solo tras validar el reemplazo en producción; informar a contabilidad del cambio de gastos.
 - [ ] Confirmar `"CW - TRADE IN"` como Lead Source real con el primer lead de Trade-In.
 - [ ] Limpieza pendiente: marcar `Deleted` el lead de prueba en DealerCenter (requiere 2FA de Jorge).
 - [ ] Formalizar contrato una vez validadas las pruebas.
 
-**Objetivo del cliente:** listo para 2026-08-17/18 (ambicioso — PRINCIPAL sin tocar y 3 workflows bloqueados por insumos).
+**Objetivo del cliente:** listo para 2026-08-17/18. PRINCIPAL ya adaptado y probado — el bloqueador real que queda para ir a producción es el saldo de OpenRouter (arriba) más los insumos externos de RSVP/SEND-MEDIA/VECTORIZAR-KB (KB de Bianca, `calendarId`s, fotos de inventario).
 
 ---
 
@@ -55,15 +56,15 @@ actualizado: 2026-08-13
 ### En producción
 
 - **MyCase auth + integración base** — 100% operativo (Token Manager refresca end-to-end vía Mongo, Schedule Trigger verificado).
-- **Radar Billing Automation** — corre solo todos los días 5:00 AM hacia la pestaña `07-05-26` (F/H/J automatizables; Trust Balance manual por límite de API). ID MAP al 96% (95/99). Detalle: [[Varela Law - Radar Billing Automation]].
+- **Radar Billing Automation** — corre solo todos los días 5:00 AM hacia la pestaña `07-05-26` (F/H/J automatizables; Trust Balance manual por límite de API). `ID MAP` reconstruido 2026-08-14 con el parser corregido: 81/87 automático, 6 casos para revisión manual (ambigüedad real en MyCase, no bug). Detalle: [[Varela Law - Radar Billing Automation]].
 - **Alerta de errores nativa** — `errorWorkflow` de Radar Billing enlazado al ERROR HANDLER (email automático a cualquier fallo) desde 2026-08-12.
 
 ### Pendientes
 
-- [ ] **Confirmar corrida automática 2026-08-13** (~03:00 UTC) sin el error `Could not find column for key "Client Name"` tras el fix `retryOnFail` del 2026-08-12 — si no llega email, pasó limpia.
+- [x] ~~Confirmar corrida automática 2026-08-13~~ — **resuelto 2026-08-14.** Ejecución `2242` a las 03:00:41 UTC, status `success`, sin errores. El fix `retryOnFail` del 2026-08-12 funcionó.
 - [ ] **Enviar a Mario el mensaje redactado** sobre Radar Billing + confirmar los 4 clientes pendientes de ID MAP (Joj Santos, Medina Manuel, Marquez Dimas, Rojas Tovar Manuel) — [[mensaje-mario-2026-07-25-radar-billing-completo.txt]].
 - [ ] **Esperando respuesta de Mario** sobre cuál de las 5 oportunidades del análisis del API (2026-07-28) priorizar — no preguntar proactivamente.
-- [ ] Corregir el parser de `Build ID MAP` antes de la próxima corrida completa (si no, regenera las 24 filas ya resueltas como NO MATCH).
+- [x] ~~Corregir el parser de `Build ID MAP`~~ — **resuelto 2026-08-14.** El parser viejo asumía que los nombres de MyCase seguían el formato "Apellido, Nombre" del sheet; en realidad son texto libre, así que partía por la última palabra y agarraba cosas como "Divorce" como apellido. Reescrito a matching por conjunto de palabras (apellido + nombre presentes como tokens, sin importar orden) con fallback por apellido único para variantes ortográficas. Probado con pin data contra los 27 casos corregidos a mano: 26 automáticos, 1 por apellido único. **Corrida real en producción 2026-08-14** (ejecución `2255`, éxito): de 87 filas en `ID MAP`, 81 resolvieron automático (`word_match`), 5 quedaron `AMBIGUOUS - needs manual review` (Castaño Juan x2, Correa Jose, Flores Juan, Medina Manuel) y 1 `NO MATCH` (Rojas Tovar Manuel). Estos 6 casos coinciden en gran parte con los 4 clientes que ya estaban pendientes de confirmar con Mario — no son regresión del fix, son casos genuinamente ambiguos en MyCase (múltiples casos con el mismo nombre).
 - [ ] Hablar con Adalberto sobre el sistema automático de contratos.
 
 ---
@@ -71,7 +72,7 @@ actualizado: 2026-08-13
 ## Otros pendientes de la agencia
 
 - [ ] Rotar Location API Key de Carwarriors LLC en GHL (expuesto en chat del 27-jul; usuario indicó no rotarlo por ahora — abierto).
-- [ ] Investigar `n8n.apps.carwarriorsllc.com` (instancia n8n legacy distinta al VPS Hostinger).
+- [ ] Investigar `n8n.apps.carwarriorsllc.com` — **avanzado 2026-08-14 (nivel red, sin login):** instancia está viva ahora mismo (`/healthz` 200, IP `187.124.250.216`, bloque LACNIC, distinta del VPS Hostinger `2.24.106.87`), corriendo `n8n@2.10.4` en `environment: development`, con certificado Let's Encrypt renovado el 5-ago-2026 (alguien la sigue manteniendo). Sin credenciales no se puede ver qué workflows corre ni quién la administra — posible relación con "Customers for AI" (Carlos Cisneros, hallazgo 2026-07-29). **Pendiente real:** conseguir login o preguntarle a Carlos Cisneros.
 - [ ] Completar datos del panel de inicio (fundador, web/redes, forma legal) — [[🏠 FORJADO — Panel (MOC)]].
 - [ ] Actualizar tablero manual del [[Pipeline (MOC)]] con estados reales.
 
