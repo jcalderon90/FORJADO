@@ -2,7 +2,7 @@
 tags: [forjado, indice, navegacion]
 tipo: indice
 aliases: [indice, mapa, index]
-actualizado: 2026-08-13
+actualizado: 2026-08-14
 ---
 
 # FORJADO — Índice de la Bóveda
@@ -34,19 +34,17 @@ actualizado: 2026-08-13
 | [[Marketing y Contenido]] | Servicio de marketing: entregables, paquetes, precios, proceso |
 | [[Consultoría]] | Servicio de consultoría: entregables, paquetes, precios, proceso |
 
-## 03 - VENTAS Y CLIENTES
+## 03 - VENTAS
 | Nota | Descripción |
 |---|---|
 | [[Pipeline (MOC)]] | Tablero de pipeline de ventas con etapas |
-| [[Carwarriors LLC]] | Cliente activo — car dealer Miami, GHL + ManyChat + DealerCenter |
-| [[Carwarriors - Infraestructura (Diseño)]] | Diseño técnico de infraestructura para Carwarriors |
-| [[Carwarriors - Migración Bot GHL a n8n y OpenRouter (Diseño)]] | Pivote 2026-08-12: GHL Conversation AI se deprecia, IA conversacional se copia de Spectrum a n8n + OpenRouter. Slack conectado 2026-08-13 |
-| [[Carwarriors - Justificación de Infraestructura (Cliente)]] | Doc para el cliente justificando la infraestructura |
-| [[Carwarriors - Propuesta Formal]] | Propuesta formal enviada a Carwarriors |
-| [[Carwarriors - SFTP DealerCenter (Investigación)]] | Investigación técnica de ADF/XML y SFTP para importar leads a DealerCenter |
-| [[Varela Law]] | Cliente activo — bufete legal Miami, n8n + MyCase API, $80/mes |
-| [[Varela Law - MyCase API]] | Documentación técnica completa de la API de MyCase |
-| [[Varela Law - Radar Billing Automation]] | Automatización MyCase → Google Sheet "Radar - Civil Cases", pestaña Billing & Payments (2-3h → 5min) |
+
+## CLIENTES (fuera de INTERNO, carpeta hermana)
+| Nota | Descripción |
+|---|---|
+| `CLIENTES/_Léeme.md` | Índice de nivel cliente — apunta al `INDEX.md` de cada subcarpeta |
+| `CLIENTES/Carwarriors LLC/INDEX.md` | Car dealer Miami, GHL + n8n + DealerCenter — migrando bot a n8n/OpenRouter |
+| `CLIENTES/Varela Law/INDEX.md` | Bufete legal Miami, n8n + MyCase API, $80/mes |
 
 ## 04 - OPERACIONES
 | Nota | Descripción |
