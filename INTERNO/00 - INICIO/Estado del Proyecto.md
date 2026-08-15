@@ -15,9 +15,9 @@ actualizado: 2026-08-15
 
 | Área | Estado | Última actividad |
 |---|---|---|
-| Carwarriors LLC | 🟡 PRINCIPAL + RSVP + SEND-MEDIA + VECTORIZAR-KB adaptados y probados con modelo gratuito | 2026-08-14 (los 4 workflows reescritos de Spectrum a Carwarriors y probados; falta cargar saldo real de OpenRouter, fotos/inventario y KB real de Bianca) |
-| Varela Law | 🟢 En producción, sin bloqueos | 2026-08-14 (corrida automática confirmada limpia, parser de `Build ID MAP` corregido y probado) |
-| Pipeline / prospección | Esperando validación para formalizar contratos | — |
+| Carwarriors LLC | 🟡 PRINCIPAL + RSVP + SEND-MEDIA + VECTORIZAR-KB adaptados y probados con modelo gratuito; 12 workflows exportados a local | 2026-08-15 (export local de workflows y estado al día; bloqueador real: saldo de OpenRouter + KB real/fotos de Bianca) |
+| Varela Law | 🟢 En producción, sin bloqueos | 2026-08-15 (3ª corrida automática limpia consecutiva `2263`; pendiente: mensaje a Mario + 4 clientes ID MAP) |
+| Pipeline / prospección | Tablero manual poblado: Carwarriors (Propuesta, por formalizar) + Varela Law (Activo) | 2026-08-15 (tablero actualizado con estados reales) |
 
 ---
 
