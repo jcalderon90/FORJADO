@@ -3,7 +3,7 @@ tags: [forjado, moc, inicio]
 tipo: moc
 estado: activo
 creado: 2026-06-17
-actualizado: 2026-06-17
+actualizado: 2026-08-15
 ---
 
 # 🏠 FORJADO — Panel
@@ -12,8 +12,8 @@ actualizado: 2026-06-17
 > Agencia multi-servicio que **forja** soluciones digitales a la medida: automatización e IA, marketing y contenido, desarrollo de software y consultoría. Operada hoy por un solo fundador, con trato directo y ejecución ágil.
 
 > [!todo] Datos a completar
-> - **Fundador:** _(tu nombre)_
-> - **Contacto:** jorge.calderon@garooinc.com
+> - **Fundador:** Jorge Calderón
+> - **Contacto:** jcalderon900610@gmail.com
 > - **Sitio web / redes:** _(pendiente)_
 > - **Forma legal / facturación:** _(pendiente)_
 

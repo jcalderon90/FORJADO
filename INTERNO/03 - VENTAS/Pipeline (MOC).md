@@ -3,7 +3,7 @@ tags: [forjado, ventas, pipeline, moc]
 tipo: moc
 estado: activo
 creado: 2026-06-17
-actualizado: 2026-06-17
+actualizado: 2026-08-15
 ---
 
 # Pipeline de Ventas — FORJADO
@@ -28,7 +28,8 @@ actualizado: 2026-06-17
 
 | Cliente | Servicio | Etapa | Valor estimado | Próximo paso |
 |---|---|---|---|---|
-| _(ejemplo)_ | Automatización | Prospecto | $___ | Enviar mensaje |
+| Carwarriors LLC | Automatización + IA (bot n8n + OpenRouter, Lead Sync GHL↔DealerCenter) | Propuesta | _(por formalizar)_ | Cargar saldo en OpenRouter + entregar KB real y fotos de inventario para ir a producción |
+| Varela Law | Automatización n8n (Radar Billing MyCase → Sheets) | Activo | $80/mes | Enviar mensaje a Mario + confirmar 4 clientes pendientes de ID MAP |
 |  |  |  |  |  |
 
 ---

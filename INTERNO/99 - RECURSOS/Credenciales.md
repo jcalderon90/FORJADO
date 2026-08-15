@@ -15,7 +15,7 @@ actualizado: 2026-06-17
 
 | Servicio | Usuario / Email | Notas |
 |---|---|---|
-| Correo | jorge.calderon@garooinc.com |  |
+| Correo | jcalderon900610@gmail.com |  |
 | Dominio / Hosting |  |  |
 | Redes sociales |  |  |
 | Facturación / Pagos |  |  |
