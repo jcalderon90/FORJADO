@@ -1,0 +1,133 @@
+{
+  "name": "SEND - MEDIA",
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true,
+    "timeSavedMode": "fixed",
+    "errorWorkflow": "ypd1lxqlsa5KXsoy",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "connections": {
+    "Map Media Resources": { "main": [[{ "node": "IF Media Disponible", "type": "main", "index": 0 }]] },
+    "IF Media Disponible": {
+      "main": [
+        [{ "node": "Send GHL Media", "type": "main", "index": 0 }],
+        [{ "node": "No Media Response", "type": "main", "index": 0 }]
+      ]
+    },
+    "START": { "main": [[{ "node": "Map Media Resources", "type": "main", "index": 0 }]] },
+    "IF Envio Exitoso": {
+      "main": [
+        [{ "node": "Response To Agent", "type": "main", "index": 0 }],
+        [{ "node": "Error Envio", "type": "main", "index": 0 }]
+      ]
+    },
+    "Send GHL Media": { "main": [[{ "node": "IF Envio Exitoso", "type": "main", "index": 0 }]] }
+  },
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "const dealer = $input.item.json.dealer || \"\";\nconst tipoRaw = String($input.item.json.tipo_media || \"\").toLowerCase().trim();\nconst tipo = tipoRaw || \"bienvenida\";\nconst canal = ($input.item.json.canal || \"whatsapp\").toLowerCase().trim();\nconst modelo = String($input.item.json.modelo || \"\").toUpperCase().trim();\n\n// PENDIENTE: reemplazar con URLs reales de fotos/videos de inventario (insumo externo del cliente, ver Estado del Proyecto.md).\n// Estructura esperada una vez haya datos reales:\n// { \"CW\": { \"bienvenida\": \"https://...mp4\", \"vehiculos\": { \"TOYOTA CAMRY 2023\": \"https://...mp4\" } }, \"RANCES\": {...} }\nconst database = {};\n\nconst dealerData = database[dealer] || {};\nlet url = null;\nif (tipo === \"vehiculo\" && modelo) {\n  url = (dealerData.vehiculos || {})[modelo] || null;\n} else {\n  url = dealerData[tipo] || null;\n}\n\nreturn [{\n  json: {\n    contactId: $input.item.json.contactId,\n    canal,\n    dealer,\n    media_disponible: url !== null,\n    attachments: url ? [url] : []\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-352, 128],
+      "id": "de0321cb-de28-4823-b536-e789d647d138",
+      "name": "Map Media Resources",
+      "_comment_pendiente": "database = {} a proposito — sin fotos/inventario real todavia (insumo de Bianca/DealerCenter)"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "strict", "version": 3 },
+          "conditions": [{ "id": "media-disponible-001", "leftValue": "={{ $json.media_disponible }}", "rightValue": "", "operator": { "type": "boolean", "operation": "true", "singleValue": true } }],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [-128, 128],
+      "id": "78d878b5-593a-4b7f-b953-de929a6b6fee",
+      "name": "IF Media Disponible"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://services.leadconnectorhq.com/conversations/messages",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [{ "name": "Content-Type", "value": "application/json" }, { "name": "Authorization", "value": "=Bearer {{ $('START').first().json.ghlToken }}" }] },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"type\": ($('Map Media Resources').first().json.canal === 'instagram' ? 'IG' : $('Map Media Resources').first().json.canal === 'messenger' ? 'FB' : 'Custom'), \"contactId\": $('Map Media Resources').first().json.contactId, \"attachments\": $('Map Media Resources').first().json.attachments } }}",
+        "options": { "response": { "response": { "neverError": true } } }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [96, 32],
+      "id": "f64b0495-c965-4fe3-a949-491152cf4cae",
+      "name": "Send GHL Media"
+    },
+    {
+      "parameters": { "assignments": { "assignments": [{ "id": "b3e21820-2c70-4976-8051-789a6be3db9d", "name": "response", "value": "Media enviada. Dile al usuario con entusiasmo que ya le enviaste lo que solicitó y pregunta qué le parece el vehículo.", "type": "string" }] }, "options": {} },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [544, -64],
+      "id": "bf904f50-1f2c-49ae-bc86-7d5f620d274a",
+      "name": "Response To Agent"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "no-media-response-001",
+              "name": "response",
+              "value": "=Informa al usuario con entusiasmo que sí contamos con material visual de {{ $('Map Media Resources').item.json.dealer }} (fotos y videos del vehículo). Dile que un asesor puede contactarle por este mismo canal para enviárselo personalmente. Ofrécele también la opción de agendar una visita al lote para verlo en persona.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [96, 224],
+      "id": "ca66ca4f-2bbf-4ca0-af3d-08f54cf6a9c0",
+      "name": "No Media Response"
+    },
+    {
+      "parameters": { "workflowInputs": { "values": [{ "name": "tipo_media" }, { "name": "dealer" }, { "name": "canal" }, { "name": "contactId" }, { "name": "modelo" }, { "name": "ghlToken" }] } },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [-576, 128],
+      "id": "06faf983-3cda-4797-b640-618d459711b2",
+      "name": "START"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "strict", "version": 3 },
+          "conditions": [{ "id": "send-ok-001", "leftValue": "={{ !!($json.messageId || $json.conversationId) }}", "rightValue": "", "operator": { "type": "boolean", "operation": "true", "singleValue": true } }],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "905b21e1-3efb-4aee-be07-ee4177185f6d",
+      "name": "IF Envio Exitoso",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [320, 32]
+    },
+    {
+      "parameters": { "assignments": { "assignments": [{ "id": "error-envio-001", "name": "response", "value": "No fue posible enviar el material en este momento. Dile al usuario con amabilidad que hubo un inconveniente técnico al enviar el material y que puede pedirlo de nuevo en unos momentos.", "type": "string" }] }, "options": {} },
+      "id": "1d385f30-d8c6-4e64-b514-30f09d6d2a8d",
+      "name": "Error Envio",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [544, 128]
+    }
+  ]
+}

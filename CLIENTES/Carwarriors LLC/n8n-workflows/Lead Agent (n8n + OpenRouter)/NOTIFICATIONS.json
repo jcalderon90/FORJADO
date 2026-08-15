@@ -1,0 +1,184 @@
+{
+  "name": "NOTIFICATIONS",
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true,
+    "timeSavedMode": "fixed",
+    "errorWorkflow": "ypd1lxqlsa5KXsoy",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "connections": {
+    "START": { "main": [[{ "node": "IF Test User", "type": "main", "index": 0 }]] },
+    "Payload Nuevo Lead": { "main": [[{ "node": "Edit Fields", "type": "main", "index": 0 }]] },
+    "Payload Precios": { "main": [[{ "node": "Edit Fields", "type": "main", "index": 0 }]] },
+    "Payload Cita": { "main": [[{ "node": "Edit Fields", "type": "main", "index": 0 }]] },
+    "Payload Escalación": { "main": [[{ "node": "Edit Fields", "type": "main", "index": 0 }]] },
+    "Edit Fields": { "main": [[{ "node": "Send a message", "type": "main", "index": 0 }]] },
+    "IF Test User": {
+      "main": [
+        [{ "node": "Skip Test", "type": "main", "index": 0 }],
+        [{ "node": "Switch Alerta", "type": "main", "index": 0 }]
+      ]
+    },
+    "Switch Alerta": {
+      "main": [
+        [{ "node": "Payload Nuevo Lead", "type": "main", "index": 0 }],
+        [{ "node": "Payload Precios", "type": "main", "index": 0 }],
+        [{ "node": "Payload Cita", "type": "main", "index": 0 }],
+        [{ "node": "Payload Escalación", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "parameters": { "workflowInputs": { "values": [{ "name": "tipo_alerta" }, { "name": "datos", "type": "object" }] } },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [-448, 192],
+      "id": "ed65d656-c29e-4ee5-bab0-e1edb76272ac",
+      "name": "START"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "text",
+              "type": "string",
+              "value": "=:fire: *Nuevo lead registrado* — {{ $json.datos.dealer }}\n\n*Nombre:* {{ $json.datos.nombre_lead || '(pendiente)' }}\n*Teléfono:* {{ $json.datos.telefono_lead || '(pendiente)' }}\n*Correo:* {{ $json.datos.correo_lead || '(pendiente)' }}\n*Canal:* {{ $json.datos.canal || '—' }}\n*Interés en vehículo:* {{ $json.datos.interes_vehiculo || '—' }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [224, 16],
+      "id": "4a08827a-27d6-437d-9d2b-7a6e1727f569",
+      "name": "Payload Nuevo Lead"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "text",
+              "type": "string",
+              "value": "=:moneybag: *Interés comercial — {{ $json.datos.dealer }}*\nLead consultando por precios o disponibilidad.\n\n*Nombre:* {{ $json.datos.nombre_lead && $json.datos.nombre_lead !== 'No registrado' ? $json.datos.nombre_lead : '(pendiente)' }}\n*Teléfono:* {{ $json.datos.telefono_lead && $json.datos.telefono_lead !== 'No registrado' ? $json.datos.telefono_lead : '(pendiente)' }}\n*Correo:* {{ $json.datos.correo_lead && $json.datos.correo_lead !== 'No registrado' ? $json.datos.correo_lead : '(pendiente)' }}\n*Vehículo de interés:* {{ $json.datos.interes_vehiculo || '—' }}\n\n> _{{ $json.datos.ultima_consulta }}_"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [224, 208],
+      "id": "908d480a-f7f0-4551-9d31-e2e5a60a057b",
+      "name": "Payload Precios"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "text",
+              "type": "string",
+              "value": "=:calendar: *{{ $json.datos.tipo_agendamiento === 'llamada' ? 'Nueva llamada agendada' : 'Nueva cita registrada' }} — {{ $json.datos.dealer }}*\n\n*Nombre:* {{ $json.datos.nombre_lead }}\n*Teléfono:* {{ $json.datos.telefono_lead }}\n*Correo:* {{ $json.datos.correo_lead || '—' }}\n\n{{ $json.datos.tipo_agendamiento === 'llamada' ? ('*Horario preferido:* ' + ($json.datos.horario_preferido || '—') + '\\n*Medio de llamada:* ' + ($json.datos.medio_llamada_label || '—')) : ('*Fecha y hora:* ' + $json.datos.fecha_cita + '\\n*Modalidad:* ' + $json.datos.modalidad) }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [224, 400],
+      "id": "39b0970f-75ad-4093-b379-7b4fb0f1e2a6",
+      "name": "Payload Cita"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "text",
+              "type": "string",
+              "value": "=:rotating_light: *Escalación a humano — {{ $json.datos.dealer }}*\nAtención requerida — cc *Nallely de Leon*\n\n*Nombre:* {{ $json.datos.nombre_lead }}\n*Teléfono:* {{ $json.datos.telefono_lead || 'No registrado' }}\n*Correo:* {{ $json.datos.correo_lead || 'No registrado' }}\n\n> _{{ $json.datos.ultima_consulta }}_"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [224, 592],
+      "id": "ec804cad-c9d8-4c9e-84a1-e676eb0c24f3",
+      "name": "Payload Escalación"
+    },
+    {
+      "parameters": { "assignments": { "assignments": [{ "id": "9e213aeb-5d26-4405-9c34-95b001959c64", "name": "text", "type": "string", "value": "={{ $json.text }}" }] }, "options": {} },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [448, 400],
+      "id": "57948182-4d61-4bce-a7bf-b0aa83c0473d",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": { "conditions": { "string": [{ "value1": "={{ $json.datos?.contactId || '' }}", "operation": "startsWith", "value2": "test_" }] } },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [-224, 192],
+      "id": "515e5c9a-8403-4b87-aab3-3751b93daa2b",
+      "name": "IF Test User",
+      "_comment": "corregido 2026-08-14: antes comprobaba datos.manychat_id (campo que ya no existe) y nunca saltaba el envio real de prueba"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [0, 80],
+      "id": "a8afc376-35ae-42c8-8407-abceeda62244",
+      "name": "Skip Test"
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": { "__rl": true, "mode": "list", "value": "C0BPV2Z2S3C", "cachedResultName": "notificaciones" },
+        "text": "={{ $json.text }}",
+        "otherOptions": { "mrkdwn": true },
+        "authentication": "accessToken"
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.6,
+      "position": [672, 400],
+      "id": "790f8294-efd5-4587-b22c-5383249ce405",
+      "name": "Send a message",
+      "webhookId": "ca9b8d7f-704f-4cea-8d94-7439fac886f4",
+      "credentials": { "slackApi": { "id": "wUpEjaBadmKdhhqM", "name": "Slack FORJADO" } }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            { "conditions": { "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "strict", "version": 1 }, "combinator": "and", "conditions": [{ "leftValue": "={{ $json.tipo_alerta }}", "rightValue": "nuevo_lead", "operator": { "type": "string", "operation": "equals" } }] }, "renameOutput": true, "outputKey": "Nuevo Lead" },
+            { "conditions": { "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "strict", "version": 1 }, "combinator": "and", "conditions": [{ "leftValue": "={{ $json.tipo_alerta }}", "rightValue": "interes_precios", "operator": { "type": "string", "operation": "equals" } }] }, "renameOutput": true, "outputKey": "Precios" },
+            { "conditions": { "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "strict", "version": 1 }, "combinator": "and", "conditions": [{ "leftValue": "={{ $json.tipo_alerta }}", "rightValue": "cita", "operator": { "type": "string", "operation": "equals" } }] }, "renameOutput": true, "outputKey": "Cita" },
+            { "conditions": { "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "strict", "version": 1 }, "combinator": "and", "conditions": [{ "leftValue": "={{ $json.tipo_alerta }}", "rightValue": "escalacion", "operator": { "type": "string", "operation": "equals" } }] }, "renameOutput": true, "outputKey": "Escalación" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4f44c1ba-269c-43ae-aef4-5a0a77a498b4",
+      "name": "Switch Alerta",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [0, 272],
+      "_comment": "Recreado 2026-08-14: el original usaba formato legacy rules.rules (typeVersion 1) que el motor ya no lee — no ruteaba ninguna de las 4 alertas"
+    }
+  ]
+}

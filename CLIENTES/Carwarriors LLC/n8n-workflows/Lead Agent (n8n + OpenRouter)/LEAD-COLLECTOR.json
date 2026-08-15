@@ -1,0 +1,239 @@
+{
+  "name": "LEAD - COLLECTOR",
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true,
+    "timeSavedMode": "fixed",
+    "errorWorkflow": "ypd1lxqlsa5KXsoy",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "connections": {
+    "START": { "main": [[{ "node": "SET CONTEXT", "type": "main", "index": 0 }]] },
+    "SET CONTEXT": { "main": [[{ "node": "Lead Agent", "type": "main", "index": 0 }]] },
+    "Lead Agent": { "main": [[{ "node": "Parse Response", "type": "main", "index": 0 }]] },
+    "MongoDB Chat Memory": { "ai_memory": [[{ "node": "Lead Agent", "type": "ai_memory", "index": 0 }]] },
+    "Parse Response": { "main": [[{ "node": "Prepare Update", "type": "main", "index": 0 }]] },
+    "No Operation, do nothing": { "main": [[{ "node": "RESPONSE", "type": "main", "index": 0 }]] },
+    "OpenRouter Chat Model": { "ai_languageModel": [[{ "node": "Lead Agent", "type": "ai_languageModel", "index": 0 }]] },
+    "Prepare Update": { "main": [[{ "node": "Hay Cambios?", "type": "main", "index": 0 }]] },
+    "Hay Cambios?": {
+      "main": [
+        [{ "node": "Update Lead in Mongo", "type": "main", "index": 0 }],
+        [{ "node": "No Operation, do nothing", "type": "main", "index": 0 }]
+      ]
+    },
+    "Update Lead in Mongo": { "main": [[{ "node": "Update GHL Contact", "type": "main", "index": 0 }]] },
+    "Update GHL Contact": { "main": [[{ "node": "RESPONSE", "type": "main", "index": 0 }]] }
+  },
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            { "name": "contactId" },
+            { "name": "locationId" },
+            { "name": "dealer" },
+            { "name": "canal" },
+            { "name": "entrada_usuario" },
+            { "name": "city_actual" },
+            { "name": "interes_vehiculo_actual" },
+            { "name": "metodo_pago_actual" },
+            { "name": "timing_actual" },
+            { "name": "idioma_actual" },
+            { "name": "resumen_actual" }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [-2368, 128],
+      "id": "cac797a1-b7b9-4681-906a-a4dd991d75ea",
+      "name": "START"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            { "id": "ctx-contactId", "name": "contactId", "value": "={{ $json.contactId || '' }}", "type": "string" },
+            { "id": "ctx-locationId", "name": "locationId", "value": "={{ $json.locationId || '' }}", "type": "string" },
+            { "id": "ctx-dealer", "name": "dealer", "value": "={{ $json.dealer || '' }}", "type": "string" },
+            { "id": "ctx-canal", "name": "canal", "value": "={{ $json.canal || '' }}", "type": "string" },
+            { "id": "ctx-entrada", "name": "entrada_usuario", "value": "={{ $json.entrada_usuario || '' }}", "type": "string" },
+            { "id": "ctx-city", "name": "city_actual", "value": "={{ $json.city_actual || '' }}", "type": "string" },
+            { "id": "ctx-vehiculo", "name": "interes_vehiculo_actual", "value": "={{ $json.interes_vehiculo_actual || '' }}", "type": "string" },
+            { "id": "ctx-pago", "name": "metodo_pago_actual", "value": "={{ $json.metodo_pago_actual || '' }}", "type": "string" },
+            { "id": "ctx-timing", "name": "timing_actual", "value": "={{ $json.timing_actual || '' }}", "type": "string" },
+            { "id": "ctx-idioma", "name": "idioma_actual", "value": "={{ $json.idioma_actual || '' }}", "type": "string" },
+            { "id": "ctx-resumen", "name": "resumen_actual", "value": "={{ $json.resumen_actual || '' }}", "type": "string" }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [-2144, 128],
+      "id": "459af54a-50c9-4ccb-a888-bab353e5b4d3",
+      "name": "SET CONTEXT"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.entrada_usuario }}",
+        "options": {
+          "systemMessage": "=### ROL ###\nEres el extractor de datos de lead para {{ $json.dealer }} (concesionario de autos, Miami). No conversas con el cliente -- tu unica salida es JSON. Analiza el ULTIMO mensaje del usuario junto con el contexto ya conocido y decide que campos actualizar.\n\n### CONTEXTO YA CONOCIDO ###\n- Canal: {{ $json.canal }}\n- Ciudad/zona actual: {{ $json.city_actual || \"no aparece\" }}\n- Interes de vehiculo actual: {{ $json.interes_vehiculo_actual || \"no aparece\" }}\n- Metodo de pago actual: {{ $json.metodo_pago_actual || \"no aparece\" }}\n- Timing de compra actual: {{ $json.timing_actual || \"no aparece\" }}\n- Idioma preferido actual: {{ $json.idioma_actual || \"no aparece\" }}\n- Resumen previo: {{ $json.resumen_actual || \"ninguno todavia\" }}\n\n### REGLAS ###\n1. Solo llena un campo si el usuario dio informacion NUEVA sobre el en su ultimo mensaje. Si no dijo nada nuevo sobre un campo, devuelve el valor actual tal cual (no lo borres, no lo inventes).\n2. city: ciudad o zona donde vive o busca el auto.\n3. interes_vehiculo: marca/modelo/tipo de vehiculo de interes (acumulable -- combina con lo que ya se sabia si el nuevo dato es mas especifico).\n4. metodo_pago: cash, financiamiento, trade-in, etc.\n5. timing_compra: urgencia/plazo de compra (ej. \"esta semana\", \"en un mes\", \"solo viendo opciones\").\n6. idioma_preferido: idioma en que escribe el usuario (english/espanol) -- detectalo del mensaje, no lo preguntes.\n7. resumen_ai: reescribe el resumen previo completo en 1-2 oraciones cortas que un asesor humano pueda leer rapido para entender donde va la conversacion. No lo concatenes sin limite.\n8. NUNCA le respondas al usuario. Tu unica salida es el JSON.\n\n### FORMATO DE SALIDA -- SOLO este JSON en una linea ###\n{\"city\": \"string|null\", \"interes_vehiculo\": \"string|null\", \"metodo_pago\": \"string|null\", \"timing_compra\": \"string|null\", \"idioma_preferido\": \"string|null\", \"resumen_ai\": \"string|null\"}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [-1920, 128],
+      "id": "06d50edd-5d13-4275-a3d9-b95b1a9a878a",
+      "name": "Lead Agent"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('START').item.json.contactId }}",
+        "collectionName": "chat_histories_lead",
+        "databaseName": "Carwarriors",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+      "typeVersion": 1,
+      "position": [-1824, 352],
+      "id": "6d19c130-7d05-4e2c-98a4-369b7f51612b",
+      "name": "MongoDB Chat Memory",
+      "credentials": { "mongoDb": { "id": "WvGe0WEIfm6NF1Qa", "name": "MongoDB Carwarriors" } }
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $input.first().json.output || '';\nconst ctx = $('SET CONTEXT').first().json;\ntry {\n  const start = raw.indexOf('{');\n  const end = raw.lastIndexOf('}') + 1;\n  if (start === -1 || end === 0) throw new Error('No JSON');\n  const parsed = JSON.parse(raw.substring(start, end).replace(/[\\n\\r]/g, ' '));\n  return [{\n    json: {\n      city: parsed.city || ctx.city_actual || '',\n      interes_vehiculo: parsed.interes_vehiculo || ctx.interes_vehiculo_actual || '',\n      metodo_pago: parsed.metodo_pago || ctx.metodo_pago_actual || '',\n      timing_compra: parsed.timing_compra || ctx.timing_actual || '',\n      idioma_preferido: parsed.idioma_preferido || ctx.idioma_actual || '',\n      resumen_ai: parsed.resumen_ai || ctx.resumen_actual || ''\n    }\n  }];\n} catch (e) {\n  return [{\n    json: {\n      city: ctx.city_actual || '',\n      interes_vehiculo: ctx.interes_vehiculo_actual || '',\n      metodo_pago: ctx.metodo_pago_actual || '',\n      timing_compra: ctx.timing_actual || '',\n      idioma_preferido: ctx.idioma_actual || '',\n      resumen_ai: ctx.resumen_actual || ''\n    }\n  }];\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-1568, 128],
+      "id": "38f6739b-d846-443b-8c41-ea1b8499f599",
+      "name": "Parse Response"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "loose" },
+          "conditions": [
+            { "id": "chg-city", "leftValue": "={{ $json.city }}", "rightValue": "={{ $('SET CONTEXT').item.json.city_actual }}", "operator": { "type": "string", "operation": "notEquals" } },
+            { "id": "chg-vehiculo", "leftValue": "={{ $json.interes_vehiculo }}", "rightValue": "={{ $('SET CONTEXT').item.json.interes_vehiculo_actual }}", "operator": { "type": "string", "operation": "notEquals" } },
+            { "id": "chg-pago", "leftValue": "={{ $json.metodo_pago }}", "rightValue": "={{ $('SET CONTEXT').item.json.metodo_pago_actual }}", "operator": { "type": "string", "operation": "notEquals" } },
+            { "id": "chg-timing", "leftValue": "={{ $json.timing_compra }}", "rightValue": "={{ $('SET CONTEXT').item.json.timing_actual }}", "operator": { "type": "string", "operation": "notEquals" } },
+            { "id": "chg-idioma", "leftValue": "={{ $json.idioma_preferido }}", "rightValue": "={{ $('SET CONTEXT').item.json.idioma_actual }}", "operator": { "type": "string", "operation": "notEquals" } },
+            { "id": "chg-resumen", "leftValue": "={{ $json.resumen_ai }}", "rightValue": "={{ $('SET CONTEXT').item.json.resumen_actual }}", "operator": { "type": "string", "operation": "notEquals" } }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [-1120, 128],
+      "id": "c70f01ab-789b-4b9d-85d1-acdb725f3b48",
+      "name": "Hay Cambios?"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            { "id": "pu-contactId", "name": "contactId", "value": "={{ $('SET CONTEXT').item.json.contactId }}", "type": "string" },
+            { "id": "pu-city", "name": "city", "value": "={{ $json.city }}", "type": "string" },
+            { "id": "pu-vehiculo", "name": "interes_vehiculo", "value": "={{ $json.interes_vehiculo }}", "type": "string" },
+            { "id": "pu-pago", "name": "metodo_pago", "value": "={{ $json.metodo_pago }}", "type": "string" },
+            { "id": "pu-timing", "name": "timing_compra", "value": "={{ $json.timing_compra }}", "type": "string" },
+            { "id": "pu-idioma", "name": "idioma_preferido", "value": "={{ $json.idioma_preferido }}", "type": "string" },
+            { "id": "pu-resumen", "name": "resumen_ai", "value": "={{ $json.resumen_ai }}", "type": "string" },
+            { "id": "pu-updatedAt", "name": "updatedAt", "value": "={{ $now.toISO() }}", "type": "string" }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [-1344, 128],
+      "id": "db893810-f6df-42fe-86cb-9900e51f22c6",
+      "name": "Prepare Update"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [0, 224],
+      "id": "33ee2c30-4297-40d6-b7c4-4309405cd6e9",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            { "id": "resp-city", "name": "city", "value": "={{ $('Prepare Update').item.json.city }}", "type": "string" },
+            { "id": "resp-vehiculo", "name": "interes_vehiculo", "value": "={{ $('Prepare Update').item.json.interes_vehiculo }}", "type": "string" },
+            { "id": "resp-pago", "name": "metodo_pago", "value": "={{ $('Prepare Update').item.json.metodo_pago }}", "type": "string" },
+            { "id": "resp-timing", "name": "timing_compra", "value": "={{ $('Prepare Update').item.json.timing_compra }}", "type": "string" },
+            { "id": "resp-idioma", "name": "idioma_preferido", "value": "={{ $('Prepare Update').item.json.idioma_preferido }}", "type": "string" },
+            { "id": "resp-resumen", "name": "resumen_ai", "value": "={{ $('Prepare Update').item.json.resumen_ai }}", "type": "string" }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [448, 128],
+      "id": "60e772a9-0837-41b1-a161-a31097170949",
+      "name": "RESPONSE"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "collection": "leads",
+        "updateKey": "contactId",
+        "fields": "contactId,city,interes_vehiculo,metodo_pago,timing_compra,idioma_preferido,resumen_ai,updatedAt",
+        "upsert": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [224, 0],
+      "id": "603a07eb-be6f-4e47-b4dc-c7f58f8f670f",
+      "name": "Update Lead in Mongo",
+      "credentials": { "mongoDb": { "id": "WvGe0WEIfm6NF1Qa", "name": "MongoDB Carwarriors" } }
+    },
+    {
+      "parameters": { "options": { "temperature": 0.1 }, "model": "nvidia/nemotron-3.5-lightning:free" },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [-1968, 352],
+      "id": "b48f8e9c-280d-4238-af8f-0e4e68e951ed",
+      "name": "OpenRouter Chat Model",
+      "credentials": { "openRouterApi": { "id": "o8MexJvFeSx2j4an", "name": "OpenRouter account" } }
+    },
+    {
+      "id": "a7c1f4e2-9b3d-4a6e-8f2c-1d5b7e9a3c6f",
+      "name": "Update GHL Contact",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [340, 60],
+      "parameters": {
+        "method": "PUT",
+        "url": "={{ \"https://services.leadconnectorhq.com/contacts/\" + $('SET CONTEXT').item.json.contactId }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [{ "name": "Version", "value": "2021-07-28" }, { "name": "Content-Type", "value": "application/json" }] },
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ { city: $('Prepare Update').item.json.city } }}",
+        "options": {}
+      },
+      "notes": "TODO: agregar customFields (interes_vehiculo, metodo_pago, timing_compra, idioma_preferido, resumen_ai) cuando: 1) se renueve el token GHL (401 Invalid JWT visto el 2026-08-12), 2) se consulten los IDs reales de esos custom fields via GET /locations/{locationId}/customFields. Por ahora solo actualiza 'city' porque es campo estandar de GHL sin necesidad de ID.",
+      "credentials": { "httpHeaderAuth": { "id": "YCJ3zHy1B4X234DO", "name": "Header Auth GHL" } }
+    }
+  ]
+}

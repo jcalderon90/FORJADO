@@ -1,0 +1,3444 @@
+{
+  "name": "PRINCIPAL",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://services.leadconnectorhq.com/conversations/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-04-15"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + $('Get Account Credentials').first().json.ghlToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { type: $('Parameter Type').first().json.type, contactId: $('PARSE BODY').first().json.current_body.contactId, message: $('Parse response').first().json.respuesta.trim() } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        11776,
+        208
+      ],
+      "id": "8e8421e4-a5a2-4be1-a35e-686b8a42d48a",
+      "name": "SEND GHL MESSAGE",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "dcff964b-b8c1-4e8f-9c6d-0a188497de72",
+              "name": "type",
+              "value": "={{ $('PARSE BODY').first().json.current_body.channel === 'instagram' ? 'IG' : ($('PARSE BODY').first().json.current_body.channel === 'messenger' ? 'FB' : 'Custom') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        11552,
+        208
+      ],
+      "id": "b4a21411-a3ea-41b3-b35e-bb47dc3580d1",
+      "name": "Parameter Type"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ \n  $('Find User').first().json.isNotEmpty()\n  ? $('Find User').first().json\n  : $('Insert User').first().json\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        8912,
+        432
+      ],
+      "id": "eef5db6c-f0d9-45d3-910a-f4ea8e9cbfcf",
+      "name": "User Data"
+    },
+    {
+      "parameters": {
+        "text": "={{ $('JOINNING MESSAGE').first().json.message }}",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "language",
+              "description": "=Idioma en el que esta escrito el texto, devuelve el nombre del idioma en ingles (english, spanish, etc).",
+              "required": true
+            },
+            {
+              "name": "asesoria",
+              "type": "boolean",
+              "description": "=Devuelve true si en el texto se solicita un asesor humano",
+              "required": true
+            },
+            {
+              "name": "interes_precios",
+              "type": "boolean",
+              "description": "=Devuelve true SOLO si el usuario pregunta EXPLICITAMENTE por un precio, costo, valor numerico, cuota, mensualidad o financiamiento de un vehiculo. Devuelve false para preguntas generales sobre el vehiculo, ubicacion, caracteristicas o disponibilidad.",
+              "required": true
+            },
+            {
+              "name": "es_fuera_de_contexto",
+              "type": "boolean",
+              "description": "=Devuelve true SOLO si el mensaje es una solicitud EXPLICITA y ESPECIFICA sobre un tema completamente ajeno a la compra/venta de autos: codigo de programacion, recetas de cocina, ayuda medica, matematicas, ciencia, entretenimiento, politica, deportes u otro tema que NADA tenga que ver con vehiculos.\n\nSIEMPRE devuelve false (nunca es fuera de contexto) para:\n- Saludos de cualquier tipo\n- Mensajes cortos de 1 a 5 palabras que no sean una solicitud especifica ajena al tema\n- Cualquier mencion a vehiculos, precios, citas, visitas, asesores, financiamiento, trade-in\n- Confirmaciones: \"si\", \"ok\", \"dale\", \"gracias\"\n\nEn caso de duda, devuelve false."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1.2,
+      "position": [
+        5296,
+        400
+      ],
+      "id": "8493fa3a-7808-4e99-813e-664a6a44ddd0",
+      "name": "Lenguaje & Asesoria"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "collection": "users",
+        "updateKey": "_id",
+        "fields": "={{ Object.keys($json).filter(k => k !== '_id').join(\",\") }}",
+        "options": {
+          "dateFields": "timestamp"
+        }
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        8688,
+        432
+      ],
+      "id": "aad646cb-e701-436d-bb6a-1c2340865898",
+      "name": "Update User",
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "collection": "users",
+        "fields": "={{ Object.keys($json).join(\",\") }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        8688,
+        240
+      ],
+      "id": "47b39ef2-2be2-412c-9d89-f3d920206e4d",
+      "name": "Insert User",
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "collection": "users",
+        "options": {},
+        "query": "={ \"contactId\": \"{{ $('PARSE BODY').first().json.current_body.contactId }}\" }"
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        8016,
+        432
+      ],
+      "id": "5516ef06-4b01-4370-8643-ffbe988f6163",
+      "name": "Find User",
+      "alwaysOutputData": true,
+      "executeOnce": true,
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "46d9906e-3ffe-418b-9c72-f072a9a18907",
+              "name": "entrada_usuario",
+              "value": "={{ $('JOINNING MESSAGE').first().json.message }}",
+              "type": "string"
+            },
+            {
+              "id": "0bdc7c86-7c02-4648-81e1-9e4d955cf0a6",
+              "name": "lenguaje",
+              "value": "={{ $('Lenguaje & Asesoria').first().json.output.language }}",
+              "type": "string"
+            },
+            {
+              "id": "b20e774f-5dea-4852-b5a9-1c0fd99db2ce",
+              "name": "asesoria",
+              "value": "={{ $('Lenguaje & Asesoria').first().json.output.asesoria }}",
+              "type": "boolean"
+            },
+            {
+              "id": "66e47da4-9bbb-4253-bb0a-1eeef66226fc",
+              "name": "canal",
+              "value": "={{ $('PARSE BODY').first().json.current_body.channel }}",
+              "type": "string"
+            },
+            {
+              "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567810",
+              "name": "interes_precios",
+              "value": "={{ $('Lenguaje & Asesoria').first().json.output.interes_precios }}",
+              "type": "boolean"
+            },
+            {
+              "id": "cd206037-46e2-4386-8f3b-a36bb3c27f22",
+              "name": "es_fuera_de_contexto",
+              "value": "={{ $('Lenguaje & Asesoria').first().json.output.es_fuera_de_contexto }}",
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        6224,
+        400
+      ],
+      "id": "a34bb8c3-5313-45ba-8f2a-c444b5c6f377",
+      "name": "CONTEXT 1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "contactid-create",
+              "name": "contactId",
+              "value": "={{ $('PARSE BODY').first().json.current_body.contactId }}",
+              "type": "string"
+            },
+            {
+              "id": "locationid-create",
+              "name": "locationId",
+              "value": "={{ $('PARSE BODY').first().json.current_body.locationId }}",
+              "type": "string"
+            },
+            {
+              "id": "dealer-create",
+              "name": "dealer",
+              "value": "={{ $('Get Account Credentials').first().json.dealer }}",
+              "type": "string"
+            },
+            {
+              "id": "689aa6e6-0e3f-4aba-8834-1b8f675acaf4",
+              "name": "proyecto",
+              "value": "={{ $('CONTEXT 1').first().json.proyecto || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "d2233cfa-026f-400c-99a9-7f34bd8d58cc",
+              "name": "last_user_input",
+              "value": "={{ $('CONTEXT 1').first().json.entrada_usuario }}",
+              "type": "string"
+            },
+            {
+              "id": "e5358421-99f8-42a6-a9db-2882f3a89206",
+              "name": "language",
+              "value": "={{ $('CONTEXT 1').first().json.lenguaje }}",
+              "type": "string"
+            },
+            {
+              "id": "2a0b8cc0-ba06-41e4-8817-055f4bbb13de",
+              "name": "asesoria",
+              "value": "={{ $('CONTEXT 1').first().json.asesoria }}",
+              "type": "boolean"
+            },
+            {
+              "id": "15532baf-1a9a-439a-9af2-bc6354c701e5",
+              "name": "input_channel",
+              "value": "={{ $('CONTEXT 1').first().json.canal }}",
+              "type": "string"
+            },
+            {
+              "id": "014d3381-ff7e-446b-a7ab-753ca46481ff",
+              "name": "timestamp",
+              "value": "={{ $('PARSE BODY').first().json.timestamp }}",
+              "type": "string"
+            },
+            {
+              "id": "9bb77330-c41a-4137-9ade-35e0d1b2c006",
+              "name": "consulta_pendiente",
+              "value": "={{ null }}",
+              "type": "string"
+            },
+            {
+              "id": "06aad59e-59d6-404b-a8f0-4b0c72f2c1c3",
+              "name": "first_interaction",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "7436bc68-ba4c-4c48-8ac0-bea988b3079d",
+              "name": "last_interaction",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "c7a21713-70b5-4357-84ce-854bcbaed33b",
+              "name": "last_message",
+              "value": "={{ $('CONTEXT 1').first().json.entrada_usuario }}",
+              "type": "string"
+            },
+            {
+              "id": "d424a476-8d63-449f-acc2-09a69f158a8f",
+              "name": "has_reservation",
+              "value": false,
+              "type": "boolean"
+            },
+            {
+              "id": "c10d0b79-3d2d-4c63-b70f-9242d988e501",
+              "name": "datos_completos",
+              "value": false,
+              "type": "boolean"
+            },
+            {
+              "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567811",
+              "name": "interes_precios",
+              "value": "={{ $('CONTEXT 1').first().json.interes_precios }}",
+              "type": "boolean"
+            },
+            {
+              "id": "spam-flag-create",
+              "name": "spam_bloqueado",
+              "value": false,
+              "type": "boolean"
+            },
+            {
+              "id": "city-create",
+              "name": "city",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "iv-create",
+              "name": "interes_vehiculo",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "mp-create",
+              "name": "metodo_pago",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "tc-create",
+              "name": "timing_compra",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "ip-create",
+              "name": "idioma_preferido",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "ra-create",
+              "name": "resumen_ai",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        8464,
+        240
+      ],
+      "id": "2ca3007b-e11a-4c6c-be7d-0b1ee4660064",
+      "name": "DATA to CREATE"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d90a4768-5969-4cb1-b612-40627b026990",
+              "name": "_id",
+              "value": "={{ $('Find User').first().json._id.toJsonString().replace(/^\"(.*)\"$/, '$1') }}",
+              "type": "string"
+            },
+            {
+              "id": "contactid-update",
+              "name": "contactId",
+              "value": "={{ $('PARSE BODY').first().json.current_body.contactId }}",
+              "type": "string"
+            },
+            {
+              "id": "locationid-update",
+              "name": "locationId",
+              "value": "={{ $('PARSE BODY').first().json.current_body.locationId }}",
+              "type": "string"
+            },
+            {
+              "id": "dealer-update",
+              "name": "dealer",
+              "value": "={{ $('Get Account Credentials').first().json.dealer }}",
+              "type": "string"
+            },
+            {
+              "id": "689aa6e6-0e3f-4aba-8834-1b8f675acaf4",
+              "name": "proyecto",
+              "value": "={{ $('Parse response').first().json.proyecto || $('Find User').first().json.proyecto || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "d2233cfa-026f-400c-99a9-7f34bd8d58cc",
+              "name": "last_user_input",
+              "value": "={{ $('CONTEXT 1').first().json.entrada_usuario }}",
+              "type": "string"
+            },
+            {
+              "id": "e5358421-99f8-42a6-a9db-2882f3a89206",
+              "name": "language",
+              "value": "={{ $('CONTEXT 1').first().json.lenguaje }}",
+              "type": "string"
+            },
+            {
+              "id": "2a0b8cc0-ba06-41e4-8817-055f4bbb13de",
+              "name": "asesoria",
+              "value": "={{ $('CONTEXT 1').first().json.asesoria }}",
+              "type": "boolean"
+            },
+            {
+              "id": "15532baf-1a9a-439a-9af2-bc6354c701e5",
+              "name": "input_channel",
+              "value": "={{ $('CONTEXT 1').first().json.canal }}",
+              "type": "string"
+            },
+            {
+              "id": "014d3381-ff7e-446b-a7ab-753ca46481ff",
+              "name": "timestamp",
+              "value": "={{ $('PARSE BODY').first().json.timestamp }}",
+              "type": "string"
+            },
+            {
+              "id": "3e5c849b-5282-4ab3-aafc-72f1a05bf25c",
+              "name": "consulta_pendiente",
+              "value": "={{ $('Find User').first().json.consulta_pendiente || null }}",
+              "type": "string"
+            },
+            {
+              "id": "cf7d7f35-fa61-4954-93ff-0a23be16a4b8",
+              "name": "last_interaction",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "6aa9fc9f-3f93-4831-b5f6-81f0ad660c2b",
+              "name": "last_message",
+              "value": "={{ $('CONTEXT 1').first().json.entrada_usuario }}",
+              "type": "string"
+            },
+            {
+              "id": "cb61c50f-503e-4fa0-b58f-2d15527da8da",
+              "name": "conversation_analysis",
+              "value": false,
+              "type": "boolean"
+            },
+            {
+              "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567812",
+              "name": "interes_precios",
+              "value": "={{ $('CONTEXT 1').first().json.interes_precios }}",
+              "type": "boolean"
+            },
+            {
+              "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567813",
+              "name": "datos_completos",
+              "value": "={{ $('Parse response').first().json.datos_completos ?? $('Find User').first().json.datos_completos }}",
+              "type": "boolean"
+            },
+            {
+              "id": "spam-flag-update",
+              "name": "spam_bloqueado",
+              "value": "={{ $('Find User').first().json.spam_bloqueado || false }}",
+              "type": "boolean"
+            },
+            {
+              "id": "city-update",
+              "name": "city",
+              "value": "={{ $('Parse response').first().json.city || $('Find User').first().json.city || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "iv-update",
+              "name": "interes_vehiculo",
+              "value": "={{ $('Parse response').first().json.interes_vehiculo || $('Find User').first().json.interes_vehiculo || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "mp-update",
+              "name": "metodo_pago",
+              "value": "={{ $('Parse response').first().json.metodo_pago || $('Find User').first().json.metodo_pago || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "tc-update",
+              "name": "timing_compra",
+              "value": "={{ $('Parse response').first().json.timing_compra || $('Find User').first().json.timing_compra || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "ip-update",
+              "name": "idioma_preferido",
+              "value": "={{ $('Parse response').first().json.idioma_preferido || $('Find User').first().json.idioma_preferido || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "ra-update",
+              "name": "resumen_ai",
+              "value": "={{ $('Parse response').first().json.resumen_ai || $('Find User').first().json.resumen_ai || '' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        8464,
+        432
+      ],
+      "id": "d3495cfc-8413-4c36-b9fb-5f67ead8d155",
+      "name": "DATA to UPDATE"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "13f396d4-0c8b-4099-b87a-4f98c96f9af1",
+              "leftValue": "={{ $('Find User').first().json.isEmpty() }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        8240,
+        432
+      ],
+      "id": "e55b6070-d74e-455b-abd5-e993347f0bdc",
+      "name": "If USER NOT EXIST"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ JSON.parse($('Create Body').first().json.body) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -304,
+        16
+      ],
+      "id": "adb35e8e-660e-4b88-bc8e-f2f47f14b244",
+      "name": "PARSE BODY"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "df6dd35d-a8b7-4ecb-8ef8-5a19ed499cfc",
+              "name": "message",
+              "value": "={{ $json.propertyName.join(\", \") }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4624,
+        400
+      ],
+      "id": "69510aa2-e8fa-4be0-aca9-d5024bb7537c",
+      "name": "JOINNING MESSAGE"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "5b5ad242-c6c3-4f2a-9b67-edb92fa424be",
+              "leftValue": "={{ $json.propertyName?.last() || \"\" }}",
+              "rightValue": "={{ $('INPUT FINAL').first().json.input }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        4400,
+        400
+      ],
+      "id": "0be0cd4f-3a0a-4026-9115-6a2da9b080d8",
+      "name": "Filter1"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ $('PARSE BODY').first().json.current_body.contactId }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        4848,
+        400
+      ],
+      "id": "7836d334-03fc-4048-b26c-ef6de4646c77",
+      "name": "DELETE MESSAGES",
+      "credentials": {
+        "redis": {
+          "id": "aSlU09IBNEqUzD4t",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        3952,
+        400
+      ],
+      "id": "473632d9-b48c-4f72-9d1e-50504632f15d",
+      "name": "Wait",
+      "webhookId": "50ed2939-b8ec-48f7-8c6b-3bf14c2efc58"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "key": "={{ $('PARSE BODY').first().json.current_body.contactId }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        4176,
+        400
+      ],
+      "id": "256f70ef-e716-4e49-9770-11d398e69a1a",
+      "name": "GET MESSAGE",
+      "credentials": {
+        "redis": {
+          "id": "aSlU09IBNEqUzD4t",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "push",
+        "list": "={{ $('PARSE BODY').first().json.current_body.contactId }}",
+        "messageData": "={{ $json.input }}",
+        "tail": true
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        3728,
+        400
+      ],
+      "id": "10c6bd70-deb9-4b91-beb3-a67c78396628",
+      "name": "SAVE MESSAGE",
+      "credentials": {
+        "redis": {
+          "id": "aSlU09IBNEqUzD4t",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c1c4c388-e572-4502-9cf1-51d28b4d022d",
+              "name": "input",
+              "value": "={{ $json.mensaje.join(\" \") || \"mensaje vacio\" }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3504,
+        400
+      ],
+      "id": "543aa443-ab5c-4b15-b236-b2ec7800da85",
+      "name": "INPUT FINAL"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ea8c9284-e11f-4e87-a742-4392a692da2a",
+              "name": "mensaje",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            },
+            {
+              "id": "1f2fe528-cff0-4713-9dcb-4221b508c597",
+              "name": "hora_llegada",
+              "value": "={{ $json.timestamp }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2608,
+        208
+      ],
+      "id": "bffd1e79-d68c-493d-9c57-ef5b7f00334a",
+      "name": "audio input"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ea8c9284-e11f-4e87-a742-4392a692da2a",
+              "name": "mensaje",
+              "value": "={{ $json.content }}",
+              "type": "string"
+            },
+            {
+              "id": "1f2fe528-cff0-4713-9dcb-4221b508c597",
+              "name": "hora_llegada",
+              "value": "={{ $json.timestamp }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2608,
+        400
+      ],
+      "id": "ac6b1c53-3f12-497d-850c-77c9ddf613d4",
+      "name": "image input"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ea8c9284-e11f-4e87-a742-4392a692da2a",
+              "name": "mensaje",
+              "value": "={{ $('PARSE BODY').first().json.current_body.message }}",
+              "type": "string"
+            },
+            {
+              "id": "1f2fe528-cff0-4713-9dcb-4221b508c597",
+              "name": "hora_llegada",
+              "value": "={{ $('PARSE BODY').first().json.timestamp }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2608,
+        592
+      ],
+      "id": "e747f46a-f02e-4397-8da1-fdc4074101f1",
+      "name": "text input"
+    },
+    {
+      "parameters": {
+        "url": "={{ $('PARSE BODY').first().json.current_body.attachmentUrl }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2160,
+        208
+      ],
+      "id": "0874f33b-70dc-45e6-bfed-51a139af1180",
+      "name": "HTTP IF AUDIO"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "text": "Eres un experto en describir imagenes para un chatbot responde lo que ves en la imagen de esta manera. \"El usuario envió una imagen etc...\"",
+        "inputType": "base64",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        2384,
+        400
+      ],
+      "id": "a13ce63a-3c52-4610-b88b-e8e93ab99e58",
+      "name": "ANALIZA IMAGEN"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "mensaje"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        3280,
+        400
+      ],
+      "id": "c0ded9fd-e8de-41b3-92dd-d132fb3c68dc",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "hora_llegada"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        3056,
+        400
+      ],
+      "id": "17f681a2-fe1d-48f8-afdd-30af4ffd8765",
+      "name": "Sort"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        2832,
+        384
+      ],
+      "id": "d800df03-172c-4376-8c9e-a369721f2be3",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        2384,
+        208
+      ],
+      "id": "3e8ac72c-da48-451c-be05-a75b6cb4c94b",
+      "name": "TRANSCRIBE AUDIO"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "92200249-f6e4-4f84-bd28-bc36de22beb3",
+              "leftValue": "={{ $('HTTP Request').first().binary.data.mimeType }}",
+              "rightValue": "audio/ogg",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "b5bd48d1-851e-43bc-a097-e16c0dcca59c",
+              "leftValue": "={{ $('HTTP Request').first().binary.data.mimeType }}",
+              "rightValue": "video/mp4",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1936,
+        208
+      ],
+      "id": "d9e52e02-139d-46e5-a568-5e26d6ae43c5",
+      "name": "ES AUDIO / IMAGEN"
+    },
+    {
+      "parameters": {
+        "url": "={{ $('PARSE BODY').first().json.current_body.attachmentUrl }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1712,
+        208
+      ],
+      "id": "117e4fcc-7b3a-4a58-9deb-82873751df6a",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "attachment-notempty",
+              "leftValue": "={{ $('PARSE BODY').first().json.current_body.attachmentUrl }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1488,
+        304
+      ],
+      "id": "93390f2d-0a57-4358-bc70-3c61da05e486",
+      "name": "ES ARCHIVO"
+    },
+    {
+      "parameters": {
+        "jsCode": "const rawBody = $input.first().json.body || $input.first().json;\n\nfunction normalize(body) {\n  const contactId = body.contactId ?? body.contact_id ?? body.id ?? '';\n  const name = body.contactName ?? body.full_name ?? body.name ?? '';\n  const channelRaw = (body.channel ?? body.source ?? body.customData?.channel ?? '').toString().toLowerCase();\n  let channel = 'unknown';\n  if (channelRaw.includes('whatsapp')) channel = 'whatsapp';\n  else if (channelRaw.includes('instagram') || channelRaw === 'ig') channel = 'instagram';\n  else if (channelRaw.includes('messenger') || channelRaw.includes('facebook') || channelRaw.includes('fb')) channel = 'messenger';\n  const message = body.message ?? body.lastMessage ?? body.message_body ?? body.body ?? '';\n  const locationId = body.locationId ?? body.location_id ?? '';\n  const attachmentUrl = body.attachmentUrl ?? body.attachment_url ?? body.mediaUrl ?? '';\n  return { contactId, name, channel, message, locationId, attachmentUrl };\n}\n\nconst current_body = normalize(rawBody);\nconst current_key = current_body.contactId;\nconst timestamp = new Date().toISOString();\nconst start_time = Date.now();\n\nconst result_body = { current_body, timestamp };\n\nreturn [{\n  key: current_key,\n  body: JSON.stringify(result_body),\n  timestamp,\n  start_time\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -528,
+        16
+      ],
+      "id": "3fe1f5b0-bad1-4cc7-b0e8-48734157e9c7",
+      "name": "Create Body"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lead-agent",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -752,
+        16
+      ],
+      "id": "7762edb9-d362-4e8d-a81a-161f3b918f7b",
+      "name": "Webhook",
+      "webhookId": "bbe94977-7886-4071-a874-e370d3b20c97"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.contactId }}",
+        "collectionName": "chat_histories",
+        "databaseName": "Carwarriors",
+        "contextWindowLength": 30
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+      "typeVersion": 1,
+      "position": [
+        9280,
+        848
+      ],
+      "id": "f984fc82-6e13-4f49-956c-2b0d5f6e280a",
+      "name": "MongoDB Chat Memory",
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Datos del Lead:\nMensaje del usuario: {{ $('CONTEXT 1').first().json.entrada_usuario }}.\nIdioma: {{ $json.language }}.\nNecesita asesoria?: {{ $('User Data').first().json.asesoria ? \"SI\" : \"NO\" }}.\nDealer: {{ $('Get Account Credentials').first().json.vendorName }}.\nCanal de entrada: {{ $('User Data').first().json.input_channel }}.\nContexto: {{ $('CONTEXT 1').first().json.toJsonString() }}\nConsulta pendiente del lead: {{ $('User Data').first().json.consulta_pendiente || 'ninguna' }}",
+        "options": {
+          "systemMessage": "=## IDENTIDAD ##\nEres el asistente virtual de {{ $('Get Account Credentials').first().json.vendorName }}, concesionario de autos en Miami. Hablas en plural (\"nosotros\"), tono calido y directo de vendedor real, nunca corporativo ni robotico. NUNCA digas que eres una IA.\n\n## ESTILO ##\n- Maximo 2 oraciones cortas, maximo 22 palabras por mensaje.\n- Una sola pregunta por mensaje.\n- No repitas apertura/validacion/pregunta en turnos seguidos. No reconfirmes datos ya capturados salvo que el cliente los cambie.\n- Responde en el idioma del cliente (Idioma: {{ $json.language }}). Si el cliente escribe \"?\", \"ok\", \"yes\" -- sigue el hilo, no reinicies la calificacion.\n- Si el cliente muestra estres o urgencia financiera, valida en 6-8 palabras antes de seguir.\n- Sin listas, sin explicaciones largas, sin markdown.\n\n## FLUJO DE CALIFICACION (orden fijo salvo urgencia) ##\n1. Intencion de vehiculo (marca/modelo/tipo)\n2. Ubicacion (ciudad/zona)\n3. Caso de uso\n4. Timing de compra\n5. Metodo de pago (despues de timing)\n\nCada mensaje debe avanzar uno de estos ejes -- no te estanques ni repitas lo mismo.\n\n## OFERTA DE VISITA ##\nOfrece la visita apenas se confirme el vehiculo de interes (no esperes a tener los 4 datos completos). Ventanas naturales: manana, tarde, \"alrededor de las 6 PM\". Nunca prometas una cita confirmada sin usar `rsvp` para verificarla de verdad.\n\n## ESCALAMIENTO INMEDIATO POR INTENCION FUERTE ##\nSolo frases explicitas: \"voy hoy\", \"tengo el dinero listo\", \"quiero cerrar ya\", \"ya estoy aprobado\", \"necesito un auto urgente\". Down payment, credit score o cambios de estructura de pago NO disparan esto solos.\n\n## JERARQUIA DE ESCALAMIENTO (5 niveles) ##\n1. Conversacion normal / calificacion exploratoria -- no escalar.\n2. Browsing general -- comparte que hay catalogo disponible, no escalar.\n3. Piden fotos exactas de una unidad -- usa `send_media` si aplica.\n4. Piden precio exacto / cash price / total -- escalamiento obligatorio, nunca des el numero.\n5. Alta urgencia (ver arriba) -- escalamiento inmediato.\n\nCompradores internacionales/exportacion: siempre orienta a WhatsApp, nunca des precio exacto en chat.\n\nReglas: nunca escales sin un trigger real, ofrece WhatsApp O llamada (nunca ambas en el mismo mensaje), siempre pon expectativa de respuesta despues de escalar (ej. \"un asesor te contacta en breve\").\n\n## HORARIO DE NEGOCIO (hora Miami) ##\nLun-Vie 10:00 AM-9:00 PM, Sab 10:00 AM-7:00 PM, Dom 10:00 AM-4:00 PM. Si esta cerrado, informa la proxima apertura. Fuera de horario no ofrezcas llamadas, solo WhatsApp.\n\n## PRECIOS E INVENTARIO ##\nNunca des precio exacto ni APR, nunca garantices aprobacion de credito. Al mostrar inventario, maximo 3 datos (ano, color exterior, kilometraje), disponibilidad \"preliminar hasta confirmar\". Promociones activas viven en la Knowledge Base (usa `kb_search`), nunca las inventes ni las hardcodees en tu respuesta.\n\n## TOOLS DISPONIBLES ##\n\n**lead_collector**\n- Usala cuando el cliente de informacion nueva sobre vehiculo/ubicacion/uso/timing/pago, o cuando falte avanzar la calificacion.\n- Devuelve JSON con los campos actualizados y un `response` conversacional.\n\n**kb_search**\n- Usala cuando el cliente pregunte sobre inventario, politicas, promos o cualquier dato del dealer.\n- Devuelve JSON con `response` y `escalate` (boolean).\n\n**rsvp**\n- Usala para agendar/confirmar/cancelar/reagendar una visita, cita virtual o llamada, o cuando el cliente acepte agendar luego de que se lo ofrecieras.\n- \"Llamada por telefono\" y \"llamada por WhatsApp\" son la MISMA categoria -- no las trates distinto.\n\n**send_media**\n- Usala para enviar fotos/inventario cuando el cliente pida ver un vehiculo especifico.\n\n## MANEJO DE RESPUESTAS DE TOOLS ##\n- Cuando `lead_collector` devuelva un JSON: usa su `response` como tu `respuesta`, refleja sus campos (city, interes_vehiculo, metodo_pago, timing_compra, idioma_preferido, resumen_ai) en `estado_lead`. Nunca pases el JSON crudo al usuario.\n- Cuando `kb_search` devuelva un JSON: usa su `response` como tu `respuesta`. Si devolvio `escalate: true`, activa `escalar.activar`.\n- Cuando `send_media` o `rsvp` devuelvan error: informa con amabilidad que hubo un inconveniente tecnico y que puede reintentar en unos momentos.\n\n## CONTEXTO DEL LEAD ##\n- Ciudad: {{ $('User Data').first().json.city || 'NO DISPONIBLE' }}\n- Interes de vehiculo: {{ $('User Data').first().json.interes_vehiculo || 'NO DISPONIBLE' }}\n- Metodo de pago: {{ $('User Data').first().json.metodo_pago || 'NO DISPONIBLE' }}\n- Timing de compra: {{ $('User Data').first().json.timing_compra || 'NO DISPONIBLE' }}\n- Idioma preferido: {{ $('User Data').first().json.idioma_preferido || 'NO DISPONIBLE' }}\n- Resumen previo: {{ $('User Data').first().json.resumen_ai || 'ninguno todavia' }}\n- Dealer: {{ $('Get Account Credentials').first().json.vendorName }}\n- Canal: {{ $('User Data').first().json.input_channel }}\n\n## FORMATO DE SALIDA OBLIGATORIO -- SOLO este JSON en una linea ##\n{\n  \"respuesta\": \"<texto al usuario>\",\n  \"estado_lead\": {\n    \"city\": \"<string|null>\",\n    \"interes_vehiculo\": \"<string|null>\",\n    \"metodo_pago\": \"<string|null>\",\n    \"timing_compra\": \"<string|null>\",\n    \"idioma_preferido\": \"<string|null>\",\n    \"resumen_ai\": \"<string|null>\"\n  },\n  \"accion\": {\n    \"tipo\": \"<saludar|calificar|consultar_inventario|agendar|escalar|aclarar|esperar>\",\n    \"razon\": \"<explicacion corta>\"\n  },\n  \"escalar\": {\n    \"activar\": <true|false>,\n    \"nivel\": <1|2|3|4|5>,\n    \"motivo\": \"<string|null>\"\n  },\n  \"metadatos\": {\n    \"intencion\": \"<saludo|consulta|calificacion|escalamiento|confirmacion|rechazo|ambiguo>\",\n    \"idioma\": \"<espanol|ingles|...>\",\n    \"confianza\": \"<alta|media|baja>\"\n  },\n  \"depuracion\": {\n    \"herramientas_usadas\": [<lista de tools llamadas>],\n    \"ruta_decision\": \"<breadcrumb corto>\",\n    \"advertencias\": [<lista>]\n  }\n}\n\n## REGLAS ESTRICTAS ##\n- `escalar.activar` es true SOLO si hay un trigger real (nivel 4-5, o kb_search/send_media devolvio escalate:true).\n- Si llamaste una tool, inclúyela en `herramientas_usadas`.\n- NUNCA menciones \"tools\", \"flujos\" ni procesos internos al usuario.\n\n## GUARDRAIL ##\nSi el usuario pide algo completamente ajeno a autos (codigo, recetas, medicina, deportes, politica), redirige con: \"Eso se sale un poco de lo mio, ¿te ayudo con algo de nuestros vehiculos?\". Si es spam/oferta B2B no relacionada a comprar auto, no sigas el flujo de calificacion estandar, responde brevemente y no lo marques como lead nuevo."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        9392,
+        624
+      ],
+      "id": "5ceebf9a-3cd3-457f-87b5-ecd361e11b4d",
+      "name": "PRINCIPAL",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "description": "=Usa esta tool cuando el usuario no haya proporcionado datos suficientes del lead (ciudad, interes de vehiculo, metodo de pago, timing de compra) y exprese intencion real. Recolecta esos datos de forma conversacional y devuelve la respuesta que debe enviarse al usuario.",
+        "workflowId": {
+          "__rl": true,
+          "value": "4r00JFnCyoUpZgXU",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/4r00JFnCyoUpZgXU",
+          "cachedResultName": "LEAD - COLLECTOR"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contactId": "={{ $('PARSE BODY').first().json.current_body.contactId }}",
+            "locationId": "={{ $('PARSE BODY').first().json.current_body.locationId }}",
+            "dealer": "={{ $('Get Account Credentials').first().json.dealer }}",
+            "canal": "={{ $('PARSE BODY').first().json.current_body.channel }}",
+            "entrada_usuario": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('entrada_usuario', ``, 'string') }}",
+            "city_actual": "={{ $('User Data').first().json.city || '' }}",
+            "interes_vehiculo_actual": "={{ $('User Data').first().json.interes_vehiculo || '' }}",
+            "metodo_pago_actual": "={{ $('User Data').first().json.metodo_pago || '' }}",
+            "timing_actual": "={{ $('User Data').first().json.timing_compra || '' }}",
+            "idioma_actual": "={{ $('User Data').first().json.idioma_preferido || '' }}",
+            "resumen_actual": "={{ $('User Data').first().json.resumen_ai || '' }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "contactId",
+              "displayName": "contactId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "locationId",
+              "displayName": "locationId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "dealer",
+              "displayName": "dealer",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "canal",
+              "displayName": "canal",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "entrada_usuario",
+              "displayName": "entrada_usuario",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "city_actual",
+              "displayName": "city_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "interes_vehiculo_actual",
+              "displayName": "interes_vehiculo_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "metodo_pago_actual",
+              "displayName": "metodo_pago_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "timing_actual",
+              "displayName": "timing_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "idioma_actual",
+              "displayName": "idioma_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "resumen_actual",
+              "displayName": "resumen_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        9400,
+        840
+      ],
+      "id": "ece2045b-8d68-4bd4-aaae-a0936f36090e",
+      "name": "lead_collector"
+    },
+    {
+      "parameters": {
+        "jsCode": "function prepareForHttp(text) {\n  if (text === null || text === undefined) return \"\";\n  return String(text)\n    .replace(/\\\\/g, \"\\\\\\\\\")\n    .replace(/\"/g, '\\\\\"')\n    .replace(/\\r\\n/g, \"\\\\n\")\n    .replace(/\\n/g, \"\\\\n\")\n    .replace(/\\t/g, \"\\\\t\")\n    .replace(/\\*\\*/g, \"*\")\n    .trim();\n}\n\nconst raw = $input.first().json.output || \"\";\nconst cleanRaw = raw.replace(/```(?:json)?\\n?/g, '').trim();\nconst match = cleanRaw.match(/\\{[\\s\\S]*\\}/);\n\nconst entradaUsuarioActual = $('CONTEXT 1').first().json.entrada_usuario || null;\n\nif (!match) {\n  const recovered = prepareForHttp(cleanRaw);\n  return [{ \n    json: { \n      respuesta: recovered || \"Lo siento, tuve un problema procesando esa respuesta. ¿Puedes repetirlo?\",\n      accion_tipo: \"error\",\n      error: \"no_json\",\n      raw_output: raw,\n      consulta_pendiente_guardar: entradaUsuarioActual,\n      consulta_pendiente_limpiar: false\n    }\n  }];\n}\n\ntry {\n  const parsed = JSON.parse(match[0]);\n\n  let respuesta = String(parsed.respuesta || \"\").trim();\n  if (!respuesta) {\n    const prefijo = cleanRaw.slice(0, match.index).trim();\n    respuesta = prefijo || \"Disculpa, tuve un problema generando la respuesta. ¿Puedes repetir tu mensaje?\";\n  }\n  const accionTipo = parsed.accion?.tipo || \"esperar\";\n  const transferir = parsed.escalar?.activar ? 1 : 0;\n  const interesVehiculo = parsed.estado_lead?.interes_vehiculo || null;\n  const metodoPago = parsed.estado_lead?.metodo_pago || null;\n  const datosCompletos = !!(interesVehiculo && metodoPago);\n\n  const respuestaFinal = prepareForHttp(respuesta);\n\n  return [{\n    json: {\n      respuesta: respuestaFinal,\n      accion_tipo: accionTipo,\n      accion_razon: parsed.accion?.razon || \"\",\n      proyecto: interesVehiculo,\n      transferir: transferir,\n      escalar_nivel: parsed.escalar?.nivel || null,\n      escalar_motivo: parsed.escalar?.motivo || null,\n      city: parsed.estado_lead?.city || null,\n      interes_vehiculo: interesVehiculo,\n      metodo_pago: metodoPago,\n      timing_compra: parsed.estado_lead?.timing_compra || null,\n      idioma_preferido: parsed.estado_lead?.idioma_preferido || null,\n      resumen_ai: parsed.estado_lead?.resumen_ai || null,\n      datos_completos: datosCompletos,\n      intencion: parsed.metadatos?.intencion || null,\n      idioma: parsed.metadatos?.idioma || null,\n      confianza: parsed.metadatos?.confianza || null,\n      herramientas_usadas: parsed.depuracion?.herramientas_usadas || [],\n      ruta_decision: parsed.depuracion?.ruta_decision || \"\",\n      advertencias: parsed.depuracion?.advertencias || [],\n      raw: parsed,\n      consulta_pendiente_guardar: parsed.consulta_pendiente?.guardar || null,\n      consulta_pendiente_limpiar: parsed.consulta_pendiente?.limpiar || false,\n      consulta_pendiente_retomar: parsed.consulta_pendiente?.retomar || null,\n    }\n  }];\n\n} catch(e) {\n  return [{ \n    json: { \n      respuesta: \"Lo siento, tuve un problema procesando esa respuesta. ¿Puedes repetirlo?\",\n      accion_tipo: \"error\",\n      error: \"parse_failed\",\n      error_message: e.message,\n      raw_output: raw,\n      consulta_pendiente_guardar: entradaUsuarioActual,\n      consulta_pendiente_limpiar: false\n    }\n  }];\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        9984,
+        624
+      ],
+      "id": "2566097f-66f9-4b63-b1da-ff439405c306",
+      "name": "Parse response"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "0d6214cb-1acb-4f7e-b57e-73e911ebcaa5",
+              "leftValue": "={{ $json.value }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        10432,
+        208
+      ],
+      "id": "82143f9c-ec4a-4a8d-ba31-274ae2e8e601",
+      "name": "If TIENE DATOS NUEVOS"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9f9974b3-e66f-4160-ab03-0c53c1d05e2c",
+              "name": "_id",
+              "value": "={{ $('User Data').first().json._id.toString().replace(/^\"(.*)\"$/, '$1') }}",
+              "type": "string"
+            },
+            {
+              "id": "1dfe570b-1cba-466b-a975-63089a0d43e1",
+              "name": "last_update",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "city-prep",
+              "name": "city",
+              "value": "={{ $('Parse response').first().json.city || undefined }}",
+              "type": "string"
+            },
+            {
+              "id": "iv-prep",
+              "name": "interes_vehiculo",
+              "value": "={{ $('Parse response').first().json.interes_vehiculo || undefined }}",
+              "type": "string"
+            },
+            {
+              "id": "mp-prep",
+              "name": "metodo_pago",
+              "value": "={{ $('Parse response').first().json.metodo_pago || undefined }}",
+              "type": "string"
+            },
+            {
+              "id": "tc-prep",
+              "name": "timing_compra",
+              "value": "={{ $('Parse response').first().json.timing_compra || undefined }}",
+              "type": "string"
+            },
+            {
+              "id": "ip-prep",
+              "name": "idioma_preferido",
+              "value": "={{ $('Parse response').first().json.idioma_preferido || undefined }}",
+              "type": "string"
+            },
+            {
+              "id": "ra-prep",
+              "name": "resumen_ai",
+              "value": "={{ $('Parse response').first().json.resumen_ai || undefined }}",
+              "type": "string"
+            },
+            {
+              "id": "0be37564-e330-4d62-8e4a-a99671f75ebf",
+              "name": "datos_completos",
+              "value": "={{ $('Parse response').first().json.datos_completos ? true : undefined }}",
+              "type": "boolean"
+            },
+            {
+              "id": "73b2ce9f-c7db-4bce-9975-21aef53dd1b3",
+              "name": "datos_completos_timestamp",
+              "value": "={{ $('Parse response').first().json.datos_completos ? $now.toISO() : undefined }}",
+              "type": "string"
+            },
+            {
+              "id": "5ddbbdb6-dd3b-4f7a-b5d3-554129d42155",
+              "name": "consulta_pendiente",
+              "value": "={{ \n  $('Parse response').first().json.consulta_pendiente_limpiar ? \"\" : \n  ($('Parse response').first().json.consulta_pendiente_guardar || $('User Data').first().json.consulta_pendiente || undefined) \n}}",
+              "type": "string"
+            },
+            {
+              "id": "9e9581f8-4fd4-4faa-9093-946783b656e9",
+              "name": "proyecto",
+              "value": "={{\n    $('Parse response').first().json.proyecto ||\n    $('User Data').first().json.proyecto ||\n    undefined\n  }}",
+              "type": "string"
+            },
+            {
+              "id": "2e50d498-8d70-4619-a619-d3d242e79de9",
+              "name": "conversation_analysis",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        10656,
+        112
+      ],
+      "id": "06b936d4-c596-4ad1-a865-84003bb40de5",
+      "name": "Prepare Update"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "550ae3c0-99c3-43fa-8627-e08c78c455eb",
+              "name": "value",
+              "value": "={{ \n  ($json.city !== null && $json.city !== '') ||\n  ($json.interes_vehiculo !== null && $json.interes_vehiculo !== '') ||\n  ($json.metodo_pago !== null && $json.metodo_pago !== '') ||\n  ($json.timing_compra !== null && $json.timing_compra !== '') ||\n  ($json.idioma_preferido !== null && $json.idioma_preferido !== '') ||\n  ($json.resumen_ai !== null && $json.resumen_ai !== '') ||\n  $json.consulta_pendiente_guardar !== null ||\n  $json.consulta_pendiente_limpiar === true\n}}",
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        10208,
+        208
+      ],
+      "id": "12bb6c03-d14a-4a92-b4f4-461de0566ada",
+      "name": "Hay Cambios?"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "collection": "users",
+        "updateKey": "_id",
+        "fields": "={{ Object.keys($json).filter(k => k !== '_id' && $json[k] !== null && $json[k] !== undefined).join(\",\") }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        10880,
+        112
+      ],
+      "id": "59fa0d48-84b6-4343-8340-39ae557a84fc",
+      "name": "Update User Lead",
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        11328,
+        528
+      ],
+      "id": "28a5622a-60a1-47e2-86e8-8ae37b8e7c1a",
+      "name": "No Operation, do nothing1"
+    },
+    {
+      "parameters": {
+        "description": "=Usa esta tool cuando el usuario haga una pregunta o consulta sobre vehiculos/inventario/politicas del dealer. Busca en la knowledge base y devuelve una respuesta conversacional.\n\nParametros que debes pasar:\n- entrada_usuario: la pregunta exacta del usuario o la consulta pendiente a retomar",
+        "workflowId": {
+          "__rl": true,
+          "value": "oB2bc9YTIpXqt5zH",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/oB2bc9YTIpXqt5zH",
+          "cachedResultName": "KB - SEARCH"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contactId": "={{ $('PARSE BODY').first().json.current_body.contactId }}",
+            "dealer": "={{ $('Get Account Credentials').first().json.dealer }}",
+            "entrada_usuario": "={{ $fromAI('entrada_usuario', ``, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "contactId",
+              "displayName": "contactId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "dealer",
+              "displayName": "dealer",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "entrada_usuario",
+              "displayName": "entrada_usuario",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        9528,
+        840
+      ],
+      "id": "aa5352b4-f700-4ea9-a1f8-b4cd4eb796e8",
+      "name": "kb_search"
+    },
+    {
+      "parameters": {
+        "description": "=Función: iniciar, recopilar o completar el agendamiento de una visita al lote (incluye test drive), una videollamada o una llamada. Úsala de inmediato si el cliente pide visitar el lote o agendar una cita/llamada, o si tras ofrecer una cita el usuario responde afirmativamente (\"sí me parece\", \"dale\").",
+        "workflowId": {
+          "__rl": true,
+          "value": "2trw9S1LM8ttZlFb",
+          "mode": "list",
+          "cachedResultName": "RSVP"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contactId": "={{ $('User Data').first().json.contactId }}",
+            "dealer": "={{ $('Get Account Credentials').first().json.dealer }}",
+            "nombre": "={{ $('PARSE BODY').first().json.current_body.name || '' }}",
+            "vehiculo_interes": "={{ $fromAI('vehiculo_interes', '', 'string') || $('User Data').first().json.interes_vehiculo || '' }}",
+            "entrada_usuario": "={{ $('CONTEXT 1').first().json.entrada_usuario }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "contactId",
+              "displayName": "contactId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "dealer",
+              "displayName": "dealer",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "nombre",
+              "displayName": "nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "vehiculo_interes",
+              "displayName": "vehiculo_interes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "entrada_usuario",
+              "displayName": "entrada_usuario",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        9656,
+        840
+      ],
+      "id": "43f4291e-277f-41cd-a519-3cceba3b7a7b",
+      "name": "rsvp"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "3844950b-1b47-4238-a3d7-70fd891a129f",
+              "leftValue": "={{ $json.transferir }}",
+              "rightValue": 1,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        10208,
+        400
+      ],
+      "id": "6b089f65-0c6c-42a0-b692-756ae4106d82",
+      "name": "Filter IF TRANSFER"
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "collection": "analytics_logs",
+        "fields": "={{ Object.keys($json).join(\",\") }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        12224,
+        208
+      ],
+      "id": "bb7002bb-673a-432c-8a57-64c28455a754",
+      "name": "Insert Analytics",
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0a394660-4198-4314-8ab0-0cf36fa10917",
+              "name": "sessionId",
+              "value": "={{ $('PARSE BODY').first().json.current_body.contactId }}",
+              "type": "string"
+            },
+            {
+              "id": "a382a941-bfab-41dd-9f6c-c2a538fef814",
+              "name": "response_time_sec",
+              "value": "={{ parseFloat((($now.toMillis() - $('Create Body').first().json.start_time) / 1000).toFixed(2)) }}",
+              "type": "number"
+            },
+            {
+              "id": "c0422b35-2086-47a0-886a-e56cba84ab28",
+              "name": "proyecto",
+              "value": "={{ $('User Data').first().json.dealer || 'No Identificado' }}",
+              "type": "string"
+            },
+            {
+              "id": "c2732a35-9768-41d0-86ef-ab5cedde1467",
+              "name": "canal",
+              "value": "={{ $('User Data').first().json.input_channel }}",
+              "type": "string"
+            },
+            {
+              "id": "463cfe71-1fa9-462f-b245-7ef75b47929d",
+              "name": "accion_orquestador",
+              "value": "={{ $('Parse response').first().json.accion_tipo || 'Desconocida' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        12000,
+        208
+      ],
+      "id": "2dfad2c5-cffe-4914-9435-07d8568f0e50",
+      "name": "Calculate Respond Time"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "oz7EabosHGTXtTjr",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/r1Jf5vwrkBrT4dEu",
+          "cachedResultName": "NOTIFICATIONS"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "tipo_alerta": "nuevo_lead",
+            "datos": "={{ { \"dealer\": $('User Data').first().json.dealer || 'Sin definir', \"interes_vehiculo\": $('Parse response').first().json.proyecto || $('User Data').first().json.interes_vehiculo || '', \"nombre_lead\": $('Parse response').first().json.lead_nombre || 'No registrado', \"telefono_lead\": $('Parse response').first().json.lead_telefono || 'No registrado', \"correo_lead\": $('Parse response').first().json.lead_correo || 'No registrado', \"canal\": $('User Data').first().json.input_channel, \"contactId\": $('User Data').first().json.contactId } }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "tipo_alerta",
+              "displayName": "tipo_alerta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "datos",
+              "displayName": "datos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "object"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        11328,
+        16
+      ],
+      "id": "d092e4fd-07f0-419f-b4b1-61e8cef57ad6",
+      "name": "'Notifications Master' Nuevos Leads"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "oz7EabosHGTXtTjr",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/r1Jf5vwrkBrT4dEu",
+          "cachedResultName": "NOTIFICATIONS"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "tipo_alerta": "escalacion",
+            "datos": "={{ { \"dealer\": $('User Data').first().json.dealer || 'Sin definir', \"interes_vehiculo\": $('Parse response').first().json.proyecto || $('User Data').first().json.interes_vehiculo || '', \"nombre_lead\": $('Parse response').first().json.lead_nombre || 'No registrado', \"telefono_lead\": $('Parse response').first().json.lead_telefono || 'No registrado', \"correo_lead\": $('Parse response').first().json.lead_correo || 'No registrado', \"canal\": $('User Data').first().json.input_channel, \"ultima_consulta\": $('CONTEXT 1').first().json.entrada_usuario, \"contactId\": $('User Data').first().json.contactId } }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "tipo_alerta",
+              "displayName": "tipo_alerta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "datos",
+              "displayName": "datos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "object"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        10432,
+        400
+      ],
+      "id": "dde14ca6-c0df-4b80-99e7-a2be3bce50bb",
+      "name": "'Notifications Master' Escalation"
+    },
+    {
+      "parameters": {
+        "description": "=Envía contenido multimedia (fotos/videos) al lead vía GHL. Usar SOLO cuando:\n1. Primera consulta general sobre el dealer (\"¿cómo son?\", \"¿qué ofrecen?\") → tipo_media: \"bienvenida\".\n2. El lead muestra interés real en un vehículo específico y pide fotos/video → tipo_media: \"vehiculo\", modelo: el modelo exacto que mencionó (ej. \"Toyota Camry 2023\").\n\nNUNCA usar para preguntas de precio, financiamiento, preguntas operativas simples, o antes de que el lead muestre interés real en un vehículo concreto.\n\nParametros requeridos:\n- tipo_media: \"bienvenida\" | \"vehiculo\"\n- modelo: modelo exacto del vehículo si el lead lo mencionó (requerido cuando tipo_media=\"vehiculo\")",
+        "workflowId": {
+          "__rl": true,
+          "value": "Gq8DaJm0kr7L4DSu",
+          "mode": "list",
+          "cachedResultName": "SEND - MEDIA"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "tipo_media": "={{ $fromAI('tipo_media', '', 'string') }}",
+            "dealer": "={{ $('Get Account Credentials').first().json.dealer }}",
+            "canal": "={{ $('User Data').first().json.input_channel }}",
+            "contactId": "={{ $('User Data').first().json.contactId }}",
+            "modelo": "={{ $fromAI('modelo', 'Specific vehicle model the lead mentioned, if any.', 'string') || '' }}",
+            "ghlToken": "={{ $('Get Account Credentials').first().json.ghlToken }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "tipo_media",
+              "displayName": "tipo_media",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "dealer",
+              "displayName": "dealer",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "canal",
+              "displayName": "canal",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "contactId",
+              "displayName": "contactId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "modelo",
+              "displayName": "modelo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "ghlToken",
+              "displayName": "ghlToken",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        9784,
+        840
+      ],
+      "id": "f169cc91-ec3a-43f6-a187-3b2a55cd1b9f",
+      "name": "send_media"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        11328,
+        336
+      ],
+      "id": "0bdae376-4c6b-42aa-b651-2fb165b3e707",
+      "name": "No Operation, do nothing2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "df577d5c-ddf9-44ef-9848-ef135119e484",
+              "leftValue": "={{ $('Parse response').first().json.datos_completos }}",
+              "rightValue": "=",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "49398426-9115-47fb-b997-e06d080b1c2b",
+              "leftValue": "={{ $('User Data').first().json.datos_completos }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        11104,
+        112
+      ],
+      "id": "318d1d9c-3a2f-47a8-805b-058c0422386b",
+      "name": "IF NUEVO LEAD"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "b9c1d2e3-f4a5-6789-bcde-f01234567891",
+              "leftValue": "={{ $('Lenguaje & Asesoria').first().json.output.interes_precios }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        12448,
+        208
+      ],
+      "id": "ede7d1e5-0f68-42e2-9420-f48e2ee916bb",
+      "name": "IF INTERES PRECIOS"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "oz7EabosHGTXtTjr",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/r1Jf5vwrkBrT4dEu",
+          "cachedResultName": "NOTIFICATIONS"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "tipo_alerta": "interes_precios",
+            "datos": "={{ { \"dealer\": $('User Data').first().json.dealer || 'No identificado', \"interes_vehiculo\": $('Parse response').first().json.proyecto || $('User Data').first().json.interes_vehiculo || '', \"nombre_lead\": $('Parse response').first().json.lead_nombre || 'No registrado', \"telefono_lead\": $('Parse response').first().json.lead_telefono || 'No registrado', \"correo_lead\": $('Parse response').first().json.lead_correo || 'No registrado', \"ultima_consulta\": $('CONTEXT 1').first().json.entrada_usuario, \"contactId\": $('User Data').first().json.contactId } }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "tipo_alerta",
+              "displayName": "tipo_alerta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "datos",
+              "displayName": "datos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "object"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        12672,
+        208
+      ],
+      "id": "9bcc099b-f683-4e44-81cc-85a1c1dfdaa6",
+      "name": "'Notifications Master' Interés Precios"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "4e9e55a0-8758-4cd3-bf5b-d1d25f77a2e3",
+              "leftValue": "={{ $('Lenguaje & Asesoria').first().json.output.es_fuera_de_contexto }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        9456,
+        16
+      ],
+      "id": "629f0cc4-7f96-46f0-b608-5aa8b6fe3929",
+      "name": "IF FUERA DE CONTEXTO"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "29d0cc6d-7efd-41bd-b9cc-26cc8c1c5809",
+              "name": "type",
+              "value": "={{ $('CONTEXT 1').first().json.canal.includes('instagram') ? 'instagram' : $('CONTEXT 1').first().json.canal.includes('messenger') ? 'messenger' : 'whatsapp' }}",
+              "type": "string"
+            },
+            {
+              "id": "e6bb1e67-6c59-410d-a7e1-a4c4673a9af4",
+              "name": "respuesta",
+              "value": "=Lo siento, ese tema está fuera de mis capacidades. Soy una asistente virtual y exclusiva de SPECTRUM VIVIENDA, y mi única función es ayudarte con información sobre nuestros proyectos de vivienda. ¿Te puedo orientar sobre alguno de ellos?",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        9984,
+        16
+      ],
+      "id": "126f49f3-953b-4a21-a02d-f2ab5f455de1",
+      "name": "OFF TOPIC - Respuesta"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.manychat.com/fb/sending/sendContent",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Get Account Credentials').first().json.api_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"subscriber_id\": \"{{ $('User Data').first().json.manychat_id }}\",\n  \"data\": {\n    \"version\": \"v2\",\n    \"content\": {\n      \"type\": \"{{ $json.type.trim() }}\",\n      \"messages\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"{{ $json.respuesta }}\"\n        }\n      ]\n    }\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        10208,
+        16
+      ],
+      "id": "22215b98-5d23-4660-8fcc-34f20699befd",
+      "name": "OFF TOPIC - Respond",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        9144,
+        840
+      ],
+      "id": "b3c65d98-49d5-44ca-b83c-88248a9b0a69",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "o8MexJvFeSx2j4an",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "options": {
+          "temperature": 0.3
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        5368,
+        632
+      ],
+      "id": "3bc7c135-24d0-4e3b-a650-63a6a7e45985",
+      "name": "OpenRouter Chat Model2",
+      "credentials": {
+        "openRouterApi": {
+          "id": "o8MexJvFeSx2j4an",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "key": "=rl:{{ $('PARSE BODY').first().json.current_body.contactId }}:{{ Math.floor($now.toUnixInteger() / 60) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        368,
+        112
+      ],
+      "id": "a2fc6c08-ebdc-460d-b0e1-b5c693ac8e75",
+      "name": "SPAM GET",
+      "credentials": {
+        "redis": {
+          "id": "aSlU09IBNEqUzD4t",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "31f88f36-6fef-4e45-ae3c-b4da83e65880",
+              "leftValue": "={{ $json.count }}",
+              "rightValue": 15,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        816,
+        112
+      ],
+      "id": "45571581-138e-4dfb-bbfa-194a1a998b8d",
+      "name": "SPAM CHECK"
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "=rl:{{ $('PARSE BODY').first().json.current_body.contactId }}:{{ Math.floor($now.toUnixInteger() / 60) }}",
+        "value": "={{ ($('SPAM NORMALIZE').first().json.count + 1).toString() }}",
+        "expire": true,
+        "ttl": 120
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        304
+      ],
+      "id": "38e01659-2fd3-4a2a-9723-418eafd96bc2",
+      "name": "SPAM INCR",
+      "credentials": {
+        "redis": {
+          "id": "aSlU09IBNEqUzD4t",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ 'https://services.leadconnectorhq.com/contacts/' + $('PARSE BODY').first().json.current_body.contactId + '/tags' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + $('Get Account Credentials').first().json.ghlToken }}"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { tags: [\"SPAM_BLOQUEADO\"] } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1040,
+        16
+      ],
+      "id": "2c817190-56b7-4de3-8164-8fc2c661bf69",
+      "name": "SPAM BLOCK MANYCHAT"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "spam-blocked-perm-check",
+              "leftValue": "={{ $('Check Spam Flag').first().json.spam_bloqueado }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "274e17a3-df7a-4b7e-85e5-2b2e6d7ad991",
+      "name": "SPAM BLOCKED IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -80,
+        16
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "ee1d2a7b-6061-4e77-9e92-34336593f617",
+      "name": "SPAM BLOCKED PERM",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        144,
+        -80
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $input.first().json.propertyName;\nconst count = parseInt(raw) || 0;\nreturn [{ json: { count } }];"
+      },
+      "id": "7364a209-4862-4747-9f55-1bb1073c6a40",
+      "name": "SPAM NORMALIZE",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        592,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9502a645-f324-46fd-b99f-0fde76cc66cc",
+              "leftValue": "={{ $json.accion_tipo }}",
+              "rightValue": "error",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        10208,
+        976
+      ],
+      "id": "fe93e52c-53b5-49a5-b282-0e4b2332c6e2",
+      "name": "Detectar Error Tecnico"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "45c4bc7e-bd90-4e05-a5f2-37cab4442fe9",
+              "name": "contactId",
+              "value": "={{ $('User Data').first().json.contactId }}",
+              "type": "string"
+            },
+            {
+              "id": "2c7adf62-f9b1-4032-9a89-339eb66ef484",
+              "name": "dealer",
+              "value": "={{ $('User Data').first().json.dealer }}",
+              "type": "string"
+            },
+            {
+              "id": "eda90aa3-1e09-4a56-8e5c-fe3c60ad5fb1",
+              "name": "canal",
+              "value": "={{ $('User Data').first().json.input_channel }}",
+              "type": "string"
+            },
+            {
+              "id": "e278abd9-6e9c-438f-b024-3d7cd2a4e6c5",
+              "name": "mensaje_usuario",
+              "value": "={{ $('CONTEXT 1').first().json.entrada_usuario }}",
+              "type": "string"
+            },
+            {
+              "id": "3150314b-74d3-4683-afa8-5aa738265dbd",
+              "name": "error_type",
+              "value": "={{ $json.error }}",
+              "type": "string"
+            },
+            {
+              "id": "a1d3c51b-701b-45b8-ace5-7a64977036a8",
+              "name": "raw_output",
+              "value": "={{ $json.raw_output }}",
+              "type": "string"
+            },
+            {
+              "id": "51fd4729-b356-43e2-8861-77f6058195b5",
+              "name": "fecha_error",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "8197b8b3-d3b5-466d-95cb-737ba895eba3",
+              "name": "execution_id",
+              "value": "={{ $execution.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        10432,
+        976
+      ],
+      "id": "291a9888-3617-42cd-8d2d-3636ba7a1542",
+      "name": "Build Error Log"
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "collection": "agent_errors",
+        "fields": "={{ Object.keys($json).join(',') }}",
+        "options": {
+          "dateFields": "fecha_error"
+        }
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        10656,
+        976
+      ],
+      "id": "0ce705f1-3e36-499c-9cd5-656387cd1abd",
+      "name": "Insert Error Log",
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
+    },
+    {
+      "id": "ea03e8b8-9e2b-4422-8621-39fb5953db98",
+      "name": "Check Spam Flag",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.3,
+      "position": [
+        -192,
+        16
+      ],
+      "parameters": {
+        "collection": "users",
+        "options": {
+          "limit": 1
+        },
+        "query": "={{ JSON.stringify({ contactId: $('PARSE BODY').first().json.current_body.contactId }) }}"
+      },
+      "alwaysOutputData": true,
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
+    },
+    {
+      "id": "83fdc04b-99f4-4642-82f9-4e2ac432a7d2",
+      "name": "Get Account Credentials",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        144,
+        112
+      ],
+      "parameters": {
+        "resource": "row",
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "3V2Oq6RyrnfPtkzi",
+          "cachedResultName": "GHL Locations"
+        },
+        "matchType": "allConditions",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "locationId",
+              "condition": "eq",
+              "keyValue": "={{ $('PARSE BODY').first().json.current_body.locationId }}"
+            }
+          ]
+        },
+        "returnAll": false,
+        "limit": 1
+      }
+    },
+    {
+      "id": "7df5c223-1e85-4517-9589-987771f7ed4c",
+      "name": "Prepare Spam Flag",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1264,
+        -160
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "psf-contactid",
+              "name": "contactId",
+              "value": "={{ $('PARSE BODY').first().json.current_body.contactId }}",
+              "type": "string"
+            },
+            {
+              "id": "psf-flag",
+              "name": "spam_bloqueado",
+              "value": true,
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "5d4a4d1f-66b0-4fd7-ab8e-4f6a2b766aea",
+      "name": "SET SPAM FIELD",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.3,
+      "position": [
+        1264,
+        -80
+      ],
+      "parameters": {
+        "operation": "update",
+        "collection": "users",
+        "updateKey": "contactId",
+        "fields": "contactId,spam_bloqueado",
+        "upsert": true,
+        "options": {}
+      },
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
+    },
+    {
+      "id": "b19d26ec-c941-4dbe-ab9a-6dab7248ae91",
+      "name": "Format Spam Alert",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1264,
+        112
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fsa-text",
+              "name": "text",
+              "value": "=:no_entry_sign: *Spam bloqueado*\\nContacto: `{{ $('PARSE BODY').first().json.current_body.contactId }}`\\nDealer: {{ $('Get Account Credentials').first().json.dealer }}\\nCanal: {{ $('PARSE BODY').first().json.current_body.channel }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "bb9bd430-241b-4993-aec9-97282b7f7465",
+      "name": "Send a message",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.5,
+      "position": [
+        1488,
+        112
+      ],
+      "parameters": {
+        "resource": "message",
+        "operation": "post",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "C0BPV2Z2S3C",
+          "cachedResultName": "notificaciones"
+        },
+        "messageType": "text",
+        "text": "={{ $json.text }}",
+        "otherOptions": {
+          "mrkdwn": true
+        },
+        "authentication": "accessToken"
+      },
+      "webhookId": "d52265df-e993-4c83-9729-a51304878d15",
+      "credentials": {
+        "slackApi": {
+          "id": "wUpEjaBadmKdhhqM",
+          "name": "Slack FORJADO"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Parameter Type": {
+      "main": [
+        [
+          {
+            "node": "SEND GHL MESSAGE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "User Data": {
+      "main": [
+        [
+          {
+            "node": "IF FUERA DE CONTEXTO",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "PRINCIPAL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update User": {
+      "main": [
+        [
+          {
+            "node": "User Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert User": {
+      "main": [
+        [
+          {
+            "node": "User Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find User": {
+      "main": [
+        [
+          {
+            "node": "If USER NOT EXIST",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DATA to CREATE": {
+      "main": [
+        [
+          {
+            "node": "Insert User",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DATA to UPDATE": {
+      "main": [
+        [
+          {
+            "node": "Update User",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If USER NOT EXIST": {
+      "main": [
+        [
+          {
+            "node": "DATA to CREATE",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "DATA to UPDATE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "JOINNING MESSAGE": {
+      "main": [
+        [
+          {
+            "node": "DELETE MESSAGES",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter1": {
+      "main": [
+        [
+          {
+            "node": "JOINNING MESSAGE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "GET MESSAGE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET MESSAGE": {
+      "main": [
+        [
+          {
+            "node": "Filter1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SAVE MESSAGE": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "INPUT FINAL": {
+      "main": [
+        [
+          {
+            "node": "SAVE MESSAGE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "audio input": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "image input": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "text input": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "HTTP IF AUDIO": {
+      "main": [
+        [
+          {
+            "node": "TRANSCRIBE AUDIO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ANALIZA IMAGEN": {
+      "main": [
+        [
+          {
+            "node": "image input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "INPUT FINAL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Sort",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "TRANSCRIBE AUDIO": {
+      "main": [
+        [
+          {
+            "node": "audio input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ES AUDIO / IMAGEN": {
+      "main": [
+        [
+          {
+            "node": "HTTP IF AUDIO",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "ANALIZA IMAGEN",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "ES AUDIO / IMAGEN",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ES ARCHIVO": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "text input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Body": {
+      "main": [
+        [
+          {
+            "node": "PARSE BODY",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Create Body",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MongoDB Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "PRINCIPAL",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PRINCIPAL": {
+      "main": [
+        [
+          {
+            "node": "Parse response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "lead_collector": {
+      "ai_tool": [
+        [
+          {
+            "node": "PRINCIPAL",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse response": {
+      "main": [
+        [
+          {
+            "node": "Hay Cambios?",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Filter IF TRANSFER",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Detectar Error Tecnico",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If TIENE DATOS NUEVOS": {
+      "main": [
+        [
+          {
+            "node": "Prepare Update",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Update": {
+      "main": [
+        [
+          {
+            "node": "Update User Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hay Cambios?": {
+      "main": [
+        [
+          {
+            "node": "If TIENE DATOS NUEVOS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update User Lead": {
+      "main": [
+        [
+          {
+            "node": "IF NUEVO LEAD",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "No Operation, do nothing1": {
+      "main": [
+        [
+          {
+            "node": "Parameter Type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "kb_search": {
+      "ai_tool": [
+        [
+          {
+            "node": "PRINCIPAL",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "rsvp": {
+      "ai_tool": [
+        [
+          {
+            "node": "PRINCIPAL",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter IF TRANSFER": {
+      "main": [
+        [
+          {
+            "node": "'Notifications Master' Escalation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert Analytics": {
+      "main": [
+        [
+          {
+            "node": "IF INTERES PRECIOS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Respond Time": {
+      "main": [
+        [
+          {
+            "node": "Insert Analytics",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "'Notifications Master' Nuevos Leads": {
+      "main": [
+        [
+          {
+            "node": "Parameter Type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "send_media": {
+      "ai_tool": [
+        [
+          {
+            "node": "PRINCIPAL",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "No Operation, do nothing2": {
+      "main": [
+        [
+          {
+            "node": "Parameter Type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF NUEVO LEAD": {
+      "main": [
+        [
+          {
+            "node": "'Notifications Master' Nuevos Leads",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF INTERES PRECIOS": {
+      "main": [
+        [
+          {
+            "node": "'Notifications Master' Interés Precios",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF FUERA DE CONTEXTO": {
+      "main": [
+        [
+          {
+            "node": "OFF TOPIC - Respuesta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OFF TOPIC - Respuesta": {
+      "main": [
+        [
+          {
+            "node": "OFF TOPIC - Respond",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "PRINCIPAL",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Lenguaje & Asesoria",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SPAM CHECK": {
+      "main": [
+        [
+          {
+            "node": "SPAM BLOCK MANYCHAT",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "SPAM INCR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SPAM BLOCK MANYCHAT": {
+      "main": [
+        [
+          {
+            "node": "Prepare Spam Flag",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Format Spam Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SPAM BLOCKED IF": {
+      "main": [
+        [
+          {
+            "node": "SPAM BLOCKED PERM",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Account Credentials",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SPAM GET": {
+      "main": [
+        [
+          {
+            "node": "SPAM NORMALIZE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SPAM NORMALIZE": {
+      "main": [
+        [
+          {
+            "node": "SPAM CHECK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Detectar Error Tecnico": {
+      "main": [
+        [
+          {
+            "node": "Build Error Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Error Log": {
+      "main": [
+        [
+          {
+            "node": "Insert Error Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PARSE BODY": {
+      "main": [
+        [
+          {
+            "node": "Check Spam Flag",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Spam Flag": {
+      "main": [
+        [
+          {
+            "node": "SPAM BLOCKED IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Account Credentials": {
+      "main": [
+        [
+          {
+            "node": "SPAM GET",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Spam Flag": {
+      "main": [
+        [
+          {
+            "node": "SET SPAM FIELD",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Spam Alert": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SEND GHL MESSAGE": {
+      "main": [
+        [
+          {
+            "node": "Calculate Respond Time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lenguaje & Asesoria": {
+      "main": [
+        [
+          {
+            "node": "CONTEXT 1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CONTEXT 1": {
+      "main": [
+        [
+          {
+            "node": "Find User",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SPAM INCR": {
+      "main": [
+        [
+          {
+            "node": "ES ARCHIVO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DELETE MESSAGES": {
+      "main": [
+        [
+          {
+            "node": "Lenguaje & Asesoria",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "ypd1lxqlsa5KXsoy"
+  }
+}

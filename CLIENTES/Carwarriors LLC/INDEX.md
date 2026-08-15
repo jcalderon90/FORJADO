@@ -39,7 +39,15 @@ actualizado: 2026-08-14
 
 ## Artefactos (exports crudos, no leer como documentación)
 
-| Archivo | Qué es |
+Organizados en `n8n-workflows/` por proyecto (2026-08-14), para no tener que consultar n8n en vivo para ver la estructura de un flujo:
+
+| Carpeta / Archivo | Qué es |
 |---|---|
-| `carwarriors_lead_intake_agent_workflow.json` | Export de un workflow n8n |
-| `n8n-workflows/ghl-to-dealercenter-adf.json` | Export de workflow n8n (GHL → DealerCenter ADF) |
+| **`n8n-workflows/Sincronizacion GHL-DealerCenter/`** | |
+| `carwarriors_lead_intake_agent_workflow.json` | Agente de Captura de Leads (pide teléfono, upsert Mongo/GHL) |
+| `ghl-to-dealercenter-adf.json` | Subir a DealerCenter (ADF/SFTP) |
+| `dealercenter-mongo-ghl-lead-sync.json` | DealerCenter → Mongo → GHL (Lead Sync diario) |
+| **`n8n-workflows/Lead Agent (n8n + OpenRouter)/`** | Migración del bot conversacional (ver [[Carwarriors - Migración Bot GHL a n8n y OpenRouter (Diseño)]]) |
+| `PRINCIPAL.json` | Orquestador |
+| `LEAD-COLLECTOR.json`, `KB-SEARCH.json`, `RSVP.json`, `SEND-MEDIA.json`, `VECTORIZAR-KB.json` | Sub-workflows tool-call de PRINCIPAL |
+| `NOTIFICATIONS.json`, `ERROR-HANDLER.json`, `SLACK-INBOUND.json` | Infraestructura de alertas/Slack compartida |

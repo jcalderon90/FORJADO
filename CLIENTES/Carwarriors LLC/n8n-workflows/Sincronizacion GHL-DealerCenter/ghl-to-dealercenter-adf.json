@@ -1,86 +1,117 @@
 {
+  "name": "Subir a DealerCenter",
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "connections": {
+    "GHL Lead Webhook (ADF)": { "main": [[{ "node": "Select Dealer + Token", "type": "main", "index": 0 }]] },
+    "Select Dealer + Token": { "main": [[{ "node": "Get GHL Contact", "type": "main", "index": 0 }]] },
+    "Build ADF XML": { "main": [[{ "node": "Subir a DealerCenter (SFTP)", "type": "main", "index": 0 }]] },
+    "Get GHL Contact": { "main": [[{ "node": "Buscar en Mongo (Dedupe)", "type": "main", "index": 0 }]] },
+    "Buscar en Mongo (Dedupe)": { "main": [[{ "node": "Es Cliente Nuevo?", "type": "main", "index": 0 }]] },
+    "Es Cliente Nuevo?": {
+      "main": [
+        [{ "node": "Build ADF XML", "type": "main", "index": 0 }],
+        [{ "node": "Duplicado Evitado", "type": "main", "index": 0 }]
+      ]
+    }
+  },
   "nodes": [
     {
-      "id": "wh-node-001",
+      "parameters": { "httpMethod": "POST", "path": "ghl-dealercenter-adf", "options": {} },
+      "id": "322b2dc6-7c88-4205-84e6-d667e1191725",
       "name": "GHL Lead Webhook (ADF)",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
-      "position": [0, 0],
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "ghl-dealercenter-adf",
-        "responseMode": "onReceived",
-        "options": {}
-      }
+      "position": [192, 128],
+      "webhookId": "bc0de0d7-de10-47dc-b34c-fd2bca680c3e",
+      "_productionUrl": "https://n8n-x5jtc0a7f0lbanybimocyidl.2.24.106.87.sslip.io/webhook/ghl-dealercenter-adf"
     },
     {
-      "id": "code-node-001",
+      "parameters": {
+        "jsCode": "const body = $input.item.json.body || $input.item.json;\nconst locationId = body.locationId;\nconst contactId = body.contactId;\n\nif (!contactId || !locationId) {\n  throw new Error('Falta contactId o locationId en el payload del webhook de GHL. Body recibido: ' + JSON.stringify(body));\n}\n\n// Location IDs y tokens de GHL (verificar contra el vault Carwarriors LLC.md si cambian)\nconst LOCATIONS = {\n  'DSe5PdPEScZL8cbZTkKI': { dealer: 'CW', vendorName: 'Carwarriors LLC', token: 'pit-34c1d79d-0bfa-4ddc-8349-11ce00ff9df5' },\n  '1j1dHo8HEbZdElQUGFoC': { dealer: 'RANCES', vendorName: 'Rances Car', token: 'pit-e8ac1488-cb01-484d-98f9-a4b2bcae4c92' }\n};\n\nconst loc = LOCATIONS[locationId];\nif (!loc) {\n  throw new Error('Location de GHL desconocida (no es Carwarriors LLC ni Rances Car): ' + locationId);\n}\n\nreturn [{\n  json: {\n    contactId,\n    locationId,\n    dealer: loc.dealer,\n    vendorName: loc.vendorName,\n    ghlToken: loc.token\n  }\n}];",
+        "_comment": "Tokens rotados 2026-08-13 (renovacion PIT en ambas subcuentas). Hardcodeado a proposito (autorizado por Jorge) -- el token vive tambien en 'Header Auth GHL' pero solo para el workflow de captura de leads."
+      },
+      "id": "06a8347f-8447-4ed9-9a3e-d483263b664f",
       "name": "Select Dealer + Token",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [220, 0],
-      "parameters": {
-        "jsCode": "const body = $input.item.json.body || $input.item.json;\nconst locationId = body.locationId;\nconst contactId = body.contactId;\n\nif (!contactId || !locationId) {\n  throw new Error('Falta contactId o locationId en el payload del webhook de GHL. Body recibido: ' + JSON.stringify(body));\n}\n\n// Location IDs y tokens de GHL (verificar contra el vault Carwarriors LLC.md si cambian)\nconst LOCATIONS = {\n  'DSe5PdPEScZL8cbZTkKI': { dealer: 'CW', vendorName: 'Carwarriors LLC', token: 'pit-20fb00b2-9c40-4e3e-a3cb-4d38736bcbb3' },\n  '1j1dHo8HEbZdElQUGFoC': { dealer: 'RANCES', vendorName: 'Rances Car', token: 'pit-c30b22ca-d09c-45a4-967e-8b75e574a783' }\n};\n\nconst loc = LOCATIONS[locationId];\nif (!loc) {\n  throw new Error('Location de GHL desconocida (no es Carwarriors LLC ni Rances Car): ' + locationId);\n}\n\nreturn [{\n  json: {\n    contactId,\n    locationId,\n    dealer: loc.dealer,\n    vendorName: loc.vendorName,\n    ghlToken: loc.token\n  }\n}];"
-      }
+      "position": [416, 128]
     },
     {
-      "id": "http-node-001",
+      "parameters": {
+        "url": "={{ 'https://services.leadconnectorhq.com/contacts/' + $json.contactId }}",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [{ "name": "Authorization", "value": "={{ 'Bearer ' + $json.ghlToken }}" }, { "name": "Version", "value": "2021-07-28" }, { "name": "Accept", "value": "application/json" }] },
+        "options": {}
+      },
+      "id": "6e2d3bef-64f0-4872-a3b9-811ad6675348",
       "name": "Get GHL Contact",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [440, 0],
-      "parameters": {
-        "method": "GET",
-        "url": "={{ 'https://services.leadconnectorhq.com/contacts/' + $json.contactId }}",
-        "authentication": "none",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            { "name": "Authorization", "value": "={{ 'Bearer ' + $json.ghlToken }}" },
-            { "name": "Version", "value": "2021-07-28" },
-            { "name": "Accept", "value": "application/json" }
-          ]
-        },
-        "options": {}
-      }
+      "position": [640, 128]
     },
     {
-      "id": "code-node-002",
+      "parameters": {
+        "jsCode": "const contact = $('Get GHL Contact').item.json.contact;\nconst dealerInfo = $('Select Dealer + Token').item.json;\nconst dealer = dealerInfo.dealer;\nconst vendorName = dealerInfo.vendorName;\n\nconst attribution = contact.attributionSource || {};\nconst campaign = (attribution.campaign || '').toUpperCase();\n\n// Lead Source: valores exactos ya existentes en el dropdown de DealerCenter (Customer List, confirmado via Playwright 2026-07-30).\n// Lead Source es texto libre sin enum -- una capitalizacion distinta crea una categoria nueva y separada,\n// fragmentando el reporte mensual del equipo en vez de sumar a la categoria que ya usan.\nconst LEAD_SOURCE_MAP = {\n  CW: { TESLA: 'Tesla CW', TRADE: 'TRADE IN CW', META: 'META CW' },\n  RANCES: { TESLA: 'TESLA RANCES', TRADE: 'Trade in Rances', META: 'Meta Rances' }\n};\n\nlet category;\nif (campaign.includes('TESLA')) {\n  category = 'TESLA';\n} else if (campaign.includes('TRADE')) {\n  category = 'TRADE';\n} else {\n  category = 'META';\n}\nconst leadSource = LEAD_SOURCE_MAP[dealer][category];\n\nconst fullName = [contact.firstName, contact.lastName].filter(Boolean).join(' ') || 'Sin Nombre';\nconst email = contact.email || '';\nconst phone = contact.phone || '';\n\nconst customFields = contact.customFields || [];\nconst vehicleInterestField = customFields.find(f => f.id === 'HeQZLqZ0JXldicPk1AOJ');\nconst vehicleInterest = vehicleInterestField ? vehicleInterestField.value : '';\n\n// requestdate ISO 8601 sin milisegundos ni zona horaria (formato validado en la prueba 2026-07-22)\nconst now = new Date().toISOString().replace(/\\.\\d{3}Z$/, '');\n\nconst escapeXml = (s) => String(s)\n  .replace(/&/g, '&amp;')\n  .replace(/</g, '&lt;')\n  .replace(/>/g, '&gt;')\n  .replace(/\"/g, '&quot;')\n  .replace(/'/g, '&apos;');\n\nconst vehicleBlock = vehicleInterest\n  ? `<vehicle status=\"used\" interest=\"buy\"><make>${escapeXml(vehicleInterest)}</make></vehicle>`\n  : `<vehicle status=\"used\" interest=\"buy\"><make>N/A</make></vehicle>`;\n\nconst xml = `<?xml version=\"1.0\"?>\n<?adf version=\"1.0\"?>\n<adf>\n  <prospect>\n    <id sequence=\"1\" source=\"ghl-contact-id\">${escapeXml(contact.id)}</id>\n    <requestdate>${now}</requestdate>\n    <requesttype>sales</requesttype>\n    ${vehicleBlock}\n    <customer>\n      <contact>\n        <name part=\"full\">${escapeXml(fullName)}</name>\n        ${email ? `<email>${escapeXml(email)}</email>` : ''}\n        ${phone ? `<phone type=\"voice\">${escapeXml(phone)}</phone>` : ''}\n      </contact>\n    </customer>\n    <vendor>\n      <id sequence=\"1\" source=\"dealerId\">14031841</id>\n      <vendorname>${escapeXml(vendorName)}</vendorname>\n    </vendor>\n    <provider>\n      <id sequence=\"1\" source=\"sourcename\">GoHighLevel</id>\n      <name part=\"full\">${escapeXml(leadSource)}</name>\n    </provider>\n  </prospect>\n</adf>`;\n\nconst fileName = `${Date.now()}_${contact.id}.xml`;\n\nreturn [{\n  json: { leadSource, fileName, dealer },\n  binary: {\n    data: {\n      data: Buffer.from(xml).toString('base64'),\n      mimeType: 'application/xml',\n      fileName\n    }\n  }\n}];"
+      },
+      "id": "ae9a22fc-3a76-4594-a1b2-11d197f3df51",
       "name": "Build ADF XML",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [660, 0],
-      "parameters": {
-        "jsCode": "const contact = $json.contact;\nconst dealerInfo = $('Select Dealer + Token').item.json;\nconst dealer = dealerInfo.dealer;\nconst vendorName = dealerInfo.vendorName;\n\nconst attribution = contact.attributionSource || {};\nconst campaign = (attribution.campaign || '').toUpperCase();\n\nlet leadSource;\nif (campaign.includes('TESLA')) {\n  leadSource = `TESLA ${dealer}`;\n} else if (campaign.includes('TRADE')) {\n  leadSource = `TRADE IN ${dealer}`;\n} else {\n  leadSource = `META ${dealer}`;\n}\n\nconst fullName = [contact.firstName, contact.lastName].filter(Boolean).join(' ') || 'Sin Nombre';\nconst email = contact.email || '';\nconst phone = contact.phone || '';\n\nconst customFields = contact.customFields || [];\nconst vehicleInterestField = customFields.find(f => f.id === 'HeQZLqZ0JXldicPk1AOJ');\nconst vehicleInterest = vehicleInterestField ? vehicleInterestField.value : '';\n\n// requestdate ISO 8601 sin milisegundos ni zona horaria (formato validado en la prueba 2026-07-22)\nconst now = new Date().toISOString().replace(/\\.\\d{3}Z$/, '');\n\nconst escapeXml = (s) => String(s)\n  .replace(/&/g, '&amp;')\n  .replace(/</g, '&lt;')\n  .replace(/>/g, '&gt;')\n  .replace(/\"/g, '&quot;')\n  .replace(/'/g, '&apos;');\n\nconst vehicleBlock = vehicleInterest\n  ? `<vehicle status=\"used\" interest=\"buy\"><make>${escapeXml(vehicleInterest)}</make></vehicle>`\n  : `<vehicle status=\"used\" interest=\"buy\"><make>N/A</make></vehicle>`;\n\nconst xml = `<?xml version=\"1.0\"?>\n<?adf version=\"1.0\"?>\n<adf>\n  <prospect>\n    <id sequence=\"1\" source=\"ghl-contact-id\">${escapeXml(contact.id)}</id>\n    <requestdate>${now}</requestdate>\n    <requesttype>sales</requesttype>\n    ${vehicleBlock}\n    <customer>\n      <contact>\n        <name part=\"full\">${escapeXml(fullName)}</name>\n        ${email ? `<email>${escapeXml(email)}</email>` : ''}\n        ${phone ? `<phone type=\"voice\">${escapeXml(phone)}</phone>` : ''}\n      </contact>\n    </customer>\n    <vendor>\n      <id sequence=\"1\" source=\"dealerId\">14031841</id>\n      <vendorname>${escapeXml(vendorName)}</vendorname>\n    </vendor>\n    <provider>\n      <id sequence=\"1\" source=\"sourcename\">GoHighLevel</id>\n      <name part=\"full\">${escapeXml(leadSource)}</name>\n    </provider>\n  </prospect>\n</adf>`;\n\nconst fileName = `${Date.now()}_${contact.id}.xml`;\n\nreturn [{\n  json: { leadSource, fileName, dealer },\n  binary: {\n    data: {\n      data: Buffer.from(xml).toString('base64'),\n      mimeType: 'application/xml',\n      fileName\n    }\n  }\n}];"
-      }
+      "position": [1312, 32]
     },
     {
-      "id": "ftp-node-001",
+      "parameters": { "protocol": "sftp", "operation": "upload", "path": "={{ '/Leads/' + $json.fileName }}", "options": {} },
+      "id": "66be1195-81fe-40fd-8a65-6a2deaf92e02",
       "name": "Subir a DealerCenter (SFTP)",
       "type": "n8n-nodes-base.ftp",
       "typeVersion": 1,
-      "position": [880, 0],
+      "position": [1536, 32],
+      "credentials": { "sftp": { "id": "y5Dxu4D7498raQQU", "name": "FTP account" } }
+    },
+    {
       "parameters": {
-        "protocol": "sftp",
-        "operation": "upload",
-        "path": "={{ '/Leads/' + $json.fileName }}",
-        "binaryData": true,
+        "collection": "dealercenter_customers",
+        "options": { "limit": 1 },
+        "query": "={{ (() => { const conds = [ $json.contact.phone ? { phone: $json.contact.phone } : null, $json.contact.email ? { email: { $regex: '^' + $json.contact.email + '$', $options: 'i' } } : null ].filter(Boolean); return JSON.stringify(conds.length ? { $or: conds } : { _id: null }); })() }}"
+      },
+      "id": "26eefe79-ad16-4830-a919-463371370ff5",
+      "name": "Buscar en Mongo (Dedupe)",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.3,
+      "position": [864, 128],
+      "alwaysOutputData": true,
+      "credentials": { "mongoDb": { "id": "WvGe0WEIfm6NF1Qa", "name": "MongoDB Carwarriors" } }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 1 },
+          "conditions": [{ "leftValue": "={{ $json.customerUniqueId }}", "operator": { "type": "string", "operation": "empty" } }]
+        },
         "options": {}
-      }
+      },
+      "id": "0e302008-fc2f-458b-9fb4-ea3aa8862551",
+      "name": "Es Cliente Nuevo?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [1088, 128]
+    },
+    {
+      "parameters": {},
+      "id": "a978c5fa-5b1a-4304-afeb-6aae5188d015",
+      "name": "Duplicado Evitado",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1312, 224],
+      "notes": "Ya existe un customer en DealerCenter con este telefono/email (segun el espejo de Mongo) -- no se reenvia el ADF para evitar crear un duplicado."
     }
-  ],
-  "connections": {
-    "GHL Lead Webhook (ADF)": {
-      "main": [[{ "node": "Select Dealer + Token", "type": "main", "index": 0 }]]
-    },
-    "Select Dealer + Token": {
-      "main": [[{ "node": "Get GHL Contact", "type": "main", "index": 0 }]]
-    },
-    "Get GHL Contact": {
-      "main": [[{ "node": "Build ADF XML", "type": "main", "index": 0 }]]
-    },
-    "Build ADF XML": {
-      "main": [[{ "node": "Subir a DealerCenter (SFTP)", "type": "main", "index": 0 }]]
-    }
-  }
+  ]
 }
