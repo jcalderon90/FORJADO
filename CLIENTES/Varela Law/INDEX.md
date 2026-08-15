@@ -41,4 +41,3 @@ Organizados en `n8n-workflows/` por proyecto (2026-08-14), igual que Carwarriors
 | `n8n-workflows/MyCase Token Manager/mycase_token_manager_workflow.json` | Export de workflow n8n |
 | `n8n-workflows/MyCase Token Manager/mycase_token_manager_workflow.staticdata.bak.json` | Backup del staticData del workflow anterior |
 | `n8n-workflows/Radar Billing Automation/radar_billing_id_mapper_workflow.json` | Export de workflow n8n |
-| `swagger-ui-init.js` | Archivo suelto de ~250KB, parece residuo de una captura de Swagger UI — no es contenido del vault. Candidato a limpieza, no borrado aquí (fuera del alcance aditivo de este índice) |

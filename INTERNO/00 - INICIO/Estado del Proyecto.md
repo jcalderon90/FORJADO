@@ -2,12 +2,12 @@
 tags: [forjado, estado, pendientes, dashboard]
 tipo: estado
 estado: activo
-actualizado: 2026-08-14
+actualizado: 2026-08-15
 ---
 
 # Estado del Proyecto — FORJADO
 
-> Estado consolidado de la agencia al **2026-08-14**. Fuente de verdad: notas de cliente individuales — este resumen se actualiza a mano.
+> Estado consolidado de la agencia al **2026-08-15**. Fuente de verdad: notas de cliente individuales — este resumen se actualiza a mano.
 
 ---
 
@@ -72,7 +72,7 @@ actualizado: 2026-08-14
 
 ## Otros pendientes de la agencia
 
-- [x] ~~Reorganizar la bóveda y hacerla más LLM-friendly~~ — **resuelto 2026-08-14.** Estructura movida a `CLIENTES/` (Carwarriors LLC, Varela Law) + `INTERNO/` (marca/servicios/ventas/operaciones/finanzas/recursos/plantillas), 49 archivos vía `git mv` sin romper wikilinks. Además: `README.md` raíz (estaba vacío) ahora es el mapa de entrada; se crearon `INDEX.md` por cliente (Carwarriors LLC, Varela Law) que separan docs vigentes / históricos-deprecados / bitácora / artefactos JSON crudos, para no tener que abrir todos los archivos de la carpeta; `CLIENTES/_Léeme.md` e `INTERNO/INDICE.md` corregidos (tenían instrucciones/enlaces desactualizados de antes de la reorg). Se detectó (no resuelto, fuera de alcance aditivo) un archivo suelto `swagger-ui-init.js` (~250KB) en `Varela Law/` que parece residuo, no contenido real — marcado en su `INDEX.md`, pendiente de decidir si se borra.
+- [x] ~~Reorganizar la bóveda y hacerla más LLM-friendly~~ — **resuelto 2026-08-14.** Estructura movida a `CLIENTES/` (Carwarriors LLC, Varela Law) + `INTERNO/` (marca/servicios/ventas/operaciones/finanzas/recursos/plantillas), 49 archivos vía `git mv` sin romper wikilinks. Además: `README.md` raíz (estaba vacío) ahora es el mapa de entrada; se crearon `INDEX.md` por cliente (Carwarriors LLC, Varela Law) que separan docs vigentes / históricos-deprecados / bitácora / artefactos JSON crudos, para no tener que abrir todos los archivos de la carpeta; `CLIENTES/_Léeme.md` e `INTERNO/INDICE.md` corregidos (tenían instrucciones/enlaces desactualizados de antes de la reorg). Se detectó (no resuelto, fuera de alcance aditivo) un archivo suelto `swagger-ui-init.js` (~250KB) en `Varela Law/` que parece residuo, no contenido real — marcado en su `INDEX.md`, pendiente de decidir si se borra. **Residuo `swagger-ui-init.js` eliminado 2026-08-15** — confirmado que era el bootstrap estándar de Swagger UI (captura, 7785 líneas, 0 contenido del vault), borrado vía `git rm` y entrada eliminada del `INDEX.md` de Varela Law.
 - [x] ~~Exportar y organizar los workflows de n8n como archivos locales~~ — **resuelto 2026-08-14** para Carwarriors LLC (12 workflows) y Varela Law (2). En ambos, `n8n-workflows/` quedó agrupado en subcarpetas por proyecto en vez de un solo directorio plano: Carwarriors → `Sincronizacion GHL-DealerCenter/` y `Lead Agent (n8n + OpenRouter)/`; Varela Law → `MyCase Token Manager/` y `Radar Billing Automation/`. `ghl-to-dealercenter-adf.json` de Carwarriors estaba desactualizado (tokens PIT viejos, sin la lógica de dedupe agregada después) y se reescribió contra el estado real en n8n. `INDEX.md` de ambos clientes actualizado con las rutas nuevas. Objetivo: menos consultas a n8n en vivo para revisar la estructura de un flujo.
 - [ ] Rotar Location API Key de Carwarriors LLC en GHL (expuesto en chat del 27-jul; usuario indicó no rotarlo por ahora — abierto).
 - [ ] Investigar `n8n.apps.carwarriorsllc.com` — **avanzado 2026-08-14 (nivel red, sin login):** instancia está viva ahora mismo (`/healthz` 200, IP `187.124.250.216`, bloque LACNIC, distinta del VPS Hostinger `2.24.106.87`), corriendo `n8n@2.10.4` en `environment: development`, con certificado Let's Encrypt renovado el 5-ago-2026 (alguien la sigue manteniendo). Sin credenciales no se puede ver qué workflows corre ni quién la administra — posible relación con "Customers for AI" (Carlos Cisneros, hallazgo 2026-07-29). **Pendiente real:** conseguir login o preguntarle a Carlos Cisneros.
