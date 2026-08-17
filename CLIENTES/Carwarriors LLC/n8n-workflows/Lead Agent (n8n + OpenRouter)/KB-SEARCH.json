@@ -72,9 +72,9 @@
       "parameters": {
         "mode": "load",
         "mongoCollection": { "__rl": true, "value": "documents", "mode": "list", "cachedResultName": "documents" },
-        "embedding": "spectrum_embedding",
+        "embedding": "carwarriors_embedding",
         "metadata_field": "respuesta",
-        "vectorIndexName": "spectrum_vector_index",
+        "vectorIndexName": "carwarriors_vector_index",
         "prompt": "={{ $('Search Context').item.json.entrada_usuario }}",
         "options": { "preFilter": "={{ JSON.stringify({ \"dealer\": { \"$eq\": $('Search Context').item.json.dealer } }) }}" }
       },
@@ -94,13 +94,14 @@
       "name": "RESPONSE"
     },
     {
-      "parameters": { "options": {} },
+      "parameters": { "model": "openai/text-embedding-3-small", "options": {} },
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
       "typeVersion": 1.2,
       "position": [464, 144],
       "id": "d8835ad9-af82-49ab-b4be-b5eefc157914",
       "name": "Embeddings OpenAI",
-      "_comment_pendiente": "SIN credencial asignada (hallazgo 2026-08-14) — bloquea embeddings de busqueda hasta crear una credencial OpenAI en n8n"
+      "credentials": { "openAiApi": { "id": "qaHyavTutYaAUnEZ", "name": "API de OpenRouter Carwarriors" } },
+      "_comment": "Recableado 2026-08-16 a la credencial propia 'API de OpenRouter Carwarriors' (baseURL https://openrouter.ai/api/v1, model openai/text-embedding-3-small). Credencial asignada en local 2026-08-17 (faltaba, el comentario decía recableado pero no tenía el campo credentials). Pendiente: saldo en esa cuenta para poder generar embeddings."
     },
     {
       "parameters": { "options": { "temperature": 0.1 }, "model": "nvidia/nemotron-3.5-lightning:free" },
