@@ -205,7 +205,7 @@
       "credentials": { "mongoDb": { "id": "WvGe0WEIfm6NF1Qa", "name": "MongoDB Carwarriors" } }
     },
     {
-      "parameters": { "options": { "temperature": 0.1 }, "model": "nvidia/nemotron-3.5-lightning:free" },
+      "parameters": { "options": { "temperature": 0.1 }, "model": "deepseek/deepseek-v4-flash" },
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [-1968, 352],

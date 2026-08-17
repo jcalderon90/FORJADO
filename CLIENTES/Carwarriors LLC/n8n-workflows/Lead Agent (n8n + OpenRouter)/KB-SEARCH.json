@@ -104,7 +104,7 @@
       "_comment": "Recableado 2026-08-16 a la credencial propia 'API de OpenRouter Carwarriors' (baseURL https://openrouter.ai/api/v1, model openai/text-embedding-3-small). Credencial asignada en local 2026-08-17 (faltaba, el comentario decía recableado pero no tenía el campo credentials). Pendiente: saldo en esa cuenta para poder generar embeddings."
     },
     {
-      "parameters": { "options": { "temperature": 0.1 }, "model": "nvidia/nemotron-3.5-lightning:free" },
+      "parameters": { "options": { "temperature": 0.1 }, "model": "deepseek/deepseek-v4-flash" },
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [1040, 144],
