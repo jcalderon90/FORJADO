@@ -141,7 +141,7 @@ Repo fuente: `Garoo/Agent-Spectrum` (n8n instance `agentsprod.redtec.ai`). Es un
 - [x] ~~Elegir modelo(s) en OpenRouter~~ — **resuelto 2026-08-14**: orquestador/PRINCIPAL usa `deepseek/deepseek-v4-flash`, resto de sub-workflows `openai/gpt-4.1-mini` (ver pendiente ya cerrado en [[Estado del Proyecto]]) — **nota:** el `OpenRouter Chat Model` de PRINCIPAL sigue con el modelo copiado de Spectrum (`gpt-5-mini` vía `openai/gpt-4o-mini` en `Lenguaje & Asesoria`), falta aplicar la decisión de modelo real en los nodos
 
 **Cierre — solo después de validar el reemplazo en producción:**
-- [ ] Apagar los bots de GHL Conversation AI — *Jorge Calderón*: **solo** una vez el bot de n8n esté probado y en producción, dejarlos en paralelo hasta entonces
+- [ ] Apagar los bots de GHL Conversation AI — *Jorge Calderón*: **solo** una vez el bot de n8n esté probado y en producción, dejarlos en paralelo hasta entonces. **2026-08-17: se descarta arreglar la tarjeta de GHL Billing** (pendiente que mantenía vivo el fallback de GHL durante la transición) — el bot de n8n ya está validado end-to-end con el modelo real pagado, no vale la pena mantener funcionando un sistema que se va a apagar. Se apunta directo al corte final apenas llegue el contenido de Bianca (KB/fotos), sin reparar el fallback intermedio.
 - [ ] Informar a contabilidad qué se elimina y qué se agrega — *Jorge Calderón*: elimina gasto de GHL Conversation AI / AI wallet (hoy bloqueado por falta de tarjeta, de todas formas iba a costar); agrega OpenRouter (pay-per-use)
 
 ## Costos
