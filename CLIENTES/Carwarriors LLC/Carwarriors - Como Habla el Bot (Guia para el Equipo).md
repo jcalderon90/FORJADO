@@ -4,28 +4,29 @@ tipo: guia
 cliente: Carwarriors LLC
 creado: 2026-08-18
 actualizado: 2026-08-18
+notas: "Actualizado la noche del 2026-08-18 tras auditar el doc contra el prompt real de GHL Conversation AI: se corrigieron 3 imprecisiones (bot de GHL en realidad apagado por billing, secciones que mezclaban bot viejo/nuevo sin aclararlo, y la promesa de calendario real que en ese momento era falsa en ambos bots). El punto del calendario real ya se resolvió de verdad en RSVP (n8n) el mismo día."
 ---
 
 # Así habla el bot con tus clientes — guía para el equipo de Carwarriors
 
-*Corte: 18 de agosto de 2026.*
+*Corte: 18 de agosto de 2026 (actualizado esa misma noche).*
 
 ## Estado actual, en una mirada
 
-- **Instagram / Facebook / SMS:** en vivo, funcionando.
-- **WhatsApp:** bloqueado — es un addon de GoHighLevel ($10/mes) que nunca se contrató. Sin él, ningún bot (ni el viejo ni el nuevo) puede mandar WhatsApp automático de verdad.
-- **Bot nuevo (n8n + OpenRouter):** ya validado de punta a punta (calificación, appointment, envío de fotos), pero todavía no reemplaza al de producción.
-- **Bot viejo (GHL Conversation AI):** sigue en paralelo, es el que responde en vivo hoy. Se apaga solo cuando el nuevo quede confirmado en producción.
+- **Instagram / Facebook / SMS / WhatsApp (bot viejo):** ⚠️ ahora mismo **nadie responde automático** — el bot de GHL está apagado por falta de tarjeta en su facturación (ver punto 1). El equipo humano cubre mientras tanto.
+- **WhatsApp (dentro de GHL):** bloqueado aparte — es un addon de GoHighLevel ($10/mes) que nunca se contrató. Aunque el bot estuviera prendido, este canal específico no funcionaría sin contratarlo.
+- **Bot nuevo (n8n + OpenRouter):** validado de punta a punta (calificación, appointment con calendario real, envío de fotos), pero **todavía no está activado** — no reemplaza al de producción todavía.
+- **Bot viejo (GHL Conversation AI):** sigue configurado en paralelo con la lógica de esta guía, pero apagado desde el lado de GHL. Se prende el nuevo (y se apaga este del todo) cuando el equipo lo decida.
 
 ---
 
 ## 1. Quién contesta hoy
 
-Hay dos sistemas corriendo en paralelo a propósito, mientras se valida el reemplazo.
+Hay dos sistemas pensados para correr en paralelo, pero ahora mismo **ninguno de los dos está respondiendo leads automáticamente**.
 
-**Hoy en producción:** el bot de GHL Conversation AI sigue siendo el que responde en vivo en Instagram, Facebook, SMS y WhatsApp (vía link externo). Todo lo descrito en esta guía es su comportamiento real y calibrado.
+**Bot de GHL Conversation AI:** es el que está configurado con la lógica de esta guía (secciones 2 a 11, salvo donde se aclara "en el bot nuevo"), pero **está apagado (`mode: off`) porque la subcuenta no tiene tarjeta cargada en GHL Billing** — GHL lo apaga solo, no es un bug ni algo que se pueda forzar por API o por UI sin resolver la facturación primero. Mientras siga así, nadie recibe respuesta automática por Instagram, Facebook, SMS o el WhatsApp externo — responde el equipo humano.
 
-**En construcción, ya validado:** se está armando un reemplazo en n8n + OpenRouter (deja de depender del bot nativo de GHL, que se apaga solo si no hay tarjeta cargada en su facturación). Ya corrió pruebas reales de punta a punta —calificación, appointment, envío de fotos— con la misma lógica de negocio de esta guía. Se apaga el bot viejo solo cuando el nuevo esté confirmado en producción, no antes.
+**Bot nuevo (n8n + OpenRouter):** se construyó como reemplazo, sin depender del bot nativo de GHL. Ya corrió pruebas reales de punta a punta —calificación, appointment con calendario real (crear, reagendar y cancelar la cita de verdad), envío de fotos— con la misma lógica de negocio de esta guía. **Sigue sin activarse en producción** — esa decisión y la de apagar el bot viejo del todo quedan pendientes del equipo.
 
 GoHighLevel sigue siendo el CRM en cualquiera de los dos escenarios: ahí vive el historial de cada contacto, sus datos y el pipeline de ventas.
 
@@ -51,11 +52,13 @@ Sigue un orden fijo de calificación — salvo que el cliente muestre urgencia r
 
 ## 4. Cómo ofrece el appointment
 
+*Esta sección describe al **bot nuevo** (n8n) — el bot viejo de GHL no distingue tipos de appointment ni toca un calendario real; solo escala a un asesor.*
+
 Apenas el cliente confirma qué vehículo le interesa —sin esperar a tener los cinco datos completos— el bot ofrece un **appointment**, usando ventanas naturales ("mañana", "por la tarde", "como a las 6 PM").
 
 Puede ser de tres tipos: **visita al lote** (presencial, incluye test-drive), **videollamada** con un asesor, o **llamada telefónica**.
 
-No es una promesa vacía: el bot lee el calendario real de asesores antes de confirmar horarios, y puede cancelar o reagendar el appointment él mismo. Nunca ofrece una hora sin poder respaldarla.
+No es una promesa vacía: desde el 18 de agosto de 2026 el bot lee el calendario real de asesores antes de confirmar horarios, y puede crear, cancelar o reagendar el appointment él mismo directo en GoHighLevel — si el horario pedido ya no está libre, propone el más cercano en vez de confirmar algo que no puede cumplir. Validado con pruebas reales, pendiente solo de activarse en producción.
 
 ## 5. Cuándo detecta urgencia real
 
@@ -141,10 +144,10 @@ En el bot nuevo (n8n), cuatro eventos avisan al canal **#notificaciones** de Sla
 
 **Pendientes reales:**
 
-- Falta que el equipo confirme si sube el modelo de IA del bot de GHL mientras dure la transición, o si se prioriza directamente el corte al bot nuevo.
-- Falta decidir la fecha para apagar el bot viejo de GHL — se apaga solo cuando el nuevo quede confirmado en producción.
+- Falta decidir cuándo activar el bot nuevo en producción — ya está construido y probado (calificación, appointment con calendario real, fotos), solo falta el visto bueno para prenderlo.
+- El bot viejo de GHL ya está apagado por falta de tarjeta en su facturación; falta decidir si se recarga mientras se activa el nuevo, o si se salta ese paso y se va directo al corte.
 - Falta avisar a contabilidad del cambio de gasto (sale la IA nativa de GHL, entra OpenRouter).
 
 ---
 
-*Preparado por FORJADO. Contenido basado en la especificación funcional ya validada en producción del bot de Carwarriors LLC y en el estado de la migración a n8n a corte del 18 de agosto de 2026.*
+*Preparado por FORJADO. Contenido basado en la especificación funcional configurada y validada del bot de Carwarriors LLC (bot de GHL apagado por facturación, bot nuevo construido y probado pero aún no activado) y en el estado de la migración a n8n a corte del 18 de agosto de 2026 (noche).*
