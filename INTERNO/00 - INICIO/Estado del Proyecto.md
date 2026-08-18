@@ -2,12 +2,12 @@
 tags: [forjado, estado, pendientes, dashboard]
 tipo: estado
 estado: activo
-actualizado: 2026-08-17 (sesión noche)
+actualizado: 2026-08-18
 ---
 
 # Estado del Proyecto — FORJADO
 
-> Estado consolidado de la agencia al **2026-08-17**. Fuente de verdad: notas de cliente individuales — este resumen se actualiza a mano.
+> Estado consolidado de la agencia al **2026-08-18**. Fuente de verdad: notas de cliente individuales — este resumen se actualiza a mano.
 
 ---
 
@@ -15,7 +15,7 @@ actualizado: 2026-08-17 (sesión noche)
 
 | Área | Estado | Última actividad |
 |---|---|---|
-| Carwarriors LLC | 🟢 Bot de n8n validado end-to-end con modelo real pagado; solo quedan pendientes externos (contenido de Bianca, fotos, prueba real de Slack) | 2026-08-17 — Crédito de OpenRouter cargado (ambas cuentas), modelo `deepseek/deepseek-v4-flash` estandarizado y probado 3 veces en real; bug de credencial cruzada corregido; KB revertida a vacío (el playbook BDC de Bianca no era contenido de RAG, se movió esa lógica al prompt de PRINCIPAL que ya la cubría); descartado arreglar la tarjeta de GHL Billing — se apunta directo al corte a n8n |
+| Carwarriors LLC | 🟢 Bot de n8n validado end-to-end (KB, fotos y Slack ya probados en real); solo quedan pendientes externos (WhatsApp addon pago, calendarIds, infra n8n caída) | 2026-08-18 — KB de inventario/políticas/promos y fotos (Mongo) resueltas y automatizadas; `SEND-MEDIA` probado real contra GHL (foto llega como adjunto nativo en el chat, 2 bugs corregidos); Slack `ERROR HANDLER` probado real en producción; bloqueador real de WhatsApp identificado (addon pago $10/mes sin contratar, Jorge dijo "todavía no"); token GHL nuevo generado pero **instancia de n8n de Carwarriors caída** — pendiente pegarlo apenas vuelva |
 | Varela Law | 🟢 En producción, sin bloqueos | 2026-08-15 (3ª corrida automática limpia consecutiva `2263`; pendiente: mensaje a Mario + 4 clientes ID MAP) |
 | Pipeline / prospección | Tablero manual poblado: Carwarriors (Propuesta, por formalizar) + Varela Law (Activo) | 2026-08-15 (tablero actualizado con estados reales) |
 
@@ -33,6 +33,10 @@ actualizado: 2026-08-17 (sesión noche)
 
 ### Pendientes críticos
 
+- [ ] **CRÍTICO 2026-08-18 — instancia de n8n de Carwarriors caída.** Tanto `n8n.apps.carwarriorsllc.com` como su respaldo sslip.io fallan (timeout/connection reset), por navegador y por MCP (confirmado que no es un problema del MCP en sí, probando también con la instancia de otro cliente). Bloquea cualquier cambio en n8n, incluido pegar el token nuevo de abajo. Ver [[project_carwarriors_infraestructura_n8n_coolify]] (memoria).
+- [ ] **Header Auth GHL (custom fields/RSVP) — REABIERTO 2026-08-18.** El token puesto manualmente el 08-13 volvió a expirar. Generé uno nuevo vía Playwright con los scopes correctos (`pit-617491f2-3f99-43cd-abe2-6595b14e184e`) pero falta pegarlo en la credencial de n8n — bloqueado por el punto de arriba.
+- [ ] **Activar WhatsApp Messaging en GHL** (Settings → WhatsApp, $10/mes) — sin esto ningún WhatsApp real sale (bot viejo ni nuevo). Jorge dijo "todavía no" (2026-08-17); no activar sin su confirmación explícita. No bloquea IG/FB/SMS.
+- [x] ~~Fuente real de fotos/inventario/políticas/promos para VECTORIZAR-KB y SEND-MEDIA~~ — **resuelto 2026-08-17/18.** Inventario automatizado (schedule DealerCenter + parser en n8n), 83 fotos reales en Mongo `inventory_media` (decisión de Jorge: Mongo, no Data Table, para un futuro dashboard), políticas/promos encontradas en el bot viejo de GHL vía API (1 promo Tesla real vigente, confirmado que no hay garantía de vehículos). `SEND-MEDIA` probado real: la foto llega como adjunto nativo en el chat, no como link — cumple el requisito explícito de Jorge. Detalle en [[Carwarriors - Migración Bot GHL a n8n y OpenRouter (Diseño)]].
 - [x] ~~Renovar token GHL~~ — **resuelto 2026-08-13.** Tokens nuevos generados y verificados en ambas subcuentas; corregidos en los 2 workflows que lo tenían hardcodeado (`Subir a DealerCenter`, `DealerCenter -> Mongo -> GHL Lead Sync`) y en la credencial `Header Auth GHL`. Detalle en [[Carwarriors LLC]].
 - [x] ~~Slack — prueba real end-to-end~~ — **resuelto 2026-08-13.** DM y mención probados en vivo; en el camino se corrigieron 2 bugs de loop de auto-respuesta en `Filtrar DM o Mencion`. Detalle en [[Carwarriors LLC]].
 - [x] ~~Cargar crédito real en OpenRouter~~ — **resuelto 2026-08-17, ambas cuentas.** Jorge cargó saldo en `API de OpenRouter Carwarriors` (embeddings) y en `OpenRouter account` ($5 USD, modelo de chat). Antes de cargar el segundo, se encontró y corrigió un **bug real de credencial cruzada**: el nodo `Embeddings OpenAI` de `VECTORIZAR - KB` tenía asignada la credencial de OpenRouter de **otro cliente** (`OpenRouter - DataAgent - Garoo`) en vez de la propia de Carwarriors — corregido para usar la misma que `KB-SEARCH`. Verificado con ejecuciones reales (`1065` embeddings, `1069`/`1070` chat) sin error `402`.
@@ -65,7 +69,7 @@ actualizado: 2026-08-17 (sesión noche)
 - [ ] Limpieza pendiente: marcar `Deleted` el lead de prueba en DealerCenter (requiere 2FA de Jorge).
 - [ ] Formalizar contrato una vez validadas las pruebas.
 
-**Objetivo del cliente:** listo para 2026-08-17/18. **El bot de n8n queda validado end-to-end con modelo real pagado (`deepseek/deepseek-v4-flash`, crédito cargado) — ya no quedan bloqueadores técnicos.** Los 4 workflows (PRINCIPAL, RSVP, SEND-MEDIA, VECTORIZAR-KB) están adaptados y probados; el RAG (embeddings + índice vectorial + búsqueda) funciona de punta a punta. En el camino de todas las sesiones se encontraron y corrigieron 5 bugs reales que habrían fallado en silencio en producción: orden de nodos en `DATA to UPDATE`, índice de Atlas sin terminar de construir, crash de `KB - SEARCH` ante 0 resultados, credencial de embeddings apuntando a la cuenta de OpenRouter de otro cliente, y contenido del playbook BDC mal ubicado en el RAG en vez del prompt (corregido el mismo día). Se descartó además reparar la tarjeta de GHL Billing — se apunta directo al corte final. Lo que falta ahora es **exclusivamente externo**: (1) inventario/políticas/promos reales de Bianca para `VECTORIZAR-KB` (el playbook BDC que mandó no cuenta como esto — es comportamiento del bot, ya está en el prompt), (2) fotos/videos de inventario para `SEND-MEDIA`, (3) prueba real end-to-end de las alertas de Slack (solo se valida disparando una real en producción). Trabajo técnico aún pendiente de construir (no bloqueante para el corte, pero mejora calidad): guardrail anti-spam en n8n (guía ya lista, `GUARDRAIL_ANTI_SPAM_IMPLEMENTACION.md`) y cambiar el trigger GHL de `DealerCenter Sync` a "Contact Created". Detalle técnico completo en [[Carwarriors - Migración Bot GHL a n8n y OpenRouter (Diseño)]].
+**Objetivo del cliente:** listo para 2026-08-17/18. **El bot de n8n queda validado end-to-end con modelo real pagado (`deepseek/deepseek-v4-flash`, crédito cargado), con KB/fotos/Slack ya probados en real — ya no quedan pendientes de construcción, solo externos/infra.** Los 4 workflows (PRINCIPAL, RSVP, SEND-MEDIA, VECTORIZAR-KB) están adaptados y probados; el RAG (embeddings + índice vectorial + búsqueda) funciona de punta a punta con contenido real (inventario automatizado, fotos en Mongo, políticas/promos reales). En el camino se encontraron y corrigieron 7 bugs reales que habrían fallado en silencio en producción: orden de nodos en `DATA to UPDATE`, índice de Atlas sin terminar de construir, crash de `KB - SEARCH` ante 0 resultados, credencial de embeddings apuntando a la cuenta de OpenRouter de otro cliente, contenido del playbook BDC mal ubicado en el RAG en vez del prompt, y 2 bugs en `SEND-MEDIA` al probar el envío real de fotos (`type` de mensaje mal mapeado, falta de texto obligatorio junto al adjunto). Se descartó reparar la tarjeta de GHL Billing — se apunta directo al corte final. Lo que falta ahora es **exclusivamente externo/infra**: (1) que vuelva la instancia de n8n de Carwarriors (caída desde 2026-08-18) para pegar el token GHL ya generado, (2) que Jorge decida activar el addon pago de WhatsApp Messaging ($10/mes, dijo "todavía no"), (3) `calendarId`s reales de GHL para RSVP, (4) apagar los bots viejos de GHL cuando Jorge lo decida, (5) avisar a contabilidad del cambio de gasto. Trabajo técnico aún pendiente de construir (no bloqueante para el corte, mejora de calidad): guardrail anti-spam en n8n (guía ya lista, `GUARDRAIL_ANTI_SPAM_IMPLEMENTACION.md`) y cambiar el trigger GHL de `DealerCenter Sync` a "Contact Created". Detalle técnico completo en [[Carwarriors - Migración Bot GHL a n8n y OpenRouter (Diseño)]].
 
 ---
 
