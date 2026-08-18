@@ -30,11 +30,12 @@ actualizado: 2026-08-12
 
 Cada mensaje debe avanzar uno de estos ejes (regla de "momentum"): no se estanca ni repite.
 
-## 3. Oferta de visita (Visit Rules)
-- Se ofrece la visita **apenas se confirma el vehículo de interés** (no espera a tener los 4 datos completos — se acortó a pedido del cliente).
+## 3. Oferta de appointment (Visit Rules)
+- Se ofrece el **appointment** **apenas se confirma el vehículo de interés** (no espera a tener los 4 datos completos — se acortó a pedido del cliente).
+- Tres tipos posibles: **visita al lote** (presencial, incluye test-drive), **videollamada** con un asesor, o **llamada telefónica**.
 - Ventanas naturales: mañana, tarde, "alrededor de las 6 PM".
-- Nunca promete cita confirmada sin verificarla — y sí puede verificarla porque **Appointment Booking agenda en firme de verdad** (calendarios `Showroom — Advisors` + `Calendario BDC‑B — Day`), leyendo el calendario real.
-- El bot **puede cancelar/reagendar** la cita él mismo (activado).
+- Nunca promete un appointment confirmado sin verificarlo — y sí puede verificarlo porque **Appointment Booking agenda en firme de verdad** (calendarios `Showroom — Advisors` + `Calendario BDC‑B — Day`), leyendo el calendario real.
+- El bot **puede cancelar/reagendar** el appointment él mismo (activado).
 
 ## 4. Regla de intención fuerte → escalamiento inmediato
 Solo frases explícitas: "voy hoy", "tengo el dinero listo", "quiero cerrar ya", "ya estoy aprobado", "necesito un auto urgente". Down payment, credit score o cambios de estructura de pago **no** disparan esto solos.
@@ -100,8 +101,8 @@ Al escalar: mensaje final de aviso, se crea una tarea en el contacto, tag `human
 
 > Pendiente: el sleep de 4h fijo en Bot Settings quedó igual por ahora (no bloqueaba el lanzamiento) — falta ajustarlo para que coincida con el cierre real en vez de un timer fijo.
 
-## 13. Después de agendar la cita
-No hay transferencia a un asesor específico — la cita cae directo en DealerCenter y la atiende el primer vendedor disponible. La IA queda registrada como el "BDC" que originó el lead.
+## 13. Después de agendar el appointment
+No hay transferencia a un asesor específico — el appointment cae directo en DealerCenter y lo atiende el primer vendedor disponible. La IA queda registrada como el "BDC" que originó el lead.
 
 ## 14. Pendientes / no cerrado todavía
 - **Actualización 2026-08-12 (misma tarde) — diagnóstico del bug de Perú corregido tras leer el prompt real vía API.** Se obtuvo el JSON completo del agente vía `GET https://services.leadconnectorhq.com/conversation-ai/agents/search` (Private Integration Token por sub-cuenta) y se confirmó que la sección **"International Rules" ya existe en el `instructions` live** y cubre exactamente este escenario: detectar país/código internacional/intención de exportación desde el primer mensaje, ofrecer catálogo primero, nunca dar precio exacto de exportación, fijar expectativa de que un asesor especializado va a contactar. El bug de Jenniffer **no fue una regla faltante** — el bot ignoró una regla ya presente en su propio prompt. Esto descarta la necesidad de redactar/aplicar la `Out-of-Area / International Lead Rule` mencionada abajo (sería redundante) y refuerza el diagnóstico (b): el problema real es el modelo configurado (`gpt-5-mini`, confirmado vía API — más débil que el `gpt-4.1` que usa el bot de Rances Car). También se confirmó que **la `Vendor/Spam Outreach Rule` ya está aplicada** en el prompt live (alguien la pegó sin que quedara registrado) — ese pendiente queda cerrado. Nota técnica: el campo `llm` (selección de modelo) salió explícitamente rechazado como no-editable al intentar un `PUT` en esta API ("property llm should not exist") — subir el modelo de Carwarriors solo sería posible desde la UI de GHL, sin confirmar todavía si esa opción existe ahí. Detalle completo de la API en memoria `reference_ghl_conversation_ai_api`.

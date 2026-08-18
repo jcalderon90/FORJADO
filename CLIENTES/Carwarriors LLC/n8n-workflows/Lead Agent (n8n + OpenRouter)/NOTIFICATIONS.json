@@ -88,7 +88,7 @@
               "id": "1",
               "name": "text",
               "type": "string",
-              "value": "=:calendar: *{{ $json.datos.tipo_agendamiento === 'llamada' ? 'Nueva llamada agendada' : 'Nueva cita registrada' }} — {{ $json.datos.dealer }}*\n\n*Nombre:* {{ $json.datos.nombre_lead }}\n*Teléfono:* {{ $json.datos.telefono_lead }}\n*Correo:* {{ $json.datos.correo_lead || '—' }}\n\n{{ $json.datos.tipo_agendamiento === 'llamada' ? ('*Horario preferido:* ' + ($json.datos.horario_preferido || '—') + '\\n*Medio de llamada:* ' + ($json.datos.medio_llamada_label || '—')) : ('*Fecha y hora:* ' + $json.datos.fecha_cita + '\\n*Modalidad:* ' + $json.datos.modalidad) }}"
+              "value": "=:calendar: *{{ $json.datos.tipo_agendamiento === 'llamada' ? 'Nueva llamada agendada' : 'Nuevo appointment registrado' }} — {{ $json.datos.dealer }}*\n\n*Nombre:* {{ $json.datos.nombre_lead }}\n*Teléfono:* {{ $json.datos.telefono_lead }}\n*Correo:* {{ $json.datos.correo_lead || '—' }}\n\n{{ $json.datos.tipo_agendamiento === 'llamada' ? ('*Horario preferido:* ' + ($json.datos.horario_preferido || '—') + '\\n*Medio de llamada:* ' + ($json.datos.medio_llamada_label || '—')) : ('*Fecha y hora:* ' + $json.datos.fecha_cita + '\\n*Modalidad:* ' + $json.datos.modalidad) }}"
             }
           ]
         },
