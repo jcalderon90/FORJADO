@@ -2,7 +2,7 @@
 tags: [forjado, carwarriors, indice, navegacion]
 tipo: indice
 cliente: Carwarriors LLC
-actualizado: 2026-08-14
+actualizado: 2026-08-20
 ---
 
 # Carwarriors LLC — Índice
@@ -15,6 +15,7 @@ actualizado: 2026-08-14
 
 | Nota | Tema | Estado |
 |---|---|---|
+| [[Carwarriors - Como Funciona el Bot y el Sync de Leads Hoy (2026-08-20)]] | Explicación funcional/coloquial de cómo se comporta el bot de n8n hoy (ambos dealers) y cómo funciona el sync de leads GHL↔DealerCenter en las 2 direcciones | vigente, bot ya en producción |
 | [[Carwarriors - Migración Bot GHL a n8n y OpenRouter (Diseño)]] | Migración del bot conversacional GHL Conversation AI → n8n + OpenRouter. Fuente de verdad técnica de la migración en curso (arquitectura, mapeo Spectrum→Carwarriors, pendientes) | en-construcción |
 | [[Carwarriors - Infraestructura (Diseño)]] | Diseño técnico de infraestructura (n8n, MongoDB, Coolify) | aprobado |
 | [[Carwarriors - SFTP DealerCenter (Investigación)]] | Investigación técnica ADF/XML + SFTP para importar leads a DealerCenter | en-progreso |
@@ -44,7 +45,7 @@ Organizados en `n8n-workflows/` por proyecto (2026-08-14), para no tener que con
 | Carpeta / Archivo | Qué es |
 |---|---|
 | **`n8n-workflows/Sincronizacion GHL-DealerCenter/`** | |
-| `carwarriors_lead_intake_agent_workflow.json` | Agente de Captura de Leads (pide teléfono, upsert Mongo/GHL) |
+| `carwarriors_lead_intake_agent_workflow.json` | Agente de Captura de Leads (pide teléfono, upsert Mongo/GHL) — **desactivado 2026-08-20** (prototipo viejo, credencial GHL vencida, función ya cubierta por `LEAD-COLLECTOR`/`PRINCIPAL`) |
 | `ghl-to-dealercenter-adf.json` | Subir a DealerCenter (ADF/SFTP) |
 | `dealercenter-mongo-ghl-lead-sync.json` | DealerCenter → Mongo → GHL (Lead Sync diario) |
 | **`n8n-workflows/Lead Agent (n8n + OpenRouter)/`** | Migración del bot conversacional (ver [[Carwarriors - Migración Bot GHL a n8n y OpenRouter (Diseño)]]) |
