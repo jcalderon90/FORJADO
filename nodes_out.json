@@ -1,0 +1,84 @@
+{
+  "Parameter Type": {
+    "parameters": {
+      "assignments": {
+        "assignments": [
+          {
+            "id": "dcff964b-b8c1-4e8f-9c6d-0a188497de72",
+            "name": "type",
+            "value": "={{ (() => { const ch = $('PARSE BODY').first().json.current_body.channel; if (ch === 'instagram') return 'IG'; if (ch === 'messenger') return 'FB'; if (ch === 'sms') return 'SMS'; const c = $('Get Contact Phone').first().json.contact || {}; if (c.phone) return 'WhatsApp'; if (c.email) return 'Email'; return 'WhatsApp'; })() }}",
+            "type": "string"
+          }
+        ]
+      },
+      "options": {}
+    },
+    "type": "n8n-nodes-base.set",
+    "typeVersion": 3.4,
+    "position": [
+      9184,
+      224
+    ],
+    "id": "b4a21411-a3ea-41b3-b35e-bb47dc3580d1",
+    "name": "Parameter Type"
+  },
+  "PARSE BODY": {
+    "parameters": {
+      "mode": "raw",
+      "jsonOutput": "={{ JSON.parse($('Create Body').first().json.body) }}",
+      "options": {}
+    },
+    "type": "n8n-nodes-base.set",
+    "typeVersion": 3.4,
+    "position": [
+      -304,
+      -64
+    ],
+    "id": "adb35e8e-660e-4b88-bc8e-f2f47f14b244",
+    "name": "PARSE BODY"
+  },
+  "Create Body": {
+    "parameters": {
+      "jsCode": "const rawBody = $input.first().json.body || $input.first().json;\n\nfunction normalize(body) {\n  const contactId = body.contactId ?? body.contact_id ?? body.id ?? '';\n  const name = body.contactName ?? body.full_name ?? body.name ?? '';\n  const channelRaw = (body.channel ?? body.source ?? body.customData?.channel ?? '').toString().toLowerCase();\n  let channel = 'unknown';\n  if (channelRaw.includes('whatsapp')) channel = 'whatsapp';\n  else if (channelRaw.includes('instagram') || channelRaw === 'ig') channel = 'instagram';\n  else if (channelRaw.includes('messenger') || channelRaw.includes('facebook') || channelRaw.includes('fb')) channel = 'messenger';\n  const message = body.message ?? body.lastMessage ?? body.message_body ?? body.body ?? '';\n  const locationId = body.locationId ?? body.location_id ?? '';\n  const attachmentUrl = body.attachmentUrl ?? body.attachment_url ?? body.mediaUrl ?? '';\n  return { contactId, name, channel, message, locationId, attachmentUrl };\n}\n\nconst current_body = normalize(rawBody);\nconst current_key = current_body.contactId;\nconst timestamp = new Date().toISOString();\nconst start_time = Date.now();\n\nconst result_body = { current_body, timestamp };\n\nreturn [{\n  key: current_key,\n  body: JSON.stringify(result_body),\n  timestamp,\n  start_time\n}];"
+    },
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "position": [
+      -528,
+      -64
+    ],
+    "id": "3fe1f5b0-bad1-4cc7-b0e8-48734157e9c7",
+    "name": "Create Body"
+  },
+  "Get Contact Phone": {
+    "id": "1bc066dc-cf19-4dd1-9012-4531d59e5582",
+    "name": "Get Contact Phone",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.2,
+    "position": [
+      9296,
+      224
+    ],
+    "parameters": {
+      "method": "GET",
+      "url": "=https://services.leadconnectorhq.com/contacts/{{ $('PARSE BODY').first().json.current_body.contactId }}",
+      "sendHeaders": true,
+      "specifyHeaders": "keypair",
+      "headerParameters": {
+        "parameters": [
+          {
+            "name": "Version",
+            "value": "2021-07-28"
+          },
+          {
+            "name": "Authorization",
+            "value": "={{ 'Bearer ' + $('Get Account Credentials').first().json.ghlToken }}"
+          }
+        ]
+      },
+      "options": {}
+    },
+    "onError": "continueRegularOutput",
+    "retryOnFail": true
+  }
+}
