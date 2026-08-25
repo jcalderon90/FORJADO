@@ -471,6 +471,20 @@ Generadas desde Dealer Settings → Customer → Lead Management → SFTP to Lea
 > [!important] Estado comercial
 > En fase de **pruebas activas**. El contrato se firma si las pruebas salen bien — es tan prioritario como Varela Law.
 
+> [!important] Retomar aquí — actualizado 2026-08-24
+> **El bot ya no corre en GHL Conversation AI** — desde el 2026-08-19 ambas subcuentas (Carwarriors LLC y Rances Car) corren en producción el bot nuevo construido en **n8n + OpenRouter** (`PRINCIPAL`/`PRINCIPAL - Rances Car` + subworkflows RSVP/KB-SEARCH/LEAD-COLLECTOR/SEND-MEDIA/NOTIFICATIONS), con los bots viejos de GHL en `mode: off`. Toda la sección de abajo (julio–inicios de agosto) queda como **historial técnico archivado** de esa arquitectura anterior, útil como referencia pero ya no representa el estado real. Detalle de la migración: [[Carwarriors - Migración Bot GHL a n8n y OpenRouter (Diseño)]]. **La fuente vigente de estado día a día es `INTERNO/00 - INICIO/Estado del Proyecto.md`** — este archivo se actualiza con menos frecuencia.
+>
+> **Pendientes reales abiertos hoy (2026-08-24):**
+> - [ ] Mapeo de auto-asignación de BDC Rep en DealerCenter dado por Bianca (CW Trade In/Tesla → Nallely y Alejandra; Trade In/Tesla/CarGurus Rances → Scarleth y Samuel; Capital One → rotación de los 4) — pendiente de confirmar/cargar en el panel de DealerCenter, bloqueado hasta ahora por un problema de red intermitente del entorno hacia `dealercenter.net`.
+> - [ ] `DAILY DIGEST - Leads Atendidos` (workflow de Slack, 8am) lleva 3 corridas reales seguidas (08-22/23/24) fallando en silencio con 404 en su nodo "Get Executions" — el bot en sí sigue sano, esto es solo el reporte diario.
+> - [ ] Confirmar `"CW - TRADE IN"` como Lead Source real con el primer lead de Trade-In (no bloqueante, el mapeo ya lo cubre por si el texto contiene "TRADE").
+> - [ ] Marcar `Deleted` el lead de prueba en DealerCenter (requiere 2FA de Jorge).
+> - [ ] Formalizar contrato una vez validadas las pruebas.
+> - [ ] Addon pago de WhatsApp Messaging en GHL ($10/mes) — Jorge dijo explícitamente que no es prioridad por ahora; sin esto, los mensajes por WhatsApp no se entregan de verdad aunque la API los acepte.
+> - [ ] Rotar Location API Key de Carwarriors LLC en GHL — Jorge indicó no rotarlo por ahora, sigue abierto.
+
+### Historial técnico archivado — Agente IA 24/7 en GHL Conversation AI (jul–ago 2026, arquitectura reemplazada por n8n)
+
 ### Agente IA 24/7 — subcuenta principal Carwarriors LLC (ver detalle en [[Carwarriors - Agente IA 24-7 (Diseño)]] y [[Carwarriors - Comportamiento del Bot (Resumen)]])
 
 - [x] Bot en vivo desde 2026-07-14: `Primary` + `Auto-Pilot`, Appointment Booking, Trigger a Workflow, Auto Followup y Human Handover (Nallely de Leon) configurados.
