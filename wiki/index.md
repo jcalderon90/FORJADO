@@ -1,0 +1,82 @@
+---
+tags: [forjado, indice, navegacion, wiki]
+tipo: indice
+actualizado: 2026-08-25
+---
+
+# wiki/ — Índice de la bóveda FORJADO
+
+> Diccionario global: una línea por página. Empieza siempre aquí — no explores el filesystem a ciegas. Cada página lista aquí es la **verdad actual, compilada**; el historial completo y crudo vive en `raw/` (ver [[../README|arquitectura de la bóveda]]).
+
+## Estado consolidado
+
+| Página | Descripción |
+|---|---|
+| [[interno/estado-proyecto]] | Snapshot actual y pendientes de la agencia — punto de entrada diario |
+
+## Clientes
+
+| Página | Descripción |
+|---|---|
+| [[clientes/carwarriors-llc]] | Car dealer Miami (3 subcuentas GHL) — estado actual, accesos, pendientes abiertos |
+| [[clientes/carwarriors-llc-arquitectura-migracion]] | Diseño: migración del bot GHL Conversation AI → n8n + OpenRouter |
+| [[clientes/carwarriors-llc-infraestructura]] | Diseño de infraestructura técnica (VPS, Coolify, n8n) |
+| [[clientes/carwarriors-llc-inventario-ghl]] | Inventario de pipelines, calendarios, custom fields y workflows en GHL |
+| [[clientes/carwarriors-llc-sftp-dealercenter]] | Investigación del mecanismo SFTP/ADF-XML de DealerCenter |
+| [[clientes/carwarriors-llc-como-funciona-bot-sync]] | Explicación funcional: cómo trabajan hoy el bot y el sync de leads |
+| [[clientes/carwarriors-llc-como-habla-el-bot]] | Guía para el equipo: cómo habla y qué hace el bot |
+| [[clientes/carwarriors-llc-comportamiento-bot]] | Resumen de comportamiento del bot — Carwarriors LLC |
+| [[clientes/carwarriors-llc-comportamiento-bot-rances]] | Resumen de comportamiento del bot — Rances Car |
+| [[clientes/carwarriors-llc-guardrail-anti-spam]] | Guía de implementación del guardrail anti-spam/bajo-interés en `PRINCIPAL` |
+| [[clientes/carwarriors-llc-propuesta-formal]] | Propuesta comercial formal |
+| [[clientes/carwarriors-llc-justificacion-infraestructura]] | Documento de justificación de infraestructura para el cliente |
+| [[clientes/carwarriors-llc-agente-ia-24-7]] | Diseño legacy del bot nativo de GHL Conversation AI 24/7 (reemplazado) |
+| [[clientes/carwarriors-llc-agente-ia-rances-car]] | Diseño legacy del bot nativo de GHL para Rances Car (reemplazado) |
+| [[clientes/varela-law]] | Bufete legal Miami — estado actual, accesos, pendientes abiertos |
+| [[clientes/varela-law-mycase-api]] | Referencia técnica de la integración con la API de MyCase |
+| [[clientes/varela-law-radar-billing]] | Diseño y estado de Radar Billing Automation |
+
+## Interno — Marca
+
+| Página | Descripción |
+|---|---|
+| [[interno/marca/identidad-de-marca]] | Propósito, misión, valores, público objetivo, propuesta de valor |
+| [[interno/marca/posicionamiento-y-mensaje]] | Tono de voz, elevator pitch, frases clave |
+| [[interno/marca/manifiesto]] | Texto listo para web y pitches |
+| [[interno/marca/identidad-visual]] | Paleta, tipografía, logos |
+
+## Interno — Servicios
+
+| Página | Descripción |
+|---|---|
+| [[interno/servicios/catalogo-de-servicios]] | Índice de los 4 servicios |
+| [[interno/servicios/automatizacion-e-ia]] | Entregables, paquetes, precios, proceso |
+| [[interno/servicios/desarrollo-de-software]] | Entregables, paquetes, precios, proceso |
+| [[interno/servicios/marketing-y-contenido]] | Entregables, paquetes, precios, proceso |
+| [[interno/servicios/consultoria]] | Entregables, paquetes, precios, proceso |
+
+## Interno — Ventas, Operaciones, Finanzas, Recursos
+
+| Página | Descripción |
+|---|---|
+| [[interno/ventas/pipeline]] | Tablero de pipeline de ventas |
+| [[interno/operaciones/procesos-y-entrega]] | Flujo Onboarding → Ejecución → Entrega → Cierre |
+| [[interno/operaciones/herramientas-y-stack]] | Stack técnico completo de FORJADO |
+| [[interno/finanzas/modelo-de-precios]] | Modalidades, reglas de cobro, tarifas por servicio |
+| [[interno/finanzas/control-de-ingresos-y-gastos]] | Registro financiero de la agencia |
+| [[interno/recursos/credenciales]] | Accesos e infraestructura propia de FORJADO |
+| [[interno/recursos/mongodb-database]] | Referencia de la base de datos MongoDB compartida |
+
+## Plantillas
+
+| Página | Descripción |
+|---|---|
+| [[interno/templates/plantilla-cliente]] | Plantilla para crear nuevas notas de cliente |
+| [[interno/templates/plantilla-propuesta]] | Plantilla para propuestas comerciales |
+| [[interno/templates/plantilla-proyecto]] | Plantilla para nuevos proyectos |
+| [[interno/templates/plantilla-servicio]] | Plantilla para notas de servicio |
+
+## Ver también
+
+- [[../raw/index|raw/ — fuentes crudas (append-only)]]
+- [[../README|README — arquitectura de la bóveda]]
