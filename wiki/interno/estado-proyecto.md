@@ -2,7 +2,7 @@
 tags: [forjado, estado, pendientes, dashboard]
 tipo: estado
 estado: activo
-actualizado: 2026-08-25
+actualizado: 2026-08-25 (noche)
 fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 ---
 
@@ -15,8 +15,8 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 
 | Cliente | Estado | Última actividad |
 |---|---|---|
-| **Carwarriors LLC** | 🟡 En pruebas activas — esperando confirmación de Bianca sobre auto-asignación de leads (BDC Rep "Ready for Leads") antes de seguir con ese frente | 2026-08-25 |
-| **Varela Law** | 🟢 En producción, sin bloqueos técnicos | 2026-08-15 (última corrida automática limpia confirmada) |
+| **Carwarriors LLC** | 🔴 Bug crítico activo: token de GHL vencido en `RSVP`, 1 cita real confirmada al cliente que nunca se creó en el calendario — además esperando confirmación de Bianca sobre auto-asignación de leads | 2026-08-25 (noche) |
+| **Varela Law** | 🟢 En producción — encontrado y documentado un sistema en producción no registrado antes (tracking de pagos Zelle), con un riesgo menor de modelo gratis inestable | 2026-08-25 |
 | **Pipeline / prospección** | Ver [[../ventas/pipeline]] | 2026-08-15 |
 
 ## Pendientes de la agencia (no ligados a un cliente específico)

@@ -13,8 +13,10 @@ actualizado: 2026-08-25
 | Carpeta | Contenido |
 |---|---|
 | `clientes/carwarriors-llc/carwarriors-llc-source-2026-08-25.md` | Snapshot íntegro del documento de cliente antes de la reestructuración (2026-08-25) — historial día a día completo hasta esa fecha |
+| `clientes/carwarriors-llc/2026-08-25-rsvp-token-ghl-vencido.md` | Bug crítico: token GHL vencido en `RSVP`, cita real confirmada al cliente pero nunca creada en el calendario |
 | `clientes/carwarriors-llc/n8n-workflows/` | Exports JSON de los workflows de n8n de Carwarriors LLC |
 | `clientes/varela-law/varela-law-source-2026-08-25.md` | Snapshot íntegro del documento de cliente antes de la reestructuración (2026-08-25) |
+| `clientes/varela-law/2026-08-25-zelle-tracking-descubierto.md` | Descubrimiento de un sistema en producción no documentado antes (tracking de pagos Zelle) |
 | `clientes/varela-law/n8n-workflows/` | Exports JSON de los workflows de n8n de Varela Law |
 | `clientes/varela-law/mensajes/` | Transcripciones de mensajes reales enviados a Mario Varela |
 | `interno/estado-proyecto-source-2026-08-25.md` | Snapshot íntegro del Estado del Proyecto antes de la reestructuración (2026-08-25) |

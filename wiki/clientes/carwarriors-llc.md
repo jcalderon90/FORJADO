@@ -49,12 +49,12 @@ fuente_raw: raw/clientes/carwarriors-llc/
 
 Documentos de referencia relacionados: [[carwarriors-llc-infraestructura]] · [[carwarriors-llc-inventario-ghl]] · [[carwarriors-llc-sftp-dealercenter]] · [[carwarriors-llc-como-funciona-bot-sync]] · [[carwarriors-llc-como-habla-el-bot]] · [[carwarriors-llc-comportamiento-bot]] · [[carwarriors-llc-comportamiento-bot-rances]] · [[carwarriors-llc-guardrail-anti-spam]] · [[carwarriors-llc-propuesta-formal]] · [[carwarriors-llc-justificacion-infraestructura]] · [[carwarriors-llc-agente-ia-24-7]] (legacy, bots viejos de GHL) · [[carwarriors-llc-agente-ia-rances-car]] (legacy).
 
-## Pendientes abiertos (al 2026-08-25)
+## Pendientes abiertos (al 2026-08-25, noche)
 
+- [ ] 🔴 **CRÍTICO, nuevo 2026-08-25 21:57 UTC** — el token de la credencial `Header Auth GHL` que usa `RSVP` para crear citas (`GHL Crear Cita`) venció de nuevo (`401 Invalid JWT`, mismo patrón recurrente de agosto). Un lead real (Mustang, contactId `5AwOYRFGqEHAUEEVHp3G`) recibió confirmación del bot de una cita el sábado 29 de agosto 10am que **nunca se creó en el calendario real de GHL** — Mongo la marca confirmada, ningún asesor la va a ver. `PRINCIPAL`/mensajería normal sigue sano (178 ejecuciones exitosas hoy), así que podría ser una credencial GHL distinta o con scopes propios de RSVP. **Acción pendiente:** renovar el token, contactar al lead del Mustang para confirmar la cita a mano, y revisar si hubo más citas afectadas desde que expiró. Detalle: [[../../raw/clientes/carwarriors-llc/2026-08-25-rsvp-token-ghl-vencido]].
 - [ ] **Esperando a Bianca** — mensaje enviado 2026-08-25 preguntando (1) si Nallely/Alejandra/Scarleth/Samuel tienen "Ready for Leads" activo en su perfil de DealerCenter, y (2) cómo manejan el apagado de ese flag en su día libre. Sin esto un lead puede quedar sin asignar en silencio, o caerle a alguien que no trabaja ese día. **No avanzar temas relacionados con auto-asignación hasta que responda.**
 - [ ] **Esperando a Bianca** — confirmar si su queja de "Team Inbox vacío con 500 sin leer" (2026-08-24) quedó resuelta limpiando el filtro de su sesión (diagnóstico: no era un bug del sistema).
 - [ ] **Esperando a Jorge González** — decidir si quiere un reporte guardado en DealerCenter (Customer List: BDC Rep vacío + Status New) para no filtrar a mano cada mañana. No construir hasta que confirme.
-- [ ] Validar con un error real que la nueva rama de email de `ERROR HANDLER` (reemplazo de `DAILY DIGEST - Leads Atendidos`, archivado 2026-08-25) sí dispara correctamente.
 - [ ] Explorar si el Knowledge Base del bot nativo de GHL (Conversation AI) sirve como fuente reusable para el KB real del bot n8n — idea de Jorge, sin explorar (requeriría Playwright+CDP contra Bot Training).
 - [ ] Automatizar la cadencia de re-contacto saliente del playbook BDC (llamar 0-2 min, insistir 5-8 veces/48h) — no cubierta por nada hoy, identificado como gap, no bloqueante.
 - [ ] Decisión de Jorge de cuándo apagar del todo los bots viejos de GHL Conversation AI (siguen en paralelo, ya sin tráfico real desde la migración).
@@ -64,7 +64,7 @@ Documentos de referencia relacionados: [[carwarriors-llc-infraestructura]] · [[
 
 ## Resueltos recientes (contexto, no acción)
 
-Auto-asignación de BDC Rep cargada en DealerCenter (31 reglas, 2026-08-25) · `DAILY DIGEST` roto reemplazado por alerta de email (2026-08-25) · 4 leads de prueba limpiados de DealerCenter (2026-08-25) · auditoría completa de producción sin bugs activos (2026-08-24) · Gmail token vencido de DealerCenter reconectado (2026-08-20) · guardrail anti-spam de engagement implementado en ambos dealers (2026-08-20) · VPS caída y recuperada + 3 bugs de producción corregidos (2026-08-19) · corte a producción de ambos dealers (2026-08-19). Detalle línea por línea en el raw.
+Rama de email del `ERROR HANDLER` validada con un error real (2026-08-25 noche) · Auto-asignación de BDC Rep cargada en DealerCenter (31 reglas, 2026-08-25) · `DAILY DIGEST` roto reemplazado por alerta de email (2026-08-25) · 4 leads de prueba limpiados de DealerCenter (2026-08-25) · auditoría completa de producción sin bugs activos (2026-08-24) · Gmail token vencido de DealerCenter reconectado (2026-08-20) · guardrail anti-spam de engagement implementado en ambos dealers (2026-08-20) · VPS caída y recuperada + 3 bugs de producción corregidos (2026-08-19) · corte a producción de ambos dealers (2026-08-19). Detalle línea por línea en el raw.
 
 ## Infraestructura y Plataformas
 
