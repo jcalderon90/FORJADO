@@ -2,7 +2,7 @@
 tags: [forjado, estado, pendientes, dashboard]
 tipo: estado
 estado: activo
-actualizado: 2026-08-25 (noche)
+actualizado: 2026-08-26
 fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 ---
 
@@ -15,7 +15,7 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 
 | Cliente | Estado | Última actividad |
 |---|---|---|
-| **Carwarriors LLC** | 🔴 Bug crítico activo: token de GHL vencido en `RSVP`, 1 cita real confirmada al cliente que nunca se creó en el calendario — además esperando confirmación de Bianca sobre auto-asignación de leads | 2026-08-25 (noche) |
+| **Carwarriors LLC** | 🟢 Token de GHL en `RSVP` renovado, 2 citas reales recuperadas por Retry — esperando respuesta de Bianca sobre el bug de auto-asignación de leads en DealerCenter (diagnosticado: falla del round-robin, no de las reglas) | 2026-08-26 |
 | **Varela Law** | 🟢 En producción — encontrado y documentado un sistema en producción no registrado antes (tracking de pagos Zelle), con un riesgo menor de modelo gratis inestable | 2026-08-25 |
 | **Pipeline / prospección** | Ver [[../ventas/pipeline]] | 2026-08-15 |
 

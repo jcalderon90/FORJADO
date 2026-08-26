@@ -6,7 +6,7 @@ servicio: automatizacion
 estado_comercial: migracion-arquitectura-en-curso
 contacto: Jorge González (dueño) / Bianca Cangialosi (marketing)
 creado: 2026-06-18
-actualizado: 2026-08-25
+actualizado: 2026-08-26
 fuente_raw: raw/clientes/carwarriors-llc/
 ---
 
@@ -49,10 +49,9 @@ fuente_raw: raw/clientes/carwarriors-llc/
 
 Documentos de referencia relacionados: [[carwarriors-llc-infraestructura]] · [[carwarriors-llc-inventario-ghl]] · [[carwarriors-llc-sftp-dealercenter]] · [[carwarriors-llc-como-funciona-bot-sync]] · [[carwarriors-llc-como-habla-el-bot]] · [[carwarriors-llc-comportamiento-bot]] · [[carwarriors-llc-comportamiento-bot-rances]] · [[carwarriors-llc-guardrail-anti-spam]] · [[carwarriors-llc-propuesta-formal]] · [[carwarriors-llc-justificacion-infraestructura]] · [[carwarriors-llc-agente-ia-24-7]] (legacy, bots viejos de GHL) · [[carwarriors-llc-agente-ia-rances-car]] (legacy).
 
-## Pendientes abiertos (al 2026-08-25, noche)
+## Pendientes abiertos (al 2026-08-26)
 
-- [ ] 🔴 **CRÍTICO, nuevo 2026-08-25 21:57 UTC** — el token de la credencial `Header Auth GHL` que usa `RSVP` para crear citas (`GHL Crear Cita`) venció de nuevo (`401 Invalid JWT`, mismo patrón recurrente de agosto). Un lead real (Mustang, contactId `5AwOYRFGqEHAUEEVHp3G`) recibió confirmación del bot de una cita el sábado 29 de agosto 10am que **nunca se creó en el calendario real de GHL** — Mongo la marca confirmada, ningún asesor la va a ver. `PRINCIPAL`/mensajería normal sigue sano (178 ejecuciones exitosas hoy), así que podría ser una credencial GHL distinta o con scopes propios de RSVP. **Acción pendiente:** renovar el token, contactar al lead del Mustang para confirmar la cita a mano, y revisar si hubo más citas afectadas desde que expiró. Detalle: [[../../raw/clientes/carwarriors-llc/2026-08-25-rsvp-token-ghl-vencido]].
-- [ ] **Esperando a Bianca** — mensaje enviado 2026-08-25 preguntando (1) si Nallely/Alejandra/Scarleth/Samuel tienen "Ready for Leads" activo en su perfil de DealerCenter, y (2) cómo manejan el apagado de ese flag en su día libre. Sin esto un lead puede quedar sin asignar en silencio, o caerle a alguien que no trabaja ese día. **No avanzar temas relacionados con auto-asignación hasta que responda.**
+- [ ] **Esperando a Bianca** — mensaje enviado 2026-08-26 con el diagnóstico completo del reporte de leads mal asignados: no son las 30 reglas de Custom Lead Assignment (verificadas, coinciden con su mapeo), es un bug de DealerCenter — el motor de round-robin auto-asigna un BDC rep igual aunque su propio log diga "There was no BDC rep ready for leads during automatic assignment". Recomendado escalarlo a soporte de DealerCenter con esa evidencia; mitigación disponible (toggle "Do not auto assign leads unless status is New", hoy apagado) sin aplicar todavía. **No avanzar más en esto hasta que responda.** Detalle: [[../../raw/clientes/carwarriors-llc/carwarriors-llc-source-2026-08-25|raw]] y memoria `project_carwarriors-dealercenter-ready-for-leads-bug-2026-08-26`.
 - [ ] **Esperando a Bianca** — confirmar si su queja de "Team Inbox vacío con 500 sin leer" (2026-08-24) quedó resuelta limpiando el filtro de su sesión (diagnóstico: no era un bug del sistema).
 - [ ] **Esperando a Jorge González** — decidir si quiere un reporte guardado en DealerCenter (Customer List: BDC Rep vacío + Status New) para no filtrar a mano cada mañana. No construir hasta que confirme.
 - [ ] Explorar si el Knowledge Base del bot nativo de GHL (Conversation AI) sirve como fuente reusable para el KB real del bot n8n — idea de Jorge, sin explorar (requeriría Playwright+CDP contra Bot Training).
@@ -64,7 +63,9 @@ Documentos de referencia relacionados: [[carwarriors-llc-infraestructura]] · [[
 
 ## Resueltos recientes (contexto, no acción)
 
-Rama de email del `ERROR HANDLER` validada con un error real (2026-08-25 noche) · Auto-asignación de BDC Rep cargada en DealerCenter (31 reglas, 2026-08-25) · `DAILY DIGEST` roto reemplazado por alerta de email (2026-08-25) · 4 leads de prueba limpiados de DealerCenter (2026-08-25) · auditoría completa de producción sin bugs activos (2026-08-24) · Gmail token vencido de DealerCenter reconectado (2026-08-20) · guardrail anti-spam de engagement implementado en ambos dealers (2026-08-20) · VPS caída y recuperada + 3 bugs de producción corregidos (2026-08-19) · corte a producción de ambos dealers (2026-08-19). Detalle línea por línea en el raw.
+**Token GHL de `RSVP` vencido (2026-08-26):** la credencial `Header Auth GHL` (usada por `GHL Crear Cita`) fallaba con `401 Invalid JWT` — causa real: el PIT no tenía el scope `calendars/events.write`. Se creó un PIT nuevo con los scopes correctos y se corrigió el formato del header (`Bearer <token>`). Dos citas reales que el bot ya había confirmado a los leads pero nunca se crearon en GHL (Dylan Santiago y un lead de Mustang) se recuperaron con **Retry** de sus ejecuciones fallidas originales en n8n (no reprocesadas desde cero) — ambas confirmadas en GHL con `ghl_event_id` guardado en Mongo. **Efecto secundario detectado y corregido:** correr "Test workflow" en el editor de n8n sobre este workflow escribe en Mongo real (no está sandboxeado) — corrompió temporalmente la cita de Dylan Santiago, revertido a mano en Mongo. **Regla nueva:** nunca usar el botón Play/Test del editor en `RSVP`, solo Retry desde el panel de Executions.
+
+Diagnosticado (no resuelto, es bug de DealerCenter) el bug de auto-asignación de BDC Rep reportado por Bianca — ver pendiente arriba (2026-08-26) · Rama de email del `ERROR HANDLER` validada con un error real (2026-08-25 noche) · Auto-asignación de BDC Rep cargada en DealerCenter (31 reglas, 2026-08-25) · `DAILY DIGEST` roto reemplazado por alerta de email (2026-08-25) · 4 leads de prueba limpiados de DealerCenter (2026-08-25) · auditoría completa de producción sin bugs activos (2026-08-24) · Gmail token vencido de DealerCenter reconectado (2026-08-20) · guardrail anti-spam de engagement implementado en ambos dealers (2026-08-20) · VPS caída y recuperada + 3 bugs de producción corregidos (2026-08-19) · corte a producción de ambos dealers (2026-08-19). Detalle línea por línea en el raw.
 
 ## Infraestructura y Plataformas
 
