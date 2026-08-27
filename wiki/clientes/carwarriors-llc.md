@@ -44,7 +44,7 @@ fuente_raw: raw/clientes/carwarriors-llc/
 
 1. **Bot conversacional en n8n + OpenRouter** (deepseek-v4-flash), reemplazando el Conversation AI nativo de GHL — decidido 2026-08-12, en producción desde 2026-08-19 para ambos dealers (Carwarriors LLC y Rances Car). GHL sigue como CRM. Detalle: [[carwarriors-llc-arquitectura-migracion]].
 2. **Notificaciones → Slack** (canal `notificaciones`) + email de respaldo desde 2026-08-25. `SLACK - INBOUND` para DM/menciones.
-3. **Lead Sync GHL ↔ DealerCenter** en producción en ambas subcuentas (SFTP + ADF/XML).
+3. **Lead Sync GHL ↔ DealerCenter** en producción en ambas subcuentas (SFTP + ADF/XML). Chequeo de salud 2026-08-27: ambas direcciones sanas, confirmado con datos reales del mismo día (lead nuevo creado en GHL, dedupe evitando subir un lead repetido a DealerCenter), sin errores en la última semana.
 4. **DealerCenter**: fuente del inventario/fotos/políticas (vía Excel diario a Gmail) y de la auto-asignación de BDC Rep por Lead Source (Custom Lead Assignment, 31 reglas cargadas 2026-08-25).
 
 Documentos de referencia relacionados: [[carwarriors-llc-infraestructura]] · [[carwarriors-llc-inventario-ghl]] · [[carwarriors-llc-sftp-dealercenter]] · [[carwarriors-llc-como-funciona-bot-sync]] · [[carwarriors-llc-como-habla-el-bot]] · [[carwarriors-llc-comportamiento-bot]] · [[carwarriors-llc-comportamiento-bot-rances]] · [[carwarriors-llc-guardrail-anti-spam]] · [[carwarriors-llc-propuesta-formal]] · [[carwarriors-llc-justificacion-infraestructura]] · [[carwarriors-llc-agente-ia-24-7]] (legacy, bots viejos de GHL) · [[carwarriors-llc-agente-ia-rances-car]] (legacy).
