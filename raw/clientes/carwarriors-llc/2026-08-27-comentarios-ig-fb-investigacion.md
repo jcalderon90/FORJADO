@@ -38,3 +38,17 @@ Fuentes consultadas: [HighLevel Support — Facebook/Instagram comment automatio
 ## Pendiente real
 
 Jorge eligió explícitamente investigar la alternativa de Meta en vez de las otras 2 opciones (construir igual con mantenimiento manual, o abandonar). Queda pendiente que confirme si quiere invertir en el camino de Meta (dado el tiempo de aprobación fuera de nuestro control) o prefiere la vía más simple de GHL con mantenimiento manual de posts. No se ha empezado a construir ninguna de las dos.
+
+## 2026-08-27 (noche, más tarde) — Confirmado el camino: ManyChat. Bloqueado esperando acceso.
+
+Jorge confirmó seguir con la vía de ManyChat (en vez de GHL nativo o Meta directo). Investigación adicional (WebSearch) confirmó que es la mejor opción real:
+
+- ManyChat **ya tiene hoy** un trigger de comentarios activo en la cuenta de Carwarriors (`## Automatizaciones ManyChat Vigentes` en el source del cliente): "Comentario en post/reel" → mensaje genérico "Unite a nuestro club..." con botón a canal IG. Es decir, el mecanismo de disparo ya existe y ya funciona — solo hay que reemplazar la respuesta estática por una llamada real a n8n/LLM.
+- Confirmado (WebSearch) que el trigger de comentarios de ManyChat sí soporta **"All posts or reels"** (a diferencia del de GHL, que exige elegir posts uno por uno) — cubre automáticamente cualquier post futuro.
+- Soporta responder **públicamente en el hilo del comentario Y por DM privado** a la vez, en tiempo real.
+- Soporta **"External Request"** (webhook saliente síncrono) para conectar con un backend propio (n8n) — así el LLM decide si hay interés real y qué responder, reusando la lógica del bot ya construido.
+- No requiere app propia de Meta ni App Review — ManyChat ya es partner oficial de Meta, ese permiso ya lo tiene ellos.
+
+**Bloqueado:** no hay credenciales de ManyChat documentadas en el archivo fuente del cliente (solo GHL, DealerCenter, VPS). Se le preguntó a Jorge cómo entrar — respondió que hay que esperar a que Bianca/Jorge González den acceso como invitado a la cuenta. **No se puede avanzar más en este frente hasta recibir ese acceso.**
+
+**Siguiente paso cuando llegue el acceso:** entrar a ManyChat, revisar el flujo "Comentario en post/reel" existente, y reemplazar la acción final (mensaje estático) por un nodo "External Request" apuntando a un webhook nuevo en n8n. Ese webhook n8n necesita: recibir el texto del comentario + datos del contacto, correr el mismo LLM/lógica de clasificación de interés que ya usa el bot `PRINCIPAL`, y devolver el texto de respuesta (pública y/o DM) en el formato que ManyChat espera de vuelta.
