@@ -16,7 +16,7 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 | Cliente | Estado | Última actividad |
 |---|---|---|
 | **Carwarriors LLC** | 🟢 Jorge pidió 4 mejoras nuevas (comentarios IG/FB con interés real, bot se calla con handoff humano, ticket a soporte DealerCenter, bot 24/7 + SMS de leads calientes) — la del handoff humano ya está **construida y publicada en producción** en ambos dealers (2026-08-27); las otras 3 siguen abiertas. Sigue esperando respuesta de Bianca sobre el bug de auto-asignación de leads en DealerCenter | 2026-08-27 |
-| **Varela Law** | 🟢 En producción — activada la primera de 5 oportunidades nuevas de MyCase (reporte semanal de facturas vencidas, 54 facturas/$81,324.76 en el primer envío real); 2 más construidas y esperando confirmación de Mario | 2026-08-27 |
+| **Varela Law** | 🔴 Riesgo de negocio: Mario dice que dejó de pagar la API de MyCase (pensando que solo servía para el Trust) — verificado que sigue viva ahora mismo, pero si la corta de verdad se caen 4 sistemas en producción (Token Manager, Radar Billing, reporte semanal de facturas vencidas lanzado hoy, tracking Zelle). Falta que Jorge se lo aclare a Mario | 2026-08-27 |
 | **Pipeline / prospección** | Ver [[../ventas/pipeline]] | 2026-08-15 |
 
 ## Pendientes de la agencia (no ligados a un cliente específico)

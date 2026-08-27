@@ -47,6 +47,7 @@ fuente_raw: raw/clientes/varela-law/
 
 ## Pendientes abiertos (al 2026-08-27)
 
+- [ ] **🔴 Aclarar con Mario — riesgo de negocio, no técnico:** mencionó haber dejado de pagar la API de MyCase (por el Trust Balance no disponible vía API). Verificado que sigue 100% viva ahora mismo (Token Manager y Radar Billing corrieron con éxito hoy). Pero si la cancela de verdad, se caen 4 sistemas en producción a la vez: Token Manager, Radar Billing (F/H/J diario), el reporte semanal de facturas vencidas (lanzado hoy mismo), y el tracking de Zelle. Jorge tiene que confirmarle que la API vale más allá del Trust antes de que la corte. Detalle: [[../../raw/clientes/varela-law/2026-08-27-mario-posible-cancelacion-api-mycase|raw/2026-08-27]].
 - [ ] **Esperando a Mario** — de las 5 oportunidades del análisis de API (2026-07-28), la #1 (facturas vencidas) ya está en producción (ver arriba). Quedan por confirmar:
   - (2) Leads — **bloqueada**: MyCase no tiene ningún lead cargado (`GET /leads` devolvió 0), sin datos reales no se puede confirmar el shape del objeto para escribir la asignación con seguridad. Retomar si aparece un lead real.
   - (3) Agenda de deadlines/audiencias — **construida, inactiva**, `Radar Billing - Agenda Deadlines y Audiencias (Diario)` (`4QsJaKlmHDhkVtBV`), esperando que Mario confirme si la quiere. La otra mitad de esta oportunidad (checklist automática de tareas al abrir un caso nuevo) sigue sin construir — depende de que Mario defina su checklist real, no es algo inventable sin riesgo.
