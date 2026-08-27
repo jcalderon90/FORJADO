@@ -22,3 +22,16 @@
 - **Pendiente real:** no hubo tráfico real nuevo en los ~4 minutos después de publicar (última ejecución real de `PRINCIPAL` antes de publicar fue las 12:52 UTC, publish fue ~16:40 UTC) para confirmar el flujo completo end-to-end con un lead real. Falta revisar las próximas ejecuciones reales de ambos dealers para confirmar que nada se rompió (ninguna alerta de error a Slack esperada si todo va bien).
 
 **Sin tocar todavía:** los otros 3 frentes de hoy (comentarios de IG/FB, ticket a DealerCenter, notificaciones SMS de leads calientes).
+
+## 2026-08-27 (tarde, más tarde) — Confirmado con tráfico real en PRINCIPAL
+
+Llegaron 2 ejecuciones reales nuevas a `PRINCIPAL` (Kif9lWwDHvR7TT39) después del publish, ambas del mismo lead (Carlos Angel Garcia Vanalesti, `u29OI32b9Mfa9V1sy1Tb`):
+
+- Ejecución `2820` (17:33:57 UTC) y `2822` (17:40:15 UTC), ambas `success`, sin errores.
+- `Check GHL Last Message` trajo la conversación real de GHL en ambos casos.
+- `Human Took Over?` evaluó correctamente `false` en ambas — el último mensaje era del lead (`lastMessageDirection: "inbound"`), no de un humano del equipo — así que tomó la rama falsa y el bot respondió normal, sin quedarse callado indebidamente.
+- `Build Last Bot Message` → `Save Last Bot Message` corrieron bien en ambas, guardando en Mongo el mensaje real que el bot mandó, listo para la próxima comparación.
+
+**Conclusión:** el mecanismo corre de punta a punta en producción sin romper nada del flujo normal (caso "no hay handoff humano"). Queda un solo caso sin confirmar con datos reales: que el bot efectivamente se calle cuando SÍ hay un humano escribiendo — no ha ocurrido un caso así todavía, hay que esperar a que pase naturalmente y revisar esa ejecución cuando llegue.
+
+**Rances Car (`N68IYzm4Bf6AVTXP`):** sin tráfico real nuevo desde el publish de hoy (última ejecución sigue siendo de ayer, 08-26). Estructura ya verificada idéntica a PRINCIPAL antes de aplicar el mismo fix — pendiente confirmar con un lead real cuando llegue.
