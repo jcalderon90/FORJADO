@@ -13,4 +13,8 @@
 
 **Limitación encontrada:** la API rechaza `channels: []` con `422 "At least one channel must be provided"` — no es posible remover completamente los canales como capa extra de seguridad. `mode: "off"` es el único freno disponible por esta vía; si alguien vuelve a poner `mode: "auto-pilot"` o `"suggestive"` desde la UI de GHL, el bot volvería a responder con los mismos 4 canales (IG, FB, WhatsApp, SMS) ya habilitados.
 
-**Pendiente real:** este hallazgo revive el pendiente que estaba "sin fecha" de decidir cuándo apagar del todo los bots viejos de GHL Conversation AI — ya no es de baja prioridad, quedó demostrado que puede dar información falsa a clientes reales. Recomendado a Jorge comunicarle a Bianca que ya está apagado del lado técnico. Sigue abierto confirmar con Jorge si quiere ir un paso más allá (ej. borrar el agente por completo, o dejarlo así con `mode: off` como suficiente).
+**Pendiente real:** este hallazgo revive el pendiente que estaba "sin fecha" de decidir cuándo apagar del todo los bots viejos de GHL Conversation AI — ya no es de baja prioridad, quedó demostrado que puede dar información falsa a clientes reales. Recomendado a Jorge comunicarle a Bianca que ya está apagado del lado técnico.
+
+## 2026-08-27 (tarde, aún más tarde) — Borrados por completo, no solo apagados
+
+Jorge pidió ir un paso más allá: **borrar los dos agentes por completo** en vez de dejarlos solo en `mode: off`. Ejecutado vía `DELETE /conversation-ai/agents/:agentId` con los mismos PIT — ambos devolvieron `{"success": true}`. Confirmado con una relectura de `GET /conversation-ai/agents/search`: **`totalCount: 0` en ambas sub-cuentas** — ya no existe ningún agente de Conversation AI nativo en ninguno de los dos dealers, ni forma de reactivarlo por accidente desde la UI de GHL (a diferencia de `mode: off`, que sí se podía revertir manualmente). Pendiente cerrado.
