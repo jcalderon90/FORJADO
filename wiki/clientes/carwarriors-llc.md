@@ -6,7 +6,7 @@ servicio: automatizacion
 estado_comercial: migracion-arquitectura-en-curso
 contacto: Jorge González (dueño) / Bianca Cangialosi (marketing)
 creado: 2026-06-18
-actualizado: 2026-08-26
+actualizado: 2026-08-27
 fuente_raw: raw/clientes/carwarriors-llc/
 ---
 
@@ -49,8 +49,9 @@ fuente_raw: raw/clientes/carwarriors-llc/
 
 Documentos de referencia relacionados: [[carwarriors-llc-infraestructura]] · [[carwarriors-llc-inventario-ghl]] · [[carwarriors-llc-sftp-dealercenter]] · [[carwarriors-llc-como-funciona-bot-sync]] · [[carwarriors-llc-como-habla-el-bot]] · [[carwarriors-llc-comportamiento-bot]] · [[carwarriors-llc-comportamiento-bot-rances]] · [[carwarriors-llc-guardrail-anti-spam]] · [[carwarriors-llc-propuesta-formal]] · [[carwarriors-llc-justificacion-infraestructura]] · [[carwarriors-llc-agente-ia-24-7]] (legacy, bots viejos de GHL) · [[carwarriors-llc-agente-ia-rances-car]] (legacy).
 
-## Pendientes abiertos (al 2026-08-26)
+## Pendientes abiertos (al 2026-08-27)
 
+- [ ] **Nuevo 2026-08-27 (Jorge, 4 frentes, sin construir nada todavía, pendiente de priorizar):** (1) atender leads que muestren interés real en **comentarios de publicaciones de IG/FB**, no solo DM, filtrando los irrelevantes — falta explorar si GHL trae comentarios como conversación o si hace falta un canal nuevo; (2) **el bot debe callarse cuando un humano toma control de la conversación** (Nallely reportó que sigue respondiendo en paralelo cuando ella atiende manual, pierde credibilidad) — falta definir cómo detectar "conversación en manejo humano" en GHL; (3) **abrir ticket a soporte de DealerCenter** por el bug de auto-asignación de BDC Rep (evidencia ya reunida, ver pendiente de abajo) — decidir si se abre ya o se sigue esperando a Bianca; (4) **bot 24/7 completo + notificaciones de leads por SMS con score de "qué tan caliente"** — la parte de citas 24/7 ya está en producción (RSVP crea/reagenda/cancela en GHL real), falta confirmar si cubre lo pedido; el canal SMS de notificación a Jorge no existe hoy (solo Slack + email), falta definir criterio de "caliente" y proveedor de SMS saliente. Detalle completo en [[../../raw/clientes/carwarriors-llc/2026-08-27-requerimientos-jorge-4-frentes|raw/2026-08-27]].
 - [ ] **Esperando a Bianca** — mensaje enviado 2026-08-26 con el diagnóstico completo del reporte de leads mal asignados: no son las 30 reglas de Custom Lead Assignment (verificadas, coinciden con su mapeo), es un bug de DealerCenter — el motor de round-robin auto-asigna un BDC rep igual aunque su propio log diga "There was no BDC rep ready for leads during automatic assignment". Recomendado escalarlo a soporte de DealerCenter con esa evidencia; mitigación disponible (toggle "Do not auto assign leads unless status is New", hoy apagado) sin aplicar todavía. **No avanzar más en esto hasta que responda.** Detalle: [[../../raw/clientes/carwarriors-llc/carwarriors-llc-source-2026-08-25|raw]] y memoria `project_carwarriors-dealercenter-ready-for-leads-bug-2026-08-26`.
 - [ ] **Esperando a Bianca** — confirmar si su queja de "Team Inbox vacío con 500 sin leer" (2026-08-24) quedó resuelta limpiando el filtro de su sesión (diagnóstico: no era un bug del sistema).
 - [ ] **Esperando a Jorge González** — decidir si quiere un reporte guardado en DealerCenter (Customer List: BDC Rep vacío + Status New) para no filtrar a mano cada mañana. No construir hasta que confirme.
