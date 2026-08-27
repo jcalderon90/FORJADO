@@ -5,7 +5,7 @@ estado: activo
 servicio: automatizacion
 contacto: Mario Varela
 creado: 2026-06-17
-actualizado: 2026-08-25
+actualizado: 2026-08-27
 fuente_raw: raw/clientes/varela-law/
 ---
 
@@ -42,15 +42,19 @@ fuente_raw: raw/clientes/varela-law/
 1. **MyCase API — Token Manager** (`MOpVRrvErCfgs2mn`): refresca el OAuth de MyCase cada 23h vía MongoDB (`VarelaLaw.mycase_tokens`). 100% operativo. Detalle: [[varela-law-mycase-api]].
 2. **Radar Billing Automation**: escribe automáticamente F (Total Amount Collected), H (Total Invoiced Amount) y J (Uninvoiced Balance) en la pestaña `07-05-26` del Google Sheet de Mario todos los días a las 5:00 AM. Trust Balance no disponible vía API de MyCase (confirmado con soporte) — queda manual. Detalle: [[varela-law-radar-billing]].
 3. **Tracking de pagos Zelle entrantes** (`TRACKING INCOMING ZELLE PAYMENTS - OUTLOOK`, `BruqJ1jdEV9xl5zG`) — detectado 2026-08-25, no documentado antes en la bóveda. Lee los correos que Mario reenvía (`FW: You received money with Zelle`) por Outlook, extrae remitente/monto/fecha/transacción con doble método (regex + LLM), y si coinciden crea el registro en Airtable y en el Google Sheet "Incoming Mail Payments"; si no coinciden, alerta por email para revisión manual. Detalle: [[../../raw/clientes/varela-law/2026-08-25-zelle-tracking-descubierto]].
-4. Todos los workflows tienen `errorWorkflow` conectado a `ERROR HANDLER` (email automático a `jcalderon900610@gmail.com` ante cualquier fallo).
+4. **Reporte semanal de facturas vencidas** (`Radar Billing - Reporte Facturas Vencidas (Semanal)`, `ZxZONW1XANkoP1ay`) — EN PRODUCCIÓN desde 2026-08-27, primera oportunidad activada del análisis de API de MyCase (2026-07-28). Cada lunes 8am trae `/invoices` y `/cases` de MyCase, filtra las de `status: "overdue"`, y manda a `mvarela@varela.law` una tabla con balance pendiente, días de atraso y link directo a cada factura. Primer envío real (2026-08-27): 54 facturas vencidas, $81,324.76 de balance total pendiente.
+5. Todos los workflows tienen `errorWorkflow` conectado a `ERROR HANDLER` (email automático a `jcalderon900610@gmail.com` ante cualquier fallo).
 
-## Pendientes abiertos (al 2026-08-25)
+## Pendientes abiertos (al 2026-08-27)
 
-- [ ] **Riesgo activo, no bloqueante hoy** — el nodo `OpenRouter Chat Model` del tracking de Zelle usa el slug `openrouter/free`, que OpenRouter ya avisó que dejó de sostener (falló 2 veces el 2026-08-24 con 404, se auto-resolvió sin cambios y sigue corriendo bien desde entonces). Puede volver a fallar sin aviso — pendiente cambiarlo a un modelo de pago estable (ej. `deepseek/deepseek-v4-flash`, ya en uso en el resto de la cuenta). Detalle: [[../../raw/clientes/varela-law/2026-08-25-zelle-tracking-descubierto]].
-- [ ] Enviar a Mario el mensaje ya redactado sobre Radar Billing pidiendo que confirme los 4 clientes sin match automático en ID MAP (Joj Santos, Medina Manuel, Marquez Dimas, Rojas Tovar Manuel) — ver [[../../raw/clientes/varela-law/mensajes/mensaje-mario-2026-07-25-radar-billing-completo.txt]].
-- [ ] **Esperando a Mario** — priorizar cuál de las 5 oportunidades del análisis completo de API (2026-07-28) atacar primero: (1) facturas vencidas/cobros para Rosa, (2) Leads, (3) Tasks/Events por caso, (4) mensajes automáticos a clientes, (5) documentos/contratos. Ver [[../../raw/clientes/varela-law/mensajes/mensaje-mario-2026-07-28-analisis-api-completo.txt]]. No preguntar proactivamente — avisará él.
+- [ ] **Esperando a Mario** — de las 5 oportunidades del análisis de API (2026-07-28), la #1 (facturas vencidas) ya está en producción (ver arriba). Quedan por confirmar:
+  - (2) Leads — **bloqueada**: MyCase no tiene ningún lead cargado (`GET /leads` devolvió 0), sin datos reales no se puede confirmar el shape del objeto para escribir la asignación con seguridad. Retomar si aparece un lead real.
+  - (3) Agenda de deadlines/audiencias — **construida, inactiva**, `Radar Billing - Agenda Deadlines y Audiencias (Diario)` (`4QsJaKlmHDhkVtBV`), esperando que Mario confirme si la quiere. La otra mitad de esta oportunidad (checklist automática de tareas al abrir un caso nuevo) sigue sin construir — depende de que Mario defina su checklist real, no es algo inventable sin riesgo.
+  - (4) Borrador de avisos a clientes — **construida, inactiva**, `Radar Billing - Borrador Avisos de Facturas Nuevas (Diario)` (`lTVFM7I3wJBpW7we`), detecta facturas nuevas y redacta el mensaje sugerido pero no lo envía al cliente (solo a Mario para revisión).
+  - (5) Documentos/contratos — **bloqueada**: depende de una conversación con Adalberto que no ha ocurrido.
+  - No preguntar proactivamente — avisará él. Detalle completo: [[../../raw/clientes/varela-law/2026-08-27-build-5-oportunidades-api]].
+- [ ] **Baja prioridad** — 4 de 99 clientes sin match automático en ID MAP (Joj Santos, Medina Manuel, Marquez Dimas, Rojas Tovar Manuel): el sistema los deja intactos, mismo trabajo manual que Mario ya hacía antes, sin riesgo de dato incorrecto. Mario no ha reportado ningún inconveniente. Mensaje ya redactado, listo para enviar cuando surja la ocasión — ver [[../../raw/clientes/varela-law/mensajes/mensaje-mario-2026-07-25-radar-billing-completo.txt]].
 - [ ] Hablar con **Adalberto** sobre el sistema automático de contratos (sin fecha).
-- [ ] Pendiente menor, no bloqueante: sacar `N8N_BLOCK_ENV_ACCESS_IN_NODE` del VPS para volver a usar `$env` en vez de credenciales hardcodeadas en el nodo del Token Manager.
 - [ ] Construir workflows funcionales nuevos (Cases, Tasks, Time Entries, Events) — depende de la priorización de Mario arriba.
 
 ## Relacionado

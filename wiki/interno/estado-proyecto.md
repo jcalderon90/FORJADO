@@ -2,7 +2,7 @@
 tags: [forjado, estado, pendientes, dashboard]
 tipo: estado
 estado: activo
-actualizado: 2026-08-26
+actualizado: 2026-08-27
 fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 ---
 
@@ -16,7 +16,7 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 | Cliente | Estado | Última actividad |
 |---|---|---|
 | **Carwarriors LLC** | 🟢 Token de GHL en `RSVP` renovado, 2 citas reales recuperadas por Retry — esperando respuesta de Bianca sobre el bug de auto-asignación de leads en DealerCenter (diagnosticado: falla del round-robin, no de las reglas) | 2026-08-26 |
-| **Varela Law** | 🟢 En producción — encontrado y documentado un sistema en producción no registrado antes (tracking de pagos Zelle), con un riesgo menor de modelo gratis inestable | 2026-08-25 |
+| **Varela Law** | 🟢 En producción — activada la primera de 5 oportunidades nuevas de MyCase (reporte semanal de facturas vencidas, 54 facturas/$81,324.76 en el primer envío real); 2 más construidas y esperando confirmación de Mario | 2026-08-27 |
 | **Pipeline / prospección** | Ver [[../ventas/pipeline]] | 2026-08-15 |
 
 ## Pendientes de la agencia (no ligados a un cliente específico)
