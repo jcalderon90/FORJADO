@@ -52,3 +52,7 @@ Jorge confirmó seguir con la vía de ManyChat (en vez de GHL nativo o Meta dire
 **Bloqueado:** no hay credenciales de ManyChat documentadas en el archivo fuente del cliente (solo GHL, DealerCenter, VPS). Se le preguntó a Jorge cómo entrar — respondió que hay que esperar a que Bianca/Jorge González den acceso como invitado a la cuenta. **No se puede avanzar más en este frente hasta recibir ese acceso.**
 
 **Siguiente paso cuando llegue el acceso:** entrar a ManyChat, revisar el flujo "Comentario en post/reel" existente, y reemplazar la acción final (mensaje estático) por un nodo "External Request" apuntando a un webhook nuevo en n8n. Ese webhook n8n necesita: recibir el texto del comentario + datos del contacto, correr el mismo LLM/lógica de clasificación de interés que ya usa el bot `PRINCIPAL`, y devolver el texto de respuesta (pública y/o DM) en el formato que ManyChat espera de vuelta.
+
+## 2026-08-27 (noche, aún más tarde) — Explicación enviada a Jorge González
+
+Jorge (Calderón) le mandó a Jorge González la explicación de por qué se va a construir esto sobre ManyChat y no directo en GHL o con una integración nueva de Meta: GHL exige elegir cada post a mano (no sirve para posts futuros), conectar directo con Meta requiere aprobación de Meta que puede tardar semanas, y ManyChat ya está conectado, ya tiene el permiso de Meta resuelto y ya responde comentarios en cualquier post automáticamente — solo falta mejorar el mensaje para que use la misma IA del bot. Sigue bloqueado esperando el acceso de invitado a la cuenta de ManyChat.
