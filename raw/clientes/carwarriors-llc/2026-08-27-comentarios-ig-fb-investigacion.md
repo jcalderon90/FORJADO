@@ -56,3 +56,16 @@ Jorge confirmó seguir con la vía de ManyChat (en vez de GHL nativo o Meta dire
 ## 2026-08-27 (noche, aún más tarde) — Explicación enviada a Jorge González
 
 Jorge (Calderón) le mandó a Jorge González la explicación de por qué se va a construir esto sobre ManyChat y no directo en GHL o con una integración nueva de Meta: GHL exige elegir cada post a mano (no sirve para posts futuros), conectar directo con Meta requiere aprobación de Meta que puede tardar semanas, y ManyChat ya está conectado, ya tiene el permiso de Meta resuelto y ya responde comentarios en cualquier post automáticamente — solo falta mejorar el mensaje para que use la misma IA del bot. Sigue bloqueado esperando el acceso de invitado a la cuenta de ManyChat.
+
+## 2026-08-28 — Corrección importante: la cuenta de ManyChat es plan FREE, no Pro; mensaje nuevo enviado a Jorge González y Bianca
+
+Jorge (Calderón) aclaró que la cuenta de ManyChat de Carwarriors está en el **plan gratuito**, no Pro. Esto invalida una parte del plan del 08-27: se verificó con WebSearch (no contra la cuenta real, que sigue sin acceso) que tanto **"External Request"** (el webhook saliente hacia n8n/LLM) como **"All posts or reels"** (cobertura automática de cualquier post futuro) son features exclusivas del **plan Pro** ($29-39/mes según fuente). El free (reducido en marzo 2026 a 25 contactos activos/mes, 2 canales, 4 automatizaciones activas) solo soporta comment-to-DM en **un post específico elegido a mano** — la misma limitación por la que ya se había descartado el trigger nativo de GHL. Es decir, el trigger "Comentario en post/reel" que ya está activo en la cuenta probablemente NO cubre posts futuros automáticamente como se asumió el 08-27, y no podría conectarse a n8n sin subir de plan.
+
+Fuentes consultadas (WebSearch, 2026-08-28): [ManyChat Pricing 2026 — SetSmart](https://setsmart.io/blog/manychat-pricing), [Free plan – Manychat Help](https://help.manychat.com/hc/en-us/articles/25800197498652-Free-plan), [ManyChat Review 2026 — Flowgent](https://flowgent.ai/blog/manychat-review).
+
+**Opciones reales resultantes, presentadas a Jorge González y Bianca (mensaje enviado 2026-08-28):**
+1. **Upgrade a ManyChat Pro** ($29-39/mes) — recomendado: desbloquea External Request + All posts/reels, mantiene cero App Review de Meta.
+2. **Meta Graph API directo + n8n** — sin costo SaaS adicional, pero requiere App Review de Meta (semanas).
+3. Pausar este frente.
+
+**Esperando respuesta de Jorge González/Bianca sobre si aprueban el gasto del upgrade a ManyChat Pro.** No construir nada de este frente (ni pedir acceso a ManyChat) hasta que decidan.

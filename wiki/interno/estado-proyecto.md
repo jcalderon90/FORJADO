@@ -2,7 +2,7 @@
 tags: [forjado, estado, pendientes, dashboard]
 tipo: estado
 estado: activo
-actualizado: 2026-08-27 (noche)
+actualizado: 2026-08-28
 fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 ---
 
@@ -15,7 +15,7 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 
 | Cliente | Estado | Última actividad |
 |---|---|---|
-| **Carwarriors LLC** | 🟢 Jorge pidió 4 mejoras nuevas — la del handoff humano ya está **construida y publicada en producción** en ambos dealers (2026-08-27, confirmada con tráfico real en PRINCIPAL). Comentarios IG/FB: camino confirmado (**ManyChat**, ya conectado y con permiso de Meta resuelto — GHL exige posts uno por uno, Meta directo tarda semanas en aprobación), explicado a Jorge González, **bloqueado esperando que dé acceso de invitado a la cuenta**. SMS de leads calientes: instrucciones ya entregadas para que Jorge González compre número SMS en GHL, bloqueado hasta que confirme. Ticket DealerCenter: en pausa esperando a Bianca. Bianca reportó el bot viejo de GHL inventando que venden Tesla — verificado y **borrado por completo vía API en ambos dealers** (2026-08-27). Nuevo hallazgo de Jorge (leads que esperan un vehículo gratis vía posts virales, gastando tokens del bot sin intención de compra) — **guardrail construido y publicado en producción en ambos dealers** (2026-08-27), pendiente confirmar con tráfico real. Chequeo de salud del sync de leads GHL↔DealerCenter (2026-08-27): **ambas direcciones sanas**, confirmado con datos reales del mismo día. Sigue esperando respuesta de Bianca sobre el bug de auto-asignación de leads en DealerCenter | 2026-08-27 |
+| **Carwarriors LLC** | 🟢 **Ticket real abierto en soporte de DealerCenter (2026-08-28)** por el bug de auto-asignación de BDC Rep — Jorge Calderón escaló directo con la evidencia completa en vez de seguir esperando a Bianca; el asistente de IA del propio formulario de soporte reafirmó el diagnóstico sin ofrecer solución, se envió igual a soporte humano. **Esperando respuesta de soporte de DealerCenter.** Comentarios IG/FB: **corrección 2026-08-28** — la cuenta de ManyChat es plan FREE, no Pro; las 2 features clave (External Request hacia n8n, All posts/reels) son Pro-only ($29-39/mes), igual de limitado que el trigger nativo de GHL ya descartado. Mensaje enviado a Jorge González y Bianca con 3 opciones (upgrade ManyChat Pro — recomendado; Meta Graph API directo + App Review de semanas; o pausar), **esperando su decisión sobre el gasto**. La del handoff humano sigue **construida y publicada en producción** en ambos dealers (2026-08-27, confirmada con tráfico real en PRINCIPAL). SMS de leads calientes: instrucciones ya entregadas para que Jorge González compre número SMS en GHL, bloqueado hasta que confirme. Bot viejo de GHL inventando que venden Tesla — verificado y **borrado por completo vía API en ambos dealers** (2026-08-27). Guardrail de leads que esperan vehículo gratis — **construido y publicado en producción en ambos dealers** (2026-08-27), pendiente confirmar con tráfico real. Sync de leads GHL↔DealerCenter (2026-08-27): **ambas direcciones sanas** | 2026-08-28 |
 | **Varela Law** | 🔴 Riesgo de negocio: Mario dice que dejó de pagar la API de MyCase (pensando que solo servía para el Trust) — verificado que sigue viva ahora mismo, pero si la corta de verdad se caen 4 sistemas en producción (Token Manager, Radar Billing, reporte semanal de facturas vencidas lanzado hoy, tracking Zelle). Falta que Jorge se lo aclare a Mario | 2026-08-27 |
 | **Pipeline / prospección** | Ver [[../ventas/pipeline]] | 2026-08-15 |
 
