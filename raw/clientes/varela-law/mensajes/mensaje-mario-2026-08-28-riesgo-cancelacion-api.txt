@@ -1,0 +1,12 @@
+Hola Mario! Te escribo porque me quedé pensando en algo que mencionaste sobre dejar de pagar la API de MyCase, y quiero explicarte bien qué implica antes de que tomes esa decisión, porque creo que hay algo importante que no quedó claro.
+
+Entiendo que la razón es que el "Trust Balance" no se puede sacar por esa vía — y es cierto, ya lo confirmamos con soporte de MyCase, ese dato específico no está disponible ahí y probablemente nunca lo esté. Pero esa API no es solo para el Trust Balance. Hoy mismo, en este momento, hay 4 sistemas tuyos corriendo todos los días gracias a esa conexión:
+
+1. El que mantiene el acceso funcionando (se renueva solo, sin que nadie tenga que hacer nada).
+2. El que llena automáticamente 3 columnas de tu pestaña de Billing todos los días a las 5 de la mañana (Total Amount Collected, Total Invoiced Amount, Uninvoiced Balance).
+3. El reporte semanal de facturas vencidas que empezó a mandarte este mismo lunes (54 facturas, $81,324.76 pendiente) — para que tú y Rosa sepan a quién hay que cobrarle sin tener que revisar caso por caso.
+4. El que revisa los correos de Zelle que reenvías y los registra solo en Airtable y en el Sheet.
+
+Si se corta la API, estos 4 sistemas dejan de funcionar el mismo día — no solo el que tenía que ver con el Trust Balance, que de hecho es el único que nunca se pudo automatizar del todo por esa limitación.
+
+No es que tengas que decidir nada ahora — solo quería que tuvieras el panorama completo antes de cortarla, porque el ahorro que representa esa API hoy es mucho mayor que lo que cuesta mantenerla. Si de todas formas quieres darle otra vuelta a la decisión, o si el tema es el costo en sí (no el Trust Balance), avísame y lo vemos juntos.

@@ -5,7 +5,7 @@ estado: activo
 servicio: automatizacion
 contacto: Mario Varela
 creado: 2026-06-17
-actualizado: 2026-08-27
+actualizado: 2026-08-28
 fuente_raw: raw/clientes/varela-law/
 ---
 
@@ -45,9 +45,11 @@ fuente_raw: raw/clientes/varela-law/
 4. **Reporte semanal de facturas vencidas** (`Radar Billing - Reporte Facturas Vencidas (Semanal)`, `ZxZONW1XANkoP1ay`) — EN PRODUCCIÓN desde 2026-08-27, primera oportunidad activada del análisis de API de MyCase (2026-07-28). Cada lunes 8am trae `/invoices` y `/cases` de MyCase, filtra las de `status: "overdue"`, y manda a `mvarela@varela.law` una tabla con balance pendiente, días de atraso y link directo a cada factura. Primer envío real (2026-08-27): 54 facturas vencidas, $81,324.76 de balance total pendiente.
 5. Todos los workflows tienen `errorWorkflow` conectado a `ERROR HANDLER` (email automático a `jcalderon900610@gmail.com` ante cualquier fallo).
 
-## Pendientes abiertos (al 2026-08-27)
+## Pendientes abiertos (al 2026-08-28)
 
-- [ ] **🔴 Aclarar con Mario — riesgo de negocio, no técnico:** mencionó haber dejado de pagar la API de MyCase (por el Trust Balance no disponible vía API). Verificado que sigue 100% viva ahora mismo (Token Manager y Radar Billing corrieron con éxito hoy). Pero si la cancela de verdad, se caen 4 sistemas en producción a la vez: Token Manager, Radar Billing (F/H/J diario), el reporte semanal de facturas vencidas (lanzado hoy mismo), y el tracking de Zelle. Jorge tiene que confirmarle que la API vale más allá del Trust antes de que la corte. Detalle: [[../../raw/clientes/varela-law/2026-08-27-mario-posible-cancelacion-api-mycase|raw/2026-08-27]].
+- [x] **Corregir el parser de `Radar Billing - Build ID MAP`** — resulta que ya estaba corregido desde 2026-08-14 (nunca quedó documentado). Verificado hoy: funciona, resolvió una de las 4 filas históricas sin match (Marquez, Dimas), y señala correctamente 6 filas que sí necesitan criterio humano en vez de asignarlas mal. Ver [[../../raw/clientes/varela-law/2026-08-28-parser-id-map-ya-corregido]].
+
+- [x] **Mensaje enviado a Mario (2026-08-28)** explicando que la API de MyCase sostiene 4 sistemas en producción (Token Manager, Radar Billing F/H/J diario, reporte semanal de facturas vencidas, tracking de Zelle), no solo el Trust Balance que cree que no sirve. Ver [[../../raw/clientes/varela-law/mensajes/mensaje-mario-2026-08-28-riesgo-cancelacion-api.txt]]. **Esperando su respuesta** — no perseguir proactivamente.
 - [ ] **Esperando a Mario** — de las 5 oportunidades del análisis de API (2026-07-28), la #1 (facturas vencidas) ya está en producción (ver arriba). Quedan por confirmar:
   - (2) Leads — **bloqueada**: MyCase no tiene ningún lead cargado (`GET /leads` devolvió 0), sin datos reales no se puede confirmar el shape del objeto para escribir la asignación con seguridad. Retomar si aparece un lead real.
   - (3) Agenda de deadlines/audiencias — **construida, inactiva**, `Radar Billing - Agenda Deadlines y Audiencias (Diario)` (`4QsJaKlmHDhkVtBV`), esperando que Mario confirme si la quiere. La otra mitad de esta oportunidad (checklist automática de tareas al abrir un caso nuevo) sigue sin construir — depende de que Mario defina su checklist real, no es algo inventable sin riesgo.
@@ -57,6 +59,8 @@ fuente_raw: raw/clientes/varela-law/
 - [ ] **Baja prioridad** — 4 de 99 clientes sin match automático en ID MAP (Joj Santos, Medina Manuel, Marquez Dimas, Rojas Tovar Manuel): el sistema los deja intactos, mismo trabajo manual que Mario ya hacía antes, sin riesgo de dato incorrecto. Mario no ha reportado ningún inconveniente. Mensaje ya redactado, listo para enviar cuando surja la ocasión — ver [[../../raw/clientes/varela-law/mensajes/mensaje-mario-2026-07-25-radar-billing-completo.txt]].
 - [ ] Hablar con **Adalberto** sobre el sistema automático de contratos (sin fecha).
 - [ ] Construir workflows funcionales nuevos (Cases, Tasks, Time Entries, Events) — depende de la priorización de Mario arriba.
+- [ ] **Backlog de ideas nuevas (2026-08-28, investigación externa, sin enviar a Mario todavía):** webhooks de MyCase para tiempo real en vez de polling; checklist automático al abrir caso; conflicto de interés al crear lead (bloqueado por lo mismo que la oportunidad #2 de arriba); seguimiento de clientes sin contacto reciente; y dos que no requieren trabajo nuevo — activar la Agenda de Deadlines ya construida, y ampliar el Borrador de Avisos de Facturas para que se envíe directo al cliente. Recomendado empujar estas dos últimas en el próximo mensaje a Mario. Detalle completo: [[../../raw/clientes/varela-law/2026-08-28-brainstorm-nuevas-ideas-mycase-api]].
+- [ ] **Backlog de ideas que NO dependen de la API de MyCase (2026-08-28 noche, investigación externa, sin enviar a Mario todavía):** más relevante ahora por el riesgo de cancelación de la API. Prioridad #1 — detectar deadlines desde notificaciones de e-filing/corte que lleguen al correo de Mario (mismo patrón que el tracking de Zelle, ataca el mismo dolor que la Agenda de Deadlines pero sin depender de MyCase); prioridad #2 — chequeo de conflicto de interés vía un Google Form de intake propio en vez de `/leads` de MyCase (desatasca lo que estaba bloqueado por falta de datos). Además: disparar el checklist de apertura de caso desde el correo de firma de retainer (DocuSign/HelloSign) en vez de MyCase; flag de correspondencia de contraparte sin respuesta; digest semanal de salud de cartera leyendo el Sheet ya existente; recordatorios administrativos internos genéricos. Pendiente confirmar con Mario si de verdad reciben notificaciones de e-filing por correo antes de proponerlo. Detalle completo: [[../../raw/clientes/varela-law/2026-08-28-brainstorm-ideas-fuera-de-mycase]].
 
 ## Relacionado
 

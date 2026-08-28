@@ -12,3 +12,5 @@
 **El riesgo real:** si Mario canceló o está por cancelar el pago de la API pensando que "no servía para el Trust", probablemente no tiene claro que esa misma API hoy sostiene 4 sistemas en producción con valor real más allá del Trust: `MyCase - Token Manager`, `Radar Billing` (F/H/J diario en su Sheet), el reporte semanal de facturas vencidas (recién lanzado hoy), y el tracking de pagos Zelle entrantes. Si la cancelación se hace efectiva, las 4 cosas se caen a la vez sin aviso previo (aunque `ERROR HANDLER` mandaría alerta por email en cuanto falle algo).
 
 **Pendiente real:** Jorge tiene que aclarar directamente con Mario si ya canceló o todavía no, y explicarle el valor real que la API sostiene hoy más allá del Trust, antes de que decida definitivamente cortarla. No es algo que se pueda resolver técnicamente — es una decisión de negocio de Mario.
+
+**Actualización 2026-08-28 — mensaje enviado.** Jorge confirmó haber enviado a Mario el mensaje redactado explicando los 4 sistemas en riesgo (ver [[mensajes/mensaje-mario-2026-08-28-riesgo-cancelacion-api.txt]]). Queda esperando su respuesta — no perseguir proactivamente.

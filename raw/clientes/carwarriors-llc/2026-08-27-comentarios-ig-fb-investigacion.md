@@ -69,3 +69,22 @@ Fuentes consultadas (WebSearch, 2026-08-28): [ManyChat Pricing 2026 — SetSmart
 3. Pausar este frente.
 
 **Esperando respuesta de Jorge González/Bianca sobre si aprueban el gasto del upgrade a ManyChat Pro.** No construir nada de este frente (ni pedir acceso a ManyChat) hasta que decidan.
+
+## 2026-08-28 (más tarde) — Acceso de invitado otorgado; Jorge Calderón infiere que la cuenta ya es Pro
+
+Jorge Calderón confirmó que ya le dieron acceso de invitado a la cuenta de ManyChat de Carwarriors. Su razonamiento: si pudieron agregarlo como invitado sin costo, la cuenta ya debe estar en plan Pro (el plan free, según lo verificado el mismo día, es muy restringido — 25 contactos activos/mes, 2 canales, 4 automatizaciones — y no quedó claro por WebSearch si eso bloquea agregar invitados, así que esto es una inferencia de Jorge, no una verificación directa dentro de la cuenta).
+
+**Pendiente inmediato:** entrar a la cuenta con el acceso ya otorgado y verificar directamente en Settings → Billing qué plan está activo de verdad, antes de asumir que External Request y All posts/reels ya están disponibles. Si se confirma Pro, se puede saltar directo al paso ya documentado arriba (reemplazar el mensaje estático del flujo "Comentario en post/reel" por un nodo External Request hacia un webhook nuevo en n8n) sin necesidad de que Jorge González/Bianca aprueben ningún gasto adicional.
+
+## 2026-08-28 (noche) — Verificado con acceso real: NO es Pro pagado, es un TRIAL de Pro
+
+Jorge Calderón entró a la cuenta con Playwright usando el acceso de invitado que le dieron (login Google, `jcalderon900610@gmail.com`). Confirmado directamente en la UI de ManyChat (selector de cuenta, esquina superior):
+
+- La cuenta **"Carwarriors LLC | Car Dealer"** muestra la insignia **TRIAL** — "Trial version: A premium trial version offering." Es decir: **sí tiene las features Pro activas ahora mismo** (probablemente incluye External Request y All posts/reels), pero es un período de prueba, no una suscripción Pro pagada. La inferencia anterior de Jorge ("si me pudieron agregar gratis, ya debe ser Pro") era parcialmente cierta — hay Pro activo, pero por trial, no por pago.
+- Existe una segunda cuenta en el mismo login, **"new WhatsApp account"**, en plan **FREE** — no es la que usamos, es aparentemente otra cuenta de pruebas o de otro proyecto, no tocar.
+- **No se encontró en la UI la fecha exacta de expiración del trial** — no hay banner de cuenta atrás visible en el Home ni en Configuración → General/Pagos. `Configuración → Pagos` es solo para Stripe/PayPal de cobro a clientes finales (no para el plan de la cuenta), y `/settings/billing` y `/settings/upgrade` devuelven 404 por URL directa (la app es un SPA, hay que navegar por clicks, no por URL).
+- Nota técnica infra: como con GHL, `manychat.com` (dominio marketing, no la app) devuelve 451 "unavailable in your region" en este entorno de Playwright — hay que entrar siempre por `app.manychat.com`, nunca por `manychat.com/login`.
+
+**Consecuencia práctica:** el trial de Pro permitiría avanzar YA con el cambio de "Comentario en post/reel" → External Request hacia n8n sin que Jorge González/Bianca tengan que aprobar el gasto todavía — pero es una ventana temporal. Falta averiguar cuándo vence (probablemente visible dentro del flujo de upgrade/checkout de la app, no en Configuración general) antes de construir algo que dependa de una feature que puede desaparecer sin aviso. Recomendado: al construir, avisar a Jorge González que el trial se va a acabar y van a necesitar decidir sobre el pago de todos modos, no evitarlo solo porque hoy funcione gratis.
+
+**Siguiente paso:** ubicar la fecha de vencimiento del trial (dentro de la app, en el flujo de upgrade/checkout) y, si el tiempo alcanza, avanzar con el cambio técnico del flujo "Comentario en post/reel" antes de que expire.
