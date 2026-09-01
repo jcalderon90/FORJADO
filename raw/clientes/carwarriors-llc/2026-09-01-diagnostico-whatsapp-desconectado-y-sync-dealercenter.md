@@ -31,6 +31,16 @@ Se modificó el bot para que pida y guarde el teléfono explícitamente, publica
 - **`PRINCIPAL`** (`Kif9lWwDHvR7TT39`) y **`PRINCIPAL - Rances Car`** (`N68IYzm4Bf6AVTXP`): nuevo paso 6 en el FLUJO DE CALIFICACION — pedir el teléfono apenas el lead muestre intención real (vehículo + un eje más confirmado), nunca en el primer mensaje. Campo `telefono` agregado a `estado_lead`, al bloque CONTEXTO DEL LEAD y al JSON de salida obligatorio. El tool `lead_collector` ahora pasa `telefono_actual` (leído de `User Data`) al sub-workflow.
 - Los 3 workflows fueron publicados explícitamente (`publish_workflow`) y se verificó que `activeVersionId` coincide con la versión corregida antes de dar por cerrado — lección aprendida de la recurrencia del 08-31 ([[2026-08-31-fix-gratis-whatsapp-y-kb-search-parsing-recurrencia]]).
 
+## Ajuste posterior: manejo de rechazo/ignoro del pedido de teléfono
+
+Jorge preguntó qué hace el bot si el cliente se niega a dar el teléfono o lo ignora y sigue preguntando otra cosa. Revisando el prompt recién escrito, **no tenía ninguna regla para ese caso** — solo instruía a pedirlo, sin manejar la negativa. Se agregó al paso 6 del FLUJO DE CALIFICACION (`PRINCIPAL` y `PRINCIPAL - Rances Car`, publicado en ambos):
+
+- Pedirlo una sola vez.
+- Si el cliente lo ignora y sigue con otro tema: responder eso con normalidad, no insistir en el mismo turno ni bloquear la conversación.
+- Si se niega explícitamente ("no quiero dar mi número", "prefiero no"): respetar la negativa, no volver a pedirlo en el resto de la conversación, seguir calificando/ayudando normal — el teléfono nunca es requisito para seguir atendiendo al lead.
+
+Verificado en la ruta viva (`versionId == activeVersionId`, texto presente en `parameters` del nodo activo).
+
 ## Pendiente
 
 - **Confirmar con tráfico real:** que el bot efectivamente pida el teléfono en una conversación real, lo guarde en GHL, y que eso dispare la automatización de sync a DealerCenter de punta a punta. No se forzó una ejecución de prueba en esta sesión.
