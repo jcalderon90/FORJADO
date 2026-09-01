@@ -6,7 +6,7 @@ servicio: automatizacion
 estado_comercial: migracion-arquitectura-en-curso
 contacto: Jorge González (dueño) / Bianca Cangialosi (marketing)
 creado: 2026-06-18
-actualizado: 2026-09-01 (tarde)
+actualizado: 2026-09-01 (noche)
 fuente_raw: raw/clientes/carwarriors-llc/
 ---
 
@@ -66,9 +66,12 @@ Documentos de referencia relacionados: [[carwarriors-llc-infraestructura]] · [[
 - [ ] Automatizar la cadencia de re-contacto saliente del playbook BDC (llamar 0-2 min, insistir 5-8 veces/48h) — no cubierta por nada hoy, identificado como gap, no bloqueante.
 - [ ] Avisar a contabilidad del cambio de gasto (sale GHL Conversation AI, entra OpenRouter).
 - [ ] **Confirmar con un mensaje real de WhatsApp que el bot ya responde en Carwarriors LLC** — WhatsApp Messaging ya se contrató y activó (2026-09-01, número `+15557757668` conectado), y se corrigió el gap que lo hubiera bloqueado igual (ver Resueltos abajo). Falta la prueba end-to-end con tráfico real (no se hizo todavía, solo se verificó la configuración).
+- [ ] **Confirmar con tráfico real que el guardrail de dirección (2026-09-01, noche) funciona** — próxima vez que un lead real pregunte la dirección del lote en cualquiera de los 2 dealers, verificar que el bot responde con el dato correcto (3620 NW 27th Ave) vía `kb_search`, no de memoria. No se pudo determinar si la lead del reporte original de Bianca llegó a visitar la dirección incorrecta.
 - [ ] Formalizar contrato una vez validadas las pruebas (sin fecha).
 
 ## Resueltos recientes (contexto, no acción)
+
+**Bot inventó la dirección física del lote a un lead real; guardrail agregado en ambos dealers (2026-09-01, noche):** Bianca reportó (captura de Instagram/Messenger) que el bot le dio a una lead que quería visitar en persona una dirección falsa ("1234 NW 12th Street, Miami") en vez de la real (**3620 NW 27th Ave, Miami, FL 33142**). Verificado con una consulta directa a Mongo (workflow temporal de solo lectura, archivado después de usarlo): el Knowledge Base ya tenía el dato correcto para ambos dealers — el bug real era que `PRINCIPAL` no tenía ningún guardrail que lo obligara a usar `kb_search` para preguntas de dirección (a diferencia del guardrail duro que sí existe para precio), así que podía contestar de memoria. Corregido en ambos (`PRINCIPAL` y `PRINCIPAL - Rances Car`): nueva sección `DIRECCION Y UBICACION` que prohíbe responder de memoria y obliga a consultar `kb_search` siempre. **Gotcha nuevo de MCP encontrado en el camino:** el primer intento de aplicar el fix (`setNodeParameter`) reportó éxito pero no cambió nada en el contenido real — detectado solo porque se re-verificó con un fetch posterior; reintentado con `updateNodeParameters` y esta vez confirmado byte a byte en la versión activa de ambos workflows. Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-01-bot-invento-direccion-fisica-fix-guardrail|raw/2026-09-01 (dirección inventada)]].
 
 **WhatsApp activado en GHL + fix del trigger faltante que le hubiera impedido funcionar de todos modos (2026-09-01, tarde):** Carwarriors LLC contrató WhatsApp Messaging ($10/mes), número `+15557757668` conectado. Al revisar el automation de GHL que alimenta al bot (`Lead Agent - n8n`, dispara el webhook `/webhook/lead-agent` que recibe `PRINCIPAL`), se encontró que **solo tenía triggers para Instagram DM y Facebook Messenger — ninguno para WhatsApp.** Aunque el número ya estuviera conectado y el código de n8n ya soportara el canal (`Create Body` ya detectaba `whatsapp` desde antes), GHL nunca le iba a avisar a n8n que llegó un mensaje por ese canal. Agregado un tercer trigger "Customer replied → Reply channel is WhatsApp", guardado y verificado persistente (workflow sigue en estado Published). Acceso a GHL vía Playwright con login por correo (OTP a Gmail, no SMS) — documentado el procedimiento para la próxima vez. Falta: confirmar con tráfico real, revisar si Rances Car tiene el mismo gap, y varios automations legacy de WhatsApp sin explorar (ver pendientes). Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-01-whatsapp-activado-fix-trigger-lead-agent|raw/2026-09-01 (WhatsApp + fix trigger)]].
 
