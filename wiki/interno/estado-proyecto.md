@@ -2,7 +2,7 @@
 tags: [forjado, estado, pendientes, dashboard]
 tipo: estado
 estado: activo
-actualizado: 2026-09-01
+actualizado: 2026-09-01 (tarde)
 fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 ---
 
@@ -15,7 +15,7 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 
 | Cliente | Estado | Última actividad |
 |---|---|---|
-| **Carwarriors LLC** | 🟢 **"WhatsApp desconectado" + "leads no llegan a DealerCenter" diagnosticados como la misma causa raíz (2026-09-01)**: WhatsApp Messaging nunca se contrató en GHL, y sin él los leads llegan sin teléfono, por lo que el sync a DealerCenter nunca disparaba. Bot rediseñado (teléfono bloqueante, 3 intentos) y auditoría de un bug de parsing de `deepseek-v4-flash` corregida en 4 nodos, ambos dealers. Pendiente: confirmar con tráfico real limpio y decisión de Carwarriors sobre WhatsApp ($10/mes). Nuevo pedido: reporte mensual de ventas retail por marca/modelo para DealerCenter. 🟡 Bug de auto-asignación de BDC Rep en DealerCenter sigue sin resolver, ticket `#TICKET-20586098` Open sin respuesta de soporte. 🟡 Comentarios IG/FB vía ManyChat publicado en LIVE (08-31), falta confirmar con tráfico real. Ver detalle completo en [[../clientes/carwarriors-llc]] | 2026-09-01 |
+| **Carwarriors LLC** | 🟢 **WhatsApp ya contratado y el bot corregido para atenderlo (2026-09-01)**: el diagnóstico del mismo día había unificado "WhatsApp desconectado" + "leads no llegan a DealerCenter" en una sola causa raíz (WhatsApp nunca contratado → leads sin teléfono → sync a DealerCenter nunca disparaba). Se corrigió el bot (teléfono bloqueante, 3 intentos) y luego, ya con WhatsApp pagado y activo, se encontró y corrigió un segundo gap independiente: el automation de GHL que alimenta al bot no tenía trigger para el canal WhatsApp (solo IG/FB) — agregado y verificado. También se agregó un filtro explícito de teléfono en el envío a DealerCenter (antes dependía solo de config de GHL) y se auditó un bug de parsing de `deepseek-v4-flash`, corregido en 4 nodos, ambos dealers. Pendiente: confirmar con tráfico real (WhatsApp y el gate de teléfono), revisar si Rances Car tiene el mismo gap de WhatsApp, y nuevo pedido de reporte mensual de ventas retail por marca/modelo (bloqueado en pedirle a Bianca el reporte correcto de ventas/deals — el de inventario no sirve). 🟡 Bug de auto-asignación de BDC Rep en DealerCenter sigue sin resolver, ticket `#TICKET-20586098` Open sin respuesta de soporte. 🟡 Comentarios IG/FB vía ManyChat publicado en LIVE (08-31), falta confirmar con tráfico real. Ver detalle completo en [[../clientes/carwarriors-llc]] | 2026-09-01 |
 | **Varela Law** | 🟡 Riesgo de negocio (API de MyCase): mensaje enviado a Mario 2026-08-28 explicando los 4 sistemas en producción que dependen de esa API — **esperando su respuesta**, no perseguir proactivamente. Parser de `Build ID MAP` — resultó ya estar corregido desde el 2026-08-14 (documentado recién ahora), verificado y cerrado. Columna N (Num Overdue Invoices) confirmada automatizable con datos que ya extraemos, sin construir todavía. Backlog nuevo de 6 ideas (investigación externa 2026-08-28): webhooks de MyCase, checklist al abrir caso, conflicto de interés en leads nuevos, seguimiento de clientes sin contacto reciente, y dos de bajo esfuerzo — activar la Agenda de Deadlines ya construida y ampliar el Borrador de Avisos para envío directo al cliente | 2026-08-28 |
 | **Pipeline / prospección** | Ver [[../ventas/pipeline]] | 2026-08-15 |
 
