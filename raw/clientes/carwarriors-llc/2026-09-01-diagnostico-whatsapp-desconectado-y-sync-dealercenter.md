@@ -41,6 +41,22 @@ Jorge preguntó qué hace el bot si el cliente se niega a dar el teléfono o lo 
 
 Verificado en la ruta viva (`versionId == activeVersionId`, texto presente en `parameters` del nodo activo).
 
+## Rediseño: teléfono como requisito bloqueante (no opcional), inspirado en Lead Collector de Spectrum
+
+Jorge cuestionó el enfoque permisivo del ajuste anterior: si el bot nunca insiste y el lead nunca comparte el teléfono, ese lead jamás llega a DealerCenter — que es justo el problema que se estaba resolviendo. Pidió replicar el comportamiento del `Lead Collector` de Spectrum Vivienda (`/Users/jorgecalderon/Desktop/PROYECTOS/Garoo/Agent-Spectrum`), adaptado para pedir **solo teléfono** (no nombre/correo, que Carwarriors no necesita).
+
+**Patrón de Spectrum estudiado:** sub-agente dedicado que bloquea la conversación hasta conseguir los datos de contacto, cuenta intentos (cada pedido = 1 intento), y al 3er intento o ante negativa explícita escala a un humano.
+
+**Adaptación para Carwarriors (diferencia clave con Spectrum: no escala a humano, sigue atendiendo):**
+
+- El teléfono pasa a ser un **gate bloqueante**: ante cualquier pregunta del cliente que pida información (precio, disponibilidad, inventario, financiamiento, fotos, cita), si el teléfono no está disponible, `PRINCIPAL` debe invocar `lead_collector` primero y responder ÚNICAMENTE con su pedido de teléfono — no llama a `kb_search`/`rsvp`/`send_media` en el mismo turno, no responde la pregunta original todavía. Excepción: saludos simples no activan el gate.
+- `LEAD - COLLECTOR` ahora lleva un **contador determinístico de intentos** (`telefono_intentos`, calculado en JS, no confiado al LLM) y una bandera persistente `telefono_dejar_de_pedir`. Se incrementa cada vez que se invoca sin conseguir el teléfono; al llegar a 3, o ante negativa explícita detectada por el LLM (`rechazo_explicito`), se marca `dejar_de_pedir=true` y el sistema genera un mensaje de cierre fijo ("Sin problema, seguimos igual 😊 ¿en qué te ayudo?").
+- A partir de ahí, `PRINCIPAL` deja de invocar `lead_collector` por teléfono y responde con total normalidad — regla de negocio del cliente: **"ningún lead sin teléfono puede ir a DealerCenter"**, y eso ya se cumple solo (el trigger de GHL depende del teléfono), sin necesidad de bloquear al lead para siempre ni escalarlo a un humano como hace Spectrum.
+- Cuando el LLM pide el teléfono, lo hace contextualizado a lo que el cliente preguntó (ej. "Para compartirte el precio del Camry, ¿me confirmas tu número?"), igual que Spectrum.
+- Nuevos campos persistidos en Mongo (`leads`) y pasados entre `PRINCIPAL`/`PRINCIPAL - Rances Car` y `LEAD - COLLECTOR`: `telefono_intentos`, `telefono_dejar_de_pedir`.
+
+Publicado y verificado en la ruta viva (`versionId == activeVersionId`) en los 3 workflows: `LEAD - COLLECTOR`, `PRINCIPAL`, `PRINCIPAL - Rances Car`.
+
 ## Pendiente
 
 - **Confirmar con tráfico real:** que el bot efectivamente pida el teléfono en una conversación real, lo guarde en GHL, y que eso dispare la automatización de sync a DealerCenter de punta a punta. No se forzó una ejecución de prueba en esta sesión.
