@@ -57,6 +57,14 @@ Jorge cuestionó el enfoque permisivo del ajuste anterior: si el bot nunca insis
 
 Publicado y verificado en la ruta viva (`versionId == activeVersionId`) en los 3 workflows: `LEAD - COLLECTOR`, `PRINCIPAL`, `PRINCIPAL - Rances Car`.
 
+## Bug real encontrado con tráfico real (mismo patrón que KB-SEARCH del 08-31, no aplicado aquí)
+
+Al monitorear tráfico real post-publish, un lead real de Rances Car (Ramses Hernandez, `ox1fHV15gEBW2TyvmvtZ`) preguntó por Tesla, el bot le pidió el teléfono (gate funcionando), y el lead respondió `"7866317873"`. Pero `LEAD - COLLECTOR` no lo guardó: `deepseek/deepseek-v4-flash` generó un rambling de razonamiento larguísimo con el JSON de salida repetido varias veces antes de la respuesta final. Mi extracción (`primer '{' a último '}' `) mezclaba varios bloques y `JSON.parse` fallaba → caía al fallback vacío. El teléfono real se perdió en silencio, y encima `PRINCIPAL` alucinó "Thanks! Got your number" sin que el dato se hubiera guardado realmente.
+
+**Es el mismo patrón exacto que ya se corrigió en `KB - SEARCH` el 2026-08-31** — no lo apliqué al escribir `LEAD - COLLECTOR` nuevo. Corregido: la extracción ahora busca todos los bloques JSON planos (`/\{[^{}]*\}/g`) y usa el **último** que parsea y tiene la clave `telefono`, en vez de asumir un solo bloque limpio. Publicado y verificado en la ruta viva.
+
+**Intento de recuperación fallido (lección aprendida):** reenvié el webhook original con el mismo payload para que el lead recuperara su teléfono por la ruta ya corregida. Coincidió en el tiempo con tráfico real genuino del mismo lead (una pregunta sobre una promo, que quedó frenada en un nodo `Filter1`/dedupe antes de llegar a `PRINCIPAL`). Mi reenvío sí llegó a `PRINCIPAL`, pero el agente tomó el contexto más reciente de GHL en vivo y respondió a la pregunta real de la promo en vez de reprocesar el teléfono — no hubo mensaje duplicado/confuso para el cliente (de hecho respondió sin querer una pregunta que el filtro había bloqueado), pero tampoco se recuperó el dato. Se confirmó que `telefono_intentos` no se corrompió (la ejecución fallida nunca llegó a escribir en Mongo). **Decisión: no volver a reenviar webhooks manualmente en este workflow** — tiene lógica dependiente de estado de GHL en tiempo real, replay es impredecible. El lead sigue activo; el gate ya corregido se lo va a volver a pedir naturalmente en su próximo mensaje, intento 1 de 3 limpio.
+
 ## Pendiente
 
 - **Confirmar con tráfico real:** que el bot efectivamente pida el teléfono en una conversación real, lo guarde en GHL, y que eso dispare la automatización de sync a DealerCenter de punta a punta. No se forzó una ejecución de prueba en esta sesión.
