@@ -27,3 +27,7 @@ Evitado mencionar en el mensaje el bug de recurrencia del 08-29/08-31 (`GRATIS -
 ## Pendiente
 
 - Esperar respuesta de Bianca. Si vuelve a reportar algo puntual, atenderlo con la misma rapidez de hoy para reforzar el mensaje de que sí se está respondiendo rápido.
+
+## Cierre (2026-09-02)
+
+Jorge indicó cerrar este ítem ("cierralo ya") sin seguir esperando/trackeando la respuesta de Bianca como pendiente abierto — la acción de nuestro lado (mensaje enviado, reconociendo la frustración y mostrando el fix del mismo día) ya estaba completa. Si Bianca escribe algo puntual nuevo más adelante, se trata como un reporte entrante normal, no como continuación de este ítem.
