@@ -34,9 +34,15 @@ Se agregó `options.timeout: 60000` (60s, con margen sobre el máximo real obser
 
 Búsqueda de ejecuciones en error desde 2026-09-03T00:00 tras el fix (publicado ~12:34 UTC): solo aparece la ejecución `4232` (la de las 02:40, previa al fix). Cero errores nuevos desde entonces — pero no ha pasado tráfico suficiente todavía para confirmar con un stall real de OpenRouter que el timeout corto efectivamente recorta la demora de 10 min a segundos.
 
+## Verificación adicional con prueba real (post-fix, 2026-09-03 ~12:39 UTC)
+
+Con un `contactId` de prueba claramente ficticio (`test-verif-fix-openrouter-01`, no corresponde a ningún contacto real de GHL), se ejecutó `PRINCIPAL - Rances Car` end-to-end simulando un lead real preguntando el precio de un Honda Civic — mismo código, mismo webhook, sin tocar datos de clientes reales.
+
+**Resultado: el bot respondió correctamente** — aplicó el gate de teléfono como está diseñado: *"¡Hola! Antes de darte info del Civic, ¿me ayudas con tu número de teléfono para pasarte los detalles completos?"*. Tiempos de los nodos OpenRouter con el fix ya activo: `OpenRouter Chat Model` (LEAD-COLLECTOR) 9.2s, `OpenRouter Chat Model2` (agente principal) 7.8s, agente `PRINCIPAL` completo 14.1s — todos muy por debajo del nuevo límite de 60s, confirmando que el timeout corto no corta llamadas normales. Sin errores.
+
 ## Pendiente real
 
-- [ ] Confirmar con tráfico real (o con el próximo stall real de OpenRouter) que el timeout de 60s efectivamente evita el bloqueo largo, sin cortar respuestas legítimas que tarden más de 60s.
+- [ ] Sigue faltando ver el fix actuar ante un stall *real* de OpenRouter (la prueba de arriba confirma que no corta llamadas normales, pero no reprodujo un colgado real — eso solo se confirma si vuelve a pasar en producción).
 - [ ] Si los timeouts de OpenRouter siguen siendo frecuentes, evaluar fallback a un segundo modelo/proveedor en el mismo nodo (multi-provider failover) en vez de solo fallar rápido.
 
 ## Relacionado
