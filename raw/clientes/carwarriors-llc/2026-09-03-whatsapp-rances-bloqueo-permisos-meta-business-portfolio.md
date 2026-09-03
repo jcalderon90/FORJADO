@@ -17,11 +17,15 @@ Se verificó en paralelo en Meta Business Suite (pestaña ya abierta por Jorge, 
 
 **Causa raíz:** son dos niveles de permiso distintos en Meta. Jorge Calderón tiene acceso de **página** (suficiente para Business Suite), pero el wizard de WhatsApp de GHL exige ser **Admin del Business Portfolio completo** que contiene esa página — nivel que no tiene sobre "Carwarriors Cuenta Publicitaria". No se completó ni guardó nada en el wizard (se canceló el diálogo de Facebook sin seleccionar portfolio).
 
+## Mensaje enviado a Bianca (2026-09-03)
+
+Se le explicó el bloqueo (permiso de Admin de Business Portfolio, no cuenta equivocada) y se le dieron **2 opciones**: (1) agregar a Jorge Calderón como Admin del portfolio "Carwarriors Cuenta Publicitaria" para que FORJADO complete la conexión, o (2) que ellos mismos completen el wizard en GHL (Settings → WhatsApp → Rances Car → "Connect with Facebook") ya que cuentan con el nivel de admin necesario. Mensaje enviado en español neutral. **Esperando respuesta/acción de Bianca — no perseguir proactivamente.**
+
 ## Pendiente real
 
-- [ ] **Bloqueante:** alguien con rol Admin en el Business Portfolio "Carwarriors Cuenta Publicitaria" (Meta Business Suite → Configuración → Usuarios de la empresa) debe agregar a Jorge Calderón como **Admin del portfolio** (no solo de la página).
-- [ ] Mensaje redactado y enviado a Bianca explicando el paso exacto — pendiente su respuesta/acción.
-- [ ] Una vez resuelto el permiso, retomar el wizard desde Settings → WhatsApp → Rances Car (se reinicia desde el paso 1 cada vez que se recarga, pero es rápido de re-transitar hasta "Connect with Facebook").
+- [ ] **Bloqueante:** esperando que Bianca elija una de las 2 opciones y la ejecute (o confirme quién lo hace).
+- [ ] Si eligen la Opción 1 (darnos permiso), una vez asignado el rol de Admin, retomar el wizard desde Settings → WhatsApp → Rances Car (se reinicia desde el paso 1 cada vez que se recarga, pero es rápido de re-transitar hasta "Connect with Facebook").
+- [ ] Si eligen la Opción 2 (lo hacen ellos), confirmar con Bianca/Jorge González cuando esté hecho y verificar en GHL que la conexión quedó activa.
 
 ## Relacionado
 
