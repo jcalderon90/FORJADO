@@ -6,7 +6,7 @@ servicio: automatizacion
 estado_comercial: migracion-arquitectura-en-curso
 contacto: Jorge González (dueño) / Bianca Cangialosi (marketing)
 creado: 2026-06-18
-actualizado: 2026-09-02
+actualizado: 2026-09-03
 fuente_raw: raw/clientes/carwarriors-llc/
 ---
 
@@ -51,6 +51,8 @@ Documentos de referencia relacionados: [[carwarriors-llc-infraestructura]] · [[
 
 ## Pendientes abiertos (al 2026-09-03)
 
+- [ ] **Confirmar con tráfico real (o el próximo stall de OpenRouter) que el timeout corto agregado hoy (2026-09-03) evita el bloqueo de 10 min al lead.** Ver detalle en Resueltos abajo.
+
 - [ ] **Cuenta de DealerCenter (`jcalderon90`) bloqueada (2026-09-03) — esperando desbloqueo.** Cualquier tarea que requiera login vivo a DealerCenter (seguimiento ROI, ticket BDC Rep, reporte de ventas retail, tasks viejos) queda pausada hasta entonces. Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-03-dealercenter-cuenta-bloqueada|raw/2026-09-03 (cuenta bloqueada)]].
 
 - [ ] **Brief de roadmap de Bianca — DealerCenter tasks viejos: PAUSADO (2026-09-02), decisión de Jorge.** Investigado en vivo: existe la vista "Customer → My Follow Ups" y una API interna real detrás (`CRMCustomReport/GetActivitiesReport`), pero el token de sesión es un JWT de Auth0 de **10 minutos sin refresh persistido** — mismo mecanismo que ya bloqueó por anti-bot el intento previo de automatizar el refresh de fotos de DealerCenter. Tampoco hay acción de "Reasignar" en la UI para un task existente (solo Complete/Cancel/Flag). Jorge decidió pausar este ítem en vez de seguir empujando contra el mismo muro. Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-02-investigacion-dealercenter-tasks-viejos|raw/2026-09-02 (investigación tasks)]].
@@ -74,6 +76,8 @@ Documentos de referencia relacionados: [[carwarriors-llc-infraestructura]] · [[
 - [ ] Formalizar contrato una vez validadas las pruebas (sin fecha).
 
 ## Resueltos recientes (contexto, no acción)
+
+**4 timeouts de 10 min en OpenRouter bloqueaban al lead esa demora; timeout corto agregado en 6 workflows (2026-09-03):** Jorge reportó notificaciones de error de ambos agentes. Diagnosticado: 4 ejecuciones de `LEAD - COLLECTOR` (compartido por los 2 dealers) fallaron en las últimas ~14h con `Request timed out` en el nodo OpenRouter (`deepseek/deepseek-v4-flash`, sin timeout configurado, default ~10 min). Como `lead_collector` es un tool síncrono del agente `PRINCIPAL`, el lead sí recibía respuesta (confirmado con una ejecución real que terminó en éxito con un mensaje coherente) pero con ~10 min de demora en vez de segundos. Se agregó `timeout: 60000ms` + `maxRetries: 1` (con margen sobre el máximo real observado de 41s) en el nodo OpenRouter de los 6 workflows que usan ese modelo: `LEAD - COLLECTOR`, `PRINCIPAL`, `PRINCIPAL - Rances Car`, `KB - SEARCH`, `RSVP`, `RSVP - Rances Car`. Publicado y verificado byte a byte en la versión activa de los 6 (gotcha ya conocido: el primer `update_workflow` solo toca el draft, hace falta `publish_workflow` explícito). Falta confirmar con tráfico real que el timeout corto recorta la demora sin cortar respuestas legítimas. Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-03-timeouts-openrouter-lead-collector-fix|raw/2026-09-03 (fix timeout OpenRouter)]].
 
 **Cerrado el seguimiento del mensaje a Bianca sobre el volumen de bugs (2026-09-02):** la acción de nuestro lado ya estaba completa (mensaje enviado, ver detalle abajo) — Jorge indicó cerrar el ítem sin seguir trackeando la respuesta como pendiente abierto. Si Bianca escribe algo puntual nuevo, se atiende como cualquier reporte entrante, no como continuación de este ítem. Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-02-bianca-frustracion-volumen-bugs|raw/2026-09-02 (frustración Bianca)]].
 
