@@ -22,3 +22,20 @@ Cualquier trabajo que requiera login vivo a DealerCenter queda **pausado** hasta
 
 - [[carwarriors-llc]]
 - [[2026-09-02-dealercenter-roi-diagnostico-completo]]
+
+## Actualización (misma sesión, más tarde 2026-09-03) — cuenta desbloqueada, password cambiada
+
+Jorge avisó que ya recuperó acceso ("ya tengo acceso de nuevo a DC"). La password cambió a `Carwarriors100@` (la anterior `Dealermiami100@` ya no sirve; actualizado en la memoria de referencia del asistente).
+
+**Se intentó loguear vía Playwright (skill `playwright-cli`) para revisar el ticket `#TICKET-20586098`:**
+- Primer intento: `auth.dealercenter.net` devolvió 403 "Access denied" (WAF), igual con Chromium que con Chrome real — bloqueo por IP de la máquina, no de la cuenta. En un intento posterior el 403 ya no apareció (parece haber sido transitorio).
+- Login con usuario+password pasó bien, pero el MFA fue problemático: pide SMS por defecto (numero al que el asistente no tiene acceso), cambiar a "Email" funciona, pero **dos veces seguidas el flujo regresó a la pantalla de login completa en vez de aceptar el código o mostrar "código inválido"** — no fue un tema de código vencido, parece detección de automatización de Auth0 reseteando la sesión. Se decidió no seguir insistiendo (mismo patrón de reintentos que causó el bloqueo de cuenta original) y pedirle a Jorge que entrara él mismo.
+- **Jorge confirmó manualmente que el ticket #TICKET-20586098 sigue Open, sin respuesta de soporte** (mismo estado que el 2026-08-29, sin cambios).
+
+Detalle técnico completo (para no repetir el intento fallido en el futuro) guardado en la memoria de referencia del asistente (`reference-dealercenter-login-credentials`).
+
+## Pendiente real (actualizado)
+
+- [x] Cuenta desbloqueada (2026-09-03) — password actualizada a `Carwarriors100@`.
+- [ ] Ticket `#TICKET-20586098` sigue Open sin respuesta de soporte — seguir esperando, sin acción nueva posible de este lado.
+- [ ] Login por Playwright a DealerCenter no es confiable por el loop de MFA/Auth0 — si se necesita automatizar en el futuro, probablemente convenga que Jorge inicie sesión manualmente primero (con "Remember this device" activo) y reutilizar ese mismo perfil persistente de Playwright, en vez de un login limpio.
