@@ -39,3 +39,15 @@ Detalle técnico completo (para no repetir el intento fallido en el futuro) guar
 - [x] Cuenta desbloqueada (2026-09-03) — password actualizada a `Carwarriors100@`.
 - [ ] Ticket `#TICKET-20586098` sigue Open sin respuesta de soporte — seguir esperando, sin acción nueva posible de este lado.
 - [ ] Login por Playwright a DealerCenter no es confiable por el loop de MFA/Auth0 — si se necesita automatizar en el futuro, probablemente convenga que Jorge inicie sesión manualmente primero (con "Remember this device" activo) y reutilizar ese mismo perfil persistente de Playwright, en vez de un login limpio.
+
+## Segundo intento, misma sesión más tarde — mismo loop confirmado, no es un incidente aislado
+
+Motivo: retomar el reporte mensual de ventas ([[2026-09-03-workflow-reporte-mensual-ventas-slack]]) chequeando si DealerCenter tiene, en **Reports → Schedules**, un tipo de reporte de ventas/deals cerrados que se pudiera programar directamente (mismo mecanismo ya usado para `FORJADO Lead Sync` e inventario) — evitaría depender de que Bianca/DealerCenter manden una muestra. Jorge pidió explícitamente intentar por Playwright pese al riesgo ya documentado.
+
+- Perfil persistente nuevo (`dc`), login limpio: esta vez **sin 403 de WAF** (confirma que el 403 de la vez anterior fue transitorio/por IP, no del lado de la cuenta). Usuario+password (`jcalderon90` / `Carwarriors100@`) aceptados sin problema.
+- Pantalla MFA por defecto: SMS. Cambiado a "Email" igual que la vez anterior.
+- No hay forma de leer el código de 6 dígitos del correo `jcalderon900610@gmail.com` desde este entorno (no hay credencial de Gmail propia en Playwright; el MCP `n8n-carwarriors` — que sí tiene una credencial Gmail OAuth ya conectada a ese buzón y podría haberse usado para leerlo — estaba caído en este momento). Se le pidió el código a Jorge.
+- Jorge indicó que el primer código ya había expirado y pidió reenviar uno nuevo. Al hacer clic en **"Resend"**, el flujo **no reenvió nada — saltó directo a la pantalla completa de login** (mismo patrón exacto del intento anterior, esta vez disparado por "Resend" en vez de por el código). **Confirma que no es un caso aislado ni un tema de timing: es un comportamiento reproducible del MFA por email de DealerCenter/Auth0 contra Playwright.**
+- Se detuvo la sesión ahí (browser cerrado) sin reintentar de nuevo, para no repetir el patrón que causó el bloqueo de cuenta original.
+
+**Conclusión reforzada:** login por Playwright a DealerCenter no es viable hoy para nada que pase por el MFA por email — ni para el primer código ni para un reenvío. La única vía confiable sigue siendo que Jorge entre manualmente. Para el chequeo puntual de Reports → Schedules (¿existe un reporte de ventas/deals programable ahí?), pendiente que Jorge lo revise él mismo cuando pueda — 2 minutos, evita el riesgo de un tercer bloqueo de cuenta.
