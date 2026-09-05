@@ -23,6 +23,7 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 
 - `.claude/skills/compile-wiki/` — compila sesiones de trabajo con clientes desde `raw/` hacia `wiki/` (usar al cerrar una sesión real).
 - `.claude/skills/manage-vault/` — referencia general de convenciones para navegar/crear/editar en esta bóveda, creada 2026-09-02 a pedido de Jorge para que cualquier agente (no solo esta sesión) la gestione bien. Ver [[../../README|README]] y [[../../raw/interno/2026-09-02-skill-manage-vault-creada]].
+- **Lección 09-05 — sesiones paralelas pueden generar hechos contradictorios en git:** dos sesiones trabajando el mismo cliente el mismo día (sin `fetch` previo) llegaron a conclusiones distintas sobre si se había contactado a un tercero, causando un conflicto de push con contenido no solo distinto sino contradictorio. Resuelto preguntándole al usuario cuál era el hecho real. Recomendación: si un cliente puede estar "caliente" (trabajado por otra sesión el mismo día), hacer `git fetch`/`pull` al arrancar. Detalle: [[../../raw/interno/2026-09-05-conflicto-sesiones-paralelas-git-push]].
 
 ## Pendientes de la agencia (no ligados a un cliente específico)
 
