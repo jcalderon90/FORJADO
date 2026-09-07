@@ -1,7 +1,7 @@
 ---
 tags: [forjado, indice, navegacion, arquitectura]
 tipo: indice
-actualizado: 2026-09-02
+actualizado: 2026-09-07
 ---
 
 # FORJADO
@@ -24,6 +24,7 @@ Bóveda de trabajo de la agencia FORJADO (automatización + IA). Reestructurada 
 1. **[`wiki/index.md`](wiki/index.md)** — diccionario global, una línea por página. Empieza siempre aquí.
 2. **[`wiki/interno/estado-proyecto.md`](wiki/interno/estado-proyecto.md)** — snapshot y pendientes de la agencia, hoy.
 3. Páginas de cliente: [`wiki/clientes/carwarriors-llc.md`](wiki/clientes/carwarriors-llc.md) · [`wiki/clientes/varela-law.md`](wiki/clientes/varela-law.md).
+4. **[`wiki/interno/mapa-forjado.md`](wiki/interno/mapa-forjado.md)** — esta bóveda es la carpeta principal de indexado de **todo FORJADO**; esta página mapea las carpetas hermanas `aplicaciones/` y `contenido/`.
 
 Para el detalle histórico completo de cualquier cliente (qué pasó cada día, cada bug, cada decisión), sigue el enlace `fuente_raw:` en el frontmatter de su página en `wiki/` hacia `raw/`.
 

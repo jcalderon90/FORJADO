@@ -32,6 +32,7 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
   └── contenido/                (repo GitHub social-media-content-, incluye engine/ — el motor de generación de video, confirmado que se queda ahí por ser herramienta acoplada a esa línea de servicio, no una app desplegada a cliente)
   ```
   Verificado: ningún path absoluto roto, remotes de git intactos, `node_modules/` correctamente ignorado y sin archivos trackeados en los 6 repos. Commits pusheados a `FORJADO` y `social-media-content-` en GitHub. Detalle completo en [[../../raw/interno/2026-09-07-reestructuracion-carpeta-raiz-forjado]].
+- **09-07: `desarrollo/` (esta bóveda) declarada carpeta principal de indexado de todo FORJADO** — hasta ahora `wiki/index.md` solo cubría clientes/interno de la propia bóveda, sin ninguna referencia a `aplicaciones/` ni `contenido/`. Creada [[mapa-forjado|wiki/interno/mapa-forjado.md]] (mapea las 4 apps de `aplicaciones/` — stack, estado, para qué sirve cada una — y referencia `contenido/`, que mantiene su propio `wiki/` independiente sin duplicarse acá), registrada en `wiki/index.md` y en el `README.md` de la bóveda. Detalle en [[../../raw/interno/2026-09-07-reestructuracion-carpeta-raiz-forjado|raw, sección "Quinta pasada"]].
 - `.claude/skills/compile-wiki/` — compila sesiones de trabajo con clientes desde `raw/` hacia `wiki/` (usar al cerrar una sesión real).
 - `.claude/skills/manage-vault/` — referencia general de convenciones para navegar/crear/editar en esta bóveda, creada 2026-09-02 a pedido de Jorge para que cualquier agente (no solo esta sesión) la gestione bien. Ver [[../../README|README]] y [[../../raw/interno/2026-09-02-skill-manage-vault-creada]].
 - **Lección 09-05 — sesiones paralelas pueden generar hechos contradictorios en git:** dos sesiones trabajando el mismo cliente el mismo día (sin `fetch` previo) llegaron a conclusiones distintas sobre si se había contactado a un tercero, causando un conflicto de push con contenido no solo distinto sino contradictorio. Resuelto preguntándole al usuario cuál era el hecho real. Recomendación: si un cliente puede estar "caliente" (trabajado por otra sesión el mismo día), hacer `git fetch`/`pull` al arrancar. Detalle: [[../../raw/interno/2026-09-05-conflicto-sesiones-paralelas-git-push]].
@@ -51,4 +52,5 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 - [[../clientes/carwarriors-llc|Carwarriors LLC]]
 - [[../clientes/varela-law|Varela Law]]
 - [[../ventas/pipeline|Pipeline (MOC)]]
+- [[mapa-forjado|Mapa de FORJADO — aplicaciones/ y contenido/]]
 - [[../index|Índice de la bóveda]]

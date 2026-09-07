@@ -13,6 +13,7 @@ actualizado: 2026-08-29
 | Página | Descripción |
 |---|---|
 | [[interno/estado-proyecto]] | Snapshot actual y pendientes de la agencia — punto de entrada diario |
+| [[interno/mapa-forjado]] | Mapa hacia `aplicaciones/` y `contenido/` — las carpetas hermanas de esta bóveda dentro de `FORJADO/` |
 
 ## Clientes
 

@@ -111,6 +111,15 @@ Remotes de los 4 repos verificados intactos tras el `mv`. Además, en esta misma
 5. **`.playwright-cli/` reubicado, no borrado** — el `rm -rf` fue bloqueado por el clasificador automático de permisos del entorno (denegación del harness, no del usuario). Se resolvió con `mv` (sí permitido) a `~/.claude/playwright-cli-history/`, fuera de cualquier repo. Se confirmó que la herramienta `playwright-cli` no tiene ninguna variable de entorno o flag para configurar su directorio de salida — siempre escribe `./.playwright-cli/` relativo al cwd desde donde se invoca; por eso ya está en el `.gitignore` de cada repo como mitigación permanente.
 6. **Script de migración para la otra máquina** creado y commiteado en `raw/interno/2026-09-07-replicar-reestructuracion-forjado.sh` (defensivo: `mv` en vez de borrar, compara con `diff` antes de sugerir borrar el `AI-Content-Automation-Engine` viejo ya que nunca estuvo en git y las dos máquinas pudieron haber divergido). **Aviso entregado al usuario:** no alcanza con que la otra compu haga `git pull` para bajarlo solo — hay que copiarlo a mano primero (problema del huevo y la gallina: el script vive dentro de la carpeta que él mismo va a renombrar). **Pendiente:** que Jorge lo corra ahí.
 
+## Quinta pasada — `desarrollo/` designada carpeta principal de indexado de todo FORJADO
+
+El usuario declaró explícitamente que **`desarrollo/`** (esta bóveda) será la carpeta principal donde vive el indexado y mapeo de **todo FORJADO** — no solo de su propio contenido (clientes/interno de la bóveda), sino también de las carpetas hermanas `aplicaciones/` y `contenido/`, que hasta ahora no tenían ninguna referencia desde `wiki/index.md`.
+
+Acción tomada: creada `wiki/interno/mapa-forjado.md` — página nueva que documenta las 4 apps bajo `aplicaciones/` (stack, estado, para qué sirve cada una, leído de sus propios `README.md`/`STATUS.md`/`PROJECT_STATUS.md`) y `contenido/` (su propia bóveda Karpathy independiente, con `wiki/` propio — no se duplica su contenido acá, solo se referencia). Registrada en `wiki/index.md`.
+
+**Alcance explícito de esta página:** es un mapa de referencia (qué existe, dónde, para qué), no una copia del detalle de cada proyecto — cada uno mantiene su propia fuente de verdad (`STATUS.md`/`PROJECT_STATUS.md` en las apps, `wiki/` propio en `contenido/`). Si el detalle de una app cambia, se actualiza en su propio repo, no acá — solo se actualiza `mapa-forjado.md` si cambia la lista de qué proyectos existen o su descripción de una línea.
+
 ## Relacionado
 
 - [[../../wiki/interno/estado-proyecto|Estado del proyecto]]
+- [[../../wiki/interno/mapa-forjado|Mapa de FORJADO — aplicaciones/ y contenido/]]
