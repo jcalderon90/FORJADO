@@ -30,6 +30,7 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 - [ ] Rotar la Location API Key de Carwarriors LLC en GHL (quedó expuesta en un chat el 2026-07-27) — Jorge indicó explícitamente no rotarla por ahora.
 - [ ] Investigar `n8n.apps.carwarriorsllc.com` — instancia n8n externa, viva y mantenida (cert renovado, no es del proyecto FORJADO). **Actualizado 09-04:** probable relación con "Yoan" (`gyoan-byte`, email `gyoan@carwarriorsllc.com`, especialista GHL que construyó los bots legacy de Carwarriors en marzo 2026, identificado al investigar el repo `gyoan-byte/carwarriors-kb`) — no confirmado si es la misma persona que "Carlos Cisneros". Sin credenciales para ver qué corre ahí. Pendiente conseguir login o preguntarle directamente a Yoan/Carlos Cisneros.
 - [ ] Completar datos del panel de inicio (fundador y contacto ya cargados): web/redes y forma legal/facturación — requiere datos del usuario.
+- [ ] **09-06: decidir qué conectar en OmniRoute** (gateway de LLMs propio en el VPS Oracle, recién explorado) — candidatos: Hermes Agent (Nous Research) y/o DeepSeek nativo/DeepSeek TUI, o alguna de las alternativas ya listadas en su catálogo (Goose, Aider, Cline, Continue, etc.). Nada instalado ni conectado todavía, solo mapeada la interfaz. De paso, reconciliar por qué OmniRoute no detecta el "Hermes Agent" que [[operaciones/herramientas-y-stack|Herramientas y Stack]] ya listaba como activo desde junio. Detalle en [[../../raw/interno/2026-09-06-omniroute-exploracion-inicial|raw]].
 
 ## Relacionado
 

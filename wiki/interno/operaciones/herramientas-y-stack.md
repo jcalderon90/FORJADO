@@ -3,7 +3,7 @@ tags: [forjado, operaciones, herramientas]
 tipo: proceso
 estado: activo
 creado: 2026-06-17
-actualizado: 2026-06-17
+actualizado: 2026-09-06
 ---
 
 # Herramientas y Stack — FORJADO
@@ -74,10 +74,14 @@ actualizado: 2026-06-17
 | **DNS** | Dominio DuckDNS (gratuito) |
 | **Dokploy** | Panel de despliegue corriendo en el VPS |
 | **Servicios activos** | n8n · Chatwoot · Redis · Hermes Agent |
+| **OmniRoute** | Gateway/proxy propio de LLMs (multi-proveedor, failover, cache, compresión de prompts) — instalado en el mismo VPS. **09-06:** explorado por primera vez; solo tiene OpenRouter conectado hoy, de un catálogo de 230 proveedores soportados. Pensado para conectar ahí Hermes Agent, DeepSeek u otros agentes/CLIs — nada conectado todavía, ver [[../../../raw/interno/2026-09-06-omniroute-exploracion-inicial|raw]]. |
 | **OpenRouter** | API de modelos de IA (modelos gratuitos en uso) |
 | **Ollama (MacPro Australia)** | LLMs locales, 64 GB RAM, acceso remoto disponible |
 
 > Esta infraestructura permite ofrecer soluciones hospedadas a clientes sin depender de terceros ni incurrir en costos adicionales de inmediato.
+
+> [!note] Por reconciliar (09-06)
+> Esta tabla lista "Hermes Agent" como servicio activo desde el 2026-06-17, pero al explorar OmniRoute el 09-06 este lo detectó como "not found" (no instalado) en el VPS. Puede que esté instalado fuera del PATH que usa OmniRoute, o que este dato ya esté desactualizado — sin confirmar todavía.
 
 ## Accesos
 Las credenciales de estas herramientas se centralizan en [[Credenciales]] (con cuidado de seguridad).
