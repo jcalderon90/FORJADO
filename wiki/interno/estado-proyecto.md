@@ -21,7 +21,17 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 
 ## Bóveda / herramientas internas
 
-- **09-07: reestructuración de la carpeta raíz `FORJADO/`** (3 pasadas en la misma sesión). Quedó así: esta bóveda pasó de `FORJADO-Development/` a `desarrollo/` (repo GitHub `FORJADO`, ruta completa ahora `~/Desktop/PROYECTOS/FORJADO/desarrollo/`). `aplicaciones/` agrupa las 4 apps (cada una su propio repo) **por cliente**: `carwarriors/dealer-center-scraper`, `varela-law/automated-legal-contracts`, `forjado/{lead-discovery,portfolio-dev}`. `contenido/` (repo `social-media-content-`) tiene `engine/` — el motor de generación de video — adentro; su rama de trabajo se renombró a `chore/vault-restructure-and-engine-readd` para reflejarlo. Ningún path absoluto quedó roto ni remote de git se movió (verificado en cada pasada). Detalle completo en [[../../raw/interno/2026-09-07-reestructuracion-carpeta-raiz-forjado]].
+- **09-07: reestructuración completa de la carpeta raíz `FORJADO/`** (varias pasadas en la misma sesión, ya cerrada). Estado final:
+  ```
+  FORJADO/
+  ├── aplicaciones/           (solo carpetas con repo GitHub propio, agrupadas por cliente)
+  │   ├── carwarriors/dealer-center-scraper/
+  │   ├── varela-law/automated-legal-contracts/
+  │   └── forjado/{lead-discovery,portfolio-dev}/
+  ├── desarrollo/              (esta bóveda — repo GitHub FORJADO)
+  └── contenido/                (repo GitHub social-media-content-, incluye engine/ — el motor de generación de video, confirmado que se queda ahí por ser herramienta acoplada a esa línea de servicio, no una app desplegada a cliente)
+  ```
+  Verificado: ningún path absoluto roto, remotes de git intactos, `node_modules/` correctamente ignorado y sin archivos trackeados en los 6 repos. Commits pusheados a `FORJADO` y `social-media-content-` en GitHub. Detalle completo en [[../../raw/interno/2026-09-07-reestructuracion-carpeta-raiz-forjado]].
 - `.claude/skills/compile-wiki/` — compila sesiones de trabajo con clientes desde `raw/` hacia `wiki/` (usar al cerrar una sesión real).
 - `.claude/skills/manage-vault/` — referencia general de convenciones para navegar/crear/editar en esta bóveda, creada 2026-09-02 a pedido de Jorge para que cualquier agente (no solo esta sesión) la gestione bien. Ver [[../../README|README]] y [[../../raw/interno/2026-09-02-skill-manage-vault-creada]].
 - **Lección 09-05 — sesiones paralelas pueden generar hechos contradictorios en git:** dos sesiones trabajando el mismo cliente el mismo día (sin `fetch` previo) llegaron a conclusiones distintas sobre si se había contactado a un tercero, causando un conflicto de push con contenido no solo distinto sino contradictorio. Resuelto preguntándole al usuario cuál era el hecho real. Recomendación: si un cliente puede estar "caliente" (trabajado por otra sesión el mismo día), hacer `git fetch`/`pull` al arrancar. Detalle: [[../../raw/interno/2026-09-05-conflicto-sesiones-paralelas-git-push]].
@@ -32,8 +42,9 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 - [ ] Investigar `n8n.apps.carwarriorsllc.com` — instancia n8n externa, viva y mantenida (cert renovado, no es del proyecto FORJADO). **Actualizado 09-04:** probable relación con "Yoan" (`gyoan-byte`, email `gyoan@carwarriorsllc.com`, especialista GHL que construyó los bots legacy de Carwarriors en marzo 2026, identificado al investigar el repo `gyoan-byte/carwarriors-kb`) — no confirmado si es la misma persona que "Carlos Cisneros". Sin credenciales para ver qué corre ahí. Pendiente conseguir login o preguntarle directamente a Yoan/Carlos Cisneros.
 - [ ] Completar datos del panel de inicio (fundador y contacto ya cargados): web/redes y forma legal/facturación — requiere datos del usuario.
 - [ ] **09-06: decidir qué conectar en OmniRoute** (gateway de LLMs propio en el VPS Oracle, recién explorado) — candidatos: Hermes Agent (Nous Research) y/o DeepSeek nativo/DeepSeek TUI, o alguna de las alternativas ya listadas en su catálogo (Goose, Aider, Cline, Continue, etc.). Nada instalado ni conectado todavía, solo mapeada la interfaz. De paso, reconciliar por qué OmniRoute no detecta el "Hermes Agent" que [[operaciones/herramientas-y-stack|Herramientas y Stack]] ya listaba como activo desde junio. Detalle en [[../../raw/interno/2026-09-06-omniroute-exploracion-inicial|raw]].
-- [ ] **09-07: `contenido/` (rama `chore/remove-legacy-ai-content-engine`) quedó con `engine/` de vuelta sin trackear** tras la reestructuración de la carpeta raíz — el nombre de la rama ya no describe lo que contiene (se creó para *eliminar* ese engine, ahora lo vuelve a tener). Decidir: renombrar la rama, separar el commit, o dejarlo así al mergear.
-- [ ] **09-07: `vault/.playwright-cli/` sin limpiar** — 100+ logs/screenshots viejos de sesiones Playwright, puro ruido. Falta que el usuario confirme si se borra o se agrega a `.gitignore`.
+- [x] ~~`contenido/` con `engine/` sin trackear en rama mal nombrada~~ — **cerrado 09-07:** rama renombrada a `chore/vault-restructure-and-engine-readd`, fusionada a `main` (fast-forward, git detectó el rename `AI-Content-Automation-Engine/ → engine/` limpio) y pusheada a `social-media-content-`.
+- [x] ~~`.playwright-cli/` sin limpiar~~ — **cerrado 09-07:** nunca tuvo archivos trackeados en git; reubicados los 324 archivos (5.2M) a `~/.claude/playwright-cli-history/` (fuera de cualquier repo, centralizado junto a `~/.claude/playwright-profiles/`).
+- [ ] **09-07: replicar la reestructuración de `FORJADO/` en la otra máquina** — script defensivo dejado en `raw/interno/2026-09-07-replicar-reestructuracion-forjado.sh` (commiteado y pusheado, pero hay que copiarlo a mano ahí porque el propio script todavía no existe localmente antes del primer `git pull`). Pendiente que Jorge lo corra en la otra compu y revise el diff del motor de contenido si `AI-Content-Automation-Engine/` local no coincide byte a byte con `contenido/engine/` (nunca estuvo en git, pudo haber divergido entre máquinas).
 
 ## Relacionado
 
