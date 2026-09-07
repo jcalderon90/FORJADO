@@ -119,3 +119,39 @@ Jorge le respondió a Bianca "voy a hacer los cambios te aviso cuando esté impl
 
 **Pendiente real:** confirmar con tráfico real que el bot suena más directo y sigue el playbook (no se puede probar sintéticamente sin arriesgar una respuesta rara a un lead real); avisarle a Bianca cuando esté confirmado, tal como Jorge le prometió.
 
+---
+
+# 2026-09-07 (continuación) — Replicado en `PRINCIPAL - Rances Car` el fix de umbral `no_json`, con hallazgo nuevo: la rama de alerta a Slack no existía ahí
+
+Jorge pidió retomar el pendiente explícito de la sección de arriba ("Este cambio no se replicó en `PRINCIPAL - Rances Car`"). Antes de tocar nada se conectó por primera vez en esta sesión el MCP de n8n de Carwarriors (`n8n-carwarriors`, agregado por Jorge con `claude mcp add --transport http n8n-carwarriors https://n8n-x5jtc0a7f0lbanybimocyidl.2.24.106.87.sslip.io/mcp-server/http`) — sesiones anteriores de este mismo hilo de trabajo solo tenían acceso al n8n de "Mundo Verde".
+
+## Hallazgo antes de replicar: el gap era más grande de lo asumido
+
+Se comparó `PRINCIPAL - Rances Car` (`N68IYzm4Bf6AVTXP`) contra `PRINCIPAL` (`Kif9lWwDHvR7TT39`) nodo por nodo (`get_workflow_details` de ambos). Dos diferencias, no una:
+
+1. **`Insert Error Log` en Rances Car no tenía ninguna conexión de salida** — los errores técnicos (`parse_failed` y `no_json`) quedaban logueados en Mongo (`agent_errors`) pero **nunca llegaban a Slack**, con ningún formato, ni antes ni después del fix del 09-06/09-07. No era que le faltara solo el umbral — le faltaba la rama de alerta completa (no existían `Format Error Tecnico Alert` ni ningún nodo relacionado).
+2. **El nodo Slack compartido `Send a message` (canal `#notificaciones`, credencial `Slack FORJADO`) estaba `disabled: true`** en este workflow — mismo nodo al que ya entraban (sin salir, por estar apagado) `Format Spam Alert` y `Format Spam Alert - Engagement`. O sea que las alertas de spam de Rances Car tampoco estaban saliendo a Slack, independientemente de este fix.
+
+Se le presentó el hallazgo a Jorge antes de tocar el nodo compartido (afecta más que solo esta rama) — eligió explícitamente **habilitarlo**, aceptando que de paso se reactivan las alertas de spam de este dealer.
+
+## Implementación
+
+Vía `update_workflow` (11 operaciones atómicas, `appliedOperations: 11`, sin `validationWarnings`):
+
+1. **4 nodos nuevos agregados** (mismo tipo/versión/parámetros que su equivalente en `PRINCIPAL`, verificado campo por campo contra el original, validados con `validate_node_config` antes de aplicar — los 4 `valid: true`):
+   - `Es parse_failed?` (IF) — `Build Error Log().error_type == 'parse_failed'`.
+   - `Format Error Tecnico Alert` (Set) — arma el texto del mensaje de Slack, mismo formato que `PRINCIPAL`.
+   - `Contar no_json Previos` (MongoDB find sobre `agent_errors`, filtrando `contactId` + `error_type: "no_json"`, `limit: 10`) — reusa la misma credencial `MongoDB Carwarriors` que ya usaba `Insert Error Log`.
+   - `3+ no_json Seguidos?` (IF) — `$input.all().length >= 3`.
+2. **Cableado:** `Insert Error Log` → `Es parse_failed?` → (true) `Format Error Tecnico Alert` / (false) `Contar no_json Previos` → `3+ no_json Seguidos?` → (true, misma entrada) `Format Error Tecnico Alert` → `Send a message`. Cableado idéntico al de `PRINCIPAL`, verificado byte a byte después de aplicar.
+3. **`Send a message` habilitado** (`setNodeDisabled: false`) — confirmado en la relectura post-cambio (`disabled: false`, credenciales intactas).
+
+Quedó guardado primero como draft (`versionId` nuevo `00d292c4-a758-455e-bfe7-7b218f91ab69` ≠ `activeVersionId` viejo), publicado después con `publish_workflow` → `activeVersionId` pasó a `00d292c4-a758-455e-bfe7-7b218f91ab69`.
+
+`Insert Error Log` no se tocó — sigue logueando el 100% de los casos en Mongo sin importar Slack, mismo criterio que en `PRINCIPAL`.
+
+## Pendiente real
+
+- Confirmar con tráfico real: que el umbral se comporte igual que en `PRINCIPAL` (1-2 `no_json` sueltos no alertan, el 3ro sí), y que las alertas de spam de Rances Car (reactivadas de paso al habilitar `Send a message`) no generen ruido inesperado ahora que sí llegan a Slack — no se había podido observar su comportamiento real hasta hoy porque el nodo estaba apagado.
+- No se investigó si hay otras ramas del workflow que también dependían de `Send a message` estando deshabilitado (se revisaron y son solo las 3 ya mencionadas: error técnico nuevo, spam, spam engagement) — sin sorpresas encontradas, pero vale la pena que Jorge esté atento a los primeros mensajes reales.
+
