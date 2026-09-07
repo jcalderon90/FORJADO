@@ -119,6 +119,8 @@ Jorge le respondió a Bianca "voy a hacer los cambios te aviso cuando esté impl
 
 **Pendiente real:** confirmar con tráfico real que el bot suena más directo y sigue el playbook (no se puede probar sintéticamente sin arriesgar una respuesta rara a un lead real); avisarle a Bianca cuando esté confirmado, tal como Jorge le prometió.
 
+**Actualización (misma sesión, más tarde):** Jorge le avisó a Bianca por WhatsApp que el cambio ya está implementado y publicado en ambos dealers (mensaje redactado en esta sesión, tono casual acorde a como Jorge le escribe, sin mencionar el tema de ROI/gasto de marketing por separado). Compromiso ("te aviso cuando esté implementado") cerrado. Sigue pendiente confirmar con tráfico real que el bot efectivamente suena más directo en conversaciones reales.
+
 ---
 
 # 2026-09-07 (continuación) — Replicado en `PRINCIPAL - Rances Car` el fix de umbral `no_json`, con hallazgo nuevo: la rama de alerta a Slack no existía ahí
@@ -154,4 +156,88 @@ Quedó guardado primero como draft (`versionId` nuevo `00d292c4-a758-455e-bfe7-7
 
 - Confirmar con tráfico real: que el umbral se comporte igual que en `PRINCIPAL` (1-2 `no_json` sueltos no alertan, el 3ro sí), y que las alertas de spam de Rances Car (reactivadas de paso al habilitar `Send a message`) no generen ruido inesperado ahora que sí llegan a Slack — no se había podido observar su comportamiento real hasta hoy porque el nodo estaba apagado.
 - No se investigó si hay otras ramas del workflow que también dependían de `Send a message` estando deshabilitado (se revisaron y son solo las 3 ya mencionadas: error técnico nuevo, spam, spam engagement) — sin sorpresas encontradas, pero vale la pena que Jorge esté atento a los primeros mensajes reales.
+
+---
+
+# 2026-09-07 (continuación) — Construida la cadencia de re-contacto saliente (Intento 1), piloto Carwarriors LLC — DRAFT, sin publicar
+
+Jorge pidió retomar el gap documentado desde el 08-17 (`raw/2026-08-25...arquitectura-migracion`, sección "gap real identificado"): el playbook BDC de Bianca pide llamar/reenganchar a un lead que se queda en silencio (5-8 contactos en 48h), pero nada en el sistema lo hacía — `PRINCIPAL` es puramente reactivo.
+
+## Decisiones tomadas con Jorge antes de construir
+
+1. **Solo WhatsApp/GHL automatizado** — no hay marcador de llamadas conectado; las llamadas reales las sigue haciendo el equipo humano de BDC, sin cambios.
+2. **Piloto en un solo dealer** (Carwarriors LLC / `CW`) antes de replicar en Rances Car.
+3. **Solo leads nuevos sin respuesta** (que se quedaron callados tras la última respuesta del bot), no leads FRIO ya reactivados.
+4. **Hallazgo clave antes de diseñar:** el intake de Carwarriors es 100% reactivo (todo lead entra escribiendo, confirmado en `carwarriors-llc-arquitectura-migracion.md`) — el "contacto instantáneo" (0-2 min) del playbook **ya se cumple hoy** por el simple hecho de que `PRINCIPAL` responde de forma síncrona. Lo único que faltaba construir era la parte de "Seguimiento" (reenganche tras silencio).
+5. **Riesgo real identificado y confirmado con Jorge:** WhatsApp Business API y Messenger (IG/FB) solo permiten texto libre dentro de una ventana de **24h** desde el último mensaje del lead — pasada esa ventana se necesita un template pre-aprobado por Meta, que esta cuenta no tiene (confirmado con Jorge: "no tengo idea / probablemente no"). La cadencia completa del PDF (5 intentos en 48h) cruzaría esa ventana en los intentos tardíos. **Decisión: construir solo el Intento 1** ("urgencia directa", el único tramo seguro dentro de la ventana de 24h); los intentos 2-5+ quedan documentados como bloqueados, no construidos.
+6. **Ventana de silencio elegida: 1 hora** tras la última respuesta del bot (recomendada por mí, elegida por Jorge sobre 15 min / 3 horas).
+7. **No se tocó `PRINCIPAL`** (workflow en producción real, todas las conversaciones reales pasan por ahí) — en vez de agregarle un campo de reset, el estado se rastrea por completo en una colección Mongo nueva (`recontacto_saliente`), manejada solo por el workflow nuevo.
+
+## Diseño y construcción
+
+Workflow nuevo `SEGUIMIENTO SALIENTE - Intento 1 (CW)` (n8n id `Fh4fB5Cgk1hchvxe`), 13 nodos, creado vía `create_workflow_from_code` (Workflow SDK) después de `get_workflow_sdk_reference`/`get_workflow_best_practices("scheduling")`/`search_nodes`/`get_node_types` y `validate_node_config` en cada nodo nuevo (todos `valid: true`) + `validate_workflow` del código completo (`valid: true, nodeCount: 13`).
+
+**Lógica:**
+1. **`Cada 15 Min`** (Schedule Trigger).
+2. **`Buscar Leads Silenciosos`** (MongoDB find sobre `users`): `dealer: "CW"`, `spam_bloqueado`/`has_reservation` != true, `last_interaction` entre hace 75 y 60 minutos (ventana del ancho del propio schedule, para no reprocesar el mismo lead en cada corrida). Reusa la credencial `MongoDB Carwarriors`.
+3. **`Iterar Leads`** (Split in Batches, tamaño 1) — por cada lead candidato:
+   - **`Buscar Recontacto Previo`** (MongoDB find sobre la colección nueva `recontacto_saliente`, por `contactId`, `alwaysOutputData: true` para no cortar la cadena cuando nunca se le mandó nada).
+   - **`Evaluar Estado Recontacto`** (Set): reconstruye los campos del candidato original (referenciándolo explícitamente por nombre de nodo, no por `$json`, porque el nodo Mongo anterior reemplaza el JSON) y calcula `yaEnviado` comparando el `last_interaction` actual contra el guardado la última vez que se envió un Intento 1 a este contacto — si son iguales, ya se le mandó el reenganche para *este* silencio específico.
+   - **`Ya Enviado Para Este Silencio?`** (IF): rama verdadera → vuelve al loop sin hacer nada más; rama falsa → sigue a mandar el mensaje.
+   - **`Buscar Credenciales Dealer`** (Data Table `GHL Locations`, mismo patrón que `Get Account Credentials` de `PRINCIPAL`) → **`Buscar Conversacion GHL`** (mismo endpoint/lógica que `Get Contact Phone` de `PRINCIPAL` para detectar canal real) → **`Determinar Tipo Mensaje`** (misma lógica exacta que el nodo `Parameter Type` de `PRINCIPAL`, portada tal cual) → **`Armar Mensaje Intento 1`** (arma el texto bilingüe — español si `language != 'en'` — usando el ejemplo textual del PDF de Bianca: *"¡Hola! Vi que estabas interesado [en el {vehículo}]. Tengo disponibilidad hoy para que lo veas — ¿te queda mejor a las 4pm o a las 6pm?"*, con fallback sin vehículo si `interes_vehiculo` está vacío) → **`Enviar Mensaje GHL`** (POST `/conversations/messages`, mismo patrón que `SEND GHL MESSAGE` de `PRINCIPAL`) → **`Preparar Registro Recontacto`** → **`Registrar Envio`** (MongoDB upsert en `recontacto_saliente` por `contactId`, guarda `last_interaction_relevante` para que la próxima vez que este contacto se quede en silencio sí se le vuelva a mandar el Intento 1).
+
+Verificado con `get_workflow_details` después de crear: cableado idéntico al diseñado (IF con ambas ramas volviendo al loop, `active: false`, `activeVersionId: null`). `create_workflow_from_code` avisó que los 2 nodos HTTP Request no tienen credencial asignada — esperado, la autenticación va por header `Authorization` armado con expresión (mismo patrón sin credential-object que ya usan `SEND GHL MESSAGE`/`Get Contact Phone` en `PRINCIPAL`), no un problema.
+
+## Estado: DRAFT, no publicado a propósito
+
+Es automatización nueva que le manda mensajes reales a leads reales — a diferencia del fix de umbral (que replicaba algo ya probado), acá no hay antecedente en producción. Queda en n8n sin publicar, pendiente que Jorge la revise (contenido del mensaje, ventana de 1h, y el propio diseño) antes de activarla.
+
+## Pendiente real
+
+- Publicar (`publish_workflow`) solo cuando Jorge confirme que el mensaje/diseño le sirve.
+- Una vez publicado: confirmar con tráfico real que el Intento 1 sale cuando corresponde y no antes/después de tiempo, y que no se duplica.
+- Los intentos 2-5+ del playbook siguen sin construir — bloqueados por la ventana de 24h de Meta hasta que exista un template aprobado.
+- Replicar en `PRINCIPAL - Rances Car` solo después de validar el piloto en Carwarriors LLC.
+
+---
+
+# 2026-09-07 (continuación) — Bug real encontrado: el umbral `no_json` del fix de esta mañana enviaba la alerta duplicada 3-6 veces por ejecución
+
+Jorge reportó (molesto, con razón): "me entraron errores en Slack nuevamente, por qué no acabas de solucionar ya eso de los errores, siempre dices que lo solucionas y siguen apareciendo más".
+
+## Diagnóstico (con acceso directo a Slack vía MCP, no adivinando)
+
+Con el MCP de n8n ya confirmado sin ejecuciones en estado `error` hoy, se conectó por primera vez un MCP de Slack (`slack-carwarriors`, agregado por Jorge con `claude mcp add slack-carwarriors --env SLACK_BOT_TOKEN=... --env SLACK_TEAM_ID=T0AQRFA32E8 -- npx -y @modelcontextprotocol/server-slack`, reusando el bot token ya existente "Slack FORJADO") y se leyó el historial real de `#notificaciones` (`slack_get_channel_history`, canal `C0BPV2Z2S3C`).
+
+Encontrado: la alerta `🚨 Error técnico (agendamiento/rsvp)` de un mismo `Execution ID` se estaba enviando **varias veces idénticas, en menos de medio segundo entre copias** — no un reenvío por retry, mensajes de Slack distintos con `ts` distintos pero contenido y `Execution ID` idénticos:
+
+| Execution ID | Contacto | Copias enviadas |
+|---|---|---|
+| 5080 | `2FR57nBn5gGJw6jTxpy1` | **6** |
+| 5078 | `2FR57nBn5gGJw6jTxpy1` | **5** |
+| 5074 | `2FR57nBn5gGJw6jTxpy1` | **4** |
+| 5072 | `2FR57nBn5gGJw6jTxpy1` | **3** |
+| 5065 | `TU71Vhj2CEGXAxvKi873` | **3** |
+| 5048 | `mtkjxXZ4jMbBRSh99lCV` | **3** |
+| 5026 | `nyszZHA47vr1mOiZZhKJ` | **3** |
+
+## Causa raíz
+
+El nodo `3+ no_json Seguidos?` (agregado en el fix de esta misma mañana) comparaba `{{ $input.all().length }} >= 3`. El problema: un nodo IF de n8n corre **una vez por cada item de su entrada**, no una sola vez por ejecución del workflow. `Contar no_json Previos` (el `find` de Mongo) devuelve **un item por cada documento histórico de `no_json` de ese contacto** — si el contacto ya acumuló 6, el IF recibe 6 items, y en **cada una** de esas 6 corridas `$input.all().length` sigue siendo 6 (mismo array completo, evaluado 6 veces) → 6 evaluaciones `true` → 6 disparos de `Format Error Tecnico Alert` → 6 mensajes idénticos a Slack.
+
+Esto explica exactamente la queja de Jorge: no eran "los mismos errores de siempre sin arreglar" — el umbral de 3+ funcionaba bien para decidir *si* alertar, pero cada vez que alertaba lo hacía multiplicado por la cantidad de veces que ese contacto ya había fallado, y entre más se repetía el problema real, más copias llegaban. El primer intento de fix (esta mañana) nunca se probó con un contacto que de verdad llegara a 3+ — se decidió esperar tráfico real, y el tráfico real expuso este bug en cuanto ocurrió.
+
+## Fix aplicado
+
+Vía `update_workflow`, en `PRINCIPAL` (`Kif9lWwDHvR7TT39`) y `PRINCIPAL - Rances Car` (`N68IYzm4Bf6AVTXP`, mismo bug heredado aunque no lo había disparado tráfico real ahí todavía):
+
+- Nodo nuevo **`Contar Total no_json`** (Set, `mode: raw`, `jsonOutput: {{ { count: $input.all().length } }}`, **`executeOnce: true`**) intercalado entre `Contar no_json Previos` y `3+ no_json Seguidos?`. Con `executeOnce: true` este nodo corre **una sola vez** sin importar cuántos items le lleguen, colapsando el array a un único item `{count: N}`.
+- `3+ no_json Seguidos?` actualizado para comparar `{{ $json.count }} >= 3` (el conteo ya colapsado) en vez de `$input.all().length` (el array crudo, re-evaluado por item).
+
+Verificado con `get_workflow_details` después de aplicar: cableado `Contar no_json Previos → Contar Total no_json → 3+ no_json Seguidos?`, `executeOnce: true` confirmado en el nodo nuevo. Publicado en ambos (`PRINCIPAL` activeVersionId `b9a8c50e-fa9d-46f9-8f90-544ea5c837d8`, `PRINCIPAL - Rances Car` `cb02d604-83d7-4067-8a2e-393897a3a441`).
+
+## Pendiente real
+
+- Confirmar con el próximo contacto real que llegue a 3+ `no_json` que la alerta sale **una sola vez**, no duplicada.
+- `Insert Error Log` sigue sin tocarse — el log en Mongo sigue completo al 100% sin importar este bug (el bug era solo de cuántas veces se notificaba a Slack, no de qué se guardaba).
 
