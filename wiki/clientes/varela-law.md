@@ -5,7 +5,7 @@ estado: activo
 servicio: automatizacion
 contacto: Mario Varela
 creado: 2026-06-17
-actualizado: 2026-08-28
+actualizado: 2026-09-08
 fuente_raw: raw/clientes/varela-law/
 ---
 
@@ -36,14 +36,16 @@ fuente_raw: raw/clientes/varela-law/
 | **Proveedor VPS** | Hostinger, KVM 1, Ubuntu 24.04, Boston — `72.60.31.74` / `srv957125.hstgr.cloud` |
 | **n8n** | https://n8n.srv957125.hstgr.cloud |
 | **Servicios Docker** | `root-n8n-1` (5678), `root-traefik-1` (80/443, reverse proxy HTTPS) |
+| **MCP `n8n-varela_law`** | Agregado 2026-09-08 (`claude mcp add --transport http n8n-varela_law https://n8n.srv957125.hstgr.cloud/mcp-server/http`) — acceso directo a workflows/credenciales/ejecuciones de esta instancia n8n desde Claude Code. Requiere reiniciar la sesión tras agregarlo la primera vez. |
 
 ## Sistemas en producción
 
 1. **MyCase API — Token Manager** (`MOpVRrvErCfgs2mn`): refresca el OAuth de MyCase cada 23h vía MongoDB (`VarelaLaw.mycase_tokens`). 100% operativo. Detalle: [[varela-law-mycase-api]].
 2. **Radar Billing Automation**: escribe automáticamente F (Total Amount Collected), H (Total Invoiced Amount) y J (Uninvoiced Balance) en la pestaña `07-05-26` del Google Sheet de Mario todos los días a las 5:00 AM. Trust Balance no disponible vía API de MyCase (confirmado con soporte) — queda manual. Detalle: [[varela-law-radar-billing]].
-3. **Tracking de pagos Zelle entrantes** (`TRACKING INCOMING ZELLE PAYMENTS - OUTLOOK`, `BruqJ1jdEV9xl5zG`) — detectado 2026-08-25, no documentado antes en la bóveda. Lee los correos que Mario reenvía (`FW: You received money with Zelle`) por Outlook, extrae remitente/monto/fecha/transacción con doble método (regex + LLM), y si coinciden crea el registro en Airtable y en el Google Sheet "Incoming Mail Payments"; si no coinciden, alerta por email para revisión manual. Detalle: [[../../raw/clientes/varela-law/2026-08-25-zelle-tracking-descubierto]].
-4. **Reporte semanal de facturas vencidas** (`Radar Billing - Reporte Facturas Vencidas (Semanal)`, `ZxZONW1XANkoP1ay`) — EN PRODUCCIÓN desde 2026-08-27, primera oportunidad activada del análisis de API de MyCase (2026-07-28). Cada lunes 8am trae `/invoices` y `/cases` de MyCase, filtra las de `status: "overdue"`, y manda a `mvarela@varela.law` una tabla con balance pendiente, días de atraso y link directo a cada factura. Primer envío real (2026-08-27): 54 facturas vencidas, $81,324.76 de balance total pendiente.
-5. Todos los workflows tienen `errorWorkflow` conectado a `ERROR HANDLER` (email automático a `jcalderon900610@gmail.com` ante cualquier fallo).
+3. **Tracking de pagos Zelle entrantes** (`TRACKING INCOMING ZELLE PAYMENTS - OUTLOOK`, `BruqJ1jdEV9xl5zG`) — detectado 2026-08-25, no documentado antes en la bóveda. Lee los correos que Mario reenvía (`FW: You received money with Zelle`) por Outlook, extrae remitente/monto/fecha/transacción con doble método (regex + LLM), y si coinciden crea el registro en MongoDB (`zelle_payments`) y en el Google Sheet "Incoming Mail Payments"; si no coinciden, alerta por email para revisión manual. **Fix 2026-09-08:** el workflow no tenía timezone propia (heredaba UTC+2 del servidor), corriendo la fecha guardada un día hacia atrás vista en hora de Houston; corregido (`timezone: America/Chicago` + formato Luxon explícito + `dateFields` de Mongo, que estaba mal configurado). Detalle: [[../../raw/clientes/varela-law/2026-08-25-zelle-tracking-descubierto]], fix en [[../../raw/clientes/varela-law/2026-09-08-migracion-airtable-mongo-contratos-y-fix-timezone-zelle]].
+4. **Procesamiento de contratos firmados por Slack** (`CONTRACTS FROM SLACK`, `jLgZaTceNMLtM9sh`) — en producción desde 2025-08-23, **no documentado antes en la bóveda hasta hoy**. Mario reenvía por Slack el PDF de un contrato firmado; el workflow lo analiza con Gemini + un AI Agent (OpenRouter) que extrae ~19 campos (cliente, contacto/responsable de pago, tipo de caso, honorarios, fechas), crea los registros de Contact(s) y Case enlazados entre sí, y notifica por Slack/Gmail. **09-08: migrado de Airtable + Google Sheets a MongoDB** (colecciones `contacts`, `cases`, `contracts_log`) porque Airtable llegó a su límite de registros; las relaciones Contact↔Case que Airtable manejaba con linked records ahora usan IDs propios (`contactId`/`caseId`). De paso se corrigió un bug real del AI Agent: no revisaba el bloque de firma final del contrato ("Información del Cliente"/"Información Responsable de Pago"), perdiendo teléfono/categoría de caso que sí estaban en el PDF. Detalle: [[../../raw/clientes/varela-law/2026-09-08-migracion-airtable-mongo-contratos-y-fix-timezone-zelle]].
+5. **Reporte semanal de facturas vencidas** (`Radar Billing - Reporte Facturas Vencidas (Semanal)`, `ZxZONW1XANkoP1ay`) — EN PRODUCCIÓN desde 2026-08-27, primera oportunidad activada del análisis de API de MyCase (2026-07-28). Cada lunes 8am trae `/invoices` y `/cases` de MyCase, filtra las de `status: "overdue"`, y manda a `mvarela@varela.law` una tabla con balance pendiente, días de atraso y link directo a cada factura. Primer envío real (2026-08-27): 54 facturas vencidas, $81,324.76 de balance total pendiente.
+6. Todos los workflows tienen `errorWorkflow` conectado a `ERROR HANDLER` (email automático a `jcalderon900610@gmail.com` ante cualquier fallo).
 
 ## Pendientes abiertos (al 2026-08-28)
 
