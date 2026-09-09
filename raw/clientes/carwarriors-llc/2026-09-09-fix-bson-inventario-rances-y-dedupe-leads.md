@@ -72,6 +72,49 @@ A pedido de Jorge ("continuemos con los pendientes" → "todo lo que tenemos pen
 3. Jorge aclaró que el problema real era que **no podía ver la ventana de Playwright** (este entorno no tiene una pantalla visible para el usuario, aunque el proceso de Chrome corre de verdad en su Mac). Se pivotó a conectar por **CDP** al Chrome real de Jorge: `open -a "Google Chrome" --args --remote-debugging-port=9222` — primer intento sin efecto (Chrome moderno ignora `--remote-debugging-port` en el perfil default por seguridad si ya hay una instancia corriendo). Segundo intento con perfil nuevo y `-na` (`--user-data-dir="$HOME/chrome-manychat-debug"`) sí funcionó: `playwright-cli attach --cdp=http://127.0.0.1:9222` conectó exitosamente al Chrome real de Jorge.
 4. **Pendiente real, sin completar:** Jorge todavía no terminó de loguearse en ManyChat en esa ventana (se confirmó con `window.location.href` que seguía en `/signin`) cuando decidió dejarlo pendiente por hoy. La sesión de Playwright se desconectó (`detach`, sin cerrar el Chrome real de Jorge). **La próxima vez que se retome:** el Chrome con `--remote-debugging-port=9222 --user-data-dir="$HOME/chrome-manychat-debug"` ya probó que funciona — solo falta relanzarlo (o reusar la ventana si sigue abierta), que Jorge complete el login manual (usuario/contraseña + el check anti-bot, ambos pasos que solo puede hacer él), avisar, y recién ahí `playwright-cli attach --cdp=http://127.0.0.1:9222` de nuevo para leer Automation → Flows → "Respuesta Comentarios" → Analytics.
 
+## Continuación 2 (misma tarde, ~18:00): login de Jorge completado, auditoría de ManyChat cerrada con datos reales
+
+Jorge relanzó Chrome con el mismo comando (`open -na "Google Chrome" --args --remote-debugging-port=9222 --user-data-dir="$HOME/chrome-manychat-debug"`), completó el login manual (usuario/contraseña + check anti-bot) y avisó "ya estas dentro" / "listo".
+
+**Reconexión por CDP exitosa** (`playwright-cli attach --cdp=http://127.0.0.1:9222`) — confirmado en `app.manychat.com/fb4391897/dashboard`, logueado como Jorge.
+
+**Hallazgo técnico durante la sesión:** un `page.goto()` (navegación con recarga completa) hacia `/automation/flows` dejaba el `react-root` de ManyChat vacío (230 caracteres, solo el cookie-consent widget) — página en blanco tanto en screenshot como en snapshot, aunque `document.readyState` marcaba `complete` y no había errores JS de la app (solo ruido de extensiones del navegador tipo MetaMask/TronLink). Se descartó que fuera bloqueo anti-bot: al re-atachar sin navegar, el dashboard que Jorge ya tenía cargado sí mostraba contenido completo (39,966 caracteres). **Causa real:** el `goto()` (recarga dura) rompe algo en el SPA de ManyChat bajo CDP; navegar haciendo `click()` en el menú (como un usuario real) sí funciona normalmente. Con eso se navegó de Inicio → Automatización (`/cms`) sin problema, contenido completo (79,665 caracteres).
+
+**Primer intento de búsqueda (impreciso):** al listar los flujos en la raíz de "Automatización" no aparecía nada llamado "Respuesta Comentarios" — solo "Auto-DM de links desde comentarios" (LIVE, 0 ejecuciones) y "Autoenviar enlaces desde comentarios, historias o DMs" (STOPPED, 0). Con eso se concluyó (**incorrectamente**, ver corrección abajo) que el nombre documentado no correspondía a un flujo real y que la causa era simple falta de tráfico orgánico.
+
+## Corrección (misma sesión, minutos después): el flujo "Respuesta Comentarios" sí existe — estaba en la carpeta `FORJADO`, y está STOPPED con el disparador deshabilitado
+
+A pedido explícito de Jorge de revisar todo lo que hay en ManyChat para documentarlo bien, se volvió a entrar (mismo Chrome, misma sesión CDP) y esta vez se encontró la carpeta **`FORJADO`** dentro de "Mis automatizaciones" (no estaba expandida en el primer pase). Adentro: **un solo flujo, llamado literalmente "Respuesta Comentarios"** (creado 2026-08-28, slug `content20260828215429_699312`), modificado **"hace 1 semana"** (≈ 2026-09-02).
+
+**Estado real, confirmado visualmente en el editor (screenshot del canvas):**
+- Badge de estado del flujo completo: **STOPPED**.
+- El nodo disparador ("Cuando... El usuario comenta tu publicación o Reel", condición "Post or Reel Comments #3") tiene la etiqueta **"Deshabilitado"** superpuesta.
+- El resto del cableado es correcto y coincide con lo ya conocido del lado n8n: `Cuando (comenta)` → `Acciones: Solicitud externa` (webhook hacia n8n, dominio visible parcialmente `n8n-...banybim...`, consistente con `COMENTARIOS-MANYCHAT`) → `Condición: es_interes_real es verdadero` → `Instagram: Enviar mensaje (respuesta_dm)`.
+- Métricas clave del flujo (todos los disparadores): Envíos 0 veces, Contactos únicos 0, Correos electrónicos 0, Teléfonos 0.
+
+**Causa raíz real (corrige la conclusión anterior de esta misma sesión):** no es falta de tráfico orgánico — **el flujo está apagado y su disparador deshabilitado en ManyChat**, desde aproximadamente el 09-02 (fecha de última modificación). Esto explica exactamente los "9 días en cero" que veíamos desde el lado n8n: aunque llegaran comentarios reales a los posts, ManyChat no los está capturando porque el disparador está desactivado. El cableado construido (llamada a n8n, evaluación de interés real, DM de respuesta) sigue siendo correcto — el problema es que quedó detenido después de publicarse, no un bug de diseño ni de n8n.
+
+**No se tocó nada** (no se reactivó el disparador ni se cambió el estado STOPPED — decisión de reactivarlo o no le corresponde a Jorge/Bianca, no a este chequeo). Sesión de Playwright desconectada limpiamente (`detach`), Chrome real de Jorge intacto.
+
+**Pendiente real, nuevo:** decidir con Jorge/Bianca si el flujo "Respuesta Comentarios" se reactiva (disparador + estado del flujo) — probablemente lo detuvieron a propósito durante alguna prueba o revisión y quedó sin reactivar. Sin eso, seguirá en cero sin importar cuánto tráfico real llegue a los posts.
+
+## Continuación 3 (misma tarde, ~18:30-18:45): auditoría completa de ManyChat, a pedido de Jorge ("revisa todo todo de ManyChat")
+
+Con la misma conexión CDP al Chrome de Jorge, se recorrió sistemáticamente toda la cuenta de ManyChat (no solo el flujo de comentarios) para dejar registrado qué hay implementado y configurado. Resultado completo en la página nueva [[../../wiki/clientes/carwarriors-llc-manychat-configuracion|wiki/carwarriors-llc-manychat-configuracion]] — resumen de lo más relevante:
+
+- **Cuenta:** plan TRIAL, propietario real "booxter marketing" (no Jorge), Jorge es Administrador. Sin Clave de API generada — la integración con n8n es unidireccional (ManyChat llama a n8n vía Solicitud externa, no al revés).
+- **Canales:** solo **Instagram** (`@carwarriorsllc`) conectado. WhatsApp, Messenger, SMS, TikTok, Telegram, Correo — todos sin conectar en ManyChat (confirma que son legacy/no usados ahí, el negocio real corre por GHL).
+- **Automatizaciones básicas de Instagram:** "Saluda a nuevos seguidores" en vivo, "Respuesta predeterminada" pausada, resto (Menú principal, Introductores de conversación, Respuesta a mención de historia) sin configurar.
+- **Manychat AI nativa:** 0 de 2 pasos completados, no activada — confirma la decisión ya tomada de clasificar vía n8n en vez de la IA nativa de comentarios.
+- **Secuencias:** ninguna configurada.
+- **6 flujos en la raíz** (fuera de carpetas): 2 LIVE con tráfico real (`Turn story replies into leads` 4 ejecuciones/75% CTR, `Saludá a tus nuevos seguidores` 371 ejecuciones/25.7% CTR), 1 LIVE sin tráfico (`Auto-DM de links desde comentarios`, 0), 1 DRAFT, 2 STOPPED.
+- **Carpeta FORJADO:** solo el flujo `Respuesta Comentarios` (ya documentado arriba, STOPPED).
+- **Campos de usuario:** solo 3, todos usados por `Respuesta Comentarios` (`es_interes_real` Boolean, `respuesta_dm` Text, `respuesta_publica` Text) — sin campos huérfanos de pruebas viejas.
+- **Etiquetas:** 4, todas auto-generadas por flujos existentes.
+- **Integraciones del marketplace:** ninguna conectada (ActiveCampaign/MailChimp/HubSpot/Kit todas en "Paso 1").
+
+Sesión de Playwright desconectada limpiamente al final (`detach`), Chrome real de Jorge intacto.
+
 ## Relacionado
 
 - [[carwarriors-llc]]
@@ -79,3 +122,4 @@ A pedido de Jorge ("continuemos con los pendientes" → "todo lo que tenemos pen
 - [[2026-09-05-auditoria-sync-leads-ghl-dealercenter-bidireccional]]
 - [[2026-09-05-comentarios-ig-fb-auditoria-n8n-sano-sin-trafico-real]]
 - [[../../wiki/clientes/carwarriors-llc-inventario-ghl]]
+- [[../../wiki/clientes/carwarriors-llc-manychat-configuracion]]

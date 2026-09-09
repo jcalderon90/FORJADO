@@ -23,6 +23,7 @@ actualizado: 2026-08-29
 | [[clientes/carwarriors-llc-arquitectura-migracion]] | Diseño: migración del bot GHL Conversation AI → n8n + OpenRouter |
 | [[clientes/carwarriors-llc-infraestructura]] | Diseño de infraestructura técnica (VPS, Coolify, n8n) |
 | [[clientes/carwarriors-llc-inventario-ghl]] | Inventario de pipelines, calendarios, custom fields y workflows en GHL |
+| [[clientes/carwarriors-llc-manychat-configuracion]] | Inventario completo de lo implementado/configurado en ManyChat (canales, flujos, campos, integraciones) |
 | [[clientes/carwarriors-llc-sftp-dealercenter]] | Investigación del mecanismo SFTP/ADF-XML de DealerCenter |
 | [[clientes/carwarriors-llc-como-funciona-bot-sync]] | Explicación funcional: cómo trabajan hoy el bot y el sync de leads |
 | [[clientes/carwarriors-llc-como-habla-el-bot]] | Guía para el equipo: cómo habla y qué hace el bot |
