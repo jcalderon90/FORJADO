@@ -68,7 +68,7 @@ Ninguna configurada (sección vacía).
 |---|---|---|---|---|
 | Turn story replies into leads | 🟢 LIVE | 4 | 75% | Responde en Historia específica + mensaje contiene "REGALO" |
 | Saludá a tus nuevos seguidores | 🟢 LIVE | 371 | 25.7% | (vinculado a la herramienta básica de nuevos seguidores) |
-| Auto-DM de links desde comentarios | 🟢 LIVE | 0 | n/a | Comenta en Publicación o Reel específicos |
+| Auto-DM de links desde comentarios | 🔴 STOPPED (detenido 2026-09-09) | 0 | n/a | Comenta en Publicación o Reel específicos |
 | Envía links automáticos por DM | ⚪ DRAFT | n/a | n/a | Mensaje contiene "viralES" |
 | Autoenviar enlaces desde comentarios, historias o DMs | 🔴 STOPPED | 0 | n/a | Mensaje contiene precio/auto/suv/troca/camioneta/pickup/"0 down"/"trade in" |
 | Instagram Default Reply | 🔴 STOPPED | 0 | n/a | (vinculado a Respuesta predeterminada, pausada) |
@@ -77,12 +77,14 @@ Ninguna configurada (sección vacía).
 
 | Flujo | Estado | Ejecuciones | Trigger |
 |---|---|---|---|
-| **Respuesta Comentarios** | 🔴 **STOPPED**, disparador **Deshabilitado** | 0 (Envíos, Contactos únicos, Correos, Teléfonos) | "El usuario comenta en cualquier publicación o reel" — creado 2026-08-28, modificado ≈2026-09-02 |
+| **Respuesta Comentarios** | 🟢 **LIVE**, disparador **habilitado** (reactivado 2026-09-09 ~19:15) | 0 al momento de reactivar (Envíos, Contactos únicos, Correos, Teléfonos) | "El usuario comenta en cualquier publicación o reel" — creado 2026-08-28, STOPPED con trigger deshabilitado desde ≈2026-09-02, reactivado 2026-09-09 |
 
 **Cableado de "Respuesta Comentarios" (confirmado visualmente en el editor):**
 `Cuando comenta (Post or Reel Comments #3)` → `Acciones: Solicitud externa` (webhook a n8n, `COMENTARIOS-MANYCHAT`) → `Condición: es_interes_real es verdadero` → `Instagram: Enviar mensaje (respuesta_dm)`.
 
-⚠️ **Este es el flujo real detrás del pendiente "comentarios IG/FB sin tráfico"** — ver [[carwarriors-llc]] para el pendiente activo (decidir con Jorge/Bianca si se reactiva).
+✅ **Este era el flujo real detrás del pendiente "comentarios IG/FB sin tráfico"** — encontrado STOPPED el 2026-09-09 y reactivado el mismo día a pedido de Jorge (toggle del disparador → el badge pasó a LIVE automáticamente, sin paso de "publicar" aparte). Falta confirmar en los próximos días que entre tráfico real. Ver [[carwarriors-llc]] para el pendiente activo.
+
+⚠️ **Revisión de solapes (2026-09-09, misma tarde):** el único otro flujo LIVE que también dispara con comentarios era `Auto-DM de links desde comentarios` (raíz), con trigger acotado a un post/reel específico — técnicamente solapaba con el trigger de "Respuesta Comentarios" (cualquier post/reel). No se confirmó con certeza técnica qué pasaría si ManyChat evalúa dos triggers coincidentes a la vez (¿dispara uno por prioridad o ambos?), pero como ese flujo llevaba **0 ejecuciones en 6 meses** (campaña vieja, post sin comentarios nuevos), Jorge decidió detenerlo por precaución en vez de investigar el mecanismo interno. Con eso, "Respuesta Comentarios" queda como el único flujo LIVE con trigger de comentarios en toda la cuenta — sin ningún otro compitiendo por el mismo evento.
 
 ## Campos de usuario (Custom User Fields)
 

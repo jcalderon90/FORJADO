@@ -115,6 +115,37 @@ Con la misma conexión CDP al Chrome de Jorge, se recorrió sistemáticamente to
 
 Sesión de Playwright desconectada limpiamente al final (`detach`), Chrome real de Jorge intacto.
 
+## Continuación 4 (misma tarde, ~19:15): flujo "Respuesta Comentarios" reactivado, a pedido de Jorge
+
+Jorge dejó abiertas las pestañas de ManyChat y GHL en su Chrome real y pidió avanzar. Se reconectó por CDP (`playwright-cli attach --cdp=http://127.0.0.1:9222`, puerto ya vivo) y, con confirmación explícita de Jorge, se reactivó el flujo:
+
+1. Navegado por clicks reales (no `goto`, para no romper el SPA — ver hallazgo técnico de la Continuación 1) hasta `Automatización → FORJADO → Respuesta Comentarios → Editar Automatización`.
+2. El canvas del editor de flujo **no es DOM real** (confirmado de nuevo esta vez: `document.querySelectorAll` no encuentra nada del contenido del canvas, y el único `<iframe>` de la página es el widget de cookies de Usercentrics, no el builder) — se interactuó vía coordenadas de mouse reales (`mousemove`/`mousedown`/`mouseup`) sobre capturas de pantalla, igual que un usuario humano.
+3. Click en el nodo disparador (`Cuando... El usuario comenta tu publicación o Reel`) → abrió el panel de configuración del trigger "Post or Reel Comments #3", con el toggle de habilitación apagado en la parte inferior.
+4. Click en ese toggle → **se activó al instante** (azul) y el badge de estado del flujo, en la cabecera, cambió de **STOPPED** a **LIVE** automáticamente — no hizo falta ningún paso adicional de "publicar" o "activar flujo" por separado, habilitar el disparador fue suficiente. Cambio guardado automáticamente (indicador "Guardado" en la cabecera).
+5. Confirmado visualmente en captura final: badge LIVE, toggle del trigger "Post or Reel Comments #3" en azul/activado, cableado intacto (`Cuando comenta` → `Acciones: Solicitud externa` → `Condición: es_interes_real` → `Instagram: Enviar mensaje respuesta_dm`).
+
+**Estado a partir de ahora:** el flujo está LIVE con el disparador activo. Comentarios nuevos en posts/reels de Instagram de `@carwarriorsllc` deberían empezar a disparar el webhook hacia n8n (`COMENTARIOS-MANYCHAT`) de inmediato. Pendiente verificar en los próximos días si empieza a entrar tráfico real (0 ejecuciones al momento de la reactivación, como se esperaba de un flujo recién prendido).
+
+Sesión de Playwright desconectada limpiamente (`detach`) al final, Chrome real de Jorge intacto — no se tocó la pestaña de GHL.
+
+## Continuación 5 (misma tarde, ~20:20-20:50): revisión de solapes con otros flujos activos, y detenido un flujo viejo por precaución
+
+Jorge preguntó si el flujo recién reactivado estorbaba con el resto de automatizaciones activas en ManyChat. Reconectado por CDP de nuevo, se auditaron los triggers de los demás flujos LIVE/STOPPED de la raíz:
+
+- **`Saludá a tus nuevos seguidores`** (LIVE): trigger de nuevo seguidor — sin relación con comentarios, sin solape.
+- **`Turn story replies into leads`** (LIVE): trigger de respuesta a una Historia específica + palabra "REGALO" — es un tipo de trigger distinto (reply a Historia, no comentario en post/reel), sin solape.
+- **`Auto-DM de links desde comentarios`** (LIVE, `content20241004134441_182585`): trigger = comentario en **un post/reel específico** (cualquiera de su contenido) + cualquier palabra. Esto SÍ se solapa en teoría con "Respuesta Comentarios" (trigger: cualquier post/reel + cualquier comentario) — un comentario nuevo en ese post puntual dispararía ambos triggers. El flujo lleva **0 ejecuciones desde su creación hace 6 meses** (campaña "club de regalos" old), evidencia de que el post ya no recibe comentarios reales.
+- Los otros 2 flujos de la raíz (`Envía links automáticos por DM` DRAFT, `Autoenviar enlaces desde comentarios...` STOPPED, `Instagram Default Reply` STOPPED) no están en vivo, sin riesgo.
+
+No se encontró en la UI de ManyChat ninguna advertencia explícita de conflicto de triggers al activar "Respuesta Comentarios" (ni un aviso de "esto se solapa con X automatizaciones"), y no se pudo confirmar con certeza técnica qué pasaría si un comentario real coincidiera con ambos triggers a la vez (¿dispara solo uno por prioridad, o ambos?) — no se siguió investigando ese mecanismo interno de ManyChat porque el flujo solapado ya estaba efectivamente muerto.
+
+**Decisión de Jorge:** detener `Auto-DM de links desde comentarios` en vez de dejarlo correr o investigar más a fondo el mecanismo de conflicto — elimina cualquier riesgo de doble respuesta sin costo real (0 tráfico en 6 meses). Acción hecha: click en "Detener" desde la vista de Insights del flujo → badge pasó de LIVE a **STOPPED** al instante, sin diálogo de confirmación. No se tocó ningún otro paso de ese flujo (mensajes, DM de apertura, etc. — siguen intactos por si se quiere reactivar más adelante).
+
+**Estado final de comentarios en Instagram tras esta sesión:** solo `Respuesta Comentarios` (carpeta FORJADO) queda LIVE con trigger de comentarios, sin ningún otro flujo compitiendo por el mismo evento.
+
+Sesión de Playwright desconectada limpiamente (`detach`) al final.
+
 ## Relacionado
 
 - [[carwarriors-llc]]
