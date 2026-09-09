@@ -47,14 +47,35 @@ Al revisar "¿Rances Car tiene el mismo bug?" se encontró que Rances Car simple
 
 ## Pendiente real
 
-- Confirmar con tráfico real la próxima vez que la rama de `Marcar Alerta Enviada` de `PRINCIPAL` se dispare (fix BSONError sin verificar en vivo todavía).
-- Confirmar con el próximo correo real de "FORJADO Inventory Sync" que la corrida automática (no manual) sigue funcionando con el fix de `markAsRead` y con la nueva rama de Rances Car juntas.
-- Confirmar con tráfico real que `leads_master` se puebla correctamente y que la alerta de Slack de "lead multi-dealer" sale una sola vez por match (no duplicada) — mismo criterio de esperar tráfico real usado en otros fixes recientes de esta cuenta.
+- Confirmar con tráfico real la próxima vez que la rama de `Marcar Alerta Enviada` de `PRINCIPAL` se dispare (fix BSONError sin verificar en vivo todavía). **Verificado 09-09 ~15:30:** cero ejecuciones con `status: error` en `PRINCIPAL` desde el fix — no es que esté confirmado, es que esa rama simplemente no se ha vuelto a disparar todavía.
+- Confirmar con el próximo correo real de "FORJADO Inventory Sync" que la corrida automática (no manual) sigue funcionando con el fix de `markAsRead` y con la nueva rama de Rances Car juntas. **Verificado 09-09 ~15:30:** la única ejecución automática (`mode: trigger`) del día fue a las 05:30 UTC, **antes** de publicar ambos fixes (`markAsRead` publicado 13:23, rama RANCES también). Sigue sin correr ni una vez con el código nuevo — el próximo disparo real es el correo de mañana ~1:30 AM hora Miami.
+- Confirmar con tráfico real que `leads_master` se puebla correctamente y que la alerta de Slack de "lead multi-dealer" sale una sola vez por match (no duplicada). **Verificado 09-09 ~15:30, parcialmente confirmado:** revisadas todas las ejecuciones reales de `LEAD - COLLECTOR` desde el publish (13:48). Solo hubo 1 (`id 5456`, 15:15) — la rama nueva `Tiene Telefono (Master)?` sí se ejecutó y evaluó correctamente (telefono vacío → rama `false`, no llegó a tocar Mongo, comportamiento esperado). Confirma que el wiring funciona con tráfico real, pero todavía no hubo ningún caso real con teléfono presente post-publish, así que `leads_master` sigue sin ningún documento real y la alerta multi-dealer sigue sin probarse. (La ejecución con el teléfono real `+13055888624` de las 12:44 fue *antes* del publish de las 13:48, así que no pasó por la rama nueva — no es un bug, solo mal timing.)
 - Sin backfill histórico de `leads_master` — el gap de datos (`leads` sin campo `dealer`) impide reconstruir con certeza el historial; el fix aplica solo hacia adelante desde el 09-09.
+
+## Continuación (misma tarde, ~15:30-17:40): segunda pasada de verificación con datos reales + intento de auditoría de ManyChat
+
+A pedido de Jorge ("continuemos con los pendientes" → "todo lo que tenemos pendiente en carwarriors"), se hizo una auditoría más profunda con ejecuciones reales de n8n, cruzando timestamps de publish contra timestamps de ejecución (no solo "¿hay error?").
+
+**Confirmado con tráfico real que la rama nueva de `leads_master` funciona correctamente post-publish.** Revisadas todas las ejecuciones de `LEAD - COLLECTOR` desde el publish (13:48): la ejecución de las 12:44 con un teléfono real (`+13055888624`, Rances Car) fue *antes* del publish (no pasó por la rama nueva — no es un bug, solo timing). Las 3 ejecuciones reales *después* del publish (15:15, 15:27 x2, dos leads nuevos distintos) sí pasaron por `Tiene Telefono (Master)?` y evaluaron correctamente `false` (teléfono todavía vacío en ambos casos) sin tocar Mongo de más — wiring confirmado sano en producción. Sigue sin haber un caso real con teléfono ya capturado post-publish, así que `leads_master` sigue vacío y la alerta multi-dealer sigue sin probarse con un match real.
+
+**Sync de inventario (Rances Car + `markAsRead`):** confirmado que la única corrida automática del día (05:30 UTC) fue *antes* de publicar ambos fixes (13:23) — no hay ninguna corrida automática todavía con el código nuevo. Próximo disparo real: correo de mañana ~1:30 AM hora Miami.
+
+**BSONError en `PRINCIPAL`:** cero ejecuciones con error desde el fix — sigue sin dispararse esa rama, no hay nada que confirmar todavía.
+
+**Chequeo adicional no pedido explícitamente pero relacionado — fix de `ghl_event_id` en RSVP (09-05):** revisadas las 8 ejecuciones reales de `RSVP` + 2 de `RSVP - Rances Car` desde ese fix. Ninguna fue una cancelación/reagendamiento real (`cancelar_cita` siempre `false`, todas citas nuevas) — sigue sin haber un caso real que ponga a prueba el fix del `_id`/`ghl_event_id`.
+
+**Chequeo adicional — comentarios IG/FB (`COMENTARIOS-MANYCHAT`):** confirmado de nuevo que sigue en cero tráfico real — la única ejecución nueva desde el 08-31 sigue siendo la misma prueba sintética por `curl` del 09-05. Van 9 días completos sin un comentario real de Instagram/Facebook.
+
+**Intento de auditar el lado de ManyChat directamente con Playwright — sin completar, varios bloqueos reales encontrados en el camino:**
+1. Se intentó levantar una instancia de Playwright propia (headed, perfil separado `manychat-carwarriors`) para loguearse — la página de ManyChat devolvió `451 Unavailable For Legal Reasons` (bloqueo por sanciones OFAC/BIS), aparentemente por la IP de salida de este entorno resolviendo a una jurisdicción sancionada.
+2. En un segundo intento (perfil nuevo `manychat-carwarriors2`) ya no salió el 451, pero apareció un check anti-bot ("Confirme que es humano") — no se intentó sortear (evadir detección anti-bot no corresponde), y de todos modos no había credenciales reales de ManyChat de Carwarriors disponibles en la bóveda para completar el login aunque se pasara el check.
+3. Jorge aclaró que el problema real era que **no podía ver la ventana de Playwright** (este entorno no tiene una pantalla visible para el usuario, aunque el proceso de Chrome corre de verdad en su Mac). Se pivotó a conectar por **CDP** al Chrome real de Jorge: `open -a "Google Chrome" --args --remote-debugging-port=9222` — primer intento sin efecto (Chrome moderno ignora `--remote-debugging-port` en el perfil default por seguridad si ya hay una instancia corriendo). Segundo intento con perfil nuevo y `-na` (`--user-data-dir="$HOME/chrome-manychat-debug"`) sí funcionó: `playwright-cli attach --cdp=http://127.0.0.1:9222` conectó exitosamente al Chrome real de Jorge.
+4. **Pendiente real, sin completar:** Jorge todavía no terminó de loguearse en ManyChat en esa ventana (se confirmó con `window.location.href` que seguía en `/signin`) cuando decidió dejarlo pendiente por hoy. La sesión de Playwright se desconectó (`detach`, sin cerrar el Chrome real de Jorge). **La próxima vez que se retome:** el Chrome con `--remote-debugging-port=9222 --user-data-dir="$HOME/chrome-manychat-debug"` ya probó que funciona — solo falta relanzarlo (o reusar la ventana si sigue abierta), que Jorge complete el login manual (usuario/contraseña + el check anti-bot, ambos pasos que solo puede hacer él), avisar, y recién ahí `playwright-cli attach --cdp=http://127.0.0.1:9222` de nuevo para leer Automation → Flows → "Respuesta Comentarios" → Analytics.
 
 ## Relacionado
 
 - [[carwarriors-llc]]
 - [[2026-09-08-fix-critico-sync-inventario-vacio]]
 - [[2026-09-05-auditoria-sync-leads-ghl-dealercenter-bidireccional]]
+- [[2026-09-05-comentarios-ig-fb-auditoria-n8n-sano-sin-trafico-real]]
 - [[../../wiki/clientes/carwarriors-llc-inventario-ghl]]
