@@ -19,6 +19,7 @@ actualizado: 2026-09-15
 
 | Página | Descripción |
 |---|---|
+| [[clientes/callacar]] | CallaCar Transportation Pty Ltd (Marketplace de transporte AU) — estado actual, alcance web y pendientes abiertos |
 | [[clientes/carwarriors-llc]] | Car dealer Miami (3 subcuentas GHL) — estado actual, accesos, pendientes abiertos |
 | [[clientes/carwarriors-llc-arquitectura-migracion]] | Diseño: migración del bot GHL Conversation AI → n8n + OpenRouter |
 | [[clientes/carwarriors-llc-infraestructura]] | Diseño de infraestructura técnica (VPS, Coolify, n8n) |
