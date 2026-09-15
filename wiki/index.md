@@ -1,7 +1,7 @@
 ---
 tags: [forjado, indice, navegacion, wiki]
 tipo: indice
-actualizado: 2026-09-14
+actualizado: 2026-09-15
 ---
 
 # wiki/ — Índice de la bóveda FORJADO
