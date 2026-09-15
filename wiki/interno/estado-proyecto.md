@@ -2,7 +2,7 @@
 tags: [forjado, estado, pendientes, dashboard]
 tipo: estado
 estado: activo
-actualizado: 2026-09-14
+actualizado: 2026-09-15
 fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 ---
 
@@ -15,8 +15,8 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 
 | Cliente | Estado | Última actividad |
 |---|---|---|
-| **Carwarriors LLC** | **✅ 09-15: aplicadas reglas de Lead Assignment en DealerCenter.** Configurada Rule 32 para `OfferUp` $\rightarrow$ Carlos Martínez y actualizadas Rules 16-31 para `Capital One` $\rightarrow$ Dayron Barrizonte. **09-11 (contexto):** chequeo de salud general — todo sano. Detalle completo: [[../clientes/carwarriors-llc]].** | 2026-09-15 |
-| **Varela Law** | ✅ 09-12: restaurado el log dual (Sheet+Mongo) de `CONTRACTS FROM SLACK` — la migración del 09-08 había dejado la Sheet "SLACK CONTRACTS" sin escribir, sin comunicarlo; re-agregado el nodo de Sheets en paralelo a Mongo, publicado. Recuperado un contrato real perdido (Gerber Medardo Dominguez, FOIA) que había fallado por el límite de Airtable justo antes de la migración y nunca quedó registrado — backfill verificado con datos reales. Corregido bug de formato de fecha ambiguo (`M/D/YYYY` → ISO `YYYY-MM-DD` en el prompt del AI Agent, v1.10) y reformateadas las 4 fechas ya guardadas. Limpiado un documento duplicado/incompleto de Gerber en Mongo (prueba real del 09-08, antes del fix del prompt). Detalle: [[../../raw/clientes/varela-law/2026-09-12-fix-sheet-log-restaurado-y-fechas-ambiguas]]. **09-08 (contexto):** acceso directo vía MCP `n8n-varela_law` conectado por primera vez; `CONTRACTS FROM SLACK` migrado de Airtable+Sheets a MongoDB (Airtable llegó a su límite de registros), más un fix real del AI Agent que perdía teléfono/tipo de caso ya presentes en el PDF; `TRACKING INCOMING ZELLE PAYMENTS` con bug de zona horaria corregido. 🟡 Sigue pendiente, sin cambios: riesgo de negocio API de MyCase (mensaje a Mario 2026-08-28, esperando respuesta, no perseguir proactivamente) y el backlog de 6 ideas del 2026-08-28 | 2026-09-12 |
+| **Carwarriors LLC** | **✅ 09-15: automatización de Nuevos Seguidores en ManyChat actualizada con Smart Delay de 2h + seguimiento de clic de inventario ($0 Down / Teslas).** También aplicadas reglas de Lead Assignment en DealerCenter (Rules 16-32). Detalle completo: [[../clientes/carwarriors-llc]]. | 2026-09-15 |
+| **Varela Law** | **✅ 09-15: corregido el ruteo de pestañas por mes en Google Sheets para el tracking de pagos Zelle (`BruqJ1jdEV9xl5zG`).** Solucionado bug donde todos los pagos de Feb-Nov se guardaban en la pestaña `Dec` ($json.month no venía de Mongo), corregido parseo de fecha en Luxon para meses completos (`September` vs `Sep`), parseo de respuestas JSON formateadas en markdown por la IA y desactivado fallback model en `Basic LLM Chain`. Publicado y verificado en producción con ejecuciones de prueba (IDs 2545, 2546, 2548). Detalle: [[../../raw/clientes/varela-law/2026-09-15-fix-zelle-tracking-month-sheets-routing-and-json-parsing]]. **09-12 (contexto):** restaurado log dual (Sheet+Mongo) de `CONTRACTS FROM SLACK` y recuperado contrato histórico de Gerber Medardo Dominguez. | 2026-09-15 |
 | **Pipeline / prospección** | Ver [[../ventas/pipeline]] | 2026-08-15 |
 
 ## Bóveda / herramientas internas

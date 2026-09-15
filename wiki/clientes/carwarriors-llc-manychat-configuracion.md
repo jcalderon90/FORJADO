@@ -67,7 +67,7 @@ Ninguna configurada (sección vacía).
 | Flujo | Estado | Ejecuciones | CTR | Trigger |
 |---|---|---|---|---|
 | Turn story replies into leads | 🟢 LIVE | 4 | 75% | Responde en Historia específica + mensaje contiene "REGALO" |
-| Saludá a tus nuevos seguidores | 🟢 LIVE | 371 | 25.7% | (vinculado a la herramienta básica de nuevos seguidores) |
+| Saludá a tus nuevos seguidores | 🟢 LIVE | 380 | 25.9% | Nuevo seguidor (5 min) + Smart Delay de 2h si no hace clic en inventario (publicado 2026-09-15) |
 | Auto-DM de links desde comentarios | 🔴 STOPPED (detenido 2026-09-09) | 0 | n/a | Comenta en Publicación o Reel específicos |
 | Envía links automáticos por DM | ⚪ DRAFT | n/a | n/a | Mensaje contiene "viralES" |
 | Autoenviar enlaces desde comentarios, historias o DMs | 🔴 STOPPED | 0 | n/a | Mensaje contiene precio/auto/suv/troca/camioneta/pickup/"0 down"/"trade in" |
