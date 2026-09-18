@@ -1,170 +1,676 @@
 {
- "name": "COMENTARIOS-MANYCHAT",
- "active": false,
- "nodes": [
-  {
-   "id": "38302c6d-048c-4ec4-b4b0-27b44edd7c42",
-   "name": "Webhook Comentario ManyChat",
-   "type": "n8n-nodes-base.webhook",
-   "typeVersion": 2.1,
-   "position": [240, 300],
-   "parameters": {
-    "httpMethod": "POST",
-    "path": "manychat-comentario-clasificar",
-    "responseMode": "responseNode",
-    "options": {}
-   },
-   "webhookId": "884dc53a-7990-429a-8b12-20cf3ead4cc8"
+  "id": "07BgeGy4vukFJDlu",
+  "name": "COMENTARIOS-MANYCHAT",
+  "active": true,
+  "isArchived": false,
+  "versionId": "67669030-739d-48a4-9e25-7fe34d2aea74",
+  "activeVersionId": "67669030-739d-48a4-9e25-7fe34d2aea74",
+  "triggerCount": 1,
+  "createdAt": "2026-08-30T17:19:31.417Z",
+  "updatedAt": "2026-09-18T17:59:11.515Z",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
   },
-  {
-   "id": "26494a7c-9248-4228-938a-089887095086",
-   "name": "Normalizar Entrada",
-   "type": "n8n-nodes-base.set",
-   "typeVersion": 3.5,
-   "position": [540, 300],
-   "parameters": {
-    "mode": "manual",
-    "includeOtherFields": false,
-    "assignments": {
-     "assignments": [
-      { "id": "comentario", "name": "comentario", "value": "={{ $json.body?.comentario ?? \"\" }}", "type": "string" },
-      { "id": "contact_id", "name": "contact_id", "value": "={{ $json.body?.contact?.id ?? \"\" }}", "type": "string" },
-      { "id": "contact_nombre", "name": "contact_nombre", "value": "={{ $json.body?.contact?.first_name ?? \"\" }}", "type": "string" }
-     ]
+  "connections": {
+    "Webhook Comentario ManyChat": {
+      "main": [
+        [
+          {
+            "node": "Normalizar Entrada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalizar Entrada": {
+      "main": [
+        [
+          {
+            "node": "Clasificar Interés Real",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clasificar Interés Real": {
+      "main": [
+        [
+          {
+            "node": "Interés Real?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Clasificar Interés Real",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Interés Real?": {
+      "main": [
+        [
+          {
+            "node": "Respuesta - Interés Real",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respuesta - Sin Interés",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respuesta - Interés Real": {
+      "main": [
+        [
+          {
+            "node": "Responder a ManyChat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respuesta - Sin Interés": {
+      "main": [
+        [
+          {
+            "node": "Responder a ManyChat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
-   }
   },
-  {
-   "id": "f9aa31bd-60e5-4e66-a204-99cbbbb0afbe",
-   "name": "Clasificar Interés Real",
-   "type": "@n8n/n8n-nodes-langchain.informationExtractor",
-   "typeVersion": 1.2,
-   "position": [840, 300],
-   "parameters": {
-    "text": "={{ $json.comentario }}",
-    "schemaType": "fromAttributes",
-    "attributes": {
-     "attributes": [
-      {
-       "name": "es_interes_real",
-       "type": "boolean",
-       "description": "Devuelve true SOLO si el comentario muestra interés real de compra de un vehículo: pregunta por precio, disponibilidad, financiamiento, quiere agendar una cita/visita, o pide información de un auto específico (marca, modelo, año). Devuelve false para comentarios genéricos, emojis, cumplidos (\"bonito auto\"), etiquetas a otras personas, comentarios no relacionados a intención de compra, o pedidos de regalos/sorteos/promociones gratuitas.",
-       "required": true
+  "nodes": [
+    {
+      "id": "38302c6d-048c-4ec4-b4b0-27b44edd7c42",
+      "name": "Webhook Comentario ManyChat",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        240,
+        300
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "manychat-comentario-clasificar",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "webhookId": "884dc53a-7990-429a-8b12-20cf3ead4cc8"
+    },
+    {
+      "id": "26494a7c-9248-4228-938a-089887095086",
+      "name": "Normalizar Entrada",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        540,
+        300
+      ],
+      "parameters": {
+        "mode": "manual",
+        "includeOtherFields": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "comentario",
+              "name": "comentario",
+              "value": "={{ $json.body?.comentario ?? \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "contact_id",
+              "name": "contact_id",
+              "value": "={{ $json.body?.contact?.id ?? \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "contact_nombre",
+              "name": "contact_nombre",
+              "value": "={{ $json.body?.contact?.first_name ?? \"\" }}",
+              "type": "string"
+            }
+          ]
+        }
       }
-     ]
-    }
-   }
-  },
-  {
-   "id": "d09253a4-4419-4cd2-832d-560165a800dd",
-   "name": "OpenRouter Chat Model",
-   "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
-   "typeVersion": 1,
-   "position": [820, 460],
-   "parameters": {
-    "model": "deepseek/deepseek-v4-flash",
-    "options": { "temperature": 0.2 }
-   },
-   "credentials": {
-    "openRouterApi": { "id": "o8MexJvFeSx2j4an", "name": "OpenRouter account" }
-   }
-  },
-  {
-   "id": "449e3914-950a-4723-b933-4c694654bf68",
-   "name": "Interés Real?",
-   "type": "n8n-nodes-base.if",
-   "typeVersion": 2.3,
-   "position": [1120, 300],
-   "parameters": {
-    "conditions": {
-     "combinator": "and",
-     "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
-     "conditions": [
-      {
-       "leftValue": "={{ $json.output.es_interes_real }}",
-       "rightValue": true,
-       "operator": { "type": "boolean", "operation": "true" }
+    },
+    {
+      "id": "f9aa31bd-60e5-4e66-a204-99cbbbb0afbe",
+      "name": "Clasificar Interés Real",
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1.2,
+      "position": [
+        840,
+        300
+      ],
+      "parameters": {
+        "attributes": {
+          "attributes": [
+            {
+              "description": "Devuelve true SOLO si el comentario muestra interés real de compra de un vehículo: pregunta por precio, disponibilidad, financiamiento, quiere agendar una cita/visita, o pide información de un auto específico (marca, modelo, año). Devuelve false para comentarios genéricos, emojis, cumplidos (\"bonito auto\"), etiquetas a otras personas, comentarios no relacionados a intención de compra, o pedidos de regalos/sorteos/promociones gratuitas.",
+              "name": "es_interes_real",
+              "required": true,
+              "type": "boolean"
+            },
+            {
+              "description": "Código de idioma detectado en el texto del comentario: 'es' si está en español, 'en' si está en inglés. Si no puedes determinarlo con certeza o es otro idioma distinto, usa 'es' por defecto.",
+              "name": "idioma",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "description": "Marca, modelo o tipo de vehículo mencionado en el comentario (ejemplo: 'Toyota Tacoma', 'Mustang', 'Corolla', 'camioneta', 'SUV'). Si no menciona ningún vehículo específico, devuelve cadena vacía.",
+              "name": "vehiculo_mencionado",
+              "required": false,
+              "type": "string"
+            }
+          ]
+        },
+        "schemaType": "fromAttributes",
+        "text": "={{ $json.comentario }}"
       }
-     ]
+    },
+    {
+      "id": "d09253a4-4419-4cd2-832d-560165a800dd",
+      "name": "OpenRouter Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        820,
+        460
+      ],
+      "parameters": {
+        "model": "deepseek/deepseek-v4-flash",
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "credentials": {
+        "openRouterApi": {
+          "id": "o8MexJvFeSx2j4an",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "id": "449e3914-950a-4723-b933-4c694654bf68",
+      "name": "Interés Real?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1120,
+        300
+      ],
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.output.es_interes_real }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "d29e8f35-9547-464c-8784-2edc11e806cb",
+      "name": "Respuesta - Interés Real",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        1400,
+        180
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "es_interes_real",
+              "name": "es_interes_real",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "id": "respuesta_publica",
+              "name": "respuesta_publica",
+              "type": "string",
+              "value": "={{ $json.output.idioma === 'en' ? 'Thanks for your interest! 🚗 We just sent you a private message with all the details.' : '¡Gracias por tu interés! 🚗 Te escribimos por mensaje privado con toda la información.' }}"
+            },
+            {
+              "id": "respuesta_dm",
+              "name": "respuesta_dm",
+              "type": "string",
+              "value": "={{ (() => {\n  const nombre = $('Normalizar Entrada').first().json.contact_nombre;\n  const isEn = $json.output.idioma === 'en';\n  const auto = ($json.output.vehiculo_mencionado || '').trim();\n\n  if (isEn) {\n    const saludo = nombre ? 'Hi ' + nombre + '!' : 'Hi!';\n    const autoTxt = auto ? ' about the ' + auto : '';\n    return saludo + ' We saw your comment' + autoTxt + '. It is available with $0 down payment options and immediate approval with passport or ITIN. What WhatsApp number can I send the photos and pricing breakdown to, or does today work to stop by and see it?';\n  } else {\n    const saludo = nombre ? '¡Hola ' + nombre + '!' : '¡Hola!';\n    const autoTxt = auto ? ' sobre el ' + auto : '';\n    return saludo + ' Vimos tu comentario' + autoTxt + '. Lo tenemos disponible con opciones desde $0 de enganche y aprobación inmediata con pasaporte o ITIN. ¿A qué número de WhatsApp te puedo compartir las fotos y corrida de pagos, o te queda bien pasar hoy a verlo?';\n  }\n})() }}"
+            }
+          ]
+        },
+        "includeOtherFields": false,
+        "mode": "manual"
+      }
+    },
+    {
+      "id": "5dfc1833-562d-4ae7-bf27-83402a59bdc7",
+      "name": "Responder a ManyChat",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1680,
+        300
+      ],
+      "parameters": {
+        "respondWith": "firstIncomingItem",
+        "options": {}
+      }
+    },
+    {
+      "id": "63fa0d06-20f4-4da7-8fcf-045403ba8280",
+      "name": "Respuesta - Sin Interés",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        1400,
+        420
+      ],
+      "parameters": {
+        "mode": "manual",
+        "includeOtherFields": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "es_interes_real",
+              "name": "es_interes_real",
+              "value": false,
+              "type": "boolean"
+            },
+            {
+              "id": "respuesta_publica",
+              "name": "respuesta_publica",
+              "value": "={{ $json.output.idioma === 'en' ? 'Thanks for commenting! 🙌' : '¡Gracias por comentar! 🙌' }}",
+              "type": "string"
+            },
+            {
+              "id": "respuesta_dm",
+              "name": "respuesta_dm",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        }
+      }
     }
-   }
+  ],
+  "nodeGroups": [],
+  "activeVersion": {
+    "nodes": [
+      {
+        "id": "38302c6d-048c-4ec4-b4b0-27b44edd7c42",
+        "name": "Webhook Comentario ManyChat",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          240,
+          300
+        ],
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "manychat-comentario-clasificar",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "webhookId": "884dc53a-7990-429a-8b12-20cf3ead4cc8"
+      },
+      {
+        "id": "26494a7c-9248-4228-938a-089887095086",
+        "name": "Normalizar Entrada",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.5,
+        "position": [
+          540,
+          300
+        ],
+        "parameters": {
+          "mode": "manual",
+          "includeOtherFields": false,
+          "assignments": {
+            "assignments": [
+              {
+                "id": "comentario",
+                "name": "comentario",
+                "value": "={{ $json.body?.comentario ?? \"\" }}",
+                "type": "string"
+              },
+              {
+                "id": "contact_id",
+                "name": "contact_id",
+                "value": "={{ $json.body?.contact?.id ?? \"\" }}",
+                "type": "string"
+              },
+              {
+                "id": "contact_nombre",
+                "name": "contact_nombre",
+                "value": "={{ $json.body?.contact?.first_name ?? \"\" }}",
+                "type": "string"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "f9aa31bd-60e5-4e66-a204-99cbbbb0afbe",
+        "name": "Clasificar Interés Real",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "typeVersion": 1.2,
+        "position": [
+          840,
+          300
+        ],
+        "parameters": {
+          "attributes": {
+            "attributes": [
+              {
+                "description": "Devuelve true SOLO si el comentario muestra interés real de compra de un vehículo: pregunta por precio, disponibilidad, financiamiento, quiere agendar una cita/visita, o pide información de un auto específico (marca, modelo, año). Devuelve false para comentarios genéricos, emojis, cumplidos (\"bonito auto\"), etiquetas a otras personas, comentarios no relacionados a intención de compra, o pedidos de regalos/sorteos/promociones gratuitas.",
+                "name": "es_interes_real",
+                "required": true,
+                "type": "boolean"
+              },
+              {
+                "description": "Código de idioma detectado en el texto del comentario: 'es' si está en español, 'en' si está en inglés. Si no puedes determinarlo con certeza o es otro idioma distinto, usa 'es' por defecto.",
+                "name": "idioma",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "description": "Marca, modelo o tipo de vehículo mencionado en el comentario (ejemplo: 'Toyota Tacoma', 'Mustang', 'Corolla', 'camioneta', 'SUV'). Si no menciona ningún vehículo específico, devuelve cadena vacía.",
+                "name": "vehiculo_mencionado",
+                "required": false,
+                "type": "string"
+              }
+            ]
+          },
+          "schemaType": "fromAttributes",
+          "text": "={{ $json.comentario }}"
+        }
+      },
+      {
+        "id": "d09253a4-4419-4cd2-832d-560165a800dd",
+        "name": "OpenRouter Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+        "typeVersion": 1,
+        "position": [
+          820,
+          460
+        ],
+        "parameters": {
+          "model": "deepseek/deepseek-v4-flash",
+          "options": {
+            "temperature": 0.2
+          }
+        },
+        "credentials": {
+          "openRouterApi": {
+            "id": "o8MexJvFeSx2j4an",
+            "name": "OpenRouter account"
+          }
+        }
+      },
+      {
+        "id": "449e3914-950a-4723-b933-4c694654bf68",
+        "name": "Interés Real?",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1120,
+          300
+        ],
+        "parameters": {
+          "conditions": {
+            "combinator": "and",
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict"
+            },
+            "conditions": [
+              {
+                "leftValue": "={{ $json.output.es_interes_real }}",
+                "rightValue": true,
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "d29e8f35-9547-464c-8784-2edc11e806cb",
+        "name": "Respuesta - Interés Real",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.5,
+        "position": [
+          1400,
+          180
+        ],
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "es_interes_real",
+                "name": "es_interes_real",
+                "type": "boolean",
+                "value": true
+              },
+              {
+                "id": "respuesta_publica",
+                "name": "respuesta_publica",
+                "type": "string",
+                "value": "={{ $json.output.idioma === 'en' ? 'Thanks for your interest! 🚗 We just sent you a private message with all the details.' : '¡Gracias por tu interés! 🚗 Te escribimos por mensaje privado con toda la información.' }}"
+              },
+              {
+                "id": "respuesta_dm",
+                "name": "respuesta_dm",
+                "type": "string",
+                "value": "={{ (() => {\n  const nombre = $('Normalizar Entrada').first().json.contact_nombre;\n  const isEn = $json.output.idioma === 'en';\n  const auto = ($json.output.vehiculo_mencionado || '').trim();\n\n  if (isEn) {\n    const saludo = nombre ? 'Hi ' + nombre + '!' : 'Hi!';\n    const autoTxt = auto ? ' about the ' + auto : '';\n    return saludo + ' We saw your comment' + autoTxt + '. It is available with $0 down payment options and immediate approval with passport or ITIN. What WhatsApp number can I send the photos and pricing breakdown to, or does today work to stop by and see it?';\n  } else {\n    const saludo = nombre ? '¡Hola ' + nombre + '!' : '¡Hola!';\n    const autoTxt = auto ? ' sobre el ' + auto : '';\n    return saludo + ' Vimos tu comentario' + autoTxt + '. Lo tenemos disponible con opciones desde $0 de enganche y aprobación inmediata con pasaporte o ITIN. ¿A qué número de WhatsApp te puedo compartir las fotos y corrida de pagos, o te queda bien pasar hoy a verlo?';\n  }\n})() }}"
+              }
+            ]
+          },
+          "includeOtherFields": false,
+          "mode": "manual"
+        }
+      },
+      {
+        "id": "5dfc1833-562d-4ae7-bf27-83402a59bdc7",
+        "name": "Responder a ManyChat",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          1680,
+          300
+        ],
+        "parameters": {
+          "respondWith": "firstIncomingItem",
+          "options": {}
+        }
+      },
+      {
+        "id": "63fa0d06-20f4-4da7-8fcf-045403ba8280",
+        "name": "Respuesta - Sin Interés",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.5,
+        "position": [
+          1400,
+          420
+        ],
+        "parameters": {
+          "mode": "manual",
+          "includeOtherFields": false,
+          "assignments": {
+            "assignments": [
+              {
+                "id": "es_interes_real",
+                "name": "es_interes_real",
+                "value": false,
+                "type": "boolean"
+              },
+              {
+                "id": "respuesta_publica",
+                "name": "respuesta_publica",
+                "value": "={{ $json.output.idioma === 'en' ? 'Thanks for commenting! 🙌' : '¡Gracias por comentar! 🙌' }}",
+                "type": "string"
+              },
+              {
+                "id": "respuesta_dm",
+                "name": "respuesta_dm",
+                "value": "",
+                "type": "string"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Webhook Comentario ManyChat": {
+        "main": [
+          [
+            {
+              "node": "Normalizar Entrada",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Normalizar Entrada": {
+        "main": [
+          [
+            {
+              "node": "Clasificar Interés Real",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Clasificar Interés Real": {
+        "main": [
+          [
+            {
+              "node": "Interés Real?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "OpenRouter Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "Clasificar Interés Real",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Interés Real?": {
+        "main": [
+          [
+            {
+              "node": "Respuesta - Interés Real",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Respuesta - Sin Interés",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Respuesta - Interés Real": {
+        "main": [
+          [
+            {
+              "node": "Responder a ManyChat",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Respuesta - Sin Interés": {
+        "main": [
+          [
+            {
+              "node": "Responder a ManyChat",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "nodeGroups": []
   },
-  {
-   "id": "d29e8f35-9547-464c-8784-2edc11e806cb",
-   "name": "Respuesta - Interés Real",
-   "type": "n8n-nodes-base.set",
-   "typeVersion": 3.5,
-   "position": [1400, 180],
-   "parameters": {
-    "mode": "manual",
-    "includeOtherFields": false,
-    "assignments": {
-     "assignments": [
-      { "id": "es_interes_real", "name": "es_interes_real", "value": true, "type": "boolean" },
-      { "id": "respuesta_publica", "name": "respuesta_publica", "value": "¡Gracias por tu interés! 🚗 Te escribimos por mensaje privado con toda la información.", "type": "string" },
-      { "id": "respuesta_dm", "name": "respuesta_dm", "value": "¡Hola! Vimos tu comentario 🙌 Contanos qué auto te interesa (marca, modelo o presupuesto) y te ayudamos con financiamiento y disponibilidad.", "type": "string" }
-     ]
-    }
-   }
+  "tags": [],
+  "meta": {
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp"
   },
-  {
-   "id": "5dfc1833-562d-4ae7-bf27-83402a59bdc7",
-   "name": "Responder a ManyChat",
-   "type": "n8n-nodes-base.respondToWebhook",
-   "typeVersion": 1.5,
-   "position": [1680, 300],
-   "parameters": {
-    "respondWith": "firstIncomingItem",
-    "options": {}
-   }
-  },
-  {
-   "id": "63fa0d06-20f4-4da7-8fcf-045403ba8280",
-   "name": "Respuesta - Sin Interés",
-   "type": "n8n-nodes-base.set",
-   "typeVersion": 3.5,
-   "position": [1400, 420],
-   "parameters": {
-    "mode": "manual",
-    "includeOtherFields": false,
-    "assignments": {
-     "assignments": [
-      { "id": "es_interes_real", "name": "es_interes_real", "value": false, "type": "boolean" },
-      { "id": "respuesta_publica", "name": "respuesta_publica", "value": "¡Gracias por comentar! 🙌", "type": "string" },
-      { "id": "respuesta_dm", "name": "respuesta_dm", "value": "", "type": "string" }
-     ]
-    }
-   }
-  }
- ],
- "connections": {
-  "Webhook Comentario ManyChat": { "main": [[{ "node": "Normalizar Entrada", "type": "main", "index": 0 }]] },
-  "Normalizar Entrada": { "main": [[{ "node": "Clasificar Interés Real", "type": "main", "index": 0 }]] },
-  "Clasificar Interés Real": { "main": [[{ "node": "Interés Real?", "type": "main", "index": 0 }]] },
-  "OpenRouter Chat Model": { "ai_languageModel": [[{ "node": "Clasificar Interés Real", "type": "ai_languageModel", "index": 0 }]] },
-  "Interés Real?": {
-   "main": [
-    [{ "node": "Respuesta - Interés Real", "type": "main", "index": 0 }],
-    [{ "node": "Respuesta - Sin Interés", "type": "main", "index": 0 }]
-   ]
-  },
-  "Respuesta - Interés Real": { "main": [[{ "node": "Responder a ManyChat", "type": "main", "index": 0 }]] },
-  "Respuesta - Sin Interés": { "main": [[{ "node": "Responder a ManyChat", "type": "main", "index": 0 }]] }
- },
- "_comment_n8n_id": "07BgeGy4vukFJDlu",
- "_comment_urls": {
-  "produccion": "https://n8n-x5jtc0a7f0lbanybimocyidl.2.24.106.87.sslip.io/webhook/manychat-comentario-clasificar",
-  "test": "https://n8n-x5jtc0a7f0lbanybimocyidl.2.24.106.87.sslip.io/webhook-test/manychat-comentario-clasificar"
- },
- "_comment_contrato": {
-  "entrada_esperada_de_manychat": {
-   "comentario": "texto del comentario (token ManyChat: Última entrada de texto / Last Text Input)",
-   "contact": "objeto Full Contact Data de ManyChat (se usa contact.id y contact.first_name)"
-  },
-  "salida_para_mapeo_de_respuesta_en_manychat": {
-   "es_interes_real": "boolean",
-   "respuesta_publica": "string — texto a responder públicamente en el comentario",
-   "respuesta_dm": "string — texto a enviar por DM si es_interes_real es true; vacío si es false"
-  }
- }
+  "parentFolderId": null,
+  "description": "Webhook que recibe comentarios de IG/FB desde ManyChat, clasifica interés real de compra con LLM y devuelve respuesta pública/DM",
+  "scopes": [
+    "execution:reveal",
+    "workflow:create",
+    "workflow:delete",
+    "workflow:disableRedaction",
+    "workflow:enableRedaction",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:export",
+    "workflow:import",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update"
+  ],
+  "canExecute": true
 }

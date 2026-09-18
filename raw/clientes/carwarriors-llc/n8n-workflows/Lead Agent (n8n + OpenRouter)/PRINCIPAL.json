@@ -3,11 +3,11 @@
   "name": "PRINCIPAL",
   "active": true,
   "isArchived": false,
-  "versionId": "448c5eeb-581d-48e2-bc19-5c8c34d58f6b",
-  "activeVersionId": "448c5eeb-581d-48e2-bc19-5c8c34d58f6b",
+  "versionId": "df4ed57a-9466-498f-8383-c8eddaa8a641",
+  "activeVersionId": "df4ed57a-9466-498f-8383-c8eddaa8a641",
   "triggerCount": 1,
   "createdAt": "2026-08-12T19:48:47.362Z",
-  "updatedAt": "2026-09-18T16:41:07.620Z",
+  "updatedAt": "2026-09-18T17:56:17.944Z",
   "settings": {
     "executionOrder": "v1",
     "binaryMode": "separate",
@@ -423,6 +423,11 @@
         [
           {
             "node": "IF NUEVO LEAD",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "GHL Tag Lead",
             "type": "main",
             "index": 0
           }
@@ -2414,7 +2419,7 @@
     },
     {
       "parameters": {
-        "jsCode": "function prepareForHttp(text) {\n  if (text === null || text === undefined) return \"\";\n  return String(text)\n    .replace(/\\\\/g, \"\\\\\\\\\")\n    .replace(/\"/g, '\\\\\"')\n    .replace(/\\r\\n/g, \"\\\\n\")\n    .replace(/\\n/g, \"\\\\n\")\n    .replace(/\\t/g, \"\\\\t\")\n    .replace(/\\*\\*/g, \"*\")\n    .trim();\n}\n\n// deepseek-v4-flash a veces genera un rambling de razonamiento antes de la respuesta final,\n// repitiendo el JSON de salida varias veces (mismo patron visto en KB-SEARCH 08-31 y\n// LEAD-COLLECTOR 09-01). Un regex greedy 'primer { a ultimo }' mezcla varios bloques y\n// JSON.parse falla. En vez de eso: extraer TODOS los objetos JSON balanceados (respetando\n// strings y llaves anidadas) y quedarnos con el ULTIMO que parsea y tiene la clave 'respuesta'.\nfunction extraerObjetosJson(texto) {\n  const resultados = [];\n  for (let i = 0; i < texto.length; i++) {\n    if (texto[i] !== '{') continue;\n    let profundidad = 0;\n    let enString = false;\n    let escape = false;\n    for (let j = i; j < texto.length; j++) {\n      const c = texto[j];\n      if (escape) { escape = false; continue; }\n      if (c === '\\\\') { escape = true; continue; }\n      if (c === '\"') { enString = !enString; continue; }\n      if (enString) continue;\n      if (c === '{') profundidad++;\n      else if (c === '}') {\n        profundidad--;\n        if (profundidad === 0) {\n          resultados.push(texto.slice(i, j + 1));\n          break;\n        }\n      }\n    }\n  }\n  return resultados;\n}\n\nfunction extraerJson(texto) {\n  const candidatos = extraerObjetosJson(texto);\n  for (let i = candidatos.length - 1; i >= 0; i--) {\n    try {\n      const obj = JSON.parse(candidatos[i]);\n      if (obj && typeof obj === 'object' && Object.prototype.hasOwnProperty.call(obj, 'respuesta')) {\n        return { obj, raw: candidatos[i], index: texto.indexOf(candidatos[i]) };\n      }\n    } catch (e) { /* seguir probando candidatos anteriores */ }\n  }\n  return null;\n}\n\nconst raw = $input.first().json.output || \"\";\nconst cleanRaw = raw.replace(/```(?:json)?\\n?/g, '').trim();\nconst found = extraerJson(cleanRaw);\n\nconst entradaUsuarioActual = $('CONTEXT 1').first().json.entrada_usuario || null;\n\nif (!found) {\n  const recovered = prepareForHttp(cleanRaw);\n  return [{ \n    json: { \n      respuesta: recovered || \"Lo siento, tuve un problema procesando esa respuesta. ¿Puedes repetirlo?\",\n      accion_tipo: \"error\",\n      error: \"no_json\",\n      raw_output: raw,\n      consulta_pendiente_guardar: entradaUsuarioActual,\n      consulta_pendiente_limpiar: false\n    }\n  }];\n}\n\ntry {\n  const parsed = found.obj;\n\n  let respuesta = String(parsed.respuesta || \"\").trim();\n  if (!respuesta) {\n    const prefijo = cleanRaw.slice(0, found.index).trim();\n    respuesta = prefijo || \"Disculpa, tuve un problema generando la respuesta. ¿Puedes repetir tu mensaje?\";\n  }\n  const accionTipo = parsed.accion?.tipo || \"esperar\";\n  const transferir = parsed.escalar?.activar ? 1 : 0;\n  const interesVehiculo = parsed.estado_lead?.interes_vehiculo || null;\n  const metodoPago = parsed.estado_lead?.metodo_pago || null;\n  const datosCompletos = !!(interesVehiculo && metodoPago);\n\n  const respuestaFinal = prepareForHttp(respuesta);\n\n  return [{\n    json: {\n      respuesta: respuestaFinal,\n      accion_tipo: accionTipo,\n      accion_razon: parsed.accion?.razon || \"\",\n      proyecto: interesVehiculo,\n      transferir: transferir,\n      escalar_nivel: parsed.escalar?.nivel || null,\n      escalar_motivo: parsed.escalar?.motivo || null,\n      city: parsed.estado_lead?.city || null,\n      interes_vehiculo: interesVehiculo,\n      metodo_pago: metodoPago,\n      timing_compra: parsed.estado_lead?.timing_compra || null,\n      idioma_preferido: parsed.estado_lead?.idioma_preferido || null,\n      resumen_ai: parsed.estado_lead?.resumen_ai || null,\n      datos_completos: datosCompletos,\n      intencion: parsed.metadatos?.intencion || null,\n      idioma: parsed.metadatos?.idioma || null,\n      confianza: parsed.metadatos?.confianza || null,\n      herramientas_usadas: parsed.depuracion?.herramientas_usadas || [],\n      ruta_decision: parsed.depuracion?.ruta_decision || \"\",\n      advertencias: parsed.depuracion?.advertencias || [],\n      raw: parsed,\n      consulta_pendiente_guardar: parsed.consulta_pendiente?.guardar || null,\n      consulta_pendiente_limpiar: parsed.consulta_pendiente?.limpiar || false,\n      consulta_pendiente_retomar: parsed.consulta_pendiente?.retomar || null,\n    }\n  }];\n\n} catch(e) {\n  return [{ \n    json: { \n      respuesta: \"Lo siento, tuve un problema procesando esa respuesta. ¿Puedes repetirlo?\",\n      accion_tipo: \"error\",\n      error: \"parse_failed\",\n      error_message: e.message,\n      raw_output: raw,\n      consulta_pendiente_guardar: entradaUsuarioActual,\n      consulta_pendiente_limpiar: false\n    }\n  }];\n}"
+        "jsCode": "function prepareForHttp(text) {\n  if (text === null || text === undefined) return \"\";\n  return String(text)\n    .replace(/\\\\/g, \"\\\\\\\\\")\n    .replace(/\"/g, '\\\\\"')\n    .replace(/\\r\\n/g, \"\\\\n\")\n    .replace(/\\n/g, \"\\\\n\")\n    .replace(/\\t/g, \"\\\\t\")\n    .replace(/\\*\\*/g, \"*\")\n    .trim();\n}\n\nfunction extraerObjetosJson(texto) {\n  const resultados = [];\n  for (let i = 0; i < texto.length; i++) {\n    if (texto[i] !== '{') continue;\n    let profundidad = 0;\n    let enString = false;\n    let escape = false;\n    for (let j = i; j < texto.length; j++) {\n      const c = texto[j];\n      if (escape) { escape = false; continue; }\n      if (c === '\\\\') { escape = true; continue; }\n      if (c === '\"') { enString = !enString; continue; }\n      if (enString) continue;\n      if (c === '{') profundidad++;\n      else if (c === '}') {\n        profundidad--;\n        if (profundidad === 0) {\n          resultados.push(texto.slice(i, j + 1));\n          break;\n        }\n      }\n    }\n  }\n  return resultados;\n}\n\nfunction extraerJson(texto) {\n  const candidatos = extraerObjetosJson(texto);\n  for (let i = candidatos.length - 1; i >= 0; i--) {\n    try {\n      const obj = JSON.parse(candidatos[i]);\n      if (obj && typeof obj === 'object' && Object.prototype.hasOwnProperty.call(obj, 'respuesta')) {\n        return { obj, raw: candidatos[i], index: texto.indexOf(candidatos[i]) };\n      }\n    } catch (e) { /* seguir probando candidatos anteriores */ }\n  }\n  return null;\n}\n\nconst raw = $input.first().json.output || \"\";\nconst cleanRaw = raw.replace(/```(?:json)?\\n?/g, '').trim();\nconst found = extraerJson(cleanRaw);\n\nconst entradaUsuarioActual = $('CONTEXT 1').first().json.entrada_usuario || null;\n\nif (!found) {\n  const recovered = prepareForHttp(cleanRaw);\n  return [{ \n    json: { \n      respuesta: recovered || \"Lo siento, tuve un problema procesando esa respuesta. ¿Puedes repetirlo?\",\n      accion_tipo: \"error\",\n      error: \"no_json\",\n      raw_output: raw,\n      consulta_pendiente_guardar: entradaUsuarioActual,\n      consulta_pendiente_limpiar: false\n    }\n  }];\n}\n\ntry {\n  const parsed = found.obj;\n\n  let respuesta = String(parsed.respuesta || \"\").trim();\n  if (!respuesta) {\n    const prefijo = cleanRaw.slice(0, found.index).trim();\n    respuesta = prefijo || \"Disculpa, tuve un problema generando la respuesta. ¿Puedes repetir tu mensaje?\";\n  }\n  const accionTipo = parsed.accion?.tipo || \"esperar\";\n  const transferir = parsed.escalar?.activar ? 1 : 0;\n  const userPrev = $('User Data').first().json || {};\n  const interesVehiculo = (parsed.estado_lead?.interes_vehiculo && parsed.estado_lead.interes_vehiculo !== 'null')\n    ? parsed.estado_lead.interes_vehiculo\n    : (userPrev.interes_vehiculo || null);\n\n  const metodoPago = (parsed.estado_lead?.metodo_pago && parsed.estado_lead.metodo_pago !== 'null')\n    ? parsed.estado_lead.metodo_pago\n    : (userPrev.metodo_pago || null);\n\n  const telefono = (parsed.estado_lead?.telefono && parsed.estado_lead.telefono !== 'null')\n    ? parsed.estado_lead.telefono\n    : (userPrev.telefono || null);\n\n  const timingCompra = (parsed.estado_lead?.timing_compra && parsed.estado_lead.timing_compra !== 'null')\n    ? parsed.estado_lead.timing_compra\n    : (userPrev.timing_compra || null);\n\n  const tieneCita = userPrev.has_reservation === true || parsed.accion?.tipo === 'agendar' || (parsed.depuracion?.herramientas_usadas && parsed.depuracion.herramientas_usadas.includes('rsvp'));\n\n  // Clasificación de Lead BDC:\n  // CALIENTE (Tier 1): Teléfono confirmado Y (auto de interés O timing inmediato O cita)\n  // TIBIO (Tier 2): Interés en auto o financiamiento/down, pero aún sin teléfono\n  // FRIO (Tier 3): Sin auto definido ni teléfono, solo mirando o respuestas vagas\n  let clasificacion = 'FRIO';\n  let tagGhl = 'lead-frio';\n\n  if (tieneCita || (telefono && (interesVehiculo || timingCompra || metodoPago))) {\n    clasificacion = 'CALIENTE';\n    tagGhl = 'lead-caliente';\n  } else if (interesVehiculo || metodoPago || (timingCompra && !timingCompra.toLowerCase().includes('despues'))) {\n    clasificacion = 'TIBIO';\n    tagGhl = 'lead-tibio';\n  } else {\n    clasificacion = 'FRIO';\n    tagGhl = 'lead-frio';\n  }\n\n  const datosCompletos = (clasificacion === 'CALIENTE');\n\n  const respuestaFinal = prepareForHttp(respuesta);\n\n  return [{\n    json: {\n      respuesta: respuestaFinal,\n      accion_tipo: accionTipo,\n      accion_razon: parsed.accion?.razon || \"\",\n      proyecto: interesVehiculo,\n      transferir: transferir,\n      escalar_nivel: parsed.escalar?.nivel || null,\n      escalar_motivo: parsed.escalar?.motivo || null,\n      city: parsed.estado_lead?.city || null,\n      interes_vehiculo: interesVehiculo,\n      metodo_pago: metodoPago,\n      timing_compra: parsed.estado_lead?.timing_compra || null,\n      idioma_preferido: parsed.estado_lead?.idioma_preferido || null,\n      resumen_ai: parsed.estado_lead?.resumen_ai || null,\n      telefono: telefono,\n      clasificacion: clasificacion,\n      tag_ghl: tagGhl,\n      datos_completos: datosCompletos,\n      intencion: parsed.metadatos?.intencion || null,\n      idioma: parsed.metadatos?.idioma || null,\n      confianza: parsed.metadatos?.confianza || null,\n      herramientas_usadas: parsed.depuracion?.herramientas_usadas || [],\n      ruta_decision: parsed.depuracion?.ruta_decision || \"\",\n      advertencias: parsed.depuracion?.advertencias || [],\n      raw: parsed,\n      consulta_pendiente_guardar: parsed.consulta_pendiente?.guardar || null,\n      consulta_pendiente_limpiar: parsed.consulta_pendiente?.limpiar || false,\n      consulta_pendiente_retomar: parsed.consulta_pendiente?.retomar || null,\n    }\n  }];\n\n} catch(e) {\n  return [{ \n    json: { \n      respuesta: \"Lo siento, tuve un problema procesando esa respuesta. ¿Puedes repetirlo?\",\n      accion_tipo: \"error\",\n      error: \"parse_failed\",\n      error_message: e.message,\n      raw_output: raw,\n      consulta_pendiente_guardar: entradaUsuarioActual,\n      consulta_pendiente_limpiar: false\n    }\n  }];\n}"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -2466,80 +2471,98 @@
             {
               "id": "9f9974b3-e66f-4160-ab03-0c53c1d05e2c",
               "name": "_id",
-              "value": "={{ $('User Data').first().json._id.toString().replace(/^\"(.*)\"$/, '$1') }}",
-              "type": "string"
+              "type": "string",
+              "value": "={{ $('User Data').first().json._id.toString().replace(/^\\\"(.*)\\\"$/, '$1') }}"
             },
             {
               "id": "1dfe570b-1cba-466b-a975-63089a0d43e1",
               "name": "last_update",
-              "value": "={{ $now.toISO() }}",
-              "type": "string"
+              "type": "string",
+              "value": "={{ $now.toISO() }}"
             },
             {
               "id": "city-prep",
               "name": "city",
-              "value": "={{ $('Parse response').first().json.city || undefined }}",
-              "type": "string"
+              "type": "string",
+              "value": "={{ $('Parse response').first().json.city || undefined }}"
             },
             {
               "id": "iv-prep",
               "name": "interes_vehiculo",
-              "value": "={{ $('Parse response').first().json.interes_vehiculo || undefined }}",
-              "type": "string"
+              "type": "string",
+              "value": "={{ $('Parse response').first().json.interes_vehiculo || undefined }}"
             },
             {
               "id": "mp-prep",
               "name": "metodo_pago",
-              "value": "={{ $('Parse response').first().json.metodo_pago || undefined }}",
-              "type": "string"
+              "type": "string",
+              "value": "={{ $('Parse response').first().json.metodo_pago || undefined }}"
             },
             {
               "id": "tc-prep",
               "name": "timing_compra",
-              "value": "={{ $('Parse response').first().json.timing_compra || undefined }}",
-              "type": "string"
+              "type": "string",
+              "value": "={{ $('Parse response').first().json.timing_compra || undefined }}"
             },
             {
               "id": "ip-prep",
               "name": "idioma_preferido",
-              "value": "={{ $('Parse response').first().json.idioma_preferido || undefined }}",
-              "type": "string"
+              "type": "string",
+              "value": "={{ $('Parse response').first().json.idioma_preferido || undefined }}"
             },
             {
               "id": "ra-prep",
               "name": "resumen_ai",
-              "value": "={{ $('Parse response').first().json.resumen_ai || undefined }}",
-              "type": "string"
+              "type": "string",
+              "value": "={{ $('Parse response').first().json.resumen_ai || undefined }}"
             },
             {
               "id": "0be37564-e330-4d62-8e4a-a99671f75ebf",
               "name": "datos_completos",
-              "value": "={{ $('Parse response').first().json.datos_completos ? true : undefined }}",
-              "type": "boolean"
+              "type": "boolean",
+              "value": "={{ $('Parse response').first().json.datos_completos ? true : undefined }}"
             },
             {
               "id": "73b2ce9f-c7db-4bce-9975-21aef53dd1b3",
               "name": "datos_completos_timestamp",
-              "value": "={{ $('Parse response').first().json.datos_completos ? $now.toISO() : undefined }}",
-              "type": "string"
+              "type": "string",
+              "value": "={{ $('Parse response').first().json.datos_completos ? $now.toISO() : undefined }}"
             },
             {
               "id": "5ddbbdb6-dd3b-4f7a-b5d3-554129d42155",
               "name": "consulta_pendiente",
-              "value": "={{ \n  $('Parse response').first().json.consulta_pendiente_limpiar ? \"\" : \n  ($('Parse response').first().json.consulta_pendiente_guardar || $('User Data').first().json.consulta_pendiente || undefined) \n}}",
-              "type": "string"
+              "type": "string",
+              "value": "={{ \n  $('Parse response').first().json.consulta_pendiente_limpiar ? \"\" : \n  ($('Parse response').first().json.consulta_pendiente_guardar || $('User Data').first().json.consulta_pendiente || undefined) \n}}"
             },
             {
               "id": "9e9581f8-4fd4-4faa-9093-946783b656e9",
               "name": "proyecto",
-              "value": "={{\n    $('Parse response').first().json.proyecto ||\n    $('User Data').first().json.proyecto ||\n    undefined\n  }}",
-              "type": "string"
+              "type": "string",
+              "value": "={{\n    $('Parse response').first().json.proyecto ||\n    $('User Data').first().json.proyecto ||\n    undefined\n  }}"
             },
             {
               "id": "2e50d498-8d70-4619-a619-d3d242e79de9",
               "name": "conversation_analysis",
-              "value": false,
-              "type": "boolean"
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "id": "clasif-prep",
+              "name": "clasificacion",
+              "type": "string",
+              "value": "={{ $('Parse response').first().json.clasificacion || undefined }}"
+            },
+            {
+              "id": "tag-prep",
+              "name": "tag_ghl",
+              "type": "string",
+              "value": "={{ $('Parse response').first().json.tag_ghl || undefined }}"
+            },
+            {
+              "id": "tel-prep",
+              "name": "telefono",
+              "type": "string",
+              "value": "={{ $('Parse response').first().json.telefono || undefined }}"
             }
           ]
         },
@@ -2561,8 +2584,8 @@
             {
               "id": "550ae3c0-99c3-43fa-8627-e08c78c455eb",
               "name": "value",
-              "value": "={{ \n  ($json.city !== null && $json.city !== '') ||\n  ($json.interes_vehiculo !== null && $json.interes_vehiculo !== '') ||\n  ($json.metodo_pago !== null && $json.metodo_pago !== '') ||\n  ($json.timing_compra !== null && $json.timing_compra !== '') ||\n  ($json.idioma_preferido !== null && $json.idioma_preferido !== '') ||\n  ($json.resumen_ai !== null && $json.resumen_ai !== '') ||\n  $json.consulta_pendiente_guardar !== null ||\n  $json.consulta_pendiente_limpiar === true\n}}",
-              "type": "boolean"
+              "type": "boolean",
+              "value": "={{ \n  ($json.city !== null && $json.city !== '') ||\n  ($json.interes_vehiculo !== null && $json.interes_vehiculo !== '') ||\n  ($json.metodo_pago !== null && $json.metodo_pago !== '') ||\n  ($json.timing_compra !== null && $json.timing_compra !== '') ||\n  ($json.idioma_preferido !== null && $json.idioma_preferido !== '') ||\n  ($json.resumen_ai !== null && $json.resumen_ai !== '') ||\n  ($json.telefono !== null && $json.telefono !== '') ||\n  ($json.clasificacion !== null && $json.clasificacion !== '') ||\n  $json.consulta_pendiente_guardar !== null ||\n  $json.consulta_pendiente_limpiar === true\n}}"
             }
           ]
         },
@@ -4466,6 +4489,42 @@
           "name": "MongoDB Carwarriors"
         }
       }
+    },
+    {
+      "id": "a02096d4-80ff-47cf-b523-35f6e53c32c2",
+      "name": "GHL Tag Lead",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        9664,
+        -280
+      ],
+      "parameters": {
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + $('Get Account Credentials').first().json.ghlToken }}"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "jsonBody": "={{ { tags: [$('Parse response').first().json.tag_ghl] } }}",
+        "method": "POST",
+        "options": {},
+        "sendBody": true,
+        "sendHeaders": true,
+        "specifyBody": "json",
+        "url": "={{ 'https://services.leadconnectorhq.com/contacts/' + $('PARSE BODY').first().json.current_body.contactId + '/tags' }}"
+      },
+      "onError": "continueRegularOutput"
     }
   ],
   "nodeGroups": [],
@@ -5784,7 +5843,7 @@
       },
       {
         "parameters": {
-          "jsCode": "function prepareForHttp(text) {\n  if (text === null || text === undefined) return \"\";\n  return String(text)\n    .replace(/\\\\/g, \"\\\\\\\\\")\n    .replace(/\"/g, '\\\\\"')\n    .replace(/\\r\\n/g, \"\\\\n\")\n    .replace(/\\n/g, \"\\\\n\")\n    .replace(/\\t/g, \"\\\\t\")\n    .replace(/\\*\\*/g, \"*\")\n    .trim();\n}\n\n// deepseek-v4-flash a veces genera un rambling de razonamiento antes de la respuesta final,\n// repitiendo el JSON de salida varias veces (mismo patron visto en KB-SEARCH 08-31 y\n// LEAD-COLLECTOR 09-01). Un regex greedy 'primer { a ultimo }' mezcla varios bloques y\n// JSON.parse falla. En vez de eso: extraer TODOS los objetos JSON balanceados (respetando\n// strings y llaves anidadas) y quedarnos con el ULTIMO que parsea y tiene la clave 'respuesta'.\nfunction extraerObjetosJson(texto) {\n  const resultados = [];\n  for (let i = 0; i < texto.length; i++) {\n    if (texto[i] !== '{') continue;\n    let profundidad = 0;\n    let enString = false;\n    let escape = false;\n    for (let j = i; j < texto.length; j++) {\n      const c = texto[j];\n      if (escape) { escape = false; continue; }\n      if (c === '\\\\') { escape = true; continue; }\n      if (c === '\"') { enString = !enString; continue; }\n      if (enString) continue;\n      if (c === '{') profundidad++;\n      else if (c === '}') {\n        profundidad--;\n        if (profundidad === 0) {\n          resultados.push(texto.slice(i, j + 1));\n          break;\n        }\n      }\n    }\n  }\n  return resultados;\n}\n\nfunction extraerJson(texto) {\n  const candidatos = extraerObjetosJson(texto);\n  for (let i = candidatos.length - 1; i >= 0; i--) {\n    try {\n      const obj = JSON.parse(candidatos[i]);\n      if (obj && typeof obj === 'object' && Object.prototype.hasOwnProperty.call(obj, 'respuesta')) {\n        return { obj, raw: candidatos[i], index: texto.indexOf(candidatos[i]) };\n      }\n    } catch (e) { /* seguir probando candidatos anteriores */ }\n  }\n  return null;\n}\n\nconst raw = $input.first().json.output || \"\";\nconst cleanRaw = raw.replace(/```(?:json)?\\n?/g, '').trim();\nconst found = extraerJson(cleanRaw);\n\nconst entradaUsuarioActual = $('CONTEXT 1').first().json.entrada_usuario || null;\n\nif (!found) {\n  const recovered = prepareForHttp(cleanRaw);\n  return [{ \n    json: { \n      respuesta: recovered || \"Lo siento, tuve un problema procesando esa respuesta. ¿Puedes repetirlo?\",\n      accion_tipo: \"error\",\n      error: \"no_json\",\n      raw_output: raw,\n      consulta_pendiente_guardar: entradaUsuarioActual,\n      consulta_pendiente_limpiar: false\n    }\n  }];\n}\n\ntry {\n  const parsed = found.obj;\n\n  let respuesta = String(parsed.respuesta || \"\").trim();\n  if (!respuesta) {\n    const prefijo = cleanRaw.slice(0, found.index).trim();\n    respuesta = prefijo || \"Disculpa, tuve un problema generando la respuesta. ¿Puedes repetir tu mensaje?\";\n  }\n  const accionTipo = parsed.accion?.tipo || \"esperar\";\n  const transferir = parsed.escalar?.activar ? 1 : 0;\n  const interesVehiculo = parsed.estado_lead?.interes_vehiculo || null;\n  const metodoPago = parsed.estado_lead?.metodo_pago || null;\n  const datosCompletos = !!(interesVehiculo && metodoPago);\n\n  const respuestaFinal = prepareForHttp(respuesta);\n\n  return [{\n    json: {\n      respuesta: respuestaFinal,\n      accion_tipo: accionTipo,\n      accion_razon: parsed.accion?.razon || \"\",\n      proyecto: interesVehiculo,\n      transferir: transferir,\n      escalar_nivel: parsed.escalar?.nivel || null,\n      escalar_motivo: parsed.escalar?.motivo || null,\n      city: parsed.estado_lead?.city || null,\n      interes_vehiculo: interesVehiculo,\n      metodo_pago: metodoPago,\n      timing_compra: parsed.estado_lead?.timing_compra || null,\n      idioma_preferido: parsed.estado_lead?.idioma_preferido || null,\n      resumen_ai: parsed.estado_lead?.resumen_ai || null,\n      datos_completos: datosCompletos,\n      intencion: parsed.metadatos?.intencion || null,\n      idioma: parsed.metadatos?.idioma || null,\n      confianza: parsed.metadatos?.confianza || null,\n      herramientas_usadas: parsed.depuracion?.herramientas_usadas || [],\n      ruta_decision: parsed.depuracion?.ruta_decision || \"\",\n      advertencias: parsed.depuracion?.advertencias || [],\n      raw: parsed,\n      consulta_pendiente_guardar: parsed.consulta_pendiente?.guardar || null,\n      consulta_pendiente_limpiar: parsed.consulta_pendiente?.limpiar || false,\n      consulta_pendiente_retomar: parsed.consulta_pendiente?.retomar || null,\n    }\n  }];\n\n} catch(e) {\n  return [{ \n    json: { \n      respuesta: \"Lo siento, tuve un problema procesando esa respuesta. ¿Puedes repetirlo?\",\n      accion_tipo: \"error\",\n      error: \"parse_failed\",\n      error_message: e.message,\n      raw_output: raw,\n      consulta_pendiente_guardar: entradaUsuarioActual,\n      consulta_pendiente_limpiar: false\n    }\n  }];\n}"
+          "jsCode": "function prepareForHttp(text) {\n  if (text === null || text === undefined) return \"\";\n  return String(text)\n    .replace(/\\\\/g, \"\\\\\\\\\")\n    .replace(/\"/g, '\\\\\"')\n    .replace(/\\r\\n/g, \"\\\\n\")\n    .replace(/\\n/g, \"\\\\n\")\n    .replace(/\\t/g, \"\\\\t\")\n    .replace(/\\*\\*/g, \"*\")\n    .trim();\n}\n\nfunction extraerObjetosJson(texto) {\n  const resultados = [];\n  for (let i = 0; i < texto.length; i++) {\n    if (texto[i] !== '{') continue;\n    let profundidad = 0;\n    let enString = false;\n    let escape = false;\n    for (let j = i; j < texto.length; j++) {\n      const c = texto[j];\n      if (escape) { escape = false; continue; }\n      if (c === '\\\\') { escape = true; continue; }\n      if (c === '\"') { enString = !enString; continue; }\n      if (enString) continue;\n      if (c === '{') profundidad++;\n      else if (c === '}') {\n        profundidad--;\n        if (profundidad === 0) {\n          resultados.push(texto.slice(i, j + 1));\n          break;\n        }\n      }\n    }\n  }\n  return resultados;\n}\n\nfunction extraerJson(texto) {\n  const candidatos = extraerObjetosJson(texto);\n  for (let i = candidatos.length - 1; i >= 0; i--) {\n    try {\n      const obj = JSON.parse(candidatos[i]);\n      if (obj && typeof obj === 'object' && Object.prototype.hasOwnProperty.call(obj, 'respuesta')) {\n        return { obj, raw: candidatos[i], index: texto.indexOf(candidatos[i]) };\n      }\n    } catch (e) { /* seguir probando candidatos anteriores */ }\n  }\n  return null;\n}\n\nconst raw = $input.first().json.output || \"\";\nconst cleanRaw = raw.replace(/```(?:json)?\\n?/g, '').trim();\nconst found = extraerJson(cleanRaw);\n\nconst entradaUsuarioActual = $('CONTEXT 1').first().json.entrada_usuario || null;\n\nif (!found) {\n  const recovered = prepareForHttp(cleanRaw);\n  return [{ \n    json: { \n      respuesta: recovered || \"Lo siento, tuve un problema procesando esa respuesta. ¿Puedes repetirlo?\",\n      accion_tipo: \"error\",\n      error: \"no_json\",\n      raw_output: raw,\n      consulta_pendiente_guardar: entradaUsuarioActual,\n      consulta_pendiente_limpiar: false\n    }\n  }];\n}\n\ntry {\n  const parsed = found.obj;\n\n  let respuesta = String(parsed.respuesta || \"\").trim();\n  if (!respuesta) {\n    const prefijo = cleanRaw.slice(0, found.index).trim();\n    respuesta = prefijo || \"Disculpa, tuve un problema generando la respuesta. ¿Puedes repetir tu mensaje?\";\n  }\n  const accionTipo = parsed.accion?.tipo || \"esperar\";\n  const transferir = parsed.escalar?.activar ? 1 : 0;\n  const userPrev = $('User Data').first().json || {};\n  const interesVehiculo = (parsed.estado_lead?.interes_vehiculo && parsed.estado_lead.interes_vehiculo !== 'null')\n    ? parsed.estado_lead.interes_vehiculo\n    : (userPrev.interes_vehiculo || null);\n\n  const metodoPago = (parsed.estado_lead?.metodo_pago && parsed.estado_lead.metodo_pago !== 'null')\n    ? parsed.estado_lead.metodo_pago\n    : (userPrev.metodo_pago || null);\n\n  const telefono = (parsed.estado_lead?.telefono && parsed.estado_lead.telefono !== 'null')\n    ? parsed.estado_lead.telefono\n    : (userPrev.telefono || null);\n\n  const timingCompra = (parsed.estado_lead?.timing_compra && parsed.estado_lead.timing_compra !== 'null')\n    ? parsed.estado_lead.timing_compra\n    : (userPrev.timing_compra || null);\n\n  const tieneCita = userPrev.has_reservation === true || parsed.accion?.tipo === 'agendar' || (parsed.depuracion?.herramientas_usadas && parsed.depuracion.herramientas_usadas.includes('rsvp'));\n\n  // Clasificación de Lead BDC:\n  // CALIENTE (Tier 1): Teléfono confirmado Y (auto de interés O timing inmediato O cita)\n  // TIBIO (Tier 2): Interés en auto o financiamiento/down, pero aún sin teléfono\n  // FRIO (Tier 3): Sin auto definido ni teléfono, solo mirando o respuestas vagas\n  let clasificacion = 'FRIO';\n  let tagGhl = 'lead-frio';\n\n  if (tieneCita || (telefono && (interesVehiculo || timingCompra || metodoPago))) {\n    clasificacion = 'CALIENTE';\n    tagGhl = 'lead-caliente';\n  } else if (interesVehiculo || metodoPago || (timingCompra && !timingCompra.toLowerCase().includes('despues'))) {\n    clasificacion = 'TIBIO';\n    tagGhl = 'lead-tibio';\n  } else {\n    clasificacion = 'FRIO';\n    tagGhl = 'lead-frio';\n  }\n\n  const datosCompletos = (clasificacion === 'CALIENTE');\n\n  const respuestaFinal = prepareForHttp(respuesta);\n\n  return [{\n    json: {\n      respuesta: respuestaFinal,\n      accion_tipo: accionTipo,\n      accion_razon: parsed.accion?.razon || \"\",\n      proyecto: interesVehiculo,\n      transferir: transferir,\n      escalar_nivel: parsed.escalar?.nivel || null,\n      escalar_motivo: parsed.escalar?.motivo || null,\n      city: parsed.estado_lead?.city || null,\n      interes_vehiculo: interesVehiculo,\n      metodo_pago: metodoPago,\n      timing_compra: parsed.estado_lead?.timing_compra || null,\n      idioma_preferido: parsed.estado_lead?.idioma_preferido || null,\n      resumen_ai: parsed.estado_lead?.resumen_ai || null,\n      telefono: telefono,\n      clasificacion: clasificacion,\n      tag_ghl: tagGhl,\n      datos_completos: datosCompletos,\n      intencion: parsed.metadatos?.intencion || null,\n      idioma: parsed.metadatos?.idioma || null,\n      confianza: parsed.metadatos?.confianza || null,\n      herramientas_usadas: parsed.depuracion?.herramientas_usadas || [],\n      ruta_decision: parsed.depuracion?.ruta_decision || \"\",\n      advertencias: parsed.depuracion?.advertencias || [],\n      raw: parsed,\n      consulta_pendiente_guardar: parsed.consulta_pendiente?.guardar || null,\n      consulta_pendiente_limpiar: parsed.consulta_pendiente?.limpiar || false,\n      consulta_pendiente_retomar: parsed.consulta_pendiente?.retomar || null,\n    }\n  }];\n\n} catch(e) {\n  return [{ \n    json: { \n      respuesta: \"Lo siento, tuve un problema procesando esa respuesta. ¿Puedes repetirlo?\",\n      accion_tipo: \"error\",\n      error: \"parse_failed\",\n      error_message: e.message,\n      raw_output: raw,\n      consulta_pendiente_guardar: entradaUsuarioActual,\n      consulta_pendiente_limpiar: false\n    }\n  }];\n}"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -5836,80 +5895,98 @@
               {
                 "id": "9f9974b3-e66f-4160-ab03-0c53c1d05e2c",
                 "name": "_id",
-                "value": "={{ $('User Data').first().json._id.toString().replace(/^\"(.*)\"$/, '$1') }}",
-                "type": "string"
+                "type": "string",
+                "value": "={{ $('User Data').first().json._id.toString().replace(/^\\\"(.*)\\\"$/, '$1') }}"
               },
               {
                 "id": "1dfe570b-1cba-466b-a975-63089a0d43e1",
                 "name": "last_update",
-                "value": "={{ $now.toISO() }}",
-                "type": "string"
+                "type": "string",
+                "value": "={{ $now.toISO() }}"
               },
               {
                 "id": "city-prep",
                 "name": "city",
-                "value": "={{ $('Parse response').first().json.city || undefined }}",
-                "type": "string"
+                "type": "string",
+                "value": "={{ $('Parse response').first().json.city || undefined }}"
               },
               {
                 "id": "iv-prep",
                 "name": "interes_vehiculo",
-                "value": "={{ $('Parse response').first().json.interes_vehiculo || undefined }}",
-                "type": "string"
+                "type": "string",
+                "value": "={{ $('Parse response').first().json.interes_vehiculo || undefined }}"
               },
               {
                 "id": "mp-prep",
                 "name": "metodo_pago",
-                "value": "={{ $('Parse response').first().json.metodo_pago || undefined }}",
-                "type": "string"
+                "type": "string",
+                "value": "={{ $('Parse response').first().json.metodo_pago || undefined }}"
               },
               {
                 "id": "tc-prep",
                 "name": "timing_compra",
-                "value": "={{ $('Parse response').first().json.timing_compra || undefined }}",
-                "type": "string"
+                "type": "string",
+                "value": "={{ $('Parse response').first().json.timing_compra || undefined }}"
               },
               {
                 "id": "ip-prep",
                 "name": "idioma_preferido",
-                "value": "={{ $('Parse response').first().json.idioma_preferido || undefined }}",
-                "type": "string"
+                "type": "string",
+                "value": "={{ $('Parse response').first().json.idioma_preferido || undefined }}"
               },
               {
                 "id": "ra-prep",
                 "name": "resumen_ai",
-                "value": "={{ $('Parse response').first().json.resumen_ai || undefined }}",
-                "type": "string"
+                "type": "string",
+                "value": "={{ $('Parse response').first().json.resumen_ai || undefined }}"
               },
               {
                 "id": "0be37564-e330-4d62-8e4a-a99671f75ebf",
                 "name": "datos_completos",
-                "value": "={{ $('Parse response').first().json.datos_completos ? true : undefined }}",
-                "type": "boolean"
+                "type": "boolean",
+                "value": "={{ $('Parse response').first().json.datos_completos ? true : undefined }}"
               },
               {
                 "id": "73b2ce9f-c7db-4bce-9975-21aef53dd1b3",
                 "name": "datos_completos_timestamp",
-                "value": "={{ $('Parse response').first().json.datos_completos ? $now.toISO() : undefined }}",
-                "type": "string"
+                "type": "string",
+                "value": "={{ $('Parse response').first().json.datos_completos ? $now.toISO() : undefined }}"
               },
               {
                 "id": "5ddbbdb6-dd3b-4f7a-b5d3-554129d42155",
                 "name": "consulta_pendiente",
-                "value": "={{ \n  $('Parse response').first().json.consulta_pendiente_limpiar ? \"\" : \n  ($('Parse response').first().json.consulta_pendiente_guardar || $('User Data').first().json.consulta_pendiente || undefined) \n}}",
-                "type": "string"
+                "type": "string",
+                "value": "={{ \n  $('Parse response').first().json.consulta_pendiente_limpiar ? \"\" : \n  ($('Parse response').first().json.consulta_pendiente_guardar || $('User Data').first().json.consulta_pendiente || undefined) \n}}"
               },
               {
                 "id": "9e9581f8-4fd4-4faa-9093-946783b656e9",
                 "name": "proyecto",
-                "value": "={{\n    $('Parse response').first().json.proyecto ||\n    $('User Data').first().json.proyecto ||\n    undefined\n  }}",
-                "type": "string"
+                "type": "string",
+                "value": "={{\n    $('Parse response').first().json.proyecto ||\n    $('User Data').first().json.proyecto ||\n    undefined\n  }}"
               },
               {
                 "id": "2e50d498-8d70-4619-a619-d3d242e79de9",
                 "name": "conversation_analysis",
-                "value": false,
-                "type": "boolean"
+                "type": "boolean",
+                "value": false
+              },
+              {
+                "id": "clasif-prep",
+                "name": "clasificacion",
+                "type": "string",
+                "value": "={{ $('Parse response').first().json.clasificacion || undefined }}"
+              },
+              {
+                "id": "tag-prep",
+                "name": "tag_ghl",
+                "type": "string",
+                "value": "={{ $('Parse response').first().json.tag_ghl || undefined }}"
+              },
+              {
+                "id": "tel-prep",
+                "name": "telefono",
+                "type": "string",
+                "value": "={{ $('Parse response').first().json.telefono || undefined }}"
               }
             ]
           },
@@ -5931,8 +6008,8 @@
               {
                 "id": "550ae3c0-99c3-43fa-8627-e08c78c455eb",
                 "name": "value",
-                "value": "={{ \n  ($json.city !== null && $json.city !== '') ||\n  ($json.interes_vehiculo !== null && $json.interes_vehiculo !== '') ||\n  ($json.metodo_pago !== null && $json.metodo_pago !== '') ||\n  ($json.timing_compra !== null && $json.timing_compra !== '') ||\n  ($json.idioma_preferido !== null && $json.idioma_preferido !== '') ||\n  ($json.resumen_ai !== null && $json.resumen_ai !== '') ||\n  $json.consulta_pendiente_guardar !== null ||\n  $json.consulta_pendiente_limpiar === true\n}}",
-                "type": "boolean"
+                "type": "boolean",
+                "value": "={{ \n  ($json.city !== null && $json.city !== '') ||\n  ($json.interes_vehiculo !== null && $json.interes_vehiculo !== '') ||\n  ($json.metodo_pago !== null && $json.metodo_pago !== '') ||\n  ($json.timing_compra !== null && $json.timing_compra !== '') ||\n  ($json.idioma_preferido !== null && $json.idioma_preferido !== '') ||\n  ($json.resumen_ai !== null && $json.resumen_ai !== '') ||\n  ($json.telefono !== null && $json.telefono !== '') ||\n  ($json.clasificacion !== null && $json.clasificacion !== '') ||\n  $json.consulta_pendiente_guardar !== null ||\n  $json.consulta_pendiente_limpiar === true\n}}"
               }
             ]
           },
@@ -7836,6 +7913,42 @@
             "name": "MongoDB Carwarriors"
           }
         }
+      },
+      {
+        "id": "a02096d4-80ff-47cf-b523-35f6e53c32c2",
+        "name": "GHL Tag Lead",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          9664,
+          -280
+        ],
+        "parameters": {
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Authorization",
+                "value": "={{ 'Bearer ' + $('Get Account Credentials').first().json.ghlToken }}"
+              },
+              {
+                "name": "Version",
+                "value": "2021-07-28"
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "jsonBody": "={{ { tags: [$('Parse response').first().json.tag_ghl] } }}",
+          "method": "POST",
+          "options": {},
+          "sendBody": true,
+          "sendHeaders": true,
+          "specifyBody": "json",
+          "url": "={{ 'https://services.leadconnectorhq.com/contacts/' + $('PARSE BODY').first().json.current_body.contactId + '/tags' }}"
+        },
+        "onError": "continueRegularOutput"
       }
     ],
     "connections": {
@@ -8245,6 +8358,11 @@
           [
             {
               "node": "IF NUEVO LEAD",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "GHL Tag Lead",
               "type": "main",
               "index": 0
             }
