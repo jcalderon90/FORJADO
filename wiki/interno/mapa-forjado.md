@@ -1,7 +1,7 @@
 ---
 tags: [forjado, indice, mapa, arquitectura]
 tipo: indice
-actualizado: 2026-09-15
+actualizado: 2026-09-18
 ---
 
 # Mapa de FORJADO — más allá de esta bóveda
@@ -21,7 +21,7 @@ FORJADO/
 
 | App | Carpeta | Cliente/dueño | Stack | Estado |
 |---|---|---|---|---|
-| [call-a-car-web](../../../aplicaciones/call-a-car-web/README.md) |  | CallaCar Transportation Pty Ltd — ver [[../clientes/callacar]] | Por definir (HTML/CSS/JS base analizado) | 🟡 En análisis de alcance y definición de stack |
+| [call-a-car-web](../../../aplicaciones/call-a-car-web/README.md) | `call-a-car-web` | CallaCar Transportation Pty Ltd — ver [[../clientes/callacar]] | Astro 5 + TypeScript + Vanilla CSS accesible (WCAG AA) + Sharp + SEO Schema.org | ✅ Build Listo — Portal web corporativo, legal y de soporte completo (5 rutas compiladas). Pendiente backend de contacto y CI/CD en callacar.au |
 | [dealer-center-scraper](../../../aplicaciones/carwarriors/dealer-center-scraper/STATUS.md) | `carwarriors/dealer-center-scraper` | Carwarriors LLC — ver [[../clientes/carwarriors-llc]] | Node.js + Playwright (scraper) · Express (API) · React + Vite + Tailwind (dashboard) · MongoDB Atlas | ✅ Completado y dinámico (STATUS.md, 2026-06-29). Pendiente: sync GHL ↔ DealerCenter (ver su propio STATUS.md) |
 | [automated-legal-contracts](../../../aplicaciones/varela-law/automated-legal-contracts/PROJECT_STATUS.md) | `varela-law/automated-legal-contracts` | Varela Law LLC — ver [[../clientes/varela-law]] | React 19 + TypeScript + Vite 8, diseño glassmorphism dorado | ✅ Producción — generador de 4 tipos de contrato legal (NDA, Services, Advisory, Employment Offer), PDFs reales en `/contracts` |
 | [lead-discovery](../../../aplicaciones/forjado/lead-discovery/README.md) | `forjado/lead-discovery` | Producto propio FORJADO | Next.js 16 (App Router) + TypeScript + Tailwind 4 + Framer Motion + Zustand | Funcional — "AI Discovery Studio": funnel de 12 pasos con lead scoring (3 tiers) → webhook n8n. Pendiente: URL real de Calendly por tier |

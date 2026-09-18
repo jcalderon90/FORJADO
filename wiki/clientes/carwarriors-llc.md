@@ -6,7 +6,7 @@ servicio: automatizacion
 estado_comercial: migracion-arquitectura-en-curso
 contacto: Jorge González (dueño) / Bianca Cangialosi (marketing)
 creado: 2026-06-18
-actualizado: 2026-09-15
+actualizado: 2026-09-18
 fuente_raw: raw/clientes/carwarriors-llc/
 ---
 
@@ -49,8 +49,12 @@ fuente_raw: raw/clientes/carwarriors-llc/
 
 Documentos de referencia relacionados: [[carwarriors-llc-infraestructura]] · [[carwarriors-llc-inventario-ghl]] · [[carwarriors-llc-sftp-dealercenter]] · [[carwarriors-llc-como-funciona-bot-sync]] · [[carwarriors-llc-como-habla-el-bot]] · [[carwarriors-llc-comportamiento-bot]] · [[carwarriors-llc-comportamiento-bot-rances]] · [[carwarriors-llc-guardrail-anti-spam]] · [[carwarriors-llc-propuesta-formal]] · [[carwarriors-llc-justificacion-infraestructura]] · [[carwarriors-llc-agente-ia-24-7]] (legacy, bots viejos de GHL) · [[carwarriors-llc-agente-ia-rances-car]] (legacy).
 
-## Pendientes abiertos (al 2026-09-14)
+## Pendientes abiertos (al 2026-09-18)
 
+- [x] **🟢 Lead Scoring (Tier 1/2/3) + tags GHL + alertas prioritarias Slack — PUBLICADO en producción (2026-09-18).** Evaluación automática de teléfono, auto de interés y citas en `PRINCIPAL` (CW, `df4ed57a`) y `PRINCIPAL - Rances Car` (`3f6578d4`). Asignación de tags `lead-caliente`, `lead-tibio`, `lead-frio` vía API GHL, persistencia en Mongo y alerta prioritaria a `#notificaciones`. Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-18-clasificacion-leads-y-respuestas-comentarios-ig]].
+- [x] **🟢 Respuestas automáticas a comentarios de Instagram con Playbook BDC — PUBLICADO en producción (2026-09-18).** Workflow `COMENTARIOS-MANYCHAT` (`67669030`). Extracción del vehículo con IA, confirmación pública y DM personalizado ($0 down, aprobación pasaporte/ITIN y Two-Option Close para WhatsApp o visita presencial). Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-18-clasificacion-leads-y-respuestas-comentarios-ig]].
+- [x] **🟢 Cadencia Saliente 24h Multi-Dealer (Intentos 1, 2 y 3) — PUBLICADO en producción (2026-09-18).** Workflow `SEGUIMIENTO SALIENTE - Cadencia 24h` (`ac921e29`) activo cada 15 min. Intento 1 (1h - Cita hoy), Intento 2 (5h - $0 down/mañana), Intento 3 (20h - Push-away close). CW y Rances Car unificados. Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-18-cadencia-seguimiento-saliente-multi-dealer-24h]].
+- [x] **🟢 Saneamiento de Lead Sources DealerCenter (ADF XML) — PUBLICADO en producción (2026-09-18).** Normalizados mapeos `TESLA CW`, `TRADE IN RANCES`, `CW TRADE IN` en `Subir a DealerCenter` (`89dcf751`).
 - [x] **🟢 Automatización de Nuevos Seguidores en ManyChat actualizada con Smart Delay de 2h + seguimiento de clic de inventario — APLICADO en vivo (2026-09-15).** Procesados audios de Bianca, auditada la automatización `Saludá a tus nuevos seguidores` en ManyChat (380 ejecuciones, 83% CTR) y activada/publicada en vivo la rama condicional de seguimiento a las 2 horas si el usuario no hace clic en el enlace del inventario (con copia de $0 Down y Teslas en oferta). Respuestas del usuario o consultas de vehículos son derivadas automáticamente al bot de IA en n8n (`LEAD - COLLECTOR` + `PRINCIPAL`) para calificar y agendar citas al dealer. Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-15-actualizacion-manychat-nuevos-seguidores-seguimiento|raw/2026-09-15]].
 - [x] **🟢 Lead Assignment en DealerCenter — APLICADO en vivo (2026-09-15).** Configurada **Rule 32** para `OfferUp` $\rightarrow$ **Carlos Martínez** (`Carlos Martinez - Carlos4125`) y actualizadas las 16 reglas (**Rule 16 a Rule 31**) de `Capital One` $\rightarrow$ **Dayron Barrizonte** (`Dayron Barrizonte - Barrizonte1996`). Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-15-lead-assignment-offerup-capitalone-aplicados|raw/2026-09-15]].
 - [x] **🟢 Chequeo de salud general 2026-09-11: todo sano, cero errores desde el fix del 09-10.** Revisión completa de ejecuciones (n8n) y `#notificaciones` (Slack): última ejecución con error real fue la del 09-10 19:35 (ya corregida ese día); 196 ejecuciones posteriores, todas `success`. Barrido de los 18 workflows activos, todos sanos salvo 2 ausencias de actividad a monitorear (no errores): `RSVP` (CW) sin citas desde 09-08, y `COMENTARIOS-MANYCHAT` sin ejecuciones desde 09-05 (posible repetición del flujo "Respuesta Comentarios" detenido del lado de ManyChat, ver pendiente nuevo abajo). Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-11-chequeo-salud-alerta-no-json-removida-responseformat-json|raw/2026-09-11]].
