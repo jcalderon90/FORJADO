@@ -1515,7 +1515,7 @@
             {
               "id": "d90a4768-5969-4cb1-b612-40627b026990",
               "name": "_id",
-              "value": "={{ $('Find User').first().json._id.toJsonString().replace(/^\"(.*)\"$/, '$1') }}",
+              "value": "={{ $('Find User').first().json._id.toString().replace(/^\"(.*)\"$/, '$1') }}",
               "type": "string"
             },
             {
@@ -4899,7 +4899,7 @@
               {
                 "id": "d90a4768-5969-4cb1-b612-40627b026990",
                 "name": "_id",
-                "value": "={{ $('Find User').first().json._id.toJsonString().replace(/^\"(.*)\"$/, '$1') }}",
+                "value": "={{ $('Find User').first().json._id.toString().replace(/^\"(.*)\"$/, '$1') }}",
                 "type": "string"
               },
               {
