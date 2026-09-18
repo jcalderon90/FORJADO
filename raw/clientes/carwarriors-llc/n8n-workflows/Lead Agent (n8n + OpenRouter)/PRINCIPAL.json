@@ -1549,12 +1549,6 @@
         "assignments": {
           "assignments": [
             {
-              "id": "d90a4768-5969-4cb1-b612-40627b026990",
-              "name": "_id",
-              "type": "string",
-              "value": "={{ $('Find User').first().json._id.toString().replace(/^\\\"(.*)\\\"$/, '$1') }}"
-            },
-            {
               "id": "contactid-update",
               "name": "contactId",
               "type": "string",
