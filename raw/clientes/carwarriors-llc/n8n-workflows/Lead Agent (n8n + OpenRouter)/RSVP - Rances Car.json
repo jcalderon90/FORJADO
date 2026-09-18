@@ -1,0 +1,3256 @@
+{
+  "id": "lFiO37FkvMmGUsdi",
+  "name": "RSVP - Rances Car",
+  "active": true,
+  "isArchived": false,
+  "versionId": "4822f2ee-68e2-40ff-8d0b-211da397dde4",
+  "activeVersionId": "4822f2ee-68e2-40ff-8d0b-211da397dde4",
+  "triggerCount": 0,
+  "createdAt": "2026-08-18T17:03:48.613Z",
+  "updatedAt": "2026-09-08T15:45:30.704Z",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  },
+  "connections": {
+    "START": {
+      "main": [
+        [
+          {
+            "node": "CONTEXT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CONTEXT": {
+      "main": [
+        [
+          {
+            "node": "RSVP Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSVP Agent": {
+      "main": [
+        [
+          {
+            "node": "Parse RSVP Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MongoDB Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "RSVP Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "RSVP Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse RSVP Output": {
+      "main": [
+        [
+          {
+            "node": "If TIENE FECHA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If TIENE FECHA": {
+      "main": [
+        [
+          {
+            "node": "Find Appointment",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "RESPONSE 1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find Appointment": {
+      "main": [
+        [
+          {
+            "node": "IF CANCELAR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF CANCELAR": {
+      "main": [
+        [
+          {
+            "node": "IF Tiene Evento GHL",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "IF APPOINTMENT EXIST",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF Tiene Evento GHL": {
+      "main": [
+        [
+          {
+            "node": "GHL Cancelar Cita",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Preparar Cancelacion Mongo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL Cancelar Cita": {
+      "main": [
+        [
+          {
+            "node": "Preparar Cancelacion Mongo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Cancelacion Mongo": {
+      "main": [
+        [
+          {
+            "node": "Mongo Cancelar Cita",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mongo Cancelar Cita": {
+      "main": [
+        [
+          {
+            "node": "'Notifications Master' Cancelacion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "'Notifications Master' Cancelacion": {
+      "main": [
+        [
+          {
+            "node": "Set Response Cancelacion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Response Cancelacion": {
+      "main": [
+        [
+          {
+            "node": "RESPONSE FINAL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF APPOINTMENT EXIST": {
+      "main": [
+        [
+          {
+            "node": "Update Appointment Data",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Insert Appointment Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Appointment Data": {
+      "main": [
+        [
+          {
+            "node": "Update Appointment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert Appointment Data": {
+      "main": [
+        [
+          {
+            "node": "Insert Appointment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Appointment": {
+      "main": [
+        [
+          {
+            "node": "IF Requiere Calendario",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert Appointment": {
+      "main": [
+        [
+          {
+            "node": "IF Requiere Calendario",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF Requiere Calendario": {
+      "main": [
+        [
+          {
+            "node": "GHL Consultar Disponibilidad",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "IF CONFIRMADA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL Consultar Disponibilidad": {
+      "main": [
+        [
+          {
+            "node": "Decidir Accion Calendario",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Decidir Accion Calendario": {
+      "main": [
+        [
+          {
+            "node": "Switch Accion Calendario",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch Accion Calendario": {
+      "main": [
+        [
+          {
+            "node": "GHL Crear Cita",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "GHL Reagendar Cita",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mongo Revertir Confirmacion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL Crear Cita": {
+      "main": [
+        [
+          {
+            "node": "Guardar Event ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar Event ID": {
+      "main": [
+        [
+          {
+            "node": "Mongo Guardar GHL Event ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mongo Guardar GHL Event ID": {
+      "main": [
+        [
+          {
+            "node": "IF CONFIRMADA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GHL Reagendar Cita": {
+      "main": [
+        [
+          {
+            "node": "IF CONFIRMADA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mongo Revertir Confirmacion": {
+      "main": [
+        [
+          {
+            "node": "Set Response No Disponible",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Response No Disponible": {
+      "main": [
+        [
+          {
+            "node": "RESPONSE FINAL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF CONFIRMADA": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "NADA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML": {
+      "main": [
+        [
+          {
+            "node": "'Notifications Master' Cita",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "'Notifications Master' Cita": {
+      "main": [
+        [
+          {
+            "node": "Find User",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find User": {
+      "main": [
+        [
+          {
+            "node": "reservation update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "reservation update": {
+      "main": [
+        [
+          {
+            "node": "Update User",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update User": {
+      "main": [
+        [
+          {
+            "node": "RESPONSE FINAL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RESPONSE 1": {
+      "main": [
+        [
+          {
+            "node": "RESPONSE FINAL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NADA": {
+      "main": [
+        [
+          {
+            "node": "RESPONSE FINAL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "aaf03e3b-1c14-41af-bd1e-69b14d84c3ba",
+      "name": "START",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "contactId"
+            },
+            {
+              "name": "dealer"
+            },
+            {
+              "name": "nombre"
+            },
+            {
+              "name": "vehiculo_interes"
+            },
+            {
+              "name": "entrada_usuario"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "e8c5a922-da8b-4c87-be95-bc5546064cb7",
+      "name": "CONTEXT",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1600,
+        80
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bf094ca3-c00a-43ab-ace2-67fd0e615aed",
+              "name": "contactId",
+              "value": "={{ $json.contactId }}",
+              "type": "string"
+            },
+            {
+              "id": "5780b9e2-72a8-42a7-b7b8-d5c9087d0cde",
+              "name": "dealer",
+              "value": "={{ $json.dealer }}",
+              "type": "string"
+            },
+            {
+              "id": "abdcd4a9-2c7d-4043-9f86-eec5da4aa55d",
+              "name": "nombre",
+              "value": "={{ $json.nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "f205ffa2-6326-40fb-9a28-879e084e4263",
+              "name": "vehiculo_interes",
+              "value": "={{ $json.vehiculo_interes }}",
+              "type": "string"
+            },
+            {
+              "id": "cc78333c-91f0-4007-ad4a-607b3f5f3fd6",
+              "name": "entrada_usuario",
+              "value": "={{ $json.entrada_usuario }}",
+              "type": "string"
+            },
+            {
+              "id": "f67344f9-d7ab-49ab-9c01-0a50e7979a05",
+              "name": "proximo_dia_habil_iso",
+              "value": "={{ $now.setZone('America/New_York').plus({days:1}).weekday >= 6 ? $now.setZone('America/New_York').plus({days:1}).plus({days: 8 - $now.setZone('America/New_York').plus({days:1}).weekday}).toFormat('yyyy-MM-dd') : $now.setZone('America/New_York').plus({days:1}).toFormat('yyyy-MM-dd') }}",
+              "type": "string"
+            },
+            {
+              "id": "31cea818-85a0-4cb1-9ec8-4d4bd829ea4f",
+              "name": "proximo_dia_habil_natural",
+              "value": "={{ ($now.setZone('America/New_York').plus({days:1}).weekday >= 6 ? $now.setZone('America/New_York').plus({days:1}).plus({days: 8 - $now.setZone('America/New_York').plus({days:1}).weekday}) : $now.setZone('America/New_York').plus({days:1})).setLocale('es').toFormat(\"cccc d 'de' MMMM\") }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "960acfb4-bb3d-4111-9a16-b968c0d44ce3",
+      "name": "RSVP Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -1376,
+        80
+      ],
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.entrada_usuario }}",
+        "options": {
+          "systemMessage": "=# Zona horaria: America/New_York (hora Miami)\n# Fecha y hora actual: {{ $now.setZone('America/New_York').toFormat('yyyy-MM-dd HH:mm') }}\n# IMPORTANTE: al emitir `fecha_hora` usa SIEMPRE formato ISO local SIN offset: YYYY-MM-DDTHH:MM:00 (el sistema aplica la zona horaria correcta de Miami, que cambia entre EST/EDT). NUNCA agregues offset ni conviertas a UTC.\n# Dealer: {{ $('CONTEXT').item.json.dealer }}\n\n## ROL ##\nEres un agente de agendamiento de {{ $('CONTEXT').item.json.dealer }}, concesionario de autos en Miami.\nTu única función: recolectar los datos necesarios para agendar un appointment con el lead (visita al lote —incluye test drive—, videollamada, o llamada telefónica), y procesar cancelaciones cuando el lead lo pida.\nNo das información de vehículos, inventario ni precios. Solo agendas y cancelas.\n\n## CONTEXTO DEL LEAD ##\n- Nombre: {{ $('CONTEXT').item.json.nombre }}\n- Vehículo de interés: {{ $('CONTEXT').item.json.vehiculo_interes }}\n\n## TIPOS DE AGENDAMIENTO ##\n\n**cita_presencial:** Visita física al lote / sala de ventas (incluye test drive).\n**cita_virtual:** Videollamada con un asesor (para leads que no pueden visitar en persona).\n**llamada:** El lead quiere ser contactado por voz. INCLUYE TANTO LLAMADA TELEFÓNICA COMO LLAMADA POR WHATSAPP — ambas son la MISMA categoría `tipo_agendamiento: \"llamada\"`. NUNCA clasifiques una llamada por WhatsApp como `cita_virtual`. Por defecto se asume llamada telefónica; `medio_llamada` solo se llena con \"whatsapp\" SI el cliente lo menciona explícitamente — no se pregunta activamente.\n**Atajo directo:** si el cliente dice \"contáctenme por WhatsApp\" u otra variante como primera respuesta al tipo de cita → clasifica DIRECTAMENTE como `tipo_agendamiento: \"llamada\"` + `medio_llamada: \"whatsapp\"`.\n\n## DATOS A RECOLECTAR SEGÚN TIPO ##\n\n### Para cita_presencial y cita_virtual:\n1. fecha_hora (ISO 8601 YYYY-MM-DDTHH:MM:00, hora local de Miami, SIN offset)\n   - Pregunta proactivamente 1-2 horarios concretos en vez de dejarlo abierto: \"¿Te gustaría este {{ $('CONTEXT').item.json.proximo_dia_habil_natural }} a las 10:00 a.m., o prefieres otro día u horario?\". Si el lead acepta la propuesta tal cual, usa fecha_hora = {{ $('CONTEXT').item.json.proximo_dia_habil_iso }}T10:00:00, marca cita_confirmada: true y confirma con el formato de PASO 3. Si el lead propone un día/hora distinto, sigue las reglas normales de conversión de abajo.\n   - Convierte lenguaje natural: \"mañana a las 3\" → fecha ISO local de Miami.\n   - Si da múltiples opciones, toma SIEMPRE la primera, márcala como fecha_hora, marca cita_confirmada: true y confirma — NUNCA preguntes \"¿Te parece bien?\".\n   - Si da un rango de horas, toma el INICIO del rango. Rangos vagos → mañana=9:00, tarde=14:00, noche=19:00.\n   - Si da fecha pasada, indícalo amablemente y pide otra.\n   - Al mostrar la fecha al usuario SIEMPRE usa formato natural en español. NUNCA uses formato ISO al hablar con el usuario.\n\n### Para llamada:\n1. horario_preferido: texto natural del horario preferido.\n   - Pregunta proactivamente 1-2 horarios concretos: \"¿Te parece si te llamamos hoy a la 1:00 p.m., o prefieres a las 5:00 p.m.? Si te acomoda otro horario, dime cuál.\"\n- NO pidas fecha_hora específica al lead.\n- fecha_hora INTERNA para llamadas: calcúlala igual que arriba combinando la fecha actual con horario_preferido, en hora local de Miami, sin offset.\n- medio_llamada: NO se pregunta activamente. Valor por defecto: \"telefono\". Solo cambia a \"whatsapp\" si el cliente lo menciona espontáneamente.\n\nORDEN OBLIGATORIO para llamada:\n1. Pregunta horario_preferido.\n2. En cuanto el lead dé horario_preferido → marca cita_confirmada: true Y envía confirmación en el MISMO turno: \"Perfecto, [nombre]! Un asesor te contactará en el horario que indicaste: [horario]. ¿Puedo ayudarte con algo más?\" (agrega \"por WhatsApp\" si aplica).\n🔒 NUNCA vuelvas a poner cita_confirmada: false una vez que fue true (excepto si el lead cambia de tipo, o pide cancelar — ver PASO 4).\n\n## FLUJO DE CONVERSACIÓN ##\n\n**PASO 1 — IDENTIFICAR TIPO:**\nRevisa el historial: si ya existe un `tipo_agendamiento` confirmado, SÁLTATE este paso.\nSi el usuario no especifica, pregunta: \"¿Prefieres visitar el lote en persona, una videollamada con un asesor, o que te llamemos?\"\nUna vez que confirme el tipo, confirma de recibido e INMEDIATAMENTE pregunta por la fecha/hora (o el horario, si es llamada) en el mismo mensaje.\n\n**CUANDO EL USUARIO PIDE SOLO UNA LLAMADA:** clasifica DIRECTAMENTE como \"llamada\" y pide horario_preferido. NO ofrezcas videollamada.\n\n**CAMBIO DE TIPO DURANTE EL FLUJO:** si el lead ya tiene un tipo registrado pero pide otro, actualiza `tipo_agendamiento`, resetea a null los campos que no aplican, pon `cita_confirmada: false`, y solicita el primer dato obligatorio del nuevo tipo.\n\n**PASO 2 — RECOLECCIÓN SECUENCIAL:** Pregunta solo UN dato por mensaje.\n\n**PASO 3 — CONFIRMACIÓN AUTOMÁTICA:**\nPara cita_presencial y cita_virtual: en cuanto tengas fecha_hora válida → marca cita_confirmada: true Y confirma en el MISMO mensaje: \"¡Perfecto, [nombre]! Tu [tipo] quedó agendada para el [fecha natural]. Un asesor te contactará para confirmar los detalles. ¿Puedo ayudarte con algo más?\"\nNUNCA uses frases que pidan aprobación (\"¿Es correcto?\", \"¿Te parece bien?\") — confirma DIRECTAMENTE.\n🔒 UNA VEZ QUE cita_confirmada ES true, MANTENLA EN true EN TODOS LOS TURNOS SIGUIENTES (excepto cambio de tipo).\nNOTA: el sistema verifica el horario contra el calendario real de asesores después de tu respuesta. Si el horario que confirmaste ya no está disponible, el sistema le reenviará al lead un mensaje alternativo proponiendo el horario libre más cercano — tú no necesitas verificar disponibilidad, solo recolectar y confirmar con naturalidad.\n\n**PASO 4 — CANCELACIÓN:**\nSi el lead pide cancelar, dice que ya no puede asistir, o que ya no quiere la cita/llamada agendada:\n- Revisa el historial de la conversación: si NO hay evidencia de una cita ya confirmada (cita_confirmada true en un turno anterior), responde que no encuentras ninguna cita agendada a su nombre y pregunta si quiere agendar una — NO marques cancelar_cita: true en ese caso.\n- Si SÍ hay una cita confirmada previamente, marca cancelar_cita: true y responde de forma breve confirmando que estás procesando la cancelación (ej. \"Entendido, cancelando tu cita ahora mismo.\"). NO afirmes tú mismo que ya quedó cancelada — el sistema confirma eso por separado en el siguiente mensaje.\n- Si el lead cancela y en el mismo mensaje pide una nueva fecha, prioriza la cancelación en este turno (cancelar_cita: true) y deja que pida la nueva fecha en el siguiente turno.\n🔒 NUNCA marques cancelar_cita: true por iniciativa propia — solo cuando el lead lo pida explícitamente.\n\n## REGLAS ESTRICTAS ##\n- El bot NUNCA ofrece coordinar el test drive ni enviar ubicación por sí mismo; delega al asesor.\n- Pregunta solo UN dato por mensaje.\n- NUNCA menciones campos internos al usuario.\n- NUNCA incluyas prefijos como \"Tu:\" ni markdown.\n- En cada respuesta incluye TODOS los parámetros ya recopilados; solo van null los que aún faltan.\n- 🔒 NUNCA pongas en null un dato ya proporcionado (especialmente tipo_agendamiento, fecha_hora, horario_preferido).\n- 🔒 NUNCA pongas cita_confirmada: false si ya fue true (excepto cambio de tipo o cancelación).\n- cancelar_cita va en false en todos los turnos excepto el turno exacto donde el lead pide cancelar una cita ya confirmada.\n\n## FORMATO DE SALIDA OBLIGATORIO ##\nResponde ÚNICAMENTE con este JSON en una sola línea, sin bloques de código:\n{\"response\":\"<texto al usuario>\",\"parameters\":{\"tipo_agendamiento\":\"<cita_presencial|cita_virtual|llamada|null>\",\"horario_preferido\":\"<texto|null>\",\"medio_llamada\":\"<telefono|whatsapp|null>\",\"fecha_hora\":\"<YYYY-MM-DDTHH:MM:00|null>\",\"cita_confirmada\":<true|false>,\"cancelar_cita\":<true|false>}}\n"
+        }
+      }
+    },
+    {
+      "id": "4f55ad58-2d9b-41cc-b643-18048432d6cd",
+      "name": "MongoDB Chat Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+      "typeVersion": 1,
+      "position": [
+        -1232,
+        304
+      ],
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('CONTEXT').item.json.contactId }}",
+        "collectionName": "chat_histories_rsvp",
+        "databaseName": "Carwarriors",
+        "contextWindowLength": 20
+      },
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
+    },
+    {
+      "id": "d5bb6fbd-f736-4ad0-9a01-c4b5cc4d3bcc",
+      "name": "OpenRouter Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -1360,
+        304
+      ],
+      "parameters": {
+        "options": {
+          "temperature": 0.1,
+          "timeout": 90000,
+          "maxRetries": 2
+        }
+      },
+      "credentials": {
+        "openRouterApi": {
+          "id": "o8MexJvFeSx2j4an",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "id": "bd1c48d0-816c-4e2f-a52b-8367ff0e6465",
+      "name": "Parse RSVP Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1024,
+        80
+      ],
+      "parameters": {
+        "jsCode": "const raw = $input.first().json.output || '';\n\n// deepseek-v4-flash a veces genera un rambling de razonamiento antes de la respuesta final,\n// repitiendo el JSON de salida varias veces (mismo patron visto en KB-SEARCH 08-31,\n// LEAD-COLLECTOR y PRINCIPAL 09-01). Un regex greedy 'primer { a ultimo }' mezcla varios\n// bloques y JSON.parse falla. En vez de eso: extraer TODOS los objetos JSON balanceados\n// (respetando strings y llaves anidadas) y quedarnos con el ULTIMO que parsea y tiene\n// la clave 'parameters' -- es la version final y mas confiable del modelo.\nfunction extraerObjetosJson(texto) {\n  const resultados = [];\n  for (let i = 0; i < texto.length; i++) {\n    if (texto[i] !== '{') continue;\n    let profundidad = 0;\n    let enString = false;\n    let escape = false;\n    for (let j = i; j < texto.length; j++) {\n      const c = texto[j];\n      if (escape) { escape = false; continue; }\n      if (c === '\\\\') { escape = true; continue; }\n      if (c === '\"') { enString = !enString; continue; }\n      if (enString) continue;\n      if (c === '{') profundidad++;\n      else if (c === '}') {\n        profundidad--;\n        if (profundidad === 0) {\n          resultados.push(texto.slice(i, j + 1));\n          break;\n        }\n      }\n    }\n  }\n  return resultados;\n}\n\nfunction extractJSON(text) {\n  const candidatos = extraerObjetosJson(text);\n  for (let i = candidatos.length - 1; i >= 0; i--) {\n    try {\n      const obj = JSON.parse(candidatos[i]);\n      if (obj && typeof obj === 'object' && Object.prototype.hasOwnProperty.call(obj, 'parameters')) {\n        return obj;\n      }\n    } catch (e) { /* seguir probando candidatos anteriores */ }\n  }\n  return null;\n}\n\nconst parsed = extractJSON(raw);\n\nif (!parsed) {\n  return [{\n    json: {\n      output: {\n        response: raw,\n        parameters: {\n          tipo_agendamiento: null,\n          horario_preferido: null,\n          medio_llamada: null,\n          fecha_hora: null,\n          cita_confirmada: false,\n          cancelar_cita: false\n        }\n      }\n    }\n  }];\n}\n\nconst p = parsed.parameters || {};\nconst norm = (v) => (v === 'null' || v === '' || v === undefined) ? null : v;\n\nreturn [{\n  json: {\n    output: {\n      response: parsed.response || raw,\n      parameters: {\n        tipo_agendamiento: norm(p.tipo_agendamiento),\n        horario_preferido: norm(p.horario_preferido),\n        medio_llamada: (() => { const v = norm(p.medio_llamada); if (!v) return null; const s = String(v).toLowerCase().replace(/[^a-z]/g, ''); if (s.includes('whats')) return 'whatsapp'; if (s.includes('telef') || s.includes('phone') || s === 'tel') return 'telefono'; return s === 'telefono' || s === 'whatsapp' ? s : null; })(),\n        fecha_hora: (() => {\n          const rawFecha = norm(p.fecha_hora);\n          if (rawFecha) {\n            const local = rawFecha.replace(/(\\.[0-9]+)?(Z|[+-]\\d{2}:?\\d{2})$/, '');\n            const dt = DateTime.fromISO(local, { zone: 'America/New_York' });\n            return dt.isValid ? dt.toISO({ suppressMilliseconds: true }) : null;\n          }\n          if (norm(p.tipo_agendamiento) === 'llamada' && norm(p.horario_preferido)) {\n            const horario = p.horario_preferido.toLowerCase().trim();\n            let hour = null, minute = 0;\n\n            const despuesM = horario.match(/(?:despu[ee]s\\s+de\\s+las?|a\\s+partir\\s+de\\s+las?)\\s+(\\d{1,2})(?::(\\d{2}))?\\s*(a\\.?m\\.?|p\\.?m\\.?)?/);\n            const rangoM = !despuesM && horario.match(/de\\s+las?\\s+(\\d{1,2})(?::(\\d{2}))?\\s*(a\\.?m\\.?|p\\.?m\\.?)?/);\n            const horaM = !despuesM && !rangoM && horario.match(/\\b(\\d{1,2})(?::(\\d{2}))?\\s*(a\\.?m\\.?|p\\.?m\\.)\\b/);\n            const hora24M = !despuesM && !rangoM && !horaM && horario.match(/\\b(\\d{1,2}):(\\d{2})\\b/);\n\n            const matchUsado = despuesM || rangoM || horaM || hora24M;\n\n            if (matchUsado) {\n              hour = parseInt(matchUsado[1]);\n              minute = matchUsado[2] ? parseInt(matchUsado[2]) : 0;\n              const ampm = ((matchUsado[3] || '').replace(/[.\\s]/g, '')).toLowerCase();\n              if (ampm === 'pm' && hour < 12) hour += 12;\n              else if (ampm === 'am' && hour === 12) hour = 0;\n            } else if (/mediod[ii]a|medio\\s+d[ii]a/.test(horario)) {\n              hour = 12; minute = 0;\n            } else if (/\\btarde\\b/.test(horario)) {\n              hour = 14; minute = 0;\n            } else if (/\\bnoche\\b/.test(horario)) {\n              hour = 19; minute = 0;\n            } else if (/\\bma[nn]ana\\b/.test(horario)) {\n              hour = 9; minute = 0;\n            } else if (/ahorita|ahora|\\bya\\b/.test(horario)) {\n              const et = $now.setZone('America/New_York');\n              const dt = et.plus({ hours: 1 }).set({ minute: 0, second: 0, millisecond: 0 });\n              return dt.toISO({ suppressMilliseconds: true });\n            }\n\n            if (hour !== null) {\n              const et = $now.setZone('America/New_York');\n              let dt = et.set({ hour, minute, second: 0, millisecond: 0 });\n              if (dt <= et) dt = dt.plus({ days: 1 });\n              return dt.toISO({ suppressMilliseconds: true });\n            }\n          }\n          return null;\n        })(),\n        cita_confirmada: p.cita_confirmada === true,\n        cancelar_cita: p.cancelar_cita === true\n      }\n    }\n  }\n}];"
+      }
+    },
+    {
+      "id": "40344ec2-073c-44a9-9967-1c168526cb02",
+      "name": "If TIENE FECHA",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -800,
+        80
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "92c59e06-0b5e-4ace-af31-3303c130b394",
+              "leftValue": "={{ \n  (\n    $json.output.parameters.tipo_agendamiento !== null && \n    $json.output.parameters.tipo_agendamiento !== 'null' && \n    $json.output.parameters.tipo_agendamiento !== ''\n  ) \n  ||\n  (\n    $json.output.parameters.fecha_hora !== null && \n    $json.output.parameters.fecha_hora !== 'null' && \n    $json.output.parameters.fecha_hora !== ''\n  ) \n  ||\n  (\n    $json.output.parameters.horario_preferido !== null &&\n    $json.output.parameters.horario_preferido !== 'null' &&\n    $json.output.parameters.horario_preferido !== ''\n  )\n  ||\n  $json.output.parameters.cita_confirmada === true\n  ||\n  $json.output.parameters.cancelar_cita === true\n}}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "9fe1ce67-a32c-4c6f-a20e-f7772ed5f6fc",
+      "name": "Find Appointment",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        -576,
+        -16
+      ],
+      "parameters": {
+        "collection": "appointments",
+        "options": {},
+        "query": "={\n  \"contactId\": \"{{$('CONTEXT').item.json.contactId}}\"\n}"
+      },
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
+    },
+    {
+      "id": "d9a62aea-bd59-45a1-965e-b350e5e656bb",
+      "name": "IF CANCELAR",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -352,
+        200
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "cx1",
+              "leftValue": "={{ $('Parse RSVP Output').item.json.output.parameters.cancelar_cita === true && $('Find Appointment').first().json.isNotEmpty() }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "c6a99109-cd7f-4e75-8486-aceeabfe6a52",
+      "name": "IF Tiene Evento GHL",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -128,
+        300
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "cx2",
+              "leftValue": "={{ !!($('Find Appointment').first().json.ghl_event_id) }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "bb45a9ac-fb29-47a4-8f39-0cbb1ed964b8",
+      "name": "GHL Cancelar Cita",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        96,
+        260
+      ],
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://services.leadconnectorhq.com/calendars/events/appointments/{{ $('Find Appointment').first().json.ghl_event_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-04-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"appointmentStatus\": \"cancelled\" } }}",
+        "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "k3Hkkki2LvoFVTWd",
+          "name": "Header Auth GHL - Rances Car"
+        }
+      }
+    },
+    {
+      "id": "f9c9b12f-3267-4aac-9079-012c9606ba27",
+      "name": "Preparar Cancelacion Mongo",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        320,
+        300
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const ap = $('Find Appointment').first().json;\nconst tipoLabel = {\n  cita_presencial: 'visita presencial',\n  cita_virtual: 'videollamada',\n  llamada: 'llamada'\n}[ap.tipo] || 'cita';\n\nlet fechaTxt = '';\nlet fechaFmt = '—';\nif (ap.fecha_hora) {\n  const dt = DateTime.fromISO(ap.fecha_hora, { zone: 'America/New_York' }).setLocale('es');\n  if (dt.isValid) {\n    fechaTxt = ` del ${dt.toFormat(\"cccc d 'de' LLLL\")}`;\n    fechaFmt = dt.toFormat(\"cccc d 'de' LLLL 'a las' h:mm a\") + ' (hora Miami)';\n  }\n}\n\nreturn [{ json: {\n  _id: ap._id.toString().replace(/^\"(.*)\"$/, '$1'),\n  confirmada: false,\n  cancelada: true,\n  updated_at: $now.toISO(),\n  response_override: `Listo, tu ${tipoLabel}${fechaTxt} fue cancelada. ¿Quieres agendar otra?`,\n  fecha_fmt: fechaFmt,\n  modalidad_fmt: tipoLabel\n} }];"
+      }
+    },
+    {
+      "id": "d174edcf-2902-4fc4-bbaa-54b624d111df",
+      "name": "Mongo Cancelar Cita",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        544,
+        300
+      ],
+      "parameters": {
+        "operation": "update",
+        "collection": "appointments",
+        "updateKey": "_id",
+        "fields": "confirmada,cancelada,updated_at",
+        "options": {
+          "dateFields": "updated_at"
+        }
+      },
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
+    },
+    {
+      "id": "b21d7214-3b55-4d9a-ae46-ba1f7ce86a2b",
+      "name": "'Notifications Master' Cancelacion",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        768,
+        300
+      ],
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "oz7EabosHGTXtTjr",
+          "mode": "list",
+          "cachedResultName": "NOTIFICATIONS"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "tipo_alerta": "cita_cancelada",
+            "datos": "={{ { \"dealer\": $('CONTEXT').item.json.dealer || 'Sin definir', \"nombre_lead\": $('CONTEXT').item.json.nombre || 'No registrado', \"telefono_lead\": '', \"correo_lead\": '', \"fecha_cita\": $('Preparar Cancelacion Mongo').item.json.fecha_fmt || 'Por confirmar', \"modalidad\": $('Preparar Cancelacion Mongo').item.json.modalidad_fmt || '-', \"contactId\": $('CONTEXT').item.json.contactId } }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "tipo_alerta",
+              "displayName": "tipo_alerta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "datos",
+              "displayName": "datos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "object"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "0015b6a1-3558-4949-857f-0dfb67490021",
+      "name": "Set Response Cancelacion",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        992,
+        300
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "rc1",
+              "name": "response",
+              "value": "={{ $('Preparar Cancelacion Mongo').item.json.response_override }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "247fa4c4-3ee2-4556-b1ac-4f359786579a",
+      "name": "IF APPOINTMENT EXIST",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -352,
+        -16
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "d992e9f0-ff10-42ea-9dc8-c756f5d77cc5",
+              "leftValue": "={{ $('Find Appointment').first().json.isNotEmpty() }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b2219d63-30db-4976-8c6d-64ff207990d2",
+      "name": "Update Appointment Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -128,
+        -112
+      ],
+      "parameters": {
+        "jsCode": "const params = $('Parse RSVP Output').first().json.output.parameters;\n\nconst data = {\n  _id: $('Find Appointment').first().json._id.toString().replace(/^\"(.*)\"$/, '$1'),\n  updated_at: $now.toISO()\n};\n\nif (params.tipo_agendamiento && params.tipo_agendamiento !== 'null') data.tipo = params.tipo_agendamiento;\nif (params.fecha_hora && params.fecha_hora !== 'null') data.fecha_hora = params.fecha_hora;\nif (params.horario_preferido && params.horario_preferido !== 'null') data.horario_preferido = params.horario_preferido;\nif (params.medio_llamada && params.medio_llamada !== 'null') data.medio_llamada = params.medio_llamada;\nif (params.cita_confirmada) data.confirmada = params.cita_confirmada;\n\nreturn [{ json: data }];"
+      }
+    },
+    {
+      "id": "ab4024bf-15ae-48a4-bc04-82cba8a512ae",
+      "name": "Insert Appointment Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -128,
+        112
+      ],
+      "parameters": {
+        "jsCode": "const params = $('Parse RSVP Output').first().json.output.parameters;\nconst ctx = $('CONTEXT').item.json;\n\nconst data = {\n  contactId: ctx.contactId,\n  dealer: ctx.dealer,\n  nombre: ctx.nombre,\n  vehiculo_interes: ctx.vehiculo_interes,\n  created_at: $now.toISO(),\n  updated_at: $now.toISO()\n};\n\nif (params.tipo_agendamiento && params.tipo_agendamiento !== 'null') data.tipo = params.tipo_agendamiento;\nif (params.fecha_hora && params.fecha_hora !== 'null') data.fecha_hora = params.fecha_hora;\nif (params.horario_preferido && params.horario_preferido !== 'null') data.horario_preferido = params.horario_preferido;\nif (params.medio_llamada && params.medio_llamada !== 'null') data.medio_llamada = params.medio_llamada;\nif (params.cita_confirmada) data.confirmada = params.cita_confirmada;\n\nreturn [{ json: data }];"
+      }
+    },
+    {
+      "id": "c9091df6-34ef-47f7-bcd3-e9fce11eb1f7",
+      "name": "Update Appointment",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        96,
+        -112
+      ],
+      "parameters": {
+        "operation": "update",
+        "collection": "appointments",
+        "updateKey": "_id",
+        "fields": "={{ Object.keys($json).filter(k => k !== '_id').join(',') }}",
+        "options": {
+          "dateFields": "updated_at"
+        }
+      },
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
+    },
+    {
+      "id": "1d61fd8d-75ca-42f2-abc9-05dd2fbaee2e",
+      "name": "Insert Appointment",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        96,
+        112
+      ],
+      "parameters": {
+        "operation": "insert",
+        "collection": "appointments",
+        "fields": "={{ Object.keys($json).filter(k => k !== '_id').join(',') }}",
+        "options": {
+          "dateFields": "created_at,updated_at"
+        }
+      },
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
+    },
+    {
+      "id": "2a0f6c80-6c74-407c-86a0-dbc6f00c900d",
+      "name": "IF Requiere Calendario",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        200,
+        700
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "cx3",
+              "leftValue": "={{ ['cita_presencial','cita_virtual'].includes($('Parse RSVP Output').item.json.output.parameters.tipo_agendamiento) && $('Parse RSVP Output').item.json.output.parameters.cita_confirmada === true && $('Parse RSVP Output').item.json.output.parameters.cancelar_cita !== true }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "1c63c8cb-547e-41de-b039-f3212455d006",
+      "name": "GHL Consultar Disponibilidad",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        424,
+        700
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "https://services.leadconnectorhq.com/calendars/i15OEWwywQIe21ihVw5n/free-slots",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "specifyQuery": "keypair",
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "startDate",
+              "value": "={{ DateTime.fromISO($('Parse RSVP Output').item.json.output.parameters.fecha_hora, {zone:'America/New_York'}).startOf('day').toMillis() }}"
+            },
+            {
+              "name": "endDate",
+              "value": "={{ DateTime.fromISO($('Parse RSVP Output').item.json.output.parameters.fecha_hora, {zone:'America/New_York'}).startOf('day').plus({days:1}).toMillis() }}"
+            },
+            {
+              "name": "timezone",
+              "value": "America/New_York"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-04-15"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "k3Hkkki2LvoFVTWd",
+          "name": "Header Auth GHL - Rances Car"
+        }
+      }
+    },
+    {
+      "id": "78dc4eef-4db0-4f63-b371-90ea68c28f28",
+      "name": "Decidir Accion Calendario",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        648,
+        700
+      ],
+      "parameters": {
+        "jsCode": "const params = $('Parse RSVP Output').first().json.output.parameters;\nconst existing = $('Find Appointment').first().json;\nconst ghlEventId = existing && existing.ghl_event_id ? existing.ghl_event_id : null;\n\nlet _id;\ntry { _id = $('Insert Appointment').first().json._id; } catch(e) {}\nif (!_id) { try { _id = $('Update Appointment').first().json._id; } catch(e) {} }\nif (!_id) { try { _id = existing && existing._id; } catch(e) {} }\n_id = _id ? _id.toString().replace(/^\"(.*)\"$/, '$1') : null;\n\nconst fechaHora = params.fecha_hora;\n\nif (!fechaHora) {\n  return [{ json: {\n    accion: 'no_disponible', _id, ghl_event_id: ghlEventId,\n    confirmada: false, updated_at: $now.toISO(),\n    response_override: 'No pude registrar el horario exacto. ¿Puedes confirmarme el día y la hora de nuevo?'\n  } }];\n}\n\nconst requested = DateTime.fromISO(fechaHora, { zone: 'America/New_York' });\nconst dayKey = requested.toFormat('yyyy-MM-dd');\nconst slotsResp = $('GHL Consultar Disponibilidad').first().json;\nconst daySlots = (slotsResp[dayKey] && slotsResp[dayKey].slots) || [];\n\nconst match = daySlots.find(s => Math.abs(DateTime.fromISO(s).toMillis() - requested.toMillis()) < 60 * 1000);\n\nif (!match) {\n  const future = daySlots.filter(s => DateTime.fromISO(s).toMillis() >= requested.toMillis());\n  const suggestion = future[0] || daySlots[0] || null;\n  let suggestionText = 'no tenemos horarios disponibles ese día, ¿prefieres otro día?';\n  if (suggestion) {\n    const dt = DateTime.fromISO(suggestion).setLocale('es');\n    suggestionText = `el horario más cercano disponible es ${dt.toFormat(\"cccc d 'de' LLLL 'a las' h:mm a\")} (hora Miami). ¿Te sirve o prefieres otro?`;\n  }\n  return [{ json: {\n    accion: 'no_disponible', _id, ghl_event_id: ghlEventId,\n    confirmada: false, updated_at: $now.toISO(),\n    response_override: `Ese horario ya no está disponible — ${suggestionText}`\n  } }];\n}\n\nconst startIso = match;\nconst endIso = DateTime.fromISO(match).plus({ minutes: 30 }).toISO({ suppressMilliseconds: true });\n\nconst tipoPrefix = {\n  cita_presencial: 'Visita presencial (incluye test drive) — ',\n  cita_virtual: 'Videollamada con asesor — '\n}[params.tipo_agendamiento] || '';\n\nreturn [{ json: {\n  accion: ghlEventId ? 'reagendar' : 'crear',\n  _id, ghl_event_id: ghlEventId,\n  slot_iso: startIso, end_iso: endIso,\n  titulo: `${tipoPrefix}Rances Car`\n} }];"
+      }
+    },
+    {
+      "id": "cbb582ba-359b-496d-9789-a16425f12bdc",
+      "name": "Switch Accion Calendario",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        872,
+        700
+      ],
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.accion }}",
+                    "rightValue": "crear",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "Crear"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.accion }}",
+                    "rightValue": "reagendar",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "Reagendar"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.accion }}",
+                    "rightValue": "no_disponible",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "No Disponible"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b4803506-5735-490e-b653-4e8765ad18d0",
+      "name": "GHL Crear Cita",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        1096,
+        600
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://services.leadconnectorhq.com/calendars/events/appointments",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-04-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"calendarId\": \"i15OEWwywQIe21ihVw5n\", \"locationId\": \"1j1dHo8HEbZdElQUGFoC\", \"contactId\": $('CONTEXT').item.json.contactId, \"startTime\": $json.slot_iso, \"endTime\": $json.end_iso, \"title\": $json.titulo, \"appointmentStatus\": \"confirmed\", \"assignedUserId\": \"PPnwiuKqgiEyxRfX7A52\" } }}",
+        "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "k3Hkkki2LvoFVTWd",
+          "name": "Header Auth GHL - Rances Car"
+        }
+      }
+    },
+    {
+      "id": "20798ddc-056c-4b0d-a420-687574dde20f",
+      "name": "Guardar Event ID",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1320,
+        600
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const d = $('Decidir Accion Calendario').first().json;\nreturn [{ json: { _id: d._id, ghl_event_id: $json.id, updated_at: $now.toISO() } }];"
+      }
+    },
+    {
+      "id": "9bee7d9b-520a-4ddb-b53f-4bb16eb5b0ce",
+      "name": "Mongo Guardar GHL Event ID",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        1544,
+        600
+      ],
+      "parameters": {
+        "operation": "update",
+        "collection": "appointments",
+        "updateKey": "_id",
+        "fields": "ghl_event_id,updated_at",
+        "options": {
+          "dateFields": "updated_at"
+        }
+      },
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
+    },
+    {
+      "id": "46f41f96-62fa-4c6d-b62b-f9056d2f6b0d",
+      "name": "GHL Reagendar Cita",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        1096,
+        700
+      ],
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://services.leadconnectorhq.com/calendars/events/appointments/{{ $json.ghl_event_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-04-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"startTime\": $json.slot_iso, \"endTime\": $json.end_iso } }}",
+        "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "k3Hkkki2LvoFVTWd",
+          "name": "Header Auth GHL - Rances Car"
+        }
+      }
+    },
+    {
+      "id": "d5a139bd-0714-4e55-bef1-759ae5ee4da5",
+      "name": "Mongo Revertir Confirmacion",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        1096,
+        820
+      ],
+      "parameters": {
+        "operation": "update",
+        "collection": "appointments",
+        "updateKey": "_id",
+        "fields": "confirmada,updated_at",
+        "options": {
+          "dateFields": "updated_at"
+        }
+      },
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
+    },
+    {
+      "id": "ddd763e7-3330-4a48-96bd-e73e414e33db",
+      "name": "Set Response No Disponible",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1320,
+        820
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "rn1",
+              "name": "response",
+              "value": "={{ $('Decidir Accion Calendario').item.json.response_override }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "d3d48baa-0135-4f4f-8cba-bd230e597f01",
+      "name": "IF CONFIRMADA",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        320,
+        -16
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "4a3c4317-c310-4233-8dbc-6b7190a3417f",
+              "leftValue": "={{ $('Parse RSVP Output').item.json.output.parameters.cita_confirmada === true }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "b2f5e8a1-d3c7-4f92-a1e6-9c4b0d8e2f63",
+              "leftValue": "={{ $('Find Appointment').first().json.confirmada !== true }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "9b346572-9031-485c-a503-0c37fead91cd",
+      "name": "HTML",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        544,
+        -112
+      ],
+      "parameters": {
+        "jsCode": "const ctx = $('CONTEXT').item.json;\nconst params = $('Parse RSVP Output').item.json.output.parameters;\n\nconst tipoLabel = {\n  'cita_presencial': 'Visita presencial al concesionario',\n  'cita_virtual': 'Videollamada con un asesor',\n  'llamada': 'Llamada telefónica'\n}[params.tipo_agendamiento] || '-';\n\nconst fechaIso = params.fecha_hora || $('Find Appointment').first().json.fecha_hora;\nlet fecha = '-';\nif (fechaIso) {\n  const dt = DateTime.fromISO(fechaIso, { zone: 'America/New_York' });\n  if (dt.isValid) {\n    const txt = dt.setLocale('es').toFormat(\"cccc d 'de' LLLL 'a las' h:mm a\");\n    fecha = (txt.charAt(0).toUpperCase() + txt.slice(1)) + ' (hora Miami)';\n  }\n}\nconst medioLlamadaLabel = params.medio_llamada === 'whatsapp' ? 'WhatsApp' : params.medio_llamada === 'telefono' ? 'Teléfono' : '-';\n\nreturn [{ json: {\n  fecha,\n  modalidad: tipoLabel,\n  tipo_agendamiento: params.tipo_agendamiento || null,\n  horario_preferido: params.horario_preferido || null,\n  medio_llamada: params.medio_llamada || null,\n  medio_llamada_label: medioLlamadaLabel\n} }];"
+      }
+    },
+    {
+      "id": "c7816dfe-92d4-42f7-b3a2-d7ece919f69a",
+      "name": "'Notifications Master' Cita",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        992,
+        -112
+      ],
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "oz7EabosHGTXtTjr",
+          "mode": "list",
+          "cachedResultName": "NOTIFICATIONS"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "tipo_alerta": "cita",
+            "datos": "={{ { \"dealer\": $('CONTEXT').item.json.dealer || 'Sin definir', \"nombre_lead\": $('CONTEXT').item.json.nombre || 'No registrado', \"telefono_lead\": '', \"correo_lead\": '', \"fecha_cita\": $('HTML').item.json.fecha || 'Por confirmar', \"modalidad\": $('HTML').item.json.modalidad || 'Presencial', \"tipo_agendamiento\": $('HTML').item.json.tipo_agendamiento || null, \"horario_preferido\": $('HTML').item.json.horario_preferido || null, \"medio_llamada\": $('HTML').item.json.medio_llamada || null, \"medio_llamada_label\": $('HTML').item.json.medio_llamada_label || '-', \"contactId\": $('CONTEXT').item.json.contactId } }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "tipo_alerta",
+              "displayName": "tipo_alerta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "datos",
+              "displayName": "datos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "object"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "989edd19-a0d6-400a-ba44-435072811cba",
+      "name": "Find User",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        1216,
+        -112
+      ],
+      "parameters": {
+        "collection": "users",
+        "options": {},
+        "query": "={\"contactId\": \"{{$('CONTEXT').item.json.contactId}}\"}"
+      },
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
+    },
+    {
+      "id": "a74eaad5-67d1-4574-8d94-8cd66719e6cb",
+      "name": "reservation update",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1440,
+        -112
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4a52d8ad-da2c-4760-9834-ac9e439b4841",
+              "name": "contactId",
+              "value": "={{ $('CONTEXT').item.json.contactId }}",
+              "type": "string"
+            },
+            {
+              "id": "1660f796-d040-4c8c-9bd3-e26e6eda9daf",
+              "name": "has_reservation",
+              "value": true,
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "02afb0cb-d9c1-48ff-8291-1bcaa1f3ba2e",
+      "name": "Update User",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        1664,
+        -112
+      ],
+      "parameters": {
+        "operation": "update",
+        "collection": "users",
+        "updateKey": "contactId",
+        "fields": "contactId,has_reservation",
+        "options": {}
+      },
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
+    },
+    {
+      "id": "22796c35-3af8-4f60-8424-259194a33ed3",
+      "name": "RESPONSE 1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1664,
+        272
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a1e815fb-c2c8-4ea2-8702-0469bce83c44",
+              "name": "response",
+              "value": "={{ $('Parse RSVP Output').item.json.output.response }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "ddef98f3-6a0c-4c29-a8b2-51997db11b18",
+      "name": "NADA",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1664,
+        80
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "fb7d5387-fab3-4b44-a628-15432c7e237b",
+      "name": "RESPONSE FINAL",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1888,
+        80
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "17040735-ba26-4907-a78f-586ea71fcbe9",
+              "name": "response",
+              "value": "={{ $json.response || $('Parse RSVP Output').item.json.output.response }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      }
+    }
+  ],
+  "nodeGroups": [],
+  "activeVersion": {
+    "nodes": [
+      {
+        "id": "aaf03e3b-1c14-41af-bd1e-69b14d84c3ba",
+        "name": "START",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          0,
+          0
+        ],
+        "parameters": {
+          "workflowInputs": {
+            "values": [
+              {
+                "name": "contactId"
+              },
+              {
+                "name": "dealer"
+              },
+              {
+                "name": "nombre"
+              },
+              {
+                "name": "vehiculo_interes"
+              },
+              {
+                "name": "entrada_usuario"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "e8c5a922-da8b-4c87-be95-bc5546064cb7",
+        "name": "CONTEXT",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -1600,
+          80
+        ],
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "bf094ca3-c00a-43ab-ace2-67fd0e615aed",
+                "name": "contactId",
+                "value": "={{ $json.contactId }}",
+                "type": "string"
+              },
+              {
+                "id": "5780b9e2-72a8-42a7-b7b8-d5c9087d0cde",
+                "name": "dealer",
+                "value": "={{ $json.dealer }}",
+                "type": "string"
+              },
+              {
+                "id": "abdcd4a9-2c7d-4043-9f86-eec5da4aa55d",
+                "name": "nombre",
+                "value": "={{ $json.nombre }}",
+                "type": "string"
+              },
+              {
+                "id": "f205ffa2-6326-40fb-9a28-879e084e4263",
+                "name": "vehiculo_interes",
+                "value": "={{ $json.vehiculo_interes }}",
+                "type": "string"
+              },
+              {
+                "id": "cc78333c-91f0-4007-ad4a-607b3f5f3fd6",
+                "name": "entrada_usuario",
+                "value": "={{ $json.entrada_usuario }}",
+                "type": "string"
+              },
+              {
+                "id": "f67344f9-d7ab-49ab-9c01-0a50e7979a05",
+                "name": "proximo_dia_habil_iso",
+                "value": "={{ $now.setZone('America/New_York').plus({days:1}).weekday >= 6 ? $now.setZone('America/New_York').plus({days:1}).plus({days: 8 - $now.setZone('America/New_York').plus({days:1}).weekday}).toFormat('yyyy-MM-dd') : $now.setZone('America/New_York').plus({days:1}).toFormat('yyyy-MM-dd') }}",
+                "type": "string"
+              },
+              {
+                "id": "31cea818-85a0-4cb1-9ec8-4d4bd829ea4f",
+                "name": "proximo_dia_habil_natural",
+                "value": "={{ ($now.setZone('America/New_York').plus({days:1}).weekday >= 6 ? $now.setZone('America/New_York').plus({days:1}).plus({days: 8 - $now.setZone('America/New_York').plus({days:1}).weekday}) : $now.setZone('America/New_York').plus({days:1})).setLocale('es').toFormat(\"cccc d 'de' MMMM\") }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        }
+      },
+      {
+        "id": "960acfb4-bb3d-4111-9a16-b968c0d44ce3",
+        "name": "RSVP Agent",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          -1376,
+          80
+        ],
+        "parameters": {
+          "promptType": "define",
+          "text": "={{ $json.entrada_usuario }}",
+          "options": {
+            "systemMessage": "=# Zona horaria: America/New_York (hora Miami)\n# Fecha y hora actual: {{ $now.setZone('America/New_York').toFormat('yyyy-MM-dd HH:mm') }}\n# IMPORTANTE: al emitir `fecha_hora` usa SIEMPRE formato ISO local SIN offset: YYYY-MM-DDTHH:MM:00 (el sistema aplica la zona horaria correcta de Miami, que cambia entre EST/EDT). NUNCA agregues offset ni conviertas a UTC.\n# Dealer: {{ $('CONTEXT').item.json.dealer }}\n\n## ROL ##\nEres un agente de agendamiento de {{ $('CONTEXT').item.json.dealer }}, concesionario de autos en Miami.\nTu única función: recolectar los datos necesarios para agendar un appointment con el lead (visita al lote —incluye test drive—, videollamada, o llamada telefónica), y procesar cancelaciones cuando el lead lo pida.\nNo das información de vehículos, inventario ni precios. Solo agendas y cancelas.\n\n## CONTEXTO DEL LEAD ##\n- Nombre: {{ $('CONTEXT').item.json.nombre }}\n- Vehículo de interés: {{ $('CONTEXT').item.json.vehiculo_interes }}\n\n## TIPOS DE AGENDAMIENTO ##\n\n**cita_presencial:** Visita física al lote / sala de ventas (incluye test drive).\n**cita_virtual:** Videollamada con un asesor (para leads que no pueden visitar en persona).\n**llamada:** El lead quiere ser contactado por voz. INCLUYE TANTO LLAMADA TELEFÓNICA COMO LLAMADA POR WHATSAPP — ambas son la MISMA categoría `tipo_agendamiento: \"llamada\"`. NUNCA clasifiques una llamada por WhatsApp como `cita_virtual`. Por defecto se asume llamada telefónica; `medio_llamada` solo se llena con \"whatsapp\" SI el cliente lo menciona explícitamente — no se pregunta activamente.\n**Atajo directo:** si el cliente dice \"contáctenme por WhatsApp\" u otra variante como primera respuesta al tipo de cita → clasifica DIRECTAMENTE como `tipo_agendamiento: \"llamada\"` + `medio_llamada: \"whatsapp\"`.\n\n## DATOS A RECOLECTAR SEGÚN TIPO ##\n\n### Para cita_presencial y cita_virtual:\n1. fecha_hora (ISO 8601 YYYY-MM-DDTHH:MM:00, hora local de Miami, SIN offset)\n   - Pregunta proactivamente 1-2 horarios concretos en vez de dejarlo abierto: \"¿Te gustaría este {{ $('CONTEXT').item.json.proximo_dia_habil_natural }} a las 10:00 a.m., o prefieres otro día u horario?\". Si el lead acepta la propuesta tal cual, usa fecha_hora = {{ $('CONTEXT').item.json.proximo_dia_habil_iso }}T10:00:00, marca cita_confirmada: true y confirma con el formato de PASO 3. Si el lead propone un día/hora distinto, sigue las reglas normales de conversión de abajo.\n   - Convierte lenguaje natural: \"mañana a las 3\" → fecha ISO local de Miami.\n   - Si da múltiples opciones, toma SIEMPRE la primera, márcala como fecha_hora, marca cita_confirmada: true y confirma — NUNCA preguntes \"¿Te parece bien?\".\n   - Si da un rango de horas, toma el INICIO del rango. Rangos vagos → mañana=9:00, tarde=14:00, noche=19:00.\n   - Si da fecha pasada, indícalo amablemente y pide otra.\n   - Al mostrar la fecha al usuario SIEMPRE usa formato natural en español. NUNCA uses formato ISO al hablar con el usuario.\n\n### Para llamada:\n1. horario_preferido: texto natural del horario preferido.\n   - Pregunta proactivamente 1-2 horarios concretos: \"¿Te parece si te llamamos hoy a la 1:00 p.m., o prefieres a las 5:00 p.m.? Si te acomoda otro horario, dime cuál.\"\n- NO pidas fecha_hora específica al lead.\n- fecha_hora INTERNA para llamadas: calcúlala igual que arriba combinando la fecha actual con horario_preferido, en hora local de Miami, sin offset.\n- medio_llamada: NO se pregunta activamente. Valor por defecto: \"telefono\". Solo cambia a \"whatsapp\" si el cliente lo menciona espontáneamente.\n\nORDEN OBLIGATORIO para llamada:\n1. Pregunta horario_preferido.\n2. En cuanto el lead dé horario_preferido → marca cita_confirmada: true Y envía confirmación en el MISMO turno: \"Perfecto, [nombre]! Un asesor te contactará en el horario que indicaste: [horario]. ¿Puedo ayudarte con algo más?\" (agrega \"por WhatsApp\" si aplica).\n🔒 NUNCA vuelvas a poner cita_confirmada: false una vez que fue true (excepto si el lead cambia de tipo, o pide cancelar — ver PASO 4).\n\n## FLUJO DE CONVERSACIÓN ##\n\n**PASO 1 — IDENTIFICAR TIPO:**\nRevisa el historial: si ya existe un `tipo_agendamiento` confirmado, SÁLTATE este paso.\nSi el usuario no especifica, pregunta: \"¿Prefieres visitar el lote en persona, una videollamada con un asesor, o que te llamemos?\"\nUna vez que confirme el tipo, confirma de recibido e INMEDIATAMENTE pregunta por la fecha/hora (o el horario, si es llamada) en el mismo mensaje.\n\n**CUANDO EL USUARIO PIDE SOLO UNA LLAMADA:** clasifica DIRECTAMENTE como \"llamada\" y pide horario_preferido. NO ofrezcas videollamada.\n\n**CAMBIO DE TIPO DURANTE EL FLUJO:** si el lead ya tiene un tipo registrado pero pide otro, actualiza `tipo_agendamiento`, resetea a null los campos que no aplican, pon `cita_confirmada: false`, y solicita el primer dato obligatorio del nuevo tipo.\n\n**PASO 2 — RECOLECCIÓN SECUENCIAL:** Pregunta solo UN dato por mensaje.\n\n**PASO 3 — CONFIRMACIÓN AUTOMÁTICA:**\nPara cita_presencial y cita_virtual: en cuanto tengas fecha_hora válida → marca cita_confirmada: true Y confirma en el MISMO mensaje: \"¡Perfecto, [nombre]! Tu [tipo] quedó agendada para el [fecha natural]. Un asesor te contactará para confirmar los detalles. ¿Puedo ayudarte con algo más?\"\nNUNCA uses frases que pidan aprobación (\"¿Es correcto?\", \"¿Te parece bien?\") — confirma DIRECTAMENTE.\n🔒 UNA VEZ QUE cita_confirmada ES true, MANTENLA EN true EN TODOS LOS TURNOS SIGUIENTES (excepto cambio de tipo).\nNOTA: el sistema verifica el horario contra el calendario real de asesores después de tu respuesta. Si el horario que confirmaste ya no está disponible, el sistema le reenviará al lead un mensaje alternativo proponiendo el horario libre más cercano — tú no necesitas verificar disponibilidad, solo recolectar y confirmar con naturalidad.\n\n**PASO 4 — CANCELACIÓN:**\nSi el lead pide cancelar, dice que ya no puede asistir, o que ya no quiere la cita/llamada agendada:\n- Revisa el historial de la conversación: si NO hay evidencia de una cita ya confirmada (cita_confirmada true en un turno anterior), responde que no encuentras ninguna cita agendada a su nombre y pregunta si quiere agendar una — NO marques cancelar_cita: true en ese caso.\n- Si SÍ hay una cita confirmada previamente, marca cancelar_cita: true y responde de forma breve confirmando que estás procesando la cancelación (ej. \"Entendido, cancelando tu cita ahora mismo.\"). NO afirmes tú mismo que ya quedó cancelada — el sistema confirma eso por separado en el siguiente mensaje.\n- Si el lead cancela y en el mismo mensaje pide una nueva fecha, prioriza la cancelación en este turno (cancelar_cita: true) y deja que pida la nueva fecha en el siguiente turno.\n🔒 NUNCA marques cancelar_cita: true por iniciativa propia — solo cuando el lead lo pida explícitamente.\n\n## REGLAS ESTRICTAS ##\n- El bot NUNCA ofrece coordinar el test drive ni enviar ubicación por sí mismo; delega al asesor.\n- Pregunta solo UN dato por mensaje.\n- NUNCA menciones campos internos al usuario.\n- NUNCA incluyas prefijos como \"Tu:\" ni markdown.\n- En cada respuesta incluye TODOS los parámetros ya recopilados; solo van null los que aún faltan.\n- 🔒 NUNCA pongas en null un dato ya proporcionado (especialmente tipo_agendamiento, fecha_hora, horario_preferido).\n- 🔒 NUNCA pongas cita_confirmada: false si ya fue true (excepto cambio de tipo o cancelación).\n- cancelar_cita va en false en todos los turnos excepto el turno exacto donde el lead pide cancelar una cita ya confirmada.\n\n## FORMATO DE SALIDA OBLIGATORIO ##\nResponde ÚNICAMENTE con este JSON en una sola línea, sin bloques de código:\n{\"response\":\"<texto al usuario>\",\"parameters\":{\"tipo_agendamiento\":\"<cita_presencial|cita_virtual|llamada|null>\",\"horario_preferido\":\"<texto|null>\",\"medio_llamada\":\"<telefono|whatsapp|null>\",\"fecha_hora\":\"<YYYY-MM-DDTHH:MM:00|null>\",\"cita_confirmada\":<true|false>,\"cancelar_cita\":<true|false>}}\n"
+          }
+        }
+      },
+      {
+        "id": "4f55ad58-2d9b-41cc-b643-18048432d6cd",
+        "name": "MongoDB Chat Memory",
+        "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+        "typeVersion": 1,
+        "position": [
+          -1232,
+          304
+        ],
+        "parameters": {
+          "sessionIdType": "customKey",
+          "sessionKey": "={{ $('CONTEXT').item.json.contactId }}",
+          "collectionName": "chat_histories_rsvp",
+          "databaseName": "Carwarriors",
+          "contextWindowLength": 20
+        },
+        "credentials": {
+          "mongoDb": {
+            "id": "WvGe0WEIfm6NF1Qa",
+            "name": "MongoDB Carwarriors"
+          }
+        }
+      },
+      {
+        "id": "d5bb6fbd-f736-4ad0-9a01-c4b5cc4d3bcc",
+        "name": "OpenRouter Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+        "typeVersion": 1,
+        "position": [
+          -1360,
+          304
+        ],
+        "parameters": {
+          "options": {
+            "temperature": 0.1,
+            "timeout": 90000,
+            "maxRetries": 2
+          }
+        },
+        "credentials": {
+          "openRouterApi": {
+            "id": "o8MexJvFeSx2j4an",
+            "name": "OpenRouter account"
+          }
+        }
+      },
+      {
+        "id": "bd1c48d0-816c-4e2f-a52b-8367ff0e6465",
+        "name": "Parse RSVP Output",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -1024,
+          80
+        ],
+        "parameters": {
+          "jsCode": "const raw = $input.first().json.output || '';\n\n// deepseek-v4-flash a veces genera un rambling de razonamiento antes de la respuesta final,\n// repitiendo el JSON de salida varias veces (mismo patron visto en KB-SEARCH 08-31,\n// LEAD-COLLECTOR y PRINCIPAL 09-01). Un regex greedy 'primer { a ultimo }' mezcla varios\n// bloques y JSON.parse falla. En vez de eso: extraer TODOS los objetos JSON balanceados\n// (respetando strings y llaves anidadas) y quedarnos con el ULTIMO que parsea y tiene\n// la clave 'parameters' -- es la version final y mas confiable del modelo.\nfunction extraerObjetosJson(texto) {\n  const resultados = [];\n  for (let i = 0; i < texto.length; i++) {\n    if (texto[i] !== '{') continue;\n    let profundidad = 0;\n    let enString = false;\n    let escape = false;\n    for (let j = i; j < texto.length; j++) {\n      const c = texto[j];\n      if (escape) { escape = false; continue; }\n      if (c === '\\\\') { escape = true; continue; }\n      if (c === '\"') { enString = !enString; continue; }\n      if (enString) continue;\n      if (c === '{') profundidad++;\n      else if (c === '}') {\n        profundidad--;\n        if (profundidad === 0) {\n          resultados.push(texto.slice(i, j + 1));\n          break;\n        }\n      }\n    }\n  }\n  return resultados;\n}\n\nfunction extractJSON(text) {\n  const candidatos = extraerObjetosJson(text);\n  for (let i = candidatos.length - 1; i >= 0; i--) {\n    try {\n      const obj = JSON.parse(candidatos[i]);\n      if (obj && typeof obj === 'object' && Object.prototype.hasOwnProperty.call(obj, 'parameters')) {\n        return obj;\n      }\n    } catch (e) { /* seguir probando candidatos anteriores */ }\n  }\n  return null;\n}\n\nconst parsed = extractJSON(raw);\n\nif (!parsed) {\n  return [{\n    json: {\n      output: {\n        response: raw,\n        parameters: {\n          tipo_agendamiento: null,\n          horario_preferido: null,\n          medio_llamada: null,\n          fecha_hora: null,\n          cita_confirmada: false,\n          cancelar_cita: false\n        }\n      }\n    }\n  }];\n}\n\nconst p = parsed.parameters || {};\nconst norm = (v) => (v === 'null' || v === '' || v === undefined) ? null : v;\n\nreturn [{\n  json: {\n    output: {\n      response: parsed.response || raw,\n      parameters: {\n        tipo_agendamiento: norm(p.tipo_agendamiento),\n        horario_preferido: norm(p.horario_preferido),\n        medio_llamada: (() => { const v = norm(p.medio_llamada); if (!v) return null; const s = String(v).toLowerCase().replace(/[^a-z]/g, ''); if (s.includes('whats')) return 'whatsapp'; if (s.includes('telef') || s.includes('phone') || s === 'tel') return 'telefono'; return s === 'telefono' || s === 'whatsapp' ? s : null; })(),\n        fecha_hora: (() => {\n          const rawFecha = norm(p.fecha_hora);\n          if (rawFecha) {\n            const local = rawFecha.replace(/(\\.[0-9]+)?(Z|[+-]\\d{2}:?\\d{2})$/, '');\n            const dt = DateTime.fromISO(local, { zone: 'America/New_York' });\n            return dt.isValid ? dt.toISO({ suppressMilliseconds: true }) : null;\n          }\n          if (norm(p.tipo_agendamiento) === 'llamada' && norm(p.horario_preferido)) {\n            const horario = p.horario_preferido.toLowerCase().trim();\n            let hour = null, minute = 0;\n\n            const despuesM = horario.match(/(?:despu[ee]s\\s+de\\s+las?|a\\s+partir\\s+de\\s+las?)\\s+(\\d{1,2})(?::(\\d{2}))?\\s*(a\\.?m\\.?|p\\.?m\\.?)?/);\n            const rangoM = !despuesM && horario.match(/de\\s+las?\\s+(\\d{1,2})(?::(\\d{2}))?\\s*(a\\.?m\\.?|p\\.?m\\.?)?/);\n            const horaM = !despuesM && !rangoM && horario.match(/\\b(\\d{1,2})(?::(\\d{2}))?\\s*(a\\.?m\\.?|p\\.?m\\.)\\b/);\n            const hora24M = !despuesM && !rangoM && !horaM && horario.match(/\\b(\\d{1,2}):(\\d{2})\\b/);\n\n            const matchUsado = despuesM || rangoM || horaM || hora24M;\n\n            if (matchUsado) {\n              hour = parseInt(matchUsado[1]);\n              minute = matchUsado[2] ? parseInt(matchUsado[2]) : 0;\n              const ampm = ((matchUsado[3] || '').replace(/[.\\s]/g, '')).toLowerCase();\n              if (ampm === 'pm' && hour < 12) hour += 12;\n              else if (ampm === 'am' && hour === 12) hour = 0;\n            } else if (/mediod[ii]a|medio\\s+d[ii]a/.test(horario)) {\n              hour = 12; minute = 0;\n            } else if (/\\btarde\\b/.test(horario)) {\n              hour = 14; minute = 0;\n            } else if (/\\bnoche\\b/.test(horario)) {\n              hour = 19; minute = 0;\n            } else if (/\\bma[nn]ana\\b/.test(horario)) {\n              hour = 9; minute = 0;\n            } else if (/ahorita|ahora|\\bya\\b/.test(horario)) {\n              const et = $now.setZone('America/New_York');\n              const dt = et.plus({ hours: 1 }).set({ minute: 0, second: 0, millisecond: 0 });\n              return dt.toISO({ suppressMilliseconds: true });\n            }\n\n            if (hour !== null) {\n              const et = $now.setZone('America/New_York');\n              let dt = et.set({ hour, minute, second: 0, millisecond: 0 });\n              if (dt <= et) dt = dt.plus({ days: 1 });\n              return dt.toISO({ suppressMilliseconds: true });\n            }\n          }\n          return null;\n        })(),\n        cita_confirmada: p.cita_confirmada === true,\n        cancelar_cita: p.cancelar_cita === true\n      }\n    }\n  }\n}];"
+        }
+      },
+      {
+        "id": "40344ec2-073c-44a9-9967-1c168526cb02",
+        "name": "If TIENE FECHA",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -800,
+          80
+        ],
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "92c59e06-0b5e-4ace-af31-3303c130b394",
+                "leftValue": "={{ \n  (\n    $json.output.parameters.tipo_agendamiento !== null && \n    $json.output.parameters.tipo_agendamiento !== 'null' && \n    $json.output.parameters.tipo_agendamiento !== ''\n  ) \n  ||\n  (\n    $json.output.parameters.fecha_hora !== null && \n    $json.output.parameters.fecha_hora !== 'null' && \n    $json.output.parameters.fecha_hora !== ''\n  ) \n  ||\n  (\n    $json.output.parameters.horario_preferido !== null &&\n    $json.output.parameters.horario_preferido !== 'null' &&\n    $json.output.parameters.horario_preferido !== ''\n  )\n  ||\n  $json.output.parameters.cita_confirmada === true\n  ||\n  $json.output.parameters.cancelar_cita === true\n}}",
+                "rightValue": "",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        }
+      },
+      {
+        "id": "9fe1ce67-a32c-4c6f-a20e-f7772ed5f6fc",
+        "name": "Find Appointment",
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          -576,
+          -16
+        ],
+        "parameters": {
+          "collection": "appointments",
+          "options": {},
+          "query": "={\n  \"contactId\": \"{{$('CONTEXT').item.json.contactId}}\"\n}"
+        },
+        "credentials": {
+          "mongoDb": {
+            "id": "WvGe0WEIfm6NF1Qa",
+            "name": "MongoDB Carwarriors"
+          }
+        }
+      },
+      {
+        "id": "d9a62aea-bd59-45a1-965e-b350e5e656bb",
+        "name": "IF CANCELAR",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -352,
+          200
+        ],
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "cx1",
+                "leftValue": "={{ $('Parse RSVP Output').item.json.output.parameters.cancelar_cita === true && $('Find Appointment').first().json.isNotEmpty() }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        }
+      },
+      {
+        "id": "c6a99109-cd7f-4e75-8486-aceeabfe6a52",
+        "name": "IF Tiene Evento GHL",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -128,
+          300
+        ],
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "cx2",
+                "leftValue": "={{ !!($('Find Appointment').first().json.ghl_event_id) }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        }
+      },
+      {
+        "id": "bb45a9ac-fb29-47a4-8f39-0cbb1ed964b8",
+        "name": "GHL Cancelar Cita",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.5,
+        "position": [
+          96,
+          260
+        ],
+        "parameters": {
+          "method": "PUT",
+          "url": "=https://services.leadconnectorhq.com/calendars/events/appointments/{{ $('Find Appointment').first().json.ghl_event_id }}",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendHeaders": true,
+          "specifyHeaders": "keypair",
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Version",
+                "value": "2021-04-15"
+              }
+            ]
+          },
+          "sendBody": true,
+          "contentType": "json",
+          "specifyBody": "json",
+          "jsonBody": "={{ { \"appointmentStatus\": \"cancelled\" } }}",
+          "options": {}
+        },
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "k3Hkkki2LvoFVTWd",
+            "name": "Header Auth GHL - Rances Car"
+          }
+        }
+      },
+      {
+        "id": "f9c9b12f-3267-4aac-9079-012c9606ba27",
+        "name": "Preparar Cancelacion Mongo",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          320,
+          300
+        ],
+        "parameters": {
+          "mode": "runOnceForAllItems",
+          "jsCode": "const ap = $('Find Appointment').first().json;\nconst tipoLabel = {\n  cita_presencial: 'visita presencial',\n  cita_virtual: 'videollamada',\n  llamada: 'llamada'\n}[ap.tipo] || 'cita';\n\nlet fechaTxt = '';\nlet fechaFmt = '—';\nif (ap.fecha_hora) {\n  const dt = DateTime.fromISO(ap.fecha_hora, { zone: 'America/New_York' }).setLocale('es');\n  if (dt.isValid) {\n    fechaTxt = ` del ${dt.toFormat(\"cccc d 'de' LLLL\")}`;\n    fechaFmt = dt.toFormat(\"cccc d 'de' LLLL 'a las' h:mm a\") + ' (hora Miami)';\n  }\n}\n\nreturn [{ json: {\n  _id: ap._id.toString().replace(/^\"(.*)\"$/, '$1'),\n  confirmada: false,\n  cancelada: true,\n  updated_at: $now.toISO(),\n  response_override: `Listo, tu ${tipoLabel}${fechaTxt} fue cancelada. ¿Quieres agendar otra?`,\n  fecha_fmt: fechaFmt,\n  modalidad_fmt: tipoLabel\n} }];"
+        }
+      },
+      {
+        "id": "d174edcf-2902-4fc4-bbaa-54b624d111df",
+        "name": "Mongo Cancelar Cita",
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          544,
+          300
+        ],
+        "parameters": {
+          "operation": "update",
+          "collection": "appointments",
+          "updateKey": "_id",
+          "fields": "confirmada,cancelada,updated_at",
+          "options": {
+            "dateFields": "updated_at"
+          }
+        },
+        "credentials": {
+          "mongoDb": {
+            "id": "WvGe0WEIfm6NF1Qa",
+            "name": "MongoDB Carwarriors"
+          }
+        }
+      },
+      {
+        "id": "b21d7214-3b55-4d9a-ae46-ba1f7ce86a2b",
+        "name": "'Notifications Master' Cancelacion",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.3,
+        "position": [
+          768,
+          300
+        ],
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "oz7EabosHGTXtTjr",
+            "mode": "list",
+            "cachedResultName": "NOTIFICATIONS"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "tipo_alerta": "cita_cancelada",
+              "datos": "={{ { \"dealer\": $('CONTEXT').item.json.dealer || 'Sin definir', \"nombre_lead\": $('CONTEXT').item.json.nombre || 'No registrado', \"telefono_lead\": '', \"correo_lead\": '', \"fecha_cita\": $('Preparar Cancelacion Mongo').item.json.fecha_fmt || 'Por confirmar', \"modalidad\": $('Preparar Cancelacion Mongo').item.json.modalidad_fmt || '-', \"contactId\": $('CONTEXT').item.json.contactId } }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "tipo_alerta",
+                "displayName": "tipo_alerta",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string"
+              },
+              {
+                "id": "datos",
+                "displayName": "datos",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "object"
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true
+          },
+          "options": {}
+        }
+      },
+      {
+        "id": "0015b6a1-3558-4949-857f-0dfb67490021",
+        "name": "Set Response Cancelacion",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          992,
+          300
+        ],
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "rc1",
+                "name": "response",
+                "value": "={{ $('Preparar Cancelacion Mongo').item.json.response_override }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        }
+      },
+      {
+        "id": "247fa4c4-3ee2-4556-b1ac-4f359786579a",
+        "name": "IF APPOINTMENT EXIST",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -352,
+          -16
+        ],
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "d992e9f0-ff10-42ea-9dc8-c756f5d77cc5",
+                "leftValue": "={{ $('Find Appointment').first().json.isNotEmpty() }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        }
+      },
+      {
+        "id": "b2219d63-30db-4976-8c6d-64ff207990d2",
+        "name": "Update Appointment Data",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -128,
+          -112
+        ],
+        "parameters": {
+          "jsCode": "const params = $('Parse RSVP Output').first().json.output.parameters;\n\nconst data = {\n  _id: $('Find Appointment').first().json._id.toString().replace(/^\"(.*)\"$/, '$1'),\n  updated_at: $now.toISO()\n};\n\nif (params.tipo_agendamiento && params.tipo_agendamiento !== 'null') data.tipo = params.tipo_agendamiento;\nif (params.fecha_hora && params.fecha_hora !== 'null') data.fecha_hora = params.fecha_hora;\nif (params.horario_preferido && params.horario_preferido !== 'null') data.horario_preferido = params.horario_preferido;\nif (params.medio_llamada && params.medio_llamada !== 'null') data.medio_llamada = params.medio_llamada;\nif (params.cita_confirmada) data.confirmada = params.cita_confirmada;\n\nreturn [{ json: data }];"
+        }
+      },
+      {
+        "id": "ab4024bf-15ae-48a4-bc04-82cba8a512ae",
+        "name": "Insert Appointment Data",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -128,
+          112
+        ],
+        "parameters": {
+          "jsCode": "const params = $('Parse RSVP Output').first().json.output.parameters;\nconst ctx = $('CONTEXT').item.json;\n\nconst data = {\n  contactId: ctx.contactId,\n  dealer: ctx.dealer,\n  nombre: ctx.nombre,\n  vehiculo_interes: ctx.vehiculo_interes,\n  created_at: $now.toISO(),\n  updated_at: $now.toISO()\n};\n\nif (params.tipo_agendamiento && params.tipo_agendamiento !== 'null') data.tipo = params.tipo_agendamiento;\nif (params.fecha_hora && params.fecha_hora !== 'null') data.fecha_hora = params.fecha_hora;\nif (params.horario_preferido && params.horario_preferido !== 'null') data.horario_preferido = params.horario_preferido;\nif (params.medio_llamada && params.medio_llamada !== 'null') data.medio_llamada = params.medio_llamada;\nif (params.cita_confirmada) data.confirmada = params.cita_confirmada;\n\nreturn [{ json: data }];"
+        }
+      },
+      {
+        "id": "c9091df6-34ef-47f7-bcd3-e9fce11eb1f7",
+        "name": "Update Appointment",
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          96,
+          -112
+        ],
+        "parameters": {
+          "operation": "update",
+          "collection": "appointments",
+          "updateKey": "_id",
+          "fields": "={{ Object.keys($json).filter(k => k !== '_id').join(',') }}",
+          "options": {
+            "dateFields": "updated_at"
+          }
+        },
+        "credentials": {
+          "mongoDb": {
+            "id": "WvGe0WEIfm6NF1Qa",
+            "name": "MongoDB Carwarriors"
+          }
+        }
+      },
+      {
+        "id": "1d61fd8d-75ca-42f2-abc9-05dd2fbaee2e",
+        "name": "Insert Appointment",
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          96,
+          112
+        ],
+        "parameters": {
+          "operation": "insert",
+          "collection": "appointments",
+          "fields": "={{ Object.keys($json).filter(k => k !== '_id').join(',') }}",
+          "options": {
+            "dateFields": "created_at,updated_at"
+          }
+        },
+        "credentials": {
+          "mongoDb": {
+            "id": "WvGe0WEIfm6NF1Qa",
+            "name": "MongoDB Carwarriors"
+          }
+        }
+      },
+      {
+        "id": "2a0f6c80-6c74-407c-86a0-dbc6f00c900d",
+        "name": "IF Requiere Calendario",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          200,
+          700
+        ],
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "cx3",
+                "leftValue": "={{ ['cita_presencial','cita_virtual'].includes($('Parse RSVP Output').item.json.output.parameters.tipo_agendamiento) && $('Parse RSVP Output').item.json.output.parameters.cita_confirmada === true && $('Parse RSVP Output').item.json.output.parameters.cancelar_cita !== true }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        }
+      },
+      {
+        "id": "1c63c8cb-547e-41de-b039-f3212455d006",
+        "name": "GHL Consultar Disponibilidad",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.5,
+        "position": [
+          424,
+          700
+        ],
+        "parameters": {
+          "method": "GET",
+          "url": "https://services.leadconnectorhq.com/calendars/i15OEWwywQIe21ihVw5n/free-slots",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendQuery": true,
+          "specifyQuery": "keypair",
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "startDate",
+                "value": "={{ DateTime.fromISO($('Parse RSVP Output').item.json.output.parameters.fecha_hora, {zone:'America/New_York'}).startOf('day').toMillis() }}"
+              },
+              {
+                "name": "endDate",
+                "value": "={{ DateTime.fromISO($('Parse RSVP Output').item.json.output.parameters.fecha_hora, {zone:'America/New_York'}).startOf('day').plus({days:1}).toMillis() }}"
+              },
+              {
+                "name": "timezone",
+                "value": "America/New_York"
+              }
+            ]
+          },
+          "sendHeaders": true,
+          "specifyHeaders": "keypair",
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Version",
+                "value": "2021-04-15"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "k3Hkkki2LvoFVTWd",
+            "name": "Header Auth GHL - Rances Car"
+          }
+        }
+      },
+      {
+        "id": "78dc4eef-4db0-4f63-b371-90ea68c28f28",
+        "name": "Decidir Accion Calendario",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          648,
+          700
+        ],
+        "parameters": {
+          "jsCode": "const params = $('Parse RSVP Output').first().json.output.parameters;\nconst existing = $('Find Appointment').first().json;\nconst ghlEventId = existing && existing.ghl_event_id ? existing.ghl_event_id : null;\n\nlet _id;\ntry { _id = $('Insert Appointment').first().json._id; } catch(e) {}\nif (!_id) { try { _id = $('Update Appointment').first().json._id; } catch(e) {} }\nif (!_id) { try { _id = existing && existing._id; } catch(e) {} }\n_id = _id ? _id.toString().replace(/^\"(.*)\"$/, '$1') : null;\n\nconst fechaHora = params.fecha_hora;\n\nif (!fechaHora) {\n  return [{ json: {\n    accion: 'no_disponible', _id, ghl_event_id: ghlEventId,\n    confirmada: false, updated_at: $now.toISO(),\n    response_override: 'No pude registrar el horario exacto. ¿Puedes confirmarme el día y la hora de nuevo?'\n  } }];\n}\n\nconst requested = DateTime.fromISO(fechaHora, { zone: 'America/New_York' });\nconst dayKey = requested.toFormat('yyyy-MM-dd');\nconst slotsResp = $('GHL Consultar Disponibilidad').first().json;\nconst daySlots = (slotsResp[dayKey] && slotsResp[dayKey].slots) || [];\n\nconst match = daySlots.find(s => Math.abs(DateTime.fromISO(s).toMillis() - requested.toMillis()) < 60 * 1000);\n\nif (!match) {\n  const future = daySlots.filter(s => DateTime.fromISO(s).toMillis() >= requested.toMillis());\n  const suggestion = future[0] || daySlots[0] || null;\n  let suggestionText = 'no tenemos horarios disponibles ese día, ¿prefieres otro día?';\n  if (suggestion) {\n    const dt = DateTime.fromISO(suggestion).setLocale('es');\n    suggestionText = `el horario más cercano disponible es ${dt.toFormat(\"cccc d 'de' LLLL 'a las' h:mm a\")} (hora Miami). ¿Te sirve o prefieres otro?`;\n  }\n  return [{ json: {\n    accion: 'no_disponible', _id, ghl_event_id: ghlEventId,\n    confirmada: false, updated_at: $now.toISO(),\n    response_override: `Ese horario ya no está disponible — ${suggestionText}`\n  } }];\n}\n\nconst startIso = match;\nconst endIso = DateTime.fromISO(match).plus({ minutes: 30 }).toISO({ suppressMilliseconds: true });\n\nconst tipoPrefix = {\n  cita_presencial: 'Visita presencial (incluye test drive) — ',\n  cita_virtual: 'Videollamada con asesor — '\n}[params.tipo_agendamiento] || '';\n\nreturn [{ json: {\n  accion: ghlEventId ? 'reagendar' : 'crear',\n  _id, ghl_event_id: ghlEventId,\n  slot_iso: startIso, end_iso: endIso,\n  titulo: `${tipoPrefix}Rances Car`\n} }];"
+        }
+      },
+      {
+        "id": "cbb582ba-359b-496d-9789-a16425f12bdc",
+        "name": "Switch Accion Calendario",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          872,
+          700
+        ],
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": false,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 1
+                  },
+                  "combinator": "and",
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.accion }}",
+                      "rightValue": "crear",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ]
+                },
+                "renameOutput": true,
+                "outputKey": "Crear"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": false,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 1
+                  },
+                  "combinator": "and",
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.accion }}",
+                      "rightValue": "reagendar",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ]
+                },
+                "renameOutput": true,
+                "outputKey": "Reagendar"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": false,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 1
+                  },
+                  "combinator": "and",
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.accion }}",
+                      "rightValue": "no_disponible",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ]
+                },
+                "renameOutput": true,
+                "outputKey": "No Disponible"
+              }
+            ]
+          },
+          "options": {}
+        }
+      },
+      {
+        "id": "b4803506-5735-490e-b653-4e8765ad18d0",
+        "name": "GHL Crear Cita",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.5,
+        "position": [
+          1096,
+          600
+        ],
+        "parameters": {
+          "method": "POST",
+          "url": "https://services.leadconnectorhq.com/calendars/events/appointments",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendHeaders": true,
+          "specifyHeaders": "keypair",
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Version",
+                "value": "2021-04-15"
+              }
+            ]
+          },
+          "sendBody": true,
+          "contentType": "json",
+          "specifyBody": "json",
+          "jsonBody": "={{ { \"calendarId\": \"i15OEWwywQIe21ihVw5n\", \"locationId\": \"1j1dHo8HEbZdElQUGFoC\", \"contactId\": $('CONTEXT').item.json.contactId, \"startTime\": $json.slot_iso, \"endTime\": $json.end_iso, \"title\": $json.titulo, \"appointmentStatus\": \"confirmed\", \"assignedUserId\": \"PPnwiuKqgiEyxRfX7A52\" } }}",
+          "options": {}
+        },
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "k3Hkkki2LvoFVTWd",
+            "name": "Header Auth GHL - Rances Car"
+          }
+        }
+      },
+      {
+        "id": "20798ddc-056c-4b0d-a420-687574dde20f",
+        "name": "Guardar Event ID",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1320,
+          600
+        ],
+        "parameters": {
+          "mode": "runOnceForAllItems",
+          "jsCode": "const d = $('Decidir Accion Calendario').first().json;\nreturn [{ json: { _id: d._id, ghl_event_id: $json.id, updated_at: $now.toISO() } }];"
+        }
+      },
+      {
+        "id": "9bee7d9b-520a-4ddb-b53f-4bb16eb5b0ce",
+        "name": "Mongo Guardar GHL Event ID",
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          1544,
+          600
+        ],
+        "parameters": {
+          "operation": "update",
+          "collection": "appointments",
+          "updateKey": "_id",
+          "fields": "ghl_event_id,updated_at",
+          "options": {
+            "dateFields": "updated_at"
+          }
+        },
+        "credentials": {
+          "mongoDb": {
+            "id": "WvGe0WEIfm6NF1Qa",
+            "name": "MongoDB Carwarriors"
+          }
+        }
+      },
+      {
+        "id": "46f41f96-62fa-4c6d-b62b-f9056d2f6b0d",
+        "name": "GHL Reagendar Cita",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.5,
+        "position": [
+          1096,
+          700
+        ],
+        "parameters": {
+          "method": "PUT",
+          "url": "=https://services.leadconnectorhq.com/calendars/events/appointments/{{ $json.ghl_event_id }}",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendHeaders": true,
+          "specifyHeaders": "keypair",
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Version",
+                "value": "2021-04-15"
+              }
+            ]
+          },
+          "sendBody": true,
+          "contentType": "json",
+          "specifyBody": "json",
+          "jsonBody": "={{ { \"startTime\": $json.slot_iso, \"endTime\": $json.end_iso } }}",
+          "options": {}
+        },
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "k3Hkkki2LvoFVTWd",
+            "name": "Header Auth GHL - Rances Car"
+          }
+        }
+      },
+      {
+        "id": "d5a139bd-0714-4e55-bef1-759ae5ee4da5",
+        "name": "Mongo Revertir Confirmacion",
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          1096,
+          820
+        ],
+        "parameters": {
+          "operation": "update",
+          "collection": "appointments",
+          "updateKey": "_id",
+          "fields": "confirmada,updated_at",
+          "options": {
+            "dateFields": "updated_at"
+          }
+        },
+        "credentials": {
+          "mongoDb": {
+            "id": "WvGe0WEIfm6NF1Qa",
+            "name": "MongoDB Carwarriors"
+          }
+        }
+      },
+      {
+        "id": "ddd763e7-3330-4a48-96bd-e73e414e33db",
+        "name": "Set Response No Disponible",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1320,
+          820
+        ],
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "rn1",
+                "name": "response",
+                "value": "={{ $('Decidir Accion Calendario').item.json.response_override }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        }
+      },
+      {
+        "id": "d3d48baa-0135-4f4f-8cba-bd230e597f01",
+        "name": "IF CONFIRMADA",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          320,
+          -16
+        ],
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "4a3c4317-c310-4233-8dbc-6b7190a3417f",
+                "leftValue": "={{ $('Parse RSVP Output').item.json.output.parameters.cita_confirmada === true }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              },
+              {
+                "id": "b2f5e8a1-d3c7-4f92-a1e6-9c4b0d8e2f63",
+                "leftValue": "={{ $('Find Appointment').first().json.confirmada !== true }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        }
+      },
+      {
+        "id": "9b346572-9031-485c-a503-0c37fead91cd",
+        "name": "HTML",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          544,
+          -112
+        ],
+        "parameters": {
+          "jsCode": "const ctx = $('CONTEXT').item.json;\nconst params = $('Parse RSVP Output').item.json.output.parameters;\n\nconst tipoLabel = {\n  'cita_presencial': 'Visita presencial al concesionario',\n  'cita_virtual': 'Videollamada con un asesor',\n  'llamada': 'Llamada telefónica'\n}[params.tipo_agendamiento] || '-';\n\nconst fechaIso = params.fecha_hora || $('Find Appointment').first().json.fecha_hora;\nlet fecha = '-';\nif (fechaIso) {\n  const dt = DateTime.fromISO(fechaIso, { zone: 'America/New_York' });\n  if (dt.isValid) {\n    const txt = dt.setLocale('es').toFormat(\"cccc d 'de' LLLL 'a las' h:mm a\");\n    fecha = (txt.charAt(0).toUpperCase() + txt.slice(1)) + ' (hora Miami)';\n  }\n}\nconst medioLlamadaLabel = params.medio_llamada === 'whatsapp' ? 'WhatsApp' : params.medio_llamada === 'telefono' ? 'Teléfono' : '-';\n\nreturn [{ json: {\n  fecha,\n  modalidad: tipoLabel,\n  tipo_agendamiento: params.tipo_agendamiento || null,\n  horario_preferido: params.horario_preferido || null,\n  medio_llamada: params.medio_llamada || null,\n  medio_llamada_label: medioLlamadaLabel\n} }];"
+        }
+      },
+      {
+        "id": "c7816dfe-92d4-42f7-b3a2-d7ece919f69a",
+        "name": "'Notifications Master' Cita",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.3,
+        "position": [
+          992,
+          -112
+        ],
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "oz7EabosHGTXtTjr",
+            "mode": "list",
+            "cachedResultName": "NOTIFICATIONS"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "tipo_alerta": "cita",
+              "datos": "={{ { \"dealer\": $('CONTEXT').item.json.dealer || 'Sin definir', \"nombre_lead\": $('CONTEXT').item.json.nombre || 'No registrado', \"telefono_lead\": '', \"correo_lead\": '', \"fecha_cita\": $('HTML').item.json.fecha || 'Por confirmar', \"modalidad\": $('HTML').item.json.modalidad || 'Presencial', \"tipo_agendamiento\": $('HTML').item.json.tipo_agendamiento || null, \"horario_preferido\": $('HTML').item.json.horario_preferido || null, \"medio_llamada\": $('HTML').item.json.medio_llamada || null, \"medio_llamada_label\": $('HTML').item.json.medio_llamada_label || '-', \"contactId\": $('CONTEXT').item.json.contactId } }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "tipo_alerta",
+                "displayName": "tipo_alerta",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string"
+              },
+              {
+                "id": "datos",
+                "displayName": "datos",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "object"
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true
+          },
+          "options": {}
+        }
+      },
+      {
+        "id": "989edd19-a0d6-400a-ba44-435072811cba",
+        "name": "Find User",
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          1216,
+          -112
+        ],
+        "parameters": {
+          "collection": "users",
+          "options": {},
+          "query": "={\"contactId\": \"{{$('CONTEXT').item.json.contactId}}\"}"
+        },
+        "credentials": {
+          "mongoDb": {
+            "id": "WvGe0WEIfm6NF1Qa",
+            "name": "MongoDB Carwarriors"
+          }
+        }
+      },
+      {
+        "id": "a74eaad5-67d1-4574-8d94-8cd66719e6cb",
+        "name": "reservation update",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1440,
+          -112
+        ],
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "4a52d8ad-da2c-4760-9834-ac9e439b4841",
+                "name": "contactId",
+                "value": "={{ $('CONTEXT').item.json.contactId }}",
+                "type": "string"
+              },
+              {
+                "id": "1660f796-d040-4c8c-9bd3-e26e6eda9daf",
+                "name": "has_reservation",
+                "value": true,
+                "type": "boolean"
+              }
+            ]
+          },
+          "options": {}
+        }
+      },
+      {
+        "id": "02afb0cb-d9c1-48ff-8291-1bcaa1f3ba2e",
+        "name": "Update User",
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          1664,
+          -112
+        ],
+        "parameters": {
+          "operation": "update",
+          "collection": "users",
+          "updateKey": "contactId",
+          "fields": "contactId,has_reservation",
+          "options": {}
+        },
+        "credentials": {
+          "mongoDb": {
+            "id": "WvGe0WEIfm6NF1Qa",
+            "name": "MongoDB Carwarriors"
+          }
+        }
+      },
+      {
+        "id": "22796c35-3af8-4f60-8424-259194a33ed3",
+        "name": "RESPONSE 1",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1664,
+          272
+        ],
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "a1e815fb-c2c8-4ea2-8702-0469bce83c44",
+                "name": "response",
+                "value": "={{ $('Parse RSVP Output').item.json.output.response }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        }
+      },
+      {
+        "id": "ddef98f3-6a0c-4c29-a8b2-51997db11b18",
+        "name": "NADA",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1664,
+          80
+        ],
+        "parameters": {}
+      },
+      {
+        "id": "fb7d5387-fab3-4b44-a628-15432c7e237b",
+        "name": "RESPONSE FINAL",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1888,
+          80
+        ],
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "17040735-ba26-4907-a78f-586ea71fcbe9",
+                "name": "response",
+                "value": "={{ $json.response || $('Parse RSVP Output').item.json.output.response }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        }
+      }
+    ],
+    "connections": {
+      "START": {
+        "main": [
+          [
+            {
+              "node": "CONTEXT",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "CONTEXT": {
+        "main": [
+          [
+            {
+              "node": "RSVP Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "RSVP Agent": {
+        "main": [
+          [
+            {
+              "node": "Parse RSVP Output",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "MongoDB Chat Memory": {
+        "ai_memory": [
+          [
+            {
+              "node": "RSVP Agent",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "OpenRouter Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "RSVP Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Parse RSVP Output": {
+        "main": [
+          [
+            {
+              "node": "If TIENE FECHA",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If TIENE FECHA": {
+        "main": [
+          [
+            {
+              "node": "Find Appointment",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "RESPONSE 1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Find Appointment": {
+        "main": [
+          [
+            {
+              "node": "IF CANCELAR",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "IF CANCELAR": {
+        "main": [
+          [
+            {
+              "node": "IF Tiene Evento GHL",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "IF APPOINTMENT EXIST",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "IF Tiene Evento GHL": {
+        "main": [
+          [
+            {
+              "node": "GHL Cancelar Cita",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Preparar Cancelacion Mongo",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GHL Cancelar Cita": {
+        "main": [
+          [
+            {
+              "node": "Preparar Cancelacion Mongo",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Preparar Cancelacion Mongo": {
+        "main": [
+          [
+            {
+              "node": "Mongo Cancelar Cita",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Mongo Cancelar Cita": {
+        "main": [
+          [
+            {
+              "node": "'Notifications Master' Cancelacion",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "'Notifications Master' Cancelacion": {
+        "main": [
+          [
+            {
+              "node": "Set Response Cancelacion",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set Response Cancelacion": {
+        "main": [
+          [
+            {
+              "node": "RESPONSE FINAL",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "IF APPOINTMENT EXIST": {
+        "main": [
+          [
+            {
+              "node": "Update Appointment Data",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Insert Appointment Data",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update Appointment Data": {
+        "main": [
+          [
+            {
+              "node": "Update Appointment",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Insert Appointment Data": {
+        "main": [
+          [
+            {
+              "node": "Insert Appointment",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update Appointment": {
+        "main": [
+          [
+            {
+              "node": "IF Requiere Calendario",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Insert Appointment": {
+        "main": [
+          [
+            {
+              "node": "IF Requiere Calendario",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "IF Requiere Calendario": {
+        "main": [
+          [
+            {
+              "node": "GHL Consultar Disponibilidad",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "IF CONFIRMADA",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GHL Consultar Disponibilidad": {
+        "main": [
+          [
+            {
+              "node": "Decidir Accion Calendario",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Decidir Accion Calendario": {
+        "main": [
+          [
+            {
+              "node": "Switch Accion Calendario",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Switch Accion Calendario": {
+        "main": [
+          [
+            {
+              "node": "GHL Crear Cita",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "GHL Reagendar Cita",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Mongo Revertir Confirmacion",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GHL Crear Cita": {
+        "main": [
+          [
+            {
+              "node": "Guardar Event ID",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Guardar Event ID": {
+        "main": [
+          [
+            {
+              "node": "Mongo Guardar GHL Event ID",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Mongo Guardar GHL Event ID": {
+        "main": [
+          [
+            {
+              "node": "IF CONFIRMADA",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GHL Reagendar Cita": {
+        "main": [
+          [
+            {
+              "node": "IF CONFIRMADA",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Mongo Revertir Confirmacion": {
+        "main": [
+          [
+            {
+              "node": "Set Response No Disponible",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set Response No Disponible": {
+        "main": [
+          [
+            {
+              "node": "RESPONSE FINAL",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "IF CONFIRMADA": {
+        "main": [
+          [
+            {
+              "node": "HTML",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "NADA",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTML": {
+        "main": [
+          [
+            {
+              "node": "'Notifications Master' Cita",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "'Notifications Master' Cita": {
+        "main": [
+          [
+            {
+              "node": "Find User",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Find User": {
+        "main": [
+          [
+            {
+              "node": "reservation update",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "reservation update": {
+        "main": [
+          [
+            {
+              "node": "Update User",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update User": {
+        "main": [
+          [
+            {
+              "node": "RESPONSE FINAL",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "RESPONSE 1": {
+        "main": [
+          [
+            {
+              "node": "RESPONSE FINAL",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "NADA": {
+        "main": [
+          [
+            {
+              "node": "RESPONSE FINAL",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "nodeGroups": []
+  },
+  "tags": [],
+  "meta": {
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp"
+  },
+  "parentFolderId": null,
+  "description": "Clon de RSVP (Carwarriors LLC) adaptado a Rances Car: calendario real de Scarleth Hassiel Rubi, horario L-V 8am-5pm, slots de 30 min, credencial GHL propia.",
+  "scopes": [
+    "execution:reveal",
+    "workflow:create",
+    "workflow:delete",
+    "workflow:disableRedaction",
+    "workflow:enableRedaction",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:export",
+    "workflow:import",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update"
+  ],
+  "canExecute": true
+}

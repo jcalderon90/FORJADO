@@ -75,7 +75,7 @@ Publicado y verificado byte a byte en la versión activa (`versionId` y `activeV
 
 ## Pendiente real
 
-- [ ] Decidir con Jorge/Bianca si corregir el `LEAD_SOURCE_MAP` de `Build ADF XML` ahora (preventivo, sin daño activo) o esperar — mínimo CW/Tesla (`Tesla CW` → `TESLA CW`) y RANCES/Trade (`Trade in Rances` → `TRADE IN RANCES`) tienen corrección inequívoca; CW/Trade-In necesita que confirmen cuál de las 2 variantes reales (`CW TRADE IN` vs `TRADE-IN CW`) es la oficial antes de tocarlo.
+- [x] Corrección de `LEAD_SOURCE_MAP` en `Build ADF XML`: confirmada por Jorge (`CW TRADE IN`), publicada en n8n (`89dcf751-bb80-4ece-a27f-33bddb2d948b`) el 2026-09-05 y sincronizada con el repositorio local el 2026-09-18.
 - [ ] Sigue abierto desde 2026-07-23: levantar la tabla completa de valores de Lead Source por campaña/dealer con Jorge/Bianca (bloqueador humano, no técnico) — este hallazgo aporta datos nuevos reales a ese pendiente.
 - [ ] 2 leads de prueba (`FORJADO TEST BORRAR`, `FORJADO TEST BORRAR CALENDAR`) siguen visibles en el espejo `dealercenter_customers` (marcados `LOST`) pese a que el vault documenta que se limpiaron el 2026-08-25 — no confirmado si siguen en DealerCenter real o es que el espejo no refleja borrados. No investigado a fondo, bajo impacto.
 
