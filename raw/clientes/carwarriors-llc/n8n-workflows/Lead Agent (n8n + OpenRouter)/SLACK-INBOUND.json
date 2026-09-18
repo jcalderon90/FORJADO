@@ -2,11 +2,45 @@
   "name": "SLACK - INBOUND (DM / Menciones)",
   "active": true,
   "description": "Recibe eventos de Slack (DM directo o @mencion en canal) y responde con un mensaje placeholder mientras el agente PRINCIPAL no esta conectado. Necesita: credencial Slack API (access token + signing secret) en el Trigger, y que el canal del Event Subscriptions apunte a la Production URL de este workflow (no la URL de OAuth callback).",
-  "settings": { "executionOrder": "v1", "availableInMCP": true },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true,
+    "errorWorkflow": "ypd1lxqlsa5KXsoy"
+  },
   "connections": {
-    "Slack Trigger DM Mencion": { "main": [[{ "node": "Filtrar DM o Mencion", "type": "main", "index": 0 }]] },
-    "Filtrar DM o Mencion": { "main": [[{ "node": "Armar Respuesta", "type": "main", "index": 0 }]] },
-    "Armar Respuesta": { "main": [[{ "node": "Responder en Slack", "type": "main", "index": 0 }]] }
+    "Slack Trigger DM Mencion": {
+      "main": [
+        [
+          {
+            "node": "Filtrar DM o Mencion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filtrar DM o Mencion": {
+      "main": [
+        [
+          {
+            "node": "Armar Respuesta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Armar Respuesta": {
+      "main": [
+        [
+          {
+            "node": "Responder en Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
   },
   "nodes": [
     {
@@ -14,17 +48,37 @@
       "name": "Slack Trigger DM Mencion",
       "type": "n8n-nodes-base.slackTrigger",
       "typeVersion": 1,
-      "position": [0, 0],
-      "parameters": { "trigger": ["app_mention", "message"], "watchWorkspace": true, "options": { "resolveIds": true } },
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "trigger": [
+          "app_mention",
+          "message"
+        ],
+        "watchWorkspace": true,
+        "options": {
+          "resolveIds": true
+        }
+      },
       "webhookId": "533d982f-376c-4b64-8195-5a3a8a74cde6",
-      "credentials": { "slackApi": { "id": "wUpEjaBadmKdhhqM", "name": "Slack FORJADO" } }
+      "credentials": {
+        "slackApi": {
+          "id": "wUpEjaBadmKdhhqM",
+          "name": "Slack FORJADO"
+        }
+      }
     },
     {
       "id": "e807689a-e3f1-402d-a7a0-583d9754ed22",
       "name": "Filtrar DM o Mencion",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [224, 0],
+      "position": [
+        224,
+        0
+      ],
       "parameters": {
         "jsCode": "const j = $input.first().json;\nconst event = j.event || j;\nconst channelType = j.channel_type || event.channel_type;\nconst eventType = j.type || event.type;\nconst subtype = j.subtype || event.subtype;\n\n// Cualquier variante de un mensaje 'message' que no sea un mensaje nuevo real\n// (respuesta del propio bot, edicion, borrado, join, etc.) trae un subtype.\n// Un mensaje humano normal nunca trae subtype -- si lo tiene, se ignora.\nif (subtype) {\n  return [];\n}\n\nconst isDM = channelType === 'im';\nconst isMention = eventType === 'app_mention';\nif (!isDM && !isMention) {\n  return [];\n}\nreturn [{ json: Object.assign({}, j, { isDM: isDM, isMention: isMention }) }];"
       },
@@ -35,11 +89,19 @@
       "name": "Armar Respuesta",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [448, 0],
+      "position": [
+        448,
+        0
+      ],
       "parameters": {
         "assignments": {
           "assignments": [
-            { "id": "1", "name": "text", "type": "string", "value": ":wave: Hola, soy el asistente de Carwarriors -- todavia estoy en construccion (la logica completa llega pronto). Tu mensaje quedo registrado." }
+            {
+              "id": "1",
+              "name": "text",
+              "type": "string",
+              "value": ":wave: Hola, soy el asistente de Carwarriors -- todavia estoy en construccion (la logica completa llega pronto). Tu mensaje quedo registrado."
+            }
           ]
         },
         "options": {}
@@ -51,21 +113,36 @@
       "name": "Responder en Slack",
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.6,
-      "position": [672, 0],
+      "position": [
+        672,
+        0
+      ],
       "parameters": {
         "resource": "message",
         "operation": "post",
         "authentication": "accessToken",
         "select": "channel",
-        "channelId": { "__rl": true, "mode": "id", "value": "={{ $('Slack Trigger DM Mencion').item.json.channel }}" },
+        "channelId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Slack Trigger DM Mencion').item.json.channel }}"
+        },
         "messageType": "text",
         "text": "={{ $json.text }}",
-        "otherOptions": { "mrkdwn": true }
+        "otherOptions": {
+          "mrkdwn": true
+        }
       },
       "webhookId": "6f0898a3-3ea0-4284-985d-f92651235021",
       "credentials": {
-        "slackOAuth2Api": { "id": "wUpEjaBadmKdhhqM", "name": "Slack account" },
-        "slackApi": { "id": "wUpEjaBadmKdhhqM", "name": "Slack FORJADO" }
+        "slackOAuth2Api": {
+          "id": "wUpEjaBadmKdhhqM",
+          "name": "Slack account"
+        },
+        "slackApi": {
+          "id": "wUpEjaBadmKdhhqM",
+          "name": "Slack FORJADO"
+        }
       }
     }
   ]

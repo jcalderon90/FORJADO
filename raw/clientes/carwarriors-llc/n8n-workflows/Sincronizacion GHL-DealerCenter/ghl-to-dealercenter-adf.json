@@ -1,60 +1,197 @@
 {
+  "id": "ZxcF7cmf3V8FZabx",
   "name": "Subir a DealerCenter",
   "active": true,
+  "isArchived": false,
+  "versionId": "89dcf751-bb80-4ece-a27f-33bddb2d948b",
+  "activeVersionId": "89dcf751-bb80-4ece-a27f-33bddb2d948b",
+  "triggerCount": 1,
+  "nodeCount": 10,
+  "createdAt": "2026-07-30T05:49:03.799Z",
+  "updatedAt": "2026-09-18T22:42:21.129Z",
   "settings": {
     "executionOrder": "v1",
     "binaryMode": "separate",
     "availableInMCP": true,
     "timeSavedMode": "fixed",
-    "callerPolicy": "workflowsFromSameOwner"
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "ypd1lxqlsa5KXsoy"
   },
+  "tags": [],
+  "parentFolderId": "84Xu5D4xWGDwDvcm",
+  "scopes": [
+    "execution:reveal",
+    "workflow:create",
+    "workflow:delete",
+    "workflow:disableRedaction",
+    "workflow:enableRedaction",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:export",
+    "workflow:import",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update"
+  ],
+  "canExecute": true,
   "connections": {
-    "GHL Lead Webhook (ADF)": { "main": [[{ "node": "Select Dealer + Token", "type": "main", "index": 0 }]] },
-    "Select Dealer + Token": { "main": [[{ "node": "Get GHL Contact", "type": "main", "index": 0 }]] },
-    "Build ADF XML": { "main": [[{ "node": "Subir a DealerCenter (SFTP)", "type": "main", "index": 0 }]] },
-    "Get GHL Contact": { "main": [[{ "node": "Buscar en Mongo (Dedupe)", "type": "main", "index": 0 }]] },
-    "Buscar en Mongo (Dedupe)": { "main": [[{ "node": "Es Cliente Nuevo?", "type": "main", "index": 0 }]] },
+    "GHL Lead Webhook (ADF)": {
+      "main": [
+        [
+          {
+            "node": "Select Dealer + Token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select Dealer + Token": {
+      "main": [
+        [
+          {
+            "node": "Get GHL Contact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build ADF XML": {
+      "main": [
+        [
+          {
+            "node": "Subir a DealerCenter (SFTP)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar en Mongo (Dedupe)": {
+      "main": [
+        [
+          {
+            "node": "Es Cliente Nuevo?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Es Cliente Nuevo?": {
       "main": [
-        [{ "node": "Build ADF XML", "type": "main", "index": 0 }],
-        [{ "node": "Duplicado Evitado", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Build ADF XML",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Duplicado Evitado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get GHL Contact": {
+      "main": [
+        [
+          {
+            "node": "Tiene Telefono?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tiene Telefono?": {
+      "main": [
+        [
+          {
+            "node": "Buscar en Mongo (Dedupe)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Sin Telefono - No Enviado",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
   "nodes": [
     {
-      "parameters": { "httpMethod": "POST", "path": "ghl-dealercenter-adf", "options": {} },
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ghl-dealercenter-adf",
+        "options": {}
+      },
       "id": "322b2dc6-7c88-4205-84e6-d667e1191725",
       "name": "GHL Lead Webhook (ADF)",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
-      "position": [192, 128],
-      "webhookId": "bc0de0d7-de10-47dc-b34c-fd2bca680c3e",
-      "_productionUrl": "https://n8n-x5jtc0a7f0lbanybimocyidl.2.24.106.87.sslip.io/webhook/ghl-dealercenter-adf"
+      "position": [
+        192,
+        128
+      ],
+      "webhookId": "bc0de0d7-de10-47dc-b34c-fd2bca680c3e"
     },
     {
       "parameters": {
-        "jsCode": "const body = $input.item.json.body || $input.item.json;\nconst locationId = body.locationId;\nconst contactId = body.contactId;\n\nif (!contactId || !locationId) {\n  throw new Error('Falta contactId o locationId en el payload del webhook de GHL. Body recibido: ' + JSON.stringify(body));\n}\n\n// Location IDs y tokens de GHL (verificar contra el vault Carwarriors LLC.md si cambian)\nconst LOCATIONS = {\n  'DSe5PdPEScZL8cbZTkKI': { dealer: 'CW', vendorName: 'Carwarriors LLC', token: 'pit-34c1d79d-0bfa-4ddc-8349-11ce00ff9df5' },\n  '1j1dHo8HEbZdElQUGFoC': { dealer: 'RANCES', vendorName: 'Rances Car', token: 'pit-e8ac1488-cb01-484d-98f9-a4b2bcae4c92' }\n};\n\nconst loc = LOCATIONS[locationId];\nif (!loc) {\n  throw new Error('Location de GHL desconocida (no es Carwarriors LLC ni Rances Car): ' + locationId);\n}\n\nreturn [{\n  json: {\n    contactId,\n    locationId,\n    dealer: loc.dealer,\n    vendorName: loc.vendorName,\n    ghlToken: loc.token\n  }\n}];",
-        "_comment": "Tokens rotados 2026-08-13 (renovacion PIT en ambas subcuentas). Hardcodeado a proposito (autorizado por Jorge) -- el token vive tambien en 'Header Auth GHL' pero solo para el workflow de captura de leads."
+        "jsCode": "const body = $input.item.json.body || $input.item.json;\nconst locationId = body.locationId;\nconst contactId = body.contactId;\n\nif (!contactId || !locationId) {\n  throw new Error('Falta contactId o locationId en el payload del webhook de GHL. Body recibido: ' + JSON.stringify(body));\n}\n\n// Location IDs y tokens de GHL (verificar contra el vault Carwarriors LLC.md si cambian)\nconst LOCATIONS = {\n  'DSe5PdPEScZL8cbZTkKI': { dealer: 'CW', vendorName: 'Carwarriors LLC', token: 'pit-34c1d79d-0bfa-4ddc-8349-11ce00ff9df5' },\n  '1j1dHo8HEbZdElQUGFoC': { dealer: 'RANCES', vendorName: 'Rances Car', token: 'pit-e8ac1488-cb01-484d-98f9-a4b2bcae4c92' }\n};\n\nconst loc = LOCATIONS[locationId];\nif (!loc) {\n  throw new Error('Location de GHL desconocida (no es Carwarriors LLC ni Rances Car): ' + locationId);\n}\n\nreturn [{\n  json: {\n    contactId,\n    locationId,\n    dealer: loc.dealer,\n    vendorName: loc.vendorName,\n    ghlToken: loc.token\n  }\n}];"
       },
       "id": "06a8347f-8447-4ed9-9a3e-d483263b664f",
       "name": "Select Dealer + Token",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [416, 128]
+      "position": [
+        416,
+        128
+      ]
     },
     {
       "parameters": {
         "url": "={{ 'https://services.leadconnectorhq.com/contacts/' + $json.contactId }}",
         "sendHeaders": true,
-        "headerParameters": { "parameters": [{ "name": "Authorization", "value": "={{ 'Bearer ' + $json.ghlToken }}" }, { "name": "Version", "value": "2021-07-28" }, { "name": "Accept", "value": "application/json" }] },
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + $json.ghlToken }}"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
         "options": {}
       },
       "id": "6e2d3bef-64f0-4872-a3b9-811ad6675348",
       "name": "Get GHL Contact",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [640, 128]
+      "position": [
+        640,
+        128
+      ]
     },
     {
       "parameters": {
@@ -64,37 +201,76 @@
       "name": "Build ADF XML",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [1312, 32]
+      "position": [
+        1312,
+        32
+      ]
     },
     {
-      "parameters": { "protocol": "sftp", "operation": "upload", "path": "={{ '/Leads/' + $json.fileName }}", "options": {} },
+      "parameters": {
+        "protocol": "sftp",
+        "operation": "upload",
+        "path": "={{ '/Leads/' + $json.fileName }}",
+        "options": {}
+      },
       "id": "66be1195-81fe-40fd-8a65-6a2deaf92e02",
       "name": "Subir a DealerCenter (SFTP)",
       "type": "n8n-nodes-base.ftp",
       "typeVersion": 1,
-      "position": [1536, 32],
-      "credentials": { "sftp": { "id": "y5Dxu4D7498raQQU", "name": "FTP account" } }
+      "position": [
+        1536,
+        32
+      ],
+      "credentials": {
+        "sftp": {
+          "id": "y5Dxu4D7498raQQU",
+          "name": "FTP account"
+        }
+      }
     },
     {
       "parameters": {
         "collection": "dealercenter_customers",
-        "options": { "limit": 1 },
+        "options": {
+          "limit": 1
+        },
         "query": "={{ (() => { const conds = [ $json.contact.phone ? { phone: $json.contact.phone } : null, $json.contact.email ? { email: { $regex: '^' + $json.contact.email + '$', $options: 'i' } } : null ].filter(Boolean); return JSON.stringify(conds.length ? { $or: conds } : { _id: null }); })() }}"
       },
       "id": "26eefe79-ad16-4830-a919-463371370ff5",
       "name": "Buscar en Mongo (Dedupe)",
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.3,
-      "position": [864, 128],
+      "position": [
+        864,
+        128
+      ],
       "alwaysOutputData": true,
-      "credentials": { "mongoDb": { "id": "WvGe0WEIfm6NF1Qa", "name": "MongoDB Carwarriors" } }
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
     },
     {
       "parameters": {
         "conditions": {
           "combinator": "and",
-          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 1 },
-          "conditions": [{ "leftValue": "={{ $json.customerUniqueId }}", "operator": { "type": "string", "operation": "empty" } }]
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.customerUniqueId }}",
+              "operator": {
+                "type": "string",
+                "operation": "empty"
+              }
+            }
+          ]
         },
         "options": {}
       },
@@ -102,7 +278,10 @@
       "name": "Es Cliente Nuevo?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
-      "position": [1088, 128]
+      "position": [
+        1088,
+        128
+      ]
     },
     {
       "parameters": {},
@@ -110,8 +289,63 @@
       "name": "Duplicado Evitado",
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
-      "position": [1312, 224],
+      "position": [
+        1312,
+        224
+      ],
       "notes": "Ya existe un customer en DealerCenter con este telefono/email (segun el espejo de Mongo) -- no se reenvia el ADF para evitar crear un duplicado."
+    },
+    {
+      "id": "9f238f02-354d-4a7a-95d2-e43cf53e18df",
+      "name": "Tiene Telefono?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        752,
+        128
+      ],
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.contact.phone }}",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "134a4379-8fb6-4ec3-a0e9-40ce84d2c422",
+      "name": "Sin Telefono - No Enviado",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        976,
+        224
+      ],
+      "parameters": {},
+      "notes": "Regla de negocio: ningun lead sin telefono puede sincronizarse a DealerCenter. Este contacto de GHL no tiene telefono -- se corta aqui, no se arma ni se sube el ADF-XML."
     }
-  ]
+  ],
+  "nodeGroups": [],
+  "activeVersion": {
+    "sameAsDraft": true
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp"
+  }
 }

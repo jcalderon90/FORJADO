@@ -1,6 +1,14 @@
 {
+  "id": "Gq8DaJm0kr7L4DSu",
   "name": "SEND - MEDIA",
-  "active": false,
+  "active": true,
+  "isArchived": false,
+  "versionId": "aae5302e-e0d5-41bc-92db-2933d28d354b",
+  "activeVersionId": "aae5302e-e0d5-41bc-92db-2933d28d354b",
+  "triggerCount": 0,
+  "nodeCount": 9,
+  "createdAt": "2026-08-12T21:50:17.552Z",
+  "updatedAt": "2026-09-18T22:41:22.047Z",
   "settings": {
     "executionOrder": "v1",
     "binaryMode": "separate",
@@ -9,47 +17,157 @@
     "errorWorkflow": "ypd1lxqlsa5KXsoy",
     "callerPolicy": "workflowsFromSameOwner"
   },
+  "tags": [],
+  "parentFolderId": "KY7Gv340Znfdg8ea",
+  "scopes": [
+    "execution:reveal",
+    "workflow:create",
+    "workflow:delete",
+    "workflow:disableRedaction",
+    "workflow:enableRedaction",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:export",
+    "workflow:import",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update"
+  ],
+  "canExecute": true,
   "connections": {
-    "Map Media Resources": { "main": [[{ "node": "IF Media Disponible", "type": "main", "index": 0 }]] },
+    "Map Media Resources": {
+      "main": [
+        [
+          {
+            "node": "IF Media Disponible",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "IF Media Disponible": {
       "main": [
-        [{ "node": "Send GHL Media", "type": "main", "index": 0 }],
-        [{ "node": "No Media Response", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Send GHL Media",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Media Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
-    "START": { "main": [[{ "node": "Map Media Resources", "type": "main", "index": 0 }]] },
+    "START": {
+      "main": [
+        [
+          {
+            "node": "Map Media Resources",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Buscar Fotos Inventario",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "IF Envio Exitoso": {
       "main": [
-        [{ "node": "Response To Agent", "type": "main", "index": 0 }],
-        [{ "node": "Error Envio", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Response To Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error Envio",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
-    "Send GHL Media": { "main": [[{ "node": "IF Envio Exitoso", "type": "main", "index": 0 }]] }
+    "Send GHL Media": {
+      "main": [
+        [
+          {
+            "node": "IF Envio Exitoso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Fotos Inventario": {
+      "main": [
+        [
+          {
+            "node": "Map Media Resources",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
   },
   "nodes": [
     {
       "parameters": {
-        "jsCode": "const dealer = $input.item.json.dealer || \"\";\nconst tipoRaw = String($input.item.json.tipo_media || \"\").toLowerCase().trim();\nconst tipo = tipoRaw || \"bienvenida\";\nconst canal = ($input.item.json.canal || \"whatsapp\").toLowerCase().trim();\nconst modelo = String($input.item.json.modelo || \"\").toUpperCase().trim();\n\n// PENDIENTE: reemplazar con URLs reales de fotos/videos de inventario (insumo externo del cliente, ver Estado del Proyecto.md).\n// Estructura esperada una vez haya datos reales:\n// { \"CW\": { \"bienvenida\": \"https://...mp4\", \"vehiculos\": { \"TOYOTA CAMRY 2023\": \"https://...mp4\" } }, \"RANCES\": {...} }\nconst database = {};\n\nconst dealerData = database[dealer] || {};\nlet url = null;\nif (tipo === \"vehiculo\" && modelo) {\n  url = (dealerData.vehiculos || {})[modelo] || null;\n} else {\n  url = dealerData[tipo] || null;\n}\n\nreturn [{\n  json: {\n    contactId: $input.item.json.contactId,\n    canal,\n    dealer,\n    media_disponible: url !== null,\n    attachments: url ? [url] : []\n  }\n}];"
+        "jsCode": "const trigger = $('START').first().json;\nconst dealer = trigger.dealer || \"\";\nconst tipoRaw = String(trigger.tipo_media || \"\").toLowerCase().trim();\nconst tipo = tipoRaw || \"bienvenida\";\nconst canal = (trigger.canal || \"whatsapp\").toLowerCase().trim();\nconst modelo = String(trigger.modelo || \"\").trim();\n\nfunction normalize(s) {\n  return String(s || '').toUpperCase().replace(/[^A-Z0-9 ]/g, ' ').replace(/\\s+/g, ' ').trim();\n}\n\nlet url = null;\nlet caption = 'Aqui tienes';\n\nif (tipo === \"vehiculo\" && modelo) {\n  const rows = $input.all().map(i => i.json);\n  const modeloWords = normalize(modelo).split(' ').filter(w => w.length >= 3);\n  let best = null;\n  let bestScore = 0;\n  for (const row of rows) {\n    const titleNorm = normalize(row.vehicle_title);\n    const score = modeloWords.filter(w => titleNorm.includes(w)).length;\n    if (score > bestScore) {\n      bestScore = score;\n      best = row;\n    }\n  }\n  // Exigir al menos 2 palabras coincidentes (ej. marca + modelo) para evitar falsos positivos\n  if (best && bestScore >= 2) {\n    url = best.photo_url;\n    caption = best.vehicle_title || caption;\n  }\n}\n// tipo === 'bienvenida' u otros: sin fuente de datos todavia, queda sin media (rama segura ya existente)\n\nreturn [{\n  json: {\n    contactId: trigger.contactId,\n    canal,\n    dealer,\n    media_disponible: url !== null,\n    attachments: url ? [url] : [],\n    caption\n  }\n}];",
+        "mode": "runOnceForAllItems"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [-352, 128],
+      "position": [
+        -352,
+        128
+      ],
       "id": "de0321cb-de28-4823-b536-e789d647d138",
-      "name": "Map Media Resources",
-      "_comment_pendiente": "database = {} a proposito — sin fotos/inventario real todavia (insumo de Bianca/DealerCenter)"
+      "name": "Map Media Resources"
     },
     {
       "parameters": {
         "conditions": {
-          "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "strict", "version": 3 },
-          "conditions": [{ "id": "media-disponible-001", "leftValue": "={{ $json.media_disponible }}", "rightValue": "", "operator": { "type": "boolean", "operation": "true", "singleValue": true } }],
-          "combinator": "and"
-        },
-        "options": {}
+          "combinator": "and",
+          "conditions": [
+            {
+              "leftValue": "={{ !!$json.media_disponible }}",
+              "operator": {
+                "operation": "true",
+                "type": "boolean"
+              },
+              "rightValue": true
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          }
+        }
       },
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
-      "position": [-128, 128],
+      "position": [
+        -128,
+        128
+      ],
       "id": "78d878b5-593a-4b7f-b953-de929a6b6fee",
       "name": "IF Media Disponible"
     },
@@ -58,23 +176,58 @@
         "method": "POST",
         "url": "https://services.leadconnectorhq.com/conversations/messages",
         "sendHeaders": true,
-        "headerParameters": { "parameters": [{ "name": "Content-Type", "value": "application/json" }, { "name": "Authorization", "value": "=Bearer {{ $('START').first().json.ghlToken }}" }] },
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('START').first().json.ghlToken }}"
+            }
+          ]
+        },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ { \"type\": ($('Map Media Resources').first().json.canal === 'instagram' ? 'IG' : $('Map Media Resources').first().json.canal === 'messenger' ? 'FB' : 'Custom'), \"contactId\": $('Map Media Resources').first().json.contactId, \"attachments\": $('Map Media Resources').first().json.attachments } }}",
-        "options": { "response": { "response": { "neverError": true } } }
+        "jsonBody": "={{ { \"type\": ($('Map Media Resources').first().json.canal === 'instagram' ? 'IG' : $('Map Media Resources').first().json.canal === 'messenger' ? 'FB' : $('Map Media Resources').first().json.canal === 'sms' ? 'SMS' : 'WhatsApp'), \"contactId\": $('Map Media Resources').first().json.contactId, \"message\": $('Map Media Resources').first().json.caption, \"attachments\": $('Map Media Resources').first().json.attachments } }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [96, 32],
+      "position": [
+        96,
+        32
+      ],
       "id": "f64b0495-c965-4fe3-a949-491152cf4cae",
       "name": "Send GHL Media"
     },
     {
-      "parameters": { "assignments": { "assignments": [{ "id": "b3e21820-2c70-4976-8051-789a6be3db9d", "name": "response", "value": "Media enviada. Dile al usuario con entusiasmo que ya le enviaste lo que solicitó y pregunta qué le parece el vehículo.", "type": "string" }] }, "options": {} },
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b3e21820-2c70-4976-8051-789a6be3db9d",
+              "name": "response",
+              "value": "Media enviada. Dile al usuario con entusiasmo que ya le enviaste lo que solicitó y pregunta qué le parece el vehículo.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [544, -64],
+      "position": [
+        544,
+        -64
+      ],
       "id": "bf904f50-1f2c-49ae-bc86-7d5f620d274a",
       "name": "Response To Agent"
     },
@@ -94,23 +247,68 @@
       },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [96, 224],
+      "position": [
+        96,
+        224
+      ],
       "id": "ca66ca4f-2bbf-4ca0-af3d-08f54cf6a9c0",
       "name": "No Media Response"
     },
     {
-      "parameters": { "workflowInputs": { "values": [{ "name": "tipo_media" }, { "name": "dealer" }, { "name": "canal" }, { "name": "contactId" }, { "name": "modelo" }, { "name": "ghlToken" }] } },
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "tipo_media"
+            },
+            {
+              "name": "dealer"
+            },
+            {
+              "name": "canal"
+            },
+            {
+              "name": "contactId"
+            },
+            {
+              "name": "modelo"
+            },
+            {
+              "name": "ghlToken"
+            }
+          ]
+        }
+      },
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
-      "position": [-576, 128],
+      "position": [
+        -576,
+        128
+      ],
       "id": "06faf983-3cda-4797-b640-618d459711b2",
       "name": "START"
     },
     {
       "parameters": {
         "conditions": {
-          "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "strict", "version": 3 },
-          "conditions": [{ "id": "send-ok-001", "leftValue": "={{ !!($json.messageId || $json.conversationId) }}", "rightValue": "", "operator": { "type": "boolean", "operation": "true", "singleValue": true } }],
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "send-ok-001",
+              "leftValue": "={{ !!($json.messageId || $json.conversationId) }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
           "combinator": "and"
         },
         "options": {}
@@ -119,15 +317,65 @@
       "name": "IF Envio Exitoso",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
-      "position": [320, 32]
+      "position": [
+        320,
+        32
+      ]
     },
     {
-      "parameters": { "assignments": { "assignments": [{ "id": "error-envio-001", "name": "response", "value": "No fue posible enviar el material en este momento. Dile al usuario con amabilidad que hubo un inconveniente técnico al enviar el material y que puede pedirlo de nuevo en unos momentos.", "type": "string" }] }, "options": {} },
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "error-envio-001",
+              "name": "response",
+              "value": "No fue posible enviar el material en este momento. Dile al usuario con amabilidad que hubo un inconveniente técnico al enviar el material y que puede pedirlo de nuevo en unos momentos.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
       "id": "1d385f30-d8c6-4e64-b514-30f09d6d2a8d",
       "name": "Error Envio",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [544, 128]
+      "position": [
+        544,
+        128
+      ]
+    },
+    {
+      "id": "1cbe5f46-9e36-4299-b02b-0cd9cd9cc6b5",
+      "name": "Buscar Fotos Inventario",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.4,
+      "position": [
+        -464,
+        128
+      ],
+      "parameters": {
+        "resource": "document",
+        "operation": "find",
+        "collection": "inventory_media",
+        "query": "={{ JSON.stringify({ dealer: $json.dealer || 'CW' }) }}",
+        "options": {}
+      },
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
     }
-  ]
+  ],
+  "nodeGroups": [],
+  "activeVersion": {
+    "sameAsDraft": true
+  },
+  "meta": {
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp",
+    "templateCredsSetupCompleted": true
+  }
 }

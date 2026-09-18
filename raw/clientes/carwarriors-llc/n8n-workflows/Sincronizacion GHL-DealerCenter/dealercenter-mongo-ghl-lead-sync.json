@@ -1,49 +1,177 @@
 {
+  "id": "EIF9ufLxqoFWZtQ0",
   "name": "DealerCenter -> Mongo -> GHL (Lead Sync)",
   "active": true,
+  "isArchived": false,
+  "versionId": "edca3e9c-9509-424c-8662-47f88e7cb428",
+  "activeVersionId": "edca3e9c-9509-424c-8662-47f88e7cb428",
+  "triggerCount": 1,
+  "nodeCount": 8,
+  "createdAt": "2026-07-30T17:09:06.536Z",
+  "updatedAt": "2026-09-18T22:41:53.472Z",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true,
+    "binaryMode": "separate",
+    "errorWorkflow": "ypd1lxqlsa5KXsoy"
+  },
+  "tags": [],
+  "parentFolderId": "84Xu5D4xWGDwDvcm",
   "description": "Ingesta diaria: parsea el Excel del reporte FORJADO Lead Sync de DealerCenter, upsert en Mongo y en GHL (ambos dealers)",
-  "settings": { "executionOrder": "v1", "availableInMCP": true, "binaryMode": "separate" },
+  "scopes": [
+    "execution:reveal",
+    "workflow:create",
+    "workflow:delete",
+    "workflow:disableRedaction",
+    "workflow:enableRedaction",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:export",
+    "workflow:import",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update"
+  ],
+  "canExecute": true,
   "connections": {
-    "FORJADO Lead Sync Email": { "main": [[{ "node": "Extraer Excel", "type": "main", "index": 0 }]] },
-    "Extraer Excel": { "main": [[{ "node": "Normalizar y Enrutar Dealer", "type": "main", "index": 0 }]] },
-    "Normalizar y Enrutar Dealer": { "main": [[{ "node": "Upsert en Mongo", "type": "main", "index": 0 }]] },
-    "Upsert en Mongo": { "main": [[{ "node": "Con Email o Telefono", "type": "main", "index": 0 }]] },
-    "Con Email o Telefono": { "main": [[{ "node": "Upsert Contacto en GHL", "type": "main", "index": 0 }]] },
-    "Upsert Contacto en GHL": { "main": [[{ "node": "Mark a message as read", "type": "main", "index": 0 }]] }
+    "FORJADO Lead Sync Email": {
+      "main": [
+        [
+          {
+            "node": "Extraer Excel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer Excel": {
+      "main": [
+        [
+          {
+            "node": "Normalizar y Enrutar Dealer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalizar y Enrutar Dealer": {
+      "main": [
+        [
+          {
+            "node": "Upsert en Mongo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upsert en Mongo": {
+      "main": [
+        [
+          {
+            "node": "Con Email o Telefono",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Con Email o Telefono": {
+      "main": [
+        [
+          {
+            "node": "Upsert Contacto en GHL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upsert Contacto en GHL": {
+      "main": [
+        [
+          {
+            "node": "Mark a message as read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
   },
   "nodes": [
     {
       "parameters": {
-        "pollTimes": { "item": [{ "mode": "everyX", "value": 30, "unit": "minutes" }] },
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "value": 30,
+              "unit": "minutes"
+            }
+          ]
+        },
         "simple": false,
-        "filters": { "q": "subject:\"FORJADO Lead Sync\" has:attachment", "readStatus": "unread" },
-        "options": { "dataPropertyAttachmentsPrefixName": "attachment_", "downloadAttachments": true }
+        "filters": {
+          "q": "subject:\"FORJADO Lead Sync\" has:attachment",
+          "readStatus": "unread"
+        },
+        "options": {
+          "dataPropertyAttachmentsPrefixName": "attachment_",
+          "downloadAttachments": true
+        }
       },
       "id": "d66c3d69-cc4e-4d10-9448-c08d17f7088a",
       "name": "FORJADO Lead Sync Email",
       "type": "n8n-nodes-base.gmailTrigger",
       "typeVersion": 1.4,
-      "position": [0, 0],
-      "credentials": { "gmailOAuth2": { "id": "3dOfYyrrSn84ZGBs", "name": "jcalderon900610@gmail.com" } }
+      "position": [
+        0,
+        0
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "3dOfYyrrSn84ZGBs",
+          "name": "jcalderon900610@gmail.com"
+        }
+      }
     },
     {
-      "parameters": { "operation": "xlsx", "binaryPropertyName": "attachment_0", "options": { "headerRow": true } },
+      "parameters": {
+        "operation": "xlsx",
+        "binaryPropertyName": "attachment_0",
+        "options": {
+          "headerRow": true
+        }
+      },
       "id": "d676a1eb-16f1-4be4-b0ba-2e5cceff91ad",
       "name": "Extraer Excel",
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1.1,
-      "position": [224, 0]
+      "position": [
+        224,
+        0
+      ]
     },
     {
       "parameters": {
-        "jsCode": "const rows = $input.all().map(item => item.json);\n\nlet headerRowIndex = -1;\nlet headerMap = null;\nfor (let i = 0; i < rows.length; i++) {\n  const values = Object.values(rows[i]);\n  if (values.includes('Customer Unique ID')) {\n    headerRowIndex = i;\n    headerMap = {};\n    for (const [key, val] of Object.entries(rows[i])) {\n      headerMap[key] = val;\n    }\n    break;\n  }\n}\n\nif (headerRowIndex === -1) {\n  throw new Error('No se encontro la fila de encabezados reales (buscando \"Customer Unique ID\") en el Excel de DealerCenter.');\n}\n\nfunction excelDateToISO(value) {\n  if (value === '' || value === null || value === undefined) return '';\n  if (typeof value === 'number') {\n    const ms = Math.round((value - 25569) * 86400 * 1000);\n    return new Date(ms).toISOString();\n  }\n  return String(value);\n}\n\nconst LOCATIONS = {\n  CW: { locationId: 'DSe5PdPEScZL8cbZTkKI', ghlToken: 'pit-34c1d79d-0bfa-4ddc-8349-11ce00ff9df5' },\n  RANCES: { locationId: '1j1dHo8HEbZdElQUGFoC', ghlToken: 'pit-e8ac1488-cb01-484d-98f9-a4b2bcae4c92' }\n};\n\nconst results = [];\nfor (let i = headerRowIndex + 1; i < rows.length; i++) {\n  const rawRow = rows[i];\n  const row = {};\n  for (const [key, val] of Object.entries(rawRow)) {\n    const columnName = headerMap[key];\n    if (columnName) row[columnName] = val;\n  }\n\n  const customerUniqueId = row['Customer Unique ID'] || '';\n  if (!customerUniqueId) continue;\n\n  const leadSource = String(row['Lead Source'] || '').toUpperCase();\n  const dealer = leadSource.includes('RANCES') ? 'RANCES' : 'CW';\n  const loc = LOCATIONS[dealer];\n\n  const digitsOnly = String(row['Mobile Phone'] || '').replace(/\\D/g, '');\n  const phone = digitsOnly ? ('+1' + digitsOnly.slice(-10)) : '';\n  const email = String(row['Email'] || '').trim();\n  const firstName = row['First Name'] || '';\n  const lastName = row['Last Name'] || '';\n\n  const ghlBody = { locationId: loc.locationId, tags: ['DealerCenter Sync'] };\n  if (email) ghlBody.email = email;\n  if (phone) ghlBody.phone = phone;\n  if (firstName) ghlBody.firstName = firstName;\n  if (lastName) ghlBody.lastName = lastName;\n  const canSyncToGhl = Boolean(email || phone);\n\n  results.push({\n    json: {\n      customerUniqueId,\n      firstName,\n      lastName,\n      email,\n      phone,\n      customerStatus: row['Customer Status'] || '',\n      customerStage: row['Customer Stage'] || '',\n      leadSource: row['Lead Source'] || '',\n      leadType: row['Lead Type'] || '',\n      createdDate: excelDateToISO(row['Customer Created Date']),\n      updatedDate: excelDateToISO(row['Last Updated Date']),\n      assignedRep: row['Sales Rep'] || '',\n      vehicleInterest: row['Interested Vehicle'] || '',\n      vehicleSold: row['Sold Vehicle'] || '',\n      nextAppointment: excelDateToISO(row['Next Appointment']),\n      dealer,\n      locationId: loc.locationId,\n      ghlToken: loc.ghlToken,\n      ghlBody,\n      canSyncToGhl\n    },\n    pairedItem: { item: 0 }\n  });\n}\n\nreturn results;",
-        "_comment": "Tokens hardcodeados aqui rotados 2026-08-13 (renovacion PIT). Autorizado por Jorge -- asi estaba construido desde antes."
+        "jsCode": "const rows = $input.all().map(item => item.json);\n\nlet headerRowIndex = -1;\nlet headerMap = null;\nfor (let i = 0; i < rows.length; i++) {\n  const values = Object.values(rows[i]);\n  if (values.includes('Customer Unique ID')) {\n    headerRowIndex = i;\n    headerMap = {};\n    for (const [key, val] of Object.entries(rows[i])) {\n      headerMap[key] = val;\n    }\n    break;\n  }\n}\n\nif (headerRowIndex === -1) {\n  throw new Error('No se encontro la fila de encabezados reales (buscando \"Customer Unique ID\") en el Excel de DealerCenter.');\n}\n\nfunction excelDateToISO(value) {\n  if (value === '' || value === null || value === undefined) return '';\n  if (typeof value === 'number') {\n    const ms = Math.round((value - 25569) * 86400 * 1000);\n    return new Date(ms).toISOString();\n  }\n  return String(value);\n}\n\nconst LOCATIONS = {\n  CW: { locationId: 'DSe5PdPEScZL8cbZTkKI', ghlToken: 'pit-34c1d79d-0bfa-4ddc-8349-11ce00ff9df5' },\n  RANCES: { locationId: '1j1dHo8HEbZdElQUGFoC', ghlToken: 'pit-e8ac1488-cb01-484d-98f9-a4b2bcae4c92' }\n};\n\nconst results = [];\nfor (let i = headerRowIndex + 1; i < rows.length; i++) {\n  const rawRow = rows[i];\n  const row = {};\n  for (const [key, val] of Object.entries(rawRow)) {\n    const columnName = headerMap[key];\n    if (columnName) row[columnName] = val;\n  }\n\n  const customerUniqueId = row['Customer Unique ID'] || '';\n  if (!customerUniqueId) continue;\n\n  const leadSource = String(row['Lead Source'] || '').toUpperCase();\n  const dealer = leadSource.includes('RANCES') ? 'RANCES' : 'CW';\n  const loc = LOCATIONS[dealer];\n\n  const digitsOnly = String(row['Mobile Phone'] || '').replace(/\\D/g, '');\n  const phone = digitsOnly ? ('+1' + digitsOnly.slice(-10)) : '';\n  const email = String(row['Email'] || '').trim();\n  const firstName = row['First Name'] || '';\n  const lastName = row['Last Name'] || '';\n\n  const ghlBody = { locationId: loc.locationId, tags: ['DealerCenter Sync'] };\n  if (email) ghlBody.email = email;\n  if (phone) ghlBody.phone = phone;\n  if (firstName) ghlBody.firstName = firstName;\n  if (lastName) ghlBody.lastName = lastName;\n  const canSyncToGhl = Boolean(email || phone);\n\n  results.push({\n    json: {\n      customerUniqueId,\n      firstName,\n      lastName,\n      email,\n      phone,\n      customerStatus: row['Customer Status'] || '',\n      customerStage: row['Customer Stage'] || '',\n      leadSource: row['Lead Source'] || '',\n      leadType: row['Lead Type'] || '',\n      createdDate: excelDateToISO(row['Customer Created Date']),\n      updatedDate: excelDateToISO(row['Last Updated Date']),\n      assignedRep: row['Sales Rep'] || '',\n      vehicleInterest: row['Interested Vehicle'] || '',\n      vehicleSold: row['Sold Vehicle'] || '',\n      nextAppointment: excelDateToISO(row['Next Appointment']),\n      dealer,\n      locationId: loc.locationId,\n      ghlToken: loc.ghlToken,\n      ghlBody,\n      canSyncToGhl\n    },\n    pairedItem: { item: 0 }\n  });\n}\n\nreturn results;"
       },
       "id": "264207f5-15ed-42cd-af2c-80abf16ab752",
       "name": "Normalizar y Enrutar Dealer",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [448, 0]
+      "position": [
+        448,
+        0
+      ]
     },
     {
       "parameters": {
@@ -58,32 +186,59 @@
       "name": "Upsert en Mongo",
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.3,
-      "position": [672, 0],
+      "position": [
+        672,
+        0
+      ],
       "onError": "continueRegularOutput",
-      "credentials": { "mongoDb": { "id": "WvGe0WEIfm6NF1Qa", "name": "MongoDB Carwarriors" } }
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
     },
     {
       "parameters": {
         "method": "POST",
         "url": "=https://services.leadconnectorhq.com/contacts/upsert",
         "sendHeaders": true,
-        "headerParameters": { "parameters": [{ "name": "Authorization", "value": "=Bearer {{ $('Normalizar y Enrutar Dealer').item.json.ghlToken }}" }, { "name": "Version", "value": "2021-07-28" }] },
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Normalizar y Enrutar Dealer').item.json.ghlToken }}"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            }
+          ]
+        },
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "={{ $('Normalizar y Enrutar Dealer').item.json.ghlBody }}",
-        "options": { "batching": { "batch": { "batchSize": 5 } } }
+        "options": {
+          "batching": {
+            "batch": {
+              "batchSize": 5
+            }
+          }
+        }
       },
       "id": "53664e4e-9b1a-4ea0-b471-72f1e1bf896d",
       "name": "Upsert Contacto en GHL",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
-      "position": [1120, 0],
-      "onError": "continueRegularOutput",
-      "_nota": "Nodo tiene continueOnFail -- causa por la que el corte de token del 2026-08-13 no se noto de inmediato (fallaba en silencio)."
+      "position": [
+        1120,
+        0
+      ],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
-        "content": "## FORJADO Lead Sync — DealerCenter -> Mongo -> GHL\\nParsea el Excel diario del reporte \"FORJADO Lead Sync\" de DealerCenter, hace upsert en Mongo (coleccion dealercenter_customers) y en GHL (contacts/upsert), enrutando por dealer segun el sufijo CW/RANCES del Lead Source.\\nPendiente: mapear customFields de GHL (Interes de Vehiculo, etc.) una vez confirmados los IDs por sub-cuenta.",
+        "content": "## FORJADO Lead Sync — DealerCenter -> Mongo -> GHL\\nParsea el Excel diario del reporte \"FORJADO Lead Sync\" de DealerCenter, hace upsert en Mongo (colecci\\u00f3n dealercenter_customers) y en GHL (contacts/upsert), enrutando por dealer seg\\u00fan el sufijo CW/RANCES del Lead Source.\\nPendiente: mapear customFields de GHL (Inter\\u00e9s de Veh\\u00edculo, etc.) una vez confirmados los IDs por sub-cuenta.",
         "height": 376,
         "width": 348
       },
@@ -91,16 +246,36 @@
       "name": "Sticky Note cf67ab5b",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
-      "position": [-416, -272]
+      "position": [
+        -416,
+        -272
+      ]
     },
     {
       "parameters": {
         "conditions": {
           "combinator": "or",
-          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 1 },
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
           "conditions": [
-            { "leftValue": "={{ $json.email }}", "operator": { "type": "string", "operation": "notEmpty" } },
-            { "leftValue": "={{ $json.phone }}", "operator": { "type": "string", "operation": "notEmpty" } }
+            {
+              "leftValue": "={{ $json.email }}",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            },
+            {
+              "leftValue": "={{ $json.phone }}",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
           ]
         },
         "options": {}
@@ -109,19 +284,42 @@
       "name": "Con Email o Telefono",
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.3,
-      "position": [896, 0]
+      "position": [
+        896,
+        0
+      ]
     },
     {
-      "parameters": { "operation": "markAsRead", "messageId": "={{ $('FORJADO Lead Sync Email').item.json.id }}" },
+      "parameters": {
+        "operation": "markAsRead",
+        "messageId": "={{ $('FORJADO Lead Sync Email').item.json.id }}"
+      },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
-      "position": [1344, 0],
+      "position": [
+        1344,
+        0
+      ],
       "id": "f37d667c-c02b-4418-b693-6bcd8664d493",
       "name": "Mark a message as read",
       "webhookId": "f4622798-02eb-4fad-aedd-b1bdbb9587a5",
       "executeOnce": true,
       "onError": "continueRegularOutput",
-      "credentials": { "gmailOAuth2": { "id": "3dOfYyrrSn84ZGBs", "name": "jcalderon900610@gmail.com" } }
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "3dOfYyrrSn84ZGBs",
+          "name": "jcalderon900610@gmail.com"
+        }
+      }
     }
-  ]
+  ],
+  "nodeGroups": [],
+  "activeVersion": {
+    "sameAsDraft": true
+  },
+  "meta": {
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp",
+    "templateCredsSetupCompleted": true
+  }
 }

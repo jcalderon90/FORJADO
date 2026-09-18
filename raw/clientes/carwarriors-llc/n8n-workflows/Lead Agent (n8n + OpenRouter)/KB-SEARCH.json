@@ -1,6 +1,14 @@
 {
+  "id": "oB2bc9YTIpXqt5zH",
   "name": "KB - SEARCH",
-  "active": false,
+  "active": true,
+  "isArchived": false,
+  "versionId": "1f8b62bf-2472-4f37-868b-eb1a86c9ffa9",
+  "activeVersionId": "1f8b62bf-2472-4f37-868b-eb1a86c9ffa9",
+  "triggerCount": 0,
+  "nodeCount": 8,
+  "createdAt": "2026-08-12T21:29:44.442Z",
+  "updatedAt": "2026-09-18T22:40:57.153Z",
   "settings": {
     "executionOrder": "v1",
     "binaryMode": "separate",
@@ -9,21 +17,130 @@
     "callerPolicy": "workflowsFromSameOwner",
     "errorWorkflow": "ypd1lxqlsa5KXsoy"
   },
+  "tags": [],
+  "parentFolderId": "KY7Gv340Znfdg8ea",
+  "scopes": [
+    "execution:reveal",
+    "workflow:create",
+    "workflow:delete",
+    "workflow:disableRedaction",
+    "workflow:enableRedaction",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:export",
+    "workflow:import",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update"
+  ],
+  "canExecute": true,
   "connections": {
-    "START": { "main": [[{ "node": "Search Context", "type": "main", "index": 0 }]] },
-    "Search Context": { "main": [[{ "node": "Knowledge Base", "type": "main", "index": 0 }]] },
-    "GENERAL AGENT": { "main": [[{ "node": "RESPONSE", "type": "main", "index": 0 }]] },
-    "Code in JavaScript": { "main": [[{ "node": "GENERAL AGENT", "type": "main", "index": 0 }]] },
-    "Knowledge Base": { "main": [[{ "node": "Code in JavaScript", "type": "main", "index": 0 }]] },
-    "Embeddings OpenAI": { "ai_embedding": [[{ "node": "Knowledge Base", "type": "ai_embedding", "index": 0 }]] },
-    "OpenRouter Chat Model": { "ai_languageModel": [[{ "node": "GENERAL AGENT", "type": "ai_languageModel", "index": 0 }]] }
+    "START": {
+      "main": [
+        [
+          {
+            "node": "Search Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Context": {
+      "main": [
+        [
+          {
+            "node": "Knowledge Base",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GENERAL AGENT": {
+      "main": [
+        [
+          {
+            "node": "RESPONSE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "GENERAL AGENT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Knowledge Base",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "GENERAL AGENT",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Knowledge Base": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
   },
   "nodes": [
     {
-      "parameters": { "workflowInputs": { "values": [{ "name": "contactId" }, { "name": "dealer" }, { "name": "entrada_usuario" }] } },
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "contactId"
+            },
+            {
+              "name": "dealer"
+            },
+            {
+              "name": "entrada_usuario"
+            }
+          ]
+        }
+      },
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
-      "position": [16, -80],
+      "position": [
+        16,
+        -80
+      ],
       "id": "5f1be5cf-31bf-4749-8aad-266358fe1372",
       "name": "START"
     },
@@ -31,16 +148,34 @@
       "parameters": {
         "assignments": {
           "assignments": [
-            { "id": "5f6644e3-d0d4-4eb7-af2b-3d8ec7573def", "name": "dealer", "value": "={{ $json.dealer }}", "type": "string" },
-            { "id": "5f1d031b-b8d8-4482-8070-518d3ab17d39", "name": "entrada_usuario", "value": "={{ $json.entrada_usuario }}", "type": "string" },
-            { "id": "f949887b-cae2-4df4-9db7-ab7561bd986b", "name": "contactId", "value": "={{ $json.contactId }}", "type": "string" }
+            {
+              "id": "5f6644e3-d0d4-4eb7-af2b-3d8ec7573def",
+              "name": "dealer",
+              "value": "={{ $json.dealer }}",
+              "type": "string"
+            },
+            {
+              "id": "5f1d031b-b8d8-4482-8070-518d3ab17d39",
+              "name": "entrada_usuario",
+              "value": "={{ $json.entrada_usuario }}",
+              "type": "string"
+            },
+            {
+              "id": "f949887b-cae2-4df4-9db7-ab7561bd986b",
+              "name": "contactId",
+              "value": "={{ $json.contactId }}",
+              "type": "string"
+            }
           ]
         },
         "options": {}
       },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [240, -80],
+      "position": [
+        240,
+        -80
+      ],
       "id": "54f849da-cbec-4c39-9345-e7afa96771d5",
       "name": "Search Context"
     },
@@ -54,7 +189,10 @@
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
-      "position": [1040, -80],
+      "position": [
+        1040,
+        -80
+      ],
       "id": "85019c7c-fdef-46b0-b8e4-cad025a5fffa",
       "name": "GENERAL AGENT"
     },
@@ -64,53 +202,122 @@
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [816, -80],
+      "position": [
+        816,
+        -80
+      ],
       "id": "051f0f39-1d62-4a78-b796-f69dea8f322b",
       "name": "Code in JavaScript"
     },
     {
       "parameters": {
         "mode": "load",
-        "mongoCollection": { "__rl": true, "value": "documents", "mode": "list", "cachedResultName": "documents" },
+        "mongoCollection": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
         "embedding": "carwarriors_embedding",
         "metadata_field": "respuesta",
         "vectorIndexName": "carwarriors_vector_index",
         "prompt": "={{ $('Search Context').item.json.entrada_usuario }}",
-        "options": { "preFilter": "={{ JSON.stringify({ \"dealer\": { \"$eq\": $('Search Context').item.json.dealer } }) }}" }
+        "options": {
+          "preFilter": "={{ JSON.stringify({ \"dealer\": { \"$eq\": $('Search Context').item.json.dealer } }) }}"
+        },
+        "alwaysOutputData": true
       },
       "type": "@n8n/n8n-nodes-langchain.vectorStoreMongoDBAtlas",
       "typeVersion": 1.3,
-      "position": [464, -80],
+      "position": [
+        464,
+        -80
+      ],
       "id": "6fb4efb0-b11a-4b46-bcbd-f482a4286b13",
       "name": "Knowledge Base",
-      "credentials": { "mongoDb": { "id": "WvGe0WEIfm6NF1Qa", "name": "MongoDB Carwarriors" } }
+      "credentials": {
+        "mongoDb": {
+          "id": "WvGe0WEIfm6NF1Qa",
+          "name": "MongoDB Carwarriors"
+        }
+      }
     },
     {
-      "parameters": { "assignments": { "assignments": [{ "id": "1eb21b84-5b4c-4bec-905f-5c6f1301e9a6", "name": "response", "value": "={{ $json.output }}", "type": "object" }] }, "options": {} },
+      "parameters": {
+        "mode": "manual",
+        "includeOtherFields": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1eb21b84-5b4c-4bec-905f-5c6f1301e9a6",
+              "name": "response",
+              "value": "={{ (() => { const raw = $json.output || ''; const match = raw.match(/\\{[\\s\\S]*\\}/); if (!match) { return { response: raw.trim().slice(0,500), escalate: false }; } try { return JSON.parse(match[0]); } catch (e) { return { response: raw.trim().slice(0,500), escalate: false }; } })() }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [1392, -80],
+      "position": [
+        1392,
+        -80
+      ],
       "id": "12abbab1-cae2-45d9-bc11-3381ad874d40",
       "name": "RESPONSE"
     },
     {
-      "parameters": { "model": "openai/text-embedding-3-small", "options": {} },
+      "parameters": {
+        "model": "=openai/text-embedding-3-small",
+        "options": {}
+      },
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
       "typeVersion": 1.2,
-      "position": [464, 144],
+      "position": [
+        464,
+        144
+      ],
       "id": "d8835ad9-af82-49ab-b4be-b5eefc157914",
       "name": "Embeddings OpenAI",
-      "credentials": { "openAiApi": { "id": "qaHyavTutYaAUnEZ", "name": "API de OpenRouter Carwarriors" } },
-      "_comment": "Recableado 2026-08-16 a la credencial propia 'API de OpenRouter Carwarriors' (baseURL https://openrouter.ai/api/v1, model openai/text-embedding-3-small). Credencial asignada en local 2026-08-17 (faltaba, el comentario decía recableado pero no tenía el campo credentials). Pendiente: saldo en esa cuenta para poder generar embeddings."
+      "credentials": {
+        "openAiApi": {
+          "id": "qaHyavTutYaAUnEZ",
+          "name": "API de OpenRouter Carwarriors"
+        }
+      }
     },
     {
-      "parameters": { "options": { "temperature": 0.1 }, "model": "deepseek/deepseek-v4-flash" },
+      "parameters": {
+        "model": "deepseek/deepseek-v4-flash",
+        "options": {
+          "temperature": 0.1,
+          "timeout": 60000,
+          "maxRetries": 1
+        }
+      },
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
-      "position": [1040, 144],
+      "position": [
+        1040,
+        144
+      ],
       "id": "7673afea-7631-41fe-9bc8-695142314fb0",
       "name": "OpenRouter Chat Model",
-      "credentials": { "openRouterApi": { "id": "o8MexJvFeSx2j4an", "name": "OpenRouter account" } }
+      "credentials": {
+        "openRouterApi": {
+          "id": "o8MexJvFeSx2j4an",
+          "name": "OpenRouter account"
+        }
+      }
     }
-  ]
+  ],
+  "nodeGroups": [],
+  "activeVersion": {
+    "sameAsDraft": true
+  },
+  "meta": {
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp"
+  }
 }
