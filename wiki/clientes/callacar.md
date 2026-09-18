@@ -50,7 +50,7 @@ fuente_raw: raw/clientes/callacar/
 
 ## Pendientes abiertos
 
-- [ ] **Backend del formulario de contacto:** Conectar el formulario de `contact.astro` a un webhook de n8n, Cloudflare Worker o Resend para alertas y procesamiento.
+- [x] **🟢 Backend del formulario de contacto completado (2026-09-18):** Creada Cloudflare Pages Function `/functions/api/contact.ts` con validación de campos, reenvío a webhook de alertas y soporte CORS. Conectado `contact.astro` con `fetch('/api/contact')`, estados de carga, alertas accesibles y fallback directo a `support@callacar.au`.
 - [ ] **Configuración CI/CD y Despliegue:** Configurar pipeline en Cloudflare Pages o Vercel asociado al dominio oficial `callacar.au`.
 - [ ] **Deep Links definitivos:** Reemplazar URLs provisionales por deep links a los flujos nativos de la aplicación móvil cuando estén disponibles.
 
