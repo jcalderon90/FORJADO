@@ -46,8 +46,22 @@ Para garantizar cobertura completa sin huecos ni envíos duplicados, la consulta
 
 ---
 
+## Actualización 2026-09-20: Sincronización Horaria Miami y Ventana de Descanso (Quiet Hours)
+A raíz del caso Harold Milian Cruz (envío de mensaje a las 8:00 P.M. proponiendo ver el auto a las 4:00 P.M. o 6:00 P.M. de hoy), se aplicaron los siguientes ajustes críticos:
+1. **Nuevo nodo `Verificar Horario Miami` (Quiet Hours):** Bloquea salidas entre las 8:30 P.M. y 9:00 A.M. (10:00 A.M. domingos) hora Miami (`America/New_York`), alineado a los horarios del lote.
+2. **Plantillas Horarias Dinámicas:** `Armar Mensaje Intento 1` calcula las opciones en tiempo real con Luxon (`America/New_York`):
+   - Mañana (< 12:00 P.M.): Hoy 2:00 P.M. o 5:00 P.M.
+   - Tarde (12:00 P.M. – 3:59 P.M.): Hoy 5:00 P.M. o 7:00 P.M.
+   - Noche / Cierre (>= 4:00 P.M. o Dom >= 2:00 P.M.): Mañana 11:00 A.M. o 3:00 P.M.
+3. **Barrido Matutino:** A las 9:00 A.M. (10:00 A.M. domingos), el query amplía la búsqueda a 750 minutos (12.5 horas) para procesar los prospectos acumulados durante la noche.
+4. **Secuencia de Intentos Garantizada:** Todo nuevo silencio arranca obligatoriamente por el `Intento 1`, sin saltear pasos.
+Detalle completo: [[2026-09-20-fix-horario-miami-cadencia-y-prompts-principal]].
+
+---
+
 ## Despliegue y Sincronización
 - **Workflow n8n:** `Fh4fB5Cgk1hchvxe`
 - **Nombre:** `SEGUIMIENTO SALIENTE - Cadencia 24h (CW + Rances Car)`
 - **Versión Activa:** `ac921e29-0f75-499e-9820-da687acd4e0d`
 - **Archivo Local:** `raw/clientes/carwarriors-llc/n8n-workflows/Lead Agent (n8n + OpenRouter)/SEGUIMIENTO-SALIENTE-CADENCIA-24H.json`
+

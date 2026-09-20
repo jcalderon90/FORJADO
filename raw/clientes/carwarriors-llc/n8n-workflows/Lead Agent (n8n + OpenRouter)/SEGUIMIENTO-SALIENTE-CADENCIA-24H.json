@@ -6,7 +6,7 @@
   "versionId": "ac921e29-0f75-499e-9820-da687acd4e0d",
   "activeVersionId": "ac921e29-0f75-499e-9820-da687acd4e0d",
   "triggerCount": 1,
-  "nodeCount": 13,
+  "nodeCount": 14,
   "createdAt": "2026-09-07T20:21:22.443Z",
   "updatedAt": "2026-09-18T22:40:06.196Z",
   "settings": {
@@ -42,7 +42,7 @@
       "main": [
         [
           {
-            "node": "Buscar Leads Silenciosos",
+            "node": "Verificar Horario Miami",
             "type": "main",
             "index": 0
           }
@@ -188,6 +188,18 @@
           }
         ]
       ]
+    },
+    "Verificar Horario Miami": {
+      "main": [
+        [
+          {
+            "node": "Buscar Leads Silenciosos",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
     }
   },
   "nodes": [
@@ -227,7 +239,7 @@
           "limit": 50
         },
         "query": "{\"dealer\": {\"$in\": [\"CW\", \"RANCES\"]}, \"spam_bloqueado\": {\"$ne\": true}, \"has_reservation\": {\"$ne\": true}, \"$or\": [{\"last_interaction\": {\"$gte\": \"$1\", \"$lt\": \"$2\"}}, {\"last_interaction\": {\"$gte\": \"$3\", \"$lt\": \"$4\"}}, {\"last_interaction\": {\"$gte\": \"$5\", \"$lt\": \"$6\"}}]}",
-        "queryParameters": "={{ [ $now.minus({minutes: 75}).toISO(), $now.minus({minutes: 60}).toISO(), $now.minus({minutes: 315}).toISO(), $now.minus({minutes: 300}).toISO(), $now.minus({minutes: 1215}).toISO(), $now.minus({minutes: 1200}).toISO() ] }}",
+        "queryParameters": "={{ (() => { const dt = $now.setZone('America/New_York'); const isMorningBatch = (dt.weekday === 7 && dt.hour === 10 && dt.minute < 15) || (dt.weekday !== 7 && dt.hour === 9 && dt.minute < 15); const lookbackMins = isMorningBatch ? 750 : 75; return [ $now.minus({minutes: lookbackMins}).toISO(), $now.minus({minutes: 60}).toISO(), $now.minus({minutes: 315}).toISO(), $now.minus({minutes: 300}).toISO(), $now.minus({minutes: 1215}).toISO(), $now.minus({minutes: 1200}).toISO() ]; })() }}",
         "resource": "document"
       },
       "credentials": {
@@ -274,7 +286,7 @@
         200
       ],
       "parameters": {
-        "jsonOutput": "={{ (() => { const cand = $('Buscar Leads Silenciosos').item.json; const prev = $json || {}; const lastMs = cand.last_interaction ? new Date(cand.last_interaction).getTime() : 0; const diffMins = lastMs ? (Date.now() - lastMs) / 60000 : 0; let targetIntento = 1; if (diffMins >= 180 && diffMins < 600) { targetIntento = 2; } else if (diffMins >= 600) { targetIntento = 3; } let yaEnviado = false; if (prev.last_interaction_relevante && prev.last_interaction_relevante === cand.last_interaction) { const previoIntento = prev.intento || 1; if (previoIntento >= targetIntento) { yaEnviado = true; } } return { contactId: cand.contactId, locationId: cand.locationId, dealer: cand.dealer, last_interaction: cand.last_interaction, interes_vehiculo: cand.interes_vehiculo || '', language: cand.language || 'es', input_channel: cand.input_channel || '', intento: targetIntento, yaEnviado }; })() }}",
+        "jsonOutput": "={{ (() => { const cand = $('Buscar Leads Silenciosos').item.json; const prev = $json || {}; const lastMs = cand.last_interaction ? new Date(cand.last_interaction).getTime() : 0; const diffMins = lastMs ? (Date.now() - lastMs) / 60000 : 0; let targetIntento = 1; let yaEnviado = false; const mismoSilencio = prev.last_interaction_relevante && prev.last_interaction_relevante === cand.last_interaction; if (!mismoSilencio) { targetIntento = 1; yaEnviado = false; } else { const previoIntento = prev.intento || 1; if (previoIntento === 1) { if (diffMins >= 180) { targetIntento = 2; yaEnviado = false; } else { yaEnviado = true; } } else if (previoIntento === 2) { if (diffMins >= 600) { targetIntento = 3; yaEnviado = false; } else { yaEnviado = true; } } else { yaEnviado = true; } } return { contactId: cand.contactId, locationId: cand.locationId, dealer: cand.dealer, last_interaction: cand.last_interaction, interes_vehiculo: cand.interes_vehiculo || '', language: cand.language || 'es', input_channel: cand.input_channel || '', intento: targetIntento, yaEnviado }; })() }}",
         "mode": "raw"
       }
     },
@@ -407,7 +419,7 @@
         400
       ],
       "parameters": {
-        "jsonOutput": "={{ (() => { const cand = $('Evaluar Estado Recontacto').item.json; const es = cand.language !== 'en'; const iv = cand.interes_vehiculo; const intento = cand.intento || 1; let msgEs = ''; let msgEn = ''; if (intento === 1) { msgEs = \"¡Hola! Vi que estabas interesado\" + (iv ? \" en el \" + iv : \"\") + \". Tengo disponibilidad hoy para que lo veas — ¿te queda mejor a las 4pm o a las 6pm?\"; msgEn = \"Hi! I saw you were interested\" + (iv ? \" in the \" + iv : \"\") + \". I have availability today for you to see it — does 4pm or 6pm work better?\"; } else if (intento === 2) { msgEs = \"¡Hola! ¿Pudiste revisar los horarios? Si prefieres, te puedo ir adelantando las opciones con $0 de inicial\" + (iv ? \" para el \" + iv : \"\") + \" o apartarte un espacio para mañana por la mañana. ¿Qué te queda mejor?\"; msgEn = \"Hi! Were you able to check the schedule? If you prefer, I can share our $0 down payment options\" + (iv ? \" for the \" + iv : \"\") + \" or reserve a spot for tomorrow morning. Which works better for you?\"; } else { msgEs = \"¡Hola! Como no tuvimos respuesta, asumí que ya resolviste o pausaste la búsqueda del auto. Avísame si aún te interesa\" + (iv ? \" el \" + iv : \" ver opciones\") + \" para guardarte el turno antes de cerrarlo, o si prefieres que no te contactemos más.\"; msgEn = \"Hi! Since we didn't hear back, I assumed you found another option or paused your search. Let me know if you're still interested\" + (iv ? \" in the \" + iv : \"\") + \" so I can save your spot before closing it out, or if you prefer no further messages.\"; } return { type: $json.type, message: es ? msgEs : msgEn }; })() }}",
+        "jsonOutput": "={{ (() => { const cand = $('Evaluar Estado Recontacto').item.json; const es = cand.language !== 'en'; const iv = cand.interes_vehiculo; const intento = cand.intento || 1; const dt = $now.setZone('America/New_York'); const hour = dt.hour; const weekday = dt.weekday; const isSunday = weekday === 7; let msgEs = ''; let msgEn = ''; if (intento === 1) { const switchTomorrow = (isSunday && hour >= 14) || hour >= 16; if (switchTomorrow) { msgEs = \"¡Hola! Vi que estabas interesado\" + (iv ? \" en el \" + iv : \"\") + \". Tengo disponibilidad para mostrártelo mañana — ¿te queda mejor a las 11:00 AM o a las 3:00 PM?\"; msgEn = \"Hi! I saw you were interested\" + (iv ? \" in the \" + iv : \"\") + \". I have availability to show it to you tomorrow — does 11:00 AM or 3:00 PM work better?\"; } else if (hour < 12) { msgEs = \"¡Hola! Vi que estabas interesado\" + (iv ? \" en el \" + iv : \"\") + \". Tengo disponibilidad hoy para que lo veas — ¿te queda mejor a las 2:00 PM o a las 5:00 PM?\"; msgEn = \"Hi! I saw you were interested\" + (iv ? \" in the \" + iv : \"\") + \". I have availability today for you to see it — does 2:00 PM or 5:00 PM work better?\"; } else { msgEs = \"¡Hola! Vi que estabas interesado\" + (iv ? \" en el \" + iv : \"\") + \". Tengo disponibilidad hoy para que lo veas — ¿te queda mejor a las 5:00 PM o a las 7:00 PM?\"; msgEn = \"Hi! I saw you were interested\" + (iv ? \" in the \" + iv : \"\") + \". I have availability today for you to see it — does 5:00 PM or 7:00 PM work better?\"; } } else if (intento === 2) { if (hour < 14 && !isSunday) { msgEs = \"¡Hola! ¿Pudiste revisar los horarios? Si prefieres, te puedo ir adelantando las opciones con $0 de inicial\" + (iv ? \" para el \" + iv : \"\") + \" o apartarte un espacio para hoy por la tarde. ¿Qué te queda mejor?\"; msgEn = \"Hi! Were you able to check the schedule? If you prefer, I can share our $0 down payment options\" + (iv ? \" for the \" + iv : \"\") + \" or reserve a spot for you this afternoon. Which works better for you?\"; } else { msgEs = \"¡Hola! ¿Pudiste revisar los horarios? Si prefieres, te puedo ir adelantando las opciones con $0 de inicial\" + (iv ? \" para el \" + iv : \"\") + \" o apartarte un espacio para mañana por la mañana. ¿Qué te queda mejor?\"; msgEn = \"Hi! Were you able to check the schedule? If you prefer, I can share our $0 down payment options\" + (iv ? \" for the \" + iv : \"\") + \" or reserve a spot for tomorrow morning. Which works better for you?\"; } } else { msgEs = \"¡Hola! Como no tuvimos respuesta, asumí que ya resolviste o pausaste la búsqueda del auto. Avísame si aún te interesa\" + (iv ? \" el \" + iv : \" ver opciones\") + \" para guardarte el turno antes de cerrarlo, o si prefieres que no te contactemos más.\"; msgEn = \"Hi! Since we didn't hear back, I assumed you found another option or paused your search. Let me know if you're still interested\" + (iv ? \" in the \" + iv : \"\") + \" so I can save your spot before closing it out, or if you prefer no further messages.\"; } return { type: $json.type, message: es ? msgEs : msgEn }; })() }}",
         "mode": "raw"
       }
     },
@@ -458,7 +470,7 @@
         400
       ],
       "parameters": {
-        "jsonOutput": "={{ { contactId: $('Evaluar Estado Recontacto').item.json.contactId, dealer: $('Evaluar Estado Recontacto').item.json.dealer, intento: $('Evaluar Estado Recontacto').item.json.intento, last_interaction_relevante: $('Evaluar Estado Recontacto').item.json.last_interaction, enviado_at: $now.toISO() } }}",
+        "jsonOutput": "={{ { contactId: $('Evaluar Estado Recontacto').item.json.contactId, dealer: $('Evaluar Estado Recontacto').item.json.dealer, intento: $('Evaluar Estado Recontacto').item.json.intento, last_interaction_relevante: $('Evaluar Estado Recontacto').item.json.last_interaction, enviado_at: $now.setZone('America/New_York').toISO() } }}",
         "mode": "raw"
       }
     },
@@ -486,6 +498,36 @@
         "mongoDb": {
           "id": "WvGe0WEIfm6NF1Qa",
           "name": "MongoDB Carwarriors"
+        }
+      }
+    },
+    {
+      "id": "e4a8b792-710f-48d6-a73c-f4b62d3a90c1",
+      "name": "Verificar Horario Miami",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        390,
+        300
+      ],
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "leftValue": "={{ (() => { const dt = $now.setZone('America/New_York'); const day = dt.weekday; const mins = dt.hour * 60 + dt.minute; let openMins = 9 * 60; let closeMins = 20 * 60 + 30; if (day === 6) { closeMins = 19 * 60; } else if (day === 7) { openMins = 10 * 60; closeMins = 16 * 60 + 30; } return mins >= openMins && mins < closeMins; })() }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict",
+            "version": 2
+          }
         }
       }
     }
