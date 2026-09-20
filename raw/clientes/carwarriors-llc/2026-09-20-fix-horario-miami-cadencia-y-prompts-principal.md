@@ -77,3 +77,20 @@ Se reemplazó el ejemplo rígido por lógica temporal contextual:
 - [`raw/clientes/carwarriors-llc/n8n-workflows/Lead Agent (n8n + OpenRouter)/PRINCIPAL.json`](file:///e:/1TRABAJO/PROGRAMMING/Proyectos/FORJADO/desarrollo/raw/clientes/carwarriors-llc/n8n-workflows/Lead%20Agent%20%28n8n%20+%20OpenRouter%29/PRINCIPAL.json)
 - [`raw/clientes/carwarriors-llc/n8n-workflows/Lead Agent (n8n + OpenRouter)/PRINCIPAL - Rances Car.json`](file:///e:/1TRABAJO/PROGRAMMING/Proyectos/FORJADO/desarrollo/raw/clientes/carwarriors-llc/n8n-workflows/Lead%20Agent%20%28n8n%20+%20OpenRouter%29/PRINCIPAL%20-%20Rances%20Car.json)
 - [`raw/clientes/carwarriors-llc/n8n-workflows/Lead Agent (n8n + OpenRouter)/SEGUIMIENTO-SALIENTE-CADENCIA-24H.json`](file:///e:/1TRABAJO/PROGRAMMING/Proyectos/FORJADO/desarrollo/raw/clientes/carwarriors-llc/n8n-workflows/Lead%20Agent%20%28n8n%20+%20OpenRouter%29/SEGUIMIENTO-SALIENTE-CADENCIA-24H.json)
+
+---
+
+## 5. Despliegue en Producción y Verificación en Vivo (2026-09-20)
+
+1. **Reconexión y Autenticación MCP:**
+   - Se renovó y validó el token OAuth en la base de datos PostgreSQL de n8n para el usuario `jcalderon900610@gmail.com` con validez de 30 días (`expiresAt: 1792475189000`), sincronizándolo en `.claude/.credentials.json`.
+   - Las 39 herramientas nativas de n8n quedaron operativas por MCP (`https://n8n-x5jtc0a7f0lbanybimocyidl.2.24.106.87.sslip.io/mcp-server/http`).
+2. **Backups Previos en VPS:**
+   - Copias íntegras previas exportadas a `/tmp/n8n_backups_20260920/` (`backup_Kif9lWwDHvR7TT39.json`, `backup_N68IYzm4Bf6AVTXP.json`, `backup_Fh4fB5Cgk1hchvxe.json`).
+3. **Despliegue y Publicación:**
+   - **`PRINCIPAL` (`Kif9lWwDHvR7TT39`):** 101 nodos, `active: true`, `versionId: 2da29ae2-5997-4a8a-a894-4f617e80f278` = `activeVersionId`.
+   - **`PRINCIPAL - Rances Car` (`N68IYzm4Bf6AVTXP`):** 98 nodos, `active: true`, `versionId: 56fedcfb-4473-4e6e-a2ee-c7601739a0b2` = `activeVersionId`.
+   - **`SEGUIMIENTO SALIENTE - Cadencia 24h` (`Fh4fB5Cgk1hchvxe`):** 14 nodos, `active: true`, `versionId: d9f68ce0-48e8-4268-8cb8-71a8f14ea314` = `activeVersionId`.
+4. **Verificación en Ejecución Real:**
+   - La ejecución programada `7940` (02:00 AM hora Miami) ejecutó el nodo IF `Verificar Horario Miami` y detuvo el proceso de inmediato en 66 ms por Quiet Hours nocturnas, confirmando el bloqueo efectivo fuera de horario comercial.
+
