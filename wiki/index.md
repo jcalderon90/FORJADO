@@ -35,6 +35,7 @@ actualizado: 2026-09-15
 | [[clientes/carwarriors-llc-justificacion-infraestructura]] | Documento de justificación de infraestructura para el cliente |
 | [[clientes/carwarriors-llc-agente-ia-24-7]] | Diseño legacy del bot nativo de GHL Conversation AI 24/7 (reemplazado) |
 | [[clientes/carwarriors-llc-agente-ia-rances-car]] | Diseño legacy del bot nativo de GHL para Rances Car (reemplazado) |
+| [[clientes/rogers-mexico]] | Rogers México (Instalación WiFi, CCTV y antenas TV en CDMX) — estado actual, análisis web y oportunidades |
 | [[clientes/varela-law]] | Bufete legal Miami — estado actual, accesos, pendientes abiertos |
 | [[clientes/varela-law-mycase-api]] | Referencia técnica de la integración con la API de MyCase |
 | [[clientes/varela-law-radar-billing]] | Diseño y estado de Radar Billing Automation |

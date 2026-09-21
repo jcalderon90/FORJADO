@@ -17,8 +17,8 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 |---|---|---|
 | **Callacar** | **🟢 09-18: Portal web completado en `aplicaciones/call-a-car-web` (Astro 5 + WCAG AA + SEO + Portal Legal).** Build de producción validado (5 rutas en ~1.8s). Pendiente backend del formulario de contacto y despliegue CI/CD en `callacar.au`. Detalle completo: [[../clientes/callacar]]. | 2026-09-18 |
 | **Carwarriors LLC** | **✅ 09-18: Lead Scoring (Tier 1/2/3) + tags automáticos en GHL, respuestas inteligentes BDC a comentarios de IG con extracción IA, y cadencia 24h saliente multi-dealer activa en producción.** Saneamiento ADF XML en DealerCenter y RSVP auditado al 100%. Detalle completo: [[../clientes/carwarriors-llc]]. | 2026-09-18 |
-| **Varela Law** | **✅ 09-15: corregido el ruteo de pestañas por mes en Google Sheets para el tracking de pagos Zelle (`BruqJ1jdEV9xl5zG`).** Solucionado bug donde todos los pagos de Feb-Nov se guardaban en la pestaña `Dec` ($json.month no venía de Mongo), corregido parseo de fecha en Luxon para meses completos (`September` vs `Sep`), parseo de respuestas JSON formateadas en markdown por la IA y desactivado fallback model en `Basic LLM Chain`. Publicado y verificado en producción con ejecuciones de prueba (IDs 2545, 2546, 2548). Detalle: [[../../raw/clientes/varela-law/2026-09-15-fix-zelle-tracking-month-sheets-routing-and-json-parsing]]. **09-12 (contexto):** restaurado log dual (Sheet+Mongo) de `CONTRACTS FROM SLACK` y recuperado contrato histórico de Gerber Medardo Dominguez. | 2026-09-15 |
-| **Pipeline / prospección** | Ver [[../ventas/pipeline]] | 2026-08-15 |
+| **Rogers México** | **🟡 09-21: Propuesta en 3 fases estructurada a partir de notas de voz de Rogers.** Enfoque inicial en Fase 1 (bot WhatsApp calificador de CP + agenda de visitas en CDMX). Pendiente llamada de alineación de 10 min. Detalle completo: [[../clientes/rogers-mexico]]. | 2026-09-21 |
+| **Pipeline / prospección** | Ver [[../ventas/pipeline]] | 2026-09-21 |
 
 ## Bóveda / herramientas internas
 
