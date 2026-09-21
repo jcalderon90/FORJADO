@@ -6,7 +6,7 @@ servicio: automatizacion
 estado_comercial: migracion-arquitectura-en-curso
 contacto: Jorge González (dueño) / Bianca Cangialosi (marketing)
 creado: 2026-06-18
-actualizado: 2026-09-18
+actualizado: 2026-09-21
 fuente_raw: raw/clientes/carwarriors-llc/
 ---
 
@@ -49,8 +49,9 @@ fuente_raw: raw/clientes/carwarriors-llc/
 
 Documentos de referencia relacionados: [[carwarriors-llc-infraestructura]] · [[carwarriors-llc-inventario-ghl]] · [[carwarriors-llc-sftp-dealercenter]] · [[carwarriors-llc-como-funciona-bot-sync]] · [[carwarriors-llc-como-habla-el-bot]] · [[carwarriors-llc-comportamiento-bot]] · [[carwarriors-llc-comportamiento-bot-rances]] · [[carwarriors-llc-guardrail-anti-spam]] · [[carwarriors-llc-propuesta-formal]] · [[carwarriors-llc-justificacion-infraestructura]] · [[carwarriors-llc-agente-ia-24-7]] (legacy, bots viejos de GHL) · [[carwarriors-llc-agente-ia-rances-car]] (legacy).
 
-## Pendientes abiertos (al 2026-09-18)
+## Pendientes abiertos (al 2026-09-21)
 
+- [x] **🟢 Sync WhatsApp $\rightarrow$ GHL $\rightarrow$ DealerCenter verificado en vivo con 100% de efectividad en ambos dealers (2026-09-21).** Auditadas 300 ejecuciones de `Subir a DealerCenter` (`ZxcF7cmf3V8FZabx`): 100% provenientes de WhatsApp (272 CW, 28 Rances). Comprobado el envío SFTP con leads reales recientes (Marvin Medrano en CW hoy 10:38 AM Miami, Wilys Sandoval en Rances el 09-19) y filtro dedupe de Mongo activo (295 evitados para no duplicar en DealerCenter). Reconfirmada vigencia de reglas 16 a 32 de Capital One y OfferUp aplicadas el 09-15. Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-21-auditoria-leads-whatsapp-sync-dealercenter-y-lead-assignment]].
 - [x] **🟢 Lead Scoring (Tier 1/2/3) + tags GHL + alertas prioritarias Slack — PUBLICADO en producción (2026-09-18).** Evaluación automática de teléfono, auto de interés y citas en `PRINCIPAL` (CW, `df4ed57a`) y `PRINCIPAL - Rances Car` (`3f6578d4`). Asignación de tags `lead-caliente`, `lead-tibio`, `lead-frio` vía API GHL, persistencia en Mongo y alerta prioritaria a `#notificaciones`. Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-18-clasificacion-leads-y-respuestas-comentarios-ig]].
 - [x] **🟢 Respuestas automáticas a comentarios de Instagram con Playbook BDC — PUBLICADO en producción (2026-09-18).** Workflow `COMENTARIOS-MANYCHAT` (`67669030`). Extracción del vehículo con IA, confirmación pública y DM personalizado ($0 down, aprobación pasaporte/ITIN y Two-Option Close para WhatsApp o visita presencial). Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-18-clasificacion-leads-y-respuestas-comentarios-ig]].
 - [x] **🟢 Cadencia Saliente 24h Multi-Dealer (Intentos 1, 2 y 3) — PUBLICADO en producción (2026-09-18).** Workflow `SEGUIMIENTO SALIENTE - Cadencia 24h` (`ac921e29`) activo cada 15 min. Intento 1 (1h - Cita hoy), Intento 2 (5h - $0 down/mañana), Intento 3 (20h - Push-away close). CW y Rances Car unificados. Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-18-cadencia-seguimiento-saliente-multi-dealer-24h]].
