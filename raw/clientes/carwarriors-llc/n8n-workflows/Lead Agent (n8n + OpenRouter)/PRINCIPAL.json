@@ -563,28 +563,6 @@
         ]
       ]
     },
-    "IF FUERA DE CONTEXTO": {
-      "main": [
-        [
-          {
-            "node": "OFF TOPIC - Respuesta",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "OFF TOPIC - Respuesta": {
-      "main": [
-        [
-          {
-            "node": "OFF TOPIC - Respond",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "OpenRouter Chat Model": {
       "ai_languageModel": [
         [
@@ -3234,103 +3212,6 @@
       ],
       "id": "9bcc099b-f683-4e44-81cc-85a1c1dfdaa6",
       "name": "'Notifications Master' Interés Precios"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "4e9e55a0-8758-4cd3-bf5b-d1d25f77a2e3",
-              "leftValue": "={{ $('Lenguaje & Asesoria').first().json.output.es_fuera_de_contexto }}",
-              "rightValue": "",
-              "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        7440,
-        -480
-      ],
-      "id": "629f0cc4-7f96-46f0-b608-5aa8b6fe3929",
-      "name": "IF FUERA DE CONTEXTO",
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "29d0cc6d-7efd-41bd-b9cc-26cc8c1c5809",
-              "name": "type",
-              "value": "={{ $('CONTEXT 1').first().json.canal.includes('instagram') ? 'instagram' : $('CONTEXT 1').first().json.canal.includes('messenger') ? 'messenger' : 'whatsapp' }}",
-              "type": "string"
-            },
-            {
-              "id": "e6bb1e67-6c59-410d-a7e1-a4c4673a9af4",
-              "name": "respuesta",
-              "value": "=Lo siento, ese tema está fuera de mis capacidades. Soy una asistente virtual y exclusiva de SPECTRUM VIVIENDA, y mi única función es ayudarte con información sobre nuestros proyectos de vivienda. ¿Te puedo orientar sobre alguno de ellos?",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        7984,
-        -480
-      ],
-      "id": "126f49f3-953b-4a21-a02d-f2ab5f455de1",
-      "name": "OFF TOPIC - Respuesta",
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.manychat.com/fb/sending/sendContent",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            },
-            {
-              "name": "Authorization",
-              "value": "=Bearer {{ $('Get Account Credentials').first().json.api_key }}"
-            }
-          ]
-        },
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"subscriber_id\": \"{{ $('User Data').first().json.manychat_id }}\",\n  \"data\": {\n    \"version\": \"v2\",\n    \"content\": {\n      \"type\": \"{{ $json.type.trim() }}\",\n      \"messages\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"{{ $json.respuesta }}\"\n        }\n      ]\n    }\n  }\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        8512,
-        -480
-      ],
-      "id": "22215b98-5d23-4660-8fcc-34f20699befd",
-      "name": "OFF TOPIC - Respond",
-      "disabled": true
     },
     {
       "parameters": {
