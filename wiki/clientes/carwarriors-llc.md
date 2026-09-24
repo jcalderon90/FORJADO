@@ -6,7 +6,7 @@ servicio: automatizacion
 estado_comercial: migracion-arquitectura-en-curso
 contacto: Jorge González (dueño) / Bianca Cangialosi (marketing)
 creado: 2026-06-18
-actualizado: 2026-09-23
+actualizado: 2026-09-24
 fuente_raw: raw/clientes/carwarriors-llc/
 ---
 
@@ -48,7 +48,9 @@ fuente_raw: raw/clientes/carwarriors-llc/
 
 Documentos de referencia relacionados: [[carwarriors-llc-infraestructura]] · [[carwarriors-llc-inventario-ghl]] · [[carwarriors-llc-sftp-dealercenter]] · [[carwarriors-llc-como-funciona-bot-sync]] · [[carwarriors-llc-como-habla-el-bot]] · [[carwarriors-llc-comportamiento-bot]] · [[carwarriors-llc-comportamiento-bot-rances]] · [[carwarriors-llc-guardrail-anti-spam]] · [[carwarriors-llc-propuesta-formal]] · [[carwarriors-llc-justificacion-infraestructura]] · [[carwarriors-llc-agente-ia-24-7]] (legacy, bots viejos de GHL) · [[carwarriors-llc-agente-ia-rances-car]] (legacy).
 
-## Pendientes abiertos (al 2026-09-23)
+## Pendientes abiertos (al 2026-09-24)
+
+- [x] **🟢 Capacitación de Ventas en DealerCenter (SOP Oficial de Bianca Cangialosi) — DOCUMENTADO (2026-09-24).** Procesada y archivada la guía práctica oficial para el equipo de ventas y BDC de Carwarriors LLC: flujo de 8 pasos, regla de oro anti-duplicados (*Customers List*), clasificación mandatoria (*Lead Type/Source*), matriz de *Dispositions*, directiva estricta de tareas futuras (*"Lead sin task = cliente perdido"*, sujeto a multa), estándar de notas útiles y rutina diaria de 6 pasos. Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-24-sop-capacitacion-ventas-dealercenter]].
 
 - [x] **🟢 Requerimientos de Bianca (3/3) 100% operativos + Auditoría Exhaustiva de DealerCenter (2026-09-23).** (1) **META CW:** Creada y verificada **Rule 33** (`META CW` $\rightarrow$ `Jean Cue` BDC Rep). (2) **Capital One:** Asignada **Nacira Estefan** como respaldo junto a Dayron Barrizonte en **Rule 16**, **Rule 17** y **Rule 18** (Auto Navigator y Shopper); si Dayron está off o es su día libre, el lead pasa automáticamente a Nacira. (3) **CarGurus:** Configuradas las 9 reglas (**Rule 7 a Rule 15**) asignadas a **Carlos Martínez** (`Carlos Martinez - Carlos4125`) en **Sales Rep** y removidos Scarleth y Samuel de BDC Rep, de modo que los leads de CarGurus ingresan directo al vendedor de piso como solicitó Bianca. (4) **Auditoría Integral DealerCenter:** Mapeados los 13 módulos, APIs internas, motor de Scheduled Reports (CSV/Excel por email a n8n), real-time lead forwarding (`dc-leads@catalogocarwarriosllc.com`), ingesta ADF (`14031841@leadsprod.dealercenter.net`) y catálogo de 5 automatizaciones de alto impacto (F&I Live Alerts con decisiones de crédito, alertas de recon/fotos/precios faltantes, pagos de floor plan y reasignación de follow-ups). Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-23-auditoria-dealercenter-y-catalogo-automatizaciones]].
 - [x] **🟢 Bug y rama "OFF TOPIC" eliminados de `PRINCIPAL` — saneamiento y paridad 100% con `PRINCIPAL - Rances Car` (2026-09-23).** Se removió la rama huérfana y deshabilitada (`IF FUERA DE CONTEXTO` → `OFF TOPIC - Respuesta` → `OFF TOPIC - Respond`), eliminando los 3 nodos que conservaban texto legacy ajeno ("Spectrum Vivienda"). Ambos workflows (`PRINCIPAL` y `PRINCIPAL - Rances Car`) cuentan ahora con exactamente 98 nodos y paridad estructural 1:1. Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-23-saneamiento-off-topic-y-paridad-100-principal]].
