@@ -103,7 +103,7 @@
     },
     {
       "parameters": {
-        "model": "deepseek/deepseek-v4-flash",
+        "model": "deepseek/deepseek-v4.1-flash",
         "options": {
           "temperature": 0.3,
           "maxTokens": 1000
@@ -119,31 +119,8 @@
       ],
       "credentials": {
         "openRouterApi": {
-          "id": "o8MexJvFeSx2j4an",
-          "name": "OpenRouter account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "sessionIdType": "customKey",
-        "sessionKey": "={{ $(\"Extract Context\").first().json.conversationId.toString() }}",
-        "collectionName": "callacar_chat_memory",
-        "databaseName": "Carwarriors",
-        "contextWindowLength": 10
-      },
-      "id": "mongo-memory-callacar",
-      "name": "MongoDB Memory",
-      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
-      "typeVersion": 1,
-      "position": [
-        880,
-        420
-      ],
-      "credentials": {
-        "mongoDb": {
-          "id": "WvGe0WEIfm6NF1Qa",
-          "name": "MongoDB Carwarriors"
+          "id": "KNEcvGOGnJM5hUjH",
+          "name": "OpenRouter CALLACAR"
         }
       }
     },
@@ -176,6 +153,21 @@
       "position": [
         1040,
         200
+      ]
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Extract Context').item.json.conversationId }}",
+        "contextWindowLength": 10
+      },
+      "id": "win-memory-callacar",
+      "name": "Window Buffer Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        592,
+        336
       ]
     }
   ],
@@ -224,23 +216,23 @@
         ]
       ]
     },
-    "MongoDB Memory": {
-      "ai_memory": [
-        [
-          {
-            "node": "Cally Agent",
-            "type": "ai_memory",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Cally Agent": {
       "main": [
         [
           {
             "node": "Reply to Chatwoot",
             "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Cally Agent",
+            "type": "ai_memory",
             "index": 0
           }
         ]

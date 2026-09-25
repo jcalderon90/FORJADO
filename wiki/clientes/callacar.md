@@ -53,12 +53,13 @@ fuente_raw: raw/clientes/callacar/
 - [x] **🟢 Backend del formulario de contacto completado (2026-09-18):** Creada Cloudflare Pages Function `/functions/api/contact.ts` con validación de campos, reenvío a webhook de alertas y soporte CORS. Conectado `contact.astro` con `fetch('/api/contact')`, estados de carga, alertas accesibles y fallback directo a `support@callacar.au`.
 - [x] **🟢 Despliegue en Vercel con CI/CD automatizado (2026-09-19):** Proyecto conectado al repositorio `jcalderon90/call-a-car-web` en Vercel. Desbloqueo de autoría de commit mediante unificación de correo `jcalderon900610@gmail.com`.
 - [x] **🟢 Normalización de marca y mayúsculas completas (2026-09-19):** Estandarización de `CALLACAR` en todos los textos, footers, avisos legales, Schema.org y metadatos del portal.
-- [x] **🟢 Suite de animaciones e interacciones premium (2026-09-19):** Integración de `lenis` (scroll suave inercial), `motion` (scroll reveals escalonados por GPU), spotlight cards con resplandor cyan interactivo y botones magnéticos en CTAs.
+- [x] **🟢 Agente de IA Cally desplegado y operativo (2026-09-25):** Workflow oficial publicado en `n8n-forjado` (`Bpiy2rUJ2Z8aitOy`, webhook `/callacar-agent`). Integra LangChain Agent con System Prompt y Knowledge Base completos de CALLACAR, memoria conversacional con aislamiento por conversación, modelo DeepSeek v4.1 Flash vía OpenRouter y entrega directa a la API de Chatwoot. Validado end-to-end en inglés y español.
 - [ ] **Asignación del dominio personalizado oficial:** Apuntar `callacar.au` / `www.callacar.au` en la configuración de dominios de Vercel con SSL automático.
 - [ ] **Deep Links definitivos:** Reemplazar enlaces provisionales por esquemas de deep linking a los flujos de la app nativa cuando estén habilitados.
 
 ## Resueltos recientes
 
+- **2026-09-25:** Construcción, corrección de payload de Chatwoot y despliegue exitoso del Agente de IA **Cally** en `n8n-forjado` (workflow `Bpiy2rUJ2Z8aitOy`) con memoria por sesión y respuestas multilingües validadas.
 - **2026-09-19:** Despliegue exitoso en Vercel, corrección de autoría en Git, saneamiento de copy legal a `CALLACAR` mayúsculas e implementación de animaciones con Lenis, Motion, Spotlight Glow y Magnetic Buttons ([[../../raw/clientes/callacar/2026-09-19-despliegue-vercel-animaciones-y-branding|detalles en raw]]).
 - **2026-09-18:** Implementación completa del sitio web y portal legal en Astro 5 en `aplicaciones/call-a-car-web`. Build estático de producción exitoso (5 rutas compiladas en ~1.8s) ([[../../raw/clientes/callacar/2026-09-18-implementacion-portal-web-callacar-astro|detalles en raw]]).
 - **2026-09-15:** Análisis de entregables del diseñador y términos legales completado ([[../../raw/clientes/callacar/2026-09-15-analisis-inicial-insumos-y-arquitectura-web|detalles en raw]]).
