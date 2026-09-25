@@ -16,7 +16,7 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 | Cliente | Estado | Última actividad |
 |---|---|---|
 | **Callacar** | **🟢 09-25: Agente IA Cally desplegado en n8n (`Bpiy2rUJ2Z8aitOy`) con Chatwoot, DeepSeek v4.1 Flash y memoria Buffer Window.** Portal web Astro y Cloudflare Function `/api/contact` validados en producción. Pendiente asignación de dominio `callacar.au`. Detalle completo: [[../clientes/callacar]]. | 2026-09-25 |
-| **Carwarriors LLC** | **🟡 09-25: Investigación WhatsApp Rances Car completada (pendiente decisión técnica de arquitectura Meta Business vs GHL nativo).** Sync WhatsApp $\rightarrow$ DealerCenter y bots CW/Rances operando sanos en producción. Detalle completo: [[../clientes/carwarriors-llc]]. | 2026-09-25 |
+| **Carwarriors LLC** | **🟡 09-25: Solicitud de Jorge de reporte diario para auditar leads sin asignar/incompletos en DealerCenter registrada en backlog.** Pendiente decisión WhatsApp Rances Car (Meta Business vs GHL nativo). Sync WhatsApp $\rightarrow$ DealerCenter y bots CW/Rances operando sanos en producción. Detalle completo: [[../clientes/carwarriors-llc]]. | 2026-09-25 |
 | **Rogers México** | **🟡 09-21: Propuesta en 3 fases estructurada a partir de notas de voz de Rogers.** Enfoque inicial en Fase 1 (bot WhatsApp calificador de CP + agenda de visitas en CDMX). Pendiente llamada de alineación de 10 min. Detalle completo: [[../clientes/rogers-mexico]]. | 2026-09-21 |
 | **Pipeline / prospección** | Ver [[../ventas/pipeline]] | 2026-09-21 |
 
