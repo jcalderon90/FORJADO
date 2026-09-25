@@ -6,7 +6,7 @@ servicio: automatizacion
 estado_comercial: migracion-arquitectura-en-curso
 contacto: Jorge González (dueño) / Bianca Cangialosi (marketing)
 creado: 2026-06-18
-actualizado: 2026-09-24
+actualizado: 2026-09-25
 fuente_raw: raw/clientes/carwarriors-llc/
 ---
 
@@ -48,7 +48,9 @@ fuente_raw: raw/clientes/carwarriors-llc/
 
 Documentos de referencia relacionados: [[carwarriors-llc-infraestructura]] · [[carwarriors-llc-inventario-ghl]] · [[carwarriors-llc-sftp-dealercenter]] · [[carwarriors-llc-como-funciona-bot-sync]] · [[carwarriors-llc-como-habla-el-bot]] · [[carwarriors-llc-comportamiento-bot]] · [[carwarriors-llc-comportamiento-bot-rances]] · [[carwarriors-llc-guardrail-anti-spam]] · [[carwarriors-llc-propuesta-formal]] · [[carwarriors-llc-justificacion-infraestructura]] · [[carwarriors-llc-agente-ia-24-7]] (legacy, bots viejos de GHL) · [[carwarriors-llc-agente-ia-rances-car]] (legacy).
 
-## Pendientes abiertos (al 2026-09-24)
+## Pendientes abiertos (al 2026-09-25)
+
+- [ ] **🟡 Decisión de arquitectura WhatsApp para Rances Car en GHL vs Meta Business (2026-09-25):** Investigadas y documentadas las opciones técnicas tras confirmarse el bloqueo de intentar conectar Rances Car al Meta Business Portfolio de Carwarriors. Toda la infraestructura en n8n (`PRINCIPAL - Rances Car`) y GHL (`Lead Agent - n8n`) ya está lista y soporta el canal. Opciones a decidir: (1) Crear Meta Business Portfolio propio para Rances Car y conectar vía GHL nativo (recomendado), (2) Conectar WhatsApp Cloud API directo a n8n sin pasar por GHL (ahorra $10/mes de GHL pero sin chat nativo en Conversations), o (3) Gateway QR si el número reside en un teléfono físico con WhatsApp Business app. Pendiente que Jorge / Jorge González tomen la decisión. Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-25-investigacion-whatsapp-rances-car-meta-business]].
 
 - [x] **🟢 Capacitación de Ventas en DealerCenter (SOP Oficial de Bianca Cangialosi) — DOCUMENTADO (2026-09-24).** Procesada y archivada la guía práctica oficial para el equipo de ventas y BDC de Carwarriors LLC: flujo de 8 pasos, regla de oro anti-duplicados (*Customers List*), clasificación mandatoria (*Lead Type/Source*), matriz de *Dispositions*, directiva estricta de tareas futuras (*"Lead sin task = cliente perdido"*, sujeto a multa), estándar de notas útiles y rutina diaria de 6 pasos. Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-24-sop-capacitacion-ventas-dealercenter]].
 
