@@ -99,7 +99,7 @@ const workflow = {
     },
     {
       parameters: {
-        model: "deepseek/deepseek-v4-flash",
+        model: "deepseek/deepseek-v4.1-flash",
         options: {
           temperature: 0.3,
           maxTokens: 1000
@@ -112,30 +112,22 @@ const workflow = {
       position: [740, 420],
       credentials: {
         openRouterApi: {
-          id: "o8MexJvFeSx2j4an",
-          name: "OpenRouter account"
+          id: "KNEcvGOGnJM5hUjH",
+          name: "OpenRouter CALLACAR"
         }
       }
     },
     {
       parameters: {
         sessionIdType: "customKey",
-        sessionKey: '={{ $("Extract Context").first().json.conversationId.toString() }}',
-        collectionName: "callacar_chat_memory",
-        databaseName: "Carwarriors",
+        sessionKey: "={{ $('Extract Context').item.json.conversationId }}",
         contextWindowLength: 10
       },
-      id: "mongo-memory-callacar",
-      name: "MongoDB Memory",
-      type: "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
-      typeVersion: 1,
-      position: [880, 420],
-      credentials: {
-        mongoDb: {
-          id: "WvGe0WEIfm6NF1Qa",
-          name: "MongoDB Carwarriors"
-        }
-      }
+      id: "win-memory-callacar",
+      name: "Window Buffer Memory",
+      type: "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      typeVersion: 1.4,
+      position: [592, 336]
     },
     {
       parameters: {
@@ -211,7 +203,7 @@ const workflow = {
         ]
       ]
     },
-    "MongoDB Memory": {
+    "Window Buffer Memory": {
       ai_memory: [
         [
           {
