@@ -54,11 +54,13 @@ fuente_raw: raw/clientes/callacar/
 - [x] **🟢 Despliegue en Vercel con CI/CD automatizado (2026-09-19):** Proyecto conectado al repositorio `jcalderon90/call-a-car-web` en Vercel. Desbloqueo de autoría de commit mediante unificación de correo `jcalderon900610@gmail.com`.
 - [x] **🟢 Normalización de marca y mayúsculas completas (2026-09-19):** Estandarización de `CALLACAR` en todos los textos, footers, avisos legales, Schema.org y metadatos del portal.
 - [x] **🟢 White-labeling oficial de Chatwoot a Forjado (2026-09-25):** Configurado e inyectado en Dokploy (Docker Compose + PostgreSQL `installation_configs` + Redis cache) las variables de marca `BRAND_NAME="Forjado"`, `INSTALLATION_NAME="Forjado"` y `WIDGET_BRAND_URL="https://forjado.agency"`. El widget web y las respuestas de soporte ahora reflejan oficialmente "Desarrollado por Forjado".
+- [x] **🟢 Sustitución de identidad visual y branding en widget Chatwoot (2026-09-25):** Reemplazado el icono genérico de Chatwoot por un icono profesional de Soporte (`Headset`) en el botón flotante y colocado el emblema circular oficial de **Forjado** en el pie del widget (`forjado_logo.png` y `logo_thumbnail.svg`).
 - [ ] **Asignación del dominio personalizado oficial:** Apuntar `callacar.au` / `www.callacar.au` en la configuración de dominios de Vercel con SSL automático.
 - [ ] **Deep Links definitivos:** Reemplazar enlaces provisionales por esquemas de deep linking a los flujos de la app nativa cuando estén habilitados.
 
 ## Resueltos recientes
 
+- **2026-09-25:** Identidad visual completada en Chatwoot y Astro: Botón flotante con icono de soporte al cliente e icono oficial de Forjado en el pie del widget.
 - **2026-09-25:** White-labeling de Chatwoot en VPS completado (`BRAND_NAME` e `INSTALLATION_NAME` cambiados a **Forjado** con enlace a `forjado.agency`).
 - **2026-09-25:** Construcción, corrección de payload de Chatwoot y despliegue exitoso del Agente de IA **Cally** en `n8n-forjado` (workflow `Bpiy2rUJ2Z8aitOy`) con memoria por sesión y respuestas multilingües validadas.
 - **2026-09-19:** Despliegue exitoso en Vercel, corrección de autoría en Git, saneamiento de copy legal a `CALLACAR` mayúsculas e implementación de animaciones con Lenis, Motion, Spotlight Glow y Magnetic Buttons ([[../../raw/clientes/callacar/2026-09-19-despliegue-vercel-animaciones-y-branding|detalles en raw]]).
