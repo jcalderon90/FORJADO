@@ -1,0 +1,213 @@
+﻿{
+    "id":  "jc317DtnKMYEscC5",
+    "name":  "DealerCenter -\u003e Slack (Reporte Diario Leads Incompletos)",
+    "active":  true,
+    "isArchived":  false,
+    "versionId":  "bbfae4cd-4de5-46fe-b059-ac9882a880df",
+    "activeVersionId":  "bbfae4cd-4de5-46fe-b059-ac9882a880df",
+    "triggerCount":  2,
+    "nodeCount":  5,
+    "createdAt":  "2026-09-26T18:01:29.353Z",
+    "updatedAt":  "2026-09-26T19:36:00.078Z",
+    "settings":  {
+                     "executionOrder":  "v1",
+                     "availableInMCP":  true
+                 },
+    "tags":  [
+
+             ],
+    "parentFolderId":  "84Xu5D4xWGDwDvcm",
+    "description":  "AuditorÃ­a diaria de leads incompletos en DealerCenter (sin Sales Rep, BDC Rep ni task futura agendada). Cumple el SOP de Bianca Cangialosi (\u0027Lead sin task = cliente perdido\u0027) y envÃ­a reporte a Slack #notificaciones.",
+    "scopes":  [
+                   "execution:reveal",
+                   "workflow:create",
+                   "workflow:delete",
+                   "workflow:disableRedaction",
+                   "workflow:enableRedaction",
+                   "workflow:execute",
+                   "workflow:execute-chat",
+                   "workflow:export",
+                   "workflow:import",
+                   "workflow:list",
+                   "workflow:move",
+                   "workflow:publish",
+                   "workflow:read",
+                   "workflow:share",
+                   "workflow:unpublish",
+                   "workflow:unshare",
+                   "workflow:update"
+               ],
+    "canExecute":  true,
+    "connections":  {
+                        "Disparador Diario (9:00 AM Miami)":  {
+                                                                  "main":  [
+                                                                               [
+                                                                                   {
+                                                                                       "node":  "Consultar Leads en Mongo",
+                                                                                       "type":  "main",
+                                                                                       "index":  0
+                                                                                   }
+                                                                               ]
+                                                                           ]
+                                                              },
+                        "Consultar Leads en Mongo":  {
+                                                         "main":  [
+                                                                      [
+                                                                          {
+                                                                              "node":  "Auditar Leads y Formatear Reporte",
+                                                                              "type":  "main",
+                                                                              "index":  0
+                                                                          }
+                                                                      ]
+                                                                  ]
+                                                     },
+                        "Auditar Leads y Formatear Reporte":  {
+                                                                  "main":  [
+                                                                               [
+                                                                                   {
+                                                                                       "node":  "Enviar Reporte a Slack",
+                                                                                       "type":  "main",
+                                                                                       "index":  0
+                                                                                   }
+                                                                               ]
+                                                                           ]
+                                                              },
+                        "Disparador Manual / Webhook":  {
+                                                            "main":  [
+                                                                         [
+                                                                             {
+                                                                                 "node":  "Consultar Leads en Mongo",
+                                                                                 "type":  "main",
+                                                                                 "index":  0
+                                                                             }
+                                                                         ]
+                                                                     ]
+                                                        }
+                    },
+    "nodes":  [
+                  {
+                      "id":  "6f599f96-4d8d-48e1-beb2-850c1d514b4c",
+                      "name":  "Disparador Diario (9:00 AM Miami)",
+                      "type":  "n8n-nodes-base.scheduleTrigger",
+                      "typeVersion":  1.2,
+                      "position":  [
+                                       0,
+                                       0
+                                   ],
+                      "parameters":  {
+                                         "rule":  {
+                                                      "interval":  [
+                                                                       {
+                                                                           "field":  "cronExpression",
+                                                                           "expression":  "0 9 * * *"
+                                                                       }
+                                                                   ]
+                                                  }
+                                     }
+                  },
+                  {
+                      "id":  "dd197ed2-ce48-4971-850e-5aab7df9e682",
+                      "name":  "Consultar Leads en Mongo",
+                      "type":  "n8n-nodes-base.mongoDb",
+                      "typeVersion":  1.5,
+                      "position":  [
+                                       224,
+                                       96
+                                   ],
+                      "parameters":  {
+                                         "resource":  "document",
+                                         "operation":  "find",
+                                         "collection":  "dealercenter_customers",
+                                         "options":  {
+                                                         "limit":  500,
+                                                         "sort":  "{\"createdDate\": -1}"
+                                                     }
+                                     },
+                      "credentials":  {
+                                          "mongoDb":  {
+                                                          "id":  "WvGe0WEIfm6NF1Qa",
+                                                          "name":  "MongoDB Carwarriors"
+                                                      }
+                                      }
+                  },
+                  {
+                      "id":  "41ce7391-63cc-499d-b225-0c50bb2f72da",
+                      "name":  "Auditar Leads y Formatear Reporte",
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       448,
+                                       96
+                                   ],
+                      "parameters":  {
+                                         "mode":  "runOnceForAllItems",
+                                         "language":  "javaScript",
+                                         "jsCode":  "const items = $input.all().map(item =\u003e item.json);\n\nconst now = new Date();\nconst ahoraMs = now.getTime();\nconst ventanaMs = 48 * 60 * 60 * 1000;\n\nconst ESTADOS_ACTIVOS = [\n  \u0027NEW\u0027,\n  \u0027PROSPECT\u0027,\n  \u0027CONTACT ATTEMPT\u0027,\n  \u0027CONTACTED\u0027,\n  \u0027APPOINTMENT SCHEDULED\u0027,\n  \u0027WORKING DEAL\u0027,\n  \u0027MISSED APPOINTMENT FOLLOW-UPS\u0027,\n  \u0027VISIT FOLLOWUP\u0027\n];\n\nconst leadsRecientes = [];\nconst leadsIncompletosRecientes = [];\nlet totalActivosAuditados = 0;\nlet sinRepRecientes = 0;\nlet sinTaskRecientes = 0;\nlet sinRepActivosGlobal = 0;\nlet sinTaskActivosGlobal = 0;\n\nfor (const lead of items) {\n  if (!lead || !lead.customerUniqueId) continue;\n\n  const createdTime = lead.createdDate ? new Date(lead.createdDate).getTime() : 0;\n  const esReciente = (ahoraMs - createdTime) \u003c= ventanaMs;\n\n  const status = String(lead.customerStatus || \u0027\u0027).toUpperCase().trim();\n  const stage = String(lead.customerStage || \u0027\u0027).toUpperCase().trim();\n  const esActivo = ESTADOS_ACTIVOS.some(e =\u003e status.includes(e)) || stage === \u0027PROSPECT\u0027;\n\n  if (!esReciente \u0026\u0026 !esActivo) continue;\n\n  const rep = String(lead.assignedRep || \u0027\u0027).trim();\n  const sinRep = !rep || rep.toUpperCase() === \u0027UNASSIGNED\u0027 || rep.toUpperCase() === \u0027NA\u0027;\n\n  const nextAppt = lead.nextAppointment ? new Date(lead.nextAppointment).getTime() : 0;\n  const sinTask = !nextAppt || nextAppt \u003c ahoraMs;\n\n  if (esActivo) {\n    totalActivosAuditados++;\n    if (sinRep) sinRepActivosGlobal++;\n    if (sinTask) sinTaskActivosGlobal++;\n  }\n\n  if (esReciente) {\n    leadsRecientes.push(lead);\n    if (sinRep) sinRepRecientes++;\n    if (sinTask \u0026\u0026 esActivo) sinTaskRecientes++;\n\n    if (sinRep || (sinTask \u0026\u0026 esActivo)) {\n      const fallas = [];\n      if (sinRep) fallas.push(\u0027ðŸ”´ SIN ASIGNACIÃ“N\u0027);\n      if (sinTask \u0026\u0026 esActivo) fallas.push(\u0027âš ï¸ SIN TASK FUTURA\u0027);\n\n      const nombre = [lead.firstName, lead.lastName].filter(Boolean).join(\u0027 \u0027).trim() || \u0027Sin Nombre\u0027;\n      const fuente = lead.leadSource || lead.leadType || \u0027No especificada\u0027;\n      const dealer = lead.dealer || (fuente.toUpperCase().includes(\u0027RANCES\u0027) ? \u0027RANCES\u0027 : \u0027CW\u0027);\n\n      leadsIncompletosRecientes.push({\n        id: lead.customerUniqueId,\n        nombre,\n        telefono: lead.phone || \u0027Sin TelÃ©fono\u0027,\n        fuente,\n        dealer,\n        status: status || \u0027NEW\u0027,\n        creado: lead.createdDate ? lead.createdDate.slice(0, 10) : \u0027Fecha desc.\u0027,\n        fallas\n      });\n    }\n  }\n}\n\nconst totalRecientes = leadsRecientes.length;\nconst totalInfractoresRecientes = leadsIncompletosRecientes.length;\nconst tasaCumplimientoReciente = totalRecientes \u003e 0\n  ? Math.max(0, Math.round(((totalRecientes - totalInfractoresRecientes) / totalRecientes) * 100))\n  : 100;\n\nconst fechaStr = now.toLocaleDateString(\u0027es-ES\u0027, { timeZone: \u0027America/New_York\u0027, day: \u00272-digit\u0027, month: \u0027short\u0027, year: \u0027numeric\u0027 });\nconst horaStr = now.toLocaleTimeString(\u0027es-ES\u0027, { timeZone: \u0027America/New_York\u0027, hour: \u00272-digit\u0027, minute: \u00272-digit\u0027 });\n\nlet lineasDetalle = \u0027\u0027;\nconst muestra = leadsIncompletosRecientes.slice(0, 10);\nif (muestra.length === 0) {\n  lineasDetalle = \u0027âœ… *Â¡Excelente! Cero leads incompletos detectados en las Ãºltimas 48 horas.*\u0027;\n} else {\n  lineasDetalle = muestra.map((l, idx) =\u003e {\n    return `${idx + 1}. *${l.nombre}* [${l.dealer}] (${l.telefono})\\n   â€¢ *Fuente:* \\`${l.fuente}\\` | *Status:* \\`${l.status}\\`\\n   â€¢ *Faltas:* ${l.fallas.join(\u0027 | \u0027)}`;\n  }).join(\u0027\\n\\n\u0027);\n\n  if (leadsIncompletosRecientes.length \u003e 10) {\n    lineasDetalle += `\\n\\n_...y ${leadsIncompletosRecientes.length - 10} leads recientes mÃ¡s sin regularizar._`;\n  }\n}\n\nconst textoSlack = `:rotating_light: *AUDITORÃA DIARIA DEALERCENTER â€” LEADS INCOMPLETOS*\n_Control de calidad y cumplimiento del SOP (\"Lead sin task = cliente perdido\")_\nðŸ“… *Fecha:* ${fechaStr} ${horaStr} (Hora Miami)\n\n*ðŸ“Š Resumen Ãšltimas 48 Horas:*\nâ€¢ *Leads ingresados recientemente:* ${totalRecientes}\nâ€¢ *Leads recientes incompletos:* ${totalInfractoresRecientes} ${totalInfractoresRecientes \u003e 0 ? \u0027âš ï¸\u0027 : \u0027âœ…\u0027}\nâ€¢ *Recientes sin AsignaciÃ³n (Sales/BDC):* ${sinRepRecientes}\nâ€¢ *Recientes activos sin Task/Cita:* ${sinTaskRecientes}\nâ€¢ *Cumplimiento SOP Reciente:* *${tasaCumplimientoReciente}%*\n\n*ðŸ“ˆ Pipeline Activo Global:*\nâ€¢ *Prospectos activos en DealerCenter:* ${totalActivosAuditados}\nâ€¢ *Activos con falta de Task Futura:* ${sinTaskActivosGlobal} âš ï¸\n\n*ðŸ“‹ Leads Recientes que Requieren AtenciÃ³n Inmediata:*\n${lineasDetalle}\n\n\u003e ðŸ’¡ *AcciÃ³n Requerida:* Asignar Sales/BDC Rep y programar la tarea/follow-up correspondiente en DealerCenter para evitar multas operativas y fuga de prospectos.\n\nâ”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”\nðŸ *Fin de AuditorÃ­a Diaria* â€¢ _FORJADO Control Automations_\nâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€`;\n\nreturn [{\n  json: {\n    totalRecientes,\n    totalInfractoresRecientes,\n    sinRepRecientes,\n    sinTaskRecientes,\n    tasaCumplimientoReciente,\n    totalActivosAuditados,\n    sinTaskActivosGlobal,\n    textoSlack,\n    leadsIncompletosRecientes\n  }\n}];"
+                                     }
+                  },
+                  {
+                      "id":  "0be98b23-a118-4f22-9c25-b4fe26358b8f",
+                      "name":  "Enviar Reporte a Slack",
+                      "type":  "n8n-nodes-base.slack",
+                      "typeVersion":  2.6,
+                      "position":  [
+                                       672,
+                                       96
+                                   ],
+                      "parameters":  {
+                                         "resource":  "message",
+                                         "operation":  "post",
+                                         "authentication":  "accessToken",
+                                         "select":  "channel",
+                                         "channelId":  {
+                                                           "__rl":  true,
+                                                           "mode":  "name",
+                                                           "value":  "auditoria-leads",
+                                                           "cachedResultName":  "auditoria-leads"
+                                                       },
+                                         "messageType":  "text",
+                                         "text":  "={{ $json.textoSlack }}",
+                                         "otherOptions":  {
+                                                              "mrkdwn":  true,
+                                                              "includeLinkToWorkflow":  false
+                                                          }
+                                     },
+                      "webhookId":  "12bbb5f2-3bd9-4751-b2b0-71bd4264e5eb",
+                      "credentials":  {
+                                          "slackApi":  {
+                                                           "id":  "wUpEjaBadmKdhhqM",
+                                                           "name":  "Slack FORJADO"
+                                                       }
+                                      }
+                  },
+                  {
+                      "id":  "8a66a94d-e2a0-4dc2-877c-05ccdd19e512",
+                      "name":  "Disparador Manual / Webhook",
+                      "type":  "n8n-nodes-base.webhook",
+                      "typeVersion":  2.1,
+                      "position":  [
+                                       0,
+                                       192
+                                   ],
+                      "parameters":  {
+                                         "path":  "reporte-diario-leads-incompletos",
+                                         "httpMethod":  "POST",
+                                         "responseMode":  "lastNode",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "webhookId":  "f8d45172-84ab-4deb-9ff1-fefe056287ee"
+                  }
+              ],
+    "nodeGroups":  [
+
+                   ],
+    "activeVersion":  {
+                          "sameAsDraft":  true
+                      },
+    "meta":  {
+                 "aiBuilderAssisted":  true,
+                 "builderVariant":  "mcp"
+             }
+}

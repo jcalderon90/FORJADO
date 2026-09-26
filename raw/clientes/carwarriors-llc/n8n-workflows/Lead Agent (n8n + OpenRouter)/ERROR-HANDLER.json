@@ -1,64 +1,116 @@
-{
-  "name": "ERROR HANDLER",
-  "active": true,
-  "settings": {
-    "executionOrder": "v1",
-    "binaryMode": "separate",
-    "availableInMCP": true,
-    "timeSavedMode": "fixed",
-    "callerPolicy": "workflowsFromSameOwner"
-  },
-  "connections": {
-    "Error Trigger": { "main": [[{ "node": "Format Slack Message", "type": "main", "index": 0 }]] },
-    "Format Slack Message": { "main": [[{ "node": "Send a message", "type": "main", "index": 0 }]] }
-  },
-  "nodes": [
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.errorTrigger",
-      "typeVersion": 1,
-      "position": [112, -64],
-      "id": "34490db9-1d6e-4e34-895b-8c489d4fd388",
-      "name": "Error Trigger"
-    },
-    {
-      "parameters": {
-        "resource": "message",
-        "operation": "post",
-        "select": "channel",
-        "channelId": { "__rl": true, "mode": "list", "value": "C0BPV2Z2S3C", "cachedResultName": "notificaciones" },
-        "messageType": "text",
-        "text": "={{ $json.text }}",
-        "otherOptions": { "mrkdwn": true },
-        "authentication": "accessToken"
-      },
-      "type": "n8n-nodes-base.slack",
-      "typeVersion": 2.5,
-      "position": [560, -64],
-      "id": "96cd5fbb-692f-4826-b0d0-43b65d6e5432",
-      "name": "Send a message",
-      "webhookId": "f35fb37d-4c13-4232-8692-1a1ceecdad0b",
-      "disabled": false,
-      "credentials": {
-        "slackOAuth2Api": { "id": "wUpEjaBadmKdhhqM", "name": "Slack account" },
-        "slackApi": { "id": "wUpEjaBadmKdhhqM", "name": "Slack FORJADO" }
-      }
-    },
-    {
-      "id": "59947a7e-beb5-45bb-94a5-05f85b42ac82",
-      "name": "Format Slack Message",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [336, -64],
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            { "id": "1", "name": "text", "type": "string", "value": "=:x: *Error en workflow:* `{{ $json.workflow.name }}`\n*Mensaje:* {{ $json.execution.error.message }}\n<{{ $json.execution.url }}|Ver ejecución>" }
-          ]
-        },
-        "options": {}
-      }
-    }
-  ],
-  "_nota": "Cableado como errorWorkflow de todos los demas flujos de la migracion (PRINCIPAL, LEAD-COLLECTOR, KB-SEARCH, RSVP, SEND-MEDIA, VECTORIZAR-KB, NOTIFICATIONS) via settings.errorWorkflow. Publicado y activo desde 2026-08-13."
+﻿{
+    "name":  "ERROR HANDLER",
+    "active":  true,
+    "settings":  {
+                     "executionOrder":  "v1",
+                     "binaryMode":  "separate",
+                     "availableInMCP":  true,
+                     "timeSavedMode":  "fixed",
+                     "callerPolicy":  "workflowsFromSameOwner"
+                 },
+    "connections":  {
+                        "Error Trigger":  {
+                                              "main":  [
+                                                           [
+                                                               {
+                                                                   "node":  "Format Slack Message",
+                                                                   "type":  "main",
+                                                                   "index":  0
+                                                               }
+                                                           ]
+                                                       ]
+                                          },
+                        "Format Slack Message":  {
+                                                     "main":  [
+                                                                  [
+                                                                      {
+                                                                          "node":  "Send a message",
+                                                                          "type":  "main",
+                                                                          "index":  0
+                                                                      }
+                                                                  ]
+                                                              ]
+                                                 }
+                    },
+    "nodes":  [
+                  {
+                      "parameters":  {
+
+                                     },
+                      "type":  "n8n-nodes-base.errorTrigger",
+                      "typeVersion":  1,
+                      "position":  [
+                                       112,
+                                       -64
+                                   ],
+                      "id":  "34490db9-1d6e-4e34-895b-8c489d4fd388",
+                      "name":  "Error Trigger"
+                  },
+                  {
+                      "parameters":  {
+                                         "resource":  "message",
+                                         "operation":  "post",
+                                         "select":  "channel",
+                                         "channelId":  {
+                                                           "__rl":  true,
+                                                           "mode":  "list",
+                                                           "value":  "C0BPV2Z2S3C",
+                                                           "cachedResultName":  "notificaciones"
+                                                       },
+                                         "messageType":  "text",
+                                         "text":  "={{ $json.text }}",
+                                         "otherOptions":  {
+                                                              "mrkdwn":  true,
+                                                              "includeLinkToWorkflow":  false
+                                                          },
+                                         "authentication":  "accessToken"
+                                     },
+                      "type":  "n8n-nodes-base.slack",
+                      "typeVersion":  2.5,
+                      "position":  [
+                                       560,
+                                       -64
+                                   ],
+                      "id":  "96cd5fbb-692f-4826-b0d0-43b65d6e5432",
+                      "name":  "Send a message",
+                      "webhookId":  "f35fb37d-4c13-4232-8692-1a1ceecdad0b",
+                      "disabled":  false,
+                      "credentials":  {
+                                          "slackOAuth2Api":  {
+                                                                 "id":  "wUpEjaBadmKdhhqM",
+                                                                 "name":  "Slack account"
+                                                             },
+                                          "slackApi":  {
+                                                           "id":  "wUpEjaBadmKdhhqM",
+                                                           "name":  "Slack FORJADO"
+                                                       }
+                                      }
+                  },
+                  {
+                      "id":  "59947a7e-beb5-45bb-94a5-05f85b42ac82",
+                      "name":  "Format Slack Message",
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  3.4,
+                      "position":  [
+                                       336,
+                                       -64
+                                   ],
+                      "parameters":  {
+                                         "assignments":  {
+                                                             "assignments":  [
+                                                                                 {
+                                                                                     "id":  "1",
+                                                                                     "name":  "text",
+                                                                                     "type":  "string",
+                                                                                     "value":  "=:x: *Error en workflow:* `{{ $json.workflow.name }}`\n*Mensaje:* {{ $json.execution.error.message }}\n\u003c{{ $json.execution.url }}|Ver ejecuciÃ³n\u003e"
+                                                                                 }
+                                                                             ]
+                                                         },
+                                         "options":  {
+
+                                                     }
+                                     }
+                  }
+              ],
+    "_nota":  "Cableado como errorWorkflow de todos los demas flujos de la migracion (PRINCIPAL, LEAD-COLLECTOR, KB-SEARCH, RSVP, SEND-MEDIA, VECTORIZAR-KB, NOTIFICATIONS) via settings.errorWorkflow. Publicado y activo desde 2026-08-13."
 }

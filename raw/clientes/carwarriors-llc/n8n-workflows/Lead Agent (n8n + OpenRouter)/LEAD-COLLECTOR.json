@@ -1,1000 +1,1022 @@
-{
-  "id": "4r00JFnCyoUpZgXU",
-  "name": "LEAD - COLLECTOR",
-  "active": true,
-  "isArchived": false,
-  "versionId": "32090edc-3334-47c2-887f-44be40f64345",
-  "activeVersionId": "32090edc-3334-47c2-887f-44be40f64345",
-  "triggerCount": 0,
-  "nodeCount": 19,
-  "createdAt": "2026-08-12T21:46:09.637Z",
-  "updatedAt": "2026-09-18T22:40:32.266Z",
-  "settings": {
-    "executionOrder": "v1",
-    "binaryMode": "separate",
-    "availableInMCP": true,
-    "timeSavedMode": "fixed",
-    "errorWorkflow": "ypd1lxqlsa5KXsoy",
-    "callerPolicy": "workflowsFromSameOwner"
-  },
-  "tags": [],
-  "parentFolderId": "rJP7OPassHBIH8DF",
-  "scopes": [
-    "execution:reveal",
-    "workflow:create",
-    "workflow:delete",
-    "workflow:disableRedaction",
-    "workflow:enableRedaction",
-    "workflow:execute",
-    "workflow:execute-chat",
-    "workflow:export",
-    "workflow:import",
-    "workflow:list",
-    "workflow:move",
-    "workflow:publish",
-    "workflow:read",
-    "workflow:share",
-    "workflow:unpublish",
-    "workflow:unshare",
-    "workflow:update"
-  ],
-  "canExecute": true,
-  "connections": {
-    "START": {
-      "main": [
-        [
-          {
-            "node": "SET CONTEXT",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Lead Agent": {
-      "main": [
-        [
-          {
-            "node": "Parse Response",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "MongoDB Chat Memory": {
-      "ai_memory": [
-        [
-          {
-            "node": "Lead Agent",
-            "type": "ai_memory",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Parse Response": {
-      "main": [
-        [
-          {
-            "node": "Prepare Update",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "No Operation, do nothing": {
-      "main": [
-        [
-          {
-            "node": "RESPONSE",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "OpenRouter Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Lead Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Prepare Update": {
-      "main": [
-        [
-          {
-            "node": "Hay Cambios?",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Tiene Telefono (Master)?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Hay Cambios?": {
-      "main": [
-        [
-          {
-            "node": "Update Lead in Mongo",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "No Operation, do nothing",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Update Lead in Mongo": {
-      "main": [
-        [
-          {
-            "node": "Update GHL Contact",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Update GHL Contact": {
-      "main": [
-        [
-          {
-            "node": "RESPONSE",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "SET CONTEXT": {
-      "main": [
-        [
-          {
-            "node": "Get Account Credentials",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get Account Credentials": {
-      "main": [
-        [
-          {
-            "node": "Lead Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Tiene Telefono (Master)?": {
-      "main": [
-        [
-          {
-            "node": "Buscar Lead Master",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Buscar Lead Master": {
-      "main": [
-        [
-          {
-            "node": "Merge Lead Master",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Merge Lead Master": {
-      "main": [
-        [
-          {
-            "node": "Upsert Lead Master",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Nuevo Match Multi-Dealer?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Nuevo Match Multi-Dealer?": {
-      "main": [
-        [
-          {
-            "node": "Avisar Lead Multi-Dealer",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
-  "nodes": [
-    {
-      "parameters": {
-        "workflowInputs": {
-          "values": [
-            {
-              "name": "contactId"
-            },
-            {
-              "name": "locationId"
-            },
-            {
-              "name": "dealer"
-            },
-            {
-              "name": "canal"
-            },
-            {
-              "name": "entrada_usuario"
-            },
-            {
-              "name": "city_actual"
-            },
-            {
-              "name": "interes_vehiculo_actual"
-            },
-            {
-              "name": "metodo_pago_actual"
-            },
-            {
-              "name": "timing_actual"
-            },
-            {
-              "name": "idioma_actual"
-            },
-            {
-              "name": "resumen_actual"
-            },
-            {
-              "name": "telefono_actual"
-            },
-            {
-              "name": "telefono_intentos_actual"
-            },
-            {
-              "name": "telefono_dejar_de_pedir_actual"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.executeWorkflowTrigger",
-      "typeVersion": 1.1,
-      "position": [
-        -2368,
-        96
-      ],
-      "id": "cac797a1-b7b9-4681-906a-a4dd991d75ea",
-      "name": "START"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "ctx-contactId",
-              "name": "contactId",
-              "value": "={{ $json.contactId || '' }}",
-              "type": "string"
-            },
-            {
-              "id": "ctx-locationId",
-              "name": "locationId",
-              "value": "={{ $json.locationId || '' }}",
-              "type": "string"
-            },
-            {
-              "id": "ctx-dealer",
-              "name": "dealer",
-              "value": "={{ $json.dealer || '' }}",
-              "type": "string"
-            },
-            {
-              "id": "ctx-canal",
-              "name": "canal",
-              "value": "={{ $json.canal || '' }}",
-              "type": "string"
-            },
-            {
-              "id": "ctx-entrada",
-              "name": "entrada_usuario",
-              "value": "={{ $json.entrada_usuario || '' }}",
-              "type": "string"
-            },
-            {
-              "id": "ctx-city",
-              "name": "city_actual",
-              "value": "={{ $json.city_actual || '' }}",
-              "type": "string"
-            },
-            {
-              "id": "ctx-vehiculo",
-              "name": "interes_vehiculo_actual",
-              "value": "={{ $json.interes_vehiculo_actual || '' }}",
-              "type": "string"
-            },
-            {
-              "id": "ctx-pago",
-              "name": "metodo_pago_actual",
-              "value": "={{ $json.metodo_pago_actual || '' }}",
-              "type": "string"
-            },
-            {
-              "id": "ctx-timing",
-              "name": "timing_actual",
-              "value": "={{ $json.timing_actual || '' }}",
-              "type": "string"
-            },
-            {
-              "id": "ctx-idioma",
-              "name": "idioma_actual",
-              "value": "={{ $json.idioma_actual || '' }}",
-              "type": "string"
-            },
-            {
-              "id": "ctx-resumen",
-              "name": "resumen_actual",
-              "value": "={{ $json.resumen_actual || '' }}",
-              "type": "string"
-            },
-            {
-              "id": "ctx-telefono",
-              "name": "telefono_actual",
-              "value": "={{ $json.telefono_actual || '' }}",
-              "type": "string"
-            },
-            {
-              "id": "ctx-tel-intentos",
-              "name": "telefono_intentos_actual",
-              "value": "={{ $json.telefono_intentos_actual || '0' }}",
-              "type": "string"
-            },
-            {
-              "id": "ctx-tel-dejar",
-              "name": "telefono_dejar_de_pedir_actual",
-              "value": "={{ $json.telefono_dejar_de_pedir_actual || 'false' }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -2144,
-        96
-      ],
-      "id": "459af54a-50c9-4ccb-a888-bab353e5b4d3",
-      "name": "SET CONTEXT"
-    },
-    {
-      "parameters": {
-        "promptType": "define",
-        "text": "={{ $('SET CONTEXT').first().json.entrada_usuario }}",
-        "options": {
-          "systemMessage": "=### ROL ###\nEres el extractor de datos de lead para {{ $('SET CONTEXT').first().json.dealer }} (concesionario de autos, Miami). No conversas libremente -- tu salida es JSON, pero tu campo `response` SI se le muestra al usuario cuando el agente principal te invoca para pedir el telefono (ver REGLA DE PEDIDO DE TELEFONO abajo). Analiza el ULTIMO mensaje del usuario junto con el contexto ya conocido y decide que campos actualizar.\n\n### CONTEXTO YA CONOCIDO ###\n- Canal: {{ $('SET CONTEXT').first().json.canal }}\n- Ciudad/zona actual: {{ $('SET CONTEXT').first().json.city_actual || \"no aparece\" }}\n- Interes de vehiculo actual: {{ $('SET CONTEXT').first().json.interes_vehiculo_actual || \"no aparece\" }}\n- Metodo de pago actual: {{ $('SET CONTEXT').first().json.metodo_pago_actual || \"no aparece\" }}\n- Timing de compra actual: {{ $('SET CONTEXT').first().json.timing_actual || \"no aparece\" }}\n- Idioma preferido actual: {{ $('SET CONTEXT').first().json.idioma_actual || \"no aparece\" }}\n- Telefono actual: {{ $('SET CONTEXT').first().json.telefono_actual || \"no aparece\" }}\n- Resumen previo: {{ $('SET CONTEXT').first().json.resumen_actual || \"ninguno todavia\" }}\n\n### REGLAS DE CAMPOS ###\n1. Solo llena un campo si el usuario dio informacion NUEVA sobre el en su ultimo mensaje. Si no dijo nada nuevo sobre un campo, devuelve el valor actual tal cual (no lo borres, no lo inventes).\n2. city: ciudad o zona donde vive o busca el auto.\n3. interes_vehiculo: marca/modelo/tipo de vehiculo de interes (acumulable -- combina con lo que ya se sabia si el nuevo dato es mas especifico).\n4. metodo_pago: cash, financiamiento, trade-in, etc.\n5. timing_compra: urgencia/plazo de compra (ej. \"esta semana\", \"en un mes\", \"solo viendo opciones\").\n6. idioma_preferido: idioma en que escribe el usuario (english/espanol) -- detectalo del mensaje, no lo preguntes.\n7. telefono: numero de telefono del usuario, SOLO si lo escribio explicitamente en este mensaje (cualquier formato). Nunca lo inventes.\n8. rechazo_explicito: true SOLO si el usuario se niega explicitamente a compartir su numero (\"no quiero dar mi numero\", \"prefiero no compartirlo\", \"no te voy a dar mi telefono\", \"no doy esa informacion\", etc.). false en cualquier otro caso, incluido si simplemente no lo menciono.\n9. resumen_ai: reescribe el resumen previo completo en 1-2 oraciones cortas que un asesor humano pueda leer rapido para entender donde va la conversacion. No lo concatenes sin limite.\n\n### REGLA DE PEDIDO DE TELEFONO ###\nEl agente principal te invoca porque necesita el telefono del cliente para poder ayudarlo (es requisito para conectar el lead con DealerCenter). Si en este mensaje NO llego un telefono valido y el cliente no se nego explicitamente:\n- Genera en `response` un pedido amable y breve, SIEMPRE contextualizado a lo que el cliente esta preguntando o buscando en su ultimo mensaje (ej: si pregunto precio de un Camry: \"Para compartirte el precio del Camry, ¿me confirmas tu numero de contacto? 😊\"). Nunca lo pidas de forma generica y desconectada de lo que el cliente quiere.\n- Si el cliente ya lo compartio en este mensaje: `response` debe confirmar brevemente en 4-6 palabras (ej: \"¡Gracias!\" o \"Perfecto, ya con eso...\").\n- Si el cliente se nego explicitamente: `response` puede quedar vacio, el sistema genera el mensaje de cierre automaticamente.\n\n### FORMATO DE SALIDA -- SOLO este JSON en una linea ###\n{\"city\": \"string|null\", \"interes_vehiculo\": \"string|null\", \"metodo_pago\": \"string|null\", \"timing_compra\": \"string|null\", \"idioma_preferido\": \"string|null\", \"telefono\": \"string|null\", \"rechazo_explicito\": true|false, \"resumen_ai\": \"string|null\", \"response\": \"string\"}"
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 3.1,
-      "position": [
-        -1696,
-        96
-      ],
-      "id": "06d50edd-5d13-4275-a3d9-b95b1a9a878a",
-      "name": "Lead Agent"
-    },
-    {
-      "parameters": {
-        "sessionIdType": "customKey",
-        "sessionKey": "={{ $('START').item.json.contactId }}",
-        "collectionName": "chat_histories_lead",
-        "databaseName": "Carwarriors",
-        "contextWindowLength": 10
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
-      "typeVersion": 1,
-      "position": [
-        -1560,
-        328
-      ],
-      "id": "6d19c130-7d05-4e2c-98a4-369b7f51612b",
-      "name": "MongoDB Chat Memory",
-      "credentials": {
-        "mongoDb": {
-          "id": "WvGe0WEIfm6NF1Qa",
-          "name": "MongoDB Carwarriors"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "jsCode": "const raw = $input.first().json.output || '';\nconst ctx = $('SET CONTEXT').first().json;\n\nfunction normalizePhone(raw) {\n  if (!raw) return '';\n  const trimmed = String(raw).trim();\n  const digits = trimmed.replace(/[^\\d]/g, '');\n  if (trimmed.startsWith('+') && digits.length >= 10) return '+' + digits;\n  if (digits.length === 10) return '+1' + digits;\n  if (digits.length === 11 && digits.startsWith('1')) return '+' + digits;\n  return ''; // formato no reconocible -- no lo mandamos a GHL para evitar basura\n}\n\nfunction fallback() {\n  return [{\n    json: {\n      city: ctx.city_actual || '',\n      interes_vehiculo: ctx.interes_vehiculo_actual || '',\n      metodo_pago: ctx.metodo_pago_actual || '',\n      timing_compra: ctx.timing_actual || '',\n      idioma_preferido: ctx.idioma_actual || '',\n      telefono: ctx.telefono_actual || '',\n      telefono_intentos: ctx.telefono_intentos_actual || '0',\n      telefono_dejar_de_pedir: ctx.telefono_dejar_de_pedir_actual || 'false',\n      resumen_ai: ctx.resumen_actual || '',\n      response: ''\n    }\n  }];\n}\n\n// deepseek-v4-flash a veces genera un rambling de razonamiento antes de la respuesta final,\n// repitiendo el JSON de salida varias veces (mismo patron visto en KB-SEARCH el 2026-08-31).\n// Tomar 'primer { a ultimo }' del texto completo mezcla varios bloques y JSON.parse falla.\n// En vez de eso: extraer TODOS los bloques JSON planos y quedarnos con el ULTIMO que parsea\n// Y tiene la clave 'telefono' -- es la version final y mas confiable del modelo.\nfunction extraerJson(texto) {\n  const candidatos = texto.match(/\\{[^{}]*\\}/g) || [];\n  for (let i = candidatos.length - 1; i >= 0; i--) {\n    try {\n      const obj = JSON.parse(candidatos[i]);\n      if (Object.prototype.hasOwnProperty.call(obj, 'telefono')) return obj;\n    } catch (e) { /* seguir probando candidatos anteriores */ }\n  }\n  return null;\n}\n\nconst parsed = extraerJson(raw);\nif (!parsed) {\n  return fallback();\n}\n\nconst telefonoNuevo = normalizePhone(parsed.telefono);\nconst telefonoFinal = telefonoNuevo || ctx.telefono_actual || '';\n\nlet intentos = parseInt(ctx.telefono_intentos_actual || '0', 10) || 0;\nconst dejarDePedirPrevio = ctx.telefono_dejar_de_pedir_actual === 'true';\nlet dejarDePedir = dejarDePedirPrevio;\nlet justGaveUp = false;\n\n// Contador deterministico -- no confiamos en que el LLM cuente bien los intentos.\n// Solo avanza mientras el telefono siga faltando y todavia no nos hayamos rendido antes.\nif (!telefonoFinal && !dejarDePedirPrevio) {\n  if (parsed.rechazo_explicito === true) {\n    dejarDePedir = true;\n    justGaveUp = true;\n  } else {\n    intentos = intentos + 1;\n    if (intentos >= 3) {\n      dejarDePedir = true;\n      justGaveUp = true;\n    }\n  }\n}\n\nlet respuesta = parsed.response || '';\nif (justGaveUp) {\n  const ingles = (parsed.idioma_preferido || ctx.idioma_actual || '').toLowerCase().includes('engl');\n  respuesta = ingles\n    ? \"No worries, let's continue -- how can I help? 😊\"\n    : \"Sin problema, seguimos igual 😊 ¿en que te ayudo?\";\n}\n\nreturn [{\n  json: {\n    city: parsed.city || ctx.city_actual || '',\n    interes_vehiculo: parsed.interes_vehiculo || ctx.interes_vehiculo_actual || '',\n    metodo_pago: parsed.metodo_pago || ctx.metodo_pago_actual || '',\n    timing_compra: parsed.timing_compra || ctx.timing_actual || '',\n    idioma_preferido: parsed.idioma_preferido || ctx.idioma_actual || '',\n    telefono: telefonoFinal,\n    telefono_intentos: String(intentos),\n    telefono_dejar_de_pedir: String(dejarDePedir),\n    resumen_ai: parsed.resumen_ai || ctx.resumen_actual || '',\n    response: respuesta\n  }\n}];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -1344,
-        96
-      ],
-      "id": "38f6739b-d846-443b-8c41-ea1b8499f599",
-      "name": "Parse Response"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "loose",
-            "version": 1
-          },
-          "conditions": [
-            {
-              "id": "chg-city",
-              "leftValue": "={{ $json.city }}",
-              "rightValue": "={{ $('SET CONTEXT').item.json.city_actual }}",
-              "operator": {
-                "type": "string",
-                "operation": "notEquals"
-              }
-            },
-            {
-              "id": "chg-vehiculo",
-              "leftValue": "={{ $json.interes_vehiculo }}",
-              "rightValue": "={{ $('SET CONTEXT').item.json.interes_vehiculo_actual }}",
-              "operator": {
-                "type": "string",
-                "operation": "notEquals"
-              }
-            },
-            {
-              "id": "chg-pago",
-              "leftValue": "={{ $json.metodo_pago }}",
-              "rightValue": "={{ $('SET CONTEXT').item.json.metodo_pago_actual }}",
-              "operator": {
-                "type": "string",
-                "operation": "notEquals"
-              }
-            },
-            {
-              "id": "chg-timing",
-              "leftValue": "={{ $json.timing_compra }}",
-              "rightValue": "={{ $('SET CONTEXT').item.json.timing_actual }}",
-              "operator": {
-                "type": "string",
-                "operation": "notEquals"
-              }
-            },
-            {
-              "id": "chg-idioma",
-              "leftValue": "={{ $json.idioma_preferido }}",
-              "rightValue": "={{ $('SET CONTEXT').item.json.idioma_actual }}",
-              "operator": {
-                "type": "string",
-                "operation": "notEquals"
-              }
-            },
-            {
-              "id": "chg-telefono",
-              "leftValue": "={{ $json.telefono }}",
-              "rightValue": "={{ $('SET CONTEXT').item.json.telefono_actual }}",
-              "operator": {
-                "type": "string",
-                "operation": "notEquals"
-              }
-            },
-            {
-              "id": "chg-tel-intentos",
-              "leftValue": "={{ $json.telefono_intentos }}",
-              "rightValue": "={{ $('SET CONTEXT').item.json.telefono_intentos_actual }}",
-              "operator": {
-                "type": "string",
-                "operation": "notEquals"
-              }
-            },
-            {
-              "id": "chg-tel-dejar",
-              "leftValue": "={{ $json.telefono_dejar_de_pedir }}",
-              "rightValue": "={{ $('SET CONTEXT').item.json.telefono_dejar_de_pedir_actual }}",
-              "operator": {
-                "type": "string",
-                "operation": "notEquals"
-              }
-            },
-            {
-              "id": "chg-resumen",
-              "leftValue": "={{ $json.resumen_ai }}",
-              "rightValue": "={{ $('SET CONTEXT').item.json.resumen_actual }}",
-              "operator": {
-                "type": "string",
-                "operation": "notEquals"
-              }
-            }
-          ],
-          "combinator": "or"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        -896,
-        96
-      ],
-      "id": "c70f01ab-789b-4b9d-85d1-acdb725f3b48",
-      "name": "Hay Cambios?"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "pu-contactId",
-              "name": "contactId",
-              "value": "={{ $('SET CONTEXT').item.json.contactId }}",
-              "type": "string"
-            },
-            {
-              "id": "pu-city",
-              "name": "city",
-              "value": "={{ $json.city }}",
-              "type": "string"
-            },
-            {
-              "id": "pu-vehiculo",
-              "name": "interes_vehiculo",
-              "value": "={{ $json.interes_vehiculo }}",
-              "type": "string"
-            },
-            {
-              "id": "pu-pago",
-              "name": "metodo_pago",
-              "value": "={{ $json.metodo_pago }}",
-              "type": "string"
-            },
-            {
-              "id": "pu-timing",
-              "name": "timing_compra",
-              "value": "={{ $json.timing_compra }}",
-              "type": "string"
-            },
-            {
-              "id": "pu-idioma",
-              "name": "idioma_preferido",
-              "value": "={{ $json.idioma_preferido }}",
-              "type": "string"
-            },
-            {
-              "id": "pu-telefono",
-              "name": "telefono",
-              "value": "={{ $json.telefono }}",
-              "type": "string"
-            },
-            {
-              "id": "pu-tel-intentos",
-              "name": "telefono_intentos",
-              "value": "={{ $json.telefono_intentos }}",
-              "type": "string"
-            },
-            {
-              "id": "pu-tel-dejar",
-              "name": "telefono_dejar_de_pedir",
-              "value": "={{ $json.telefono_dejar_de_pedir }}",
-              "type": "string"
-            },
-            {
-              "id": "pu-resumen",
-              "name": "resumen_ai",
-              "value": "={{ $json.resumen_ai }}",
-              "type": "string"
-            },
-            {
-              "id": "pu-updatedAt",
-              "name": "updatedAt",
-              "value": "={{ $now.toISO() }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -1120,
-        96
-      ],
-      "id": "db893810-f6df-42fe-86cb-9900e51f22c6",
-      "name": "Prepare Update"
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        -448,
-        192
-      ],
-      "id": "33ee2c30-4297-40d6-b7c4-4309405cd6e9",
-      "name": "No Operation, do nothing"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "resp-city",
-              "name": "city",
-              "value": "={{ $('Prepare Update').item.json.city }}",
-              "type": "string"
-            },
-            {
-              "id": "resp-vehiculo",
-              "name": "interes_vehiculo",
-              "value": "={{ $('Prepare Update').item.json.interes_vehiculo }}",
-              "type": "string"
-            },
-            {
-              "id": "resp-pago",
-              "name": "metodo_pago",
-              "value": "={{ $('Prepare Update').item.json.metodo_pago }}",
-              "type": "string"
-            },
-            {
-              "id": "resp-timing",
-              "name": "timing_compra",
-              "value": "={{ $('Prepare Update').item.json.timing_compra }}",
-              "type": "string"
-            },
-            {
-              "id": "resp-idioma",
-              "name": "idioma_preferido",
-              "value": "={{ $('Prepare Update').item.json.idioma_preferido }}",
-              "type": "string"
-            },
-            {
-              "id": "resp-telefono",
-              "name": "telefono",
-              "value": "={{ $('Prepare Update').item.json.telefono }}",
-              "type": "string"
-            },
-            {
-              "id": "resp-tel-intentos",
-              "name": "telefono_intentos",
-              "value": "={{ $('Prepare Update').item.json.telefono_intentos }}",
-              "type": "string"
-            },
-            {
-              "id": "resp-tel-dejar",
-              "name": "telefono_dejar_de_pedir",
-              "value": "={{ $('Prepare Update').item.json.telefono_dejar_de_pedir }}",
-              "type": "string"
-            },
-            {
-              "id": "resp-resumen",
-              "name": "resumen_ai",
-              "value": "={{ $('Prepare Update').item.json.resumen_ai }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -224,
-        96
-      ],
-      "id": "60e772a9-0837-41b1-a161-a31097170949",
-      "name": "RESPONSE"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "collection": "leads",
-        "updateKey": "contactId",
-        "fields": "contactId,city,interes_vehiculo,metodo_pago,timing_compra,idioma_preferido,telefono,telefono_intentos,telefono_dejar_de_pedir,resumen_ai,updatedAt",
-        "upsert": true,
-        "options": {}
-      },
-      "type": "n8n-nodes-base.mongoDb",
-      "typeVersion": 1.2,
-      "position": [
-        -672,
-        0
-      ],
-      "id": "603a07eb-be6f-4e47-b4dc-c7f58f8f670f",
-      "name": "Update Lead in Mongo",
-      "credentials": {
-        "mongoDb": {
-          "id": "WvGe0WEIfm6NF1Qa",
-          "name": "MongoDB Carwarriors"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "options": {
-          "temperature": 0.1,
-          "timeout": 30000,
-          "maxRetries": 2
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
-      "typeVersion": 1,
-      "position": [
-        -1744,
-        320
-      ],
-      "id": "b48f8e9c-280d-4238-af8f-0e4e68e951ed",
-      "name": "OpenRouter Chat Model",
-      "credentials": {
-        "openRouterApi": {
-          "id": "o8MexJvFeSx2j4an",
-          "name": "OpenRouter account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "PUT",
-        "url": "={{ \"https://services.leadconnectorhq.com/contacts/\" + $('SET CONTEXT').item.json.contactId }}",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "Version",
-              "value": "2021-07-28"
-            },
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            },
-            {
-              "name": "Authorization",
-              "value": "={{ 'Bearer ' + $('Get Account Credentials').first().json.ghlToken }}"
-            }
-          ]
-        },
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ Object.assign({ city: $('Prepare Update').item.json.city }, $('Prepare Update').item.json.telefono ? { phone: $('Prepare Update').item.json.telefono } : {}) }}",
-        "options": {}
-      },
-      "id": "a7c1f4e2-9b3d-4a6e-8f2c-1d5b7e9a3c6f",
-      "name": "Update GHL Contact",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        -448,
-        0
-      ],
-      "retryOnFail": true,
-      "onError": "continueRegularOutput",
-      "notes": "TODO: agregar customFields (interes_vehiculo, metodo_pago, timing_compra, idioma_preferido, resumen_ai) cuando: 1) se renueve el token GHL (401 Invalid JWT visto el 2026-08-12), 2) se consulten los IDs reales de esos custom fields via GET /locations/{locationId}/customFields. Por ahora solo actualiza 'city' porque es campo estandar de GHL sin necesidad de ID."
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "dataTableId": {
-          "__rl": true,
-          "mode": "id",
-          "value": "3V2Oq6RyrnfPtkzi",
-          "cachedResultName": "GHL Locations"
-        },
-        "matchType": "allConditions",
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "locationId",
-              "keyValue": "={{ $('SET CONTEXT').first().json.locationId }}"
-            }
-          ]
-        },
-        "limit": 1
-      },
-      "id": "b1e4a0b0-1a1b-4a7f-9c3a-6a7e2b4f9c11",
-      "name": "Get Account Credentials",
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1.1,
-      "position": [
-        -1920,
-        96
-      ]
-    },
-    {
-      "id": "713db8cd-5273-4faa-860c-5c8e90f751b6",
-      "name": "Tiene Telefono (Master)?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        -896,
-        420
-      ],
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "leftValue": "={{ $('Prepare Update').item.json.telefono }}",
-              "operator": {
-                "type": "string",
-                "operation": "notEmpty"
-              },
-              "rightValue": ""
-            }
-          ],
-          "combinator": "and"
-        }
-      }
-    },
-    {
-      "id": "a4e74b7b-aaad-4570-b67a-70d83485a9a4",
-      "name": "Buscar Lead Master",
-      "type": "n8n-nodes-base.mongoDb",
-      "typeVersion": 1.4,
-      "position": [
-        -672,
-        420
-      ],
-      "parameters": {
-        "resource": "document",
-        "operation": "find",
-        "collection": "leads_master",
-        "query": "={{ JSON.stringify({ telefono: $('Prepare Update').item.json.telefono }) }}",
-        "options": {
-          "limit": 1
-        }
-      },
-      "alwaysOutputData": true,
-      "credentials": {
-        "mongoDb": {
-          "id": "WvGe0WEIfm6NF1Qa",
-          "name": "MongoDB Carwarriors"
-        }
-      }
-    },
-    {
-      "id": "caeb53a9-a874-43f7-8c59-8262f228f9db",
-      "name": "Merge Lead Master",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -448,
-        420
-      ],
-      "parameters": {
-        "mode": "runOnceForAllItems",
-        "language": "javaScript",
-        "jsCode": "const pu = $('Prepare Update').first().json;\nconst ctx = $('SET CONTEXT').first().json;\nconst foundItems = $input.all();\nconst existing = foundItems.length ? foundItems[0].json : null;\n\nconst now = new Date().toISOString();\nconst dealer = ctx.dealer || pu.dealer || '';\n\nconst nuevaFuente = {\n  dealer: dealer,\n  locationId: ctx.locationId || '',\n  contactId: pu.contactId,\n  canal: ctx.canal || '',\n  primeraEntrada: now,\n  ultimaEntrada: now\n};\n\nlet fuentes = (existing && Array.isArray(existing.fuentes)) ? existing.fuentes.slice() : [];\nconst idx = fuentes.findIndex(f => f.dealer === nuevaFuente.dealer && f.contactId === nuevaFuente.contactId);\nlet esFuenteNueva = false;\nif (idx >= 0) {\n  fuentes[idx] = Object.assign({}, fuentes[idx], { ultimaEntrada: now });\n} else {\n  fuentes.push(nuevaFuente);\n  esFuenteNueva = true;\n}\n\nconst dealersUnicos = [...new Set(fuentes.map(f => f.dealer))];\nconst multiDealer = dealersUnicos.length > 1;\nconst nuevoMatchCrossDealer = esFuenteNueva && multiDealer;\n\nreturn [{\n  json: {\n    telefono: pu.telefono,\n    city: pu.city,\n    interes_vehiculo: pu.interes_vehiculo,\n    metodo_pago: pu.metodo_pago,\n    timing_compra: pu.timing_compra,\n    idioma_preferido: pu.idioma_preferido,\n    resumen_ai: pu.resumen_ai,\n    fuentes: fuentes,\n    dealers: dealersUnicos,\n    multiDealer: multiDealer,\n    nuevoMatchCrossDealer: nuevoMatchCrossDealer,\n    createdAt: (existing && existing.createdAt) ? existing.createdAt : now,\n    updatedAt: now\n  }\n}];"
-      }
-    },
-    {
-      "id": "bd069043-c877-41bc-8d29-27cb36983c88",
-      "name": "Upsert Lead Master",
-      "type": "n8n-nodes-base.mongoDb",
-      "typeVersion": 1.4,
-      "position": [
-        -224,
-        500
-      ],
-      "parameters": {
-        "resource": "document",
-        "operation": "update",
-        "collection": "leads_master",
-        "updateKey": "telefono",
-        "fields": "telefono,city,interes_vehiculo,metodo_pago,timing_compra,idioma_preferido,resumen_ai,fuentes,dealers,multiDealer,createdAt,updatedAt",
-        "upsert": true,
-        "options": {}
-      },
-      "credentials": {
-        "mongoDb": {
-          "id": "WvGe0WEIfm6NF1Qa",
-          "name": "MongoDB Carwarriors"
-        }
-      }
-    },
-    {
-      "id": "e36b9a8a-1a6d-4382-8404-83242a8ad558",
-      "name": "Nuevo Match Multi-Dealer?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        -224,
-        320
-      ],
-      "parameters": {
-        "conditions": {
-          "combinator": "and",
-          "conditions": [
-            {
-              "leftValue": "={{ !!$json.nuevoMatchCrossDealer }}",
-              "operator": {
-                "operation": "true",
-                "type": "boolean"
-              },
-              "rightValue": true
-            }
-          ],
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          }
-        }
-      }
-    },
-    {
-      "id": "ff49070c-2e2d-455e-8397-f459384b65fa",
-      "name": "Avisar Lead Multi-Dealer",
-      "type": "n8n-nodes-base.slack",
-      "typeVersion": 2.6,
-      "position": [
-        0,
-        320
-      ],
-      "parameters": {
-        "resource": "message",
-        "operation": "post",
-        "select": "channel",
-        "channelId": {
-          "__rl": true,
-          "mode": "id",
-          "value": "C0BPV2Z2S3C",
-          "cachedResultName": "notificaciones"
-        },
-        "messageType": "text",
-        "text": "=🔗 *Lead detectado en más de un dealer*\nTeléfono: {{ $json.telefono }}\nDealers: {{ $json.dealers.join(', ') }}\nInterés de vehículo: {{ $json.interes_vehiculo || 'no especificado' }}\nResumen: {{ $json.resumen_ai || 'sin resumen todavía' }}",
-        "otherOptions": {}
-      },
-      "webhookId": "23a9d96b-4138-482e-9560-bec58ec9a085",
-      "credentials": {
-        "slackApi": {
-          "id": "wUpEjaBadmKdhhqM",
-          "name": "Slack FORJADO"
-        }
-      }
-    }
-  ],
-  "nodeGroups": [],
-  "activeVersion": {
-    "sameAsDraft": true
-  },
-  "meta": {
-    "aiBuilderAssisted": true,
-    "builderVariant": "mcp"
-  }
+﻿{
+    "id":  "4r00JFnCyoUpZgXU",
+    "name":  "LEAD - COLLECTOR",
+    "active":  true,
+    "isArchived":  false,
+    "versionId":  "32090edc-3334-47c2-887f-44be40f64345",
+    "activeVersionId":  "32090edc-3334-47c2-887f-44be40f64345",
+    "triggerCount":  0,
+    "nodeCount":  19,
+    "createdAt":  "2026-08-12T21:46:09.637Z",
+    "updatedAt":  "2026-09-18T22:40:32.266Z",
+    "settings":  {
+                     "executionOrder":  "v1",
+                     "binaryMode":  "separate",
+                     "availableInMCP":  true,
+                     "timeSavedMode":  "fixed",
+                     "errorWorkflow":  "ypd1lxqlsa5KXsoy",
+                     "callerPolicy":  "workflowsFromSameOwner"
+                 },
+    "tags":  [
+
+             ],
+    "parentFolderId":  "rJP7OPassHBIH8DF",
+    "scopes":  [
+                   "execution:reveal",
+                   "workflow:create",
+                   "workflow:delete",
+                   "workflow:disableRedaction",
+                   "workflow:enableRedaction",
+                   "workflow:execute",
+                   "workflow:execute-chat",
+                   "workflow:export",
+                   "workflow:import",
+                   "workflow:list",
+                   "workflow:move",
+                   "workflow:publish",
+                   "workflow:read",
+                   "workflow:share",
+                   "workflow:unpublish",
+                   "workflow:unshare",
+                   "workflow:update"
+               ],
+    "canExecute":  true,
+    "connections":  {
+                        "START":  {
+                                      "main":  [
+                                                   [
+                                                       {
+                                                           "node":  "SET CONTEXT",
+                                                           "type":  "main",
+                                                           "index":  0
+                                                       }
+                                                   ]
+                                               ]
+                                  },
+                        "Lead Agent":  {
+                                           "main":  [
+                                                        [
+                                                            {
+                                                                "node":  "Parse Response",
+                                                                "type":  "main",
+                                                                "index":  0
+                                                            }
+                                                        ]
+                                                    ]
+                                       },
+                        "MongoDB Chat Memory":  {
+                                                    "ai_memory":  [
+                                                                      [
+                                                                          {
+                                                                              "node":  "Lead Agent",
+                                                                              "type":  "ai_memory",
+                                                                              "index":  0
+                                                                          }
+                                                                      ]
+                                                                  ]
+                                                },
+                        "Parse Response":  {
+                                               "main":  [
+                                                            [
+                                                                {
+                                                                    "node":  "Prepare Update",
+                                                                    "type":  "main",
+                                                                    "index":  0
+                                                                }
+                                                            ]
+                                                        ]
+                                           },
+                        "No Operation, do nothing":  {
+                                                         "main":  [
+                                                                      [
+                                                                          {
+                                                                              "node":  "RESPONSE",
+                                                                              "type":  "main",
+                                                                              "index":  0
+                                                                          }
+                                                                      ]
+                                                                  ]
+                                                     },
+                        "OpenRouter Chat Model":  {
+                                                      "ai_languageModel":  [
+                                                                               [
+                                                                                   {
+                                                                                       "node":  "Lead Agent",
+                                                                                       "type":  "ai_languageModel",
+                                                                                       "index":  0
+                                                                                   }
+                                                                               ]
+                                                                           ]
+                                                  },
+                        "Prepare Update":  {
+                                               "main":  [
+                                                            [
+                                                                {
+                                                                    "node":  "Hay Cambios?",
+                                                                    "type":  "main",
+                                                                    "index":  0
+                                                                },
+                                                                {
+                                                                    "node":  "Tiene Telefono (Master)?",
+                                                                    "type":  "main",
+                                                                    "index":  0
+                                                                }
+                                                            ]
+                                                        ]
+                                           },
+                        "Hay Cambios?":  {
+                                             "main":  [
+                                                          [
+                                                              {
+                                                                  "node":  "Update Lead in Mongo",
+                                                                  "type":  "main",
+                                                                  "index":  0
+                                                              }
+                                                          ],
+                                                          [
+                                                              {
+                                                                  "node":  "No Operation, do nothing",
+                                                                  "type":  "main",
+                                                                  "index":  0
+                                                              }
+                                                          ]
+                                                      ]
+                                         },
+                        "Update Lead in Mongo":  {
+                                                     "main":  [
+                                                                  [
+                                                                      {
+                                                                          "node":  "Update GHL Contact",
+                                                                          "type":  "main",
+                                                                          "index":  0
+                                                                      }
+                                                                  ]
+                                                              ]
+                                                 },
+                        "Update GHL Contact":  {
+                                                   "main":  [
+                                                                [
+                                                                    {
+                                                                        "node":  "RESPONSE",
+                                                                        "type":  "main",
+                                                                        "index":  0
+                                                                    }
+                                                                ]
+                                                            ]
+                                               },
+                        "SET CONTEXT":  {
+                                            "main":  [
+                                                         [
+                                                             {
+                                                                 "node":  "Get Account Credentials",
+                                                                 "type":  "main",
+                                                                 "index":  0
+                                                             }
+                                                         ]
+                                                     ]
+                                        },
+                        "Get Account Credentials":  {
+                                                        "main":  [
+                                                                     [
+                                                                         {
+                                                                             "node":  "Lead Agent",
+                                                                             "type":  "main",
+                                                                             "index":  0
+                                                                         }
+                                                                     ]
+                                                                 ]
+                                                    },
+                        "Tiene Telefono (Master)?":  {
+                                                         "main":  [
+                                                                      [
+                                                                          {
+                                                                              "node":  "Buscar Lead Master",
+                                                                              "type":  "main",
+                                                                              "index":  0
+                                                                          }
+                                                                      ]
+                                                                  ]
+                                                     },
+                        "Buscar Lead Master":  {
+                                                   "main":  [
+                                                                [
+                                                                    {
+                                                                        "node":  "Merge Lead Master",
+                                                                        "type":  "main",
+                                                                        "index":  0
+                                                                    }
+                                                                ]
+                                                            ]
+                                               },
+                        "Merge Lead Master":  {
+                                                  "main":  [
+                                                               [
+                                                                   {
+                                                                       "node":  "Upsert Lead Master",
+                                                                       "type":  "main",
+                                                                       "index":  0
+                                                                   },
+                                                                   {
+                                                                       "node":  "Nuevo Match Multi-Dealer?",
+                                                                       "type":  "main",
+                                                                       "index":  0
+                                                                   }
+                                                               ]
+                                                           ]
+                                              },
+                        "Nuevo Match Multi-Dealer?":  {
+                                                          "main":  [
+                                                                       [
+                                                                           {
+                                                                               "node":  "Avisar Lead Multi-Dealer",
+                                                                               "type":  "main",
+                                                                               "index":  0
+                                                                           }
+                                                                       ]
+                                                                   ]
+                                                      }
+                    },
+    "nodes":  [
+                  {
+                      "parameters":  {
+                                         "workflowInputs":  {
+                                                                "values":  [
+                                                                               {
+                                                                                   "name":  "contactId"
+                                                                               },
+                                                                               {
+                                                                                   "name":  "locationId"
+                                                                               },
+                                                                               {
+                                                                                   "name":  "dealer"
+                                                                               },
+                                                                               {
+                                                                                   "name":  "canal"
+                                                                               },
+                                                                               {
+                                                                                   "name":  "entrada_usuario"
+                                                                               },
+                                                                               {
+                                                                                   "name":  "city_actual"
+                                                                               },
+                                                                               {
+                                                                                   "name":  "interes_vehiculo_actual"
+                                                                               },
+                                                                               {
+                                                                                   "name":  "metodo_pago_actual"
+                                                                               },
+                                                                               {
+                                                                                   "name":  "timing_actual"
+                                                                               },
+                                                                               {
+                                                                                   "name":  "idioma_actual"
+                                                                               },
+                                                                               {
+                                                                                   "name":  "resumen_actual"
+                                                                               },
+                                                                               {
+                                                                                   "name":  "telefono_actual"
+                                                                               },
+                                                                               {
+                                                                                   "name":  "telefono_intentos_actual"
+                                                                               },
+                                                                               {
+                                                                                   "name":  "telefono_dejar_de_pedir_actual"
+                                                                               }
+                                                                           ]
+                                                            }
+                                     },
+                      "type":  "n8n-nodes-base.executeWorkflowTrigger",
+                      "typeVersion":  1.1,
+                      "position":  [
+                                       -2368,
+                                       96
+                                   ],
+                      "id":  "cac797a1-b7b9-4681-906a-a4dd991d75ea",
+                      "name":  "START"
+                  },
+                  {
+                      "parameters":  {
+                                         "assignments":  {
+                                                             "assignments":  [
+                                                                                 {
+                                                                                     "id":  "ctx-contactId",
+                                                                                     "name":  "contactId",
+                                                                                     "value":  "={{ $json.contactId || \u0027\u0027 }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "ctx-locationId",
+                                                                                     "name":  "locationId",
+                                                                                     "value":  "={{ $json.locationId || \u0027\u0027 }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "ctx-dealer",
+                                                                                     "name":  "dealer",
+                                                                                     "value":  "={{ $json.dealer || \u0027\u0027 }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "ctx-canal",
+                                                                                     "name":  "canal",
+                                                                                     "value":  "={{ $json.canal || \u0027\u0027 }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "ctx-entrada",
+                                                                                     "name":  "entrada_usuario",
+                                                                                     "value":  "={{ $json.entrada_usuario || \u0027\u0027 }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "ctx-city",
+                                                                                     "name":  "city_actual",
+                                                                                     "value":  "={{ $json.city_actual || \u0027\u0027 }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "ctx-vehiculo",
+                                                                                     "name":  "interes_vehiculo_actual",
+                                                                                     "value":  "={{ $json.interes_vehiculo_actual || \u0027\u0027 }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "ctx-pago",
+                                                                                     "name":  "metodo_pago_actual",
+                                                                                     "value":  "={{ $json.metodo_pago_actual || \u0027\u0027 }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "ctx-timing",
+                                                                                     "name":  "timing_actual",
+                                                                                     "value":  "={{ $json.timing_actual || \u0027\u0027 }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "ctx-idioma",
+                                                                                     "name":  "idioma_actual",
+                                                                                     "value":  "={{ $json.idioma_actual || \u0027\u0027 }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "ctx-resumen",
+                                                                                     "name":  "resumen_actual",
+                                                                                     "value":  "={{ $json.resumen_actual || \u0027\u0027 }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "ctx-telefono",
+                                                                                     "name":  "telefono_actual",
+                                                                                     "value":  "={{ $json.telefono_actual || \u0027\u0027 }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "ctx-tel-intentos",
+                                                                                     "name":  "telefono_intentos_actual",
+                                                                                     "value":  "={{ $json.telefono_intentos_actual || \u00270\u0027 }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "ctx-tel-dejar",
+                                                                                     "name":  "telefono_dejar_de_pedir_actual",
+                                                                                     "value":  "={{ $json.telefono_dejar_de_pedir_actual || \u0027false\u0027 }}",
+                                                                                     "type":  "string"
+                                                                                 }
+                                                                             ]
+                                                         },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  3.4,
+                      "position":  [
+                                       -2144,
+                                       96
+                                   ],
+                      "id":  "459af54a-50c9-4ccb-a888-bab353e5b4d3",
+                      "name":  "SET CONTEXT"
+                  },
+                  {
+                      "parameters":  {
+                                         "promptType":  "define",
+                                         "text":  "={{ $(\u0027SET CONTEXT\u0027).first().json.entrada_usuario }}",
+                                         "options":  {
+                                                         "systemMessage":  "=### ROL ###\nEres el extractor de datos de lead para {{ $(\u0027SET CONTEXT\u0027).first().json.dealer }} (concesionario de autos, Miami). No conversas libremente -- tu salida es JSON, pero tu campo `response` SI se le muestra al usuario cuando el agente principal te invoca para pedir el telefono (ver REGLA DE PEDIDO DE TELEFONO abajo). Analiza el ULTIMO mensaje del usuario junto con el contexto ya conocido y decide que campos actualizar.\n\n### CONTEXTO YA CONOCIDO ###\n- Canal: {{ $(\u0027SET CONTEXT\u0027).first().json.canal }}\n- Ciudad/zona actual: {{ $(\u0027SET CONTEXT\u0027).first().json.city_actual || \"no aparece\" }}\n- Interes de vehiculo actual: {{ $(\u0027SET CONTEXT\u0027).first().json.interes_vehiculo_actual || \"no aparece\" }}\n- Metodo de pago actual: {{ $(\u0027SET CONTEXT\u0027).first().json.metodo_pago_actual || \"no aparece\" }}\n- Timing de compra actual: {{ $(\u0027SET CONTEXT\u0027).first().json.timing_actual || \"no aparece\" }}\n- Idioma preferido actual: {{ $(\u0027SET CONTEXT\u0027).first().json.idioma_actual || \"no aparece\" }}\n- Telefono actual: {{ $(\u0027SET CONTEXT\u0027).first().json.telefono_actual || \"no aparece\" }}\n- Resumen previo: {{ $(\u0027SET CONTEXT\u0027).first().json.resumen_actual || \"ninguno todavia\" }}\n\n### REGLAS DE CAMPOS ###\n1. Solo llena un campo si el usuario dio informacion NUEVA sobre el en su ultimo mensaje. Si no dijo nada nuevo sobre un campo, devuelve el valor actual tal cual (no lo borres, no lo inventes).\n2. city: ciudad o zona donde vive o busca el auto.\n3. interes_vehiculo: marca/modelo/tipo de vehiculo de interes (acumulable -- combina con lo que ya se sabia si el nuevo dato es mas especifico).\n4. metodo_pago: cash, financiamiento, trade-in, etc.\n5. timing_compra: urgencia/plazo de compra (ej. \"esta semana\", \"en un mes\", \"solo viendo opciones\").\n6. idioma_preferido: idioma en que escribe el usuario (english/espanol) -- detectalo del mensaje, no lo preguntes.\n7. telefono: numero de telefono del usuario, SOLO si lo escribio explicitamente en este mensaje (cualquier formato). Nunca lo inventes.\n8. rechazo_explicito: true SOLO si el usuario se niega explicitamente a compartir su numero (\"no quiero dar mi numero\", \"prefiero no compartirlo\", \"no te voy a dar mi telefono\", \"no doy esa informacion\", etc.). false en cualquier otro caso, incluido si simplemente no lo menciono.\n9. resumen_ai: reescribe el resumen previo completo en 1-2 oraciones cortas que un asesor humano pueda leer rapido para entender donde va la conversacion. No lo concatenes sin limite.\n\n### REGLA DE PEDIDO DE TELEFONO ###\nEl agente principal te invoca porque necesita el telefono del cliente para poder ayudarlo (es requisito para conectar el lead con DealerCenter). Si en este mensaje NO llego un telefono valido y el cliente no se nego explicitamente:\n- Genera en `response` un pedido amable y breve, SIEMPRE contextualizado a lo que el cliente esta preguntando o buscando en su ultimo mensaje (ej: si pregunto precio de un Camry: \"Para compartirte el precio del Camry, Â¿me confirmas tu numero de contacto? ðŸ˜Š\"). Nunca lo pidas de forma generica y desconectada de lo que el cliente quiere.\n- Si el cliente ya lo compartio en este mensaje: `response` debe confirmar brevemente en 4-6 palabras (ej: \"Â¡Gracias!\" o \"Perfecto, ya con eso...\").\n- Si el cliente se nego explicitamente: `response` puede quedar vacio, el sistema genera el mensaje de cierre automaticamente.\n\n### FORMATO DE SALIDA -- SOLO este JSON en una linea ###\n{\"city\": \"string|null\", \"interes_vehiculo\": \"string|null\", \"metodo_pago\": \"string|null\", \"timing_compra\": \"string|null\", \"idioma_preferido\": \"string|null\", \"telefono\": \"string|null\", \"rechazo_explicito\": true|false, \"resumen_ai\": \"string|null\", \"response\": \"string\"}"
+                                                     }
+                                     },
+                      "type":  "@n8n/n8n-nodes-langchain.agent",
+                      "typeVersion":  3.1,
+                      "position":  [
+                                       -1696,
+                                       96
+                                   ],
+                      "id":  "06d50edd-5d13-4275-a3d9-b95b1a9a878a",
+                      "name":  "Lead Agent"
+                  },
+                  {
+                      "parameters":  {
+                                         "sessionIdType":  "customKey",
+                                         "sessionKey":  "={{ $(\u0027START\u0027).item.json.contactId }}",
+                                         "collectionName":  "chat_histories_lead",
+                                         "databaseName":  "Carwarriors",
+                                         "contextWindowLength":  10
+                                     },
+                      "type":  "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+                      "typeVersion":  1,
+                      "position":  [
+                                       -1560,
+                                       328
+                                   ],
+                      "id":  "6d19c130-7d05-4e2c-98a4-369b7f51612b",
+                      "name":  "MongoDB Chat Memory",
+                      "credentials":  {
+                                          "mongoDb":  {
+                                                          "id":  "WvGe0WEIfm6NF1Qa",
+                                                          "name":  "MongoDB Carwarriors"
+                                                      }
+                                      }
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "const raw = $input.first().json.output || \u0027\u0027;\nconst ctx = $(\u0027SET CONTEXT\u0027).first().json;\n\nfunction normalizePhone(raw) {\n  if (!raw) return \u0027\u0027;\n  const trimmed = String(raw).trim();\n  const digits = trimmed.replace(/[^\\d]/g, \u0027\u0027);\n  if (trimmed.startsWith(\u0027+\u0027) \u0026\u0026 digits.length \u003e= 10) return \u0027+\u0027 + digits;\n  if (digits.length === 10) return \u0027+1\u0027 + digits;\n  if (digits.length === 11 \u0026\u0026 digits.startsWith(\u00271\u0027)) return \u0027+\u0027 + digits;\n  return \u0027\u0027; // formato no reconocible -- no lo mandamos a GHL para evitar basura\n}\n\nfunction fallback() {\n  return [{\n    json: {\n      city: ctx.city_actual || \u0027\u0027,\n      interes_vehiculo: ctx.interes_vehiculo_actual || \u0027\u0027,\n      metodo_pago: ctx.metodo_pago_actual || \u0027\u0027,\n      timing_compra: ctx.timing_actual || \u0027\u0027,\n      idioma_preferido: ctx.idioma_actual || \u0027\u0027,\n      telefono: ctx.telefono_actual || \u0027\u0027,\n      telefono_intentos: ctx.telefono_intentos_actual || \u00270\u0027,\n      telefono_dejar_de_pedir: ctx.telefono_dejar_de_pedir_actual || \u0027false\u0027,\n      resumen_ai: ctx.resumen_actual || \u0027\u0027,\n      response: \u0027\u0027\n    }\n  }];\n}\n\n// deepseek-v4-flash a veces genera un rambling de razonamiento antes de la respuesta final,\n// repitiendo el JSON de salida varias veces (mismo patron visto en KB-SEARCH el 2026-08-31).\n// Tomar \u0027primer { a ultimo }\u0027 del texto completo mezcla varios bloques y JSON.parse falla.\n// En vez de eso: extraer TODOS los bloques JSON planos y quedarnos con el ULTIMO que parsea\n// Y tiene la clave \u0027telefono\u0027 -- es la version final y mas confiable del modelo.\nfunction extraerJson(texto) {\n  const candidatos = texto.match(/\\{[^{}]*\\}/g) || [];\n  for (let i = candidatos.length - 1; i \u003e= 0; i--) {\n    try {\n      const obj = JSON.parse(candidatos[i]);\n      if (Object.prototype.hasOwnProperty.call(obj, \u0027telefono\u0027)) return obj;\n    } catch (e) { /* seguir probando candidatos anteriores */ }\n  }\n  return null;\n}\n\nconst parsed = extraerJson(raw);\nif (!parsed) {\n  return fallback();\n}\n\nconst telefonoNuevo = normalizePhone(parsed.telefono);\nconst telefonoFinal = telefonoNuevo || ctx.telefono_actual || \u0027\u0027;\n\nlet intentos = parseInt(ctx.telefono_intentos_actual || \u00270\u0027, 10) || 0;\nconst dejarDePedirPrevio = ctx.telefono_dejar_de_pedir_actual === \u0027true\u0027;\nlet dejarDePedir = dejarDePedirPrevio;\nlet justGaveUp = false;\n\n// Contador deterministico -- no confiamos en que el LLM cuente bien los intentos.\n// Solo avanza mientras el telefono siga faltando y todavia no nos hayamos rendido antes.\nif (!telefonoFinal \u0026\u0026 !dejarDePedirPrevio) {\n  if (parsed.rechazo_explicito === true) {\n    dejarDePedir = true;\n    justGaveUp = true;\n  } else {\n    intentos = intentos + 1;\n    if (intentos \u003e= 3) {\n      dejarDePedir = true;\n      justGaveUp = true;\n    }\n  }\n}\n\nlet respuesta = parsed.response || \u0027\u0027;\nif (justGaveUp) {\n  const ingles = (parsed.idioma_preferido || ctx.idioma_actual || \u0027\u0027).toLowerCase().includes(\u0027engl\u0027);\n  respuesta = ingles\n    ? \"No worries, let\u0027s continue -- how can I help? ðŸ˜Š\"\n    : \"Sin problema, seguimos igual ðŸ˜Š Â¿en que te ayudo?\";\n}\n\nreturn [{\n  json: {\n    city: parsed.city || ctx.city_actual || \u0027\u0027,\n    interes_vehiculo: parsed.interes_vehiculo || ctx.interes_vehiculo_actual || \u0027\u0027,\n    metodo_pago: parsed.metodo_pago || ctx.metodo_pago_actual || \u0027\u0027,\n    timing_compra: parsed.timing_compra || ctx.timing_actual || \u0027\u0027,\n    idioma_preferido: parsed.idioma_preferido || ctx.idioma_actual || \u0027\u0027,\n    telefono: telefonoFinal,\n    telefono_intentos: String(intentos),\n    telefono_dejar_de_pedir: String(dejarDePedir),\n    resumen_ai: parsed.resumen_ai || ctx.resumen_actual || \u0027\u0027,\n    response: respuesta\n  }\n}];"
+                                     },
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       -1344,
+                                       96
+                                   ],
+                      "id":  "38f6739b-d846-443b-8c41-ea1b8499f599",
+                      "name":  "Parse Response"
+                  },
+                  {
+                      "parameters":  {
+                                         "conditions":  {
+                                                            "options":  {
+                                                                            "caseSensitive":  true,
+                                                                            "leftValue":  "",
+                                                                            "typeValidation":  "loose",
+                                                                            "version":  1
+                                                                        },
+                                                            "conditions":  [
+                                                                               {
+                                                                                   "id":  "chg-city",
+                                                                                   "leftValue":  "={{ $json.city }}",
+                                                                                   "rightValue":  "={{ $(\u0027SET CONTEXT\u0027).item.json.city_actual }}",
+                                                                                   "operator":  {
+                                                                                                    "type":  "string",
+                                                                                                    "operation":  "notEquals"
+                                                                                                }
+                                                                               },
+                                                                               {
+                                                                                   "id":  "chg-vehiculo",
+                                                                                   "leftValue":  "={{ $json.interes_vehiculo }}",
+                                                                                   "rightValue":  "={{ $(\u0027SET CONTEXT\u0027).item.json.interes_vehiculo_actual }}",
+                                                                                   "operator":  {
+                                                                                                    "type":  "string",
+                                                                                                    "operation":  "notEquals"
+                                                                                                }
+                                                                               },
+                                                                               {
+                                                                                   "id":  "chg-pago",
+                                                                                   "leftValue":  "={{ $json.metodo_pago }}",
+                                                                                   "rightValue":  "={{ $(\u0027SET CONTEXT\u0027).item.json.metodo_pago_actual }}",
+                                                                                   "operator":  {
+                                                                                                    "type":  "string",
+                                                                                                    "operation":  "notEquals"
+                                                                                                }
+                                                                               },
+                                                                               {
+                                                                                   "id":  "chg-timing",
+                                                                                   "leftValue":  "={{ $json.timing_compra }}",
+                                                                                   "rightValue":  "={{ $(\u0027SET CONTEXT\u0027).item.json.timing_actual }}",
+                                                                                   "operator":  {
+                                                                                                    "type":  "string",
+                                                                                                    "operation":  "notEquals"
+                                                                                                }
+                                                                               },
+                                                                               {
+                                                                                   "id":  "chg-idioma",
+                                                                                   "leftValue":  "={{ $json.idioma_preferido }}",
+                                                                                   "rightValue":  "={{ $(\u0027SET CONTEXT\u0027).item.json.idioma_actual }}",
+                                                                                   "operator":  {
+                                                                                                    "type":  "string",
+                                                                                                    "operation":  "notEquals"
+                                                                                                }
+                                                                               },
+                                                                               {
+                                                                                   "id":  "chg-telefono",
+                                                                                   "leftValue":  "={{ $json.telefono }}",
+                                                                                   "rightValue":  "={{ $(\u0027SET CONTEXT\u0027).item.json.telefono_actual }}",
+                                                                                   "operator":  {
+                                                                                                    "type":  "string",
+                                                                                                    "operation":  "notEquals"
+                                                                                                }
+                                                                               },
+                                                                               {
+                                                                                   "id":  "chg-tel-intentos",
+                                                                                   "leftValue":  "={{ $json.telefono_intentos }}",
+                                                                                   "rightValue":  "={{ $(\u0027SET CONTEXT\u0027).item.json.telefono_intentos_actual }}",
+                                                                                   "operator":  {
+                                                                                                    "type":  "string",
+                                                                                                    "operation":  "notEquals"
+                                                                                                }
+                                                                               },
+                                                                               {
+                                                                                   "id":  "chg-tel-dejar",
+                                                                                   "leftValue":  "={{ $json.telefono_dejar_de_pedir }}",
+                                                                                   "rightValue":  "={{ $(\u0027SET CONTEXT\u0027).item.json.telefono_dejar_de_pedir_actual }}",
+                                                                                   "operator":  {
+                                                                                                    "type":  "string",
+                                                                                                    "operation":  "notEquals"
+                                                                                                }
+                                                                               },
+                                                                               {
+                                                                                   "id":  "chg-resumen",
+                                                                                   "leftValue":  "={{ $json.resumen_ai }}",
+                                                                                   "rightValue":  "={{ $(\u0027SET CONTEXT\u0027).item.json.resumen_actual }}",
+                                                                                   "operator":  {
+                                                                                                    "type":  "string",
+                                                                                                    "operation":  "notEquals"
+                                                                                                }
+                                                                               }
+                                                                           ],
+                                                            "combinator":  "or"
+                                                        },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.if",
+                      "typeVersion":  2.3,
+                      "position":  [
+                                       -896,
+                                       96
+                                   ],
+                      "id":  "c70f01ab-789b-4b9d-85d1-acdb725f3b48",
+                      "name":  "Hay Cambios?"
+                  },
+                  {
+                      "parameters":  {
+                                         "assignments":  {
+                                                             "assignments":  [
+                                                                                 {
+                                                                                     "id":  "pu-contactId",
+                                                                                     "name":  "contactId",
+                                                                                     "value":  "={{ $(\u0027SET CONTEXT\u0027).item.json.contactId }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "pu-city",
+                                                                                     "name":  "city",
+                                                                                     "value":  "={{ $json.city }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "pu-vehiculo",
+                                                                                     "name":  "interes_vehiculo",
+                                                                                     "value":  "={{ $json.interes_vehiculo }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "pu-pago",
+                                                                                     "name":  "metodo_pago",
+                                                                                     "value":  "={{ $json.metodo_pago }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "pu-timing",
+                                                                                     "name":  "timing_compra",
+                                                                                     "value":  "={{ $json.timing_compra }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "pu-idioma",
+                                                                                     "name":  "idioma_preferido",
+                                                                                     "value":  "={{ $json.idioma_preferido }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "pu-telefono",
+                                                                                     "name":  "telefono",
+                                                                                     "value":  "={{ $json.telefono }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "pu-tel-intentos",
+                                                                                     "name":  "telefono_intentos",
+                                                                                     "value":  "={{ $json.telefono_intentos }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "pu-tel-dejar",
+                                                                                     "name":  "telefono_dejar_de_pedir",
+                                                                                     "value":  "={{ $json.telefono_dejar_de_pedir }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "pu-resumen",
+                                                                                     "name":  "resumen_ai",
+                                                                                     "value":  "={{ $json.resumen_ai }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "pu-updatedAt",
+                                                                                     "name":  "updatedAt",
+                                                                                     "value":  "={{ $now.toISO() }}",
+                                                                                     "type":  "string"
+                                                                                 }
+                                                                             ]
+                                                         },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  3.4,
+                      "position":  [
+                                       -1120,
+                                       96
+                                   ],
+                      "id":  "db893810-f6df-42fe-86cb-9900e51f22c6",
+                      "name":  "Prepare Update"
+                  },
+                  {
+                      "parameters":  {
+
+                                     },
+                      "type":  "n8n-nodes-base.noOp",
+                      "typeVersion":  1,
+                      "position":  [
+                                       -448,
+                                       192
+                                   ],
+                      "id":  "33ee2c30-4297-40d6-b7c4-4309405cd6e9",
+                      "name":  "No Operation, do nothing"
+                  },
+                  {
+                      "parameters":  {
+                                         "assignments":  {
+                                                             "assignments":  [
+                                                                                 {
+                                                                                     "id":  "resp-city",
+                                                                                     "name":  "city",
+                                                                                     "value":  "={{ $(\u0027Prepare Update\u0027).item.json.city }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "resp-vehiculo",
+                                                                                     "name":  "interes_vehiculo",
+                                                                                     "value":  "={{ $(\u0027Prepare Update\u0027).item.json.interes_vehiculo }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "resp-pago",
+                                                                                     "name":  "metodo_pago",
+                                                                                     "value":  "={{ $(\u0027Prepare Update\u0027).item.json.metodo_pago }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "resp-timing",
+                                                                                     "name":  "timing_compra",
+                                                                                     "value":  "={{ $(\u0027Prepare Update\u0027).item.json.timing_compra }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "resp-idioma",
+                                                                                     "name":  "idioma_preferido",
+                                                                                     "value":  "={{ $(\u0027Prepare Update\u0027).item.json.idioma_preferido }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "resp-telefono",
+                                                                                     "name":  "telefono",
+                                                                                     "value":  "={{ $(\u0027Prepare Update\u0027).item.json.telefono }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "resp-tel-intentos",
+                                                                                     "name":  "telefono_intentos",
+                                                                                     "value":  "={{ $(\u0027Prepare Update\u0027).item.json.telefono_intentos }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "resp-tel-dejar",
+                                                                                     "name":  "telefono_dejar_de_pedir",
+                                                                                     "value":  "={{ $(\u0027Prepare Update\u0027).item.json.telefono_dejar_de_pedir }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "resp-resumen",
+                                                                                     "name":  "resumen_ai",
+                                                                                     "value":  "={{ $(\u0027Prepare Update\u0027).item.json.resumen_ai }}",
+                                                                                     "type":  "string"
+                                                                                 }
+                                                                             ]
+                                                         },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  3.4,
+                      "position":  [
+                                       -224,
+                                       96
+                                   ],
+                      "id":  "60e772a9-0837-41b1-a161-a31097170949",
+                      "name":  "RESPONSE"
+                  },
+                  {
+                      "parameters":  {
+                                         "operation":  "update",
+                                         "collection":  "leads",
+                                         "updateKey":  "contactId",
+                                         "fields":  "contactId,city,interes_vehiculo,metodo_pago,timing_compra,idioma_preferido,telefono,telefono_intentos,telefono_dejar_de_pedir,resumen_ai,updatedAt",
+                                         "upsert":  true,
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.mongoDb",
+                      "typeVersion":  1.2,
+                      "position":  [
+                                       -672,
+                                       0
+                                   ],
+                      "id":  "603a07eb-be6f-4e47-b4dc-c7f58f8f670f",
+                      "name":  "Update Lead in Mongo",
+                      "credentials":  {
+                                          "mongoDb":  {
+                                                          "id":  "WvGe0WEIfm6NF1Qa",
+                                                          "name":  "MongoDB Carwarriors"
+                                                      }
+                                      }
+                  },
+                  {
+                      "parameters":  {
+                                         "options":  {
+                                                         "temperature":  0.1,
+                                                         "timeout":  30000,
+                                                         "maxRetries":  2
+                                                     }
+                                     },
+                      "type":  "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+                      "typeVersion":  1,
+                      "position":  [
+                                       -1744,
+                                       320
+                                   ],
+                      "id":  "b48f8e9c-280d-4238-af8f-0e4e68e951ed",
+                      "name":  "OpenRouter Chat Model",
+                      "credentials":  {
+                                          "openRouterApi":  {
+                                                                "id":  "o8MexJvFeSx2j4an",
+                                                                "name":  "OpenRouter account"
+                                                            }
+                                      }
+                  },
+                  {
+                      "parameters":  {
+                                         "method":  "PUT",
+                                         "url":  "={{ \"https://services.leadconnectorhq.com/contacts/\" + $(\u0027SET CONTEXT\u0027).item.json.contactId }}",
+                                         "sendHeaders":  true,
+                                         "headerParameters":  {
+                                                                  "parameters":  [
+                                                                                     {
+                                                                                         "name":  "Version",
+                                                                                         "value":  "2021-07-28"
+                                                                                     },
+                                                                                     {
+                                                                                         "name":  "Content-Type",
+                                                                                         "value":  "application/json"
+                                                                                     },
+                                                                                     {
+                                                                                         "name":  "Authorization",
+                                                                                         "value":  "={{ \u0027Bearer \u0027 + $(\u0027Get Account Credentials\u0027).first().json.ghlToken }}"
+                                                                                     }
+                                                                                 ]
+                                                              },
+                                         "sendBody":  true,
+                                         "specifyBody":  "json",
+                                         "jsonBody":  "={{ Object.assign({ city: $(\u0027Prepare Update\u0027).item.json.city }, $(\u0027Prepare Update\u0027).item.json.telefono ? { phone: $(\u0027Prepare Update\u0027).item.json.telefono } : {}) }}",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "id":  "a7c1f4e2-9b3d-4a6e-8f2c-1d5b7e9a3c6f",
+                      "name":  "Update GHL Contact",
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "typeVersion":  4.4,
+                      "position":  [
+                                       -448,
+                                       0
+                                   ],
+                      "retryOnFail":  true,
+                      "onError":  "continueRegularOutput",
+                      "notes":  "TODO: agregar customFields (interes_vehiculo, metodo_pago, timing_compra, idioma_preferido, resumen_ai) cuando: 1) se renueve el token GHL (401 Invalid JWT visto el 2026-08-12), 2) se consulten los IDs reales de esos custom fields via GET /locations/{locationId}/customFields. Por ahora solo actualiza \u0027city\u0027 porque es campo estandar de GHL sin necesidad de ID."
+                  },
+                  {
+                      "parameters":  {
+                                         "operation":  "get",
+                                         "dataTableId":  {
+                                                             "__rl":  true,
+                                                             "mode":  "id",
+                                                             "value":  "3V2Oq6RyrnfPtkzi",
+                                                             "cachedResultName":  "GHL Locations"
+                                                         },
+                                         "matchType":  "allConditions",
+                                         "filters":  {
+                                                         "conditions":  [
+                                                                            {
+                                                                                "keyName":  "locationId",
+                                                                                "keyValue":  "={{ $(\u0027SET CONTEXT\u0027).first().json.locationId }}"
+                                                                            }
+                                                                        ]
+                                                     },
+                                         "limit":  1
+                                     },
+                      "id":  "b1e4a0b0-1a1b-4a7f-9c3a-6a7e2b4f9c11",
+                      "name":  "Get Account Credentials",
+                      "type":  "n8n-nodes-base.dataTable",
+                      "typeVersion":  1.1,
+                      "position":  [
+                                       -1920,
+                                       96
+                                   ]
+                  },
+                  {
+                      "id":  "713db8cd-5273-4faa-860c-5c8e90f751b6",
+                      "name":  "Tiene Telefono (Master)?",
+                      "type":  "n8n-nodes-base.if",
+                      "typeVersion":  2.3,
+                      "position":  [
+                                       -896,
+                                       420
+                                   ],
+                      "parameters":  {
+                                         "conditions":  {
+                                                            "options":  {
+                                                                            "caseSensitive":  true,
+                                                                            "leftValue":  "",
+                                                                            "typeValidation":  "strict"
+                                                                        },
+                                                            "conditions":  [
+                                                                               {
+                                                                                   "leftValue":  "={{ $(\u0027Prepare Update\u0027).item.json.telefono }}",
+                                                                                   "operator":  {
+                                                                                                    "type":  "string",
+                                                                                                    "operation":  "notEmpty"
+                                                                                                },
+                                                                                   "rightValue":  ""
+                                                                               }
+                                                                           ],
+                                                            "combinator":  "and"
+                                                        }
+                                     }
+                  },
+                  {
+                      "id":  "a4e74b7b-aaad-4570-b67a-70d83485a9a4",
+                      "name":  "Buscar Lead Master",
+                      "type":  "n8n-nodes-base.mongoDb",
+                      "typeVersion":  1.4,
+                      "position":  [
+                                       -672,
+                                       420
+                                   ],
+                      "parameters":  {
+                                         "resource":  "document",
+                                         "operation":  "find",
+                                         "collection":  "leads_master",
+                                         "query":  "={{ JSON.stringify({ telefono: $(\u0027Prepare Update\u0027).item.json.telefono }) }}",
+                                         "options":  {
+                                                         "limit":  1
+                                                     }
+                                     },
+                      "alwaysOutputData":  true,
+                      "credentials":  {
+                                          "mongoDb":  {
+                                                          "id":  "WvGe0WEIfm6NF1Qa",
+                                                          "name":  "MongoDB Carwarriors"
+                                                      }
+                                      }
+                  },
+                  {
+                      "id":  "caeb53a9-a874-43f7-8c59-8262f228f9db",
+                      "name":  "Merge Lead Master",
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       -448,
+                                       420
+                                   ],
+                      "parameters":  {
+                                         "mode":  "runOnceForAllItems",
+                                         "language":  "javaScript",
+                                         "jsCode":  "const pu = $(\u0027Prepare Update\u0027).first().json;\nconst ctx = $(\u0027SET CONTEXT\u0027).first().json;\nconst foundItems = $input.all();\nconst existing = foundItems.length ? foundItems[0].json : null;\n\nconst now = new Date().toISOString();\nconst dealer = ctx.dealer || pu.dealer || \u0027\u0027;\n\nconst nuevaFuente = {\n  dealer: dealer,\n  locationId: ctx.locationId || \u0027\u0027,\n  contactId: pu.contactId,\n  canal: ctx.canal || \u0027\u0027,\n  primeraEntrada: now,\n  ultimaEntrada: now\n};\n\nlet fuentes = (existing \u0026\u0026 Array.isArray(existing.fuentes)) ? existing.fuentes.slice() : [];\nconst idx = fuentes.findIndex(f =\u003e f.dealer === nuevaFuente.dealer \u0026\u0026 f.contactId === nuevaFuente.contactId);\nlet esFuenteNueva = false;\nif (idx \u003e= 0) {\n  fuentes[idx] = Object.assign({}, fuentes[idx], { ultimaEntrada: now });\n} else {\n  fuentes.push(nuevaFuente);\n  esFuenteNueva = true;\n}\n\nconst dealersUnicos = [...new Set(fuentes.map(f =\u003e f.dealer))];\nconst multiDealer = dealersUnicos.length \u003e 1;\nconst nuevoMatchCrossDealer = esFuenteNueva \u0026\u0026 multiDealer;\n\nreturn [{\n  json: {\n    telefono: pu.telefono,\n    city: pu.city,\n    interes_vehiculo: pu.interes_vehiculo,\n    metodo_pago: pu.metodo_pago,\n    timing_compra: pu.timing_compra,\n    idioma_preferido: pu.idioma_preferido,\n    resumen_ai: pu.resumen_ai,\n    fuentes: fuentes,\n    dealers: dealersUnicos,\n    multiDealer: multiDealer,\n    nuevoMatchCrossDealer: nuevoMatchCrossDealer,\n    createdAt: (existing \u0026\u0026 existing.createdAt) ? existing.createdAt : now,\n    updatedAt: now\n  }\n}];"
+                                     }
+                  },
+                  {
+                      "id":  "bd069043-c877-41bc-8d29-27cb36983c88",
+                      "name":  "Upsert Lead Master",
+                      "type":  "n8n-nodes-base.mongoDb",
+                      "typeVersion":  1.4,
+                      "position":  [
+                                       -224,
+                                       500
+                                   ],
+                      "parameters":  {
+                                         "resource":  "document",
+                                         "operation":  "update",
+                                         "collection":  "leads_master",
+                                         "updateKey":  "telefono",
+                                         "fields":  "telefono,city,interes_vehiculo,metodo_pago,timing_compra,idioma_preferido,resumen_ai,fuentes,dealers,multiDealer,createdAt,updatedAt",
+                                         "upsert":  true,
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "credentials":  {
+                                          "mongoDb":  {
+                                                          "id":  "WvGe0WEIfm6NF1Qa",
+                                                          "name":  "MongoDB Carwarriors"
+                                                      }
+                                      }
+                  },
+                  {
+                      "id":  "e36b9a8a-1a6d-4382-8404-83242a8ad558",
+                      "name":  "Nuevo Match Multi-Dealer?",
+                      "type":  "n8n-nodes-base.if",
+                      "typeVersion":  2.3,
+                      "position":  [
+                                       -224,
+                                       320
+                                   ],
+                      "parameters":  {
+                                         "conditions":  {
+                                                            "combinator":  "and",
+                                                            "conditions":  [
+                                                                               {
+                                                                                   "leftValue":  "={{ !!$json.nuevoMatchCrossDealer }}",
+                                                                                   "operator":  {
+                                                                                                    "operation":  "true",
+                                                                                                    "type":  "boolean"
+                                                                                                },
+                                                                                   "rightValue":  true
+                                                                               }
+                                                                           ],
+                                                            "options":  {
+                                                                            "caseSensitive":  true,
+                                                                            "leftValue":  "",
+                                                                            "typeValidation":  "strict"
+                                                                        }
+                                                        }
+                                     }
+                  },
+                  {
+                      "id":  "ff49070c-2e2d-455e-8397-f459384b65fa",
+                      "name":  "Avisar Lead Multi-Dealer",
+                      "type":  "n8n-nodes-base.slack",
+                      "typeVersion":  2.6,
+                      "position":  [
+                                       0,
+                                       320
+                                   ],
+                      "parameters":  {
+                                         "resource":  "message",
+                                         "operation":  "post",
+                                         "select":  "channel",
+                                         "channelId":  {
+                                                           "__rl":  true,
+                                                           "mode":  "id",
+                                                           "value":  "C0BPV2Z2S3C",
+                                                           "cachedResultName":  "notificaciones"
+                                                       },
+                                         "messageType":  "text",
+                                         "text":  "=ðŸ”— *Lead detectado en mÃ¡s de un dealer*\nTelÃ©fono: {{ $json.telefono }}\nDealers: {{ $json.dealers.join(\u0027, \u0027) }}\nInterÃ©s de vehÃ­culo: {{ $json.interes_vehiculo || \u0027no especificado\u0027 }}\nResumen: {{ $json.resumen_ai || \u0027sin resumen todavÃ­a\u0027 }}",
+                                         "otherOptions":  {
+                                                              "includeLinkToWorkflow":  false
+                                                          }
+                                     },
+                      "webhookId":  "23a9d96b-4138-482e-9560-bec58ec9a085",
+                      "credentials":  {
+                                          "slackApi":  {
+                                                           "id":  "wUpEjaBadmKdhhqM",
+                                                           "name":  "Slack FORJADO"
+                                                       }
+                                      }
+                  }
+              ],
+    "nodeGroups":  [
+
+                   ],
+    "activeVersion":  {
+                          "sameAsDraft":  true
+                      },
+    "meta":  {
+                 "aiBuilderAssisted":  true,
+                 "builderVariant":  "mcp"
+             }
 }
