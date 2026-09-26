@@ -33,28 +33,35 @@ Se construyó y publicó el workflow **`DealerCenter -> Slack (Reporte Diario Le
    - Formatea un mensaje estructurado en Slack Markdown destacando los 10 prospectos prioritarios a regularizar con su nombre, dealer (`CW` vs `RANCES`), teléfono, fuente de adquisición y estatus.
 
 4. **Notificación en Producción (`Enviar Reporte a Slack`):**
-   - Envía el reporte automáticamente al canal `#notificaciones` (`C0BPV2Z2S3C`) utilizando la credencial oficial `Slack FORJADO` (`wUpEjaBadmKdhhqM`).
+   - Envía el reporte automáticamente al canal dedicado **`#auditoria-leads`** (`C0C4K7SRY5B`), separándolo de `#notificaciones` para mantener limpio el feed de alertas en tiempo real.
+   - Incluye barra divisoria sólida reforzada (`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`) y pie de página de cierre para garantizar que en la app móvil y web se distinga nítidamente dónde termina un reporte y empieza el siguiente.
 
 ---
 
-## 2. Pruebas y Verificación en Vivo
+## 2. Configuración en DealerCenter (Reports -> Schedules)
 
-Se ejecutó la prueba manual (Ejecución ID: `9659`):
-- **Estatus:** **`success`** (100% de los nodos ejecutados en 3.08 segundos).
-- **Slack API:** `ok: true`, entregado en canal `C0BPV2Z2S3C`.
-- **Datos reales auditados en la prueba:**
-  - Leads analizados (últimas 48h): **74 leads**.
-  - Leads recientes incompletos: **71 leads** (59 sin asignación de vendedor/BDC, 65 sin task/cita futura programada).
-  - Tasa de cumplimiento reciente del SOP: **4%**.
-  - Pipeline activo global: **482 prospectos activos** (457 con falta de task futura).
-  - Listado de prospectos con banderas claras: `🔴 SIN ASIGNACIÓN` y `⚠️ SIN TASK FUTURA`.
+Aprovechando el acceso en vivo, se ingresó al diseñador de reportes de DealerCenter (`Customer Reports → FORJADO Lead Sync`):
+- Se agregaron las 4 columnas mandatorias: **`BDC Rep`**, **`Follow Up Date`**, **`Created By`** y **`Last Activity Create Date`**.
+- Configuración guardada y verificada en la grilla (`reportId: 1878845`). Las futuras exportaciones matutinas incluirán estos campos de forma nativa.
 
 ---
 
-## 3. Estado en Producción
+## 3. Pruebas y Verificación en Vivo
+
+1. **Prueba inicial a `#notificaciones` (Ejecución ID: `9659`):** `status: success`, entrega verificada.
+2. **Prueba definitiva al nuevo canal `#auditoria-leads` (Ejecución ID: `9675`):**
+   - **Canal de destino:** `C0C4K7SRY5B` (`#auditoria-leads`).
+   - **Slack API:** `ok: true`.
+   - **División visual:** Barra continua `━━━━━━━━━━` y footer `🏁 Fin de Auditoría Diaria` confirmados al pie del mensaje.
+   - **Datos reales auditados:** 74 leads recientes, 71 incompletos detectados, desglose detallado de los 10 prioritarios.
+
+---
+
+## 4. Estado en Producción
 
 - **Workflow ID:** `jc317DtnKMYEscC5`
-- **Active Version ID:** `9bc742fb-8f14-4b65-8273-e79775da482e`
+- **Active Version ID:** `bbfae4cd-4de5-46fe-b059-ac9882a880df`
+- **Canal Slack:** `#auditoria-leads` (`C0C4K7SRY5B`)
 - **Estatus:** **`active: true`**
 - **Siguiente ejecución automática:** Diariamente a las **09:00 AM hora Miami**.
 - **Pendiente:** CERRADO y RESUELTO al 100%.
