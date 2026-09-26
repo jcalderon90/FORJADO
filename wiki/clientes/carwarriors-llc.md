@@ -6,7 +6,7 @@ servicio: automatizacion
 estado_comercial: migracion-arquitectura-en-curso
 contacto: Jorge González (dueño) / Bianca Cangialosi (marketing)
 creado: 2026-06-18
-actualizado: 2026-09-25
+actualizado: 2026-09-26
 fuente_raw: raw/clientes/carwarriors-llc/
 ---
 
@@ -50,7 +50,7 @@ Documentos de referencia relacionados: [[carwarriors-llc-infraestructura]] · [[
 
 ## Pendientes abiertos (al 2026-09-25)
 
-- [ ] **🟡 Reporte diario de leads en DealerCenter sin asignación, notas ni tasks (2026-09-25):** Solicitud directa de Jorge González (dueño de Carwarriors). Asesores o personal de BDC ingresan manualmente leads de personas a DealerCenter y los dejan incompletos: sin asignar Sales Rep ni BDC Rep, sin notas y sin tareas/tasks futuros (violando la directiva oficial del SOP *"Lead sin task = cliente perdido"*). Requerimiento: implementar un reporte diario automatizado (vía n8n por Slack o email) que audite y liste los leads creados sin asignación o sin seguimiento para control de calidad del equipo. Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-25-solicitud-reporte-diario-leads-sin-asignacion-dealercenter]].
+- [x] **🟢 Reporte diario de leads en DealerCenter sin asignación ni tasks — IMPLEMENTADO, PUBLICADO Y VERIFICADO EN SLACK (2026-09-26).** Workflow `DealerCenter -> Slack (Reporte Diario Leads Incompletos)` (`jc317DtnKMYEscC5`) creado en la carpeta `SYNC - GHL-Dealer_Center` y activo en producción (`activeVersionId: 9bc742fb-8f14-4b65-8273-e79775da482e`). Dispara automáticamente todos los días a las **09:00 AM hora Miami** (post-sync DealerCenter de las 08:30 AM) y soporta webhook manual (`/webhook/reporte-diario-leads-incompletos`). Audita en MongoDB `dealercenter_customers`: (1) Sin asignación de Sales Rep / BDC Rep (`🔴 SIN ASIGNACIÓN`), (2) Sin tarea o cita futura programada (`⚠️ SIN TASK FUTURA`, violando la regla del SOP de Bianca *"Lead sin task = cliente perdido"*). Probado en vivo (Ejecución `9659`): 74 leads recientes auditados, detectados 71 incompletos, y reporte ejecutivo con los 10 prioritarios entregado con éxito a Slack `#notificaciones` (`C0BPV2Z2S3C`). Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-26-reporte-diario-leads-incompletos-dealercenter-slack]].
 
 - [ ] **🟡 Decisión de arquitectura WhatsApp para Rances Car en GHL vs Meta Business (2026-09-25):** Investigadas y documentadas las opciones técnicas tras confirmarse el bloqueo de intentar conectar Rances Car al Meta Business Portfolio de Carwarriors. Toda la infraestructura en n8n (`PRINCIPAL - Rances Car`) y GHL (`Lead Agent - n8n`) ya está lista y soporta el canal. Opciones a decidir: (1) Crear Meta Business Portfolio propio para Rances Car y conectar vía GHL nativo (recomendado), (2) Conectar WhatsApp Cloud API directo a n8n sin pasar por GHL (ahorra $10/mes de GHL pero sin chat nativo en Conversations), o (3) Gateway QR si el número reside en un teléfono físico con WhatsApp Business app. Pendiente que Jorge / Jorge González tomen la decisión. Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-25-investigacion-whatsapp-rances-car-meta-business]].
 
