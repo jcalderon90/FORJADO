@@ -2,7 +2,7 @@
 tags: [forjado, carwarriors, manychat, instagram, configuracion]
 tipo: referencia
 estado: activo
-actualizado: 2026-09-09
+actualizado: 2026-09-28
 fuente_raw: raw/clientes/carwarriors-llc/2026-09-09-fix-bson-inventario-rances-y-dedupe-leads.md
 ---
 
@@ -14,7 +14,7 @@ fuente_raw: raw/clientes/carwarriors-llc/2026-09-09-fix-bson-inventario-rances-y
 ## Cuenta
 
 - Página: **Carwarriors LLC | Car Dealer** (Facebook Page ID `4391897`, URL base `app.manychat.com/fb4391897/`).
-- Plan: **TRIAL** (premium trial).
+- Plan: **PRO** (visto 2026-09-28; el 09-09 figuraba TRIAL).
 - Zona horaria de la cuenta: **(UTC-04:00) Eastern Time — New York**.
 - **Propietario:** "booxter marketing" (tercero, no Jorge ni Carwarriors directamente — relevante para billing/continuidad de acceso).
 - **Administrador:** Jorge (cuenta usada para esta auditoría).
@@ -26,7 +26,7 @@ fuente_raw: raw/clientes/carwarriors-llc/2026-09-09-fix-bson-inventario-rances-y
 |---|---|
 | **Instagram** | ✅ Conectado — `@carwarriorsllc` |
 | WhatsApp | ❌ No conectado en ManyChat (botón "Conectar") |
-| Messenger | ❌ No conectado |
+| Messenger | ❌ No conectado — **(2026-09-28)** la página de Facebook "Carwarriors LLC Miami" está conectada a **otra cuenta de ManyChat de booxter marketing**; al intentar conectarla quedó "Solicitud Enviada", pendiente de aprobación de booxter |
 | SMS | ❌ No conectado |
 | TikTok | ❌ No conectado |
 | Telegram | ❌ No conectado |
@@ -81,6 +81,9 @@ Ninguna configurada (sección vacía).
 
 **Cableado de "Respuesta Comentarios" (confirmado visualmente en el editor):**
 `Cuando comenta (Post or Reel Comments #3)` → `Acciones: Solicitud externa` (webhook a n8n, `COMENTARIOS-MANYCHAT`) → `Condición: es_interes_real es verdadero` → `Instagram: Enviar mensaje (respuesta_dm)`.
+
+> [!danger] Actualización 2026-09-28 — el flujo no recibe el texto del comentario
+> Cuerpo de la Solicitud externa: `{"comentario": {Última entrada de texto}, "contact": {Full Contact Data}}`. "Última entrada de texto" es el último DM del contacto, **no el comentario** → n8n recibe `{{last_input_text}}` o un DM viejo y clasifica al azar. ManyChat **no expone ninguna variable con el texto del comentario** (revisado Campos del sistema + sección Instagram). Estado ese día: 20 ejecuciones, 18 contactos, 2 DMs enviados; respuesta pública fija "Thanks for commenting! 🙌 If you are looking for info on a vehicle, send us a DM.". Límite del trigger por palabras clave: 10 palabras en "incluyen". Manychat AI: nuevas secciones **Behavior** (rol "Especialista en Autos" ya configurado) y habilidad **"Respuestas de IA"** (DMs y comentarios) — ambas apagadas. Detalle: [[../../raw/clientes/carwarriors-llc/2026-09-28-comentarios-manychat-sin-texto-real-facebook-desconectado-pivote-meta-api|raw/2026-09-28]].
 
 ✅ **Este era el flujo real detrás del pendiente "comentarios IG/FB sin tráfico"** — encontrado STOPPED el 2026-09-09 y reactivado el mismo día a pedido de Jorge (toggle del disparador → el badge pasó a LIVE automáticamente, sin paso de "publicar" aparte). Falta confirmar en los próximos días que entre tráfico real. Ver [[carwarriors-llc]] para el pendiente activo.
 
