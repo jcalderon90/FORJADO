@@ -2,7 +2,7 @@
 tags: [forjado, estado, pendientes, dashboard]
 tipo: estado
 estado: activo
-actualizado: 2026-09-28
+actualizado: 2026-10-02
 fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 ---
 
@@ -35,6 +35,7 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
   Verificado: ningún path absoluto roto, remotes de git intactos, `node_modules/` correctamente ignorado y sin archivos trackeados en los 6 repos. Commits pusheados a `FORJADO` y `social-media-content-` en GitHub. Detalle completo en [[../../raw/interno/2026-09-07-reestructuracion-carpeta-raiz-forjado]].
 - **09-07: `desarrollo/` (esta bóveda) declarada carpeta principal de indexado de todo FORJADO** — hasta ahora `wiki/index.md` solo cubría clientes/interno de la propia bóveda, sin ninguna referencia a `aplicaciones/` ni `contenido/`. Creada [[mapa-forjado|wiki/interno/mapa-forjado.md]] (mapea las 4 apps de `aplicaciones/` — stack, estado, para qué sirve cada una — y referencia `contenido/`, que mantiene su propio `wiki/` independiente sin duplicarse acá), registrada en `wiki/index.md` y en el `README.md` de la bóveda. Detalle en [[../../raw/interno/2026-09-07-reestructuracion-carpeta-raiz-forjado|raw, sección "Quinta pasada"]].
 - **09-14: instalación global de suite de skills agenticas en `~/.gemini/config/skills/`** — 20 habilidades instaladas (14 de Superpowers por Jesse Vincent, `/find-skill` / `/find-skills` para descubrimiento dinámico por stack, `n8n` para automatizaciones y flujos, `karpathy-vault` + `manage-vault` + `compile-wiki` globales). Ver [[configuracion-skills|wiki/interno/configuracion-skills.md]] y [[../../raw/interno/2026-09-14-instalacion-suite-skills-superpowers-n8n-find-skill|raw]].
+- **10-02: Vitrina (producto propio FORJADO) registrada en `aplicaciones/vitrina/`** — marketplace/directorio para mypimes y particulares de Cienfuegos (Cuba), desarrollado por Jorge a tiempo parcial. Plan v0.5 y esqueleto + autenticación ya desplegados en Dokploy (solo HTTP). Su seguimiento operativo (pendientes: dominio + HTTPS, rotar clave de Atlas, backups, módulo negocio) vive en `aplicaciones/vitrina/PLAN_DESARROLLO.md` sección 11, no se duplica acá. Ficha en [[mapa-forjado]]. `aplicaciones/applecell` también existe pero aún no está mapeada.
 - `.claude/skills/compile-wiki/` — compila sesiones de trabajo con clientes desde `raw/` hacia `wiki/` (usar al cerrar una sesión real).
 - `.claude/skills/manage-vault/` — referencia general de convenciones para navegar/crear/editar en esta bóveda, creada 2026-09-02 a pedido de Jorge para que cualquier agente (no solo esta sesión) la gestione bien. Ver [[../../README|README]] y [[../../raw/interno/2026-09-02-skill-manage-vault-creada]].
 - **Lección 09-05 — sesiones paralelas pueden generar hechos contradictorios en git:** dos sesiones trabajando el mismo cliente el mismo día (sin `fetch` previo) llegaron a conclusiones distintas sobre si se había contactado a un tercero, causando un conflicto de push con contenido no solo distinto sino contradictorio. Resuelto preguntándole al usuario cuál era el hecho real. Recomendación: si un cliente puede estar "caliente" (trabajado por otra sesión el mismo día), hacer `git fetch`/`pull` al arrancar. Detalle: [[../../raw/interno/2026-09-05-conflicto-sesiones-paralelas-git-push]].
