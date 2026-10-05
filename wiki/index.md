@@ -1,7 +1,7 @@
 ---
 tags: [forjado, indice, navegacion, wiki]
 tipo: indice
-actualizado: 2026-09-15
+actualizado: 2026-10-05
 ---
 
 # wiki/ — Índice de la bóveda FORJADO
@@ -14,6 +14,7 @@ actualizado: 2026-09-15
 |---|---|
 | [[interno/estado-proyecto]] | Snapshot actual y pendientes de la agencia — punto de entrada diario |
 | [[interno/mapa-forjado]] | Mapa hacia `aplicaciones/` y `contenido/` — las carpetas hermanas de esta bóveda dentro de `FORJADO/` |
+| [[interno/proyectos-pendientes]] | Productos propios: Vitrina (en desarrollo) y por desarrollar: app para barberías/peluquerías y app tipo Call a Car para Cuba |
 
 ## Clientes
 
