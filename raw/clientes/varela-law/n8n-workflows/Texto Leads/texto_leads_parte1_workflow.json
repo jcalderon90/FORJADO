@@ -1,0 +1,109 @@
+{
+  "name": "Texto - Leads FindMyFirm (Parte 1: Sheet -> datos)",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Texto - Leads FindMyFirm\n**Parte 1:** detecta fila nueva en el Sheet de FindMyFirm y deja solo First Name, Last Name, Phone Number y Email.\n**Parte 2 (pendiente):** HTTP Request al webhook de Texto (URL/token por confirmar) + prueba con número propio antes de activar.\n\nSheet: `a - DON'T DELETE - Lead Export - Varela` / pestaña `Sheet1`.\nAjustar los nombres de columna del nodo `Datos para Texto` si los encabezados reales difieren.",
+        "height": 220,
+        "width": 480
+      },
+      "id": "a1b2c3d4-0001-4000-8000-000000000001",
+      "name": "Nota",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [-420, -260]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "11rhw8svoVOI064scO-hbgASRuJCtO9W7sp6-HphR5w4",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0002-4000-8000-000000000002",
+      "name": "Nueva fila en Sheet",
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [-420, 0],
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "IuMZWPrlwG9KZeJi",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f1000000-0000-4000-8000-000000000001",
+              "name": "First Name",
+              "value": "={{ $json['First Name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "f1000000-0000-4000-8000-000000000002",
+              "name": "Last Name",
+              "value": "={{ $json['Last Name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "f1000000-0000-4000-8000-000000000003",
+              "name": "Phone Number",
+              "value": "={{ $json['Phone Number'] }}",
+              "type": "string"
+            },
+            {
+              "id": "f1000000-0000-4000-8000-000000000004",
+              "name": "Email",
+              "value": "={{ $json['Email'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": false,
+        "options": {}
+      },
+      "id": "a1b2c3d4-0003-4000-8000-000000000003",
+      "name": "Datos para Texto",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [-180, 0]
+    }
+  ],
+  "connections": {
+    "Nueva fila en Sheet": {
+      "main": [
+        [
+          {
+            "node": "Datos para Texto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false
+}
