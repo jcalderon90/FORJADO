@@ -6,7 +6,7 @@ servicio: automatizacion
 estado_comercial: migracion-arquitectura-en-curso
 contacto: Jorge González (dueño) / Bianca Cangialosi (marketing)
 creado: 2026-06-18
-actualizado: 2026-09-28
+actualizado: 2026-10-09
 fuente_raw: raw/clientes/carwarriors-llc/
 ---
 
@@ -165,6 +165,18 @@ Diagnosticado (no resuelto, es bug de DealerCenter) el bug de auto-asignación d
 | **n8n + OpenRouter (Coolify, VPS Hostinger `2.24.106.87`)** | Bot conversacional de producción, sync de leads, notificaciones |
 | **MongoDB Atlas** | KB vectorial (RAG), inventario/fotos, estado de conversación |
 | **Zonitel** | Telefonía integrada con el Panel de Llamadas (histórico, sin seguimiento activo reciente) |
+
+## Costos recurrentes contratados (resumen al 2026-10-09)
+
+| Concepto | Monto | Quién paga |
+|---|---|---|
+| VPS Hostinger KVM 1 | ~$8/mes | Carwarriors |
+| OpenRouter (IA del bot) | pago por uso, estimado ~$10–30/mes; $5 cargados 2026-08-17 | Jorge González |
+| GHL WhatsApp Messaging (Carwarriors LLC y Rances Car) | $10/mes cada uno | Carwarriors |
+| ManyChat Pro | $29–39/mes, **quién paga por confirmar** | — |
+| MongoDB Atlas M0 | $0 | — |
+
+Los montos son tarifas de lista, sin facturas en la bóveda. El WhatsApp de Rances Car se paga pero no se usa (pendiente de decisión, ver pendientes). Ahorros, gasto evitado y cómo registrarlo: [[../../raw/clientes/carwarriors-llc/2026-10-09-resumen-gastos-y-ahorros-para-bianca|raw/2026-10-09 (gastos y ahorros)]].
 
 ## Subcuentas (Locations) en GoHighLevel
 
