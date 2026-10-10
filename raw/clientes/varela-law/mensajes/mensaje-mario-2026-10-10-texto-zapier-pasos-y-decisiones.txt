@@ -1,0 +1,21 @@
+Mario, ya dejé casi listo lo de Texto. Te explico cómo va y qué necesito de ti. Son tres cosas cortas.
+
+CÓMO VA
+- Ya entré a la cuenta de Zapier y conecté el Google Sheet de los leads de FindMyFirm.
+- Como el plan gratis de Zapier solo permite automatizaciones de dos pasos, la limpieza la hago por mi lado: reviso cada lead nuevo, descarto los de prueba y los que traen datos malos (por ejemplo sin teléfono válido) y arreglo el formato del teléfono. Los leads limpios quedan en una hoja aparte, y Zapier solo los reenvía a Texto. Así no pagamos nada por ahora.
+- Todavía NO se envía nada a Texto. Todo está apagado hasta que probemos con tu celular.
+
+1) UN PASO TUYO (1 minuto)
+Abre este enlace con tu sesión de Zapier (mvarela@varela.law):
+https://mcp.zapier.com/api/v1/connect-auth/App229472CLIAPI?accountId=12252410
+Te va a pedir entrar a tu cuenta de Texto (trytexto.com) y autorizar la conexión. Solo conecta la cuenta, no envía nada.
+
+2) UN CELULAR DE PRUEBA
+Necesito un número de celular (el tuyo o el de alguien del equipo) para mandar un lead de prueba a Texto y ver que el mensaje llega bien antes de activar nada.
+
+3) TRES DECISIONES TUYAS
+a) Hoy el equipo ya llama y manda texto a mano a cada lead nuevo ofreciendo la evaluación. Si activamos Texto, el prospecto recibiría también el mensaje automático. ¿Quieres que Texto reemplace ese primer contacto o que se sume al del equipo?
+b) Texto responde al instante, a cualquier hora. Entran leads de noche y de madrugada (por ejemplo, uno a las 2:58 AM). ¿Está bien que el mensaje salga a esa hora o prefieres un horario? Lo del consentimiento para mandar SMS lo decides tú.
+c) El lead más reciente (10/10, 2:58 AM) todavía no tiene seguimiento del equipo. ¿Lo contacta el equipo a mano o lo enviamos a Texto cuando esté listo? Por defecto, solo se enviarán los leads que entren DESPUÉS de activar; los que ya están en la hoja no se envían.
+
+Cuando tenga estas respuestas, armo la última parte y la probamos con el celular.
