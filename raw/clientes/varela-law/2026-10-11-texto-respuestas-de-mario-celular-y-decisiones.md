@@ -40,3 +40,32 @@ Continuación de [[2026-10-11-texto-conectado-en-zapier]]. Responde al mensaje [
 - Primer intento sin `connection_id`: error "No default connection is set for Texto" (la conexión existe pero no es la predeterminada del MCP). No se cambió la configuración predeterminada.
 - Segundo intento con `connection_id` `02bce20a-b517-831f-9463-70e35f39d36c`, `texto_create_lead`, parámetros `phoneNumber` `+18327158757`, `firstName` `Mario`, `lastName` `Prueba`: respuesta `{"results":[{"success":true,"isSampleData":false}]}`. Texto no devolvió id de lead ni datos del mensaje.
 - **Pendiente de confirmar:** que a Mario le llegó el SMS, cuánto tardó y qué decía. Hasta que lo confirme, "éxito" solo significa que Zapier/Texto aceptaron la creación del lead.
+
+## Confirmación de Mario: el SMS llegó (2026-10-11)
+
+- Mario le envió a Jorge una captura del iPhone: mensaje SMS recibido **"Today 8:21 PM"** (hora del teléfono de Mario) con el texto literal: *"Hola Mario, soy Albert del equipo de Mario Varela Law Firm. Gracias por contactar a nuestra oficina de abogados. ¿En qué puedo ayudarte hoy?"*
+- Esto confirma que `Create Lead` por Zapier/Texto con la conexión de Mario **sí dispara el SMS** al celular del lead (`+18327158757`), en español y usando el `firstName` enviado ("Mario").
+- **No se registró el retraso** entre la ejecución y la llegada: la captura solo trae la hora de recepción y no se anotó la hora exacta de ejecución. Mario dijo antes que en formularios reales le llegaba en 1-2 minutos.
+- iOS mostró bajo el mensaje el aviso "If you did not expect this message from an unknown sender, it may be spam" con el botón "Report Spam" (el número no está en los contactos de Mario; es normal en un número nuevo, pero un lead real también lo verá).
+- **Observación:** el agente de Texto se presenta como **"Albert del equipo"**. Albert es también la persona del equipo que llama a los leads (según Mario, lead de la fila 9). No se verificó quién configuró ese nombre en Texto ni si se puede cambiar. Si el lead recibe el SMS de "Albert" y luego la llamada de Albert, puede ser coherente o confuso; hay que preguntarle a Mario si es intencional.
+- Pendiente de la prueba de `Create Lead`: cerrado (SMS recibido). Siguen abiertos el resto de los pendientes de la lista anterior (armar el Zap sin activar, pregunta del "enviado" en el Sheet, publicar el workflow n8n).
+
+## Zap armado por navegador (2026-10-11, noche)
+
+Jorge pidió hacerlo yo. Por MCP no se pueden crear ni listar Zaps, así que se usó `playwright-cli` (navegador visible) y Jorge inició sesión a mano en la cuenta de Mario (no se compartieron credenciales).
+
+**Hallazgos en zapier.com**
+- El banner de la cuenta dice **"Welcome to your Professional trial! You have 11 days to try Zapier's paid features"** (visto el 2026-10-11, o sea, vence hacia el 2026-10-22). La cuenta **no está en Free ahora**: lo que se guarda y prueba hoy no demuestra que el plan Free lo permita. Cuando termine la prueba hay que revisar que el Zap siga funcionando; con 2 pasos debería, pero no se verificó.
+- Zaps existentes antes de esta sesión: 4 borradores "Untitled Zap", todos apagados, de plantillas ajenas (Airtable→Airtable, Airtable→Email by Zapier, Drive→Sheets, Drive→Drive). No tienen que ver con Texto. No se tocaron.
+- **Texto solo tiene un trigger:** `New Incoming Lead` (Instant, "cuando se genera un lead nuevo en Texto"). No hay trigger de "mensaje enviado". Texto solo tiene una acción: `Create Lead` (campos: First Name, Last Name, Phone Number [obligatorio], Email). Respuesta a Mario: con lo que expone Texto en Zapier, no se puede marcar "enviado" en el Sheet.
+- Google Sheets `New Spreadsheet Row` figura como **Instant** (no polling).
+
+**Fila de prueba en la hoja limpia** (`1s6Y7__i0VBexFB6a9xbBEa5Par0GxldjWbp23bqtSLQ`, `Sheet1`, fila 2), escrita por MCP: `Mario` / `Prueba` / `+18327158757` / email vacío / `2026-10-11` / `20:30`. La primera escritura guardó el teléfono como `18327158757` (Sheets interpretó el `+` como número); se corrigió con `update_row` y un apóstrofe (`'+18327158757`) y el trigger la lee con el `+`. El workflow n8n ya usa `cellFormat: RAW`, que conserva el `+`; solo la escritura por MCP lo perdía.
+
+**Zap creado (borrador, apagado, no publicado, no probado el paso 2):** `Texto - Leads FindMyFirm (hoja limpia a Create Lead)`, id `383180348`, editor `https://zapier.com/editor/383180348/draft`.
+1. Google Sheets `New Spreadsheet Row` — cuenta `varelalawremote@gmail.com`, spreadsheet `Texto - Leads limpios para Zapier (FindMyFirm)`, worksheet `Sheet1`. `Test trigger` leyó la fila 2 (solo lectura, no envía nada).
+2. Texto `Create Lead` — conexión `Mario Varela - Mario Varela Law Firm`; First Name ← First Name, Last Name ← Last Name, Phone Number ← Phone Number, Email ← Email.
+- Zapier autoguardó los cambios. No se ejecutó `Test step` del paso 2 ni `Publish`: ambos mandarían un SMS a Mario.
+- Incidente menor: al intentar renombrar, se tecleó texto con el menú del Zap abierto; solo cambió el zoom del editor (110%→100%). No se borró ni cambió nada del Zap.
+
+**Pendiente tras esto:** avisar a Mario y probar el paso 2 (otro SMS); decidir con él el nombre "Albert" del agente; activar el Zap; publicar el workflow n8n `zyPZ9H05SA4a3V9s`; revisar el plan al terminar la prueba Professional.
