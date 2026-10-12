@@ -1,0 +1,11 @@
+Nota: enviar DESPUÉS de que Mario conteste lo de Texto (no mandarle dos temas el mismo día). Es opcional: la bóveda dice no perseguir estas oportunidades; este mensaje es solo un recordatorio corto con una pregunta de sí/no.
+
+Mario, una cosa aparte de Texto, sin prisa. Hace unas semanas te dejé listas dos automatizaciones de MyCase que están apagadas esperando tu visto bueno. Cada lunes ya te llega el reporte de facturas vencidas, y estas dos van en la misma línea:
+
+1) AGENDA DE FECHAS LÍMITE Y AUDIENCIAS
+Cada mañana a las 7 te llega un correo con todo lo que cae en los próximos 3 días en tu calendario de MyCase (audiencias, deadlines, citas), con el nombre del caso y quién lo lleva. Si no hay nada ese día, no te manda nada. Solo te llega a ti.
+
+2) BORRADOR DE AVISOS DE FACTURAS NUEVAS
+Cada mañana revisa si se creó alguna factura nueva en las últimas 24 horas y te manda un borrador del mensaje para el cliente (monto, vencimiento y enlace). No le escribe al cliente: solo te llega a ti para que lo copies si quieres.
+
+Las dos las puedo prender en un minuto y las apago cuando quieras. ¿Quieres que active alguna, o prefieres dejarlas como están?

@@ -1,0 +1,9 @@
+Mario, ya vi que Texto quedó reconectado en Zapier, gracias. Te dejo dos cosas cortas.
+
+1) EL NOMBRE "ALBERT"
+Tienes razón, y el nombre no sale de mi lado: lo pone el agente que está configurado dentro de tu cuenta de Texto, no la automatización. Hay que quitarlo ahí. ¿Tú tienes acceso a la configuración del agente (el mensaje de presentación)? Si lo ves, basta con quitar el nombre y dejar que se presente solo como "el equipo de Mario Varela Law Firm". Si no lo encuentras, dímelo y le escribo yo a soporte de Texto, aunque probablemente te pidan confirmar a ti desde tu cuenta.
+
+2) LA PRUEBA
+Voy a mandar un mensaje de prueba a tu celular (el mismo de la vez pasada). Si todavía no cambiamos el nombre, puede salir firmado como "Albert" una vez más; es solo la prueba, no se activa nada. Dime si prefieres que espere a que lo quites o la mando ya.
+
+Una pregunta rápida: ¿fuiste tú quien volvió a conectar Texto hoy, o se arregló solo? Es para saber si la conexión se vuelve a vencer sin que hagas nada, porque si pasa, el mensaje a un lead no saldría y nadie se enteraría.

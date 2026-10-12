@@ -1,0 +1,16 @@
+Nota: enviar desde la cuenta/correo de Mario (la cuenta de Texto es suya) o con su autorización. Texto del mensaje en inglés:
+
+Subject: Zapier connection expiring, agent name, and lead sent-status
+
+Hi Texto team,
+
+We're connecting Texto to Zapier for Mario Varela Law Firm (Zapier account mvarela@varela.law). Three questions:
+
+1. Our Zapier connection to Texto showed as "expired" in the Zap editor about 19 hours after it was created (Oct 11, ~7:21 PM CT), and we had to reconnect it. Do Texto's authorization tokens expire quickly, and does Zapier refresh them automatically? We want to be sure a live Zap won't silently stop sending messages.
+
+2. Our AI agent introduces itself by a first name ("Albert"). We'd like it to introduce itself only as "the team at Mario Varela Law Firm", with no personal name. Where do we change this in the dashboard, or can you do it for us?
+
+3. In Zapier, Texto only exposes the "New Incoming Lead" trigger and the "Create Lead" action. Is there a webhook or API (or a Zapier action) to mark a lead as "message sent", or to get notified when the first SMS is delivered? We saw a webhook mentioned on your site and would like to know if it applies to our plan.
+
+Thank you,
+Mario Varela Law Firm
