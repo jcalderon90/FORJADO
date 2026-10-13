@@ -1,0 +1,19 @@
+Nota: enviar desde la cuenta/correo de Mario (la cuenta de Texto es suya) o con su autorización. Reemplaza a consulta-soporte-texto-2026-10-12.txt: la pregunta del nombre ya no aplica (Mario dejó el nombre) y la de la conexión ahora tiene dos datos. Texto del mensaje en inglés:
+
+Subject: Zapier connection to Texto expires after about 19 hours (needs a fix before we go live)
+
+Hi Texto team,
+
+We're connecting Texto to Zapier for Mario Varela Law Firm (Zapier account mvarela@varela.law, Texto app v1.1.2, action "Create Lead"). The Zapier connection stops working after about 19 hours, twice in a row:
+
+- Connection created Oct 11, 7:21 PM CT (00:21 UTC). The Zap editor showed "This account connection is expired" about 19 hours later. Mario reconnected it.
+- Reconnected Oct 12, 2:49 PM CT (19:49 UTC). Zapier shows the token was never refreshed after that, and the editor showed "expired" again on Oct 13 at 10:40 AM CT, about 20 hours later.
+
+With a live Zap this would mean new leads silently stop receiving their SMS, and nobody would be notified.
+
+1. How long do Texto's authorization tokens last, and does Texto's Zapier integration support refreshing them automatically (refresh token)? If not, can you fix it, or tell us the right way to keep the connection alive?
+2. Is there another supported way to send a lead into Texto without the Zapier connection (a webhook, an API key, or an inbound email/form)? We saw a webhook mentioned on your site and would like to know if it applies to our plan.
+3. In Zapier, Texto only exposes the "New Incoming Lead" trigger and the "Create Lead" action. Is there a way to mark a lead as "message sent", or to be notified when the first SMS is delivered?
+
+Thank you,
+Mario Varela Law Firm

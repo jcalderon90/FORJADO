@@ -4,7 +4,7 @@ tipo: proyecto
 estado: activo
 servicio: desarrollo-de-software
 creado: 2026-10-05
-actualizado: 2026-10-05
+actualizado: 2026-10-13
 fuente_raw: raw/interno/2026-10-05-proyectos-pendientes-barberias-y-callacar-cuba-y-revision-vitrina
 ---
 
@@ -17,7 +17,7 @@ fuente_raw: raw/interno/2026-10-05-proyectos-pendientes-barberias-y-callacar-cub
 |---|---|---|---|
 | 1 | **Vitrina** | 🟡 En desarrollo, MVP sin completar | `aplicaciones/vitrina/` |
 | 2 | **App para barberías y peluquerías** | ⬜ Por desarrollar (solo idea) | sin repo |
-| 3 | **App tipo Call a Car para Cuba** | ⬜ Por desarrollar (solo idea) | sin repo |
+| 3 | **App de transporte en triciclos eléctricos para Cuba** | ⬜ Por desarrollar (solo idea) | sin repo |
 
 Prioridad: Vitrina primero; los otros dos entran "dentro de poco" según Jorge (2026-10-05), sin fecha.
 
@@ -43,17 +43,21 @@ Sin definir: país/mercado, si es web, móvil o ambas, modelo de negocio, funcio
 - [ ] Definir alcance y mercado con Jorge.
 - [ ] Crear plan de desarrollo propio (con el formato del de Vitrina) antes de escribir código.
 
-## 3. App tipo Call a Car para Cuba (por desarrollar)
+## 3. App de transporte en triciclos eléctricos para Cuba (por desarrollar)
 
-**Qué dijo Jorge:** aplicación similar a Call a Car pero para Cuba. Call a Car es el marketplace de transporte y fletes peer-to-peer de CALLACAR Transportation Pty Ltd (Australia); ver [[../clientes/callacar]].
+Antes anotada como "tipo Call a Car para Cuba" ([[../clientes/callacar]] fue solo la referencia original). El 2026-10-13 Jorge la aclaró: **app para clientes y choferes para pedir taxis**, pensada para los **triciclos eléctricos ("motorcitos")** de alquiler o pasaje que hay hoy en Cuba. Detalle en [[../../raw/interno/2026-10-13-idea-app-transporte-triciclos-electricos-cuba|raw (2026-10-13)]].
 
-> [!warning] Por confirmar
-> Interpretación de trabajo, no confirmada: plataforma de transporte/fletes entre particulares adaptada a Cuba. Falta saber si es carga, pasajeros o ambos.
+Ideas planteadas (sin desarrollar, Jorge las ampliará luego):
+
+- Clientes ven la posición/distancia del motorcito más cercano y piden el transporte.
+- Choferes comparten su posición para ser vistos y solicitados.
+- Mapa con las **piqueras** de motorcitos.
+- Precio del pasaje; en los de alquiler, precio de cada chofer.
 
 Debe heredar las restricciones de diseño para Cuba que ya documenta Vitrina (conectividad escasa y cara, pagos sin Stripe/PayPal, servicios de EE. UU. con restricciones, hosting portable): ver secciones 5 y 7.1 del plan de Vitrina.
 
-- [ ] Confirmar el alcance exacto con Jorge.
-- [ ] Definir cómo se paga y se verifica a conductores en Cuba, y la parte legal local.
+- [ ] Desarrollar la idea con Jorge (ciudades iniciales, web o móvil, modelo de negocio).
+- [ ] Definir cómo se paga y se verifica a choferes, y la parte legal local.
 - [ ] Crear plan de desarrollo propio antes de escribir código.
 
 ## Relacionado

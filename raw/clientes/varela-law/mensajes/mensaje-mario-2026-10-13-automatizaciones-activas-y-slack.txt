@@ -1,0 +1,11 @@
+Mario, dos avisos cortos de cosas que ya están funcionando:
+
+1) DOS AUTOMATIZACIONES NUEVAS, YA ACTIVAS
+- Agenda de deadlines y audiencias: todos los días a las 7:00 AM te llega un resumen de lo que viene en los próximos 3 días (hoy salió 1: el docket call de David Reyes del viernes 16, 10:00 AM).
+- Borrador de avisos de facturas nuevas: todos los días a las 8:30 AM detecta facturas nuevas en MyCase y te prepara un mensaje sugerido para el cliente. No se envía nada a los clientes; solo lo ves tú para revisarlo.
+Las dejé encendidas para ver cómo se comportan. Si algo no te sirve (el horario, el formato, que te llegue por correo y por Slack), dime y lo ajusto o lo apago.
+
+2) SLACK
+Creé dos canales privados, #reports y #notifications. Los reportes ya se publican en #reports además de llegarte por correo. Te voy a invitar a los dos; ¿quieres que también invite a Rosa o a alguien más del equipo? Cuando todo esté estable podemos dejar de mandarte el correo y quedarte solo con Slack, si prefieres.
+
+Sobre Texto y Zapier ya te escribí aparte.

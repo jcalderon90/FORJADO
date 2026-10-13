@@ -1,0 +1,13 @@
+Mario, listo: dejamos el nombre "Albert" como está, no hay que cambiar nada.
+
+Lo que sí necesito de ti: la conexión de Texto con Zapier se vuelve a vencer a las ~19 horas (ya van dos veces, la última esta mañana). Mientras eso pase no puedo mandar la prueba ni activar nada, porque un lead nuevo se quedaría sin su mensaje y nadie se enteraría.
+
+Dos cosas cortas:
+
+1) Reconectar Texto de nuevo (1 minuto). Abre este enlace con tu sesión de Texto y autoriza: [pegar aquí el reconnect_url actual de list_zapier_connections]. Avísame cuando lo hagas y mando la prueba enseguida (te llegará un SMS firmado "Albert", no hay que contestarlo).
+
+2) Escribirle a soporte de Texto desde tu correo (la cuenta es tuya, a mí no me responderán). Te dejo el texto en inglés listo para pegar; es lo que pregunta cómo hacer que la conexión no se venza. Si prefieres, reenvíamelo y lo mando yo con tu autorización.
+
+[pegar aquí el texto de mensajes/consulta-soporte-texto-2026-10-13.txt]
+
+Mientras soporte contesta no se activa nada, así que no hay riesgo para ningún lead.
