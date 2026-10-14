@@ -23,9 +23,9 @@ Regla simple: **claro antes que impresionante**.
 
 ## Tagline
 
-> **FORJADO — Soluciones digitales hechas a la medida.**
+> **FORJADO — Forjamos software y automatizaciones que funcionan de verdad.**
 
-_Subtítulo de apoyo (opcional para web/redes):_ **Calidad de oficio. Trato directo.**
+_Subtítulo de apoyo (opcional para web/redes):_ **IA, software y automatización. Hablas con quien lo construye.**
 
 ---
 
@@ -72,6 +72,14 @@ _Subtítulo de apoyo (opcional para web/redes):_ **Calidad de oficio. Trato dire
 - "Automatización, software y marketing, sin la burocracia de una agencia grande."
 - "Hablas con quien hace el trabajo."
 - "De la idea a la solución que funciona."
+
+**Frases rotativas (2026-10-14):**
+- "Automatizamos lo repetitivo. Tú te quedas con lo importante."
+- "IA que trabaja en tu negocio, no en una demo."
+- "Agentes de IA y automatizaciones que sí llegan a producción."
+- "Menos procesos manuales. Más negocio."
+- "Cualquiera genera código. Nosotros lo hacemos funcionar." _(mejor en redes que en firma)_
+- "Tu negocio, con IA y sin intermediarios."
 
 ---
 

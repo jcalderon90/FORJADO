@@ -9,7 +9,7 @@ actualizado:
 
 # Propuesta — {{title}}
 
-**FORJADO** · Soluciones digitales hechas a la medida
+**FORJADO** · Forjamos software y automatizaciones que funcionan de verdad
 Preparada para: **[Cliente]** · Fecha: {{date}}
 
 ---
