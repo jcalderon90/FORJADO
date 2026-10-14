@@ -4,22 +4,24 @@ tipo: proyecto
 estado: activo
 servicio: desarrollo-de-software
 creado: 2026-10-05
-actualizado: 2026-10-13
+actualizado: 2026-10-14
 fuente_raw: raw/interno/2026-10-05-proyectos-pendientes-barberias-y-callacar-cuba-y-revision-vitrina
 ---
 
 # Productos propios FORJADO — en desarrollo y por desarrollar
 
 > [!info] Cómo leer esta página
-> Cola de productos propios. Solo el estado actual; el detalle de cómo se llegó a esto está en [[../../raw/interno/2026-10-05-proyectos-pendientes-barberias-y-callacar-cuba-y-revision-vitrina|raw (2026-10-05)]].
+> Cola de productos propios. Solo el estado actual; el detalle de cómo se llegó a esto está en [[../../raw/interno/2026-10-05-proyectos-pendientes-barberias-y-callacar-cuba-y-revision-vitrina|raw (2026-10-05)]] y notas raw individuales.
 
 | # | Producto | Estado | Dónde |
 |---|---|---|---|
 | 1 | **Vitrina** | 🟡 En desarrollo, MVP sin completar | `aplicaciones/vitrina/` |
 | 2 | **App para barberías y peluquerías** | ⬜ Por desarrollar (solo idea) | sin repo |
 | 3 | **App de transporte en triciclos eléctricos para Cuba** | ⬜ Por desarrollar (solo idea) | sin repo |
+| 4 | **App para gestores de ventas de casas en Cuba** | ⬜ Por desarrollar (solo idea) | sin repo |
+| 5 | **App para venta de medicamentos** | ⬜ Por desarrollar (solo idea) | sin repo |
 
-Prioridad: Vitrina primero; los otros dos entran "dentro de poco" según Jorge (2026-10-05), sin fecha.
+Prioridad: Vitrina primero; los otros entran más adelante según Jorge, sin fecha.
 
 ## 1. Vitrina (en desarrollo)
 
@@ -60,8 +62,35 @@ Debe heredar las restricciones de diseño para Cuba que ya documenta Vitrina (co
 - [ ] Definir cómo se paga y se verifica a choferes, y la parte legal local.
 - [ ] Crear plan de desarrollo propio antes de escribir código.
 
+## 4. App para gestores de ventas de casas en Cuba (por desarrollar)
+
+Anotada el 2026-10-14 por indicación de Jorge: **aplicación dirigida a gestores de ventas de casas** (compraventa de viviendas e intermediación inmobiliaria en Cuba). Detalle en [[../../raw/interno/2026-10-14-idea-app-gestores-ventas-casas-cuba|raw (2026-10-14)]].
+
+Contexto e ideas iniciales:
+- En Cuba el mercado de compraventa de inmuebles opera fuertemente a través de gestores independientes con carteras de propiedades.
+- Herramienta para gestión de inmuebles, fichas técnicas, filtrado de propiedades por zona y contacto entre gestores, propietarios y compradores.
+- Debe contemplar las mismas restricciones de conectividad y entorno Cuba que Vitrina (optimización de datos móviles, arquitectura ligera, métodos de pago o cobro viables en la isla).
+
+- [ ] Definir alcance, módulos y modelo de negocio con Jorge.
+- [ ] Definir si será Web/PWA offline-first o aplicación móvil.
+- [ ] Crear plan de desarrollo antes de comenzar implementación.
+
+## 5. App para venta de medicamentos (por desarrollar)
+
+Anotada el 2026-10-14 por indicación de Jorge: **aplicación para la venta de medicamentos** (catálogo, disponibilidad y búsqueda de medicamentos e insumos médicos). Detalle en [[../../raw/interno/2026-10-14-idea-app-venta-medicamentos|raw (2026-10-14)]].
+
+Contexto e ideas iniciales:
+- Gran demanda y necesidad de localización rápida de medicamentos escasos o distribuidos de forma dispersa.
+- Puede operar como directorio de disponibilidad, catálogo de farmacias/vendedores particulares y canal de contacto directo.
+- Requiere revisión de regulaciones locales sobre medicamentos y recetas, además de diseño optimizado para conexiones inestables o de bajo ancho de banda.
+
+- [ ] Definir mercado inicial (Cuba u otro), alcance y modelo operativo con Jorge.
+- [ ] Analizar consideraciones regulatorias y legales de intermediación de fármacos.
+- [ ] Crear plan de desarrollo propio antes de escribir código.
+
 ## Relacionado
 
 - [[mapa-forjado]]
 - [[estado-proyecto]]
 - [[../clientes/callacar]]
+

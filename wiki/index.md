@@ -14,7 +14,7 @@ actualizado: 2026-10-05
 |---|---|
 | [[interno/estado-proyecto]] | Snapshot actual y pendientes de la agencia — punto de entrada diario |
 | [[interno/mapa-forjado]] | Mapa hacia `aplicaciones/` y `contenido/` — las carpetas hermanas de esta bóveda dentro de `FORJADO/` |
-| [[interno/proyectos-pendientes]] | Productos propios: Vitrina (en desarrollo) y por desarrollar: app para barberías/peluquerías y app de transporte en triciclos eléctricos para Cuba (clientes y choferes) |
+| [[interno/proyectos-pendientes]] | Productos propios: Vitrina (en desarrollo) y por desarrollar: barberías/peluquerías, transporte en triciclos eléctricos, gestores de casas y venta de medicamentos |
 
 ## Clientes
 
