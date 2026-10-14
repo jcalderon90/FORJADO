@@ -51,6 +51,19 @@ _Subtítulo de apoyo (opcional para web/redes):_ **Calidad de oficio. Trato dire
 
 > [!todo] Sustituye el caso del ejemplo por uno tuyo real cuando lo tengas.
 
+> [!tip] Propuesta (2026-10-14) — casos reales, por validar
+> Casos tomados del trabajo registrado en la bóveda, **sin cifras** (no hay métricas medidas de ahorro de tiempo; no inventarlas) y **sin nombrar al cliente**. Antes de usar el nombre de cualquiera en público, pedirle permiso.
+>
+> **Caso A — bufete de abogados (Varela Law):**
+> *"A un bufete de abogados en Miami le conecté su sistema de gestión de casos con hojas de cálculo y correo. Ahora recibe cada mañana su agenda de plazos y audiencias, un borrador de avisos para las facturas vencidas y el registro automático de los pagos por Zelle, sin copiar un solo dato a mano."*
+>
+> **Caso B — concesionario de autos (Carwarriors):**
+> *"A un concesionario de autos le monté un agente de IA que atiende a los clientes potenciales a cualquier hora y sincroniza sus leads con el CRM y el inventario."*
+>
+> **Caso C — instalador residencial (Rogers México), solo en propuesta:** todavía no es un caso entregado; no usarlo hasta cerrar la Fase 1.
+>
+> **Para sustituir el pitch largo:** *"Por ejemplo, a un bufete en Miami le conecté su sistema de casos con Sheets y correo: cada mañana le llega la agenda de plazos y audiencias, y los pagos por Zelle se registran solos. Lo mismo aplico a marketing, desarrollo o estrategia…"*
+
 ---
 
 ## Frases clave (web y redes)

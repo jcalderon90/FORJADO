@@ -1,7 +1,7 @@
 ---
 tags: [forjado, indice, mapa, arquitectura]
 tipo: indice
-actualizado: 2026-10-05
+actualizado: 2026-10-14
 ---
 
 # Mapa de FORJADO — más allá de esta bóveda
@@ -27,6 +27,9 @@ FORJADO/
 | [lead-discovery](../../../aplicaciones/forjado/lead-discovery/README.md) | `forjado/lead-discovery` | Producto propio FORJADO | Next.js 16 (App Router) + TypeScript + Tailwind 4 + Framer Motion + Zustand | Funcional — "AI Discovery Studio": funnel de 12 pasos con lead scoring (3 tiers) → webhook n8n. Pendiente: URL real de Calendly por tier |
 | [portfolio-dev](../../../aplicaciones/forjado/portfolio-dev/README.md) | `forjado/portfolio-dev` | Producto propio FORJADO | Next.js + React + TypeScript + Vite (scaffold) | 🟡 Sin personalizar todavía — README genérico de `create-next-app`, sin contenido propio documentado |
 | [vitrina](../../../aplicaciones/vitrina/vitrina-backend/docs/PLAN_DESARROLLO.md) | `vitrina` (2 repos: `vitrina-frontend`, `vitrina-backend`) | Producto propio FORJADO — vitrina digital + directorio para mypimes y particulares en Cienfuegos (Cuba); foco alimentos y artículos del hogar | Astro + React (islas) · Fastify + Zod · MongoDB Atlas · auth propia (Argon2id + JWT) · Dokploy en VPS Oracle | 🟡 En desarrollo, MVP sin completar (plan v0.5, revisado 2026-10-05): auth, negocio, catálogo, vitrina pública, admin, PWA y directorio desplegados con HTTPS provisional (`vitrinaf.duckdns.org`); multi-negocio por cuenta sin commitear. Detalle y pendientes en su `PLAN_DESARROLLO.md` (secciones 11 y 16) y en [[proyectos-pendientes]] |
+
+> [!info] Marca (decidido 2026-10-14)
+> El logo y la identidad visual de FORJADO ([[marca/identidad-visual]]) aplican solo a los productos propios (`lead-discovery`, `portfolio-dev`, `vitrina`); los proyectos de clientes conservan su propia marca.
 
 ## `contenido/`
 

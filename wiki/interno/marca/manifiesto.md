@@ -35,6 +35,13 @@ Hacemos pocas cosas, pero las hacemos bien. Y las hacemos para que duren.
 
 > [!todo] Reescribe esto con tu historia real: qué te llevó a emprender, qué problema viste, qué te mueve.
 
+> [!tip] Propuesta (2026-10-14) — estructura con lo verificable; **el motivo personal solo lo puedes poner tú**
+> *"Empecé FORJADO porque [tu motivo en una frase: qué viste, qué te frustró o qué te movió]. Vi a negocios reales, un bufete, un concesionario, una empresa de instalaciones, perder horas copiando datos entre sistemas o esperando a una agencia que les contestaba tarde. Con las herramientas correctas —automatización, IA, software bien hecho— se resuelve mejor, más rápido y más cerca. Así que decidí forjarlo yo mismo, y firmar con mi nombre lo que entrego."*
+>
+> **Lo que sí puedo respaldar con la bóveda:** los negocios y el tipo de problema (procesos manuales, sistemas que no se hablan) y que hay productos propios además de proyectos para clientes. **Lo que no:** por qué empezaste, desde cuándo y qué te mueve. Dos o tres líneas tuyas bastan; el resto del texto ya aguanta.
+>
+> **Preguntas para sacar esa frase (responde las que quieras):** ¿qué trabajo tenías antes? ¿qué fue lo primero que automatizaste para alguien y qué pasó? ¿por qué trabajar solo y no dentro de una agencia?
+
 ---
 
 ## Relacionado

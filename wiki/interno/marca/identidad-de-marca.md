@@ -38,6 +38,11 @@ Forjar soluciones de automatización, software, marketing y estrategia a la medi
 > [!todo] Define tu horizonte a 3–5 años
 > Ejemplo: *"Ser el aliado digital de referencia para PyMEs y fundadores en Latinoamérica, reconocido por entregar resultados sólidos sin burocracia."*
 
+> [!tip] Propuesta (2026-10-14) — por validar
+> *"En 2030, ser el estudio de automatización y desarrollo al que acuden las PyMEs de servicios de EE. UU. y Latinoamérica cuando quieren que su operación funcione sola: con la calidad de una agencia y el trato directo de un solo experto."*
+>
+> **Por qué así:** los clientes reales de FORJADO ya están en EE. UU. (Miami), México y Australia, no solo en Latinoamérica; y lo que más se ha entregado es automatización e IA. El año (2030) y el alcance geográfico son decisión tuya.
+
 ## Valores
 
 | Valor | Qué significa en la práctica |
@@ -73,11 +78,25 @@ Forjar soluciones de automatización, software, marketing y estrategia a la medi
 
 > [!todo] Prioriza 1–2 segmentos para los primeros 90 días.
 
+> [!tip] Propuesta (2026-10-14) — por validar
+> **Prioridad 1: PyMEs de servicios con operación repetitiva y herramientas desconectadas** (el segmento "PyMEs y negocios locales", acotado). Es donde está el trabajo real: un bufete (MyCase → Sheets, agenda de plazos, avisos de cobro), un concesionario de autos (agente de IA + sincronización de leads con el CRM), un instalador residencial en CDMX (bot de WhatsApp que califica leads). Servicio de entrada: **Diagnóstico Express ($150)**, que lleva a una automatización puntual o a un retainer.
+>
+> **Prioridad 2: emprendedores / fundadores con una idea que validar** → MVP ($2,500). Encaja con la parte de producto propio (Vitrina, etc.) y sirve de escaparate.
+>
+> **Dejar para después:** agencias/freelancers (white-label) y "equipos sin área técnica" (demasiado amplio para empezar). Se puede reactivar cuando haya casos publicados.
+>
+> **Dato a confirmar:** la mezcla de clientes sale de lo registrado en la bóveda; si hay otros prospectos no anotados, el orden puede cambiar.
+
 ---
 
 ## Posicionamiento (frase de una línea)
 
 > Para **[público]** que necesita **[resultado]**, FORJADO es la agencia de un solo experto que **forja soluciones digitales a la medida** con calidad de oficio y trato directo —a diferencia de las agencias grandes, sin burocracia ni sobrecostos.
+
+> [!tip] Propuesta (2026-10-14) con la prioridad 1 de arriba — por validar
+> Para **PyMEs de servicios que pierden horas en tareas manuales y herramientas que no se hablan**, FORJADO es el estudio de un solo experto que **forja automatizaciones, agentes de IA y software a la medida**, con calidad de oficio y trato directo; a diferencia de las agencias grandes, sin burocracia ni sobrecostos.
+>
+> Versión corta para bio/LinkedIn: *"Automatización, IA y software a la medida para PyMEs. Trabajas con quien lo forja."*
 
 ---
 
