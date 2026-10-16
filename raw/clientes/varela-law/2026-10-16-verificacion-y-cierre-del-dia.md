@@ -35,3 +35,13 @@ Solo lectura (n8n `n8n-varela_law` y MCP de Zapier). Pedido de Jorge: "dejemos t
 - Verificación posterior: sin ejecuciones nuevas y hoja limpia sin cambios; Jairo y Margarita Diaz (10-16 10:20 AM) quedaron como base del trigger y **no recibirán SMS: contactarlos a mano**.
 - `Test step` del Zap no se hizo (con el Zap encendido, cualquier fila nueva envía SMS real).
 - **Prueba pendiente:** Mario llena el formulario web con su celular (`+18327158757`, nombre/apellido reales, sin `test@test.com`); mensaje enviado por Jorge. Esperado en 1-2 min: ejecución n8n + fila en la hoja limpia + SMS + conversación en Texto. Avisar a AL que es prueba.
+
+## Reporte de Mario: lead de las 10:20 AM sin registrar (re-verificación, tarde)
+
+- Mario avisó (captura del Sheet) que Margarita Diaz (10-16 10:20 AM, English, `18328731761`, sin mensaje) no aparecía en Texto. Re-verificado con n8n (historial y ejecuciones) y lectura de ambas hojas por el MCP de Zapier (Sheets, hoja `0`):
+  - Hoja origen: Jairo Rodriguez (fila 13) y Margarita Diaz (fila 14) presentes, **sin nota de seguimiento ni fecha en `Contacted`**.
+  - Hoja limpia `Texto - Leads limpios para Zapier (FindMyFirm)`: solo la fila de prueba de Mario (10-11).
+  - Workflow `zyPZ9H05SA4a3V9s`: una sola versión (`3ad40680`, 10-16 15:31 UTC = 11:31 AM Miami) y 0 ejecuciones automáticas; ambos leads entraron antes de la activación y el trigger de filas nuevas no los ve.
+- **Recomendación a Jorge (acordada):** que AL o Mario llamen a los dos a mano, primero Jairo (más de 16 h sin contacto; pide cita por manutención); **no** insertar sus filas en la hoja limpia (enviaría SMS real sin una prueba exitosa del flujo, y duplicaría el contacto manual de AL). El flujo automático queda para los leads nuevos. Mensaje para Mario redactado en la conversación (causa + pedir llamada ya + pedir confirmar que el Zap está encendido).
+- No se escribió nada en hojas ni en n8n en esta revisión (solo lectura).
+- **Pendiente:** confirmar que Mario/AL contactaron a Jairo y Margarita; revisar el próximo lead real (o la prueba de Mario) en n8n → hoja limpia → SMS → Texto.
