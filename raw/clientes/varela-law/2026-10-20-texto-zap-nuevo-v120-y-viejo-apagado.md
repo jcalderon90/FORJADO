@@ -31,8 +31,19 @@ Continuación de [[2026-10-16-verificacion-y-cierre-del-dia]] y [[2026-10-14-age
 - Si el nuevo falla, reencender el viejo no arregla la causa (misma conexión), solo vuelve al comportamiento anterior.
 - Mensaje a Mario redactado por Claude (hecho, nuevo Zap activo, viejo apagado, sin SMS de prueba, avisar si se desconecta otra vez). **No consta que Jorge lo haya enviado.**
 
+## Alternativa sin Zapier: ¿Texto tiene webhook/API? (misma sesión, solo investigación)
+
+Jorge propuso ofrecer a Mario otra infraestructura "porque la combinación de estos servicios está dando problemas". Claude recomendó primero mandar los leads a Texto directo desde n8n y **omitió que ya estaba descartado**: el 10-09 el soporte de Texto le dijo a Mario que no se puede crear prospectos por API ni webhook ([[2026-10-09-texto-leads-pivote-a-zapier]]). Jorge lo recordó ("creo que Mario investigó que no se podía") y se revisó.
+
+- **Lo que falla** es solo el tramo Zapier ↔ Texto (conexión que caduca a las ~19-20 h); n8n, la hoja, Gmail y Slack no dan problemas. Cambiar todo el stack no arregla eso.
+- **Contradicción sin resolver** (la de la nota del 10-09): `trytexto.com` y `/features/integrations` (leídas 2026-10-20) dicen que se pueden subir leads "via Webhook or CSV" desde Meta Ads, Google Ads y GoHighLevel, y el FAQ: "Any source that sends data via webhook or Zapier!". **No hay documentación**: ni URL del endpoint, ni token, ni formato, ni API key. La búsqueda web no encontró nada más.
+- Posibles lecturas: el soporte se equivocó, el webhook es solo para fuentes específicas, o depende del plan.
+- **Cómo salir de la duda:** (1) que Mario/Jorge miren el panel de Texto (Integraciones / fuentes de leads) por una URL y token de webhook; (2) pregunta precisa a soporte: URL, token, JSON y si aplica al plan de Mario (la consulta del 10-13 la mezcla con la de la caducidad y sigue sin respuesta); (3) si no hay webhook: seguir con Zapier + una alerta en n8n que avise si el Zap falla, o evaluar otro servicio de SMS/agente de IA (el más costoso: Mario ya tiene el agente montado en Texto).
+- Sin cambios en n8n, Zapier ni Texto; sin mensajes enviados a Mario ni a soporte. Jorge no ha decidido aún qué proponer.
+
 ## Pendientes
 
+- [ ] Decidir con Jorge qué se le propone a Mario sobre el tramo Zapier ↔ Texto; redactar (si se quiere) el mensaje a soporte de Texto enfocado solo en el webhook y el recado a Mario para que revise el panel.
 - [ ] Que Mario sepa que el Zap viejo está apagado y el nuevo activo; que avise si Texto se desconecta.
 - [ ] Primer lead real: confirmar ejecución en `Zap runs` del `384163782`, fila en la hoja limpia, SMS y conversación en Texto.
 - [ ] Mario: decidir si se usa el campo `Message` / saludo bilingüe.
