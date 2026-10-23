@@ -2,7 +2,7 @@
 tags: [forjado, estado, pendientes, dashboard]
 tipo: estado
 estado: activo
-actualizado: 2026-10-20
+actualizado: 2026-10-23
 fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 ---
 
@@ -42,6 +42,7 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 - **10-14: Idea documentada — app para gestores de ventas de casas en Cuba** — aplicación para gestores inmobiliarios/compraventa de viviendas en Cuba. Solo idea en cola, a definir y desarrollar más adelante. Ver [[proyectos-pendientes]] y [[../../raw/interno/2026-10-14-idea-app-gestores-ventas-casas-cuba|raw]].
 - **10-14: Idea documentada — app para venta de medicamentos** — aplicación / catálogo / directorio para compraventa y localización de medicamentos. Solo idea en cola, pendiente de definir alcance y marco regulatorio. Ver [[proyectos-pendientes]] y [[../../raw/interno/2026-10-14-idea-app-venta-medicamentos|raw]].
 - **10-14: logo y branding de FORJADO completados; Higgsfield instalado.** Logo nuevo = monograma "F" de tres astillas (naranja `#E85D04`) + wordmark Archivo Black, elegido por Jorge entre varias direcciones; 10 SVG + avatar + variante sobre fondo claro, y además favicon, firma de correo, banners (LinkedIn, portada web) y plantillas de redes, todo en `wiki/interno/marca/`. Aplica **solo a productos propios** (`lead-discovery`, `portfolio-dev`, `vitrina`), no a clientes. Logo del herrero reemplazado en `call-a-car-web/public/` (sin commitear en ese repo). Borradores de visión/segmentos/pitch/manifiesto por validar. Higgsfield CLI + 8 skills instalados en el repo (plan free, **quedan 2 créditos**). Ver [[marca/identidad-visual]] y [[../../raw/interno/2026-10-14-logo-forjado-branding-y-setup-higgsfield|raw]].
+- **10-23: Vitrina — corrección de layout en vitrina pública y fase de pruebas end-to-end** — se corrigió un problema de flexbox que colapsaba la rejilla de productos en pantallas de escritorio en `/[slug]` debido a la posición de la sección de opiniones (`#opiniones`). Build y tests verificados (`astro check` y `build` 0 errores); commit pusheado a GitHub (`main`) para despliegue en Dokploy. Se inicia protocolo de pruebas cruzadas entre navegador de PC y la app nativa Android instalada en dispositivo móvil.
 - `.claude/skills/compile-wiki/` — compila sesiones de trabajo con clientes desde `raw/` hacia `wiki/` (usar al cerrar una sesión real).
 - `.claude/skills/manage-vault/` — referencia general de convenciones para navegar/crear/editar en esta bóveda, creada 2026-09-02 a pedido de Jorge para que cualquier agente (no solo esta sesión) la gestione bien. Ver [[../../README|README]] y [[../../raw/interno/2026-09-02-skill-manage-vault-creada]].
 - **Lección 09-05 — sesiones paralelas pueden generar hechos contradictorios en git:** dos sesiones trabajando el mismo cliente el mismo día (sin `fetch` previo) llegaron a conclusiones distintas sobre si se había contactado a un tercero, causando un conflicto de push con contenido no solo distinto sino contradictorio. Resuelto preguntándole al usuario cuál era el hecho real. Recomendación: si un cliente puede estar "caliente" (trabajado por otra sesión el mismo día), hacer `git fetch`/`pull` al arrancar. Detalle: [[../../raw/interno/2026-09-05-conflicto-sesiones-paralelas-git-push]].
