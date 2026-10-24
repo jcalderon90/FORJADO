@@ -15,7 +15,7 @@ actualizado: 2026-10-14
 
 ## Alcance (decidido 2026-10-14)
 
-Esta identidad (logo, paleta, tipografía y estilo) aplica **solo a los productos propios de FORJADO** y a la marca de la agencia: `lead-discovery`, `portfolio-dev` y `vitrina` (ver [[mapa-forjado]]). **No** se impone a los proyectos de clientes (CallaCar, Carwarriors, Varela Law): cada cliente conserva su marca. Ljörk y NERINE (`contenido/`) tienen identidad propia.
+Esta identidad (logo, paleta, tipografía y estilo) aplica **solo a los productos propios de FORJADO** y a la marca de la agencia: `lead-discovery`, `forjado-landing` y `vitrina` (ver [[mapa-forjado]]). **No** se impone a los proyectos de clientes (CallaCar, Carwarriors, Varela Law): cada cliente conserva su marca. Ljörk y NERINE (`contenido/`) tienen identidad propia.
 
 > [!todo] Por decidir: si `vitrina` (para mypimes de Cienfuegos) lleva la marca "FORJADO" o una marca propia. Aún no se ha revisado cuánto de la paleta/tipografía usan ya los tres productos propios.
 
