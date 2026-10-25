@@ -53,11 +53,12 @@ Forjar soluciones de automatización, software, marketing y estrategia a la medi
 
 > **FORJADO forja soluciones digitales a la medida —automatización, software, marketing y estrategia— con la calidad de una agencia y la cercanía de trabajar directo con el experto.**
 
-**Por qué ser un solo fundador es una ventaja:**
-- Comunicación directa, cero teléfono descompuesto.
-- Flexibilidad para combinar disciplinas (IA + marketing + desarrollo) en un mismo proyecto.
-- Costos más bajos que una agencia tradicional, sin sacrificar calidad.
-- Responsabilidad total sobre el resultado.
+**Por qué este modelo es una ventaja para el cliente:**
+- **Trato directo con el especialista:** Comunicación sin intermediarios ni ejecutivos de cuenta; cero distorsión en los requerimientos.
+- **Equipo de entera confianza:** Capacidad de escalar e integrar talento dedicado y probado según las necesidades del proyecto, compartiendo valores de oficio y compromiso.
+- **Enfoque multi-disciplinario integral:** Capacidad real de conectar desarrollo full-stack, agentes de IA, flujos en n8n e infraestructura bajo una sola visión técnica.
+- **Costos eficientes y tiempos récord:** Menos burocracia corporativa se traduce en despliegues en producción más rápidos y presupuestos justos orientados al valor.
+- **Responsabilidad total sobre el resultado:** Quien diseña y forja la solución responde directamente por su funcionamiento y estabilidad.
 
 ---
 

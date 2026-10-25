@@ -23,28 +23,28 @@ Regla simple: **claro antes que impresionante**.
 
 ## Tagline
 
-> **FORJADO — Forjamos software y automatizaciones que funcionan de verdad.**
+> **FORJADO — Construimos el software y la IA que mueven tu negocio.**
 
-_Subtítulo de apoyo (opcional para web/redes):_ **IA, software y automatización. Hablas con quien lo construye.**
+_Subtítulo de apoyo (web y redes):_ **Ingeniería de software, automatización e IA. Hablas directo con quien lo construye.**
 
 ---
 
 ## Pilares de mensaje
 
-1. **A la medida** — nada de plantillas genéricas; cada solución se forja para tu caso.
-2. **Multi-disciplina** — IA, automatización, software y marketing bajo un mismo techo.
-3. **Trato directo** — trabajas con el experto, no con un intermediario.
-4. **Calidad que dura** — entregables sólidos, documentados y mantenibles.
+1. **A la medida** — nada de plantillas genéricas; cada solución se forja para tu problema real.
+2. **Multi-disciplina** — IA aplicada, flujos en n8n, desarrollo full-stack y estrategia técnica bajo un mismo techo.
+3. **Trato directo de oficio** — hablas y trabajas directo con el especialista técnico, sin capas de intermediarios.
+4. **Calidad para durar** — entregables sólidos, arquitecturas probadas y código listo para producción.
 
 ---
 
 ## Elevator pitch
 
 **Corto (1 frase):**
-> FORJADO forja soluciones digitales a la medida —automatización, software y marketing— con calidad de agencia y trato directo con el experto.
+> FORJADO es un estudio de desarrollo y automatización que construye software e inteligencia artificial a la medida, combinando la solvencia técnica de una agencia con el trato directo y la agilidad de un solo equipo de confianza.
 
 **Medio (30 segundos):**
-> Muchos negocios pierden tiempo en procesos manuales o tienen una presencia digital floja, pero una agencia grande les queda cara y lenta. FORJADO es una agencia ágil de un solo experto que forja soluciones a la medida: automatizo tareas con IA, desarrollo software, y monto marketing y contenido. Hablas directo conmigo, entregamos rápido y pagas por resultados, no por estructura.
+> Muchas empresas pierden horas en procesos manuales y sistemas desconectados, pero contratar una consultora tradicional resulta caro, burocrático y lento. En FORJADO resolvemos problemas operativos de fondo: automatizamos flujos con n8n, desplegamos agentes de IA y desarrollamos software a la medida. Trabajas de forma directa con quien construye la solución, garantizando rapidez, comunicación transparente y resultados reales sin sobrecostos de estructura.
 
 **Largo (1 minuto):**
 > Muchos negocios pierden tiempo en procesos manuales o sistemas que no se comunican, pero una agencia grande les resulta lenta y costosa. FORJADO es un estudio de desarrollo y automatización de trato directo: conecto flujos con IA, construyo software a medida y resuelvo problemas operativos reales.
