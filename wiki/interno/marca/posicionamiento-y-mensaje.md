@@ -1,9 +1,9 @@
 ---
 tags: [forjado, marca, mensaje]
 tipo: marca
-estado: borrador
+estado: activo
 creado: 2026-06-17
-actualizado: 2026-06-17
+actualizado: 2026-10-25
 ---
 
 # Posicionamiento y Mensaje — FORJADO
@@ -47,22 +47,9 @@ _Subtítulo de apoyo (opcional para web/redes):_ **IA, software y automatizació
 > Muchos negocios pierden tiempo en procesos manuales o tienen una presencia digital floja, pero una agencia grande les queda cara y lenta. FORJADO es una agencia ágil de un solo experto que forja soluciones a la medida: automatizo tareas con IA, desarrollo software, y monto marketing y contenido. Hablas directo conmigo, entregamos rápido y pagas por resultados, no por estructura.
 
 **Largo (1 minuto):**
-> _(Parte del pitch medio y añade un caso concreto)_ Por ejemplo, a un negocio que perdía horas copiando datos entre sistemas le forjé una automatización en n8n con IA que lo hace solo en segundos. Lo mismo aplico a marketing, desarrollo o estrategia. La ventaja de FORJADO es que combino disciplinas que normalmente están separadas, y al ser yo quien ejecuta, te ahorras la burocracia y el sobrecosto de una agencia grande.
-
-> [!todo] Sustituye el caso del ejemplo por uno tuyo real cuando lo tengas.
-
-> [!tip] Propuesta (2026-10-14) — casos reales, por validar
-> Casos tomados del trabajo registrado en la bóveda, **sin cifras** (no hay métricas medidas de ahorro de tiempo; no inventarlas) y **sin nombrar al cliente**. Antes de usar el nombre de cualquiera en público, pedirle permiso.
+> Muchos negocios pierden tiempo en procesos manuales o sistemas que no se comunican, pero una agencia grande les resulta lenta y costosa. FORJADO es un estudio de desarrollo y automatización de trato directo: conecto flujos con IA, construyo software a medida y resuelvo problemas operativos reales.
 >
-> **Caso A — bufete de abogados (Varela Law):**
-> *"A un bufete de abogados en Miami le conecté su sistema de gestión de casos con hojas de cálculo y correo. Ahora recibe cada mañana su agenda de plazos y audiencias, un borrador de avisos para las facturas vencidas y el registro automático de los pagos por Zelle, sin copiar un solo dato a mano."*
->
-> **Caso B — concesionario de autos (Carwarriors):**
-> *"A un concesionario de autos le monté un agente de IA que atiende a los clientes potenciales a cualquier hora y sincroniza sus leads con el CRM y el inventario."*
->
-> **Caso C — instalador residencial (Rogers México), solo en propuesta:** todavía no es un caso entregado; no usarlo hasta cerrar la Fase 1.
->
-> **Para sustituir el pitch largo:** *"Por ejemplo, a un bufete en Miami le conecté su sistema de casos con Sheets y correo: cada mañana le llega la agenda de plazos y audiencias, y los pagos por Zelle se registran solos. Lo mismo aplico a marketing, desarrollo o estrategia…"*
+> Por ejemplo, a un bufete de abogados en Miami le integré su gestión de casos con hojas de cálculo y correo: cada mañana reciben su agenda de plazos y audiencias, el borrador de avisos de cobro y el registro automatizado de pagos por Zelle sin tocar un solo dato a mano. Lo mismo aplico a concesionarios con agentes de IA 24/7 o a negocios que necesitan validar un producto digital rápido y sólido. Trabajas directo con quien lo construye, sin burocracia ni sobrecostos de agencia.
 
 ---
 

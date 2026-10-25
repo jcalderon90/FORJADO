@@ -1,9 +1,9 @@
 ---
 tags: [forjado, marca]
 tipo: marca
-estado: borrador
+estado: activo
 creado: 2026-06-17
-actualizado: 2026-06-17
+actualizado: 2026-10-25
 ---
 
 # Identidad de Marca — FORJADO
@@ -35,13 +35,7 @@ Forjar soluciones de automatización, software, marketing y estrategia a la medi
 
 ## Visión
 
-> [!todo] Define tu horizonte a 3–5 años
-> Ejemplo: *"Ser el aliado digital de referencia para PyMEs y fundadores en Latinoamérica, reconocido por entregar resultados sólidos sin burocracia."*
-
-> [!tip] Propuesta (2026-10-14) — por validar
-> *"En 2030, ser el estudio de automatización y desarrollo al que acuden las PyMEs de servicios de EE. UU. y Latinoamérica cuando quieren que su operación funcione sola: con la calidad de una agencia y el trato directo de un solo experto."*
->
-> **Por qué así:** los clientes reales de FORJADO ya están en EE. UU. (Miami), México y Australia, no solo en Latinoamérica; y lo que más se ha entregado es automatización e IA. El año (2030) y el alcance geográfico son decisión tuya.
+> *"En 2030, ser el estudio de automatización y desarrollo de referencia para empresas, negocios y fundadores de habla hispana en Estados Unidos y toda América Latina, reconocidos por hacer que sus operaciones funcionen solas: con la solvencia técnica de una agencia y el trato directo de un solo experto."*
 
 ## Valores
 
@@ -71,32 +65,30 @@ Forjar soluciones de automatización, software, marketing y estrategia a la medi
 
 | Segmento | Necesidad típica | Qué les forja FORJADO |
 |---|---|---|
-| PyMEs y negocios locales | Procesos manuales, presencia digital débil | Automatización + marketing |
-| Emprendedores / fundadores | Validar y lanzar un producto | Desarrollo de software + consultoría |
-| Equipos sin área técnica | Integrar herramientas, ahorrar tiempo | Automatización e IA |
-| Otras agencias / freelancers | Capacidad técnica puntual (white-label) | Desarrollo + automatización |
+| Empresas y negocios de servicios | Procesos manuales, herramientas desconectadas | Automatización con n8n, agentes IA, integraciones |
+| Emprendedores / fundadores | Validar, construir y lanzar productos digitales | Desarrollo de software a medida (MVPs, web apps) |
+| Equipos con fricción operativa | Tareas repetitivas que consumen horas de su personal | Flujos inteligentes de trabajo e IA aplicada |
+| Agencias / aliados estratégicos | Capacidad técnica especializada y ejecución directa | Desarrollo y automatización avanzada (white-label) |
 
-> [!todo] Prioriza 1–2 segmentos para los primeros 90 días.
+### Audiencia y Enfoque Geográfico
+- **Audiencia principal:** Dueños de negocios, directores y fundadores de **habla hispana en Estados Unidos y toda América Latina**.
+- **Alcance secundario:** Clientes y mercados anglófonos o internacionales (ej. proyectos en Australia o EE. UU. anglo) gracias a estándares técnicos universales y bilingüismo operativo.
 
-> [!tip] Propuesta (2026-10-14) — por validar
-> **Prioridad 1: PyMEs de servicios con operación repetitiva y herramientas desconectadas** (el segmento "PyMEs y negocios locales", acotado). Es donde está el trabajo real: un bufete (MyCase → Sheets, agenda de plazos, avisos de cobro), un concesionario de autos (agente de IA + sincronización de leads con el CRM), un instalador residencial en CDMX (bot de WhatsApp que califica leads). Servicio de entrada: **Diagnóstico Express ($150)**, que lleva a una automatización puntual o a un retainer.
->
-> **Prioridad 2: emprendedores / fundadores con una idea que validar** → MVP ($2,500). Encaja con la parte de producto propio (Vitrina, etc.) y sirve de escaparate.
->
-> **Dejar para después:** agencias/freelancers (white-label) y "equipos sin área técnica" (demasiado amplio para empezar). Se puede reactivar cuando haya casos publicados.
->
-> **Dato a confirmar:** la mezcla de clientes sale de lo registrado en la bóveda; si hay otros prospectos no anotados, el orden puede cambiar.
+### Prioridades Comerciales
+1. **Prioridad 1 — Negocios y empresas con operación repetitiva y herramientas desconectadas:** Donde el dolor operativo diario es alto (despachos profesionales, inmobiliarias, automotriz, servicios técnicos). Servicio de entrada: **Diagnóstico Express ($150)** hacia automatizaciones puntuales o retainers mensuales.
+2. **Prioridad 2 — Fundadores y emprendedores que necesitan validar un producto:** Construcción ágil de **MVPs sólidos ($2,500)** y plataformas digitales.
 
 ---
 
 ## Posicionamiento (frase de una línea)
 
-> Para **[público]** que necesita **[resultado]**, FORJADO es la agencia de un solo experto que **forja soluciones digitales a la medida** con calidad de oficio y trato directo —a diferencia de las agencias grandes, sin burocracia ni sobrecostos.
+> **"Construimos el software y la IA que mueven tu negocio."**
 
-> [!tip] Propuesta (2026-10-14) con la prioridad 1 de arriba — por validar
-> Para **PyMEs de servicios que pierden horas en tareas manuales y herramientas que no se hablan**, FORJADO es el estudio de un solo experto que **forja automatizaciones, agentes de IA y software a la medida**, con calidad de oficio y trato directo; a diferencia de las agencias grandes, sin burocracia ni sobrecostos.
->
-> Versión corta para bio/LinkedIn: *"Automatización, IA y software a la medida para PyMEs. Trabajas con quien lo forja."*
+*Versión descriptiva:*  
+> Para **empresas y negocios que pierden tiempo en tareas manuales o sistemas desconectados**, FORJADO es el estudio tecnológico que **forja automatizaciones, agentes de IA y software a medida**, combinando la solvencia técnica de una agencia con el trato directo y la agilidad de un solo experto.
+
+*Versión corta para bio / LinkedIn:*  
+> *"Ingeniería de software, automatización e IA para negocios de habla hispana en EE. UU. y América Latina. Hablas directo con quien lo construye."*
 
 ---
 
