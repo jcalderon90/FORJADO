@@ -14,7 +14,7 @@ Un gateway/proxy de LLMs auto-hospedado (v3.8.17 al momento de explorarlo, hay u
 
 ## Acceso
 
-El login pedía password (sin usuario), y el default `CHANGEME` ya no servía — Jorge confirmó la password real (`Oracle100@`) en el chat. Se usó para entrar exitosamente. **La password no se guardó en este repo** (que es público/compartible) por la misma razón que `wiki/interno/recursos/credenciales.md` ya advierte de no subir credenciales sensibles aquí — quedó guardada solo en la memoria local del agente (fuera de git) para futuras sesiones.
+El login pedía password (sin usuario), y el default `CHANGEME` ya no servía — Jorge confirmó la clave real en su momento. Se usó para entrar exitosamente. **Las credenciales no se almacenan en este repositorio** (siguiendo las directrices de `wiki/interno/recursos/credenciales.md`) — se gestionan de forma segura fuera del control de versiones.
 
 Nota operativa para quien retome esto: `playwright-cli` (viene de `@playwright/cli`, ya instalado globalmente vía nvm) es el comando correcto para navegar la página (`open`, `goto`, `snapshot`, `click`, `fill`, etc.). Ejecutarlo dentro de un `for` de bash a veces falla con "command not found" (problema de resolución de PATH en ese contexto de shell) — si pasa, correr cada comando `playwright-cli` suelto, no en loop.
 
