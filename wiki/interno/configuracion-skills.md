@@ -2,7 +2,7 @@
 tags: [forjado, interno, configuracion, skills, superpowers, n8n, karpathy]
 tipo: interno
 creado: 2026-09-14
-actualizado: 2026-09-14
+actualizado: 2026-10-26
 fuente_raw: raw/interno/2026-09-14-instalacion-suite-skills-superpowers-n8n-find-skill.md
 ---
 
@@ -30,6 +30,12 @@ Framework completo de ingeniería de software de Jesse Vincent (`obra/superpower
 - **`karpathy-vault`**: Principios generales de la bóveda (`raw/` hechos + `wiki/` estado compilado).
 - **`manage-vault`**: Manual de convenciones, frontmatter, nombrado y navegación (`[[...]]`).
 - **`compile-wiki`**: Flujo de compilación al término de una sesión de trabajo (`/compile-wiki`).
+
+### 5. Arquitectura y Visualización Técnica (`archify`)
+- Herramienta para entregables de consultoría técnica y desarrollo de software (`tt-a1i/archify`).
+- Genera diagramas interactivos en HTML autónomo (arquitectura, flujos, secuencias, ERD, ciclo de vida, waterfall, timelines y explainers ejecutivos).
+- Soporta exportación a SVG/PNG/WebM, trazabilidad de componentes, dark/light themes y delta comparators (`archify compare`).
+- Ubicación: `~/.gemini/config/plugins/user-global-skills/skills/archify` y `~/.gemini/config/skills/archify`. CLI ejecutable directamente con Node.js (`node <ruta>/bin/archify.mjs`).
 
 ---
 
