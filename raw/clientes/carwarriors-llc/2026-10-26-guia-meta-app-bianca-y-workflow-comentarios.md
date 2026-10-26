@@ -105,7 +105,8 @@ Se diseñó y exportó el workflow completo en:
 ## 4. Próximos Pasos (Checklist)
 
 - [ ] Jorge aplica la contención en ManyChat (desconectar DM aleatorio).
-- [ ] Jorge envía el mensaje de la sección 2 a Bianca.
+- [x] Jorge envía el mensaje de la sección 2 a Bianca (enviado 2026-10-26 ~11:20 AM).
+- [ ] Esperar entrega segura de credenciales de Bianca (App ID, Secret, Page Access Token).
 - [ ] Al recibir las credenciales seguras de Bianca:
   - Importar `META-COMENTARIOS-GRAPH-API.json` en n8n de Carwarriors.
   - Guardar el Page Access Token en las credenciales HTTP Header Auth.

@@ -22,6 +22,7 @@ Continuación de [[2026-10-20-texto-zap-nuevo-v120-y-viejo-apagado]].
 
 ## Siguientes pasos
 
-- [ ] Jorge envía el mensaje a Mario por WhatsApp o correo.
-- [ ] Enviar la consulta a soporte de Texto (vía correo o respuesta al ticket previo de Zain).
+- [x] Jorge envía el mensaje a Mario por WhatsApp o correo (enviado 2026-10-26 ~11:20 AM).
+- [x] Enviar la consulta a soporte de Texto (enviado 2026-10-26 ~11:20 AM).
+- [ ] Esperar respuesta de Mario sobre el panel de Texto / respuesta de soporte de Texto sobre el Webhook.
 - [ ] Monitorear en Zapier `Zap runs` (`384163782`) el procesamiento del primer lead real que ingrese a la hoja limpia de FindMyFirm.
