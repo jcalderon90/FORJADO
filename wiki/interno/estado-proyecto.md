@@ -69,7 +69,7 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
   - **Cómo hacerlo:** `npx -y skills add tt-a1i/archify --skill archify --agent claude-code --global --copy --yes`. Quien lidere el desarrollo o la consultoría decide si adoptarla globalmente en `~/.gemini/config/skills/` o descartarla con motivo.
   - **Licencia:** MIT.
   - **Ruta de la nota:** [[HERRAMIENTAS/IA y agentes/Archify|Archify]] en la bóveda personal.
-- [ ] **10-24: Evaluar Cloudflare Browser Rendering (Browser Run) para scraping y RAG en n8n.**
+- [x] ~~**10-24 / 10-26: Evaluar Cloudflare Browser Rendering (Browser Run) para scraping y RAG en n8n.**~~ Evaluado y aprobado técnicamente el 2026-10-26 (ver `raw/interno/2026-10-26-evaluacion-cloudflare-browser-run.md`). Endpoint verificado: `POST https://api.cloudflare.com/client/v4/accounts/<id>/browser-run/markdown` con token `Browser Run - Edit`. Cero consumo de RAM en Oracle VPS; listo para conectar en n8n o `lead-discovery` cuando se requiera scraping dinámico.
   - **Por qué encaja:** En el servicio de **Automatización e IA** y en prospección (`lead-discovery`), el endpoint `/markdown` permite extraer contenido limpio de webs dinámicas sin consumir RAM del VPS Oracle (evita levantar contenedores pesados de Playwright/Chrome en el servidor).
   - **Cómo hacerlo:** Invocar vía HTTP Request en n8n contra `api.cloudflare.com/client/v4/accounts/<id>/browser-run/markdown` con Cloudflare API Token (`Browser Run - Edit`). El desarrollador decide si implementarlo en los flujos de extracción o descartarlo con motivo.
   - **Ruta de la nota:** [[HERRAMIENTAS/Web, datos y mensajería/Scraping Cloudflare|Scraping Cloudflare]] en la bóveda personal.
