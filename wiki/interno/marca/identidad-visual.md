@@ -17,7 +17,9 @@ actualizado: 2026-10-14
 
 Esta identidad (logo, paleta, tipografía y estilo) aplica **solo a los productos propios de FORJADO** y a la marca de la agencia: `lead-discovery`, `forjado-landing` y `vitrina` (ver [[mapa-forjado]]). **No** se impone a los proyectos de clientes (CallaCar, Carwarriors, Varela Law): cada cliente conserva su marca. Ljörk y NERINE (`contenido/`) tienen identidad propia.
 
-> [!todo] Por decidir: si `vitrina` (para mypimes de Cienfuegos) lleva la marca "FORJADO" o una marca propia. Aún no se ha revisado cuánto de la paleta/tipografía usan ya los tres productos propios.
+> [!success] Decidido 2026-10-26 para `vitrina`: **mantiene identidad propia** (turquesa `#0e6b78` sobre fondo crema, favicon e íconos propios, cuerpo en fuente del sistema para ahorrar datos en Cuba) y FORJADO figura como **autor/endorser**. El pie de página común muestra "Creado por" + logo horizontal oficial (variante `-claro`, copiado a `public/forjado-logo-horizontal.svg`), y el catálogo imprimible dice "creado por FORJADO". Esta nota no obliga a Vitrina a usar la paleta carbón/naranja.
+
+> [!todo] Pendiente: revisar cuánto de la paleta/tipografía usan ya `lead-discovery` y `forjado-landing`.
 
 ## Concepto visual
 
