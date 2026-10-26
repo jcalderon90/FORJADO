@@ -1,0 +1,11 @@
+Hola Mario, te comparto la actualización sobre Texto y Zapier:
+
+1. Zap nuevo en producción: Siguiendo la recomendación de Zain (soporte de Texto), creamos un Zap totalmente nuevo montado sobre la versión actualizada de Texto (v1.2.0) y apagamos el anterior para evitar cualquier mensaje duplicado. Ya está encendido y listo para procesar los próximos leads reales.
+
+2. ¿Podemos eliminar Zapier y conectar directo?: En la página oficial de Texto promocionan que reciben prospectos directo por "Webhook". Si esto está habilitado en tu cuenta, nos permitiría enviar los leads directo desde nuestros servidores a Texto en tiempo real, con 0 caídas y sin depender de Zapier ni de reconexiones manuales.
+   - ¿Podrías entrar un momento a tu panel de Texto (trytexto.com), ir a Settings / Integrations (o Lead Sources / Integraciones) y fijarte si aparece alguna opción de "Webhook", "API" o "Custom Integration"?
+   - Si la ves, mándanos una captura para configurarlo de inmediato.
+
+3. Mensaje a soporte de Texto: Si prefieres, también le dejamos redactada una consulta directa a Zain/soporte para que nos proporcione los datos técnicos del Webhook o nos aclare por qué Zapier pierde la autorización.
+
+Te avisamos en cuanto entre el próximo lead para verificar la entrega del SMS.

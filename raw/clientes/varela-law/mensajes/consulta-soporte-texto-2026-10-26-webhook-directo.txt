@@ -1,0 +1,18 @@
+Subject: Inbound Webhook specifications for new leads (Mario Varela Law Firm)
+
+Hi Zain and Texto Team,
+
+Following your recommendation, we created a fresh Zap using the latest Texto app version (v1.2.0) for the Mario Varela Law Firm account (mvarela@varela.law).
+
+To ensure high reliability and avoid third-party token expiration issues, we would like to send leads directly to Texto via Webhook, as advertised on your website (trytexto.com/features/integrations: "via Webhook or Zapier").
+
+Could you please provide:
+1. Webhook Endpoint URL: Where should we send POST requests for incoming leads?
+2. Authentication: What headers or API Key/Bearer tokens are required?
+3. JSON Payload Format: What is the expected JSON schema (fields for firstName, lastName, phoneNumber, email, and any custom metadata)?
+4. Account Setup: Does our current subscription/account tier support direct Webhook ingestion, or does it need to be enabled on your backend?
+
+If direct Webhook ingestion is currently restricted to certain ad platforms (Meta/Google), please confirm if the Texto Zapier v1.2.0 app includes automatic OAuth refresh token handling, so the connection stops expiring every ~19-24 hours.
+
+Thank you for your support,
+Mario Varela Law Firm / Technical Integrations Team
