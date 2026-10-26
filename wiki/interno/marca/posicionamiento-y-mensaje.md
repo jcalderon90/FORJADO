@@ -23,9 +23,9 @@ Regla simple: **claro antes que impresionante**.
 
 ## Tagline
 
-> **FORJADO — Construimos el software y la IA que mueven tu negocio.**
+> **FORJADO — Tecnología forjada para que tu operación funcione sola.**
 
-_Subtítulo de apoyo (web y redes):_ **Ingeniería de software, automatización e IA. Hablas directo con quien lo construye.**
+_Subtítulo de apoyo (web y redes):_ **Creamos chatbots y asistentes de ventas que atienden tu negocio 24/7, agentes de IA internos que organizan los procesos y la documentación de tu empresa, y aplicaciones hechas a tu medida. Sistemas ya probados por clientes reales y funcionando ahora mismo.**
 
 ---
 
