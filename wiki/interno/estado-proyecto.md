@@ -2,7 +2,7 @@
 tags: [forjado, estado, pendientes, dashboard]
 tipo: estado
 estado: activo
-actualizado: 2026-10-24
+actualizado: 2026-10-26
 fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 ---
 
@@ -63,7 +63,7 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
   - Esto también ayuda a reconciliar el "Hermes Agent activo" de `herramientas-y-stack`: hipótesis sin confirmar, que la entrada se refiere a la instancia de Garoo (VPS de Hostinger con Coolify), no a este VPS.
   - **10-24: Vitrina — validado el uso de OmniRoute para sus agentes de IA** (pendiente registrado en `aplicaciones/vitrina/vitrina-backend/docs/PLAN_DESARROLLO.md`, sección 17, y validación en `docs/INVESTIGACION_AGENTES_IA.md`). Resultado: el "costo $0 con pool gratuito" del plan no se sostiene (topes de tokens, no 17.000 al día; Cerebras ya no es gratis; el nivel gratuito de Google usa los datos y pide no enviar datos personales; Cuba no está en las regiones de Gemini). Pagar un modelo barato cuesta ≈ $6/mes con 10 negocios Pro (estimado). Recomendación: motor determinista por defecto + modelo barato con tope de presupuesto en OmniRoute.
   - **Varela Law (despacho): nunca niveles gratuitos** ni proveedores que entrenen con datos; combo cerrado de pago o modelo local (Ollama del MacPro, sin verificar que OmniRoute lo acepte). Riesgos: punto único de falla, instancia pública en `sslip.io` y versión atrasada.
-- [ ] **10-24: rotar la contraseña de OmniRoute.** Quedó escrita en texto plano en `raw/interno/2026-09-06-omniroute-exploracion-inicial.md` (commit `b63face`, ya subido a GitHub). El repo parece privado, pero un secreto en el historial de git no se borra editando el archivo: lo que lo cierra es cambiarla. Después, quitar la línea del archivo.
+- [x] ~~**10-24 / 10-26: rotar la contraseña de OmniRoute.**~~ Rotada exitosamente el 2026-10-26 vía API `PATCH /api/settings` en la instancia en vivo. Verificado acceso con nueva clave de 32 caracteres y rechazo de la credencial previa (`Oracle100@`). Archivos temporales purgados.
 - [ ] **10-24: Evaluar e incorporar Archify (`tt-a1i/archify`) como skill de arquitectura para consultoría y documentación técnica.**
   - **Por qué encaja:** En los servicios de **Consultoría** ($120 sesión, $400 diagnóstico + hoja de ruta) y **Desarrollo de Software** ($2,500 MVP, $4,500 app a medida), permite generar diagramas de arquitectura interactivos en HTML autónomo con trazabilidad de dependencias, vista de trust boundaries y controles de navegación. Eleva sustancialmente la calidad y profesionalismo de los entregables frente al cliente sin coste de licencias.
   - **Cómo hacerlo:** `npx -y skills add tt-a1i/archify --skill archify --agent claude-code --global --copy --yes`. Quien lidere el desarrollo o la consultoría decide si adoptarla globalmente en `~/.gemini/config/skills/` o descartarla con motivo.
