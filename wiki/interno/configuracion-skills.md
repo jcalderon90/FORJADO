@@ -37,7 +37,15 @@ Framework completo de ingeniería de software de Jesse Vincent (`obra/superpower
 - Soporta exportación a SVG/PNG/WebM, trazabilidad de componentes, dark/light themes y delta comparators (`archify compare`).
 - Ubicación: `~/.gemini/config/plugins/user-global-skills/skills/archify` y `~/.gemini/config/skills/archify`. CLI ejecutable directamente con Node.js (`node <ruta>/bin/archify.mjs`).
 
+### 6. Componentes Animados y UI Interactiva (`react-bits`)
+- Biblioteca y registro abierto de más de 217 componentes, fondos WebGL/Canvas y micro-interacciones animadas para React (`reactbits.dev`).
+- Filosofía shadcn: código fuente modular en TS/JS con Tailwind CSS o CSS puro (`npx shadcn@latest add @react-bits/...`).
+- Compatible con el registro MCP oficial para instalación y configuración por agentes de IA.
+- Ubicación: `~/.gemini/config/plugins/user-global-skills/skills/react-bits` y `~/.gemini/config/skills/react-bits`.
+- Referencia interna completa: [[recursos/react-bits]].
+
 ---
 
 ## Historial y Fuentes Raw
+- [[../../raw/interno/2026-10-27-auditoria-react-bits-e-instalacion-skill|raw/interno/2026-10-27-auditoria-react-bits-e-instalacion-skill.md — Auditoría de React Bits e instalación de skill global]]
 - [[../../raw/interno/2026-09-14-instalacion-suite-skills-superpowers-n8n-find-skill|raw/interno/2026-09-14-instalacion-suite-skills-superpowers-n8n-find-skill.md — Registro detallado de la instalación]]

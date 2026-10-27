@@ -71,6 +71,7 @@ actualizado: 2026-10-05
 | [[interno/finanzas/control-de-ingresos-y-gastos]] | Registro financiero de la agencia |
 | [[interno/recursos/credenciales]] | Accesos e infraestructura propia de FORJADO |
 | [[interno/recursos/mongodb-database]] | Referencia de la base de datos MongoDB compartida |
+| [[interno/recursos/react-bits]] | Catálogo e integración de 217+ componentes animados, WebGL y micro-interacciones (shadcn) |
 | [[interno/configuracion-skills]] | Configuración de habilidades agenticas globales (Superpowers, n8n, find-skill, Karpathy) |
 
 ## Plantillas
