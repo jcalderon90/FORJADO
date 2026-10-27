@@ -44,3 +44,16 @@ Además, pidió destacar explícitamente que:
 ## Verificación y GitHub
 - `npx tsc --noEmit` verificado con 0 errores.
 - Commits subidos a `jcalderon90/forjado-landing` (`ce4f1a9` y `b81f3b8`) y a `jcalderon90/FORJADO` (`10d0de4`).
+
+## 3. Segunda Pasada (2026-10-26) — Auditoría Exhaustiva de UI/CSS y Evaluación de Herramientas de Animación de la Bóveda
+- **Correcciones de interfaz y estilos en `forjado-landing`**:
+  1. **Visibilidad garantizada de tarjetas**: Se reemplazó `whileInView` por animación de entrada directa (`animate={{ opacity: 1, y: 0 }}`) en las grillas de `#servicios`, `#soluciones` y `#proceso`, evitando que las tarjetas quedaran con `opacity: 0` al navegar mediante enlaces de ancla o capturas de página completa.
+  2. **Cierre diagonal de biseles (`.chamfer-card::after`)**: `clip-path: polygon(...)` cortaba el borde superior derecho de 16×16 px dejando la esquina abierta; se añadió un pseudo-elemento `::after` con gradiente lineal a 45° que cierra el borde industrial y cambia a naranja en `:hover`.
+  3. **Cabecera del simulador en el Hero**: Se corrigió el salto de línea en las métricas (`Respuesta en 1.2 s`, `14 h ahorradas / sem`) añadiendo `whitespace-nowrap shrink-0` y ajustando el título a `SISTEMAS EN MARCHA`.
+  4. **Anillos de foco y accesibilidad WCAG 2.2 AA**: Se eliminó el contorno blanco de 3 px al hacer clic en los radios del formulario (`has-[:focus-visible]:outline` + `input:not(.sr-only)`), se añadió foco interno (`inset box-shadow`) para botones con `clip-path` (`.chamfer-sm:focus-visible`) cuyo `outline` externo era recortado por el polígono, y se completó el patrón ARIA `tablist`/`tab`/`tabpanel` (`aria-controls`, `aria-labelledby`).
+  5. **Cero warnings en ESLint y limpieza de API**: Migración de los logos `<img>` a `<Image unoptimized />` de `next/image` (`0 errors, 0 warnings`) y actualización de los valores por defecto en `app/api/contact/route.ts`.
+- **Evaluación de herramientas de animación de la bóveda personal (`HERRAMIENTAS/Diseño e interfaces/`)**:
+  - **`Thinking Orbs` (`thinking-orbs`) — Recomendación #1**: Sustituir el ícono estático `<Activity />` en el simulador en vivo del Hero por `<ThinkingOrb size={20} />` (Canvas 2D sin WebGL, ~131 KB, respeta `prefers-reduced-motion`), cambiando dinámicamente el estado según la pestaña activa (`Ventas 24/7` → `listening`/`composing`, `Agente Interno` → `searching`/`solving`, `Apps y Catálogos` → `working`).
+  - **`React Bits` (`TS-TW`) — Recomendación #2**: Compatibilidad 100% directa con el stack de `forjado-landing` (Next 16 + React 19 + Tailwind 4 + Framer Motion + `components.json`). Se recomienda copiar selectivamente `DecryptedText` para el badge de métrica del simulador y `Magnet` para el CTA principal del Hero, descartando fondos WebGL pesados.
+  - **`AnimateIcons` — Recomendación #3 (baja prioridad)**: Como `framer-motion` ya está en el bundle de `forjado-landing`, no tiene el sobrecosto de 38 KB que tuvo en GTL, pero solo se recomienda copiar a mano los 4 íconos de `SERVICE_ICONS` activados en hover sobre la tarjeta, sin instalar el paquete completo.
+  - **`UI-SKILLS` — Recomendación #4 (auditoría de calidad/motion)**: Uso puntual de las guías `fixing-motion-performance`, `mastering-animate-presence` y `to-spring-or-not-to-spring` como checklist de revisión sin usar el CLI remoto.
