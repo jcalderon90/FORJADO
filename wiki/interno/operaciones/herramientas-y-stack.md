@@ -3,7 +3,7 @@ tags: [forjado, operaciones, herramientas]
 tipo: proceso
 estado: activo
 creado: 2026-06-17
-actualizado: 2026-09-06
+actualizado: 2026-10-29
 ---
 
 # Herramientas y Stack — FORJADO
@@ -22,6 +22,8 @@ actualizado: 2026-09-06
 | **n8n** | Agentes de IA y chatbots cuando se necesita algo rápido y funcional. |
 | **Python / JavaScript** | Migración a código cuando se requiere más control, escala o personalización (librerías de agentes). |
 | **Claude / Claude Code** | Desarrollo asistido, generación de contenido, agentes. |
+| **Recall.ai** | Bots y streaming de audio/video en videollamadas (Meet, Zoom, Teams) — ver [[../../clientes/garoo-redtec|Garoo / Redtec]]. |
+| **Baseten** | Inferencia de modelos ML/LLMs en GPUs dedicadas y serverless con Truss — ver [[../../clientes/garoo-redtec|Garoo / Redtec]]. |
 
 ## Frontend
 
@@ -73,7 +75,8 @@ actualizado: 2026-09-06
 | **VPS Oracle Cloud (free tier)** | ARM/Ampere, 24 GB RAM — servidor principal |
 | **DNS** | Dominio DuckDNS (gratuito) |
 | **Dokploy** | Panel de despliegue corriendo en el VPS |
-| **Servicios activos** | n8n · Chatwoot · Redis · Hermes Agent |
+| **Servicios activos** | n8n · Chatwoot · Redis · Hermes Agent · WireGuard VPN |
+| **WireGuard (wg-easy)** | VPN privada cifrada (puerto UDP 51820, Web UI en Dokploy con SSL) para acceso seguro a la infraestructura — ver [[WireGuard VPN]]. |
 | **OmniRoute** | Gateway/proxy propio de LLMs (multi-proveedor, failover, cache, compresión de prompts) — instalado en el mismo VPS. **09-06:** explorado por primera vez; solo tiene OpenRouter conectado hoy, de un catálogo de 230 proveedores soportados. Pensado para conectar ahí Hermes Agent, DeepSeek u otros agentes/CLIs — nada conectado todavía, ver [[../../../raw/interno/2026-09-06-omniroute-exploracion-inicial|raw]]. |
 | **OpenRouter** | API de modelos de IA (modelos gratuitos en uso) |
 | **Ollama (MacPro Australia)** | LLMs locales, 64 GB RAM, acceso remoto disponible |
@@ -90,3 +93,4 @@ Las credenciales de estas herramientas se centralizan en [[Credenciales]] (con c
 - [[Automatización e IA]]
 - [[Desarrollo de Software]]
 - [[Credenciales]]
+- [[WireGuard VPN]]

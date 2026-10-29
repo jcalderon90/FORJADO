@@ -1,7 +1,7 @@
 ---
 tags: [forjado, indice, navegacion, wiki]
 tipo: indice
-actualizado: 2026-10-05
+actualizado: 2026-10-29
 ---
 
 # wiki/ — Índice de la bóveda FORJADO
@@ -21,6 +21,7 @@ actualizado: 2026-10-05
 | Página | Descripción |
 |---|---|
 | [[clientes/callacar]] | CallaCar Transportation Pty Ltd (Marketplace de transporte AU) — estado actual, alcance web y pendientes abiertos |
+| [[clientes/garoo-redtec]] | Garoo / Redtec (`redtec.ai`) — stack de IA avanzada, bots para videollamadas con Recall.ai y hosting de modelos en GPUs con Baseten |
 | [[clientes/carwarriors-llc]] | Car dealer Miami (3 subcuentas GHL) — estado actual, accesos, pendientes abiertos |
 | [[clientes/carwarriors-llc-arquitectura-migracion]] | Diseño: migración del bot GHL Conversation AI → n8n + OpenRouter |
 | [[clientes/carwarriors-llc-infraestructura]] | Diseño de infraestructura técnica (VPS, Coolify, n8n) |
@@ -67,6 +68,7 @@ actualizado: 2026-10-05
 | [[interno/ventas/pipeline]] | Tablero de pipeline de ventas |
 | [[interno/operaciones/procesos-y-entrega]] | Flujo Onboarding → Ejecución → Entrega → Cierre |
 | [[interno/operaciones/herramientas-y-stack]] | Stack técnico completo de FORJADO |
+| [[interno/operaciones/wireguard-vpn]] | Infraestructura y gestión de túneles VPN WireGuard (wg-easy) |
 | [[interno/finanzas/modelo-de-precios]] | Modalidades, reglas de cobro, tarifas por servicio |
 | [[interno/finanzas/control-de-ingresos-y-gastos]] | Registro financiero de la agencia |
 | [[interno/recursos/credenciales]] | Accesos e infraestructura propia de FORJADO |
