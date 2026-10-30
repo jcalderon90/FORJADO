@@ -1,10 +1,10 @@
 ---
-tags: [forjado, cliente, partner, garoo, redtec, ia, automatizacion, recall-ai, baseten]
+tags: [forjado, cliente, partner, garoo, redtec, ia, automatizacion, recall-ai, baseten, kokoro-tts, omnivoice]
 tipo: cliente-partner
 estado: activo
 servicio: ia-avanzada-y-agentes
 creado: 2026-10-29
-actualizado: 2026-10-29
+actualizado: 2026-10-30
 fuente_raw: raw/clientes/garoo-redtec/
 ---
 
@@ -97,29 +97,56 @@ sequenceDiagram
 
 ---
 
-## 5. Matriz de Integración Operativa
+---
+
+## 5. Estrategia de Motores de Voz (TTS) e Infraestructura
+
+Ante la necesidad de síntesis de voz natural y clonación sin dependencia de ElevenLabs, se contemplan dos tecnologías open source y su encaje según el entorno de hosting:
+
+| Motor | Perfil Técnico | Entorno Óptimo | Rol en Redtec |
+|---|---|---|---|
+| **Kokoro TTS** | Modelo ultraligero (~82M params). Excelente en CPU y GPU. | **VPS Hostinger (CPU)** o Baseten | **Voz conversacional en tiempo real**. Latencia ultra baja (RTF < 0.5 en CPU, <100ms en GPU). Ideal para la API in-server de n8n. |
+| **OmniVoice / VoiceStudio** | Modelo de difusión (~800M params). Zero-shot cloning (+640 idiomas) y voice design. | **Baseten (GPU A10G)** o PC Local | **Clonación de identidad de clientes y estudio**. En Baseten vía Truss para llamadas específicas; en PC local (VoiceStudio) para diseño de voces. Inviable en CPU Hostinger para tiempo real. |
+
+### Infraestructura de Despliegue en Redtec
+
+1. **VPS Hostinger (`agentsprod.redtec.ai` - CPU):**
+   - Aloja n8n, orquestadores y microservicios.
+   - Puede correr **Kokoro TTS** en un contenedor Docker local (consumo < 1 GB RAM, sin coste marginal).
+2. **Baseten (GPU Serverless A10G):**
+   - Ejecuta **OmniVoice** empaquetado en Truss para peticiones de clonación a demanda (*scale-to-zero*, $0 en reposo).
+   - Inferencia de LLMs pesados y transcripción rápida (WhisperX).
+
+---
+
+## 6. Matriz de Integración Operativa
 
 | Herramienta | Rol en la Arquitectura | Conexión con el Ecosistema Redtec |
 |---|---|---|
 | **Recall.ai** | Punto de contacto y captura en videollamadas | Se comunica mediante Webhooks y WebSockets hacia el backend de agentes o webhooks de n8n (`agentsprod.redtec.ai`). |
-| **Baseten** | Infraestructura de cómputo e inferencia GPU | Endpoints REST/SSE invocados directamente desde nodos HTTP en n8n o microservicios Python de Redtec. |
+| **Baseten** | Infraestructura de cómputo e inferencia GPU | Endpoints REST/SSE invocados directamente desde nodos HTTP en n8n o microservicios Python de Redtec. Hospeda OmniVoice y WhisperX. |
+| **Kokoro TTS (Hostinger)** | Motor TTS in-house de latencia cero | Contenedor local en el VPS de Hostinger para síntesis de voz sin consumo de GPU externa. |
+| **VoiceStudio (Local)** | Suite de laboratorio y curación de voces | Desktop app para clonar muestras de audio y configurar perfiles antes de subirlos a producción. |
 | **n8n / Backend** | Lógica de negocio y orquestación | Controla el ciclo de vida del bot, almacena contexto en MongoDB y gestiona las herramientas/RAG del agente. |
 | **MongoDB Atlas** | Memoria persistente y base de conocimiento | Guarda transcripciones, resúmenes, vector embeddings y metadatos de las sesiones. |
 
 ---
 
-## 6. Estado y Próximos Pasos
+## 7. Estado y Próximos Pasos
 
 - [x] Registro inicial de cuentas y consolas en Obsidian.
+- [x] Evaluación técnica de motores de voz (OmniVoice vs Kokoro TTS) y viabilidad en VPS Hostinger.
 - [ ] Configurar el primer bot de prueba en Recall.ai conectado a una llamada de Google Meet.
-- [ ] Evaluar el primer despliegue de modelo en Baseten con Truss (WhisperX o Kokoro TTS para benchmarks de latencia).
+- [ ] Desplegar contenedor piloto de Kokoro TTS en el VPS de Hostinger para habilitar TTS local en n8n.
+- [ ] Evaluar el empaquetado Truss de OmniVoice / WhisperX en Baseten para benchmarks de clonación y latencia.
 - [ ] Diseñar el workflow piloto en n8n (`agentsprod.redtec.ai`) para procesar el webhook post-reunión de Recall.ai y generar minutas automáticas.
 
 ---
 
 ## Relacionado
 
-- [[../../raw/clientes/garoo-redtec/2026-10-29-adopcion-recall-ai-y-baseten|Log crudo de adopción (2026-10-29)]]
+- [[../../raw/clientes/garoo-redtec/2026-10-29-adopcion-recall-ai-y-baseten|Log crudo de adopción Recall.ai & Baseten (2026-10-29)]]
+- [[../../raw/clientes/garoo-redtec/2026-10-30-evaluacion-omnivoice-y-kokoro-tts|Evaluación Técnica OmniVoice y Kokoro TTS (2026-10-30)]]
 - [[carwarriors-llc-arquitectura-migracion|Arquitectura de referencia (Agent-Spectrum)]]
 - [[../interno/operaciones/herramientas-y-stack|Herramientas y Stack de FORJADO]]
 - [[../index|Índice de la bóveda]]
