@@ -54,11 +54,12 @@ Unificar la identidad visual de todo el inventario de **Carwarriors LLC** en **D
 - **Extracción de DealerCenter:** Localizado en `Inventory Reports -> Active Inventory List` bajo `Custom Status: LISTO VENTA`. Se accedió a la pestaña `Media` y se descargó el paquete de fotos original en alta resolución.
 - **Carga en Cleverwave:** Se inyectaron las fotografías en `https://carwarriors-dev.cleverwave.ai/seller-studio/photos/projects/85c3621a-83bd-4789-b93a-3e50e4cc8ecd`.
 - **Aplicación de Fondo:** Se seleccionó el fondo oficial **"Car Warriors · Graffiti Garage"**, se ejecutó `Prepare space` y la IA mapeó automáticamente las perspectivas y ángulos (Front left, Rear, etc.), reemplazando la matrícula por la placa oficial de Car Warriors.
-- **Aprobación de Render:** Se aprobó el preview (`Approve and process photos`) y el lote de 25 fotos quedó procesándose en segundo plano con más de 10 imágenes ya listas para descarga.
+- **Aprobación de Render:** Se aprobó el preview (`Approve and process photos`) y el lote de 25 fotos completó su renderizado al 100% con estado `Ready`.
+- **Descarga y Empaquetado:** Se renombró el proyecto formalmente a `2023 Alfa Romeo Stelvio - ND56867` y se descargó el paquete ZIP final (`2023 Alfa Romeo Stelvio - ND56867.zip`, 54.3 MB) conteniendo las 25 imágenes estandarizadas de alta calidad.
 
 ---
 
 ## 5. Próximos Pasos y Automatización de Lotes
-1. **Descarga de Rendimientos:** Obtener el ZIP final procesado de Cleverwave para el Alfa Romeo.
-2. **Validación con Bianca / Jorge:** Mostrar el resultado visual terminado para confirmar satisfacción con el contraste, reflejos y logo en pared.
+1. **Validación de Calidad con Bianca / Jorge:** Confirmar satisfacción con el contraste, sombras, reflejos y logo en pared del paquete descargado.
+2. **Actualización en DealerCenter:** Reemplazar o complementar las fotos del vehículo en la pestaña `Media` de DealerCenter con las imágenes del ZIP.
 3. **Escalar al Resto del Inventario:** Proceder en secuencia con los demás vehículos en estado "LISTO VENTA" de DealerCenter (*2024 Hyundai Tucson*, *2016 Honda Civic*, *2022 Ford Mustang GT*, *2021 Tesla Model Y*, etc.).
