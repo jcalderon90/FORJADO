@@ -40,10 +40,11 @@ fuente_raw: raw/clientes/carwarriors-llc/
 > [!warning] Información sensible — no compartir
 > Los accesos completos (GHL, DealerCenter, SFTP, VPS/Coolify, tokens PIT por subcuenta) están en el snapshot raw, sección "Accesos Centrales" y "DealerCenter — Credenciales SFTP": [[../../raw/clientes/carwarriors-llc/carwarriors-llc-source-2026-08-25]].
 
-### Plataforma de Videos y Doblaje (2026-11-02)
+### Plataformas de Edición y Estudio (2026-11-02)
 | Servicio / Herramienta | URL | Usuario / Email | Contraseña | Notas |
 |---|---|---|---|---|
-| Plataforma Videos & Doblaje IA | *Pendiente URL* | `orlandomma86@gmail.com` | `Realmadrid7` | Subida/descarga de videos con doblaje al español. Ver [[../../raw/clientes/carwarriors-llc/2026-11-02-credenciales-plataforma-videos-doblaje\|raw/2026-11-02]]. |
+| **Car Warriors Studio (Cleverwave)** | `https://carwarriors-dev.cleverwave.ai` | `orlandomma86@gmail.com` (o cuenta admin) | `Realmadrid7` | Estudio de ventas: estandarización de fotos de vehículos con fondo virtual "Car Warriors - Graffiti Garage". Ver [[../../raw/clientes/carwarriors-llc/2026-11-02-sop-estandarizacion-fotos-inventario-cleverwave\|raw/2026-11-02]]. |
+| **DealerCenter (Portal)** | `https://app.dealercenter.net` | `jcalderon90` | `Dealermiami100@` | 2FA vía email `jcalderon900610@gmail.com`. Origen de inventario y pestaña Media. |
 
 ## Arquitectura actual (resumen)
 
@@ -56,7 +57,11 @@ Documentos de referencia relacionados: [[carwarriors-llc-infraestructura]] · [[
 
 ## Pendientes abiertos (al 2026-11-02)
 
-- [ ] **🟡 Plataforma de videos y doblaje al español (2026-11-02):** Recibidas credenciales de Orlando (`orlandomma86@gmail.com` / `Realmadrid7`) para gestión y subida de videos con doblaje. Pendiente recibir el enlace / URL de acceso para ingresar a la plataforma. Detalle: [[../../raw/clientes/carwarriors-llc/2026-11-02-credenciales-plataforma-videos-doblaje|raw/2026-11-02]].
+- [ ] **🟡 Estandarización de fotos de inventario en Cleverwave con fondo "Graffiti Garage" (2026-11-02):** Requerimiento prioritario de Bianca. Descargar fotos de todos los autos listos para la venta con imágenes en DealerCenter (`app.dealercenter.net`), subirlas a `carwarriors-dev.cleverwave.ai` en *Estudio de ventas* -> *Fotos*, y aplicarles el fondo corporativo oficial **"Car Warriors - Graffiti Garage"**. Detalle y SOP: [[../../raw/clientes/carwarriors-llc/2026-11-02-sop-estandarizacion-fotos-inventario-cleverwave|raw/2026-11-02]].
+
+- [ ] **🟡 Cuestionarios pendientes de envío por Bianca (2026-11-02):** A la espera de que Bianca envíe los cuestionarios acordados para su incorporación al sistema.
+
+- [x] **⚪ Videos y doblaje de curso — DESCARTADOS TEMPORALMENTE (2026-11-02):** Bianca aclaró que los videos pertenecen a un curso de pago y la plataforma no permite su descarga directa, por lo que la tarea queda descartada por ahora. Detalle: [[../../raw/clientes/carwarriors-llc/2026-11-02-credenciales-plataforma-videos-doblaje|raw/2026-11-02]].
 
 - [x] **🟢 Corrección nodo Code `Filtro Lead Real` en `Subir a DealerCenter` — RESUELTO EN PRODUCCIÓN (2026-11-02).** El nodo `Filtro Lead Real` en modo `runOnceForEachItem` falló en ejecución `#16627` con `A 'json' property isn't an object [item 0]` porque devolvía un array `[{ json: ... }]`. Se corrigió el return a `{ json: { ... } }` y se validó en las ejecuciones posteriores `#16629` y `#16630`, ambas `success`, procesando y filtrando correctamente al contacto de WhatsApp sin mensajes entrantes recientes. Detalle: [[../../raw/clientes/carwarriors-llc/2026-11-02-filtro-leads-reales-dealercenter-y-fix-nodo-code|raw/2026-11-02]].
 

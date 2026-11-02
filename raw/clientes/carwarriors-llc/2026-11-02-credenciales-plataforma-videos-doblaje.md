@@ -29,6 +29,6 @@ Recepción de credenciales enviadas a Jorge vía WhatsApp para acceder a una pla
 | **Contraseña (prueba)** | `Realmadrid7` |
 | **Objetivo operativo** | Subir videos de inventario/contenido y probar el doblaje al español |
 
-## Observaciones y Pendientes
-1. **URL de acceso faltante:** En las capturas suministradas no aparece el enlace o dominio web de la herramienta. Se debe solicitar al usuario la URL para poder ingresar, probar y auditar la plataforma.
-2. **Rol de Orlando:** Determinar si Orlando es un colaborador externo de video/creación de contenido o parte del equipo de Carwarriors.
+## Observaciones y Estado Actualizado (2026-11-02 mediodía)
+1. **Tarea descartada por ahora:** Bianca Cangialosi confirmó que los videos solicitados pertenecen a un curso de pago cuya plataforma no permite descargarlos. Por lo tanto, se descarta temporalmente la descarga y doblaje de dichos videos.
+2. **Plataforma del ecosistema identificada:** El entorno de estudio y herramientas internas de Carwarriors opera bajo `carwarriors-dev.cleverwave.ai`. Se reorienta el esfuerzo hacia la estandarización fotográfica del inventario de DealerCenter (ver [[2026-11-02-sop-estandarizacion-fotos-inventario-cleverwave]]).
