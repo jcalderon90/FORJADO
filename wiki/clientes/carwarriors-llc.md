@@ -57,7 +57,7 @@ Documentos de referencia relacionados: [[carwarriors-llc-infraestructura]] · [[
 
 ## Pendientes abiertos (al 2026-11-02)
 
-- [ ] **🟡 Estandarización de fotos de inventario en Cleverwave con fondo "Graffiti Garage" (2026-11-02):** Requerimiento prioritario de Bianca. Descargar fotos de todos los autos listos para la venta con imágenes en DealerCenter (`app.dealercenter.net`), subirlas a `carwarriors-dev.cleverwave.ai` en *Estudio de ventas* -> *Fotos*, y aplicarles el fondo corporativo oficial **"Car Warriors - Graffiti Garage"**. Detalle y SOP: [[../../raw/clientes/carwarriors-llc/2026-11-02-sop-estandarizacion-fotos-inventario-cleverwave|raw/2026-11-02]].
+- [x] **🟢 Estandarización de fotos en Cleverwave con fondo "Graffiti Garage" — PRUEBA PILOTO COMPLETADA Y VALIDADA EN VIVO (2026-11-02).** Se ejecutó el flujo completo de punta a punta: obtención de fotos del *2023 Alfa Romeo Stelvio* (Stock `ND56867`) desde la pestaña *Media* de DealerCenter bajo estado *LISTO VENTA*, carga automática en `carwarriors-dev.cleverwave.ai`, mapeo de ángulos y aplicación del fondo oficial **"Car Warriors · Graffiti Garage"** (con reemplazo de matrícula corporativa). Lote aprobado y renderizado en cola de producción. Pendiente aprobación visual de Bianca/Jorge y escalar al resto del inventario. Detalle y SOP: [[../../raw/clientes/carwarriors-llc/2026-11-02-sop-estandarizacion-fotos-inventario-cleverwave|raw/2026-11-02]].
 
 - [ ] **🟡 Cuestionarios pendientes de envío por Bianca (2026-11-02):** A la espera de que Bianca envíe los cuestionarios acordados para su incorporación al sistema.
 

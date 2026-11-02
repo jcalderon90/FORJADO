@@ -48,8 +48,17 @@ Unificar la identidad visual de todo el inventario de **Carwarriors LLC** en **D
 7. Procesar y guardar el lote de imágenes estandarizadas para su posterior actualización en DealerCenter.
 
 ---
+## 4. Validación en Vivo: Prueba Piloto con 2023 Alfa Romeo Stelvio (2026-11-02)
 
-## 4. Próximos Pasos y Factibilidad de Automatización
-1. **Acceso a `carwarriors-dev.cleverwave.ai`:** Validar si las credenciales de Orlando (`orlandomma86@gmail.com` / `Realmadrid7`) o una cuenta propia de Jorge/Bianca tienen rol de administrador/editor en este dominio.
-2. **Evaluación de Automatización:** Determinar si Cleverwave expone una API REST interna para carga de imágenes y aplicación de plantillas de fondo, o si el proceso se abordará inicialmente vía automatización de navegador (Puppeteer/Playwright/DevTools) o ejecución manual por lotes.
-3. **Re-ingesta a DealerCenter:** Coordinar si las fotos procesadas se suben manualmente a la pestaña Media de DealerCenter o mediante el feed/SFTP si existe soporte de sync de assets.
+- **Vehículo de Prueba:** 2023 Alfa Romeo Stelvio Sprint Sport Utility 4D (VIN: `ZASPAJAN5P7D56867`, Stock: `ND56867`).
+- **Extracción de DealerCenter:** Localizado en `Inventory Reports -> Active Inventory List` bajo `Custom Status: LISTO VENTA`. Se accedió a la pestaña `Media` y se descargó el paquete de fotos original en alta resolución.
+- **Carga en Cleverwave:** Se inyectaron las fotografías en `https://carwarriors-dev.cleverwave.ai/seller-studio/photos/projects/85c3621a-83bd-4789-b93a-3e50e4cc8ecd`.
+- **Aplicación de Fondo:** Se seleccionó el fondo oficial **"Car Warriors · Graffiti Garage"**, se ejecutó `Prepare space` y la IA mapeó automáticamente las perspectivas y ángulos (Front left, Rear, etc.), reemplazando la matrícula por la placa oficial de Car Warriors.
+- **Aprobación de Render:** Se aprobó el preview (`Approve and process photos`) y el lote de 25 fotos quedó procesándose en segundo plano con más de 10 imágenes ya listas para descarga.
+
+---
+
+## 5. Próximos Pasos y Automatización de Lotes
+1. **Descarga de Rendimientos:** Obtener el ZIP final procesado de Cleverwave para el Alfa Romeo.
+2. **Validación con Bianca / Jorge:** Mostrar el resultado visual terminado para confirmar satisfacción con el contraste, reflejos y logo en pared.
+3. **Escalar al Resto del Inventario:** Proceder en secuencia con los demás vehículos en estado "LISTO VENTA" de DealerCenter (*2024 Hyundai Tucson*, *2016 Honda Civic*, *2022 Ford Mustang GT*, *2021 Tesla Model Y*, etc.).

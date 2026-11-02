@@ -18,3 +18,5 @@ yarn-error.log*
 
 # Debug screenshots dropped in repo root by browser-automation sessions
 /*.png
+
+scratch/
