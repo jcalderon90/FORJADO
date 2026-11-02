@@ -6,7 +6,7 @@ servicio: automatizacion
 estado_comercial: migracion-arquitectura-en-curso
 contacto: Jorge González (dueño) / Bianca Cangialosi (marketing)
 creado: 2026-06-18
-actualizado: 2026-10-26
+actualizado: 2026-11-02
 fuente_raw: raw/clientes/carwarriors-llc/
 ---
 
@@ -33,11 +33,17 @@ fuente_raw: raw/clientes/carwarriors-llc/
 | **Jorge González** | Dueño / Decisor principal | +1 (786) 502-5614 |
 | **Karel Suarez** | Admin subcuenta Carwarriors LLC | karelfsuarez@gmail.com |
 | **Bianca Cangialosi** | Estrategia y marketing | — |
+| **Orlando** | Contenido / Plataforma Videos | orlandomma86@gmail.com |
 
 ## Accesos y credenciales
 
 > [!warning] Información sensible — no compartir
 > Los accesos completos (GHL, DealerCenter, SFTP, VPS/Coolify, tokens PIT por subcuenta) están en el snapshot raw, sección "Accesos Centrales" y "DealerCenter — Credenciales SFTP": [[../../raw/clientes/carwarriors-llc/carwarriors-llc-source-2026-08-25]].
+
+### Plataforma de Videos y Doblaje (2026-11-02)
+| Servicio / Herramienta | URL | Usuario / Email | Contraseña | Notas |
+|---|---|---|---|---|
+| Plataforma Videos & Doblaje IA | *Pendiente URL* | `orlandomma86@gmail.com` | `Realmadrid7` | Subida/descarga de videos con doblaje al español. Ver [[../../raw/clientes/carwarriors-llc/2026-11-02-credenciales-plataforma-videos-doblaje\|raw/2026-11-02]]. |
 
 ## Arquitectura actual (resumen)
 
@@ -48,7 +54,11 @@ fuente_raw: raw/clientes/carwarriors-llc/
 
 Documentos de referencia relacionados: [[carwarriors-llc-infraestructura]] · [[carwarriors-llc-inventario-ghl]] · [[carwarriors-llc-sftp-dealercenter]] · [[carwarriors-llc-como-funciona-bot-sync]] · [[carwarriors-llc-como-habla-el-bot]] · [[carwarriors-llc-comportamiento-bot]] · [[carwarriors-llc-comportamiento-bot-rances]] · [[carwarriors-llc-guardrail-anti-spam]] · [[carwarriors-llc-propuesta-formal]] · [[carwarriors-llc-justificacion-infraestructura]] · [[carwarriors-llc-agente-ia-24-7]] (legacy, bots viejos de GHL) · [[carwarriors-llc-agente-ia-rances-car]] (legacy).
 
-## Pendientes abiertos (al 2026-09-28)
+## Pendientes abiertos (al 2026-11-02)
+
+- [ ] **🟡 Plataforma de videos y doblaje al español (2026-11-02):** Recibidas credenciales de Orlando (`orlandomma86@gmail.com` / `Realmadrid7`) para gestión y subida de videos con doblaje. Pendiente recibir el enlace / URL de acceso para ingresar a la plataforma. Detalle: [[../../raw/clientes/carwarriors-llc/2026-11-02-credenciales-plataforma-videos-doblaje|raw/2026-11-02]].
+
+- [x] **🟢 Corrección nodo Code `Filtro Lead Real` en `Subir a DealerCenter` — RESUELTO EN PRODUCCIÓN (2026-11-02).** El nodo `Filtro Lead Real` en modo `runOnceForEachItem` falló en ejecución `#16627` con `A 'json' property isn't an object [item 0]` porque devolvía un array `[{ json: ... }]`. Se corrigió el return a `{ json: { ... } }` y se validó en las ejecuciones posteriores `#16629` y `#16630`, ambas `success`, procesando y filtrando correctamente al contacto de WhatsApp sin mensajes entrantes recientes. Detalle: [[../../raw/clientes/carwarriors-llc/2026-11-02-filtro-leads-reales-dealercenter-y-fix-nodo-code|raw/2026-11-02]].
 
 - [ ] **🔴 Comentarios IG/FB NO funcionan — PIVOTE A META GRAPH API EN CURSO (2026-09-28 / 2026-10-26): Facebook nunca estuvo conectado e Instagram clasifica al azar. Pivote a Meta Graph API + n8n, app a crear por Bianca.** Reporte de Jorge González (comentarios sin respuesta). **Facebook:** la página "Carwarriors LLC Miami" está conectada a **otra cuenta de ManyChat de booxter marketing** — nuestro flujo nunca recibió un comentario de FB. **Instagram:** la Solicitud Externa manda `{Última entrada de texto}` (último DM del contacto), **no el comentario** — n8n recibe `{{last_input_text}}` o un DM viejo (`??`), y el LLM clasifica eso. ManyChat no expone ninguna variable con el texto del comentario. **Decisión:** webhooks de Meta (IG `comments` + Page `feed`) → n8n → clasificador OpenRouter existente → respuesta por Graph API; cubre también Facebook. **Avance 10-26:** redactada y enviada la guía paso a paso a Bianca ([[../../raw/clientes/carwarriors-llc/2026-10-26-guia-meta-app-bianca-y-workflow-comentarios]]), documentadas las instrucciones de contención en ManyChat (desconectar DM automático para evitar mensajes al azar) y construido el workflow `META-COMENTARIOS-GRAPH-API.json` (doble handshake GET/POST, extracción IG/FB, DeepSeek v4.1 Flash, respuesta pública `/{comment_id}/replies` y privada `/me/messages`). **Siguiente:** esperar entrega segura de credenciales de Bianca para importar el workflow en n8n y suscribir en Meta, y aplicar la contención en ManyChat. Detalle: [[../../raw/clientes/carwarriors-llc/2026-10-26-guia-meta-app-bianca-y-workflow-comentarios]] y [[../../raw/clientes/carwarriors-llc/2026-09-28-comentarios-manychat-sin-texto-real-facebook-desconectado-pivote-meta-api]].
 
