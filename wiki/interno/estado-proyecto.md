@@ -2,7 +2,7 @@
 tags: [forjado, estado, pendientes, dashboard]
 tipo: estado
 estado: activo
-actualizado: 2026-10-30
+actualizado: 2026-11-02
 fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 ---
 
@@ -18,7 +18,7 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 | **Garoo / Redtec** | **🟢 10-30: Arquitectura de motores de voz (Kokoro TTS vs OmniVoice) y matriz de hosting (Hostinger CPU vs Baseten GPU).** Definida estrategia dual: Kokoro TTS en Docker local para síntesis rápida sin coste marginal (<1.5s) y OmniVoice en Baseten (Truss) para clonación zero-shot y personalidades sintéticas hacia Recall.ai. Documentado en [[../clientes/garoo-redtec]]. | 2026-10-30 |
 | **Callacar** | **🟢 09-25: Agente IA Cally desplegado en n8n (`Bpiy2rUJ2Z8aitOy`) con Chatwoot, DeepSeek v4.1 Flash y memoria Buffer Window.** Portal web Astro y Cloudflare Function `/api/contact` validados en producción. Pendiente asignación de dominio `callacar.au`. Detalle completo: [[../clientes/callacar]]. | 2026-09-25 |
 | **Carwarriors LLC** | **🔴 09-28 / 10-26: Comentarios IG/FB — pivote a Meta Graph API + n8n en marcha.** Guía enviada a Bianca, instrucciones de contención documentadas para ManyChat (desconectar DM al azar) y workflow `META-COMENTARIOS-GRAPH-API.json` preparado en n8n (soporta handshake GET y webhook POST unificado para IG y FB, DeepSeek v4.1 Flash, respuesta pública y DM privado). Pendiente recibir credenciales de Bianca y decisión WhatsApp Rances Car. Detalle completo: [[../clientes/carwarriors-llc]]. | 2026-10-26 |
-| **Varela Law** | **🟡 10-20 / 10-26: Texto — Zap nuevo v1.2.0 activo (`384163782`), viejo apagado; mensajes enviados a Mario y soporte sobre Webhook directo.** Zap v1.2.0 encendido sin probar el paso 2 para no enviar SMS al lead de prueba; el viejo fue apagado para evitar duplicados. Mensajes enviados: recado a Mario pidiendo revisar el panel de Texto por la opción de Webhook directo y consulta técnica en inglés para soporte de Texto indagando especificaciones del Webhook anunciado en su web o solución a la caducidad OAuth en Zapier. Falta: respuesta de Mario/soporte, confirmar el primer lead real (`Zap runs`, SMS en Texto) y vigilar la conexión. Detalle completo: [[../clientes/varela-law]]. | 2026-10-26 |
+| **Varela Law** | **🟢 11-02: Texto — Zap replicado en cuenta Varela Law en OFF, video Loom de Zain analizado y traspaso coordinado.** Analizado el tutorial Loom de Zain con la conexión directa Google Sheets → Texto (incorporando el nuevo campo `Message`). Zaps viejos confirmados en OFF para evitar duplicados. Zap oficial en cuenta Varela Law listo en OFF y mensaje enviado a Mario y a Zain para coordinar el apagado del Zap de Zain antes de activar el de la firma. Detalle completo: [[../clientes/varela-law]]. | 2026-11-02 |
 | **Rogers México** | **🟡 09-21: Propuesta en 3 fases estructurada a partir de notas de voz de Rogers.** Enfoque inicial en Fase 1 (bot WhatsApp calificador de CP + agenda de visitas en CDMX). Pendiente llamada de alineación de 10 min. Detalle completo: [[../clientes/rogers-mexico]]. | 2026-09-21 |
 | **Pipeline / prospección** | Ver [[../ventas/pipeline]] | 2026-09-21 |
 
