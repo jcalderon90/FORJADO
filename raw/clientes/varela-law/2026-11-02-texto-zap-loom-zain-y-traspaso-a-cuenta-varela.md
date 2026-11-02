@@ -31,7 +31,16 @@ Lo de arriba no era cierto en dos puntos:
 - Queda como **borrador sin publicar**: en Zapier, publicar lo enciende. Se publica cuando Zain confirme que apagó el suyo.
 - La hoja directa también tiene una columna `Language` (Spanish/English) sin mapear. Puede servir para el problema del idioma del saludo de Texto (ver [[2026-10-19-agenda-hora-chicago-e-idioma-saludo-texto]]).
 
+## Switch hecho (2026-11-02, ~22:48 UTC)
+- Mario le escribió a Zain (4:39 PM) que el Zap de la firma estaba listo y apagado, y le pidió apagar el suyo. **Zain confirmó a las 6:20 PM: "I've disabled the zap on my end now!"** Hilo: [[mensajes/correo-mario-zain-2026-11-02-switch-zap-texto.txt]].
+- Al revisar Zapier, los 3 Zaps de la cuenta seguían apagados, así que durante ese rato no había ningún Zap procesando leads.
+- Publicar estaba bloqueado porque el paso 2 (Texto `Create Lead`) no estaba probado. Se usó **`Skip test`** para no crearle un lead ni mandarle un SMS de prueba a Claudia Car Vasquez (lead real). Antes se revisó el mapeo: firstName, lastName, phoneNumber, email y message, todos desde la hoja.
+- **Publicado `385519802`**: Zapier confirmó "Zap published — Your Zap is on and using version v1". `383180348` y `384163782` siguen en OFF.
+- **No hubo leads en el hueco del traspaso:** la última fila de la hoja directa es Claudia Car Vasquez (11/1/2026 10:09 PM), que ya había entrado con el Zap de Zain. Como el disparador `New Spreadsheet Row` solo toma filas posteriores a la activación, no queda nada por reprocesar.
+- El paso 2 sigue **sin probar con un lead real**. El primer lead que entre será la prueba.
+
 ## Pendientes
-- [ ] Confirmación de Zain de que su Zap ha sido desactivado.
-- [ ] Encender (ON) el Zap definitivo en la cuenta de Zapier de Varela Law.
-- [ ] Monitorear la primera ejecución real del nuevo Zap y la llegada del SMS en Texto.
+- [x] Confirmación de Zain de que su Zap ha sido desactivado (2026-11-02 6:20 PM).
+- [x] Encender (ON) el Zap definitivo en la cuenta de Zapier de Varela Law (`385519802`, publicado 2026-11-02 ~22:48 UTC).
+- [ ] Monitorear la primera ejecución real del nuevo Zap (`Zap runs`) y la llegada del SMS en Texto, incluido que el campo `Message` llegue bien.
+- [x] Avisar a Mario (Reply All) que ya está encendido (enviado por Jorge, 2026-11-02).

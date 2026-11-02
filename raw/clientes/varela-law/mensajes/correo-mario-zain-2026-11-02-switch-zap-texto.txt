@@ -1,0 +1,15 @@
+Hilo de correo 2026-11-02 (Mario Varela -> Zain Abideen, cc Jorge)
+
+Mario Varela, 4:39 PM:
+Hi Zain,
+We have created and tested the new Zap in our Zapier account following the steps from your Loom video (it connects the Google Sheet directly to Texto with the new Message field). The Zap is currently ready and turned OFF on our side.
+Please go ahead and turn off the Zap running on your end. As soon as you confirm (please Reply All) it is disabled, we will switch ours ON to start processing leads directly from our account.
+Sincerely,
+Mario Varela
+
+Zain Abideen <zain@trytexto.com>, 6:20 PM:
+Hi Mario,
+Yes - I've disabled the zap on my end now!
+Best,
+Zain
+TryTexto.com
