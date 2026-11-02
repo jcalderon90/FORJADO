@@ -1,0 +1,9 @@
+Hola Mario, te cuento cómo vamos:
+
+1. Texto / Zapier: El Zap nuevo ya quedó montado en la cuenta de Zapier de la firma, igual a como lo explicó Zain en el video (la hoja de leads directo a Texto, incluyendo el mensaje que deja el cliente en el formulario). Está listo pero apagado, para que no le lleguen dos SMS al mismo lead. En cuanto Zain nos confirme que apagó el suyo, lo encendemos y revisamos el primer lead que entre.
+
+2. Contrato de Jessica Banda: El 29 de octubre entraron por Slack dos contratos de ella (la modificación y el de "enforcement"). En el de "enforcement" el sistema leyó la fecha del contrato como 28/10/2021 y honorarios de $400/h abogado y $175/h paralegal. ¿Ese contrato es de 2021, o la fecha debería ser de este año? Si es un error, la corregimos.
+
+3. Como los dos contratos de Jessica entraron casi al mismo tiempo, es posible que haya quedado registrada dos veces como contacto. Lo estamos revisando y lo dejamos unificado.
+
+Cualquier cosa me avisas.
