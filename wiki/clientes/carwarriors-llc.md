@@ -6,7 +6,7 @@ servicio: automatizacion
 estado_comercial: migracion-arquitectura-en-curso
 contacto: Jorge González (dueño) / Bianca Cangialosi (marketing)
 creado: 2026-06-18
-actualizado: 2026-11-02
+actualizado: 2026-11-03
 fuente_raw: raw/clientes/carwarriors-llc/
 ---
 

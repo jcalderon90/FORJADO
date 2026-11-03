@@ -2,7 +2,7 @@
 tags: [forjado, estado, pendientes, dashboard]
 tipo: estado
 estado: activo
-actualizado: 2026-11-02
+actualizado: 2026-11-03
 fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 ---
 
