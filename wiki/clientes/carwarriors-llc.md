@@ -57,7 +57,10 @@ Documentos de referencia relacionados: [[carwarriors-llc-infraestructura]] · [[
 
 ## Pendientes abiertos (al 2026-11-03)
 
-- [x] **🟢 Estandarización de fotos en Cleverwave con fondo "Graffiti Garage" — PRUEBA PILOTO 100% COMPLETADA Y DESCARGADA (2026-11-02).** Flujo completo ejecutado de punta a punta: extracción de fotos originales del *2023 Alfa Romeo Stelvio* (Stock `ND56867`) desde la pestaña *Media* de DealerCenter (`Custom Status: LISTO VENTA`), inyección directa en Cleverwave Studio (`carwarriors-dev.cleverwave.ai`), mapeo inteligente de ángulos/perspectivas y renderizado con fondo oficial **"Car Warriors · Graffiti Garage"** (con placas corporativas). El proyecto fue nombrado formalmente `2023 Alfa Romeo Stelvio - ND56867`, el procesamiento de las 25 imágenes finalizó al 100% y el paquete ZIP oficial (`2023 Alfa Romeo Stelvio - ND56867.zip`, 54.3 MB) fue generado y descargado localmente. Pendiente validación de Bianca/Jorge para escalar al resto del inventario (siguiente en cola: *2024 Hyundai Tucson Limited*). Detalle y SOP: [[../../raw/clientes/carwarriors-llc/2026-11-02-sop-estandarizacion-fotos-inventario-cleverwave|raw/2026-11-02]].
+- [ ] **🟡 Estandarización de fotos en Cleverwave — SEGUNDO LOTE EN EJECUCIÓN Y BYPASS WAF DEALERCENTER (2026-11-03):** 
+  - *Piloto completado (02-nov):* *2023 Alfa Romeo Stelvio* (`ND56867`) 25 fotos procesadas y paquete ZIP descargado (`54.3 MB`).
+  - *Lote actual en proceso:* *2024 Hyundai Tucson Limited* (Stock `R300375`, VIN `5NMJECDE4RH300375`).
+  - *Infraestructura de automatización:* Superado bloqueo de red/WAF de DealerCenter (`ERR_CONNECTION_TIMED_OUT`) mediante enrutamiento por túnel dinámico SOCKS5 a través del VPS (`ssh -N -D 1080 carwarriors-vps`). Navegador Chrome automatizado por CDP (`--remote-debugging-port=9222`) con sesiones autenticadas en DealerCenter y Cleverwave Studio, listo para descarga de fotos de stock y renderizado en *Graffiti Garage*. Detalle: [[../../raw/clientes/carwarriors-llc/2026-11-03-estandarizacion-fotos-cleverwave-bypass-waf-dealercenter|raw/2026-11-03]].
 
 - [ ] **🟡 Cuestionarios pendientes de envío por Bianca (2026-11-02):** A la espera de que Bianca envíe los cuestionarios acordados para su incorporación al sistema.
 
