@@ -1,7 +1,7 @@
 ---
 tags: [forjado, indice, navegacion, wiki]
 tipo: indice
-actualizado: 2026-10-29
+actualizado: 2026-11-04
 ---
 
 # wiki/ — Índice de la bóveda FORJADO
@@ -74,6 +74,7 @@ actualizado: 2026-10-29
 | [[interno/recursos/credenciales]] | Accesos e infraestructura propia de FORJADO |
 | [[interno/recursos/mongodb-database]] | Referencia de la base de datos MongoDB compartida |
 | [[interno/recursos/react-bits]] | Catálogo e integración de 217+ componentes animados, WebGL y micro-interacciones (shadcn) |
+| [[interno/recursos/impeccable]] | QA de diseño para agentes: detector de 62 reglas sin LLM y comandos `audit`/`polish` (evaluado, no instalado) |
 | [[interno/configuracion-skills]] | Configuración de habilidades agenticas globales (Superpowers, n8n, find-skill, Karpathy) |
 
 ## Plantillas
