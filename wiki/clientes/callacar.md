@@ -6,7 +6,7 @@ servicio: desarrollo-de-software
 estado_comercial: desarrollo-web-completado
 contacto: CallaCar Team
 creado: 2026-09-15
-actualizado: 2026-09-18
+actualizado: 2026-11-05
 fuente_raw: raw/clientes/callacar/
 ---
 
@@ -23,7 +23,7 @@ fuente_raw: raw/clientes/callacar/
 | **Ubicación / Mercado** | Australia (Adelaide / Cobertura nacional) |
 | **Sector** | Marketplace de transporte y fletes peer-to-peer (muebles, electrodomésticos, compras online) |
 | **Servicio principal** | Desarrollo Web (Portal corporativo, legal y de conversión) |
-| **Estado** | 🟢 Portal web completado en `aplicaciones/call-a-car-web` — Build verificado y listo para despliegue |
+| **Estado** | 🟢 Portal web completado en `aplicaciones/call-a-car-web` — Builds y tests 100% en verde, sincronizado en GitHub `main` (`d651222`) |
 
 ## Repositorios y aplicaciones
 
@@ -50,6 +50,8 @@ fuente_raw: raw/clientes/callacar/
 
 ## Pendientes abiertos
 
+- [x] **🟢 Auditoría de diseño Impeccable y eliminación de anti-patrones de IA (2026-11-05):** Resuelto contraste WCAG AA en CTAs y avatares, textos de lectura elevados a 12px, pestañas laterales gruesas sustituidas por elevaciones limpias y fuente Inter preservada como marca en configuración de detector.
+- [x] **🟢 Reemplazo de HUD futurista por Cotizador Realista de Tarifas en Adelaide (2026-11-05):** Eliminado el falso mapa ciberpunk y reemplazado por un cotizador interactivo de alta conversión con 4 cargas, 4 rutas locales de Adelaide, recomendación de vehículos y animación fluida con Number Ticker (commits `8016632` y `d651222`, subido a `origin/main`).
 - [x] **🟢 Backend del formulario de contacto completado (2026-09-18):** Creada Cloudflare Pages Function `/functions/api/contact.ts` con validación de campos, reenvío a webhook de alertas y soporte CORS. Conectado `contact.astro` con `fetch('/api/contact')`, estados de carga, alertas accesibles y fallback directo a `support@callacar.au`.
 - [x] **🟢 Despliegue en Vercel con CI/CD automatizado (2026-09-19):** Proyecto conectado al repositorio `jcalderon90/call-a-car-web` en Vercel. Desbloqueo de autoría de commit mediante unificación de correo `jcalderon900610@gmail.com`.
 - [x] **🟢 Normalización de marca y mayúsculas completas (2026-09-19):** Estandarización de `CALLACAR` en todos los textos, footers, avisos legales, Schema.org y metadatos del portal.
@@ -60,6 +62,8 @@ fuente_raw: raw/clientes/callacar/
 
 ## Resueltos recientes
 
+- **2026-11-05:** Sustitución total del antiguo HUD ciberpunk por el nuevo **Adelaide Fare & Route Estimator** con selector de carga, 4 rutas locales de Adelaide y Number Ticker nativo en tiempo real (commits `8016632` y `d651222`, subido a `origin/main`).
+- **2026-11-05:** Auditoría completa de diseño y accesibilidad con **Impeccable**; corrección de contrastes WCAG AA en botones, avatares, tamaño de tipografía (>= 12px) y eliminación de anti-patrones visuales.
 - **2026-09-25:** Identidad visual completada en Chatwoot y Astro: Botón flotante con icono de soporte al cliente e icono oficial de Forjado en el pie del widget.
 - **2026-09-25:** White-labeling de Chatwoot en VPS completado (`BRAND_NAME` e `INSTALLATION_NAME` cambiados a **Forjado** con enlace a `forjado.agency`).
 - **2026-09-25:** Construcción, corrección de payload de Chatwoot y despliegue exitoso del Agente de IA **Cally** en `n8n-forjado` (workflow `Bpiy2rUJ2Z8aitOy`) con memoria por sesión y respuestas multilingües validadas.
