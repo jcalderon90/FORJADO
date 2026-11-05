@@ -14,7 +14,8 @@ actualizado: 2026-11-04
 |---|---|
 | [[interno/estado-proyecto]] | Snapshot actual y pendientes de la agencia — punto de entrada diario |
 | [[interno/mapa-forjado]] | Mapa hacia `aplicaciones/` y `contenido/` — las carpetas hermanas de esta bóveda dentro de `FORJADO/` |
-| [[interno/proyectos-pendientes]] | Productos propios: Vitrina (en desarrollo) y por desarrollar: barberías/peluquerías, transporte en triciclos eléctricos, gestores de casas y venta de medicamentos |
+| [[interno/productos/time-control]] | Time Control — Suite empresarial de monitoreo horario, capturas y productividad (3 repos: Backend, Frontend, Desktop) en adaptación para clientes B2B |
+| [[interno/proyectos-pendientes]] | Productos propios: Vitrina y Time Control (en desarrollo/adaptación) y por desarrollar: barberías/peluquerías, transporte en triciclos eléctricos, gestores de casas y venta de medicamentos |
 
 ## Clientes
 

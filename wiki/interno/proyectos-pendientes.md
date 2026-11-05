@@ -4,7 +4,7 @@ tipo: proyecto
 estado: activo
 servicio: desarrollo-de-software
 creado: 2026-10-05
-actualizado: 2026-10-14
+actualizado: 2026-11-04
 fuente_raw: raw/interno/2026-10-05-proyectos-pendientes-barberias-y-callacar-cuba-y-revision-vitrina
 ---
 
@@ -15,17 +15,18 @@ fuente_raw: raw/interno/2026-10-05-proyectos-pendientes-barberias-y-callacar-cub
 
 | # | Producto | Estado | Dónde |
 |---|---|---|---|
-| 1 | **Vitrina** | 🟡 En desarrollo, MVP sin completar | `aplicaciones/vitrina/` |
-| 2 | **App para barberías y peluquerías** | ⬜ Por desarrollar (solo idea) | sin repo |
-| 3 | **App de transporte en triciclos eléctricos para Cuba** | ⬜ Por desarrollar (solo idea) | sin repo |
-| 4 | **App para gestores de ventas de casas en Cuba** | ⬜ Por desarrollar (solo idea) | sin repo |
-| 5 | **App para venta de medicamentos** | ⬜ Por desarrollar (solo idea) | sin repo |
+| 1 | **Vitrina** | 🟡 En desarrollo, MVP sin completar | `aplicaciones/forjado/vitrina/` |
+| 2 | **Time Control** | 🟡 En transición / Adaptación a FORJADO | `aplicaciones/forjado/time-control/` (3 repos) |
+| 3 | **App para barberías y peluquerías** | ⬜ Por desarrollar (solo idea) | sin repo |
+| 4 | **App de transporte en triciclos eléctricos para Cuba** | ⬜ Por desarrollar (solo idea) | sin repo |
+| 5 | **App para gestores de ventas de casas en Cuba** | ⬜ Por desarrollar (solo idea) | sin repo |
+| 6 | **App para venta de medicamentos** | ⬜ Por desarrollar (solo idea) | sin repo |
 
-Prioridad: Vitrina primero; los otros entran más adelante según Jorge, sin fecha.
+Prioridad activa: Vitrina y adaptación de Time Control; los productos 3 al 6 permanecen en conceptualización.
 
 ## 1. Vitrina (en desarrollo)
 
-Vitrina digital + directorio + contacto directo para mypimes y particulares de Cienfuegos (Cuba). Dos repos (`vitrina-backend`, `vitrina-frontend`). Fuente de verdad: `aplicaciones/vitrina/vitrina-backend/docs/PLAN_DESARROLLO.md` (secciones 11 y 16 = estado y próximos pasos). Ficha en [[mapa-forjado]].
+Vitrina digital + directorio + contacto directo para mypimes y particulares de Cienfuegos (Cuba). Dos repos (`vitrina-backend`, `vitrina-frontend`). Fuente de verdad: `aplicaciones/forjado/vitrina/vitrina-backend/docs/PLAN_DESARROLLO.md` (secciones 11 y 16 = estado y próximos pasos). Ficha en [[mapa-forjado]].
 
 Verificado el 2026-10-05: backend con typecheck y lint limpios y 220 tests pasando; frontend con lint, typecheck y build limpios tras revertir un cambio accidental que bajaba Astro de 7 a 2.10.9 y limpiar 25 errores de lint (cambios sin commit; detalle en [[../../raw/interno/2026-10-05-proyectos-pendientes-barberias-y-callacar-cuba-y-revision-vitrina|raw]]).
 
@@ -36,7 +37,16 @@ Verificado el 2026-10-05: backend con typecheck y lint limpios y 220 tests pasan
 - [ ] Fase 0 de negocio: entrevistas con 8–10 negocios de Cienfuegos y análisis de competidores.
 - [ ] Definir antes de construir: feed, gestores con comisión, ofertas de trabajo (secciones 20.1–20.4 del plan).
 
-## 2. App para barberías y peluquerías (por desarrollar)
+## 2. Time Control (en transición / adaptación a FORJADO)
+
+Suite empresarial de control horario, monitoreo de productividad y liquidación de nóminas (clon tipo Time Doctor). Desarrollada originalmente para un cliente corporativo (`Home Las Vegas Nevada` / `LogYourTime`) e incorporada al catálogo de FORJADO el 2026-11-04 para comercialización a clientes de la agencia. Tres repositorios independientes: Backend Node.js/Express/Mongo/S3, Frontend React 19/Tailwind/Vite, Desktop Electron/SQLite/keyspy.
+
+- **Fuente de verdad:** [`aplicaciones/forjado/time-control/STATUS.md`](../../../aplicaciones/forjado/time-control/STATUS.md). Ficha técnica en [[productos/time-control]].
+- [ ] **Branding:** Reemplazar identidad `LogYourTime` por marca FORJADO (`#E85D04` / `#111111`) en Web y Desktop (`appId` a `com.forjado.timecontrol`).
+- [ ] **Infraestructura:** Desplegar backend en Dokploy (Oracle VPS) y configurar S3 en Cloudflare R2 o MinIO.
+- [ ] **Empaquetado B2B:** Estructurar oferta SaaS y On-Premise para clientes interesados de la agencia.
+
+## 3. App para barberías y peluquerías (por desarrollar)
 
 **Qué dijo Jorge:** aplicación **exclusiva** para barberías, peluquerías, y barberos y peluqueros **a domicilio**.
 
@@ -45,7 +55,7 @@ Sin definir: país/mercado, si es web, móvil o ambas, modelo de negocio, funcio
 - [ ] Definir alcance y mercado con Jorge.
 - [ ] Crear plan de desarrollo propio (con el formato del de Vitrina) antes de escribir código.
 
-## 3. App de transporte en triciclos eléctricos para Cuba (por desarrollar)
+## 4. App de transporte en triciclos eléctricos para Cuba (por desarrollar)
 
 Antes anotada como "tipo Call a Car para Cuba" ([[../clientes/callacar]] fue solo la referencia original). El 2026-10-13 Jorge la aclaró: **app para clientes y choferes para pedir taxis**, pensada para los **triciclos eléctricos ("motorcitos")** de alquiler o pasaje que hay hoy en Cuba. Detalle en [[../../raw/interno/2026-10-13-idea-app-transporte-triciclos-electricos-cuba|raw (2026-10-13)]].
 
@@ -62,7 +72,7 @@ Debe heredar las restricciones de diseño para Cuba que ya documenta Vitrina (co
 - [ ] Definir cómo se paga y se verifica a choferes, y la parte legal local.
 - [ ] Crear plan de desarrollo propio antes de escribir código.
 
-## 4. App para gestores de ventas de casas en Cuba (por desarrollar)
+## 5. App para gestores de ventas de casas en Cuba (por desarrollar)
 
 Anotada el 2026-10-14 por indicación de Jorge: **aplicación dirigida a gestores de ventas de casas** (compraventa de viviendas e intermediación inmobiliaria en Cuba). Detalle en [[../../raw/interno/2026-10-14-idea-app-gestores-ventas-casas-cuba|raw (2026-10-14)]].
 
@@ -75,7 +85,7 @@ Contexto e ideas iniciales:
 - [ ] Definir si será Web/PWA offline-first o aplicación móvil.
 - [ ] Crear plan de desarrollo antes de comenzar implementación.
 
-## 5. App para venta de medicamentos (por desarrollar)
+## 6. App para venta de medicamentos (por desarrollar)
 
 Anotada el 2026-10-14 por indicación de Jorge: **aplicación para la venta de medicamentos** (catálogo, disponibilidad y búsqueda de medicamentos e insumos médicos). Detalle en [[../../raw/interno/2026-10-14-idea-app-venta-medicamentos|raw (2026-10-14)]].
 
