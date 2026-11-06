@@ -1,11 +1,11 @@
----
+﻿---
 tags: [forjado, producto, time-control, arquitectura, b2b]
 tipo: especificacion
 actualizado: 2026-11-04
 fuente_raw: raw/interno/2026-11-04-registro-e-integracion-time-control-forjado.md
 ---
 
-# Time Control — Suite de Monitoreo de Tiempo y Productividad
+# Calibre — Suite de Monitoreo de Tiempo y Productividad
 
 > **Sistema empresarial de auditoría horaria y gestión de productividad de equipos remotos.**  
 > Desarrollado originalmente para un cliente corporativo (`Home Las Vegas Nevada` / `LogYourTime`) e incorporado el 2026-11-04 como producto de software propio de **FORJADO** para ser adaptado comercialmente y ofrecido a nuevos clientes B2B.
@@ -44,9 +44,9 @@ El sistema opera bajo una arquitectura desacoplada en 3 niveles, permitiendo alt
                 └───────────────────────────┘
 ```
 
-### 1.1 Backend API (`time-doctor-clon-backend`)
-- **Ubicación local:** [`aplicaciones/forjado/time-control/time-doctor-clon-backend`](file:///D:/1TRABAJO/PROYECTOS/FORJADO/aplicaciones/forjado/time-control/time-doctor-clon-backend)
-- **Repositorio remoto:** [`GLM1996/time-doctor-clon-backend`](https://github.com/GLM1996/time-doctor-clon-backend)
+### 1.1 Backend API (`calibre-backend`)
+- **Ubicación local:** [`aplicaciones/forjado/time-control/calibre-backend`](file:///D:/1TRABAJO/PROYECTOS/FORJADO/aplicaciones/forjado/time-control/calibre-backend)
+- **Repositorio remoto:** [`FORJADO-AGENCY/calibre-backend`](https://github.com/FORJADO-AGENCY/calibre-backend)
 - **Stack:** Node.js (ES Modules), Express 4, Mongoose 8 (MongoDB Atlas), AWS SDK v3 (`@aws-sdk/client-s3`, presigned URLs), Socket.io, JWT, Joi, ExcelJS, PDFKit.
 - **Módulos implementados:**
   - `organizations`: Aislamiento estricto multi-tenant por empresa/cliente.
@@ -58,15 +58,15 @@ El sistema opera bajo una arquitectura desacoplada en 3 niveles, permitiendo alt
   - `billing`: Integración de pasarelas de pago y planes de suscripción.
   - `alerts` & `audit`: Detección de anomalías, ausencias prolongadas e intentos de alteración horaria.
 
-### 1.2 Frontend Web (`time-doctor-clon-fronted`)
-- **Ubicación local:** [`aplicaciones/forjado/time-control/time-doctor-clon-fronted`](file:///D:/1TRABAJO/PROYECTOS/FORJADO/aplicaciones/forjado/time-control/time-doctor-clon-fronted)
-- **Repositorio remoto:** [`GLM1996/time-doctor-clon-fronted`](https://github.com/GLM1996/time-doctor-clon-fronted)
+### 1.2 Frontend Web (`calibre-frontend`)
+- **Ubicación local:** [`aplicaciones/forjado/time-control/calibre-frontend`](file:///D:/1TRABAJO/PROYECTOS/FORJADO/aplicaciones/forjado/time-control/calibre-frontend)
+- **Repositorio remoto:** [`FORJADO-AGENCY/calibre-frontend`](https://github.com/FORJADO-AGENCY/calibre-frontend)
 - **Stack:** React 19, Vite 8, Tailwind CSS, Zustand, Recharts, Lucide React, Socket.io-client, Stripe JS, jsPDF, i18next.
 - **Vistas clave:** Tablero analítico en tiempo real, visor de capturas de pantalla organizadas por timeline de usuario, gestión de turnos/horarios, configuración multi-tenant, exportación de reportes a PDF y Excel.
 
-### 1.3 Cliente Desktop (`time-doctor-clon-desktop`)
-- **Ubicación local:** [`aplicaciones/forjado/time-control/time-doctor-clon-desktop`](file:///D:/1TRABAJO/PROYECTOS/FORJADO/aplicaciones/forjado/time-control/time-doctor-clon-desktop)
-- **Repositorio remoto:** [`GLM1996/time-doctor-clon-desktop`](https://github.com/GLM1996/time-doctor-clon-desktop)
+### 1.3 Cliente Desktop (`calibre-desktop`)
+- **Ubicación local:** [`aplicaciones/forjado/time-control/calibre-desktop`](file:///D:/1TRABAJO/PROYECTOS/FORJADO/aplicaciones/forjado/time-control/calibre-desktop)
+- **Repositorio remoto:** [`FORJADO-AGENCY/calibre-desktop`](https://github.com/FORJADO-AGENCY/calibre-desktop)
 - **Stack:** Electron 43, electron-vite 3, React 18, `better-sqlite3` (almacenamiento local offline), `keyspy` (auditoría de eventos de periféricos sin registrar pulsaciones de teclas confidenciales), `get-windows` (rastreo de ventanas y apps activas), `electron-builder`.
 - **Características operativas:**
   - Funcionamiento offline resiliente con SQLite local: si se cae la red, sigue grabando y sincroniza al reconectar sin perder datos.
@@ -99,4 +99,6 @@ El sistema opera bajo una arquitectura desacoplada en 3 niveles, permitiendo alt
 - [[../mapa-forjado|Mapa de aplicaciones de FORJADO]]
 - [[../proyectos-pendientes|Proyectos propios pendientes]]
 - [[../estado-proyecto|Estado consolidado del proyecto]]
-- Bóveda Personal Obsidian: `[[PROYECTOS/FORJADO/time-control]]` y `[[FORJADO/Time Control/Time Control - Sistema de Monitoreo]]`
+- Bóveda Personal Obsidian: `[[PROYECTOS/FORJADO/time-control]]` y `[[FORJADO/Calibre/Calibre - Sistema de Monitoreo]]`
+
+
