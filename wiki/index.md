@@ -1,7 +1,7 @@
 ---
 tags: [forjado, indice, navegacion, wiki]
 tipo: indice
-actualizado: 2026-11-04
+actualizado: 2026-11-07
 ---
 
 # wiki/ — Índice de la bóveda FORJADO
@@ -13,7 +13,8 @@ actualizado: 2026-11-04
 | Página | Descripción |
 |---|---|
 | [[interno/estado-proyecto]] | Snapshot actual y pendientes de la agencia — punto de entrada diario |
-| [[interno/mapa-forjado]] | Mapa hacia `aplicaciones/` y `contenido/` — las carpetas hermanas de esta bóveda dentro de `FORJADO/` |
+| [[interno/mapa-forjado]] | Mapa hacia `aplicaciones/`, `contenido/` y `acl-recovery/` — las carpetas hermanas de esta bóveda dentro de `FORJADO/` |
+| [[interno/mapa-garoo]] | Mapa hacia `Garoo/` — ecosistema hermano de agentes IA, portales y telefonía (`Agent-Spectrum`, `Agent-Belize`, `TELNYX`, etc.) |
 | [[interno/productos/time-control]] | Time Control — Suite empresarial de monitoreo horario, capturas y productividad (3 repos: Backend, Frontend, Desktop) en adaptación para clientes B2B |
 | [[interno/proyectos-pendientes]] | Productos propios: Vitrina y Time Control (en desarrollo/adaptación) y por desarrollar: barberías/peluquerías, transporte en triciclos eléctricos, gestores de casas y venta de medicamentos |
 

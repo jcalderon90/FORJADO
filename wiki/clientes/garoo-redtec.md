@@ -145,6 +145,7 @@ Ante la necesidad de síntesis de voz natural y clonación sin dependencia de El
 
 ## Relacionado
 
+- [[../interno/mapa-garoo|Mapa del Ecosistema Garoo / Redtec (Agentes, Portales y Telefonía)]]
 - [[../../raw/clientes/garoo-redtec/2026-10-29-adopcion-recall-ai-y-baseten|Log crudo de adopción Recall.ai & Baseten (2026-10-29)]]
 - [[../../raw/clientes/garoo-redtec/2026-10-30-evaluacion-omnivoice-y-kokoro-tts|Evaluación Técnica OmniVoice y Kokoro TTS (2026-10-30)]]
 - [[carwarriors-llc-arquitectura-migracion|Arquitectura de referencia (Agent-Spectrum)]]

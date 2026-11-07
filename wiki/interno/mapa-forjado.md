@@ -1,15 +1,16 @@
 ---
 tags: [forjado, indice, mapa, arquitectura]
 tipo: indice
-actualizado: 2026-11-04
+actualizado: 2026-11-07
 ---
 
 # Mapa de FORJADO — más allá de esta bóveda
 
-> Esta bóveda (`desarrollo/`) es la carpeta **principal de indexado y mapeo de todo FORJADO**, no solo de su propio contenido. Esta página es el mapa hacia las dos carpetas hermanas que viven fuera de `desarrollo/` pero dentro de `FORJADO/`. Cada una mantiene su propia fuente de verdad — acá solo se referencia, no se duplica el detalle.
+> Esta bóveda (`desarrollo/`) es la carpeta **principal de indexado y mapeo de todo FORJADO**, no solo de su propio contenido. Esta página es el mapa hacia las carpetas hermanas que viven fuera de `desarrollo/` pero dentro de `FORJADO/`. Cada una mantiene su propia fuente de verdad — acá solo se referencia, no se duplica el detalle.
 
 ```
 FORJADO/
+├── acl-recovery/     → Respaldo y scripts de reparación de descriptores de seguridad (NTFS/ACL)
 ├── aplicaciones/     → Apps de clientes y forjado/ (productos y plataformas de la agencia)
 ├── contenido/        → bóveda propia (Ljörk / NERINE), arquitectura Karpathy independiente
 └── desarrollo/       → esta bóveda (estás acá)
@@ -18,6 +19,8 @@ FORJADO/
 **Regla de corte:** una carpeta va en `aplicaciones/` si tiene remoto propio en GitHub (es un producto desplegado); si no, vive dentro de la bóveda/sistema al que sirve (ver `raw/interno/2026-09-07-reestructuracion-carpeta-raiz-forjado.md` para el criterio completo).
 
 ## `aplicaciones/`
+
+Ver [`aplicaciones/README.md`](../../../aplicaciones/README.md) y [`aplicaciones/forjado/README.md`](../../../aplicaciones/forjado/README.md) para el índice global.
 
 | App | Carpeta | Cliente/dueño | Stack | Estado |
 |---|---|---|---|---|
@@ -46,8 +49,13 @@ Bóveda propia e independiente para el sistema de generación de contenido de la
 
 **Estado al 2026-09-07:** 🔴 producción en pausa desde 2026-08-23 (ver `contenido/STATUS.md`) — no se está creando contenido nuevo ni gestionando campañas. Pendiente de mayor peso: construir `brand/nerine/` (Ljörk ya completo) y cerrar Campaña 1 antes de poder planificar Campaña 2.
 
+## `acl-recovery/`
+
+Directorio administrativo que conserva bitácoras y respaldos de descriptores de seguridad (ACL) del sistema de archivos NTFS en Windows. Ver [`acl-recovery/README.md`](../../../acl-recovery/README.md) para el detalle de respaldos y el script de rollback.
+
 ## Ver también
 
+- [[mapa-garoo|Mapa del Ecosistema Garoo / Redtec]]
 - [[../index|wiki/index.md — índice de esta bóveda]]
 - [[../interno/estado-proyecto|Estado del proyecto]]
 - [[../../raw/interno/2026-09-07-reestructuracion-carpeta-raiz-forjado|raw — historia completa de la reestructuración de la carpeta raíz FORJADO]]

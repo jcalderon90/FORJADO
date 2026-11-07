@@ -13,7 +13,8 @@ yarn-error.log*
 .claude/settings.local.json
 
 # Playwright MCP session artifacts (may contain sensitive client data)
-.playwright-mcp/
+.playwright-mcp/*
+!.playwright-mcp/README.md
 .playwright-cli/
 
 # Debug screenshots dropped in repo root by browser-automation sessions
@@ -22,4 +23,5 @@ yarn-error.log*
 # Temporary client inventory photos
 raw/**/inventario-fotos/
 
-scratch/
+scratch/*
+!scratch/README.md
