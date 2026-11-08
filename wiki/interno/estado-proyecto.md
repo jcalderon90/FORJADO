@@ -24,6 +24,9 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 
 ## Bóveda / herramientas internas
 
+- **11-07: Calibre (Suite de Control de Tiempo y Auditoría B2B) desplegado y 100% operativo en producción en Dokploy (Oracle VPS Ashburn)** — Configurados y desplegados exitosamente tanto el backend API (`calibre-backend`) como el frontend dashboard (`calibre-frontend`) dentro del swarm de Dokploy en el VPS Oracle (`129.213.108.102`):
+  - **Backend:** Node.js 22 + MongoDB Atlas + Cloudflare R2 (`calibre-screenshots`). Dominio SSL: `https://forjado-calibrebackend-ikw9yh-ed029b-129-213-108-102.sslip.io` (Healthcheck HTTP/2 200).
+  - **Frontend:** React 19 + Vite + Nginx Alpine. Dominio SSL: `https://forjado-calibrefrontend-qdevp9-774452-129-213-108-102.sslip.io`. Corregida anomalía de UTF-8 BOM en `package.json`, inyectado `VITE_API_URL` en CSP/Nginx y vinculado CORS bidireccional. Ambas aplicaciones con réplicas 1/1 activas. Documentado en [[productos/time-control]].
 - **09-07: reestructuración completa de la carpeta raíz `FORJADO/`** (varias pasadas en la misma sesión, ya cerrada). Estado final:
   ```
   FORJADO/
