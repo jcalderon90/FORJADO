@@ -1,12 +1,12 @@
 ---
 tags: [forjado, cliente, carwarriors, gohighlevel, automatizacion, automotive]
 tipo: cliente
-estado: activo
+estado: pausado
 servicio: automatizacion
-estado_comercial: migracion-arquitectura-en-curso
+estado_comercial: servicios-pausados-por-cliente
 contacto: Jorge González (dueño) / Bianca Cangialosi (marketing)
 creado: 2026-06-18
-actualizado: 2026-11-05
+actualizado: 2026-11-09
 fuente_raw: raw/clientes/carwarriors-llc/
 ---
 
@@ -24,7 +24,7 @@ fuente_raw: raw/clientes/carwarriors-llc/
 | **Decisor principal** | Jorge González |
 | **Contacto de marketing** | Bianca Cangialosi |
 | **Servicio FORJADO** | Automatización (n8n + GHL + ManyChat + DealerCenter) |
-| **Estado comercial** | Fase de pruebas activas — contrato se formaliza si las pruebas salen bien |
+| **Estado comercial** | **Pausado / Detenido** a petición de Jorge González (2026-11-09) |
 
 ## Stakeholders
 
@@ -48,6 +48,9 @@ fuente_raw: raw/clientes/carwarriors-llc/
 
 ## Arquitectura actual (resumen)
 
+> [!important] Sistemas Desactivados (2026-11-09)
+> Tras la notificación de congelación/pausa de servicios por parte de Jorge González, **se desactivaron y despublicaron todos los workflows de producción en n8n** (18 workflows apagados: bot PRINCIPAL CW, bot PRINCIPAL Rances Car, Subir a DealerCenter SFTP, Lead Sync, cadencias salientes 24h, comentarios ManyChat, reportes programados Slack y monitores). La infraestructura queda en reposo sin consumo de tokens ni ejecuciones automáticas.
+
 1. **Bot conversacional en n8n + OpenRouter** (deepseek-v4-flash), reemplazando el Conversation AI nativo de GHL — decidido 2026-08-12, en producción desde 2026-08-19 para ambos dealers (Carwarriors LLC y Rances Car). GHL sigue como CRM. Detalle: [[carwarriors-llc-arquitectura-migracion]].
 2. **Notificaciones → Slack** (canal `notificaciones`) + email de respaldo desde 2026-08-25. `SLACK - INBOUND` para DM/menciones.
 3. **Lead Sync GHL ↔ DealerCenter** en producción en ambas subcuentas (SFTP + ADF/XML). Chequeo de salud 2026-08-27: ambas direcciones sanas, confirmado con datos reales del mismo día (lead nuevo creado en GHL, dedupe evitando subir un lead repetido a DealerCenter), sin errores en la última semana.
@@ -57,7 +60,12 @@ Documentos de referencia relacionados: [[carwarriors-llc-infraestructura]] · [[
 
 ## Pendientes abiertos (al 2026-11-03)
 
-- [ ] **🟡 Estandarización de fotos en Cleverwave — SEGUNDO LOTE EN EJECUCIÓN Y BYPASS WAF DEALERCENTER (2026-11-03):** 
+- [x] **🟢 Estandarización de fotos en Cleverwave y carga en DealerCenter — 29 DE 32 VEHÍCULOS COMPLETADOS (90.6%) Y CONGELADO POR PAUSA DE SERVICIOS (2026-11-09):**
+  - *Balance consolidado:* 29 de 32 vehículos procesados con fondo institucional *"Car Warriors · Graffiti Garage"*, placas corporativas y portada frontal 3/4 en Pos #1 en DealerCenter.
+  - *Lote 1 (11 vehículos):* 100% completado y verificado en DealerCenter.
+  - *Lote 2 (11 vehículos):* 100% completado y verificado en DealerCenter.
+  - *Lote 3 (10 vehículos):* 7 completados en DealerCenter (`ND43063`, `N117374`, `ND64512`, `NC47730`, `N278625`, `N108736`, `N560770`). 3 restantes congelados en local (`N036430`, `N503769`, `N143102`) tras la notificación de Jorge González de suspender labores.
+  - *Detalle:* [[../../raw/clientes/carwarriors-llc/2026-11-09-cierre-y-pausa-servicios-carwarriors|raw/2026-11-09]]. 
   - *Piloto completado (02-nov):* *2023 Alfa Romeo Stelvio* (`ND56867`) 25 fotos procesadas y paquete ZIP descargado (`54.3 MB`).
   - *Lote actual en proceso:* *2024 Hyundai Tucson Limited* (Stock `R300375`, VIN `5NMJECDE4RH300375`).
   - *Infraestructura de automatización:* Superado bloqueo de red/WAF de DealerCenter (`ERR_CONNECTION_TIMED_OUT`) mediante enrutamiento por túnel dinámico SOCKS5 a través del VPS (`ssh -N -D 1080 carwarriors-vps`). Navegador Chrome automatizado por CDP (`--remote-debugging-port=9222`) con sesiones autenticadas en DealerCenter y Cleverwave Studio, listo para descarga de fotos de stock y renderizado en *Graffiti Garage*. Detalle: [[../../raw/clientes/carwarriors-llc/2026-11-03-estandarizacion-fotos-cleverwave-bypass-waf-dealercenter|raw/2026-11-03]].

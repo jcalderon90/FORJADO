@@ -3,7 +3,7 @@ tags: [forjado, ventas, pipeline, moc]
 tipo: moc
 estado: activo
 creado: 2026-06-17
-actualizado: 2026-08-15
+actualizado: 2026-11-10
 ---
 
 # Pipeline de Ventas — FORJADO
@@ -28,7 +28,8 @@ actualizado: 2026-08-15
 
 | Cliente | Servicio | Etapa | Valor estimado | Próximo paso |
 |---|---|---|---|---|
-| Carwarriors LLC | Automatización + IA (bot n8n + OpenRouter, Lead Sync GHL↔DealerCenter) | Propuesta | _(por formalizar)_ | Cargar saldo en OpenRouter + entregar KB real y fotos de inventario para ir a producción |
+| All Print | Calibre PRO (Control Horario y Auditoría) | Activo (Piloto 60d) | $4/usuario/mes (~$40-$60/mes) | Despliegue de Calibre-Setup-1.2.9.exe y alta de organización en Cienfuegos; ver [[../../clientes/all-print]] |
+| Carwarriors LLC | Automatización + IA (bot n8n + OpenRouter, Lead Sync GHL↔DealerCenter) | Perdido (pausa del cliente, 2026-11-09) | $200/mes (perdido) | Decidir si se pausan bot, sync SFTP y alertas; exportar respaldo de MongoDB; ver [[../../clientes/carwarriors-llc]] |
 | Varela Law | Automatización n8n (Radar Billing MyCase → Sheets) | Activo | $80/mes | Enviar mensaje a Mario + confirmar 4 clientes pendientes de ID MAP |
 | Rogers México | Automatización + IA (Bot WhatsApp calificador CP + Agenda CDMX) | Propuesta | _(por cotizar)_ | Llamada de 10 min para alinear Fase 1 y acordar fee |
 
