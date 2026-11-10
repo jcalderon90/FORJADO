@@ -2,7 +2,7 @@
 tags: [forjado, estado, pendientes, dashboard]
 tipo: estado
 estado: activo
-actualizado: 2026-11-09
+actualizado: 2026-11-10
 fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 ---
 
@@ -24,6 +24,8 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 | **Pipeline / prospección** | Ver [[../ventas/pipeline]] | 2026-09-21 |
 
 ## Bóveda / herramientas internas
+
+- **11-10: Ingeniería inversa integral de Cleverwave y extracción de arquitectura SaaS** — Se completó la auditoría técnica profunda de `carwarriors-dev.cleverwave.ai` utilizando Chrome DevTools MCP y la skill REA (`reverse-engineer-anything`). Se extrajo y respaldó la topología AWS Amplify Gen 2 completa (AppSync GraphQL, Cognito User Pool, Lambdas backend y S3), el pipeline del módulo *Car Studio IA* (clasificación de 12 ángulos, mapas de suelo *Scenery*, sombras de contacto y homografía 2D de matrículas), el algoritmo de subasta *Buy-Box* y el optimizador financiero *F&I Desk Target Solver* (5 palancas heurísticas para cuota fija). Todos los bundles JS originales, esquemas y muestras de proyectos fueron guardados en `raw/clientes/carwarriors-llc/cleverwave-dump/` y documentados en [[tecnologia/cleverwave-reverse-engineering/cleverwave-blueprint|wiki/interno/tecnologia/cleverwave-reverse-engineering/cleverwave-blueprint.md]] para la construcción de la plataforma propia de FORJADO. Sincronizado a GitHub `origin/main`.
 
 - **11-07: Calibre (Suite de Control de Tiempo y Auditoría B2B) desplegado y 100% operativo en producción en Dokploy (Oracle VPS Ashburn)** — Configurados y desplegados exitosamente tanto el backend API (`calibre-backend`) como el frontend dashboard (`calibre-frontend`) dentro del swarm de Dokploy en el VPS Oracle (`129.213.108.102`):
   - **Backend:** Node.js 22 + MongoDB Atlas + Cloudflare R2 (`calibre-screenshots`). Dominio SSL: `https://forjado-calibrebackend-ikw9yh-ed029b-129-213-108-102.sslip.io` (Healthcheck HTTP/2 200).
