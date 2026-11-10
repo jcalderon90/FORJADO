@@ -22,6 +22,7 @@ actualizado: 2026-11-07
 
 | Página | Descripción |
 |---|---|
+| [[clientes/all-print]] | All Print (Mipyme Cienfuegos, Cuba) — Cliente Piloto #1 de Calibre: 60 días bonificados y tarifa fundador $4.00 USD/usuario/mes en efectivo |
 | [[clientes/callacar]] | CallaCar Transportation Pty Ltd (Marketplace de transporte AU) — estado actual, alcance web y pendientes abiertos |
 | [[clientes/garoo-redtec]] | Garoo / Redtec (`redtec.ai`) — stack de IA avanzada, bots para videollamadas con Recall.ai y hosting de modelos en GPUs con Baseten |
 | [[clientes/carwarriors-llc]] | Car dealer Miami (3 subcuentas GHL) — estado actual, accesos, pendientes abiertos |
@@ -68,6 +69,8 @@ actualizado: 2026-11-07
 | Página | Descripción |
 |---|---|
 | [[interno/ventas/pipeline]] | Tablero de pipeline de ventas |
+| [[interno/ventas/pack-inmobiliario]] | Oferta retainer $250/mes para inmobiliarias nuevas de habla hispana |
+| [[interno/ventas/prospeccion-hispanoamerica]] | Plan de prospección en Hispanoamérica adaptando el patrón de AI Job Search |
 | [[interno/operaciones/procesos-y-entrega]] | Flujo Onboarding → Ejecución → Entrega → Cierre |
 | [[interno/operaciones/herramientas-y-stack]] | Stack técnico completo de FORJADO |
 | [[interno/operaciones/wireguard-vpn]] | Infraestructura y gestión de túneles VPN WireGuard (wg-easy) |

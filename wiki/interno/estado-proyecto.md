@@ -2,7 +2,7 @@
 tags: [forjado, estado, pendientes, dashboard]
 tipo: estado
 estado: activo
-actualizado: 2026-11-07
+actualizado: 2026-11-09
 fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 ---
 
@@ -15,9 +15,10 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 
 | Cliente | Estado | Última actividad |
 |---|---|---|
-| **Garoo / Redtec** | **🟢 10-30: Arquitectura de motores de voz (Kokoro TTS vs OmniVoice) y matriz de hosting (Hostinger CPU vs Baseten GPU).** Definida estrategia dual: Kokoro TTS en Docker local para síntesis rápida sin coste marginal (<1.5s) y OmniVoice en Baseten (Truss) para clonación zero-shot y personalidades sintéticas hacia Recall.ai. Documentado en [[../clientes/garoo-redtec]]. | 2026-10-30 |
+| **Calibre (Time Control)** | **🟢 11-10: Onboarding del Cliente Piloto #1 (All Print, Cienfuegos).** Definido modelo de pricing B2B público (Trial 14d, Basic $4.99, Pro $8.99, Advanced $14.99). Acordado despliegue piloto bonificado de 60 días en Plan Pro para All Print con tarifa preferencial de $4.00 USD/usuario en efectivo mensual a partir del mes 3. Backend, Frontend y R2 operativos en Dokploy (`129.213.108.102`). Detalle: [[../clientes/all-print]] y [[productos/time-control]]. | 2026-11-10 |
+| **All Print** | **🟢 11-10: Cliente Piloto #1 de Calibre activado (Mipyme Cienfuegos, Cuba).** Despliegue de 60 días bonificados al 100% en Plan PRO completo. Tarifa preferencial de socio fundador de $4.00 USD/usuario activo al mes liquidable en efectivo a mes vencido. Documentación corporativa B2B generada en PDF y Markdown. Detalle completo: [[../clientes/all-print]]. | 2026-11-10 |
+| **Carwarriors LLC** | **⏸️ 11-09: Servicios pausados a solicitud del cliente y sistemas apagados.** Despublicados y desactivados los 18 workflows de producción en n8n (`n8n-carwarriors`). 0 consumo de tokens ni peticiones SFTP. Estandarización de fotos en DealerCenter congelada con balance final de 29 de 32 vehículos completados (90.6%). Detalle completo: [[../clientes/carwarriors-llc]]. | 2026-11-09 |
 | **Callacar** | **🟢 11-05: Auditoría de diseño Impeccable completada y nuevo Cotizador Realista de Tarifas en Adelaide desplegado en `main` (`d651222`).** Eliminado el antiguo HUD ciberpunk/sci-fi; implementado cotizador interactivo con 4 tipos de carga, 4 rutas locales de Adelaide, recomendación de vehículos y animación fluida con Number Ticker (0 KB runtime). Corregidos contrastes WCAG AA en CTAs y avatares, y áreas táctiles elevadas a 12px. Subido a GitHub `origin/main`. Detalle completo: [[../clientes/callacar]]. | 2026-11-05 |
-| **Carwarriors LLC** | **🟢 11-05: Estandarización fotográfica institucional completa en DealerCenter (22 vehículos).** Procesamiento en Cleverwave Studio con fondo institucional *"Car Warriors · Graffiti Garage"* y chapas personalizadas. 22 vehículos en estado "LISTO VENTA" (Batch 1: 12 unidades + Batch 2: 10 unidades) actualizados en DealerCenter con purga de fotos legacy, ordenación garantizada y portada front 3/4 estrictamente en posición #1. Validaciones previas de producción (reporte mensual retail a Slack `#15925`, sync leads WhatsApp y bypass WAF) 100% operativas. Detalle completo: [[../clientes/carwarriors-llc]]. | 2026-11-05 |
 | **Varela Law** | **🟢 11-05: Publicada en producción la Agenda en hora Central (Chicago).** Mario reportó en Slack `#reports` que los eventos salían con `(Miami time)`. Se diagnosticó que el fix de `America/Chicago` y etiqueta `(Central time)` estaba guardado en borrador desde el 10-19 pero sin publicar. Se ejecutó `publish_workflow` vía MCP (`4QsJaKlmHDhkVtBV`, versión activa `af2131eb`). A partir de la próxima corrida (7 AM Central) saldrá con la hora local de Texas. Zaps de Texto y doble verificación de Zelle siguen estables. Detalle completo: [[../clientes/varela-law]]. | 2026-11-05 |
 | **Rogers México** | **🟡 09-21: Propuesta en 3 fases estructurada a partir de notas de voz de Rogers.** Enfoque inicial en Fase 1 (bot WhatsApp calificador de CP + agenda de visitas en CDMX). Pendiente llamada de alineación de 10 min. Detalle completo: [[../clientes/rogers-mexico]]. | 2026-09-21 |
 | **Pipeline / prospección** | Ver [[../ventas/pipeline]] | 2026-09-21 |

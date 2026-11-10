@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Propuesta Corporativa B2B — Calibre (by FORJADO)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+    @page {
+      size: A4 portrait;
+      margin: 14mm 16mm 14mm 16mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #1e293b;
+      background: #ffffff;
+      line-height: 1.48;
+      font-size: 12.5px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      page-break-after: always;
+      position: relative;
+      padding-bottom: 20px;
+    }
+
+    .page:last-child {
+      page-break-after: avoid;
+    }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 14px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 16px;
+    }
+
+    .brand-title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #0f172a;
+    }
+
+    .brand-title span {
+      color: #e85d04;
+    }
+
+    .brand-sub {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-top: 2px;
+    }
+
+    .doc-meta {
+      text-align: right;
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    .badge-pill {
+      display: inline-block;
+      padding: 3px 9px;
+      background: #eff6ff;
+      color: #2563eb;
+      border: 1px solid #bfdbfe;
+      border-radius: 9999px;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    h1 {
+      font-size: 19px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 3px;
+      letter-spacing: -0.3px;
+    }
+
+    .subtitle {
+      font-size: 12px;
+      color: #475569;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-top: 16px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    h2::before {
+      content: "";
+      display: inline-block;
+      width: 4px;
+      height: 15px;
+      background: #e85d04;
+      border-radius: 2px;
+    }
+
+    h3 {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+
+    p {
+      margin-bottom: 8px;
+      color: #334155;
+      text-align: justify;
+    }
+
+    .program-banner {
+      display: flex;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      margin: 12px 0;
+      overflow: hidden;
+    }
+
+    .banner-col {
+      flex: 1;
+      padding: 12px 14px;
+    }
+
+    .banner-col:first-child {
+      border-right: 1px solid #cbd5e1;
+      background: #f0fdf4;
+    }
+
+    .banner-tag {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 3px;
+    }
+
+    .banner-tag.green { color: #16a34a; }
+    .banner-tag.blue { color: #2563eb; }
+
+    .banner-main {
+      font-size: 14px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 3px;
+    }
+
+    .banner-desc {
+      font-size: 11px;
+      color: #475569;
+      line-height: 1.4;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 10px 12px;
+    }
+
+    .card-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .card-body {
+      font-size: 11.5px;
+      color: #475569;
+      line-height: 1.42;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      margin-bottom: 14px;
+      font-size: 11.5px;
+    }
+
+    th {
+      background: #0f172a;
+      color: #ffffff;
+      font-weight: 600;
+      text-align: left;
+      padding: 7px 9px;
+      font-size: 11px;
+      letter-spacing: 0.3px;
+    }
+
+    th:first-child { border-top-left-radius: 5px; }
+    th:last-child { border-top-right-radius: 5px; }
+
+    td {
+      padding: 7px 9px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #334155;
+      vertical-align: middle;
+    }
+
+    tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    .tag-red {
+      display: inline-block;
+      padding: 2px 6px;
+      background: #fef2f2;
+      color: #dc2626;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .tag-green {
+      display: inline-block;
+      padding: 2px 6px;
+      background: #ecfdf5;
+      color: #059669;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .roi-box {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 12px 0;
+    }
+
+    .roi-box h3 {
+      color: #f8fafc;
+      font-size: 13px;
+      margin-top: 0;
+      margin-bottom: 4px;
+    }
+
+    .roi-box p {
+      color: #cbd5e1;
+      font-size: 11.5px;
+      line-height: 1.45;
+      margin-bottom: 0;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin: 10px 0 14px 0;
+    }
+
+    .step-item {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-top: 3px solid #e85d04;
+      border-radius: 6px;
+      padding: 9px;
+      font-size: 11px;
+    }
+
+    .step-badge {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #e85d04;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .step-name {
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 3px;
+      font-size: 11.5px;
+    }
+
+    .step-desc {
+      color: #475569;
+      line-height: 1.35;
+    }
+
+    .footer {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: #64748b;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PÁGINA 1: CONTEXTO, ALIANZA Y CONDICIONES DETALLADAS -->
+  <div class="page">
+    <div class="header">
+      <div>
+        <div class="brand-title">FORJADO<span>.</span></div>
+        <div class="brand-sub">Enterprise Software & Engineering</div>
+      </div>
+      <div class="doc-meta">
+        <div class="badge-pill">Programa Early Adopter</div>
+        <div>Ref: <strong>PROP-CAL-2026-B2B</strong></div>
+        <div>Vigencia: <strong>Marzo — Junio 2026</strong></div>
+      </div>
+    </div>
+
+    <h1>Propuesta Corporativa — Suite Calibre</h1>
+    <div class="subtitle">Despliegue Integral de Control Horario, Evidencia Visual y Auditoría de Productividad</div>
+
+    <h2>1. Contexto Estratégico y Propósito del Programa</h2>
+    <p>En el entorno corporativo actual, la gestión de equipos de alto rendimiento enfrenta un desafío primordial: <strong>la pérdida de visibilidad operativa</strong>. Frecuentemente, las direcciones de operaciones y líderes de proyectos carecen de datos objetivos sobre en qué tareas específicas se invierten las horas laborales, qué proporción del tiempo se diluye en dispersión digital y si los presupuestos facturados a clientes corresponden con el esfuerzo real del equipo.</p>
+    <p>Las plataformas convencionales del mercado global (como Time Doctor o Hubstaff) imponen barreras prohibitivas: costos de suscripción elevados con cobros mínimos forzados, requerimiento de tarjetas de crédito extranjeras y arquitecturas rígidas que fallan ante latencias o micro-cortes de red. Para resolver esto, <strong>FORJADO</strong> acerca su <strong>Programa de Expansión Regional & Adopción Temprana</strong>, permitiendo a su empresa validar la suite <strong>Calibre</strong> sin costo durante 60 días y garantizar una tarifa congelada para el largo plazo.</p>
+
+    <h2>2. Estructura y Condiciones del Programa</h2>
+    <div class="program-banner">
+      <div class="banner-col">
+        <div class="banner-tag green">Mes 1 &amp; Mes 2 (60 Días)</div>
+        <div class="banner-main">Despliegue Piloto 100% Bonificado ($0.00)</div>
+        <div class="banner-desc">Acceso corporativo total al Plan PRO para todo su personal. Sin costo, sin compromisos y sin requerir tarjetas bancarias.</div>
+      </div>
+      <div class="banner-col">
+        <div class="banner-tag blue">Mes 3 en adelante</div>
+        <div class="banner-main">Tarifa Socio Fundador: $4.00 USD / usuario / mes</div>
+        <div class="banner-desc">Tarifa fija preferencial de por vida, liquidable mensualmente en efectivo a través de representante regional autorizado.</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">🚀 2.1. Despliegue Piloto de 60 Días</div>
+        <div class="card-body">
+          Su organización dispondrá de <strong>todas las capacidades avanzadas</strong> de Calibre (cronometraje por proyectos, capturas de pantalla, turnos, análisis de aplicaciones/webs y liquidación de nóminas). Incluye acompañamiento técnico en la puesta en marcha. Si al finalizar el plazo decide no continuar, la cuenta se cierra sin ninguna penalidad ni costo.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">💎 2.2. Tarifa Preferencial de Socio Fundador</div>
+        <div class="card-body">
+          A partir del mes 3, su empresa accede a una tarifa congelada de <strong>$4.00 USD por usuario al mes</strong> (más de 55% de ahorro frente a los $8.99 USD de lista oficial). Esta tarifa queda blindada contractualmente contra futuras subidas de precio mientras conserve la suscripción activa.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">📊 2.3. Facturación Elástica por Usuarios Reales</div>
+        <div class="card-body">
+          A diferencia de otros proveedores que obligan a contratar paquetes mínimos cerrados o compromisos anuales forzosos, con Calibre <strong>solo paga por los empleados que registren actividad real</strong> en el mes. Si su equipo disminuye de 8 a 6 personas, su cobro baja de inmediato.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">💵 2.4. Liquidación Directa en Efectivo</div>
+        <div class="card-body">
+          Para máxima comodidad, la liquidación se efectúa a mes vencido en <strong>efectivo (en USD o contravalor en moneda local convenida)</strong> mediante nuestro <strong>representante regional asignado</strong>, eliminando trabas de pasarelas extranjeras y comisiones bancarias.
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div><strong>FORJADO Agency</strong> &bull; Enterprise Software &amp; Cloud Systems</div>
+      <div>Página 1 de 3 &bull; Propuesta B2B Calibre</div>
+    </div>
+  </div>
+
+  <!-- PÁGINA 2: COMPARATIVA TÉCNICA DETALLADA VS TIME DOCTOR Y SIMULACIÓN FINANCIERA -->
+  <div class="page">
+    <div class="header">
+      <div>
+        <div class="brand-title">FORJADO<span>.</span></div>
+        <div class="brand-sub">Análisis Técnico y Comparativo de Plataformas</div>
+      </div>
+      <div class="doc-meta">
+        <div>Ref: <strong>PROP-CAL-2026-B2B</strong></div>
+        <div>Módulo: <strong>Benchmarking vs. Time Doctor</strong></div>
+      </div>
+    </div>
+
+    <h2>3. Análisis Exhaustivo: Calibre vs. Time Doctor</h2>
+    <p>A continuación se detallan las razones técnicas y operativas por las cuales Calibre supera el estándar convencional del mercado:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 25%;">Dimensión de Evaluación</th>
+          <th style="width: 35%;">Time Doctor (Standard / Premium)</th>
+          <th style="width: 40%;">Calibre (Programa Early Adopter)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Costo por Colaborador</strong></td>
+          <td><span class="tag-red">$10.00 a $20.00 USD</span> / usuario / mes</td>
+          <td><span class="tag-green">$4.00 USD / usuario / mes</span> (Ahorro > 60%)</td>
+        </tr>
+        <tr>
+          <td><strong>Duración de la Prueba</strong></td>
+          <td>14 días limitados (insuficiente para evaluar)</td>
+          <td><strong>60 días completos (2 meses)</strong> con acceso PRO total</td>
+        </tr>
+        <tr>
+          <td><strong>Canal de Facturación</strong></td>
+          <td>Exclusivamente tarjetas de crédito corporativas</td>
+          <td><strong>Efectivo directo / liquidación local autorizada</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Resiliencia de Conexión</strong></td>
+          <td>Dependiente de enlace continuo; suele pausar ante latencias</td>
+          <td><strong>Motor Nativo Offline-First:</strong> Almacena en disco local y sincroniza en segundo plano al restablecerse la red</td>
+        </tr>
+        <tr>
+          <td><strong>Evidencia Visual (Capturas)</strong></td>
+          <td>Sin capturas en Basic ($7); 1 c/ 9 min en Standard ($10)</td>
+          <td><strong>Intervalos configurables (3, 5 o 10 min)</strong> con algoritmo de difuminado (*blur*) de privacidad</td>
+        </tr>
+        <tr>
+          <td><strong>Rendimiento en Computadora</strong></td>
+          <td>Cliente pesado (~300 MB RAM) con impacto en CPU</td>
+          <td><strong>Cliente ultra-optimizado:</strong> Consumo mínimo de recursos, imperceptible para el usuario</td>
+        </tr>
+        <tr>
+          <td><strong>Auditoría de Apps y Sitios Web</strong></td>
+          <td>Solo en planes de $10+ con clasificación rígida</td>
+          <td><strong>Clasificación Inteligente:</strong> Distinción clara entre software productivo, neutro y ocio</td>
+        </tr>
+        <tr>
+          <td><strong>Cálculo de Nóminas (Payroll)</strong></td>
+          <td>Requiere integraciones de terceros de pago adicional</td>
+          <td><strong>Módulo Nativo Integrado:</strong> Liquidación automática de pagos multiplicando horas por tarifa horaria</td>
+        </tr>
+        <tr>
+          <td><strong>Atención y Soporte Técnico</strong></td>
+          <td>Soporte en inglés por tickets (demoras de 24 a 48h)</td>
+          <td><strong>Atención preferencial directa en español</strong> con canal prioritario y acompañamiento técnico dedicado</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>4. Proyección Financiera y Simulación de Ahorro</h2>
+    <p>Comparación del costo directo a partir del tercer mes de operación (meses 1 y 2 con Calibre a costo $0.00):</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Colaboradores Activos</th>
+          <th>Time Doctor Standard</th>
+          <th>Calibre Preferencial</th>
+          <th>Ahorro Mensual Directo</th>
+          <th>Ahorro Anual Proyectado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>4 colaboradores</strong></td>
+          <td>$40.00 USD / mes</td>
+          <td><strong style="color: #059669;">$16.00 USD / mes</strong></td>
+          <td>$24.00 USD</td>
+          <td><strong>$288.00 USD / año</strong></td>
+        </tr>
+        <tr>
+          <td><strong>6 colaboradores</strong></td>
+          <td>$60.00 USD / mes</td>
+          <td><strong style="color: #059669;">$24.00 USD / mes</strong></td>
+          <td>$36.00 USD</td>
+          <td><strong>$432.00 USD / año</strong></td>
+        </tr>
+        <tr>
+          <td><strong>8 colaboradores</strong></td>
+          <td>$80.00 USD / mes</td>
+          <td><strong style="color: #059669;">$32.00 USD / mes</strong></td>
+          <td>$48.00 USD</td>
+          <td><strong>$576.00 USD / año</strong></td>
+        </tr>
+        <tr>
+          <td><strong>10 colaboradores</strong></td>
+          <td>$100.00 USD / mes</td>
+          <td><strong style="color: #059669;">$40.00 USD / mes</strong></td>
+          <td>$60.00 USD</td>
+          <td><strong>$720.00 USD / año</strong></td>
+        </tr>
+        <tr>
+          <td><strong>15 colaboradores</strong></td>
+          <td>$150.00 USD / mes</td>
+          <td><strong style="color: #059669;">$60.00 USD / mes</strong></td>
+          <td>$90.00 USD</td>
+          <td><strong>$1,080.00 USD / año</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="footer">
+      <div><strong>FORJADO Agency</strong> &bull; Enterprise Software &amp; Cloud Systems</div>
+      <div>Página 2 de 3 &bull; Propuesta B2B Calibre</div>
+    </div>
+  </div>
+
+  <!-- PÁGINA 3: ROI, FASES DE IMPLEMENTACIÓN, SEGURIDAD Y CIERRE -->
+  <div class="page">
+    <div class="header">
+      <div>
+        <div class="brand-title">FORJADO<span>.</span></div>
+        <div class="brand-sub">Retorno de Inversión y Plan de Puesta en Marcha</div>
+      </div>
+      <div class="doc-meta">
+        <div>Ref: <strong>PROP-CAL-2026-B2B</strong></div>
+        <div>Módulo: <strong>Ejecución y Seguridad</strong></div>
+      </div>
+    </div>
+
+    <h2>5. Justificación Financiera y Retorno de Inversión (ROI)</h2>
+    <div class="roi-box">
+      <h3>📈 Análisis de Rendimiento Financiero</h3>
+      <p>Diversos estudios de eficiencia operativa constatan que la dispersión digital y pausas no justificadas consumen entre <strong>1.5 y 2.5 horas diarias</strong> por trabajador de oficina o remoto. Tomando como base un costo horario conservador de <strong>$1.50 USD/hora</strong>:</p>
+      <p style="margin-top: 6px;">Recuperar tan solo <strong>30 minutos diarios de tiempo productivo</strong> por empleado genera un valor recuperado de <strong>$18.00 USD mensuales por puesto</strong>. Frente a una inversión de apenas <strong>$4.00 USD mensuales</strong>, Calibre produce un <strong>retorno de inversión neto superior al 350%</strong>, autofinanciando el sistema desde las primeras semanas de adopción.</p>
+    </div>
+
+    <h2>6. Hoja de Ruta de Implementación (Paso a Paso)</h2>
+    <div class="steps-grid">
+      <div class="step-item">
+        <div class="step-badge">Fase 1</div>
+        <div class="step-name">Despliegue Inicial</div>
+        <div class="step-desc"><strong>Días 1 a 3:</strong> Alta de la empresa en la consola web, configuración de departamentos/proyectos e instalación del cliente en Windows.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-badge">Fase 2</div>
+        <div class="step-name">Piloto Bonificado</div>
+        <div class="step-desc"><strong>Días 4 a 50:</strong> Cronometraje activo, recolección automatizada de evidencia visual y reportes analíticos con costo $0.00.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-badge">Fase 3</div>
+        <div class="step-name">Balance Ejecutivo</div>
+        <div class="step-desc"><strong>Días 50 a 60:</strong> Auditoría conjunta de métricas, análisis de rentabilidad y confirmación de puestos que continúan al servicio regular.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-badge">Fase 4</div>
+        <div class="step-name">Consolidación</div>
+        <div class="step-desc"><strong>Mes 3 en adelante:</strong> Servicio activo bajo tarifa de $4.00 USD/usuario con cobro mensual en efectivo y soporte prioritario en español.</div>
+      </div>
+    </div>
+
+    <h2>7. Estándares de Privacidad y Seguridad Corporativa</h2>
+    <p>Calibre opera bajo principios estrictos de resguardo y privacidad de datos:</p>
+    <ul style="margin-left: 18px; margin-bottom: 12px; font-size: 11.5px; color: #334155;">
+      <li style="margin-bottom: 4px;"><strong>Aislamiento de Información (Multi-Tenant Seguro):</strong> La información, capturas y métricas de su empresa están estrictamente aisladas de otras cuentas en bases de datos con cifrado integral.</li>
+      <li style="margin-bottom: 4px;"><strong>Transmisión Cifrada de Extremo a Extremo:</strong> Toda la telemetría y evidencia visual viaja mediante protocolos seguros TLS/HTTPS.</li>
+      <li style="margin-bottom: 4px;"><strong>Tecnología Privacy Blur:</strong> Posibilidad de difuminar capturas para puestos contables, financieros o con acceso a claves privadas, garantizando la supervisión del avance sin comprometer datos confidenciales.</li>
+    </ul>
+
+    <div style="background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 6px; padding: 12px; margin-top: 14px;">
+      <div style="font-weight: 700; color: #0f172a; margin-bottom: 3px;">¿Cómo iniciar el Despliegue del Piloto de 60 Días?</div>
+      <div style="font-size: 11.5px; color: #475569;">
+        Únicamente requerimos el <strong>nombre de su organización</strong> y el <strong>correo corporativo del administrador principal</strong>. Nuestro equipo habilitará su espacio de trabajo en Calibre de forma inmediata.
+      </div>
+    </div>
+
+    <div class="footer">
+      <div><strong>FORJADO Agency</strong> &bull; Enterprise Software &amp; Cloud Systems</div>
+      <div>Página 3 de 3 &bull; Propuesta B2B Calibre</div>
+    </div>
+  </div>
+
+</body>
+</html>
