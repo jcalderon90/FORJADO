@@ -2,7 +2,7 @@
 tags: [forjado, estado, pendientes, dashboard]
 tipo: estado
 estado: activo
-actualizado: 2026-11-10
+actualizado: 2026-11-11
 fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 ---
 
@@ -24,6 +24,8 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 | **Pipeline / prospección** | Ver [[../ventas/pipeline]] | 2026-09-21 |
 
 ## Bóveda / herramientas internas
+
+- **11-11: Auditoría de estado y alineación de ciclo de vida de producto (Calibre & All Print)** — Consolidación ejecutiva del estado general de FORJADO. Calibre (Time Control) entra en fase crítica de validación y retención tras onboarding del Cliente Piloto #1 (All Print). Prioridades P0 fijadas en acompañamiento en producción, monitoreo de capturas a R2 y compilación del instalador Windows. Estado de clientes externos verificado (Carwarriors pausado con 0 consumo, Varela Law y Callacar estables en producción). Actualizado mapa operativo y prioridades de negocio.
 
 - **11-10: Ingeniería inversa integral de Cleverwave y extracción de arquitectura SaaS** — Se completó la auditoría técnica profunda de `carwarriors-dev.cleverwave.ai` utilizando Chrome DevTools MCP y la skill REA (`reverse-engineer-anything`). Se extrajo y respaldó la topología AWS Amplify Gen 2 completa (AppSync GraphQL, Cognito User Pool, Lambdas backend y S3), el pipeline del módulo *Car Studio IA* (clasificación de 12 ángulos, mapas de suelo *Scenery*, sombras de contacto y homografía 2D de matrículas), el algoritmo de subasta *Buy-Box* y el optimizador financiero *F&I Desk Target Solver* (5 palancas heurísticas para cuota fija). Todos los bundles JS originales, esquemas y muestras de proyectos fueron guardados en `raw/clientes/carwarriors-llc/cleverwave-dump/` y documentados en [[tecnologia/cleverwave-reverse-engineering/cleverwave-blueprint|wiki/interno/tecnologia/cleverwave-reverse-engineering/cleverwave-blueprint.md]] para la construcción de la plataforma propia de FORJADO. Sincronizado a GitHub `origin/main`.
 
