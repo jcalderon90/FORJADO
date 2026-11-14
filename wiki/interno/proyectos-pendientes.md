@@ -4,7 +4,7 @@ tipo: proyecto
 estado: activo
 servicio: desarrollo-de-software
 creado: 2026-10-05
-actualizado: 2026-11-04
+actualizado: 2026-11-14
 fuente_raw: raw/interno/2026-10-05-proyectos-pendientes-barberias-y-callacar-cuba-y-revision-vitrina
 ---
 
@@ -15,8 +15,8 @@ fuente_raw: raw/interno/2026-10-05-proyectos-pendientes-barberias-y-callacar-cub
 
 | # | Producto | Estado | Dónde |
 |---|---|---|---|
-| 1 | **Vitrina** | 🟡 En desarrollo, MVP sin completar | `aplicaciones/forjado/vitrina/` |
-| 2 | **Time Control** | 🟡 En transición / Adaptación a FORJADO | `aplicaciones/forjado/time-control/` (3 repos) |
+| 1 | **Vitrina** | 🟡 En desarrollo avanzado (360 tests OK, lógica de pedidos/stock/gestores/planes integrada y pusheada a `main`) | `aplicaciones/forjado/vitrina/` |
+| 2 | **Time Control** | 🟢 En producción (Calibre) — Dokploy + R2 activos, Piloto #1 activo (All Print) | `aplicaciones/forjado/time-control/` (3 repos) |
 | 3 | **App para barberías y peluquerías** | ⬜ Por desarrollar (solo idea) | sin repo |
 | 4 | **App de transporte en triciclos eléctricos para Cuba** | ⬜ Por desarrollar (solo idea) | sin repo |
 | 5 | **App para gestores de ventas de casas en Cuba** | ⬜ Por desarrollar (solo idea) | sin repo |
@@ -28,23 +28,26 @@ Prioridad activa: Vitrina y adaptación de Time Control; los productos 3 al 6 pe
 
 Vitrina digital + directorio + contacto directo para mypimes y particulares de Cienfuegos (Cuba). Dos repos (`vitrina-backend`, `vitrina-frontend`). Fuente de verdad: `aplicaciones/forjado/vitrina/vitrina-backend/docs/PLAN_DESARROLLO.md` (secciones 11 y 16 = estado y próximos pasos). Ficha en [[mapa-forjado]].
 
-Verificado el 2026-10-05: backend con typecheck y lint limpios y 220 tests pasando; frontend con lint, typecheck y build limpios tras revertir un cambio accidental que bajaba Astro de 7 a 2.10.9 y limpiar 25 errores de lint (cambios sin commit; detalle en [[../../raw/interno/2026-10-05-proyectos-pendientes-barberias-y-callacar-cuba-y-revision-vitrina|raw]]).
+Verificado el 2026-11-14: backend con `lint` y `typecheck` limpios y **360 tests pasando (23 suites)**; frontend con `lint`, `typecheck` (**73 archivos, 0 errores**) y `build` limpios tras auditar y ampliar categorías (+5 giros cubanos), unidades (+6), precios `"A consultar"`, integración de pedidos con catálogo/stock/comisiones de gestores y persistencia de `aiAddon` en planes (pusheado a `main` en `vitrina-backend` `9082008` y `vitrina-frontend` `930da87`; detalle en [[../../raw/interno/2026-11-14-vitrina-auditoria-logica-negocio-categorias-unidades|raw (2026-11-14)]]).
 
-- [x] ~~Revertir el cambio accidental de dependencias del frontend y limpiar el lint~~ — hecho 2026-10-05, sin commit.
-- [ ] Revisar, commitear y desplegar el multi-negocio por cuenta (hasta 3 negocios, rutas por slug), hoy solo en el árbol de trabajo.
-- [ ] Primera copia de seguridad real y ensayo de restauración (destino sin decidir).
-- [ ] Dominio definitivo, pruebas con móvil real y datos de ETECSA, revisión legal local.
+- [x] ~~Revertir el cambio accidental de dependencias del frontend y limpiar el lint~~ — hecho 2026-10-05.
+- [x] ~~Módulo de gestores con comisión e inventario conectado al flujo de pedidos~~ — integrado en `orderService` (`stockQty`, `StockMovementModel`, `SaleModel`) el 2026-11-14.
+- [x] ~~Hacer `commit` y `push` de las mejoras de lógica de negocio del 2026-11-14 en `vitrina-backend` y `vitrina-frontend`.~~ — pusheado a `main` (`9082008` y `930da87`).
+- [ ] Configurar secrets de firma Android en `vitrina-frontend` (`ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_PASSWORD`).
+- [ ] Primera copia de seguridad real de MongoDB Atlas y ensayo de restauración.
+- [ ] Dominio definitivo HTTPS, pruebas con móvil real y datos de ETECSA, revisión legal local.
 - [ ] Fase 0 de negocio: entrevistas con 8–10 negocios de Cienfuegos y análisis de competidores.
-- [ ] Definir antes de construir: feed, gestores con comisión, ofertas de trabajo (secciones 20.1–20.4 del plan).
+- [ ] Definir antes de construir: feed y ofertas de trabajo (secciones 20.1 y 20.4 del plan).
 
-## 2. Time Control (en transición / adaptación a FORJADO)
+## 2. Time Control / Calibre (en producción — Piloto #1 activo)
 
-Suite empresarial de control horario, monitoreo de productividad y liquidación de nóminas (clon tipo Time Doctor). Desarrollada originalmente para un cliente corporativo (`Home Las Vegas Nevada` / `LogYourTime`) e incorporada al catálogo de FORJADO el 2026-11-04 para comercialización a clientes de la agencia. Tres repositorios independientes: Backend Node.js/Express/Mongo/S3, Frontend React 19/Tailwind/Vite, Desktop Electron/SQLite/keyspy.
+Suite empresarial de control horario, monitoreo de productividad y liquidación de nóminas (ahora **Calibre**). Incorporada al catálogo de FORJADO el 2026-11-04. Tres repositorios independientes en `FORJADO-AGENCY`: Backend Node.js/Express/Mongo/R2, Frontend React 19/Tailwind/Vite, Desktop Electron/SQLite.
 
-- **Fuente de verdad:** [`aplicaciones/forjado/time-control/STATUS.md`](../../../aplicaciones/forjado/time-control/STATUS.md). Ficha técnica en [[productos/time-control]].
-- [ ] **Branding:** Reemplazar identidad `LogYourTime` por marca FORJADO (`#E85D04` / `#111111`) en Web y Desktop (`appId` a `com.forjado.timecontrol`).
-- [ ] **Infraestructura:** Desplegar backend en Dokploy (Oracle VPS) y configurar S3 en Cloudflare R2 o MinIO.
-- [ ] **Empaquetado B2B:** Estructurar oferta SaaS y On-Premise para clientes interesados de la agencia.
+- **Fuente de verdad:** [`aplicaciones/forjado/time-control/STATUS.md`](../../../aplicaciones/forjado/time-control/STATUS.md). Ficha técnica en [[productos/time-control]] y cliente piloto en [[../clientes/all-print]].
+- [x] ~~**Branding:** Reemplazar identidad `LogYourTime` por marca Calibre / FORJADO (`#E85D04` / `#111111`) en Web y Desktop.~~ — completado 2026-11-07.
+- [x] ~~**Infraestructura:** Desplegar backend y frontend en Dokploy (Oracle VPS `129.213.108.102`) con MongoDB Atlas y Cloudflare R2 (`calibre-screenshots`).~~ — completado 2026-11-07.
+- [x] ~~**Empaquetado B2B:** Estructurar pricing comercial y activar Cliente Piloto #1 (**All Print**, 60 días Plan Pro bonificados).~~ — completado 2026-11-10.
+- [ ] **Desktop Release y Seguimiento:** Compilar instalador Windows (`Calibre-Setup-1.2.9.exe`) y monitorear capturas R2/retención durante el piloto de All Print.
 
 ## 3. App para barberías y peluquerías (por desarrollar)
 
