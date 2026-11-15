@@ -2,7 +2,7 @@
 tags: [forjado, estado, pendientes, dashboard]
 tipo: estado
 estado: activo
-actualizado: 2026-11-14
+actualizado: 2026-11-15
 fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 ---
 
@@ -24,6 +24,8 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 | **Pipeline / prospección** | Ver [[../ventas/pipeline]] | 2026-09-21 |
 
 ## Bóveda / herramientas internas
+
+- **11-15: Content Engine — integración de Metodología "Imagen Ancla" y automatización resiliente de Google Flow** — Implementada la técnica de consistencia visual basada en Imagen Ancla (Anchor Image) dentro de `content/engine`: (1) extendido `VideoScript` con `anchor_prompt` opcional e `ImageTask` con `sequence_reference`; (2) actualizado `GeminiImageGenerator` para condicionar imágenes de escena manteniendo identidad física y texturas constantes; (3) orquestada la fase de generación del ancla en `pipeline.py:step2_generate_images`; (4) desarrollado bot de automatización para Google Flow (`tools/google_flow/flow_bot.py`) con Selenium para aprovechar los 50 créditos diarios de Google Labs (Veo 3.1) con control de presupuesto y auto-recuperación de fallos de servidor (*self-healing* retry); (5) añadido runner CLI `scripts/run_google_flow.py` y documentado en [[tecnologia/metodologia-imagen-ancla-video-ia|wiki/interno/tecnologia/metodologia-imagen-ancla-video-ia.md]]. Commits en repos `content` (`4b01c1e`) y `desarrollo` (`e4a290c`).
 
 - **11-14: Vitrina — auditoría integral e implementación de lógica de negocio, catálogo multi-giro y cierre de brechas operativas** — Se auditaron y sincronizaron `vitrina-backend` y `vitrina-frontend` para cubrir giros de negocio faltantes en Cuba (estudios fotográficos, casas particulares/hostales, imprentas/sublimación, ópticas/clínicas, veterinarias, joyerías) y cerrar desconexiones entre módulos: (1) añadidas 5 categorías (`joyeria-relojeria`, `alquiler-hospedaje`, `impresion-personalizados`, `salud-bienestar`, `mascotas-veterinaria`) y 6 unidades de venta (`dia`, `metro`, `persona`, `mes`, `desde`, `cotizar`), más soporte para precios `0` mostrados como `"A consultar"` en UI (`formatPrice`) e IA (`formatMoney`); (2) integrado `orderService` con catálogo (`ProductModel`), descuento automático de inventario (`stockQty` + `StockMovementModel`) y generación automática de comisiones de gestores (`SaleModel`) al completar pedidos de forma idempotente; (3) añadido `aiAddon` al esquema Mongoose de `Business`, corregido `approveByAdmin` en `plan-request.service.ts` para respetar `targetPlan` (`free`/`pro`/`enterprise`) y alineadas las tarjetas de `/panel/[slug]/plan.astro` con `plan.config.ts`; (4) sumado `deliveryFee` al total estimado de WhatsApp en `cart.ts`. Verificado con **360 tests pasando (23 suites)** en backend y **73 archivos con 0 errores** en frontend (`lint`, `typecheck` y `build` limpios; commiteado y pusheado a `main` en `vitrina-backend` `9082008` y `vitrina-frontend` `930da87`). Ver [[../../raw/interno/2026-11-14-vitrina-auditoria-logica-negocio-categorias-unidades|raw]].
 
