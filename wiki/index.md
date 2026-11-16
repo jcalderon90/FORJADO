@@ -64,6 +64,12 @@ actualizado: 2026-11-07
 | [[interno/servicios/marketing-y-contenido]] | Entregables, paquetes, precios, proceso |
 | [[interno/servicios/consultoria]] | Entregables, paquetes, precios, proceso |
 
+## Interno — Tecnología
+
+| Página | Descripción |
+|---|---|
+| [[interno/tecnologia/metodologia-imagen-ancla-video-ia]] | Metodología de la "Imagen Ancla" para consistencia visual en video IA (Veo / Google Flow) y su integración en `contenido/engine` |
+
 ## Interno — Ventas, Operaciones, Finanzas, Recursos
 
 | Página | Descripción |
