@@ -4,7 +4,7 @@ tipo: proyecto
 estado: activo
 servicio: desarrollo-de-software
 creado: 2026-10-05
-actualizado: 2026-11-14
+actualizado: 2026-11-16
 fuente_raw: raw/interno/2026-10-05-proyectos-pendientes-barberias-y-callacar-cuba-y-revision-vitrina
 ---
 
@@ -33,6 +33,7 @@ Verificado el 2026-11-14: backend con `lint` y `typecheck` limpios y **360 tests
 - [x] ~~Revertir el cambio accidental de dependencias del frontend y limpiar el lint~~ — hecho 2026-10-05.
 - [x] ~~Módulo de gestores con comisión e inventario conectado al flujo de pedidos~~ — integrado en `orderService` (`stockQty`, `StockMovementModel`, `SaleModel`) el 2026-11-14.
 - [x] ~~Hacer `commit` y `push` de las mejoras de lógica de negocio del 2026-11-14 en `vitrina-backend` y `vitrina-frontend`.~~ — pusheado a `main` (`9082008` y `930da87`).
+- [x] ~~Rediseñar el Showroom de Perfumería en `vitrina-spatial` (`PerfumeNicheShowroom.tsx`) para destacar los pomos sobre el fondo y escalar a nuevos perfumes~~ — hecho 2026-11-16 (prototipado en FigCraft MCP e implementado con podios LED, pomos 3D en relieve y filtros por familia olfativa; pendiente commit en `vitrina-spatial` tras visto bueno visual final).
 - [ ] Configurar secrets de firma Android en `vitrina-frontend` (`ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_PASSWORD`).
 - [ ] Primera copia de seguridad real de MongoDB Atlas y ensayo de restauración.
 - [ ] Dominio definitivo HTTPS, pruebas con móvil real y datos de ETECSA, revisión legal local.
