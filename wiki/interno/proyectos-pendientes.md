@@ -4,7 +4,7 @@ tipo: proyecto
 estado: activo
 servicio: desarrollo-de-software
 creado: 2026-10-05
-actualizado: 2026-11-16
+actualizado: 2026-11-19
 fuente_raw: raw/interno/2026-10-05-proyectos-pendientes-barberias-y-callacar-cuba-y-revision-vitrina
 ---
 
@@ -39,6 +39,7 @@ Verificado el 2026-11-14: backend con `lint` y `typecheck` limpios y **360 tests
 - [ ] Dominio definitivo HTTPS, pruebas con móvil real y datos de ETECSA, revisión legal local.
 - [ ] Fase 0 de negocio: entrevistas con 8–10 negocios de Cienfuegos y análisis de competidores.
 - [ ] Definir antes de construir: feed y ofertas de trabajo (secciones 20.1 y 20.4 del plan).
+- [ ] *Referentes UI/UX auditados (2026-11-19):* Adoptar skeletons automáticos `CLS = 0` (`Boneyard`) para 3G/4G Cuba, evaluar patrón **Paper-Doll PNG 1080×1350** (`Hanzife Pro V1.1`) sin costo de GPU/API en runtime para tiendas de ropa, vitrina espacial (`BASALTE`/`LANDSHIFT`/`NIKE` rack 90°/`Try the Look` bundles/`Remanence`), arquetipos de comercial 1-foto (`/detail-closeup`, `/tabletop-ad`) y pasar el checklist de 40 reglas de seguridad y pre-deploy antes de liberar dominio definitivo (ver [[recursos/catalogo-referencias-multimedia]]).
 
 ## 2. Time Control / Calibre (en producción — Piloto #1 activo)
 
@@ -58,6 +59,7 @@ Sin definir: país/mercado, si es web, móvil o ambas, modelo de negocio, funcio
 
 - [ ] Definir alcance y mercado con Jorge.
 - [ ] Crear plan de desarrollo propio (con el formato del de Vitrina) antes de escribir código.
+- [ ] *Referentes UI/UX auditados (2026-11-19):* Dirección de arte **Dark Luxury** (`Barbería` negro/oro/mármol/rim-light, secciones `PRECISION. STYLE. CONFIDENCE.`, `HAIRCUT / BEARD SCULPTING / PREMIUM STYLING`, `THE CRAFT`) combinada con el patrón **Slide-over Booking Drawer + Mini-CRM de Leads** de `Car Detailing ($1,500)` para reservar citas sin salir del flujo visual (ver [[recursos/catalogo-referencias-multimedia]]).
 
 ## 4. App de transporte en triciclos eléctricos para Cuba (por desarrollar)
 
@@ -88,6 +90,7 @@ Contexto e ideas iniciales:
 - [ ] Definir alcance, módulos y modelo de negocio con Jorge.
 - [ ] Definir si será Web/PWA offline-first o aplicación móvil.
 - [ ] Crear plan de desarrollo antes de comenzar implementación.
+- [ ] *Referentes auditados (2026-11-19):* Recorridos 3D ultraligeros en un solo HTML sin assets externos (`recorrido.html`, `Método 1`), ficha con semáforo en tiempo real + **`Consultar por WhatsApp`** (`Paraíso del Urubó`), foco en **compradores en el exterior / diáspora** con mapas por radios `1/3/5 KM` (`Navigo Web`), modo remodelación *Antes/Después* (`Método 2` Prompt 5/7) y patrón de recorrido por scroll + calendario (`Casa Rural Olivar`). Ver [[recursos/catalogo-referencias-multimedia]].
 
 ## 6. App para venta de medicamentos (por desarrollar)
 
@@ -101,6 +104,9 @@ Contexto e ideas iniciales:
 - [ ] Definir mercado inicial (Cuba u otro), alcance y modelo operativo con Jorge.
 - [ ] Analizar consideraciones regulatorias y legales de intermediación de fármacos.
 - [ ] Crear plan de desarrollo propio antes de escribir código.
+
+> [!info] Estándar transversal de QA Pre-Deploy (Auditoría 2026-11-19)
+> Para todos los productos anteriores (activos y futuros), aplicar la **Checklist de 40 Reglas** (20 de seguridad API/DB/Auth + 20 pre-lanzamiento SEO/OG/WCAG/GA4/404/Anti-Spam) y skeletons `CLS = 0` tipo `Boneyard` documentados en [[recursos/catalogo-referencias-multimedia]].
 
 ## Relacionado
 

@@ -85,3 +85,32 @@ Para aprovechar la cuota gratuita diaria de **50 puntos de Google Labs** (Google
 3. **Contenido de Marca Propia (UGC y Shorts):**
    - Avatares consistentes para reels educativos y videos promocionales de Calibre y FORJADO.
 
+---
+
+## 5. Extensiones Multimodales y Pipelines Complementarios (2026-11-19)
+
+Resultados incorporados desde la auditoría multimedia de `C:\Users\Jorge\Desktop\imgs\` (ver detalle completo y prompts literales en [[../recursos/catalogo-referencias-multimedia]]):
+
+### A. Pipeline Arquitectónico Anti-Alucinación (`Claude + Blender 5.1.1 + Seedance 2.5`)
+- **Problema que resuelve:** Evita que los modelos de video inventen muros, puertas o proporciones en recorridos inmobiliarios (`Video-68393.mp4`).
+- **Flujo en 4 pasos:**
+  1. Reconstrucción *greybox* fiel del plano 2D en **Blender 5.1.1** mediante script generado por Claude.
+  2. Trazado de spline de cámara a altura de ojo (**1.5 m**) con desaceleración (`hold`) por ambiente, exportado como video lineart B/N (**`Driving video`**).
+  3. Generación de *stills* clave consistentes repitiendo un **diccionario fijo de materiales** en cada ambiente (ej. `raw concrete, light pine, white linen, soft daylight`).
+  4. Renderizado en **Seedance 2.5** (disponible en FORJADO vía `higgsfield-generate`) combinando **`Driving video` + `Start frame` + `End frame`**.
+
+### B. Gemini Omni Flash para Arquitectura y Preventa
+- **Extrusión 2D → Maqueta 3D (`Video-45732.mp4`):** Animación continua de construcción sobre plano 2D con restricción estricta de geometría sin alterar muros.
+- **Dron FPV Timelapse (`Video-38320.mp4`):** Plano secuencia vertical 9:16 4K de terreno vacío transformándose en complejo multi-torre condicionado al render final de destino.
+- **Nota para renders cutaway (`AI-Houses.com` / `Seedream 5.0 Pro` / `VizMaker`):** Generar siempre sin etiquetas de texto dentro del prompt (`No text, no labels...`) para evitar typos y flechas alucinadas, añadiendo los rótulos posteriormente en HTML o postproducción.
+
+### C. Tres Arquetipos de Comerciales desde 1 Sola Foto (`AQMD55`)
+Replicables encadenando **Imagen Ancla** (packshot del producto) con `higgsfield-product-photoshoot` / `higgsfield-generate` / Veo / Gemini Omni:
+- **`/detail-closeup`:** Superficie oscura húmeda → zoom macro a etiqueta → detalle dispensador → manos aplicando textura (ideal skincare/cosmética).
+- **`/retail-commercial`:** Producto en pedestal de tienda → caminata urbana a ras de suelo → plano entero lifestyle en calle (ideal calzado/moda).
+- **`/tabletop-ad`:** Piedra oscura + hielo/condensación + órbita cinematográfica sin personas (ideal objetos/accesorios/bebidas).
+
+### D. Motion Graphics Programáticos en Código (`gsap.timeline()`)
+- Generación de piezas animadas 60 fps directo a MP4 (`Claude Opus 5.5` + `gsap.timeline()`, `expo.out`, `cubic-bezier(0.22, 1, 0.36, 1)`) sin After Effects (`Motion Graphics.mp4`), directamente compatible con nuestro stack `HyperFrames` / `Remotion` en `contenido/engine`.
+- En consistencia de moda/producto estático con cambio de prendas sin alterar rostro ni escenario, destacó también el patrón **`GPT Image 2.6` (`Flare` + `Sunburst edit` vía `fal.ai`)** (~$0.08/imagen pre-generada y ~$0.07/try-on en vivo, cuidando conversión de `.HEIC` en iOS).
+
