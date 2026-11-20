@@ -53,9 +53,9 @@ Alta: usa WhatsApp para vender, pone anuncios pagados, responde lento o fuera de
 
 1. [x] Crear repo `prospeccion` en `aplicaciones/forjado/` (2026-11-10, solo local).
 2. [x] Escribir el **perfil de oferta** FORJADO (`perfil-oferta.md`, con lo no confirmado marcado).
-3. [ ] Primera fuente: Meta Ad Library + Google Maps para un nicho y un país piloto.
-4. [ ] Ranking de 20 prospectos y revisión manual.
-5. [ ] Propuesta personalizada y primeros 10 contactos.
+3. [x] Primera tanda de prospección inmobiliaria: 12 prospectos reales (México, Ecuador y Miami FL) recopilados en `data/prospectos.csv` (2026-11-20; Meta Ad Library por validar).
+4. [x] Calificación objetiva del Lote #1 (Top 3: Vivi & Ale Realtors, Urbana México, EKS Constructora) + micro-demo 3D (`data/demos/vivi-ale-delano-1hab-recorrido.html`).
+5. [/] Aperturas `Prompt 7/7` redactadas para Top 3 en `data/propuestas-lote-1.md` (para revisión humana y envío manual; falta completar 10 envíos).
 6. [ ] Medir respuestas y ajustar. Meta: 1–2 clientes de $250/mes.
 
 ## Decisiones (2026-11-10)
@@ -66,10 +66,9 @@ Alta: usa WhatsApp para vender, pone anuncios pagados, responde lento o fuera de
 
 ## Pendientes
 
-- Elegir el primer nicho y país para la primera corrida (ej. `/prospectar México dealers de autos --fuente maps`).
-- Presupuesto de API/tokens para el ranking.
-- Crear el remoto privado en GitHub cuando se decida.
-- Escribir `/proponer` y `/seguimiento` cuando haya prospectos reales.
+- Revisar y enviar los mensajes del Top 3 en `data/propuestas-lote-1.md` (y verificar Meta Ad Library para subir puntaje a prioridad alta ≥ 6).
+- Presupuesto de API/tokens para futuras corridas de ranking.
+- Crear el remoto privado en GitHub cuando se decida (`a4b225e`, `data/` ignorado).
 
 ## Táctica de Apertura con Micro-Demo (Auditoría 2026-11)
 
