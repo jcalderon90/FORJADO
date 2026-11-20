@@ -4,7 +4,7 @@ tipo: proyecto
 estado: activo
 servicio: desarrollo-de-software
 creado: 2026-10-05
-actualizado: 2026-11-19
+actualizado: 2026-11-20
 fuente_raw: raw/interno/2026-10-05-proyectos-pendientes-barberias-y-callacar-cuba-y-revision-vitrina
 ---
 
@@ -33,13 +33,14 @@ Verificado el 2026-11-14: backend con `lint` y `typecheck` limpios y **360 tests
 - [x] ~~Revertir el cambio accidental de dependencias del frontend y limpiar el lint~~ — hecho 2026-10-05.
 - [x] ~~Módulo de gestores con comisión e inventario conectado al flujo de pedidos~~ — integrado en `orderService` (`stockQty`, `StockMovementModel`, `SaleModel`) el 2026-11-14.
 - [x] ~~Hacer `commit` y `push` de las mejoras de lógica de negocio del 2026-11-14 en `vitrina-backend` y `vitrina-frontend`.~~ — pusheado a `main` (`9082008` y `930da87`).
-- [x] ~~Rediseñar el Showroom de Perfumería en `vitrina-spatial` (`PerfumeNicheShowroom.tsx`) para destacar los pomos sobre el fondo y escalar a nuevos perfumes~~ — hecho 2026-11-16 (prototipado en FigCraft MCP e implementado con podios LED, pomos 3D en relieve y filtros por familia olfativa; pendiente commit en `vitrina-spatial` tras visto bueno visual final).
+- [x] ~~Rediseñar el Showroom de Perfumería en `vitrina-spatial` (`PerfumeNicheShowroom.tsx`) para destacar los pomos sobre el fondo y escalar a nuevos perfumes~~ — hecho 2026-11-16 (prototipado en FigCraft MCP e implementado con podios LED, pomos 3D en relieve y filtros por familia olfativa; commiteado y pusheado en `vitrina-spatial` `d5d31dc`, árbol limpio).
 - [ ] Configurar secrets de firma Android en `vitrina-frontend` (`ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_PASSWORD`).
 - [ ] Primera copia de seguridad real de MongoDB Atlas y ensayo de restauración.
 - [ ] Dominio definitivo HTTPS, pruebas con móvil real y datos de ETECSA, revisión legal local.
 - [ ] Fase 0 de negocio: entrevistas con 8–10 negocios de Cienfuegos y análisis de competidores.
 - [ ] Definir antes de construir: feed y ofertas de trabajo (secciones 20.1 y 20.4 del plan).
-- [ ] *Referentes UI/UX auditados (2026-11-19):* Adoptar skeletons automáticos `CLS = 0` (`Boneyard`) para 3G/4G Cuba, evaluar patrón **Paper-Doll PNG 1080×1350** (`Hanzife Pro V1.1`) sin costo de GPU/API en runtime para tiendas de ropa, vitrina espacial (`BASALTE`/`LANDSHIFT`/`NIKE` rack 90°/`Try the Look` bundles/`Remanence`), arquetipos de comercial 1-foto (`/detail-closeup`, `/tabletop-ad`) y pasar el checklist de 40 reglas de seguridad y pre-deploy antes de liberar dominio definitivo (ver [[recursos/catalogo-referencias-multimedia]]).
+- [x] *Implementados referentes UI/UX clave (`2026-11-20`):* Skeletons geométricos `CLS = 0` (`BoneyardSkeleton.astro`) integrados en `vitrina-frontend` para 3G/4G ETECSA, **Probador Paper-Doll `1080×1350`** (`Hanzife Pro V1.1` en `$0` API runtime) + **Combo Look `-10%`** (`Try the Look`) en `vitrina-spatial` (`PaperDollTryOnShowroom.tsx` / `/demo/probador`) y soporte preventivo `.HEIC` en `src/lib/image.ts`.
+- [ ] *Restante de referentes (`imgs/`):* Auditar el **Checklist de 40 Reglas** en `vitrina-backend` y dominio final, y evaluar arquetipos comerciales 1-foto (`/detail-closeup`, `/tabletop-ad`) + giro 90° `NIKE` en perchero (ver [[recursos/catalogo-referencias-multimedia]]).
 
 ## 2. Time Control / Calibre (en producción — Piloto #1 activo)
 

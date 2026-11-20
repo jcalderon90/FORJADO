@@ -2,7 +2,7 @@
 tags: [forjado, interno, configuracion, skills, superpowers, n8n, karpathy]
 tipo: interno
 creado: 2026-09-14
-actualizado: 2026-11-19
+actualizado: 2026-11-20
 fuente_raw: raw/interno/2026-09-14-instalacion-suite-skills-superpowers-n8n-find-skill.md
 ---
 
@@ -44,24 +44,31 @@ Framework completo de ingeniería de software de Jesse Vincent (`obra/superpower
 - Ubicación: `~/.gemini/config/plugins/user-global-skills/skills/react-bits` y `~/.gemini/config/skills/react-bits`.
 - Referencia interna completa: [[recursos/react-bits]].
 
+### 7. Suite IA y Frontend (Auditoría 2026-11-19 — Instalada 2026-11-20)
+Instalación curada de **18 skills globales** en `C:\Users\Jorge\.agents\skills\` vinculadas por symlink/junction tanto a **Antigravity** (`C:\Users\Jorge\.gemini\config\skills\`) como a **Claude Code** (`C:\Users\Jorge\.claude\skills\`):
+- **Copywriting, Ventas y Anti-Slop (9):** `stop-slop` (`hardikpandya/stop-slop`), `product-marketing`, `copywriting`, `copy-editing`, `cold-email`, `prospecting`, `cro`, `pricing`, `ad-creative` (`coreyhaines31/marketingskills`).
+- **Context Engineering (3):** `context-fundamentals`, `context-optimization`, `context-compression` (`muratcankoylan/Agent-Skills-for-Context-Engineering`).
+- **Animación GSAP (5):** `gsap-core`, `gsap-timeline`, `gsap-scrolltrigger`, `gsap-react`, `gsap-performance` (`greensock/gsap-skills`).
+- **Automatización Web y QA (1 + CLI global):** skill `playwright-cli` (`microsoft/playwright-cli`) + paquete global `@playwright/cli` (`0.1.25`). *(Skill interna `dev` omitida deliberadamente).*
+
 ---
 
 ## Skills Recomendadas / En Evaluación (Auditoría 2026-11-19)
 
 Identificadas en la auditoría de `C:\Users\Jorge\Desktop\imgs\` (`Skills/` y `Tips de IA/`):
 
-| Skill / Toolkit | Fuente / Repositorio | Qué aporta | Prioridad |
+| Skill / Toolkit | Fuente / Repositorio | Qué aporta | Prioridad / Estado |
 |---|---|---|---|
-| **Context Engineering** | Mencionada en audio `5 Skills de Claude` | Optimiza prompts y reduce drásticamente el consumo de tokens por petición. | 🔴 Alta |
-| **Stop Slop** | Mencionada en audio `5 Skills de Claude` | Humanizador de copy para eliminar estilo genérico/robótico de IA. | 🔴 Alta |
-| **Marketing Skills** | Corey Haines (+20 skills gratis) | Pack de copy para anuncios, SEO, emails, pricing y analítica. | 🔴 Alta |
-| **Impeccable** | `github.com/pbakaus/impeccable` | 24 comandos (`polish`, `audit`, `bolder`, `critique`) y 62 reglas anti-AI-slop (ver [[recursos/impeccable]]). | 🔴 Alta |
-| **GSAP Skills** | `github.com/greensock/gsap-skills` (`gsap.com`) | Timelines y scroll (`ScrollTrigger`); todo GSAP ya es 100% gratis. Clave para scrollytelling. | 🔴 Alta |
-| **Taste Skill** | `github.com/Leonxlnx/taste-skill` | Dirección de arte real, búsqueda de imágenes y auto-revisión en navegador. | 🟡 Media-Alta |
-| **Playwright CLI** | `github.com/microsoft/playwright-cli` | Navegador real automatizado para recorrer páginas y capturar cada estado UI. | 🟡 Media-Alta |
-| **transitions.dev** | `github.com/Jakubantalik/transitions.dev` | +43 transiciones CSS pulidas (`Modal`, dropdowns, contadores, check de éxito). | 🟡 Media |
-| **designlang** | `github.com/Manavarya09/design-extract` (`npx designlang`) | Extrae de una URL 17+ archivos de colores, fuentes y Tailwind. | 🟡 Media |
-| **UI UX Pro Max** | Mencionada en audio `5 Skills de Claude` | Biblioteca de estilos, paletas y tipografías para evitar diseños genéricos en webs y dashboards. | 🟡 Media |
+| **Context Engineering** | `muratcankoylan/Agent-Skills-for-Context-Engineering` | Optimiza prompts y reduce drásticamente el consumo de tokens por petición. | 🟢 Instalada (2026-11-20 — 3 skills core) |
+| **Stop Slop** | `hardikpandya/stop-slop` | Humanizador de copy para eliminar estilo genérico/robótico de IA. | 🟢 Instalada (2026-11-20) |
+| **Marketing Skills** | `coreyhaines31/marketingskills` (+20 skills gratis) | Pack de copy para anuncios, SEO, emails, pricing y analítica. | 🟢 Instalada (2026-11-20 — 8 skills seleccionadas) |
+| **Impeccable** | `github.com/pbakaus/impeccable` | 24 comandos (`polish`, `audit`, `bolder`, `critique`) y 62 reglas anti-AI-slop (ver [[recursos/impeccable]]). | 🟡 Por proyecto (nunca global) |
+| **GSAP Skills** | `github.com/greensock/gsap-skills` (`gsap.com`) | Timelines y scroll (`ScrollTrigger`); todo GSAP ya es 100% gratis. Clave para scrollytelling. | 🟢 Instalada (2026-11-20 — 5 skills) |
+| **Taste Skill** | `github.com/Leonxlnx/taste-skill` | Dirección de arte real, búsqueda de imágenes y auto-revisión en navegador. | 🟡 Media-Alta (por evaluar) |
+| **Playwright CLI** | `github.com/microsoft/playwright-cli` | Navegador real automatizado para recorrer páginas y capturar cada estado UI. | 🟢 Instalada (2026-11-20 — skill + `@playwright/cli`) |
+| **transitions.dev** | `github.com/Jakubantalik/transitions.dev` | +43 transiciones CSS pulidas (`Modal`, dropdowns, contadores, check de éxito). | 🟡 Media (por evaluar) |
+| **designlang** | `github.com/Manavarya09/design-extract` (`npx designlang`) | Extrae de una URL 17+ archivos de colores, fuentes y Tailwind. | 🟡 Media (por evaluar) |
+| **UI UX Pro Max** | `nextlevelbuilder/ui-ux-pro-max-skill` | Biblioteca de estilos, paletas y tipografías para evitar diseños genéricos en webs y dashboards. | 🟡 Instalada en `~/.agents/skills/` y `~/.claude/skills/` |
 | **Remotion** | `remotion.dev` (ya en uso en `contenido/engine`) | Video programático en React desde guion (Licencia Free para equipos de hasta 3 personas). | 🟢 En uso |
 
 ---

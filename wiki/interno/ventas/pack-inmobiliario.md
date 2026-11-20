@@ -4,7 +4,7 @@ tipo: oferta
 estado: borrador
 servicio: automatizacion-e-ia
 creado: 2026-11-10
-actualizado: 2026-11-19
+actualizado: 2026-11-20
 ---
 
 # Oferta — Pack Inmobiliario (FORJADO)
@@ -62,6 +62,7 @@ Basado en los referentes auditados en `C:\Users\Jorge\Desktop\imgs\` (ver [[../r
 | **Nivel 4 — Showroom Web Interactivo** | Exterior 3D/renders (`Day/Golden/Night`), planta con semáforo de disponibilidad en vivo, ficha + WhatsApp, mapa radios `1/3/5 KM` (ideal compradores en el exterior), tour 360° con vista real de dron | `Paraíso del Urubó` + `Navigo Web` + `ALTURA Miami` + `StreamSpatial` (3DGS desde dron `0:37`) | Proyectos high-ticket **$1,500 – $3,500+ USD** |
 
 - **Táctica de prospección en frío (Prompt 7/7):** Construir primero **1 recorrido/showroom demo gratis** a partir de un plano público de la constructora/inmobiliaria y abrir el mensaje con ese link directo antes de ofrecer el catálogo completo.
+- **Plantilla operativa lista (`2026-11-20`):** Implementada en [`aplicaciones/forjado/prospeccion/plantillas/recorrido-3d/`](../../../../aplicaciones/forjado/prospeccion/plantillas/recorrido-3d/recorrido.html) (`recorrido.html` Three.js single-file con vanos recortados, texturas procedurales, joystick móvil, minimapa, vista `Planta 2D`, `Amoblado/Vacío`, `Luz: Día/Tarde/Noche`, `Tour 90s` y ficha WhatsApp + validador/generador `generar-recorrido.mjs` y comandos `/micro-demo` y `/proponer`).
 
 ## Relacionado
 - [[pipeline]]

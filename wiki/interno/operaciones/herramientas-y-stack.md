@@ -3,7 +3,7 @@ tags: [forjado, operaciones, herramientas]
 tipo: proceso
 estado: activo
 creado: 2026-06-17
-actualizado: 2026-10-29
+actualizado: 2026-11-20
 ---
 
 # Herramientas y Stack — FORJADO
@@ -85,6 +85,20 @@ actualizado: 2026-10-29
 
 > [!note] Por reconciliar (09-06)
 > Esta tabla lista "Hermes Agent" como servicio activo desde el 2026-06-17, pero al explorar OmniRoute el 09-06 este lo detectó como "not found" (no instalado) en el VPS. Puede que esté instalado fuera del PATH que usa OmniRoute, o que este dato ya esté desactualizado — sin confirmar todavía.
+
+## Diseño, Motion, 3D y QA Pre-Deploy (Biblioteca 2026-11)
+
+Estándar de herramientas y referentes incorporados tras la auditoría de `C:\Users\Jorge\Desktop\imgs\` (ver [[../recursos/catalogo-referencias-multimedia]] y [[../configuracion-skills]]):
+
+| Área | Herramienta / Estándar | Uso principal en FORJADO |
+|---|---|---|
+| **Skeletons `CLS = 0`** | **Boneyard** | Extracción pixel-perfect de skeleton loaders sin saltos de diseño en cargas móviles (Vitrina 3G/4G, Calibre, apps Next/React). |
+| **Motion & Scrollytelling** | **GSAP + ScrollTrigger** *(100% gratis)* | Timelines, pinned scroll, scrub de secuencias en `<canvas>` y Motion Graphics programáticos a 60 fps (`gsap.timeline()`). |
+| **Recorridos 3D ligeros** | **Three.js single-file** (`recorrido.html`) | Maquetas caminables en un solo HTML sin assets externos (Pack Inmobiliario Nivel 1 y Perla Inmobiliaria). |
+| **Micro-interacciones & Tokens** | **transitions.dev** · **designlang** | +43 transiciones CSS pulidas y extracción rápida de tokens/paleta/Tailwind desde URLs de referencia (`npx designlang`). |
+| **Skills de Diseño y Copy** *(en evaluación)* | `Context Engineering`, `Stop Slop`, `Marketing Skills`, `Impeccable`, `Taste Skill`, `Playwright CLI`, `UI UX Pro Max` | Ahorro de tokens, copy humano sin clichés IA, auditoría visual/a11y determinista (62 reglas) y verificación real en navegador. |
+| **QA Pre-Deploy** | **Checklist de 40 Reglas** | 20 reglas de seguridad (API/DB/Auth/Uploads/Headers) + 20 pre-lanzamiento (legal, SEO/OG, WCAG, 404, anti-spam, GA4). |
+| **⚠️ Alerta de seguridad API** | **APInex (`apinex.bond`)** | Gateway promocionado como gratuito: **prohibido con repositorios o datos de clientes** (Varela Law, Carwarriors, Garoo); solo uso sandbox/desechable. |
 
 ## Accesos
 Las credenciales de estas herramientas se centralizan en [[Credenciales]] (con cuidado de seguridad).

@@ -4,7 +4,7 @@ tipo: plan
 estado: borrador
 servicio: automatizacion-e-ia
 creado: 2026-11-10
-actualizado: 2026-11-10
+actualizado: 2026-11-20
 ---
 
 # Plan — Prospección en Hispanoamérica con el patrón de AI Job Search
@@ -71,7 +71,14 @@ Alta: usa WhatsApp para vender, pone anuncios pagados, responde lento o fuera de
 - Crear el remoto privado en GitHub cuando se decida.
 - Escribir `/proponer` y `/seguimiento` cuando haya prospectos reales.
 
+## Táctica de Apertura con Micro-Demo (Auditoría 2026-11)
+
+- **Patrón *The \$5K Pitch* (`Prompt 7/7`):** En lugar de pedir una llamada en frío desde cero, construir primero **1 micro-demo o recorrido `recorrido.html`** (o prototipo visual) a partir de un plano o catálogo público del prospecto y abrir el mensaje (`<120` palabras) con ese enlace directo antes de ofertar el paquete completo.
+- **Benchmarks de ticket y escalera de oferta:** `Car Detailing ($1,500)` (booking drawer + CRM), `Ámbar Serum ($2,500)` (scrollytelling PDP), `The Solana ($3,350)` (showroom 3D) y la escalera de 4 niveles del [[pack-inmobiliario]].
+- **Calidad de copy comercial:** Aplicar `Stop Slop` y `Marketing Skills` (ver [[../configuracion-skills]]) al redactar `/proponer` para eliminar el tono genérico de IA. Ver [[../recursos/catalogo-referencias-multimedia]].
+
 ## Relacionado
 - [[pack-inmobiliario]]
 - [[pipeline]]
 - [[../servicios/catalogo-de-servicios]]
+- [[../recursos/catalogo-referencias-multimedia]]

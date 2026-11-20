@@ -3,7 +3,7 @@ tags: [forjado, servicio, desarrollo, software]
 tipo: servicio
 estado: borrador
 creado: 2026-06-17
-actualizado: 2026-06-17
+actualizado: 2026-11-20
 ---
 
 # Servicio — Desarrollo de Software
@@ -40,6 +40,12 @@ Diseño y construyo productos digitales a la medida: sitios web, aplicaciones e 
 2. Diseño y propuesta técnica.
 3. Desarrollo iterativo.
 4. Pruebas, despliegue y entrega.
+
+## Estándares de Entrega y Capacidades Visuales (2026-11)
+
+- **Compuerta QA Pre-Deploy (40 Reglas):** toda web o app entregada pasa la doble verificación (20 controles de seguridad API/DB/Auth/Uploads/Headers + 20 de lanzamiento SEO/OG/WCAG/404/anti-spam/GA4).
+- **Rendimiento y carga sin saltos:** skeletons `CLS = 0` (`Boneyard`), conversión obligatoria de `.HEIC` en subidas móviles y animaciones en compositor GPU.
+- **Patrones interactivos de alto valor reutilizables:** showrooms espaciales 2.5D/3D (`BASALTE`, `LANDSHIFT`, `ATELIER`, `Try the Look`), recorridos 3D single-file en `Three.js` (`recorrido.html`), scrollytelling con `GSAP` y flujo **Slide-over Booking Drawer + Login + Mini-CRM de Leads** para servicios/citas (ver [[../recursos/catalogo-referencias-multimedia]] y [[../operaciones/procesos-y-entrega]]).
 
 ## Relacionado
 - [[Catálogo de Servicios (MOC)]]
