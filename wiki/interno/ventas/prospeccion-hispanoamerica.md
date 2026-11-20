@@ -68,7 +68,7 @@ Alta: usa WhatsApp para vender, pone anuncios pagados, responde lento o fuera de
 
 - Revisar y enviar los mensajes del Top 3 en `data/propuestas-lote-1.md` (y verificar Meta Ad Library para subir puntaje a prioridad alta ≥ 6).
 - Presupuesto de API/tokens para futuras corridas de ranking.
-- Crear el remoto privado en GitHub cuando se decida (`a4b225e`, `data/` ignorado).
+- Crear el remoto privado en GitHub cuando se decida (`4a067c8`, `data/` ignorado).
 
 ## Táctica de Apertura con Micro-Demo (Auditoría 2026-11)
 

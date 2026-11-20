@@ -15,8 +15,8 @@ fuente_raw: raw/interno/2026-10-05-proyectos-pendientes-barberias-y-callacar-cub
 
 | # | Producto | Estado | Dónde |
 |---|---|---|---|
-| 1 | **Vitrina** | 🟡 En desarrollo avanzado (360 tests OK, lógica de pedidos/stock/gestores/planes integrada y pusheada a `main`) | `aplicaciones/forjado/vitrina/` |
-| 2 | **Time Control** | 🟢 En producción (Calibre) — Dokploy + R2 activos, Piloto #1 activo (All Print) | `aplicaciones/forjado/time-control/` (3 repos) |
+| 1 | **Vitrina** | 🟢 Hardening & Features OK (`368/368` tests backend `a4af21c`, `74` archivos `febe105` + `81` archivos `493833f` OK) | `aplicaciones/forjado/vitrina/` |
+| 2 | **Time Control** | 🟢 En producción (Calibre) — Dokploy + R2 activos, `510/510` tests (`882b8c5`), `9fb0737` CSP, Piloto #1 activo (All Print) | `aplicaciones/forjado/time-control/` (3 repos) |
 | 3 | **App para barberías y peluquerías** | ⬜ Por desarrollar (solo idea) | sin repo |
 | 4 | **App de transporte en triciclos eléctricos para Cuba** | ⬜ Por desarrollar (solo idea) | sin repo |
 | 5 | **App para gestores de ventas de casas en Cuba** | ⬜ Por desarrollar (solo idea) | sin repo |
@@ -28,7 +28,7 @@ Prioridad activa: Vitrina y adaptación de Time Control; los productos 3 al 6 pe
 
 Vitrina digital + directorio + contacto directo para mypimes y particulares de Cienfuegos (Cuba). Dos repos (`vitrina-backend`, `vitrina-frontend`). Fuente de verdad: `aplicaciones/forjado/vitrina/vitrina-backend/docs/PLAN_DESARROLLO.md` (secciones 11 y 16 = estado y próximos pasos). Ficha en [[mapa-forjado]].
 
-Verificado el 2026-11-14: backend con `lint` y `typecheck` limpios y **360 tests pasando (23 suites)**; frontend con `lint`, `typecheck` (**73 archivos, 0 errores**) y `build` limpios tras auditar y ampliar categorías (+5 giros cubanos), unidades (+6), precios `"A consultar"`, integración de pedidos con catálogo/stock/comisiones de gestores y persistencia de `aiAddon` en planes (pusheado a `main` en `vitrina-backend` `9082008` y `vitrina-frontend` `930da87`; detalle en [[../../raw/interno/2026-11-14-vitrina-auditoria-logica-negocio-categorias-unidades|raw (2026-11-14)]]).
+Verificado el 2026-11-20: backend con `lint`, `typecheck`, `build` y **368/368 tests pasando (24 suites, 0 vulnerabilidades en `npm audit`)** tras el hardening **40 Reglas** (`a4af21c`, plan en `5a4a9c6`); frontend con `astro check` (**74 archivos, 0 errores**) y `build` limpios con `BoneyardSkeleton` + `.HEIC` (`febe105`); `vitrina-spatial` con **81 archivos `astro check`**, `build` y Edge headless `0` errores con `PaperDollTryOnShowroom` + `.HEIC` (`493833f`), además de la auditoría de lógica de negocio previa (`9082008` y `930da87`; detalle en [[../../raw/interno/2026-11-14-vitrina-auditoria-logica-negocio-categorias-unidades|raw (2026-11-14)]]).
 
 - [x] ~~Revertir el cambio accidental de dependencias del frontend y limpiar el lint~~ — hecho 2026-10-05.
 - [x] ~~Módulo de gestores con comisión e inventario conectado al flujo de pedidos~~ — integrado en `orderService` (`stockQty`, `StockMovementModel`, `SaleModel`) el 2026-11-14.
@@ -40,7 +40,7 @@ Verificado el 2026-11-14: backend con `lint` y `typecheck` limpios y **360 tests
 - [ ] Fase 0 de negocio: entrevistas con 8–10 negocios de Cienfuegos y análisis de competidores.
 - [ ] Definir antes de construir: feed y ofertas de trabajo (secciones 20.1 y 20.4 del plan).
 - [x] *Implementados referentes UI/UX clave (`2026-11-20`):* Skeletons geométricos `CLS = 0` (`BoneyardSkeleton.astro`) integrados en `vitrina-frontend` para 3G/4G ETECSA, **Probador Paper-Doll `1080×1350`** (`Hanzife Pro V1.1` en `$0` API runtime) + **Combo Look `-10%`** (`Try the Look`) en `vitrina-spatial` (`PaperDollTryOnShowroom.tsx` / `/demo/probador`) y soporte preventivo `.HEIC` en `src/lib/image.ts`.
-- [ ] *Restante de referentes (`imgs/`):* Auditar el **Checklist de 40 Reglas** en `vitrina-backend` y dominio final, y evaluar arquetipos comerciales 1-foto (`/detail-closeup`, `/tabletop-ad`) + giro 90° `NIKE` en perchero (ver [[recursos/catalogo-referencias-multimedia]]).
+- [x] *Hardening backend 40 Reglas completado (`2026-11-20`, `a4af21c`):* auditoría de seguridad, `npm audit` `0` vulnerabilidades, `@fastify/helmet`, `sanitizeFilter`, cookie simétrica, privacidad IA/pedidos, `crypto.randomInt`, escape HTML Telegram, rate limits y honeypots en `vitrina-backend`. *Restante al lanzar dominio HTTPS:* rotación de clave Atlas, backups reales, bloque B/SEO en frontend y evaluar arquetipos comerciales 1-foto (`/detail-closeup`, `/tabletop-ad`) + giro 90° `NIKE` en perchero (ver [[recursos/catalogo-referencias-multimedia]]).
 
 ## 2. Time Control / Calibre (en producción — Piloto #1 activo)
 
@@ -50,7 +50,7 @@ Suite empresarial de control horario, monitoreo de productividad y liquidación 
 - [x] ~~**Branding:** Reemplazar identidad `LogYourTime` por marca Calibre / FORJADO (`#E85D04` / `#111111`) en Web y Desktop.~~ — completado 2026-11-07.
 - [x] ~~**Infraestructura:** Desplegar backend y frontend en Dokploy (Oracle VPS `129.213.108.102`) con MongoDB Atlas y Cloudflare R2 (`calibre-screenshots`).~~ — completado 2026-11-07.
 - [x] ~~**Empaquetado B2B:** Estructurar pricing comercial y activar Cliente Piloto #1 (**All Print**, 60 días Plan Pro bonificados).~~ — completado 2026-11-10.
-- [ ] **Desktop Release y Seguimiento:** Compilar instalador Windows (`Calibre-Setup-1.2.9.exe`) y monitorear capturas R2/retención durante el piloto de All Print.
+- [x] ~~**Hardening y Build (`2026-11-20`):** Corregido bug CSP en `configure-nginx-api.cjs` (`9fb0737`), cerrados whitelists anti-*mass assignment* en backend (**510/510** tests en `882b8c5`) e instalador Windows `Calibre-Setup-1.2.9.exe` compilado en `release/`.~~ — pendiente pulsar **Redeploy** manual en Dokploy, correr prueba E2E desktop, reservar IP en Oracle (`129.213.108.102`) y acompañar retención/capturas del piloto All Print.
 
 ## 3. App para barberías y peluquerías (por desarrollar)
 
