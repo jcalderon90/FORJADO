@@ -224,7 +224,13 @@ flowchart TD
 > [!warning] Puntos de Atención Actuales (Monitoreo & Transición)
 > 1. **Comentarios de Instagram / Facebook:**
 >    - Se detectó que ManyChat no expone el texto íntegro del comentario en su variable `{Última entrada de texto}` hacia n8n.
->    - **Solución en curso:** Se redactó la guía para que Bianca cree la App en Meta Developers y conectar directamente los webhooks de Meta Graph API (`comments` y `feed`) a n8n.
+>    - **Solución en curso:** Se redactó la [[carwarriors-llc-guia-meta-developers-bianca|Guía Meta Developers - Bianca]] para crear la App en Meta Developers y conectar directamente los webhooks de Meta Graph API (`comments` y `feed`) a n8n sin dependencia de ManyChat.
 > 2. **WhatsApp para Rances Car:**
 >    - Toda la infraestructura en n8n (`PRINCIPAL - Rances Car`) y GHL ya está construida y lista.
 >    - Pendiente decisión de Jorge González sobre si activar el canal vía Meta Business Portfolio propio en GHL o conectar Cloud API directa a n8n.
+
+---
+
+## Ver también
+- [[carwarriors-llc|Ficha de cliente: Carwarriors LLC]]
+- [[carwarriors-llc-guia-meta-developers-bianca|Guía Meta Developers — Bianca]]

@@ -42,7 +42,7 @@ Framework completo de ingeniería de software de Jesse Vincent (`obra/superpower
 - Filosofía shadcn: código fuente modular en TS/JS con Tailwind CSS o CSS puro (`npx shadcn@latest add @react-bits/...`).
 - Compatible con el registro MCP oficial para instalación y configuración por agentes de IA.
 - Ubicación: `~/.gemini/config/plugins/user-global-skills/skills/react-bits` y `~/.gemini/config/skills/react-bits`.
-- Referencia interna completa: [[recursos/react-bits]].
+- Ficha completa en Obsidian: `HERRAMIENTAS/Diseño e interfaces/React Bits.md`.
 
 ### 7. Suite IA y Frontend (Auditoría 2026-11-19 — Instalada 2026-11-20)
 Instalación curada de **18 skills globales** en `C:\Users\Jorge\.agents\skills\` vinculadas por symlink/junction tanto a **Antigravity** (`C:\Users\Jorge\.gemini\config\skills\`) como a **Claude Code** (`C:\Users\Jorge\.claude\skills\`):
@@ -62,7 +62,7 @@ Identificadas en la auditoría de `C:\Users\Jorge\Desktop\imgs\` (`Skills/` y `T
 | **Context Engineering** | `muratcankoylan/Agent-Skills-for-Context-Engineering` | Optimiza prompts y reduce drásticamente el consumo de tokens por petición. | 🟢 Instalada (2026-11-20 — 3 skills core) |
 | **Stop Slop** | `hardikpandya/stop-slop` | Humanizador de copy para eliminar estilo genérico/robótico de IA. | 🟢 Instalada (2026-11-20) |
 | **Marketing Skills** | `coreyhaines31/marketingskills` (+20 skills gratis) | Pack de copy para anuncios, SEO, emails, pricing y analítica. | 🟢 Instalada (2026-11-20 — 8 skills seleccionadas) |
-| **Impeccable** | `github.com/pbakaus/impeccable` | 24 comandos (`polish`, `audit`, `bolder`, `critique`) y 62 reglas anti-AI-slop (ver [[recursos/impeccable]]). | 🟡 Por proyecto (nunca global) |
+| **Impeccable** | `github.com/pbakaus/impeccable` | 24 comandos (`polish`, `audit`, `bolder`, `critique`) y 62 reglas anti-AI-slop (ficha en Obsidian `HERRAMIENTAS/Diseño e interfaces/Impeccable.md`). | 🟡 Por proyecto (nunca global) |
 | **GSAP Skills** | `github.com/greensock/gsap-skills` (`gsap.com`) | Timelines y scroll (`ScrollTrigger`); todo GSAP ya es 100% gratis. Clave para scrollytelling. | 🟢 Instalada (2026-11-20 — 5 skills) |
 | **Taste Skill** | `github.com/Leonxlnx/taste-skill` | Dirección de arte real, búsqueda de imágenes y auto-revisión en navegador. | 🟡 Media-Alta (por evaluar) |
 | **Playwright CLI** | `github.com/microsoft/playwright-cli` | Navegador real automatizado para recorrer páginas y capturar cada estado UI. | 🟢 Instalada (2026-11-20 — skill + `@playwright/cli`) |

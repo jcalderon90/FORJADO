@@ -34,12 +34,12 @@ Fuente histórica de despliegue y auditoría en [[../../../raw/interno/2026-10-2
 ## 3. Clientes y Perfiles Sincronizados
 
 ### Perfil Principal en Producción (Hostinger / Alta Velocidad)
-* **Archivo en la bóveda**: `[[../../../raw/misc/Jorge-pc.conf|Jorge-pc.conf]]`
+* **Archivo de configuración:** Resguardado en Obsidian (`FORJADO/ORACLE - VPS/Jorge-pc.conf`).
 * **Servidor**: Hostinger US (`31.220.62.26:51820`), IP asignada `10.8.0.3`.
 * **Uso actual**: Conexión activa en la PC de desarrollo de Jorge. Rendimiento y ancho de banda óptimos para navegación y trabajo diario.
 
 ### Perfil Servidor Propio Optimizado (VPS Oracle Cloud / Dokploy)
-* **Archivo en la bóveda**: `[[../../../raw/misc/forjado-wireguard.conf|forjado-wireguard.conf]]`
+* **Archivo de configuración:** Resguardado en Obsidian (`FORJADO/ORACLE - VPS/forjado-wireguard.conf`).
 * **Servidor**: Oracle Cloud Ashburn (`129.213.108.102:51820`), IP asignada `10.8.0.2`.
 * **Estado**: **100% Operativo y Alta Velocidad**.
 * **Optimizaciones aplicadas y persistidas en `/etc/wireguard/wg0.conf`**:

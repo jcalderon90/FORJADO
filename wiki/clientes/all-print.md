@@ -94,10 +94,10 @@ El tenant de All Print se registra en el backend de Calibre con la siguiente con
 
 | Documento | Ubicación | Descripción |
 |---|---|---|
-| **Propuesta Ejecutiva PDF** | [`Propuesta_Calibre_FORJADO.pdf`](file:///d:/1TRABAJO/PROYECTOS/FORJADO/desarrollo/Propuesta_Calibre_FORJADO.pdf) | Documento B2B corporativo de 3 páginas con comparativa vs Time Doctor y ROI del 350%. |
-| **Plantilla HTML Imprimible** | [`propuesta_calibre.html`](file:///d:/1TRABAJO/PROYECTOS/FORJADO/desarrollo/propuesta_calibre.html) | Plantilla fuente estilizada con paleta de marca FORJADO. |
-| **Propuesta Comercial Markdown** | [`PROPUESTA_MIPYME_CALIBRE.md`](file:///d:/1TRABAJO/PROYECTOS/FORJADO/desarrollo/PROPUESTA_MIPYME_CALIBRE.md) | Versión editable con el detalle de condiciones comerciales. |
-| **Código Fuente Suite Calibre** | `aplicaciones/forjado/time-control/` | Repositorios backend, frontend web y cliente desktop. |
+| **Propuesta Ejecutiva PDF** | [`Propuesta_Calibre_FORJADO.pdf`](file:///d:/1TRABAJO/PROYECTOS/FORJADO/aplicaciones/forjado/calibre/Propuesta_Calibre_FORJADO.pdf) | Documento B2B corporativo de 3 páginas con comparativa vs Time Doctor y ROI del 350%. |
+| **Plantilla HTML Imprimible** | [`propuesta_calibre.html`](file:///d:/1TRABAJO/PROYECTOS/FORJADO/aplicaciones/forjado/calibre/propuesta_calibre.html) | Plantilla fuente estilizada con paleta de marca FORJADO. |
+| **Propuesta Comercial Markdown** | [`PROPUESTA_MIPYME_CALIBRE.md`](file:///d:/1TRABAJO/PROYECTOS/FORJADO/aplicaciones/forjado/calibre/PROPUESTA_MIPYME_CALIBRE.md) | Versión editable con el detalle de condiciones comerciales. |
+| **Código Fuente Suite Calibre** | `aplicaciones/forjado/calibre/` | Repositorios backend, frontend web y cliente desktop. |
 
 ---
 

@@ -74,10 +74,10 @@ Alta: usa WhatsApp para vender, pone anuncios pagados, responde lento o fuera de
 
 - **Patrón *The \$5K Pitch* (`Prompt 7/7`):** En lugar de pedir una llamada en frío desde cero, construir primero **1 micro-demo o recorrido `recorrido.html`** (o prototipo visual) a partir de un plano o catálogo público del prospecto y abrir el mensaje (`<120` palabras) con ese enlace directo antes de ofertar el paquete completo.
 - **Benchmarks de ticket y escalera de oferta:** `Car Detailing ($1,500)` (booking drawer + CRM), `Ámbar Serum ($2,500)` (scrollytelling PDP), `The Solana ($3,350)` (showroom 3D) y la escalera de 4 niveles del [[pack-inmobiliario]].
-- **Calidad de copy comercial:** Aplicar `Stop Slop` y `Marketing Skills` (ver [[../configuracion-skills]]) al redactar `/proponer` para eliminar el tono genérico de IA. Ver [[../recursos/catalogo-referencias-multimedia]].
+- **Calidad de copy comercial:** Aplicar `Stop Slop` y `Marketing Skills` (ver [[../configuracion-skills]]) al redactar `/proponer` para eliminar el tono genérico de IA. Ver Obsidian `HERRAMIENTAS/Biblioteca de Referencias Modernas - Auditoria imgs.md`.
 
 ## Relacionado
 - [[pack-inmobiliario]]
 - [[pipeline]]
 - [[../servicios/catalogo-de-servicios]]
-- [[../recursos/catalogo-referencias-multimedia]]
+- En Obsidian: `HERRAMIENTAS/Biblioteca de Referencias Modernas - Auditoria imgs.md`

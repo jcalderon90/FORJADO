@@ -25,3 +25,7 @@ raw/**/inventario-fotos/
 
 scratch/*
 !scratch/README.md
+
+# WireGuard and client config secrets (stored in Obsidian)
+raw/misc/*.conf
+*.conf

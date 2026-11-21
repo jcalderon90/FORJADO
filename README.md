@@ -23,9 +23,9 @@ Bóveda de trabajo de la agencia FORJADO (automatización + IA). Reestructurada 
 
 1. **[`wiki/index.md`](wiki/index.md)** — diccionario global, una línea por página. Empieza siempre aquí.
 2. **[`wiki/interno/estado-proyecto.md`](wiki/interno/estado-proyecto.md)** — snapshot y pendientes de la agencia, hoy.
-3. Páginas de cliente: [`wiki/clientes/carwarriors-llc.md`](wiki/clientes/carwarriors-llc.md) · [`wiki/clientes/varela-law.md`](wiki/clientes/varela-law.md) · [`wiki/clientes/garoo-redtec.md`](wiki/clientes/garoo-redtec.md).
-4. **[`wiki/interno/mapa-forjado.md`](wiki/interno/mapa-forjado.md)** — esta bóveda es la carpeta principal de indexado de **todo FORJADO**; esta página mapea las carpetas hermanas `aplicaciones/`, `contenido/` y `acl-recovery/`.
-5. **[`wiki/interno/mapa-garoo.md`](wiki/interno/mapa-garoo.md)** — mapeo del ecosistema hermano de agentes, telefonía y plataformas en [`Garoo/`](../../Garoo).
+3. Páginas de cliente: [`wiki/clientes/carwarriors-llc.md`](wiki/clientes/carwarriors-llc.md) · [`wiki/clientes/varela-law.md`](wiki/clientes/varela-law.md) · [`wiki/clientes/callacar.md`](wiki/clientes/callacar.md) · [`wiki/clientes/all-print.md`](wiki/clientes/all-print.md).
+4. **[`wiki/interno/mapa-forjado.md`](wiki/interno/mapa-forjado.md)** — esta bóveda es la carpeta principal de indexado de **todo FORJADO**; esta página mapea las carpetas hermanas `aplicaciones/` y `contenido/`.
+5. **Ecosistema hermano Garoo / RedTec:** su índice y fichas viven en Obsidian (`BOVEDA-PERSONAL/PROYECTOS/Garoo/`).
 
 Para el detalle histórico completo de cualquier cliente (qué pasó cada día, cada bug, cada decisión), sigue el enlace `fuente_raw:` en el frontmatter de su página en `wiki/` hacia `raw/`.
 

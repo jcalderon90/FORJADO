@@ -57,7 +57,7 @@ fuente_raw: raw/clientes/callacar/
 - [x] **🟢 Normalización de marca y mayúsculas completas (2026-09-19):** Estandarización de `CALLACAR` en todos los textos, footers, avisos legales, Schema.org y metadatos del portal.
 - [x] **🟢 White-labeling oficial de Chatwoot a Forjado (2026-09-25):** Configurado e inyectado en Dokploy (Docker Compose + PostgreSQL `installation_configs` + Redis cache) las variables de marca `BRAND_NAME="Forjado"`, `INSTALLATION_NAME="Forjado"` y `WIDGET_BRAND_URL="https://forjado.agency"`. El widget web y las respuestas de soporte ahora reflejan oficialmente "Desarrollado por Forjado".
 - [x] **🟢 Sustitución de identidad visual y branding en widget Chatwoot (2026-09-25):** Reemplazado el icono genérico de Chatwoot por un icono profesional de Soporte (`Headset`) en el botón flotante y colocado el emblema circular oficial de **Forjado** en el pie del widget (`forjado_logo.png` y `logo_thumbnail.svg`).
-- [ ] **Asignación del dominio personalizado oficial:** Apuntar `callacar.au` / `www.callacar.au` en la configuración de dominios de Vercel con SSL automático.
+- [ ] **Asignación del dominio personalizado oficial:** Apuntar `callacar.au` / `www.callacar.au` en la configuración de dominios de Vercel con SSL automático (Adriano / CallaCar es propietario y gestiona el registrador; FORJADO provee los registros DNS `A`/`CNAME`).
 - [ ] **Deep Links definitivos:** Reemplazar enlaces provisionales por esquemas de deep linking a los flujos de la app nativa cuando estén habilitados.
 
 ## Resueltos recientes

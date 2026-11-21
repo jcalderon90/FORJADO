@@ -52,7 +52,7 @@ Con 1 cliente se recupera lo de Carwarriors; con 2 se supera.
 
 ## Extras y Upsells Visuales 3D / IA (Auditoría 2026-11-19)
 
-Basado en los referentes auditados en `C:\Users\Jorge\Desktop\imgs\` (ver [[../recursos/catalogo-referencias-multimedia]]), podemos ofrecer una escalera clara de extras de alto margen sobre el retainer base ($250/mes):
+Basado en los referentes auditados en `C:\Users\Jorge\Desktop\imgs\` (ver Obsidian `HERRAMIENTAS/Biblioteca de Referencias Modernas - Auditoria imgs.md`), podemos ofrecer una escalera clara de extras de alto margen sobre el retainer base ($250/mes):
 
 | Nivel | Qué entregamos | Stack / Referente | Rango / Posicionamiento |
 |---|---|---|---|
@@ -68,4 +68,4 @@ Basado en los referentes auditados en `C:\Users\Jorge\Desktop\imgs\` (ver [[../r
 - [[pipeline]]
 - [[prospeccion-hispanoamerica]]
 - [[../servicios/automatizacion-e-ia]]
-- [[../recursos/catalogo-referencias-multimedia]]
+- En Obsidian: `HERRAMIENTAS/Biblioteca de Referencias Modernas - Auditoria imgs.md`

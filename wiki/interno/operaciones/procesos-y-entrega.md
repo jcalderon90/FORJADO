@@ -24,7 +24,7 @@ Flujo estándar desde que un cliente dice "sí" hasta el cierre. Sirve para cual
 
 ## 3. Entrega
 - [ ] Revisión final de calidad.
-- [ ] **Compuerta QA Web/App (Auditoría 2026-11):** Pasar la **Checklist de 40 Reglas** (20 de seguridad Web/API/DB + 20 pre-lanzamiento SEO/OG/WCAG/404/anti-spam/GA4), verificar flujo y responsive en navegador real (`Playwright CLI` / `Impeccable`) y usar skeletons `CLS = 0` (`Boneyard`) cuando aplique (ver [[../recursos/catalogo-referencias-multimedia]] y [[../configuracion-skills]]).
+- [ ] **Compuerta QA Web/App (Auditoría 2026-11):** Pasar la **Checklist de 40 Reglas** (20 de seguridad Web/API/DB + 20 pre-lanzamiento SEO/OG/WCAG/404/anti-spam/GA4), verificar flujo y responsive en navegador real (`Playwright CLI` / `Impeccable`) y usar skeletons `CLS = 0` (`Boneyard`) cuando aplique (ver Obsidian `HERRAMIENTAS/Biblioteca de Referencias Modernas - Auditoria imgs.md` y [[../configuracion-skills]]).
 - [ ] Entrega de resultados + documentación/handoff.
 - [ ] Capacitación breve si aplica.
 - [ ] Cobrar saldo restante.
@@ -41,5 +41,5 @@ Flujo estándar desde que un cliente dice "sí" hasta el cierre. Sirve para cual
 - [[../ventas/pipeline|Pipeline]]
 - [[herramientas-y-stack|Herramientas y Stack]]
 - [[../finanzas/modelo-de-precios|Modelo de Precios]]
-- [[../recursos/catalogo-referencias-multimedia|Catálogo de Referencias Multimedia]]
 - [[../configuracion-skills|Configuración de Skills]]
+- En Obsidian: `HERRAMIENTAS/Biblioteca de Referencias Modernas - Auditoria imgs.md`

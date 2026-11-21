@@ -43,7 +43,7 @@ Construyo y gestiono la presencia digital: estrategia de contenido, gestión de 
 - **9 Prefijos visuales ChatGPT:** `/microscopicview`, `/Anatomy`, `/explodedview`, `/360view`, `/impossibleangle`, `/blueprint`, `/handwritten`, `/surreal` y `/Xray` para infografías de ingredientes, producto y diagramas técnicos.
 - **Motion Graphics programáticos a 60 fps:** piezas desde código con `gsap.timeline()` (`expo.out`, `cubic-bezier(0.22, 1, 0.36, 1)`) compatibles con `HyperFrames` y `Remotion` sin depender de After Effects.
 - **Playbook de 8 formatos virales de Reels:** *Dual-laptop* Antes/Después, *Ultrawide + iPhone* con LED color-match, `3 sí / 2 no`, cronómetro LED y barrido *Before/After* con `WAIT FOR IT`.
-- **Regla estricta de Meta Ads:** prohibido mostrar comparativas *before/after* o desapariciones directas de manchas/arrugas en anuncios pagados (reservar solo para contenido orgánico o landing/PDP propia). Ver [[../recursos/catalogo-referencias-multimedia]].
+- **Regla estricta de Meta Ads:** prohibido mostrar comparativas *before/after* o desapariciones directas de manchas/arrugas en anuncios pagados (reservar solo para contenido orgánico o landing/PDP propia). Ver Obsidian `HERRAMIENTAS/Biblioteca de Referencias Modernas - Auditoria imgs.md`.
 
 ## Relacionado
 - [[Catálogo de Servicios (MOC)]]

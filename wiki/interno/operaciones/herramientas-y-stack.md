@@ -22,8 +22,8 @@ actualizado: 2026-11-20
 | **n8n** | Agentes de IA y chatbots cuando se necesita algo rápido y funcional. |
 | **Python / JavaScript** | Migración a código cuando se requiere más control, escala o personalización (librerías de agentes). |
 | **Claude / Claude Code** | Desarrollo asistido, generación de contenido, agentes. |
-| **Recall.ai** | Bots y streaming de audio/video en videollamadas (Meet, Zoom, Teams) — ver [[../../clientes/garoo-redtec|Garoo / Redtec]]. |
-| **Baseten** | Inferencia de modelos ML/LLMs en GPUs dedicadas y serverless con Truss — ver [[../../clientes/garoo-redtec|Garoo / Redtec]]. |
+| **Recall.ai** | Bots y streaming de audio/video en videollamadas (Meet, Zoom, Teams) — arquitectura transversal en Obsidian (`HERRAMIENTAS/Video, voz e imagen/Arquitectura Voz IA - Recall.ai, Baseten y Kokoro TTS.md`). |
+| **Baseten** | Inferencia de modelos ML/LLMs en GPUs dedicadas y serverless con Truss — arquitectura transversal en Obsidian (`HERRAMIENTAS/Video, voz e imagen/Arquitectura Voz IA - Recall.ai, Baseten y Kokoro TTS.md`). |
 
 ## Frontend
 
@@ -88,7 +88,7 @@ actualizado: 2026-11-20
 
 ## Diseño, Motion, 3D y QA Pre-Deploy (Biblioteca 2026-11)
 
-Estándar de herramientas y referentes incorporados tras la auditoría de `C:\Users\Jorge\Desktop\imgs\` (ver [[../recursos/catalogo-referencias-multimedia]] y [[../configuracion-skills]]):
+Estándar de herramientas y referentes incorporados tras la auditoría de `C:\Users\Jorge\Desktop\imgs\` (biblioteca completa en Obsidian `HERRAMIENTAS/Biblioteca de Referencias Modernas - Auditoria imgs.md` y [[../configuracion-skills]]):
 
 | Área | Herramienta / Estándar | Uso principal en FORJADO |
 |---|---|---|

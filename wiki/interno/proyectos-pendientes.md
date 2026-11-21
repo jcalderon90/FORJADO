@@ -16,7 +16,7 @@ fuente_raw: raw/interno/2026-10-05-proyectos-pendientes-barberias-y-callacar-cub
 | # | Producto | Estado | Dónde |
 |---|---|---|---|
 | 1 | **Vitrina** | 🟢 Hardening & Features OK (`368/368` tests backend `a4af21c`, `74` archivos `febe105` + `81` archivos `493833f` OK) | `aplicaciones/forjado/vitrina/` |
-| 2 | **Time Control** | 🟢 En producción (Calibre) — Dokploy + R2 activos, `510/510` tests (`882b8c5`), `9fb0737` CSP, Piloto #1 activo (All Print) | `aplicaciones/forjado/time-control/` (3 repos) |
+| 2 | **Time Control (Calibre)** | 🟢 En producción (Calibre) — Dokploy + R2 activos, `510/510` tests (`882b8c5`), `9fb0737` CSP, Piloto #1 activo (All Print) | `aplicaciones/forjado/calibre/` (3 repos) |
 | 3 | **App para barberías y peluquerías** | ⬜ Por desarrollar (solo idea) | sin repo |
 | 4 | **App de transporte en triciclos eléctricos para Cuba** | ⬜ Por desarrollar (solo idea) | sin repo |
 | 5 | **App para gestores de ventas de casas en Cuba** | ⬜ Por desarrollar (solo idea) | sin repo |
@@ -40,13 +40,13 @@ Verificado el 2026-11-20: backend con `lint`, `typecheck`, `build` y **368/368 t
 - [ ] Fase 0 de negocio: entrevistas con 8–10 negocios de Cienfuegos y análisis de competidores.
 - [ ] Definir antes de construir: feed y ofertas de trabajo (secciones 20.1 y 20.4 del plan).
 - [x] *Implementados referentes UI/UX clave (`2026-11-20`):* Skeletons geométricos `CLS = 0` (`BoneyardSkeleton.astro`) integrados en `vitrina-frontend` para 3G/4G ETECSA, **Probador Paper-Doll `1080×1350`** (`Hanzife Pro V1.1` en `$0` API runtime) + **Combo Look `-10%`** (`Try the Look`) en `vitrina-spatial` (`PaperDollTryOnShowroom.tsx` / `/demo/probador`) y soporte preventivo `.HEIC` en `src/lib/image.ts`.
-- [x] *Hardening backend 40 Reglas completado (`2026-11-20`, `a4af21c`):* auditoría de seguridad, `npm audit` `0` vulnerabilidades, `@fastify/helmet`, `sanitizeFilter`, cookie simétrica, privacidad IA/pedidos, `crypto.randomInt`, escape HTML Telegram, rate limits y honeypots en `vitrina-backend`. *Restante al lanzar dominio HTTPS:* rotación de clave Atlas, backups reales, bloque B/SEO en frontend y evaluar arquetipos comerciales 1-foto (`/detail-closeup`, `/tabletop-ad`) + giro 90° `NIKE` en perchero (ver [[recursos/catalogo-referencias-multimedia]]).
+- [x] *Hardening backend 40 Reglas completado (`2026-11-20`, `a4af21c`):* auditoría de seguridad, `npm audit` `0` vulnerabilidades, `@fastify/helmet`, `sanitizeFilter`, cookie simétrica, privacidad IA/pedidos, `crypto.randomInt`, escape HTML Telegram, rate limits y honeypots en `vitrina-backend`. *Restante al lanzar dominio HTTPS:* rotación de clave Atlas, backups reales, bloque B/SEO en frontend y evaluar arquetipos comerciales 1-foto (`/detail-closeup`, `/tabletop-ad`) + giro 90° `NIKE` en perchero (ver Obsidian `HERRAMIENTAS/Biblioteca de Referencias Modernas - Auditoria imgs.md`).
 
 ## 2. Time Control / Calibre (en producción — Piloto #1 activo)
 
 Suite empresarial de control horario, monitoreo de productividad y liquidación de nóminas (ahora **Calibre**). Incorporada al catálogo de FORJADO el 2026-11-04. Tres repositorios independientes en `FORJADO-AGENCY`: Backend Node.js/Express/Mongo/R2, Frontend React 19/Tailwind/Vite, Desktop Electron/SQLite.
 
-- **Fuente de verdad:** [`aplicaciones/forjado/time-control/STATUS.md`](../../../aplicaciones/forjado/time-control/STATUS.md). Ficha técnica en [[productos/time-control]] y cliente piloto en [[../clientes/all-print]].
+- **Fuente de verdad:** [`aplicaciones/forjado/calibre/STATUS.md`](../../../aplicaciones/forjado/calibre/STATUS.md). Ficha técnica en [[productos/time-control]] y cliente piloto en [[../clientes/all-print]].
 - [x] ~~**Branding:** Reemplazar identidad `LogYourTime` por marca Calibre / FORJADO (`#E85D04` / `#111111`) en Web y Desktop.~~ — completado 2026-11-07.
 - [x] ~~**Infraestructura:** Desplegar backend y frontend en Dokploy (Oracle VPS `129.213.108.102`) con MongoDB Atlas y Cloudflare R2 (`calibre-screenshots`).~~ — completado 2026-11-07.
 - [x] ~~**Empaquetado B2B:** Estructurar pricing comercial y activar Cliente Piloto #1 (**All Print**, 60 días Plan Pro bonificados).~~ — completado 2026-11-10.
@@ -60,7 +60,7 @@ Sin definir: país/mercado, si es web, móvil o ambas, modelo de negocio, funcio
 
 - [ ] Definir alcance y mercado con Jorge.
 - [ ] Crear plan de desarrollo propio (con el formato del de Vitrina) antes de escribir código.
-- [ ] *Referentes UI/UX auditados (2026-11-19):* Dirección de arte **Dark Luxury** (`Barbería` negro/oro/mármol/rim-light, secciones `PRECISION. STYLE. CONFIDENCE.`, `HAIRCUT / BEARD SCULPTING / PREMIUM STYLING`, `THE CRAFT`) combinada con el patrón **Slide-over Booking Drawer + Mini-CRM de Leads** de `Car Detailing ($1,500)` para reservar citas sin salir del flujo visual (ver [[recursos/catalogo-referencias-multimedia]]).
+- [ ] *Referentes UI/UX auditados (2026-11-19):* Dirección de arte **Dark Luxury** (`Barbería` negro/oro/mármol/rim-light, secciones `PRECISION. STYLE. CONFIDENCE.`, `HAIRCUT / BEARD SCULPTING / PREMIUM STYLING`, `THE CRAFT`) combinada con el patrón **Slide-over Booking Drawer + Mini-CRM de Leads** de `Car Detailing ($1,500)` para reservar citas sin salir del flujo visual (ver Obsidian `HERRAMIENTAS/Biblioteca de Referencias Modernas - Auditoria imgs.md`).
 
 ## 4. App de transporte en triciclos eléctricos para Cuba (por desarrollar)
 
@@ -91,7 +91,7 @@ Contexto e ideas iniciales:
 - [ ] Definir alcance, módulos y modelo de negocio con Jorge.
 - [ ] Definir si será Web/PWA offline-first o aplicación móvil.
 - [ ] Crear plan de desarrollo antes de comenzar implementación.
-- [ ] *Referentes auditados (2026-11-19):* Recorridos 3D ultraligeros en un solo HTML sin assets externos (`recorrido.html`, `Método 1`), ficha con semáforo en tiempo real + **`Consultar por WhatsApp`** (`Paraíso del Urubó`), foco en **compradores en el exterior / diáspora** con mapas por radios `1/3/5 KM` (`Navigo Web`), modo remodelación *Antes/Después* (`Método 2` Prompt 5/7) y patrón de recorrido por scroll + calendario (`Casa Rural Olivar`). Ver [[recursos/catalogo-referencias-multimedia]].
+- [ ] *Referentes auditados (2026-11-19):* Recorridos 3D ultraligeros en un solo HTML sin assets externos (`recorrido.html`, `Método 1`), ficha con semáforo en tiempo real + **`Consultar por WhatsApp`** (`Paraíso del Urubó`), foco en **compradores en el exterior / diáspora** con mapas por radios `1/3/5 KM` (`Navigo Web`), modo remodelación *Antes/Después* (`Método 2` Prompt 5/7) y patrón de recorrido por scroll + calendario (`Casa Rural Olivar`). Ver Obsidian `HERRAMIENTAS/Biblioteca de Referencias Modernas - Auditoria imgs.md`.
 
 ## 6. App para venta de medicamentos (por desarrollar)
 
@@ -107,7 +107,7 @@ Contexto e ideas iniciales:
 - [ ] Crear plan de desarrollo propio antes de escribir código.
 
 > [!info] Estándar transversal de QA Pre-Deploy (Auditoría 2026-11-19)
-> Para todos los productos anteriores (activos y futuros), aplicar la **Checklist de 40 Reglas** (20 de seguridad API/DB/Auth + 20 pre-lanzamiento SEO/OG/WCAG/GA4/404/Anti-Spam) y skeletons `CLS = 0` tipo `Boneyard` documentados en [[recursos/catalogo-referencias-multimedia]].
+> Para todos los productos anteriores (activos y futuros), aplicar la **Checklist de 40 Reglas** (20 de seguridad API/DB/Auth + 20 pre-lanzamiento SEO/OG/WCAG/GA4/404/Anti-Spam) y skeletons `CLS = 0` tipo `Boneyard` documentados en Obsidian (`HERRAMIENTAS/Biblioteca de Referencias Modernas - Auditoria imgs.md`).
 
 ## Relacionado
 

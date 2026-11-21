@@ -13,10 +13,9 @@ actualizado: 2026-11-19
 | Página | Descripción |
 |---|---|
 | [[interno/estado-proyecto]] | Snapshot actual y pendientes de la agencia — punto de entrada diario |
-| [[interno/mapa-forjado]] | Mapa hacia `aplicaciones/`, `contenido/` y `acl-recovery/` — las carpetas hermanas de esta bóveda dentro de `FORJADO/` |
-| [[interno/mapa-garoo]] | Mapa hacia `Garoo/` — ecosistema hermano de agentes IA, portales y telefonía (`Agent-Spectrum`, `Agent-Belize`, `TELNYX`, etc.) |
-| [[interno/productos/time-control]] | Time Control — Suite empresarial de monitoreo horario, capturas y productividad (3 repos: Backend, Frontend, Desktop) en adaptación para clientes B2B |
-| [[interno/proyectos-pendientes]] | Productos propios: Vitrina y Time Control (en desarrollo/adaptación) y por desarrollar: barberías/peluquerías, transporte en triciclos eléctricos, gestores de casas y venta de medicamentos |
+| [[interno/mapa-forjado]] | Mapa hacia `aplicaciones/` y `contenido/` — las carpetas hermanas de esta bóveda dentro de `FORJADO/` |
+| [[interno/productos/time-control]] | Calibre (antes Time Control) — Suite empresarial de monitoreo horario, capturas y productividad (`aplicaciones/forjado/calibre/`) |
+| [[interno/proyectos-pendientes]] | Productos propios: Vitrina y Calibre (en desarrollo/producción) y por desarrollar: barberías/peluquerías, transporte en triciclos eléctricos, gestores de casas y venta de medicamentos |
 
 ## Clientes
 
@@ -24,8 +23,9 @@ actualizado: 2026-11-19
 |---|---|
 | [[clientes/all-print]] | All Print (Mipyme Cienfuegos, Cuba) — Cliente Piloto #1 de Calibre: 60 días bonificados y tarifa fundador $4.00 USD/usuario/mes en efectivo |
 | [[clientes/callacar]] | CallaCar Transportation Pty Ltd (Marketplace de transporte AU) — estado actual, alcance web y pendientes abiertos |
-| [[clientes/garoo-redtec]] | Garoo / Redtec (`redtec.ai`) — stack de IA avanzada, bots para videollamadas con Recall.ai y hosting de modelos en GPUs con Baseten |
 | [[clientes/carwarriors-llc]] | Car dealer Miami (3 subcuentas GHL) — estado actual, accesos, pendientes abiertos |
+| [[clientes/carwarriors-llc-ecosistema-completo]] | Arquitectura integral del ecosistema tecnológico de Carwarriors LLC y Rances Car (DealerCenter, GHL, n8n, MongoDB, Slack) |
+| [[clientes/carwarriors-llc-guia-meta-developers-bianca]] | Guía operativa paso a paso para configurar Meta App y tokens permanentes (Bianca) |
 | [[clientes/carwarriors-llc-arquitectura-migracion]] | Diseño: migración del bot GHL Conversation AI → n8n + OpenRouter |
 | [[clientes/carwarriors-llc-infraestructura]] | Diseño de infraestructura técnica (VPS, Coolify, n8n) |
 | [[clientes/carwarriors-llc-inventario-ghl]] | Inventario de pipelines, calendarios, custom fields y workflows en GHL |
@@ -82,11 +82,8 @@ actualizado: 2026-11-19
 | [[interno/operaciones/wireguard-vpn]] | Infraestructura y gestión de túneles VPN WireGuard (wg-easy) |
 | [[interno/finanzas/modelo-de-precios]] | Modalidades, reglas de cobro, tarifas por servicio |
 | [[interno/finanzas/control-de-ingresos-y-gastos]] | Registro financiero de la agencia |
-| [[interno/recursos/credenciales]] | Accesos e infraestructura propia de FORJADO |
-| [[interno/recursos/mongodb-database]] | Referencia de la base de datos MongoDB compartida |
-| [[interno/recursos/react-bits]] | Catálogo e integración de 217+ componentes animados, WebGL y micro-interacciones (shadcn) |
-| [[interno/recursos/impeccable]] | QA de diseño para agentes: detector de 62 reglas sin LLM y comandos `audit`/`polish` (evaluado, no instalado) |
-| [[interno/recursos/catalogo-referencias-multimedia]] | Biblioteca compilada de 81 referencias modernas (`Desktop/imgs`): showrooms 3D, VTON, scrollytelling, pipelines IA, skills y QA 40 reglas |
+| [[interno/recursos/credenciales]] | Índice sin secretos hacia accesos e infraestructura propia en Obsidian |
+| [[interno/recursos/mongodb-database]] | Referencia sin credenciales al clúster MongoDB compartido (URIs en Obsidian) |
 | [[interno/configuracion-skills]] | Configuración de habilidades agenticas globales (Superpowers, n8n, find-skill, Karpathy) |
 
 ## Plantillas

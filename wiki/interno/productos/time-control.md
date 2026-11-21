@@ -45,7 +45,7 @@ El sistema opera bajo una arquitectura desacoplada en 3 niveles, permitiendo alt
 ```
 
 ### 1.1 Backend API (`calibre-backend`)
-- **Ubicación local:** [`aplicaciones/forjado/time-control/calibre-backend`](file:///D:/1TRABAJO/PROYECTOS/FORJADO/aplicaciones/forjado/time-control/calibre-backend)
+- **Ubicación local:** [`aplicaciones/forjado/calibre/calibre-backend`](file:///D:/1TRABAJO/PROYECTOS/FORJADO/aplicaciones/forjado/calibre/calibre-backend)
 - **Repositorio remoto:** [`FORJADO-AGENCY/calibre-backend`](https://github.com/FORJADO-AGENCY/calibre-backend)
 - **Despliegue de Producción (Dokploy / Oracle VPS Ashburn):**
   - **URL Base:** `https://forjado-calibrebackend-ikw9yh-ed029b-129-213-108-102.sslip.io`
@@ -63,7 +63,7 @@ El sistema opera bajo una arquitectura desacoplada en 3 niveles, permitiendo alt
   - `alerts` & `audit`: Detección de anomalías, ausencias prolongadas e intentos de alteración horaria.
 
 ### 1.2 Frontend Web (`calibre-frontend`)
-- **Ubicación local:** [`aplicaciones/forjado/time-control/calibre-frontend`](file:///D:/1TRABAJO/PROYECTOS/FORJADO/aplicaciones/forjado/time-control/calibre-frontend)
+- **Ubicación local:** [`aplicaciones/forjado/calibre/calibre-frontend`](file:///D:/1TRABAJO/PROYECTOS/FORJADO/aplicaciones/forjado/calibre/calibre-frontend)
 - **Repositorio remoto:** [`FORJADO-AGENCY/calibre-frontend`](https://github.com/FORJADO-AGENCY/calibre-frontend)
 - **Despliegue de Producción (Dokploy / Oracle VPS Ashburn):**
   - **URL Panel:** `https://forjado-calibrefrontend-qdevp9-774452-129-213-108-102.sslip.io`
@@ -72,7 +72,7 @@ El sistema opera bajo una arquitectura desacoplada en 3 niveles, permitiendo alt
 - **Vistas clave:** Tablero analítico en tiempo real, visor de capturas de pantalla organizadas por timeline de usuario, gestión de turnos/horarios, configuración multi-tenant, exportación de reportes a PDF y Excel.
 
 ### 1.3 Cliente Desktop (`calibre-desktop`)
-- **Ubicación local:** [`aplicaciones/forjado/time-control/calibre-desktop`](file:///D:/1TRABAJO/PROYECTOS/FORJADO/aplicaciones/forjado/time-control/calibre-desktop)
+- **Ubicación local:** [`aplicaciones/forjado/calibre/calibre-desktop`](file:///D:/1TRABAJO/PROYECTOS/FORJADO/aplicaciones/forjado/calibre/calibre-desktop)
 - **Repositorio remoto:** [`FORJADO-AGENCY/calibre-desktop`](https://github.com/FORJADO-AGENCY/calibre-desktop)
 - **Stack:** Electron 43, electron-vite 3, React 18, `better-sqlite3` (almacenamiento local offline), `keyspy` (auditoría de eventos de periféricos sin registrar pulsaciones de teclas confidenciales), `get-windows` (rastreo de ventanas y apps activas), `electron-builder`.
 - **Características operativas:**
@@ -86,7 +86,7 @@ El sistema opera bajo una arquitectura desacoplada en 3 niveles, permitiendo alt
 ### Fase 1: Identidad Visual y Marca
 - Sustituir branding de `LogYourTime` / `Home Las Vegas Nevada` por la identidad corporativa de **FORJADO** ([[../marca/identidad-visual]]).
 - Aplicar colores oficiales: Naranja Forja (`#E85D04`), Carbón oscuro (`#111111`), Blanco brasa (`#F8F9FA`).
-- Cambiar identificador de aplicación (`appId`) en Electron a `com.forjado.timecontrol`.
+- Cambiar identificador de aplicación (`appId`) en Electron a `com.forjado.calibre`.
 
 ### Fase 2: Despliegue en Infraestructura Propia (COMPLETADO ✅ 2026-11-07)
 - Contenedores Docker configurados y desplegados en el VPS Oracle Ashburn de FORJADO mediante Dokploy.
@@ -107,6 +107,7 @@ El sistema opera bajo una arquitectura desacoplada en 3 niveles, permitiendo alt
 - [[../mapa-forjado|Mapa de aplicaciones de FORJADO]]
 - [[../proyectos-pendientes|Proyectos propios pendientes]]
 - [[../estado-proyecto|Estado consolidado del proyecto]]
-- Bóveda Personal Obsidian: `[[PROYECTOS/FORJADO/time-control]]` y `[[FORJADO/Calibre/Calibre - Sistema de Monitoreo]]`
+- Bóveda Personal Obsidian: `PROYECTOS/FORJADO/calibre.md` (credenciales en `FORJADO/Time Control/`)
+- Documentación del repo: [`aplicaciones/forjado/calibre/README.md`](file:///D:/1TRABAJO/PROYECTOS/FORJADO/aplicaciones/forjado/calibre/README.md) y [`STATUS.md`](file:///D:/1TRABAJO/PROYECTOS/FORJADO/aplicaciones/forjado/calibre/STATUS.md)
 
 

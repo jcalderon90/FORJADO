@@ -89,7 +89,7 @@ Para aprovechar la cuota gratuita diaria de **50 puntos de Google Labs** (Google
 
 ## 5. Extensiones Multimodales y Pipelines Complementarios (2026-11-19)
 
-Resultados incorporados desde la auditoría multimedia de `C:\Users\Jorge\Desktop\imgs\` (ver detalle completo y prompts literales en [[../recursos/catalogo-referencias-multimedia]]):
+Resultados incorporados desde la auditoría multimedia de `C:\Users\Jorge\Desktop\imgs\` (ver detalle completo y prompts literales en Obsidian `HERRAMIENTAS/Biblioteca de Referencias Modernas - Auditoria imgs.md`):
 
 ### A. Pipeline Arquitectónico Anti-Alucinación (`Claude + Blender 5.1.1 + Seedance 2.5`)
 - **Problema que resuelve:** Evita que los modelos de video inventen muros, puertas o proporciones en recorridos inmobiliarios (`Video-68393.mp4`).
