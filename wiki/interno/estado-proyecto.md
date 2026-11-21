@@ -2,7 +2,7 @@
 tags: [forjado, estado, pendientes, dashboard]
 tipo: estado
 estado: activo
-actualizado: 2026-11-20
+actualizado: 2026-11-21
 fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 ---
 
@@ -24,6 +24,13 @@ fuente_raw: raw/interno/estado-proyecto-source-2026-08-25.md
 | **Pipeline / prospección** | Ver [[../ventas/pipeline]] | 2026-09-21 |
 
 ## Bóveda / herramientas internas
+
+- **11-21: Reorganización integral Obsidian (`BOVEDA-PERSONAL`) ↔ `FORJADO/` ↔ `Garoo/` y sincronización en GitHub:**
+  - **Principio aplicado:** Obsidian quedó consolidada como bóveda transversal de información (credenciales/accesos, herramientas evaluadas para ambas empresas, ideas/estrategia, perfiles/branding PDF y fichas ligeras en `PROYECTOS/`), mientras los repos `FORJADO/` y `Garoo/` quedaron como fuente única de verdad técnica de cada proyecto.
+  - **Seguridad y limpieza:** migrados perfiles WireGuard `.conf`, credenciales de `wg-easy` y URIs de MongoDB desde `desarrollo` hacia Obsidian (`0` `.conf` y `0` URIs `mongodb+srv://` con contraseña en `HEAD`); redactada la URI en `vitrina/docs/ARQUITECTURA_Y_DESPLIEGUE_DOKPLOY.md`; liberados ~793 MB de `desarrollo/scratch/` (solo `README.md`), eliminado `FORJADO/acl-recovery/` y purgado `enlazar-boveda/backup/`.
+  - **Reubicaciones y renombramientos en disco:** `aplicaciones/applecell` (cliente en raíz de `aplicaciones/`), `aplicaciones/forjado/calibre/{calibre-backend,calibre-frontend,calibre-desktop}`, `Garoo/AGENT-TiendaMaestro`, y `Garoo/_archivados/{Demo-Generator,Support-Agent-Panel}`.
+  - **Consolidación de duplicados y enlaces:** consolidados en repos los documentos vivos de Mundo Verde Caja Chica, Vitrina, Carwarriors, Calibre, CallaCar, Spectrum Showroom, Belize y Demo-Generator; promovida la arquitectura Recall.ai/Baseten/Kokoro TTS a herramienta transversal en Obsidian (`HERRAMIENTAS/Video, voz e imagen/`) y deduplicadas fichas de herramientas (`React Bits`, `Impeccable`, `Catalogo Referencias`, `REA`); añadidas fichas en Obsidian para `redtec-realstate-api` y `AGENT-TiendaMaestro`; limpiado el bloque erróneo de *Support Agent Panel* en 6 repos de `Garoo`.
+  - **Verificación y push:** `Obsidian.com` reportó `No unresolved links found` y `0` notas `.md` huérfanas (solo los 2 `.conf` en `FORJADO/ORACLE - VPS/` sin wikilink directo). Commiteados y pusheados **11 repos** (`desarrollo` `e32c6ec`, `contenido` `faa0aa5`, `vitrina-backend` `2ec7ff1`, `mundo-verde-workflows` `d2fc910`, `spectrum-showroom` `c5b5bc0`, `Demo-Generator` `7ed562c`, `Agent-ADS` `395cc68`, `Agent-Convento` `8d6431f`, `AGENT-INJERTO` `5cb317e`, `Agent-Windham` `06de3ff`, `TELNYX-Voice-Agent` `a13adec`).
 
 - **11-20 (Tarde): Ejecución e integración en código de los 4 puntos de aplicación derivados de `Desktop/imgs`:**
   1. **Base de herramientas IA ([[configuracion-skills]]):** instaladas **18 skills curadas** (`stop-slop`, `gsap-*` 5, `playwright-cli`, `marketingskills` 8, `context-*` 3) en `~/.agents/skills/` con symlinks en Antigravity y Claude Code, más `@playwright/cli` (`0.1.25`) global; `Impeccable` se mantiene por proyecto.
